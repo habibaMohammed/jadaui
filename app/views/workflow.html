@@ -1,0 +1,206 @@
+ 
+ <div class="panel panel-default">
+            <div class="panel-heading">Workflow
+               
+            </div>
+          
+  <div class="panel-body " ng-controller="WorkflowController">
+           <div class="row">
+   <div class="col-lg-12">
+
+
+
+    
+         <table class="table table-bordered-white   table-bordered-whitecol-lg-6" >
+            <thead>
+               <tr>
+                  <th>Priority #</th>
+                  <th>Process Name</th>
+                 <th>User</th>
+                   <th>Action</th>
+                 
+               </tr>
+            </thead>
+            <tbody >
+               <tr  ng-repeat="workflow in workflows">
+                    <td> {{workflow.status}}</td>
+                        <td> {{workflow.status}}</td>
+           
+                <td>{{workflow.userId}}</td>
+
+                  <td> <div class="clearfix">
+        
+     <button class="btn btn-sm btn-info  mr" type="button" ng-click="show(workflow)"><em class="fa fa-pencil fa-fw mr"></em></button>
+
+     <button class="btn btn-sm btn-danger  mr" type="button" ng-click="delete(workflow)"><em class="fa fa-trash fa-fw mr"></em></button>
+       
+      
+     
+ 
+      </div></td>
+                  
+                  
+                
+               </tr>
+
+              
+              
+              
+              
+          
+            
+            </tbody>
+         </table>
+             
+   </div>
+   
+
+   
+   </div>
+   <hr class="hidden-print" />
+
+     <div class="clearfix">
+          <button class="btn btn-sm btn-info  mr" type="button" ng-click="open()">  <em class="fa fa-plus-circle fa-fw mr"></em> Add New</button>
+       
+         <a  class="btn btn-success pull-right mr" ui-sref="app.task" ui-sref-active="active">Back</a>
+      </div>
+         </div>
+         </div>
+
+
+
+
+     <script type="text/ng-template" id="newWorkflow.html">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">New workflow</h4></div><div class="modal-body"><!-- START panel-->
+
+ <form class="form-horizontal" ng-controller="WorkflowController">
+    <div class="form-group">
+                  <label class="col-lg-3">Task Name
+</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text"  name="trans_type" ng-model="workflow.transactionId" placeholder="Task Name"/>
+                  </div>
+               </div>
+                <div class="form-group">
+                  <label class="col-lg-3">Priority
+</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text"  name="trans_type" ng-model="workflow.processId" placeholder="Enter Priority #"/>
+                  </div>
+               </div>
+              
+                <div class="form-group">
+                  <label class="col-lg-3">Process Name
+            </label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text"  name="trans_type" ng-model="workflow.status" placeholder="Enter Process Name"/>
+                  </div>
+               </div>
+
+    
+
+           <div class="form-group">
+                        <label class="col-sm-3 ">User</label>
+                        <div class="col-lg-9">
+                    <select class="form-control" name="pay_mode"  ng-model="workflow.userId">
+                              <option value="">Nothing</option>
+                              <option value="1">User 1</option>
+                              <option value="2">User 2</option>
+                              <option value="3">User 3</option>
+                              <option value="4">User 4</option>
+                           </select>
+                          
+                     
+                        <!-- <div class="col-sm-4">
+                           <small class="text-muted">type='number'</small>
+                        </div> -->
+                  </div>
+                           
+                     </div>
+           
+           
+              
+             
+            
+              
+               <div class="form-group">
+                  <div class="col-lg-offset-3 col-lg-9">
+                     <button class="btn btn-info btn-sm mr"  ng-click="submitWorkflow()">Save and New</button>
+                     <button class="btn btn-info btn-sm mr"  ng-click="closeWorkflow()">Save and Close</button>
+                      <button class="btn btn-warning btn-sm mr" type="reset">Reset</button>
+                  </div>
+               </div>
+                        <div class="text-center text-success" margin-top="md" ng-show="SuccessMsg">{{SuccessMsg}}</div>
+             <div class="text-center text-danger"  margin-top="md" ng-show="errorMsg">{{errorMsg}}</div>
+            </form>
+<!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
+         </script>
+
+<script type="text/ng-template" id="Editworkflow.html">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Edit workflow</h4></div><div class="modal-body"><!-- START panel-->
+
+ <form class="form-horizontal"  ng-controller="WorkflowController">
+   <div class="form-group">
+                  <label class="col-lg-3">Task Id
+</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text"  name="trans_type" ng-model="currentworkflow.id" placeholder="Task Name"/>
+                  </div>
+               </div>
+                <div class="form-group">
+                  <label class="col-lg-3">Task Name
+</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text"  name="trans_type" ng-model="currentworkflow.transactionId" placeholder="Task Name"/>
+                  </div>
+               </div>
+                <div class="form-group">
+                  <label class="col-lg-3">Priority
+</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text"  name="trans_type" ng-model="currentworkflow.processId" placeholder="Enter Priority #"/>
+                  </div>
+               </div>
+              
+                <div class="form-group">
+                  <label class="col-lg-3">Process Name
+            </label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text"  name="trans_type" ng-model="currentworkflow.status" placeholder="Enter Process Name"/>
+                  </div>
+               </div>
+
+    
+
+           <div class="form-group">
+                        <label class="col-sm-3 ">User</label>
+                        <div class="col-lg-9">
+                    <select class="form-control" name="pay_mode"  ng-model="currentworkflow.userId">
+                              <option value="">Nothing</option>
+                              <option value="1">User 1</option>
+                              <option value="2">User 2</option>
+                              <option value="3">User 3</option>
+                              <option value="4">User 4</option>
+                           </select>
+                          
+                     
+                        <!-- <div class="col-sm-4">
+                           <small class="text-muted">type='number'</small>
+                        </div> -->
+                  </div>
+                           
+                     </div>
+           
+              
+               <div class="form-group">
+                  <div class="col-lg-offset-3 col-lg-9">
+                     <button class="btn btn-info btn-sm mr" ng-click=updateWorkflow(currentworkflow)>Update</button>
+                      <button class="btn btn-warning btn-sm mr" type="reset">Reset</button>
+                  </div>
+               </div>
+         
+            </form>
+<!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
+         </script>
+
+

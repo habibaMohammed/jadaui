@@ -1,0 +1,175 @@
+<h3>Leave Posting 
+<div class="clearfix">
+
+<!--  <button class="btn btn-primary pull-right mr" type="button">
+      <em class="fa fa-plus-circle fa-fw "></em>Input bulk items</button> &nbsp; &nbsp; 
+<a href="server/jm.csv" class="btn btn-primary pull-right mr" type="button"> 
+
+      <em class="fa fa-download fa-fw "></em>Download the csv format</a>
+      </div> --></h3>
+  
+<div class="panel panel-widget">
+   <div class="panel-body">
+   <div class="col-lg-10">
+   
+<form class="form-horizontal">
+
+<div class="form-group">
+                  <label class="col-lg-2">Employee Number
+</label>
+                  <div class="col-lg-10">
+                     <input class="form-control" type="text"  name="empNumber"  ng-model="fempNumber" placeholder="Number"/>
+                  </div>
+               </div>
+                <div class="form-group">
+                  <label class="col-lg-2 ">Full Name
+</label>
+                  <div class="col-lg-10">
+                     <input class="form-control" type="text"  name="empName"  ng-model="empName" placeholder="Name"/>
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label class="col-lg-2 ">Department
+</label>
+                  <div class="col-lg-10">
+                     <input class="form-control" type="text"  name="empDept" ng-model="empDept" placeholder="Department"/>
+                  </div>
+               </div>
+
+                
+                <div class="form-group">
+                        <label class="col-sm-2 ">Leave Type</label>
+                        <div class="col-lg-4">
+                       
+                    <select class="form-control " name="leaveType"  ng-model="leaveType">
+                              <option value="">Nothing</option>
+                              <option value="1">Annual</option>
+                              <option value="2">Sick</option>
+                              <option value="3">Exam</option>
+                              <option value="4">Study</option>
+
+                           </select>
+                           </div>
+
+                      <label class="col-lg-2 ">Leave Balance:  
+                    </label>
+                    <div class="col-lg-2">
+                       
+                    <span class="text-success h4" >5</span> 
+                           </div>
+                        <!-- <div class="col-sm-4">
+                           <small class="text-muted">type='number'</small>
+                        </div> -->
+                  </div>
+                           
+                                
+              
+                 
+ <div class="form-group" >
+                 
+
+                 <label class="col-lg-2">   Start Date 
+                   </label>
+                   <div class="col-lg-3" ng-controller="DatepickerDemoCtrl as dpick">
+                      <p class="input-group">
+                              <input class="form-control" type="text" name="ex_date" ng-model="ex_date" uib-datepicker-popup="{{dpick.format}}" ng-model="startDate"  is-open="dpick.opened" min-date="dpick.minDate" max-date="'2019-12-22'" uib-datepicker-options="dpick.dateOptions"
+                              date-disabled="dpick.disabled(date, mode)" close-text="Close" />
+                              <span class="input-group-btn">
+                                 <button class="btn btn-default" type="button" ng-click="dpick.open($event)">
+                                    <em class="fa fa-calendar"></em>
+                                 </button>
+                              </span>
+                           </p>
+                           
+                  </div>
+
+                   
+                   <label class="col-lg-2 control-label">  End Date
+                   </label>
+                  <div class="col-lg-3" ng-controller="DatepickerDemoCtrl as dpick">
+                      <p class="input-group">
+                              <input class="form-control" type="text" name="ex_date" ng-model="ex_date" uib-datepicker-popup="{{dpick.format}}" ng-model="endDate" is-open="dpick.opened" min-date="dpick.minDate" max-date="'2019-12-22'" uib-datepicker-options="dpick.dateOptions"
+                              date-disabled="dpick.disabled(date, mode)" close-text="Close" />
+                              <span class="input-group-btn">
+                                 <button class="btn btn-default" type="button" ng-click="dpick.open($event)">
+                                    <em class="fa fa-calendar"></em>
+                                 </button>
+                              </span>
+                           </p>
+                           
+                  </div>
+                  <label class="col-lg-2 control-label"> Duration: <span class="text-success h4" >5</span>
+                   </label>
+                  
+</div>
+                 
+            <!--  <div class="form-group" >
+                 
+                  <div class="  col-lg-4" ng-controller="DatepickerDemoCtrl as dpick">
+                   <label class="  col-lg-4">  Start Date
+                   </label>
+                    <p class="input-group col-lg-8">
+                              <input class="form-control form-control-inline" type="text" name="date_of_birth"  uib-datepicker-popup="{{dpick.format}}" ng-model="dpick.date" is-open="dpick.opened" min-date="dpick.minDate" uib-datepicker-options="dpick.dateOptions"
+                              date-disabled="dpick.disabled(date, mode)" close-text="Close" />
+                              <span class="input-group-btn">
+                                 <button class="btn btn-default" type="button" ng-click="dpick.open($event)">
+                                    <em class="fa fa-calendar"></em>
+                                 </button>
+                              </span>
+                           </p>
+                  </div>
+                  <div class="  col-lg-4" ng-controller="DatepickerDemoCtrl as dpick">
+                   <label class="  col-lg-4">  End Date
+                   </label>
+                    <p class="input-group col-lg-8">
+                              <input class="form-control form-control-inline" type="text" name="date_of_birth"  uib-datepicker-popup="{{dpick.format}}" ng-model="dpick.date" is-open="dpick.opened" min-date="dpick.minDate" uib-datepicker-options="dpick.dateOptions"
+                              date-disabled="dpick.disabled(date, mode)" close-text="Close" />
+                              <span class="input-group-btn">
+                                 <button class="btn btn-default" type="button" ng-click="dpick.open($event)">
+                                    <em class="fa fa-calendar"></em>
+                                 </button>
+                              </span>
+                           </p>
+                  </div>
+                   <div class="  col-lg-4" ng-controller="DatepickerDemoCtrl as dpick">
+                   <label class="  col-lg-4">  Duration
+                   </label>
+                    <div class="input-group col-lg-8">
+                              <input class="form-control" type="text"  name="pin_number" />
+                             
+                           </div>
+                  </div>
+                  
+               </div> -->
+
+                   
+
+                  <div class="form-group">
+  <label class="col-lg-2 ">Comment:</label>
+   <div class="col-lg-10">
+  <textarea class="form-control" name="leaveComment" ng-model="leaveComment" id="comment"></textarea>
+  </div>
+</div> 
+                   
+                 
+                  
+                   
+  
+
+           
+              
+          
+              
+               <div class="form-group">
+                  <div class="col-lg-offset-3 col-lg-9">
+                     <button class="btn btn-primary btn-sm" type="submit">Send for Approval</button>
+                      <button class="btn btn-warning btn-sm" type="reset">Cancel</button>
+                  </div>
+               </div>
+            </form>
+            </div>
+       
+   </div>
+   </div>
+
+ 

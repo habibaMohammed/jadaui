@@ -1,0 +1,226 @@
+  <h3> Company Details
+   <!-- <small>Company Details Relating to Payroll</small> -->
+
+
+ </h3>
+
+
+<div class="panel panel-default">
+          <div class="panel-heading">Company information</div>
+          <div class="panel-body" ng-controller="CompanyInfoController">
+           <div class="row ">
+             <div class="col-lg-6">
+          
+
+                           <div class="col-md-10">
+                            <div class="clearfix">
+                           <p class="pull-left bold">NSSF Number</p>
+                           <p class="pull-right mr ">{{company.nssf}}</p>
+                            </div>
+                        <div class="clearfix">
+                           <p class="pull-left bold">NHIF Number</p>
+                           <p class="pull-right mr">{{company.nhif}}</p>
+                        </div>
+                    
+                    
+     
+
+
+     
+
+                 
+             </div>
+
+         </div>
+         <div class="col-lg-6">
+              
+
+                           <div class="col-md-10">
+                        
+                        
+                        <div class="clearfix">
+                           <p class="pull-left bold">HELB Number</p>
+                           <p class="pull-right mr">{{company.helb}}</p>
+                        </div>
+                     
+
+                        <div class="clearfix">
+                           <p class="pull-left bold">Work Days</p>
+                           <p class="pull-right mr">{{company.workDays}}</p>
+                        </div>
+               </div>
+                      
+
+
+     
+
+
+         </div>
+             <div class="buttons col-lg-6">
+                       <button class="btn btn-sm btn-info mr" title="Edit" ng-click="open()">
+                        Add New
+                     </button>
+                     <button class="btn btn-sm btn-info" title="Edit" ng-click="show(company)">
+                        <em class="fa fa-pencil"></em>
+                     </button>
+                     <button class="btn btn-sm btn-danger"  title="Delete" ng-click="delete(company)">
+                        <em class="fa fa-trash"></em>
+                     </button>
+                  </div>
+        
+       
+
+              
+                    </div>
+                  </div>
+                </div>
+     
+
+                <script type="text/ng-template" id="CompInfoContent.html">
+                  <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Company information</h4>
+                  </div>
+                  <div class="modal-body"><!-- START panel-->
+                    <form class="form-horizontal"  ng-controller="CompanyInfoController">
+                     <!--  <div class="form-group">
+                        <label class="col-lg-3 control-label">PIN Number </label>
+                        <div class="col-lg-9">
+                         <input class="form-control" type="text"  name="pin_number"  ng-model="statutory.pin_number" placeholder="PIN number"/>
+                       </div>
+                     </div> -->
+
+                      <div class="form-group">
+                      <label class="col-lg-3 control-label">Company id </label>
+                      <div class="col-lg-9">
+                       <input class="form-control" type="text" name="nssf_number" ng-model="statutory.companyId" placeholder="NSSF number"/>
+                     </div>
+                   </div>
+                     <div class="form-group">
+                      <label class="col-lg-3 control-label">NSSF Number</label>
+                      <div class="col-lg-9">
+                       <input class="form-control" type="text" name="nssf_number" ng-model="statutory.nssf" placeholder="NSSF number"/>
+                     </div>
+                   </div>
+                   <div class="form-group">
+                    <label class="col-lg-3 control-label">NHIF Number</label>
+                    <div class="col-lg-9">
+                     <input class="form-control" type="text" name="pay_points"  ng-model="statutory.nhif" placeholder="NHIF Number"/>
+                   </div>
+                 </div>
+
+                 <div class="form-group">
+                  <label class="col-lg-3 control-label">HELB Number</label>
+                  <div class="col-lg-9">
+                   <input class="form-control" type="text" name="pay_points"  ng-model="statutory.helb" placeholder="HELB Number"/>
+                 </div>
+               </div>
+   
+               <div class="form-group">
+                <label class="col-lg-3 control-label">Work days 
+
+
+                </label>
+                <div class="col-lg-9">
+                 <input class="form-control" type="text" name="work_days"  ng-model="statutory.workDays" placeholder="Work days"/>
+               </div>
+             </div>
+
+
+             <div class="form-group">
+              <div class="col-lg-offset-3 col-lg-9">
+                <button class="btn btn-sm btn-info mr"  ng-click="submitStatutory()"  >Save</button>
+                <button class="btn btn-sm btn-warning mr"  ng-click="submitStatutory()"  >Reset</button>
+              </div>
+            </div>
+
+                      <div class="text-center text-success" margin-top="md" ng-show="SuccessMsg">{{SuccessMsg}}</div>
+             <div class="text-center text-danger"  margin-top="md" ng-show="errorMsg">{{errorMsg}}</div>
+    
+          </form>
+          <!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
+        </script>
+
+        <script type="text/ng-template" id="CompInfoedit.html">
+         <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Edit Statutory information</h4></div>
+      <div class="modal-body"><!-- START panel-->
+          <form class="form-horizontal"    ng-controller="CompanyInfoController"">
+            <div class="form-group">
+           
+              <div class="col-lg-9">
+               <input class="form-control" type="hidden"  name="id"  ng-model="company.companyId" />
+             </div>
+           </div>
+         <!--   <div class="form-group">
+            <label class="col-lg-3 control-label">NSSF Number</label>
+            <div class="col-lg-9">
+             <input class="form-control" type="text" name="nssf_number" ng-model="company.companyId" placeholder="NSSF number"/>
+           </div>
+         </div> -->
+           <div class="form-group">
+            <label class="col-lg-3 control-label">NSSF Number</label>
+            <div class="col-lg-9">
+             <input class="form-control" type="text" name="nssf_number" ng-model="company.nssf" placeholder="NSSF number"/>
+           </div>
+         </div>
+         <div class="form-group">
+          <label class="col-lg-3 control-label">NHIF Number</label>
+          <div class="col-lg-9">
+           <input class="form-control" type="text" name="pay_points"  ng-model="company.nhif" placeholder="NHIF Number"/>
+         </div>
+       </div>
+
+       <div class="form-group">
+        <label class="col-lg-3 control-label">HELB Number</label>
+        <div class="col-lg-9">
+         <input class="form-control" type="text" name="pay_points"  ng-model="company.helb" placeholder="HELB Number"/>
+       </div>
+     </div>
+    <!--  <div class="form-group">
+      <label class="col-sm-3 control-label">Pay Frequency</label>
+      <div class="col-lg-9">
+        <div class="checkbox c-checkbox needsclick">
+          <label class="needsclick">
+           <input class="needsclick" type="checkbox" required="" name="monthly"  ng-model="Company.monthly"/>
+           <span class="fa fa-check"></span>Monthly</label>
+         </div>
+         <span class="text-danger" ng-show="form.validateInput('checkbox', 'required')">This field is required</span>
+
+         <div class="checkbox c-checkbox needsclick">
+          <label class="needsclick">
+           <input class="needsclick" type="checkbox"  name="weekly" ng-model="Company.weekly" disabled="" />
+           <span class="fa fa-check"></span>Weekly</label>
+         </div>
+ 
+         <div class="checkbox c-checkbox needsclick">
+          <label class="needsclick">
+           <input class="needsclick" type="checkbox"  name="fortnight" ng-model="Company.fortnight" disabled="" />
+           <span class="fa fa-check"></span>Fortnight</label>
+         </div>
+       
+       </div>
+
+     </div> -->
+     <div class="form-group">
+      <label class="col-lg-3 control-label">Work days 
+
+
+      </label>
+      <div class="col-lg-9">
+       <input class="form-control" type="text" name="work_days"  ng-model="company.workDays" placeholder="Work days"/>
+     </div>
+   </div>
+
+
+    <div class="form-group">
+      <div class="col-lg-offset-3 col-lg-9">
+       <button class="btn btn-info btn-sm" ng-click="updateStatutory(company)">Update</button>
+          <button class="btn btn-warning btn-sm" type="reset">Reset</button>
+     </div>
+   </div>
+</form>
+<!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
+</script>
+
+
+
+
+

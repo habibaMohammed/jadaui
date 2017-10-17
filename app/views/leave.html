@@ -1,0 +1,248 @@
+
+<div class="panel b">
+   <div class="panel-heading bg-gray-lighter text-bold">Leave types and Entitlement
+  
+   </div>
+   <div class="panel-body">
+     <div class="container-md">
+   <div class="row">
+      <div class="col-md-3">
+         <div class="panel b">
+            <div class="panel-heading bg-gray-lighter text-bold">Leave Types</div>
+            <div class="list-group" ng-init="settingActive = 1"><a class="list-group-item" href="" ng-click="settingActive=1" ng-class="{'active': (settingActive == 1)}">Annual Leave</a><a class="list-group-item" href="" ng-click="settingActive=2" ng-class="{'active': (settingActive == 2)}">Sick Leave</a><a class="list-group-item"
+               href="" ng-click="settingActive=3" ng-class="{'active': (settingActive == 3)}">Exam Leave</a><a class="list-group-item" href="" ng-click="settingActive=4" ng-class="{'active': (settingActive == 4)}">Maternity Leave</a><a class="list-group-item"
+               href="" ng-click="settingActive=5" ng-class="{'active': (settingActive == 5)}">Paternity Leave</a>
+            </div>
+         </div>
+      </div>
+      <div class="col-md-9">
+         <div ng-show="settingActive == 1">
+            <div class="panel b">
+               <div class="panel-heading bg-gray-lighter text-bold">Annual Leave</div>
+               <div class="panel-body">
+                  <table class="table table-bordered-white " >
+            <thead>
+               <tr><th>Month</th>
+                   <th>Leave Accrued</th>
+                  <th>Leave Taken</th>
+                 <th>Balance</th>
+                 
+                 
+               </tr>
+            </thead>
+            <tbody >
+               <tr>
+                  <td >August</td>
+                  <td >1.75</td>
+                  <td >1 </td>
+                   <td >2</td>
+                  
+                 
+                
+               </tr>
+               
+              
+             
+            
+            </tbody>
+         </table>
+             
+               </div>
+            </div>
+         </div>
+         <div ng-show="settingActive == 2">
+            <div class="panel b">
+               <div class="panel-heading bg-gray-lighter text-bold">Sick Leave</div>
+               <div class="panel-body">
+                  <table class="table table-bordered-white " >
+            <thead>
+               <tr><th>Month</th>
+                    <th>Leave Accrued</th>
+                  <th>Leave Taken</th>
+                 <th>Balance</th>
+                 
+                 
+               </tr>
+            </thead>
+            <tbody >
+               <tr>
+                  <td >August</td>
+                  <td >21 </td>
+                  <td >1.73 </td>
+                   <td >2</td>
+                  
+                 
+                
+               </tr>
+               
+              
+             
+            
+            </tbody>
+         </table>
+               </div>
+            </div>
+            
+         </div>
+         <div ng-show="settingActive == 3">
+            <div class="panel b">
+               <div class="panel-heading bg-gray-lighter text-bold" >Exam Leave</div>
+               <div class="panel-body">
+                  <table class="table table-bordered-white " >
+            <thead>
+               <tr><th>Month</th>
+                  <th>Leave Accrued</th>
+                  <th>Leave Taken</th>
+                 <th>Balance</th>
+                 
+                 
+               </tr>
+            </thead>
+            <tbody >
+               <tr>
+                  <td >August</td>
+                  <td >21 </td>
+                  <td >1.73 </td>
+                   <td >2</td>
+                  
+                 
+                
+               </tr>
+               
+              
+             
+            
+            </tbody>
+         </table>
+               </div>
+              
+            </div>
+         </div>
+         <div ng-show="settingActive == 4">
+  <div class="panel b">
+               <div class="panel-heading bg-gray-lighter text-bold">Exam Leave</div>
+               <div class="panel-body">
+                  <table class="table table-bordered-white " >
+            <thead>
+               <tr><th>Month</th>
+                       <th>Leave Accrued</th>
+                  <th>Leave Taken</th>
+                 <th>Balance</th>
+                 
+                 
+               </tr>
+            </thead>
+            <tbody >
+               <tr>
+                  <td >August</td>
+                  <td >21 </td>
+                  <td >1.73 </td>
+                   <td >2</td>
+                  
+                 
+                
+               </tr>
+               
+              
+             
+            
+            </tbody>
+         </table>
+               </div>
+              
+            </div>
+         </div>
+         <div ng-show="settingActive == 5">
+            <div class="panel b">
+               <div class="panel-heading bg-gray-lighter text-bold">Paternity Leave</div>
+               <div class="panel-body">
+                  <table class="table table-bordered-white " >
+            <thead>
+               <tr><th>Month</th>
+                    <th>Leave Accrued</th>
+                  <th>Leave Taken</th>
+                 <th>Balance</th>
+                 
+               </tr>
+            </thead>
+            <tbody >
+               <tr>
+                  <td >August</td>
+                  <td >21 </td>
+                  <td >1.73 </td>
+                   <td >2</td>
+                  
+                 
+                
+               </tr>
+               
+              
+             
+            
+            </tbody>
+         </table>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+   </div>
+</div>
+
+
+    
+     
+         <!--    <div class="panel b">
+               <div class="panel-heading bg-gray-lighter text-bold">Leave Status</div>
+               <div class="panel-body">
+                  <table class="table table-bordered-white " >
+            <thead>
+               <tr><th>Date applied</th>
+                   <th>Leave type</th>
+                  <th>Status</th>
+                 
+                 
+               </tr>
+            </thead>
+            <tbody >
+               <tr>
+                  <td >17/8/2017</td>
+                  <td >Annual </td>
+                  <td >Pending </td>
+           
+                  
+                 
+                
+               </tr>
+               
+              
+             
+            
+            </tbody>
+         </table>
+             
+               </div>
+            </div>
+        
+  
+       
+          <div class="panel b">
+               
+               <div class="panel-body">
+                   <div class="col-lg-8">
+          <div class="clearfix">
+         <button class="btn btn-info pull-left mr" type="button">Leave history</button>
+  
+         <button class="btn btn-info pull-left mr" type="button">Apply</button>
+        
+      </div>
+
+      </div>
+               </div>
+            </div>
+        
+      -->
+
+
+

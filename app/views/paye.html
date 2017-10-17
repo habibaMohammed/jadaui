@@ -1,0 +1,1482 @@
+<h3>
+  PAYE Report
+  
+
+
+</h3>
+
+
+
+
+      <!-- START panel-->
+      <div class="panel panel-default" id="panelDemo15">
+         <div class="panel-heading"></div>
+         <div class="panel-body">
+            <uib-tabset type="pills">
+            <uib-tab heading="Basic Information">
+            
+
+               <div class="col-lg-12  companydetails"><div class="panel panel b">
+         <div class="panel-heading"><h3>Section A: Return Information</h3></div>
+         <div class="panel-body" ng-controller="LeaveController">
+        <div class="list-group mb0">
+               <div class="list-group-item">
+                
+                  Employer's Personal Identification Number
+                  <span class="  pull-right">..........</span></div>
+               <div class="list-group-item">
+                
+              Type of Return
+                  <span class="label label-default pull-right">.........</span></div>
+            
+             <div class="list-group-item">
+                
+                Return Period From
+                  <span class="label label-default  pull-right">.........</span></div>
+                  <div class="list-group-item">
+                
+                  Return Period To
+                  <span class=" label label-default pull-right">.........</span></div>
+            </div>
+
+         
+         </div>
+         </div>
+      </div>
+
+    
+         
+           
+</uib-tab>
+
+               
+   <uib-tab heading="Employee Details"> <div class=" companydetails"><div class="panel panel-default"> 
+   <div class="panel-heading">
+   <h3>Section B: Details of Salary Paid and Paye deducted from Employee(s)
+ </h3>
+
+          </div>
+
+         <div class="panel-body" ng-controller="ModalController as  trans">
+
+<div class="table-responsive">
+               <table class="table table-bordered table-hover table-striped largetbl">
+                  <thead>
+                     <tr>
+                        <th>PIN of Employee</th>
+                        <th>Name of Employee</th>
+                        <th>Residential Status</th>
+                        <th>Type of Employee</th>
+                        <th>Basic Salary</th>
+                        <th>Housing Allowance</th>
+                        <th>Transport Allowance</th>
+                        <th>Leave Pay</th>
+                        <th>Over Time Allowance</th>
+                        <th>Director's Fee</th>
+                        <th>Lump Sum Payment if any</th>
+                        <th>Other Allowance</th>
+                        <th >Total Cash Pay(A)</th>
+                        <th>Value of Car Benefit ("Value of Car Benefit")</th>
+                        <th>Other Non Cash Benefits(C)</th>
+                        <th>Total Non Cash Pay (D)=(B+C)(C is greater than 3,000)</th>
+
+                         <th>Global Income(In case of non full time service director)(Ksh)(E)</th>
+                        <th>Type of Housing</th>
+                        <th>Rent of House/ Market Value</th>
+                        <th>Computed Rent of House(F)</th>
+                        <th>Rent Recovered from Employee (G)</th>
+                        <th>Net Value of Housing (Ksh) (H)=(F)-(G)</th>
+                        <th>Total Gross Pay(Ksh) (I)=(A+D+E+H)</th>
+                        <th>30% of Cash Pay (J)=(A)*30%</th>
+                        <th>Actual contribution (K)</th>
+                        <th>Permissible Limit (L)</th>
+                        <th>Mortgage Interest (Max 25000 Ksh a month) (M)</th>
+                        <th>Deposit on Home Ownership Saving Plan (Max 48,000 Ksh or 4,000 Ksh a month) (N</th>
+                        <th>Amount of Benefit (O) =(Lower of J,K,L + M or N which ever is higher)</th>
+                        <th>Taxable Pay (Ksh) (P) = (I -O)</th>
+                        <th>Tax Payable (Ksh) (Q) =(P)*Slab Rate</th>
+                        <th>Monthly Personal Relief(Ksh) ( R ) </th>
+                          <th>Amount of Insurance Relief (Total of "Amount of Insurance Relief" from E_Computation_of_Insu_Relief) (Ksh) (S)</th>
+                        <th>PAYE Tax (Ksh) (T) =(Q - R - S)</th>
+                        <th>Self Assessed PAYE Tax(Ksh)</th>
+                        
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td >3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                       <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td class="disabled"></td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                         <td class="disabled"></td>
+                              <td class="disabled"></td>
+                        <td>10/21/2013</td>
+                             <td class="disabled"></td>
+                        <td class="disabled"></td>
+                             <td class="disabled"></td>
+                        <td class="disabled"></td>
+                          <td class="disabled"></td>
+                      <td class="disabled"></td>
+                      <td class="disabled"></td>
+                         <td class="disabled"></td>
+                      <td class="disabled"></td>
+                       <td class="disabled"></td>
+                      <td class="disabled"></td>
+                       <td class="disabled"></td>
+                      <td class="disabled"></td>
+                        <td class="disabled"></td>
+                      <td class="disabled"></td>
+                          <td class="disabled"></td>
+                    
+                         <td>10/21/2013</td>
+                       
+                        
+                     </tr>
+                    <tr>
+                        <td colspan="32"></td>
+                       
+                             <td><b>Total</b></td>
+                        <td class="disabled"></td>
+                          <td class="disabled"></td>
+                       
+                        
+                     </tr>
+                  
+                     <br/>
+                   <br/>
+                     
+                  
+                      
+                      
+                  </tbody>
+                  <br/>
+                   <br/>
+               </table>
+              
+
+     
+
+         
+         <br/>
+         <br/>
+            </div>
+                <br/>
+             <div class="clearfix">
+         <button class="btn btn-success pull-left mr" type="button">Export to CSV</button>
+        
+      </div>
+            <!-- END table responsive-->
+               </div>
+
+         </div>
+         </div>
+     
+
+ </uib-tab>
+
+
+<uib-tab heading="Disabled Employee Details"> <div class=" companydetails"><div class="panel panel-default">
+         <div class="panel-heading"><h3>Section C: Details of Salary and Benefits Paid and Paye deducted from Persons with Disability
+         </h3></div>
+         <div class="panel-body " ng-controller="ModalController as  trans">
+
+        <div class="table-responsive">
+               <table class="table table-bordered table-hover table-striped largetbl">
+                  <thead>
+                     <tr>
+                        <th>PIN of Employee</th>
+                        <th>Name of Employee</th>
+
+                        <th>Residential Status</th>
+                        <th>Type of Employee</th>
+                         <th>Exemption Certificate Number</th>
+                        <th>Basic Salary</th>
+                        <th>Housing Allowance</th>
+                        <th>Transport Allowance</th>
+                        <th>Leave Pay</th>
+                        <th>Over Time Allowance</th>
+                        <th>Director's Fee</th>
+                        <th>Lump Sum Payment if any</th>
+                        <th>Other Allowance</th>
+                        <th>Total Cash Pay(A)</th>
+                        <th>Value of Car Benefit ("Value of Car Benefit" from D_Computation_of_Car_Benefit) 
+                          (B)
+</th>
+                        <th>Other Non Cash Benefits(C)</th>
+                        <th>Total Non Cash Pay (D)=(B+C)(C is greater than 3,000)</th>
+
+                         <th>Global Income(In case of non full time service director)(Ksh)(E)</th>
+                        <th>Type of Housing</th>
+                        <th>Rent of House/ Market Value</th>
+                        <th>Computed Rent of House(F)</th>
+                        <th>Rent Recovered from Employee (G)</th>
+                        <th>Net Vakue of Housing (Ksh) (H)=(F)-(G)</th>
+                        <th>Total Gross Pay(Ksh) (I)=(A+D+E+H)</th>
+                        <th>30% of Cash Pay (J)=(A)*30%</th>
+                        <th>Actual contribution (K)</th>
+                        <th>Permissible Limit (L)</th>
+                        <th>Mortgage Interest (Max 25000 Ksh a month) (M)</th>
+                        <th>Deposit on Home Ownership Saving Plan (Max 48,000 Ksh or 4,000 Ksh a month) (N</th>
+                        <th>Amount of Benefit (O) =(Lower of J,K,L + M or N which ever is higher)</th>
+                        <th>Exemption for Persons with Disability (Ksh) (P)</th>
+                        <th>Taxable Pay (Ksh) (P) = (I -O)</th>
+                        <th>Tax Payable (Ksh) (Q) =(P)*Slab Rate</th>
+                        <th>Monthly Personal Relief(Ksh) ( R ) </th>
+                          <th>Amount of Insurance Relief (Total of "Amount of Insurance Relief" from E_Computation_of_Insu_Relief) (Ksh) (S)</th>
+                        <th>PAYE Tax (Ksh) (T) =(Q - R - S)</th>
+                        <th>Self Assessed PAYE Tax(Ksh)</th>
+                        
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                       <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                       
+                           <td>3326</td>
+                        <td>10/21/2013</td>
+                         <td>10/21/2013</td>
+                     </tr>
+                    <tr>
+                        <td colspan="34"></td>
+                       
+                             <td><b>Total</b></td>
+                        <td>10/21/2013</td>
+                         <td>10/21/2013</td>
+                       
+                        
+                     </tr>
+                  
+                     <br/>
+                   <br/>
+                     
+                  
+                      
+                      
+                  </tbody>
+                  <br/>
+                   <br/>
+               </table>
+              
+
+     
+
+         
+         <br/>
+         <br/>
+            </div>
+                <br/>
+             <div class="clearfix">
+         <button class="btn btn-success pull-left mr" type="button">Export to CSV</button>
+        
+      </div>
+         
+         </div>
+         </div>
+      </div>
+
+
+
+
+
+
+
+
+
+      </uib-tab>
+               
+
+    <uib-tab heading="Car Benefits"> <div class=" companydetails"><div class="panel panel-default">
+         <div class="panel-heading"><h3>Section D: Computation of Value of Car Benefit</h3></div>
+         <div class="panel-body" ng-controller="ModalController as  trans">
+
+          <div class="table-responsive">
+               <table class="table table-bordered table-hover table-striped largetbl">
+                  <thead>
+                     <tr>
+                        <th>PIN of Employee</th>
+                        <th>Reference to Section</th>
+
+                        <th>Car Registration Number</th>
+                        <th>Make</th>
+                         <th>Body Type</th>
+                         <th>CC Rating </th>
+                        <th>Type of Car Cost </th>
+                        <th>Cost of Hiring / Leasing(Ksh)</th>
+                        <th>Cost of Owned Car (Ksh)</th>
+                        <th>Value of Car Benefit (Ksh)</th>
+                        
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                       <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                          
+                       
+                       
+                     </tr>
+                   
+                  
+                  <tr>
+                        <td colspan="8"></td>
+                       
+                             <td><b>Total</b></td>
+                    
+                         <td>10/21/2013</td>
+                       
+                        
+                     </tr>
+                  
+                     <br/>
+                   <br/>
+                     
+                  
+                      
+                      
+                  </tbody>
+                  <br/>
+                   <br/>
+               </table>
+              
+
+     
+
+         
+         <br/>
+         <br/>
+            </div>
+                <br/>
+             <div class="clearfix">
+         <button class="btn btn-success pull-left mr" type="button">Export to CSV</button>
+        
+      </div>
+            <!-- END table responsive-->
+          
+         
+         </div>
+         </div>
+      </div>
+
+
+
+
+
+
+
+
+
+      </uib-tab>
+       <uib-tab heading="Insurance Relief"> <div class=" companydetails"><div class="panel panel-default">
+         <div class="panel-heading"><h3>Section E: Details of Insurance Relief</h3></div>
+         <div class="panel-body" ng-controller="ModalController as  trans">
+
+             <div class="table-responsive">
+               <table class="table table-bordered table-hover table-striped largetbl">
+                  <thead>
+                     <tr>
+                        <th>PIN of Employee</th>
+                        <th>Reference to Section</th>
+
+                        <th>PIN of Insurance Company</th>
+                        <th>Name of Insurance Company</th>
+                         <th>Purpose of Policy</th>
+                         <th>Insurance Policy Number</th>
+                        <th>Policy Holder</th>
+                        <th>Age of Child </th>
+                        <th>Commencement Date</th>
+                        <th>Maturity Date</th>
+                         <th>Sum Assured (Ksh) </th>
+                        <th>Premium paid till month(Ksh) (A) </th>
+                        <th>Date of payment of premium</th>
+                        <th>Amount of Insurance Relief (Ksh)(A) * 15%0</th>
+                        
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                       <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                           <td>10/21/2013</td>
+                          
+                          
+                       
+                       
+                     </tr>
+                   
+                   <tr>
+                        <td colspan="12"></td>
+                       
+                             <td><b>Total</b></td>
+                        <td>10/21/2013</td>
+                     
+                       
+                        
+                     </tr>
+                  
+                     <br/>
+                   <br/>
+                     
+                  
+                      
+                      
+                  </tbody>
+                  <br/>
+                   <br/>
+               </table>
+              
+
+     
+
+         
+         <br/>
+         <br/>
+            </div>
+                <br/>
+             <div class="clearfix">
+         <button class="btn btn-success pull-left mr" type="button">Export to CSV</button>
+        
+      </div>
+            <!-- END table responsive-->
+          
+         
+         </div>
+         </div>
+      </div>
+
+
+
+
+
+
+
+
+
+      </uib-tab>
+       <uib-tab heading="Lump Sum Payment"> <div class=" companydetails"><div class="panel panel-default">
+         <div class="panel-heading"><h3>Section F : Calculation of PAYE Tax on Lump Sum Payments Paid after Termination
+</h3></div>
+         <div class="panel-body" ng-controller="ModalController as  trans">
+
+         
+             <div class="table-responsive">
+               <table class="table table-bordered table-hover table-striped largetbl">
+                  <thead>
+                     <tr>
+                        <th>PIN of Employee</th>
+                        <th>Name of Employee</th>
+
+                        <th>Employment Start Date</th>
+                        <th>Employment End Date</th>
+                         <th>Lump Sum Payment Due Year</th>
+                         <th>Lump Sum Payment Paid Year</th>
+                        <th>Amount of Gross Lump Sum Payment (Ksh) (A</th>
+                        <th>Emoluments of Lump Sum Payment Due Year (Ksh) / Emoluments of Lump SumPayment Due Month (Ksh)(B)</th>
+                        <th>Total Revised Income (Ksh)(C)= (A+B)</th>
+                        <th>PAYE Deducted on Revised Income (Ksh) (D)</th>
+                         <th>
+                          Income (Ksh) (D)
+                          PAYE Paid in Lump Sum
+                          Payment Due Year (Ksh) /
+                          Lump Sum Payment Due
+                          Month (Ksh) (E)          
+                         </th>
+                        <th>Amount of PAYE Tax Payable (Ksh) (F) = (D - E) </th>
+                      
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                       <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                          <td>3326</td>
+                        <td>10/21/2013</td>
+                          
+                       
+                       
+                     </tr>
+                   
+                  
+                    <tr>
+                        <td colspan="10"></td>
+                       
+                             <td><b>Total</b></td>
+                        <td>10/21/2013</td>
+                     
+                       
+                        
+                     </tr>
+                  
+                     <br/>
+                   <br/>
+                     
+                  
+                      
+                      
+                  </tbody>
+                  <br/>
+                   <br/>
+               </table>
+              
+
+     
+
+         
+         <br/>
+         <br/>
+            </div>
+             <!-- END table responsive-->
+                <br/>
+             <div class="clearfix">
+         <button class="btn btn-success pull-left mr" type="button">Export to CSV</button>
+        
+      </div>
+           
+          
+         
+         </div>
+         </div>
+      </div>
+
+
+
+
+
+
+
+
+
+      </uib-tab>
+       <uib-tab heading="Arrears Details"> <div class=" companydetails"><div class="panel panel-default">
+         <div class="panel-heading"><h3>Section G : Details of Arrears of Salary and Benefits paid and PAYE deducted from Employee(s)
+</h3></div>
+         <div class="panel-body " ng-controller="ModalController as  trans">
+
+          <div class="table-responsive">
+               <table class="table table-bordered table-hover table-striped largetbl">
+                  <thead>
+                     <tr>
+                        <th>PIN of Employee</th>
+                        <th>Name of Employee</th>
+                        <th>Arrears for the Month</th>
+                        <th>Arrears Year</th>
+                        <th>Residential Status</th>
+                        <th>Type of Employee</th>
+                        <th>Basic Salary</th>
+                        <th>Housing Allowance</th>
+                        <th>Transport Allowance</th>
+                        <th>Leave Pay</th>
+                        <th>Over Time Allowance</th>
+                        <th>Director's Fee</th>
+                        <th>Lump Sum Payment if any</th>
+                        <th>Other Allowance</th>
+                        <th>Total Cash Pay(A)</th>
+                        <th>Value of Car Benefit
+                        ("Value of Car Benefit"
+                        from D_Computation
+                        _of_Car_Benefit) (B)
+                       </th>
+                        <th>Other Non Cash Benefits(C)</th>
+                        <th>Total Non Cash Pay (D)=(B+C)(C is greater than 3,000)</th>
+
+                         <th>Global Income(In case of non full time service director)(Ksh)(E)</th>
+                        <th>Type of Housing</th>
+                        <th>Rent of House/ Market Value</th>
+                        <th>Computed Rent of House(F)</th>
+                        <th>Rent Recovered from Employee (G)</th>
+                        <th>Net Value of Housing (Ksh) (H)=(F)-(G)</th>
+                        <th>Total Gross Pay(Ksh) (I)=(A+D+E+H)</th>
+                        <th>30% of Cash Pay (J)=(A)*30%</th>
+                        <th>Actual contribution (K)</th>
+                        <th>Permissible Limit (L)</th>
+                        <th>Mortgage Interest  (M)</th>
+                        <th>Deposit on Home Ownership Saving Plan (Max 48,000 Ksh or 4,000 Ksh a month) (N</th>
+                        <th>Amount of Benefit (O) =(Lower of J,K,L + M or N which ever is higher)</th>
+                        <th>Taxable Pay (Ksh) (P) = (I -O)</th>
+                        <th>Tax Payable (Ksh) (Q) =(P)*Slab Rate</th>
+                        <th>Monthly Personal Relief(Ksh) ( R ) </th>
+                        <th>Amount of Insurance Relief (Total of "Amount of Insurance Relief" from E_Computation_of_Insu_Relief) (Ksh) (S)</th>
+                        <th>PAYE Tax (Ksh) (T) =(Q - R - S)</th>
+                        <th>Amount of PAYE Already
+                          Paid (Ksh) (U)</th>
+                        <th>Final PAYE Tax (Ksh) (V) =(T - U)
+</th>
+                        
+                        <th>Self Assessed PAYE Tax(Ksh)</th>
+                        
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                       <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                            <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>10/21/2013</td>
+                            <td>3326</td>
+                        <td>10/21/2013</td>
+                        
+                     </tr>
+                   
+                    <tr>
+                        <td colspan="37"></td>
+                       
+                             <td><b>Total</b></td>
+                        <td>10/21/2013</td>
+                     
+                       
+                        
+                     </tr>
+                  
+                     <br/>
+                   <br/>
+                     
+                  
+                      
+                      
+                  </tbody>
+                  <br/>
+                   <br/>
+               </table>
+              
+
+     
+
+         
+         <br/>
+         <br/>
+            </div>
+             <!-- END table responsive-->
+                <br/>
+             <div class="clearfix">
+         <button class="btn btn-success pull-left mr" type="button">Export to CSV</button>
+        
+      </div>
+         
+         </div>
+         </div>
+      </div>
+
+
+
+
+
+
+
+
+
+      </uib-tab>
+
+         <uib-tab heading="Arrears Details of Employees with Disabilities"> <div class=" companydetails"><div class="panel panel-default">
+         <div class="panel-heading"><h3>Section H:  Details of Arrears of Salary and Benefits paid and PAYE deducted from Persons with Disability
+        </h3></div>
+         <div class="panel-body " ng-controller="ModalController as  trans">
+
+          <div class="table-responsive">
+               <table class="table table-bordered table-hover table-striped largetbl">
+                  <thead>
+                     <tr>
+                        <th>PIN of Employee</th>
+                        <th>Name of Employee</th>
+                        <th>Arrears for the Month</th>
+                        <th>Arrears Year</th>
+                        <th>Residential Status</th>
+                        <th>Type of Employee</th>
+                         <th>Exemption Certificate Number</th>
+                        <th>Basic Salary</th>
+                        <th>Housing Allowance</th>
+                        <th>Transport Allowance</th>
+                        <th>Leave Pay</th>
+                        <th>Over Time Allowance</th>
+                        <th>Director's Fee</th>
+                        <th>Lump Sum Payment if any</th>
+                        <th>Other Allowance</th>
+                        <th>Total Cash Pay(A)</th>
+                        <th>Value of Car Benefit
+                        ("Value of Car Benefit"
+                        from D_Computation
+                        _of_Car_Benefit) (B)
+                       </th>
+                        <th>Other Non Cash Benefits(C)</th>
+                        <th>Total Non Cash Pay (D)=(B+C)(C is greater than 3,000)</th>
+
+                         <th>Global Income(In case of non full time service director)(Ksh)(E)</th>
+                        <th>Type of Housing</th>
+                        <th>Rent of House/ Market Value</th>
+                        <th>Computed Rent of House(F)</th>
+                        <th>Rent Recovered from Employee (G)</th>
+                        <th>Net Value of Housing (Ksh) (H)=(F)-(G)</th>
+                        <th>Total Gross Pay(Ksh) (I)=(A+D+E+H)</th>
+                        <th>30% of Cash Pay (J)=(A)*30%</th>
+                        <th>Actual contribution (K)</th>
+                        <th>Permissible Limit (L)</th>
+                        <th>Mortgage Interest  (M)</th>
+                        <th>Deposit on Home Ownership Saving Plan (Max 48,000 Ksh or 4,000 Ksh a month) (N</th>
+                        <th>Amount of Benefit (O) =(Lower of J,K,L + M or N which ever is higher)</th>
+                          <th>Exemption for Persons with Disability (Ksh) (P)</th>
+                        <th>Taxable Pay (Ksh) (P) = (I -O)</th>
+                        <th>Tax Payable (Ksh) (Q) =(P)*Slab Rate</th>
+                        <th>Monthly Personal Relief(Ksh) ( R ) </th>
+                        <th>Amount of Insurance Relief (Total of "Amount of Insurance Relief" from E_Computation_of_Insu_Relief) (Ksh) (S)</th>
+                        <th>PAYE Tax (Ksh) (T) =(Q - R - S)</th>
+                        <th>Amount of PAYE Already
+                          Paid (Ksh) (U)</th>
+                        <th>Final PAYE Tax (Ksh) (V) =(T - U)
+</th>
+                        
+                        <th>Self Assessed PAYE Tax(Ksh)</th>
+                        
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                       <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                            <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>10/21/2013</td>
+                            <td>3326</td>
+                        <td>10/21/2013</td>
+                        
+                     </tr>
+                   
+                    <tr>
+                        <td colspan="37"></td>
+                       
+                             <td><b>Total</b></td>
+                        <td>10/21/2013</td>
+                     
+                       
+                        
+                     </tr>
+                  
+                     <br/>
+                   <br/>
+                     
+                  
+                      
+                      
+                  </tbody>
+                  <br/>
+                   <br/>
+               </table>
+              
+
+     
+
+         
+         <br/>
+         <br/>
+            </div>
+             <!-- END table responsive-->
+                <br/>
+             <div class="clearfix">
+         <button class="btn btn-success pull-left mr" type="button">Export to CSV</button>
+        
+      </div>
+         
+         </div>
+         </div>
+      </div>
+
+
+
+
+
+
+
+
+
+      </uib-tab>
+       <uib-tab heading="Gratuity Details"> <div class=" companydetails"><div class="panel panel-default">
+         <div class="panel-heading"><!-- <h3>Section I : Calculation of PAYE Tax Payable on Gratuity
+</h3> --></div>
+         <div class="panel-body " ng-controller="ModalController as  trans">
+
+          <div class="table-responsive ">
+          <div class="panel-heading"><h3>Section I : Calculation of PAYE Tax Payable on Gratuity</h3></div>
+               <table class="table table-bordered table-hover table-striped largetbl">
+                  <thead>
+                     <tr>
+                        <th>PIN of Employee</th>
+                        <th>Name of Employee</th>
+
+                        <th>Gratuity Paid Month</th>
+                     
+                         <th>Gratuity Paid Year  (A)</th>
+                        <th>Gratuity Related/Retirement Year (Ksh)</th>
+                         <th>Gratuity Period in Years</th>
+                        <th>Gratuity Value (Ksh) </th>
+                        <th>Amount of Tax Payable on Gratuity (Ksh)</th>
+                        
+                        
+                        
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                       <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             
+                          
+                       
+                       
+                     </tr>
+                   
+                  
+                    
+                    <tr>
+                        <td colspan="6"></td>
+                       
+                             <td><b>Total</b></td>
+                        <td>10/21/2013</td>
+                     
+                       
+                        
+                     </tr>
+                  
+                     <br/>
+                   <br/>
+                     
+                  
+                      
+                      
+                  </tbody>
+                  <br/>
+                   <br/>
+               </table>
+              
+
+     
+
+         
+         <br/>
+         <br/>
+            </div>
+             <!-- END table responsive-->
+                <br/>
+           
+
+          <br/>
+
+       <div class="table-responsive ">
+          <div class="panel-heading" ><h3>Calculation of PAYE Tax Payable on Gratuity for Specific PIN</h3></div>
+               <table class="table table-bordered table-hover table-striped largetbl">
+                  <thead>
+                     <tr>
+                        <th>PIN of Employee</th>
+                        <th>Gratuity Year </th>
+
+                        <th>Gratuity Value (Ksh) (A)</th>
+                     
+                         <th>Taxable Amounts (Ksh) (B) (A)</th>
+                        <th>Total Revised Income(Ksh)(C)=(A+B)</th>
+                         <th>Tax on Revised Income(Ksh) (D)</th>
+                        <th>Tax Deducted plus Reliefs(Ksh) (E)</th>
+                        <th>Amount of Tax Payable on Gratuity (Ksh) (F) = (D-E)</th>
+                        
+                        
+                        
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                       <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             
+                          
+                       
+                       
+                     </tr>
+                   
+                  
+                     <br/>
+                   <br/>
+                     
+                  
+                      
+                      
+                  </tbody>
+                  <br/>
+                   <br/>
+               </table>
+            </div>
+            <!-- END table responsive-->
+          <br/>
+
+      
+         
+         </div>
+         </div>
+      </div>
+
+
+
+
+
+
+
+
+
+      </uib-tab>
+
+
+         <uib-tab heading="FBT Details"> <div class=" companydetails"><div class="panel panel-default">
+         <div class="panel-heading"><h3>Section J : Calculation of Fringe Benefit Tax Payable
+</h3></div>
+         <div class="panel-body" ng-controller="ModalController as  trans">
+
+
+       <div class="table-responsive">
+               <table class="table table-bordered table-hover table-striped largetbl">
+                  <thead>
+                     <tr>
+                        <th>PIN of Employee</th>
+                        <th>Name of Employee</th>
+
+                        <th>Loan Account Number</th>
+                        <th>Loan Amount (Ksh)</th>
+                         <th>Amount of Loan Outstanding (Ksh) (A)</th>
+                         <th>Rate of Interest on Loan(%) (B)</th>
+                        <th>Interest on Loan (Ksh)(C)=(A)*(B)</th>
+                        <th>Prescribed Market Interest Rate (%) (D)</th>
+                        <th>Prescribed Market Interest (Ksh) (E) = (A)*(D)</th>
+                        <th>Amount of Fringe Benefit (Ksh) (F) = (E - C)</th>
+                         <th>Amount of Fringe Benefit Tax (Ksh) (G) = (F) * 30%</th>
+                        
+                        
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                       <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>3326</td>
+                        <td>10/21/2013</td>
+                             <td>10/21/2013</td>
+                          
+                       
+                       
+                     </tr>
+                   
+                  
+                    <tr>
+                        <td colspan="9"></td>
+                       
+                             <td><b>Total</b></td>
+                        <td>10/21/2013</td>
+                     
+                       
+                        
+                     </tr>
+                  
+                     <br/>
+                   <br/>
+                     
+                  
+                      
+                      
+                  </tbody>
+                  <br/>
+                   <br/>
+               </table>
+              
+
+     
+
+         
+         <br/>
+         <br/>
+            </div>
+             <!-- END table responsive-->
+                <br/>
+             <div class="clearfix">
+         <button class="btn btn-success pull-left mr" type="button">Export to CSV</button>
+        
+      </div>
+         
+         </div>
+         </div>
+      </div>
+
+
+
+
+  
+
+
+
+      </uib-tab>
+       <uib-tab heading="PAYE payment Credit"> <div class=" companydetails"><div class="panel panel-default">
+         <div class="panel-heading"><h3>Section K : Details of PAYE Tax paid</h3></div>
+         <div class="panel-body" ng-controller="ModalController as  trans">
+           
+        <div class="table-responsive ">
+          <div class="panel-heading"><h4>Section K1 : Advance Payment</h4></div>
+               <table class="table table-bordered table-hover table-striped largetbl">
+                  <thead>
+                     <tr>
+                        <th>PIN of Employee</th>
+                        <th>Name of Employee</th>
+
+                        <th>Gratuity Paid Month</th>
+                       
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td>3326</td>
+                        <td>10/21/2013</td>
+                        <td>3326</td>
+                     
+                             
+                          
+                       
+                       
+                     </tr>
+                   
+                  
+                    
+                    <tr>
+                        <td ></td>
+                       
+                             <td><b>Total</b></td>
+                        <td>10/21/2013</td>
+                     
+                       
+                        
+                     </tr>
+                  
+                     <br/>
+                   <br/>
+                     
+                  
+                      
+                      
+                  </tbody>
+                  <br/>
+                   <br/>
+               </table>
+              
+
+     
+
+         
+         <br/>
+         <br/>
+            </div>
+             <!-- END table responsive-->
+                <br/>
+           
+
+          <br/>
+
+       <div class="table-responsive">
+          <div class="panel-heading" ><h4>Section K2 : Self Assessment Tax</h4></div>
+               <table class="table table-bordered table-hover table-striped largetbl">
+                  <thead>
+                     <tr>
+                        <th>PIN of Employee</th>
+                        <th>Gratuity Year </th>
+
+                        <th>Gratuity Value (Ksh) (A)</th>
+                     
+                       
+                        
+                        
+                        
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td>3326</td>
+                        <td>10/21/2013</td>
+                        <td>3326</td>  
+                     </tr>
+                   
+                  <tr>
+                        <td ></td>
+                       
+                             <td><b>Total</b></td>
+                        <td>10/21/2013</td>
+                     
+                       
+                        
+                     </tr>
+
+                     <tr>
+                        <td ></td>
+                       
+                             <td><b>Total (Section K1 Total + Section K2 Total)  </b></td>
+                        <td>10/21/2013</td>
+                     
+                       
+                        
+                     </tr>
+                  
+                     <br/>
+                   <br/>
+                     
+                  
+                      
+                      
+                  </tbody>
+                  <br/>
+                   <br/>
+               </table>
+              
+
+     
+
+         
+         <br/>
+         <br/>
+            </div>
+             <!-- END table responsive-->
+                <br/>
+            
+          
+         
+         </div>
+         </div>
+      </div>
+
+
+      </uib-tab>
+
+
+ <uib-tab heading="Tax Due"> <div class=" companydetails"><div class="panel panel-default">
+           <div class="panel-heading"><h3>Section L : Calculation of Tax Due</h3></div>
+         <div class="panel-body" ng-controller="ModalController as  trans">
+
+           <div class="table-responsive">
+        
+               <table class="table table-bordered table-hover table-striped largetbl">
+                  <thead>
+                     <tr>
+                        <th>Sr. No</th>
+                        <th colspan="5">Description</th>
+
+                        <th>Amount(Ksh)</th>
+                     
+                       
+                        
+                        
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td>1</td>
+                       <td colspan="5">Total Employees (Total records of B_Employees_Dtls and C_Disabled_Employees_Dtls)
+                       </td>
+                        <td></td>
+                             
+                    </tr>
+                       <tr>
+                        <td>2</td>
+                       <td colspan="5">PAYE Tax deducted from the Employee(s) (Total of "Self Assessed PAYE Tax" from B_Employees_Dtls)
+                       </td>
+                        <td></td>
+                             
+                    </tr>
+                       <tr>
+                        <td>3</td>
+                       <td colspan="5">PAYE Tax deducted from Persons with Disability (Total of "Self Assessed PAYE Tax"
+                        from C_Disabled_Employees_Dtls)
+                       </td>
+                        <td></td>
+                             
+                    </tr>
+
+                     <tr>
+                        <td>4</td>
+                       <td colspan="5">PAYE Tax on Lump Sum Payment on Termination (Total of "Amount of PAYE
+                        Payable" from F_Lump_Sum_Payments_Dtls)
+
+                       </td>
+                        <td></td>
+                             
+                    </tr>
+
+                    <tr>
+                        <td>5</td>
+                       <td colspan="5">PAYE Tax deducted from Employee(s) on Arrears (Total of "Self Assessed PAYE Tax"
+                       from G_Arrears_Dtls_E)
+                       </td>
+                        <td></td>
+                             
+                    </tr>
+
+
+                     <tr>
+                        <td>6</td>
+                       <td colspan="5">
+                        PAYE Tax deducted from Persons with Disability on Arrears (Total of "Self Assessed
+                        PAYE Tax" from H_Arrears_Dtls_DE)
+
+                       </td>
+                        <td></td>
+                             
+                    </tr>
+                  
+                  <tr>
+                        <td>7</td>
+                       <td colspan="5">
+                       PAYE Tax deducted on Gratuity (Total of "Amount of Tax Payable on Gratuity" from
+                       I_Gratuity_Dtls)
+
+                       </td>
+                        <td></td>
+                             
+                    </tr>
+
+
+                  <tr>
+                        <td>8</td>
+                       <td colspan="5">
+                      Fringe Benefit Tax (Total of "Amount of Fringe Benefit Tax" from J_FBT_Dtls)
+
+                       </td>
+                        <td></td>
+                             
+                    </tr>
+
+                    <tr>
+                        <td>9</td>
+                       <td>
+                    Total PAYE Tax Payable for the Month (2+3+4+5+6+7+8)
+
+                       </td>
+                        <td></td>
+                             
+                    </tr>
+
+                    <tr>
+                        <td>10</td>
+                       <td colspan="5">
+                   Previous month PAYE Tax (If the amount was less than 100 Ksh and not paid) 
+
+                       </td>
+                        <td></td>
+                             
+                    </tr>
+
+                     <tr>
+                        <td>11</td>
+                       <td colspan="5">
+                     Total PAYE Tax Payable (9+10)
+
+
+                       </td>
+                        <td></td>
+                             
+                    </tr>
+                     <tr>
+                        <td>12</td>
+                       <td colspan="5">
+                      PAYE Paid in Advance (Total of "Amount of PAYE Tax Paid" from
+                      K_PAYE_Payment_Credits)
+
+                       </td>
+                        <td></td>
+                             
+                    </tr>
+
+                    <tr>
+                        <td>13</td>
+                       <td colspan="5">
+                      Net PAYE Tax Payable (11-12)
+)
+
+                       </td>
+                        <td></td>
+                             
+                    </tr>
+                     <br/>
+                   <br/>
+                     
+                  
+                      
+                      
+                  </tbody>
+                  <br/>
+                   <br/>
+               </table>
+                    <br/>
+         <br/>
+         <br/>
+            </div>
+            <!-- END table responsive-->
+          
+         
+         </div>
+         </div>
+      </div>
+
+
+
+
+
+
+
+
+
+      </uib-tab>
+
+
+            </uib-tabset>
+         </div>
+      </div>
+ 

@@ -1,0 +1,120 @@
+<h3>Payroll Groups
+   
+</h3>
+
+    <div class="panel panel-default">
+     <div class="panel-heading">Payroll Groups</div>
+     <div class="panel-body"  ng-controller="PayrollGroupController">
+      <div class="table-responsive">
+       <table class="table table-striped"  >
+         <thead>
+          <tr>
+           <th> Code</th>
+           <th>Description</th>
+            <th>Action</th>
+       
+         </tr>
+       </thead>
+       <tbody>
+        <tr ng-repeat="group in groups">
+        
+          <td>{{group.code}}</td>
+          <td>{{group.description }}</td>
+          
+
+          <td>
+            <div class="buttons" >
+             <button class="btn btn-sm btn-info pull-left mr" type="button" ng-click="show(group)" > <em class="fa fa-pencil"></em></button>
+                   
+                        <button class="btn btn-sm btn-danger"  ng-click="delete(group)" title="Delete">
+                          <em class="fa fa-trash"></em>
+                        </button>
+                      </div>
+                    </td>          
+                  </tr>
+
+                </tbody>
+              </table>
+
+
+            </div>
+            <button class="btn btn-info pull-left mr" type="button" ng-click="open()">Add New</button>
+            
+<script type="text/ng-template" id="AddPgroups.html">
+        <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Add Payroll Group</h4></div><div class="modal-body">
+         
+          <form class="form-horizontal"  ng-controller="PayrollGroupController">
+
+           <div class="form-group">
+            <label class="col-lg-3 control-label"> Group Code</label>
+            <div class="col-lg-9">
+             <input class="form-control" type="text" name="cat_code" ng-model="pgroup.code"  placeholder="Enter Code"/>
+           </div>
+         </div>
+         <div class="form-group">
+           <label class="col-lg-3 control-label">Descriptions</label>
+           <div class="col-lg-9">
+             <input class="form-control" type="text" name="cat_description" ng-model="pgroup.description"   placeholder="Enter Descriptions"/>
+           </div>
+         </div>
+     
+
+     <div class="form-group">
+      <div class="col-lg-offset-3 col-lg-9">
+       <button class="btn btn-info btn-sm mr" ng-click="submitPayrollGroup()">Save and New</button>
+         <button class="btn btn-info btn-sm mr" ng-click="ClosePayrollGroup()">Save and Close</button>
+          <button class="btn btn-warning btn-sm" type="reset">Cancel</button>
+     </div>
+   
+   </div>
+   <div class="text-center text-success" margin-top="md" ng-show="SuccessMsg">{{SuccessMsg}}</div>
+             <div class="text-center text-danger"  margin-top="md" ng-show="errorMsg">{{errorMsg}}</div>
+ </form>
+
+</div>
+<div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
+</script>
+
+<script type="text/ng-template" id="EditPgroups.html">
+     <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Edit Payroll  Group</h4></div><div class="modal-body" >
+  
+          <form class="form-horizontal" ng-controller="PayrollGroupController">
+
+           <div class="form-group">
+         
+            <div class="col-lg-9">
+             <input class="form-control" type="hidden" name="cat_code" ng-model="group.id"  placeholder="Group Code"/>
+           </div>
+         </div>
+         <div class="form-group">
+            <label class="col-lg-3 control-label"> Group Code</label>
+            <div class="col-lg-9">
+             <input class="form-control" type="text" name="cat_code" ng-model="group.code"  placeholder="Group Code"/>
+           </div>
+         </div>
+         <div class="form-group">
+           <label class="col-lg-3 control-label">Descriptions</label>
+           <div class="col-lg-9">
+             <input class="form-control" type="text" name="cat_description" ng-model="group.description"   placeholder="Descriptions"/>
+           </div>
+         </div>
+       
+ 
+
+     <div class="form-group">
+      <div class="col-lg-offset-3 col-lg-9">
+       <button class="btn btn-info btn-sm mr" ng-click="updatePayrollGroup(group)">Update</button>
+          <button class="btn btn-warning btn-sm mr" type="reset">Reset</button>
+     </div>
+   </div>
+ </form>
+
+</div>
+<div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
+
+</script>
+          </div>
+        </div>
+ 
+
+      

@@ -1,0 +1,139 @@
+<h3>Tasks
+
+</h3>
+
+     
+
+             <div class="panel panel-default">
+        <!--  <div class="panel-heading">Tasks</div> -->
+            <div class="panel-body" ng-controller="TasksController">
+         <div class="row">
+           <div class="col-md-10">
+                   <div class="clearfix">
+          <table class="table table-bordered-white"  >
+         <thead>
+          <tr>
+           <th> Task</th>
+           <th>Action</th>
+       
+         </tr>
+       </thead>
+       <tbody>
+        <tr ng-repeat="task in tasks">
+        
+    
+            <td>{{task.description}}</td>
+     
+
+          <td>
+            <div class="buttons" >
+                  <a class="btn btn-primary mr" ui-sref="app.workflow()"  ui-sref-active="active">View</a>
+                   <button class="btn btn-sm btn-info  mr" type="button" ng-click="show(task)"><em class="fa fa-pencil"></em></button>
+                  <button class="btn btn-sm btn-danger mr"  ng-click="delete(task)" title="Delete">
+                    <em class="fa fa-trash"></em>
+
+         
+                  
+                      </div>
+                    </td>          
+                  </tr>
+
+
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+            
+               
+            <br/>
+           
+                 
+          </div>
+           <div class="buttons" >
+ <button class="btn btn-success pull-left mr" type="button" ng-click="open()">Add New</button>
+
+            </div>
+    
+
+               </div>
+             <br/>
+              
+
+          <script type="text/ng-template" id="newTask.html">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">New Task</h4></div><div class="modal-body"><!-- START panel-->
+
+ <form class="form-horizontal"  ng-controller="TasksController">
+    <div class="form-group">
+                  <label class="col-lg-3">Task Description
+</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text"  name="trans_type" ng-model="task.description" placeholder="Task Name"/>
+                  </div>
+               </div>
+               
+            
+    
+
+           
+              
+             
+            
+              
+               <div class="form-group">
+                  <div class="col-lg-offset-3 col-lg-9">
+                     <button class="btn btn-info btn-sm mr" ng-click="submitTask()">Save and New</button>
+                         <button class="btn btn-info btn-sm mr" ng-click="closeTask()">Save and Close</button>
+                      <button class="btn btn-warning btn-sm" type="reset">Reset</button>
+                  </div>
+               </div>
+               
+                      <div class="text-center text-success" margin-top="md" ng-show="SuccessMsg">{{SuccessMsg}}</div>
+             <div class="text-center text-danger"  margin-top="md" ng-show="errorMsg">{{errorMsg}}</div>
+            </form>
+<!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
+         </script>
+
+
+             <script type="text/ng-template" id="EditTask.html">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Edit Task</h4></div><div class="modal-body"><!-- START panel-->
+
+ <form class="form-horizontal" ng-controller="TasksController">
+  <div class="form-group">
+                  
+                  <div class="col-lg-9">
+                     <input class="form-control" type="hidden"  name="trans_type" ng-model="currenttask.id" placeholder="Task Name"/>
+                  </div>
+               </div>
+    <div class="form-group">
+                  <label class="col-lg-3">Task Name
+</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text"  name="trans_type" ng-model="currenttask.description" placeholder="Task Name"/>
+                  </div>
+               </div>
+              
+              
+
+    
+
+         
+           
+              
+             
+            
+              
+               <div class="form-group">
+                  <div class="col-lg-offset-3 col-lg-9">
+                     <button class="btn btn-info btn-sm" ng-click=updateTask(currenttask) >Update</button>
+                      <button class="btn btn-warning btn-sm" type="reset">Reset</button>
+                  </div>
+               </div>
+            </form>
+<!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
+         </script>
+      </div>
+       
+
+ 
+               

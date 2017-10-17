@@ -1,0 +1,142 @@
+<h3>Pay Frequencies
+   
+</h3>
+<!-- Zero Configuration-->
+ <div class="col-lg-12  companydetails"><div class="panel panel-default">
+                
+                 <div class="panel-body" ng-controller="PayFrequencyController">
+
+                  <div class="table-responsive">
+                   <table class="table table-striped">
+                     <thead>
+                       <tr>
+
+                        <th> Code</th>
+                        <th>Description</th>
+                        <th>Action</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                     <tr ng-repeat="frequency in frequencies">
+                      <td>{{ frequency .code}}</td>
+                      <td>{{ frequency .description}}</td>
+
+
+
+                      <td>
+                        <div class="buttons">
+                         <button class="btn btn-info pull-left mr" type="button" ng-click="show(frequency)"><em class="fa fa-pencil"></em></button>
+                  
+                        <button class="btn btn-sm btn-danger"  ng-click="delete(frequency)" title="Delete">
+                          <em class="fa fa-trash"></em>
+                        </button>
+                      </div>
+                    </td>          
+                  </tr>
+
+                </tbody>
+              </table>
+
+
+            </div>
+            <button class="btn btn-info pull-left mr" type="button" ng-click="open()">Add New</button>
+            
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <script type="text/ng-template" id="AddPayFrequency.html">
+        <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Add Pay Frequency</h4></div><div class="modal-body"><!-- START panel-->
+
+         <form class="form-horizontal" ng-controller="PayFrequencyController" >
+
+           <div class="form-group">
+            <label class="col-lg-3 control-label">Code</label>
+            <div class="col-lg-9">
+             <input class="form-control" type="text" name="ppoint_code" ng-model="pfrequency.code" placeholder="Enter Code"/>
+           </div>
+         </div>
+         <div class="form-group">
+          <label class="col-lg-3 control-label">Descriptions</label>
+          <div class="col-lg-9">
+           <select class="form-control" name="pay_frequency"  ng-model="pfrequency.description">
+                              <option value="">Nothing</option>
+                              <option value="Monthly">Monthly</option>
+                              <option value="Weekly">Weekly</option>
+                              <option value="Biweekly">Biweekly</option>
+                              
+                           </select>
+    
+         </div>
+       </div>
+
+
+
+
+       <div class="form-group">
+        <div class="col-lg-offset-3 col-lg-9">
+         <button class="btn btn-info btn-sm mr" ng-click="submitPFrequency()">Save And New</button>
+         <button class="btn btn-info btn-sm mr" ng-click="closePFrequency()">Save And Close</button>
+
+
+           <button class="btn btn-warning btn-sm" type="reset">Reset</button>
+       </div>
+     </div>
+                      <div class="text-center text-success" margin-top="md" ng-show="SuccessMsg">{{SuccessMsg}}</div>
+             <div class="text-center text-danger"  margin-top="md" ng-show="errorMsg">{{errorMsg}}</div>
+   </form>
+   <!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
+ </script>
+
+
+ <script type="text/ng-template" id="EditPayFrequency.html">
+  <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Edit Pay Frequency</h4></div><div class="modal-body"><!-- START panel-->
+
+   <form class="form-horizontal" ng-controller="PayFrequencyController">
+
+     <div class="form-group">
+    
+      <div class="col-lg-12">
+       <input class="form-control" type="hidden" name="ppoint_code" ng-model="frequency.id" />
+     </div>
+   </div>
+    <div class="form-group">
+      <label class="col-lg-3 control-label">Code</label>
+      <div class="col-lg-9">
+       <input class="form-control" type="text" name="ppoint_code" ng-model="frequency.code" placeholder="Enter Code"/>
+     </div>
+   </div>
+   <div class="form-group">
+    <label class="col-lg-3 control-label">Descriptions</label>
+    <div class="col-lg-9">
+
+       <select class="form-control" name="pay_frequency"  ng-model="frequency.description">
+                              <option value="">Nothing</option>
+                              <option value="Monthly">Monthly</option>
+                              <option value="Weekly">Weekly</option>
+                              <option value="Biweekly">Biweekly</option>
+                              
+                           </select>
+    
+   </div>
+ </div>
+
+
+
+
+                   <div class="form-group">
+                        <div class="col-lg-offset-3 col-lg-9">
+                         <button class="btn btn-info btn-sm mr" ng-click="updatePayFrequency(frequency)">Update</button>
+                           <button class="btn btn-warning btn-sm mr" type="reset">Reset</button>
+                       </div>
+                     </div>
+                 
+</form>
+<!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
+</script>
+
+
