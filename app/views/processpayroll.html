@@ -1,0 +1,289 @@
+
+<h3>Employee Posting
+  
+</h3>
+
+
+<div class="container-fluid"  ng-controller="EmployeePostingController" >
+
+<form class="form-inline" role="form">
+      
+    
+      <div class="form-group mb-xl">
+         <label class="control-label mb">by Department</label>
+         <br/>      <select name="Category" class="slider slider-lg form-control" ng-model="selectedCategory" ng-options="department.ID as department.description for department in departments">
+    <option value="" disabled selected>Departments</option>
+  </select>
+             
+ 
+      </div>
+      <div class="form-group mb-xl">
+         <label class="control-label mb">Employee Name</label>
+         <br/>
+
+           <select name="Category" class="slider slider-lg form-control" ng-model="userId" ng-options="employee.id as employee.firstName for employee in employees | filter:{department: selectedCategory}" ng-change="searchEmployee(userId)">
+    <option value="" disabled selected>Employees</option>
+  </select>
+                <!-- <input class="slider slider-lg form-control" id="sl2" ui-slider=""
+                 type="text" ng-model="userId"
+                 value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,750]" /> -->
+      </div>
+
+
+      <div class="form-group mb-xl">
+         <label class="control-label mb">Employee Number</label>
+         <br/>
+
+          
+                <input class="slider slider-lg form-control" id="sl2" ui-slider=""
+                 type="text" ng-model="userId"
+                 value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,750]" />
+      </div>
+      <button class="btn btn-default"  ng-click="searchEmployee(userId)"><i class="fa fa-search" aria-hidden="true"></i></button>
+      </form>
+
+
+
+          <!-- START panel-->
+
+      <div class="panel panel-default">
+         
+            <div class="panel-body">
+      <!--       <h3>Search
+   <small>Search and filter results</small>
+</h3> -->
+      
+      {{selectedCategory}}
+             <div class="table-responsive">
+                    <div class="col-lg-4 col-xs-12 pv">
+            <div class="clearfix">
+               <p class="pull-left">Employee NO.</p>
+               <p class="pull-right mr">{{oneUser.employeeNumber}}</p>
+            </div>
+            <div class="clearfix">
+               <p class="pull-left">Employee Name</p>
+               <p  class="pull-right mr">{{oneUser.name}}</p>
+            </div>
+            <div class="clearfix">
+               <p class="pull-left">Pay Period</p>
+               <p class="pull-right mr">{{oneUser.period}}</p>
+            </div>
+         </div>
+         <br/>
+<!--  <h4 class="page-header">Current details</h4> -->
+   <table class="table table-bordered table-hover bg-white">
+      <tr style="font-weight: bold">
+         <td style="width:35%">Code</td>
+         <td style="width:20%">Description </td>
+         <td style="width:20%">Amount</td>
+         <td style="width:25%">Action</td>
+
+      </tr>
+      <div>
+      <tr  ng-repeat="transaction in transactions">
+         <td>
+            {{transaction.code}}    </td> 
+             <td> {{transaction.description}}    </td> 
+             <td>    {{transaction.amount}}
+            
+         </td>                           
+       
+         <td style="white-space: nowrap">
+            <!-- form-->
+           
+           
+            <div class="buttons" >
+               <button class="btn btn-sm btn-info" ng-click="show(transaction)"   title="Edit">
+                  <em class="fa fa-pencil"></em>
+               </button>
+               <button class="btn btn-sm btn-danger"  title="Delete">
+                  <em class="fa fa-trash"></em>
+               </button>
+            </div>
+         </td>
+      </tr>
+   </div>
+   </table>
+   <button class="btn btn-primary" ng-click="open()" >+</button>
+
+<script type="text/ng-template" id="addTransactions.html">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Transaction posting</h4></div><div class="modal-body">
+  <form class="form-horizontal"  ng-controller="EmployeePostingController">
+      <div class="form-group">
+                  <label class="col-lg-3 control-label"> Period
+
+                 </label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" ng-model="transaction.periodId" name="element_code
+" placeholder="Element code
+" />
+                  </div>
+               </div>
+
+      <div class="form-group">
+                  <label class="col-lg-3 control-label"> Employee
+
+                 </label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" ng-model="transaction.employeeId" name="element_code
+" placeholder="Element code
+" />
+                  </div>
+               </div>
+           <div class="form-group">
+                  <label class="col-lg-3 control-label"> code
+
+                 </label>
+                  <div class="col-lg-9">
+                    <select class="form-control" name="payrollcode" ng-model="transaction.payrollCodeId"  ng-options="code.id as code.code for code in pcodes" ng-change="codeChange(transaction.payrollCodeId)">
+    <option value="" disabled selected>All Codes</option>
+  </select>
+          <!--            <input class="form-control" type="text" ng-model="transaction.payrollCodeId" name="element_code
+" placeholder="Element code
+" /> -->
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label class="col-lg-3 control-label">Descriptions
+
+                 </label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text"   ng-model="description" name="code_desc
+" placeholder="Descriptions" disabled />
+                  </div>
+               </div>
+
+               <div class="form-group">
+                  <label class="col-lg-3 control-label">Amount
+                   </label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text"  ng-model="transaction.amount" placeholder="Group code
+                   " />
+                  </div>
+               </div>
+
+
+
+ 
+              
+       
+               
+              
+                     
+              <div class="form-group">
+                  <div class="col-lg-offset-3 col-lg-9">
+                  <button class="btn btn-sm btn-info" ng-click="submitTransaction()" >Save and New</button>
+                   <button class="btn btn-sm btn-info" ng-click="saveCloseTransaction()" >Save and close</button>
+                    <button class="btn btn-sm btn-warning"  type="reset" >Reset</button>
+                   </div>
+               </div>
+                <div class="text-center text-success" margin-top="md" ng-show="SuccessMsg">{{SuccessMsg}}</div>
+             <div class="text-center text-danger"  margin-top="md" ng-show="errorMsg">{{errorMsg}}</div>
+               
+            </form>
+
+</div>
+<div class="modal-footer"><button class="btn btn-primary" type="button"  ng-click="ok()">Close</button></div>
+         </script>
+
+
+
+         <script type="text/ng-template" id="editTransaction.html">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Edit</h4></div><div class="modal-body">
+  <form class="form-horizontal"  ng-controller="EmployeePostingController">
+
+
+    <div class="form-group">
+                  <label class="col-lg-3 control-label"> Period
+
+                 </label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" ng-model="transaction.id" name="element_code
+" placeholder="Element code
+" />
+                  </div>
+               </div>
+            <div class="form-group">
+                  <label class="col-lg-3 control-label"> Period
+
+                 </label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" ng-model="transaction.payrollCodeId" name="element_code
+" placeholder="Element code
+" />
+                  </div>
+               </div>
+
+      <div class="form-group">
+                  <label class="col-lg-3 control-label"> Employee
+
+                 </label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" ng-model="transaction.employeeId" name="element_code
+" placeholder="Element code
+" />
+                  </div>
+               </div>
+           <div class="form-group">
+                  <label class="col-lg-3 control-label"> code
+
+                 </label>
+                  <div class="col-lg-9">
+              <select class="form-control" name="payrollcode" ng-model="transaction.payrollCodeId"  ng-options="code.id as code.code for code in pcodes" ng-change="codeChange(transaction.payrollCodeId)">
+    <option value="" disabled selected>All Codes</option>
+  </select>      </div>
+               </div>
+               <div class="form-group">
+                  <label class="col-lg-3 control-label">Descriptions
+
+                 </label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text"  ng-model="description" name="code_desc
+" placeholder="Descriptions
+
+                   " disabled/>
+                  </div>
+               </div>
+
+               <div class="form-group">
+                  <label class="col-lg-3 control-label">Amount
+                   </label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text"  ng-model="transaction.amount" placeholder="Group code
+                   " />
+                  </div>
+               </div>
+
+
+
+ 
+              
+       
+               
+              
+                     
+              <div class="form-group">
+                  <div class="col-lg-offset-3 col-lg-9">
+                  <button class="btn btn-sm btn-primary mr"  ng-click=updateTransaction(transaction) >Update</button>
+                    <button class="btn btn-sm btn-warning mr" type="reset" >Cancel</button>
+                   </div>
+               </div>
+               
+            </form>
+
+</div>
+<div class="modal-footer"><button class="btn btn-primary" type="button"  ng-click="ok()">Close</button></div>
+         </script>
+                </div>
+
+
+
+            </div>
+         
+         
+       
+      </div>
+      <!-- END panel-->
+
+</div>
+       

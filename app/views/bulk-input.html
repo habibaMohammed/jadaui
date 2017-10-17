@@ -1,0 +1,109 @@
+<h3>Batch inputs 
+</h3>
+  
+<div class="panel">
+   <div class="panel-body" ng-controller="EmpBulkTransController">
+      <div class="clearfix">
+
+ <button class="btn btn-primary pull-left mr" type="button" ng-click="open()">
+      <em class="fa fa-plus-circle fa-fw "></em>Import Employees Transaction</button> &nbsp; &nbsp; 
+<a href="server/jm.csv" class="btn btn-primary pull-left mr" type="button"> 
+
+      <em class="fa fa-download fa-fw "></em>Download the csv format</a>
+      </div>
+
+     
+ <script type="text/ng-template" id="EmpBulkTransaction.html">
+              <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Upload</h4></div>
+ <div class="modal-body">
+
+    <form class="form-horizontal" ng-submit="submitCostCentre()">
+
+   <div class="col-lg-9">
+      
+    <input class="form-control" filestyle="" type="file" data-button-text="Browse" data-class-button="btn btn-default" data-classinput="form-control inline" nv-file-select="" uploader="form.uploader" />
+  
+                </div> 
+<br/>
+<br/>
+<br/>
+     <div class="clearfix">
+       
+     <button class="btn btn-info btn-s" type="button" >
+                     <span class="icon-cloud-upload mr"></span>Upload</button>
+                  <button class="btn btn-warning btn-s" type="button">
+                     <span class="icon-close mr"></span>Cancel</button>
+
+      </div>
+
+     
+       
+                 
+              </form>
+  <!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">OK</button></div>
+
+           </script>
+<br/>
+<br/>
+     
+      <div class="table-responsive table-bordered mb-lg">
+         <table class="table">
+            <thead>
+               <tr>
+                  <th>Employee Number</th>
+                  <th>Payroll Code</th>
+                  <th>Amount</th>
+                  <th>Action</th>
+                 
+               </tr>
+            </thead>
+                  
+                 
+            <tbody>
+              
+               <tr>
+                  <td>p103</td>
+                  <td>Basic Salary</td>
+                  <td>60000</td>
+                 
+               </tr>
+               <tr>
+                  <td>p104</td>
+                  <td>house allowance</td>
+                  <td>10000</td>
+                  
+               </tr>
+               <tr>
+                  <td>p104</td>
+                  <td>Telephone benefits</td>
+                  <td>5000</td>
+                 
+               </tr>
+            </tbody>
+         </table>
+      </div>
+     
+               
+            </div>
+         </div>
+      </div> 
+  
+      <div class="clearfix">
+         <button class="btn btn-info pull-left mr" type="button">Edit</button>
+         <button class="btn btn-danger pull-left mr" type="button">Delete</button>
+      
+         <button class="btn btn-success pull-left" type="button">Save</button>
+
+
+      </div>
+
+
+
+
+
+
+
+
+
+       
+   </div>

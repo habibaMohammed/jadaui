@@ -1,0 +1,163 @@
+<h3>Company Details
+   <small>General Company Details</small>
+</h3>
+
+
+      
+            
+
+           
+     
+        <div class="panel panel-default">
+            <div class="panel-heading">Company information</div>
+                <div class="panel-body" ng-controller=" CompanyRegController ">
+                   <div class="row mb-lg">
+                     <div class="col-lg-6 col-xs-6  pv">
+                       <div class="row">
+                           
+
+        
+        
+                           <div class="col-md-10">
+                            <div class="clearfix">
+                           <p class="pull-left bold">Name</p>
+                           <p class="pull-right mr ">{{company.companyName}}</p>
+                            </div>
+                        <div class="clearfix">
+                           <p class="pull-left bold">Email Address</p>
+                           <p class="pull-right mr">{{company.emailAddress}}</p>
+                        </div>
+                        <div class="clearfix">
+                           <p class="pull-left bold">Pin Number</p>
+                           <p class="pull-right mr">{{company.companyPin}}</p>
+                        </div>
+                        <div class="clearfix">
+                           <p class="pull-left bold">Posta Address</p>
+                           <p class="pull-right mr">{{company.postalAddress}}</p>
+                        </div>
+
+                        <div class="clearfix">
+                           <p class="pull-left bold">Postal Code</p>
+                           <p class="pull-right mr">{{company.postalCode}}</p>
+                        </div>
+
+                          <div class="clearfix">
+                           <p class="pull-left bold">Physical Address</p>
+                           <p class="pull-right mr">{{company.physicalAddress}}</p>
+                        </div>
+
+
+                          <div class="clearfix">
+                           <p class="pull-left bold">Country</p>
+                           <p class="pull-right mr">{{company.country}}</p>
+                        </div>
+
+                          <div class="clearfix">
+                           <p class="pull-left bold">website</p>
+                           <p class="pull-right mr">{{company.website}}</p>
+                        </div>
+
+
+                       
+                         </div>
+              </div>
+           </div>
+           </div>
+            
+  <div class="buttons"  >
+                       <button class="btn btn-info pull-left mr" type="button" ng-click="show(Company)">Edit</button>
+                    <!--  <a class="btn btn-primary" title="edit"
+                          ui-sref="app.userinfo({UserId:user.id})">  <em class="fa fa-pencil"></em></a>
+                                                                           -->
+                   
+                    </div>
+          
+
+        
+         
+          
+         
+         </div>
+         </div>
+    
+
+    
+
+        <script type="text/ng-template" id="GeneralCompanyEdit.html">
+     <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Company information</h4></div>
+  <div class="modal-body"><!-- START panel-->
+              <form role="form" class="form-horizontal" ng-controller="CompanyRegController">
+
+
+              <div class="form-group">
+                  <label class="col-lg-3 control-label">Company Name</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="cname" ng-model="company.companyName" placeholder="Company name" />
+                  </div>
+               </div> 
+               <div class="form-group">
+                  <label class="col-lg-3 control-label">Email Adress</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="cname" ng-model="company.emailAddress" placeholder="Email Adress" />
+                  </div>
+               </div>
+             <div class="form-group">
+                  <label class="col-lg-3 control-label">Company Pin</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="cname" ng-model="company.companyPin" placeholder="Company Pin" />
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label class="col-lg-3 control-label" >Postal Address</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text"  name="cpostal" ng-model="company.postalAddress" placeholder="Postal Address" />
+                  </div>
+                  
+               </div>
+
+                <div class="form-group">
+                  <label class="col-lg-3 control-label" >Postal Code</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text"  name="cpostal" ng-model="company.postalCode" placeholder="Postal Code" />
+                  </div>
+                  
+               </div>
+              <div class="form-group">
+                  <label class="col-lg-3 control-label">Physical Address</label>
+                 <div class="col-lg-9">
+                     <input class="form-control" type="text"  name="cpin" 
+                     ng-model="company.physicalAddress" placeholder="Physical Address " />
+                  </div>
+               </div>
+               
+               
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Country </label>
+                 <div class="col-lg-9">
+                     <input class="form-control" type="text" name="caddress" ng-model="company.country"  placeholder="Country  " />
+                  </div>
+               </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Company Website</label>
+                   <div class="col-lg-9">
+                     <input class="form-control" type="text" name="ctelephone" ng-model="company.website"  placeholder="Company Website" />
+                  </div>
+               </div>
+          
+  <div class="form-group">
+                <div class="col-lg-offset-3 col-lg-9">
+                    <button class="btn btn-sm btn-info mr" ng-click="EditGenCompany(company)">Update</button>
+                     <button class="btn btn-sm btn-warning mr" type="reset">Reset</button>
+                     
+                  </div>
+               
+               </div>
+               
+                      <div class="text-center text-success" margin-top="md" ng-show="SuccessMsg">{{SuccessMsg}}</div>
+             <div class="text-center text-danger"  margin-top="md" ng-show="errorMsg">{{errorMsg}}</div>
+
+       
+               
+            </form>
+  <!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
+           </script>

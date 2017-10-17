@@ -1,0 +1,130 @@
+
+<h3>Leave Transaction Types
+</h3>
+<div class="panel panel-default">
+         <div class="panel-heading">Leave Transaction Types</div>
+         <div class="panel-body" ng-controller="LeaveTransactionTypeController">
+
+         <div class="table-responsive">
+         <table class="table table-striped">
+                 <thead>
+               <tr>
+                  <th> Type</th>
+                  <th>Description</th>
+                  
+                  
+                   <th>Action</th>
+                  
+               </tr>
+            </thead>
+                <tbody>
+               <tr ng-repeat="type in types">
+                  <td>{{type.id}}</td>
+                  <td>{{type.username}}</td>
+                  
+                  <td>  <div class="buttons" >
+               <button class="btn btn-sm btn-info"   title="Edit" ng-click="show(type)">
+                  <em class="fa fa-pencil"></em>
+               </button>
+               <button class="btn btn-sm btn-danger"  title="Delete" ng-click="delete(type)">
+                  <em class="fa fa-trash"></em>
+               </button>
+            </div>
+                  </td>
+                  
+               </tr>
+              
+    
+                 
+               
+            </tbody>
+         </table>
+
+          
+      </div>
+           <button class="btn btn-info pull-left mr" type="button" ng-click="open()">Add New</button>
+          
+         
+         </div>
+
+
+<script type="text/ng-template" id="AddTType.html">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Add Leave Transaction</h4></div><div class="modal-body"><!-- START panel-->
+
+ <form class="form-horizontal">
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Transaction Type
+</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text"  name="trans_type" ng-model="type.id" placeholder="Enter Transaction Type"/>
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label class="col-lg-3 control-label">Trasaction Description</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="trans_desc" ng-model="type.description"  placeholder="Enter Trasaction Description"/>
+                  </div>
+               </div>
+            
+
+              
+              
+              
+               <div class="form-group">
+                  <div class="col-lg-offset-3 col-lg-9">
+                     <button class="btn btn-info btn-sm mr" ng-click="submitLeaveTType()">Save and New</button>
+                      <button class="btn btn-info btn-sm mr" ng-click="closeLeaveTType()">Save and Close</button>
+                      <button class="btn btn-warning btn-sm mr" type="reset">Cancel</button>
+                  </div>
+               </div>
+            </form>
+<!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">OK</button></div>
+         </script>
+
+
+
+
+
+
+<script type="text/ng-template" id="editTType.html">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Edit Leave Transaction Type</h4></div><div class="modal-body"><!-- START panel-->
+
+ <form class="form-horizontal">
+
+
+  <div class="form-group">
+          
+                  <div class="col-lg-9">
+                     <input class="form-control" type="hidden"  name="trans_type" ng-model="type.id" placeholder="Transaction Type"/>
+                  </div>
+               </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Transaction Type
+</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text"  name="trans_type" ng-model="type.type" placeholder="Enter Transaction Type"/>
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label class="col-lg-3 control-label">Trasaction Description</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="trans_desc" ng-model="type.username"  placeholder="Enter Trasaction Description"/>
+                  </div>
+               </div>
+            
+
+              
+              
+              
+               <div class="form-group">
+                  <div class="col-lg-offset-3 col-lg-9">
+                     <button class="btn btn-info btn-sm" ng-click="updateLeaveTType(type)">Update</button>
+                      <button class="btn btn-warning btn-sm" type="reset">Reset</button>
+                  </div>
+               </div>
+            </form>
+<!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
+         </script>
+
+         </div>
+ 

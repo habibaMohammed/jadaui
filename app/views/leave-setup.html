@@ -1,0 +1,139 @@
+<h3>Leave Types
+  
+
+
+</h3>
+
+
+
+
+
+
+            <div class="panel panel-default">
+         <div class="panel-heading">Leave Types</div>
+         <div class="panel-body" ng-controller="LeaveController">
+
+         <div class="table-responsive">
+         <table class="table table-striped">
+                 <thead>
+               <tr>
+                  <th> Type</th>
+                  <th>Description</th>
+                  <th> Entitlement</th>
+                  
+                   <th>Action</th>
+                  
+               </tr>
+            </thead>
+                <tbody>
+               <tr ng-repeat="leave in leaves">
+                    <td>{{ leave.id }}</td>
+                    <td>{{ leave.email }}</td>
+                     <td>{{ leave.id }}</td>
+                 
+            
+                      <td>
+                        <div class="buttons">
+                       <button class="btn btn-info pull-left mr" type="button" ng-click="show(leave)"><em class="fa fa-pencil"></em></button>
+        
+                     <button class="btn btn-sm btn-danger"  ng-click="delete(leave)" title="Delete">
+                    <em class="fa fa-trash"></em>
+                     </button>
+                    </div>
+                     </td>          
+                 </tr>
+              
+              
+               
+            </tbody>
+         </table>
+
+          
+      </div>
+           <button class="btn btn-info pull-left mr" type="button" ng-click="open()">Add New</button>
+          
+         
+         </div>
+         </div>
+
+
+      <script type="text/ng-template" id="addLeave.html">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Add Leave</h4></div><div class="modal-body"><!-- START panel-->
+
+ <form class="form-horizontal">
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Type
+</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text"  name="leave_name"  ng-model="leave.type" placeholder="Leave Type"/>
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label class="col-lg-3 control-label"> Description</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="leave_desc" ng-model="leave.description" placeholder="eg. Annual"/>
+                  </div>
+               </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Entitlement</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="l_entitlement" ng-model="leave.entitlement"  placeholder="eg 21 days"/>
+                  </div>
+               </div>
+
+              
+              
+              
+               <div class="form-group">
+                  <div class="col-lg-offset-3 col-lg-9">
+                     <button class="btn btn-info btn-sm" ng-click="submitLeaveTypes">Save and New</button>
+                       <button class="btn btn-info btn-sm" ng-click="closesubmitLeaveTypes">Save and Close</button>
+                        <button class="btn btn-warning btn-sm" type="reset">Reset</button>
+                  </div>
+               </div>
+            </form>
+<!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
+         </script>
+
+            <script type="text/ng-template" id="editLeave.html">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Add Leave</h4></div><div class="modal-body"><!-- START panel-->
+
+ <form class="form-horizontal">
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Type
+</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text"  name="leave_name"  ng-model="user.name" placeholder="Leave Type"/>
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label class="col-lg-3 control-label"> Description</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="leave_desc" ng-model="leave_desc" placeholder="eg. Annual"/>
+                  </div>
+               </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Entitlement</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="l_entitlement" ng-model="l_entitlement"  placeholder="eg 21 days"/>
+                  </div>
+               </div>
+
+              
+              
+              
+               <div class="form-group">
+                  <div class="col-lg-offset-3 col-lg-9">
+                     <button class="btn btn-info btn-sm" ng-click="UpdateLeaveTypes">Update</button>
+                          <button class="btn btn-info btn-sm" type="reset">Reset</button>
+                  </div>
+               </div>
+            </form>
+<!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
+         </script>
+
+
+               
+            
+
+           

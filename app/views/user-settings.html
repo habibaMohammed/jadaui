@@ -1,0 +1,351 @@
+<h3>User Settings
+  
+
+
+</h3>
+
+
+
+
+      <div class="panel panel-default" id="panelDemo15">
+         <div class="panel-heading"></div>
+         <div class="panel-body">
+            <uib-tabset type="pills">
+          
+
+               
+               <uib-tab heading="User Groups"> <div class=" companydetails"><div class="panel panel-default">
+         <div class="panel-heading">user groups</div>
+         <div class="panel-body" ng-controller="UserGroupController">
+
+         <div class="table-responsive">
+         <table class="table table-striped">
+                 <thead>
+               <tr>
+                  
+                  <th>user</th>
+                  <th>Module</th>
+                  <th> Read Only</th>
+                   <th>Read and Write</th>
+                  <th>process payroll</th>
+                   <th>approve payroll</th>
+                  
+               </tr>
+            </thead>
+                <tbody>
+             <tr  ng-repeat="usergroup in usergroups">
+                    <td> {{usergroup.username}}</td>
+                        <td> {{usergroup.name}}</td>
+           
+                <td>{{usergroup.id}}</td>
+
+                  <td> {{usergroup.id}}</td>
+                        <td> {{usergroup.name}}</td>
+           
+                <td>{{usergroup.name}}</td>
+
+                  <td> <div class="clearfix">
+        
+     <button class="btn btn-sm btn-info  mr" type="button" ng-click="show(usergroup)"><em class="fa fa-pencil fa-fw mr"></em></button>
+
+     <button class="btn btn-sm btn-danger  mr" type="button" ng-click="delete(usergroup)"><em class="fa fa-trash fa-fw mr"></em></button>
+       
+      
+     
+ 
+      </div></td>
+                  
+                  
+                
+               </tr>
+              
+               
+               
+            </tbody>
+         </table>
+
+          
+      </div>
+           <button class="btn btn-info pull-left mr" type="button" ng-click="open()">Add New</button>
+          
+         
+         </div>
+         </div>
+      </div>
+
+<script type="text/ng-template" id="newUserGroup.html">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Add Leave Transaction</h4></div><div class="modal-body"><!-- START panel-->
+herer {{oneUser.username }}
+ <form class="form-horizontal">
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Transaction Type
+</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text"  name="trans_type" ng-model="trans_type" placeholder="Transaction Type"/>
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label class="col-lg-3 control-label">Trasaction Description</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="trans_desc" ng-model="trans_desc"  placeholder="eg. Paid"/>
+                  </div>
+               </div>
+            
+
+              
+              
+              
+               <div class="form-group">
+                  <div class="col-lg-offset-3 col-lg-9">
+                     <button class="btn btn-info btn-lg" type="submit">Save</button>
+                      <button class="btn btn-info btn-lg" type="reset">Cancel</button>
+                  </div>
+               </div>
+            </form>
+<!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">OK</button></div>
+         </script>
+
+
+
+
+<script type="text/ng-template" id="EditUserGroup.html">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">New User</h4></div><div class="modal-body"><!-- START panel-->
+
+ <form class="form-horizontal">
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Email Address
+</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text"  name="leave_name"  ng-model="leave_name" placeholder="Enter Email"/>
+                  </div>
+               </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label"> Username</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="leave_desc" ng-model="leave_desc" placeholder="Enter Username"/>
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label class="col-lg-3 control-label"> Phone Number </label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="leave_desc" ng-model="leave_desc" placeholder="Enter Phone Number"/>
+                  </div>
+               </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Group</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="l_entitlement" ng-model="l_entitlement"  placeholder="Enter group"/>
+                  </div>
+               </div>
+             
+             <div class="form-group">
+                  <label class="col-lg-3 control-label">Active</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="l_entitlement" ng-model="l_entitlement"  placeholder="YES"/>
+                  </div>
+               </div>
+
+              
+              
+              
+               <div class="form-group">
+                  <div class="col-lg-offset-3 col-lg-9">
+                     <button class="btn btn-info btn-sm" type="submit">Save</button>
+                      <button class="btn btn-warning btn-sm" type="submit">Cancel</button>
+                  </div>
+               </div>
+            </form>
+<!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">OK</button></div>
+         </script>
+
+
+      </uib-tab>
+               
+
+                 <uib-tab heading="Users">
+            
+
+               <div class="col-lg-12  companydetails"><div class="panel panel-default">
+         <div class="panel-heading">users</div>
+         <div class="panel-body" ng-controller="UserAdminController">
+
+         <div class="table-responsive">
+         <table class="table table-striped">
+                 <thead>
+               <tr>
+                  <th> Email Address</th>
+                  <th>Username</th>
+                  <th> Phone Number</th>
+                  
+                   <th>Group</th>
+
+                   <th>Active</th>
+                     <th>Action</th>
+                  
+               </tr>
+            </thead>
+                <tbody>
+              <tr ng-repeat="user in users">
+                <td>{{ user.email }}</td>
+                 <td>{{ user.name }}</td>
+                  <td>{{ user.id }}</td>
+                  <td>{{ user.username }}</td>
+                  <td>{{ user.id }}</td>
+                  <td>  <div class="buttons" >
+                <button class="btn btn-sm btn-info" ng-click="show()"  title="Edit">
+                  <em class="fa fa-pencil"></em>
+               </button>
+               <button class="btn btn-sm btn-danger"  title="Delete">
+                  <em class="fa fa-trash"></em>
+               </button>
+            </div>
+                  </td>
+                  
+               </tr>
+              
+            
+               
+            </tbody>
+         </table>
+
+          
+      </div>
+              <button class="btn btn-sm btn-info" ng-click="open()">
+            Add
+               </button>
+          
+         
+         </div>
+         </div>
+      </div>
+
+      <script type="text/ng-template" id="ModalContent.html">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">New User</h4></div><div class="modal-body"><!-- START panel-->
+
+ <form class="form-horizontal">
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Email Address
+</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text"  name="leave_name"  ng-model="leave_name" placeholder="Enter Email"/>
+                  </div>
+               </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label"> Username</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="leave_desc" ng-model="leave_desc" placeholder="Enter Username"/>
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label class="col-lg-3 control-label"> Phone Number </label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="leave_desc" ng-model="leave_desc" placeholder="Enter Phone Number"/>
+                  </div>
+               </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Group</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="l_entitlement" ng-model="l_entitlement"  placeholder="Enter group"/>
+                  </div>
+               </div>
+             
+             <div class="form-group">
+                  <label class="col-lg-3 control-label">Active</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="l_entitlement" ng-model="l_entitlement"  placeholder="YES"/>
+                  </div>
+               </div>
+
+              
+              
+              
+               <div class="form-group">
+                  <div class="col-lg-offset-3 col-lg-9">
+                     <button class="btn btn-info btn-sm" type="submit">Save</button>
+                      <button class="btn btn-warning btn-sm" type="submit">Cancel</button>
+                  </div>
+               </div>
+            </form>
+<!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">OK</button></div>
+         </script>
+
+
+
+         <script type="text/ng-template" id="edit-user-setting.html">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Edit User</h4></div><div class="modal-body"><!-- START panel-->
+
+ <form class="form-horizontal">
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Email Address
+</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text"  name="leave_name"  ng-model="leave_name" placeholder="Enter Email"/>
+                  </div>
+               </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label"> Username</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="leave_desc" ng-model="leave_desc" placeholder="Enter Username"/>
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label class="col-lg-3 control-label"> Phone Number </label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="leave_desc" ng-model="leave_desc" placeholder="Enter Phone Number"/>
+                  </div>
+               </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Group</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="l_entitlement" ng-model="l_entitlement"  placeholder="Enter group"/>
+                  </div>
+               </div>
+             
+             <div class="form-group">
+                  <label class="col-lg-3 control-label">Active</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="l_entitlement" ng-model="l_entitlement"  placeholder="YES"/>
+                  </div>
+               </div>
+
+              
+              
+              
+               <div class="form-group">
+                  <div class="col-lg-offset-3 col-lg-9">
+                     <button class="btn btn-info btn-sm" type="submit">Save</button>
+                      <button class="btn btn-warning btn-sm" type="submit">Cancel</button>
+                  </div>
+               </div>
+            </form>
+<!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">OK</button></div>
+         </script>
+</uib-tab>
+
+<!-- 
+  <uib-tab heading="Tasks">
+            
+
+      <div  ng-include="'app/views/task.html'"> </div>
+</uib-tab> -->
+            </uib-tabset>
+         </div>
+      </div>
+
+
+
+
+<!-- Modal -->
+
+
+
+
+
+
+
+
+
+
+
+
+

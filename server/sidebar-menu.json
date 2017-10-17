@@ -1,0 +1,234 @@
+[
+  {
+    "text": "Main Navigation",
+    "heading": "true",
+    "translate": "sidebar.heading.HEADER"
+  },
+  {
+    "text": "DASHBOARD",
+    "sref": "app.dashboard",
+    "icon": "icon-speedometer",
+   
+    "label": "label label-info"
+   
+
+  },
+
+{
+    "text": "ADMINISTRATION",
+   
+    "icon": "icon-speedometer",
+   
+    "label": "label label-info",
+
+     "submenu": [
+       {  "text": "Company Details", "sref": "app.company" },
+          {"text": "Financial Periods","sref": "app.financialperiods"},
+           {"text": "Statutory", "sref": "app.payroll-details"}, 
+
+         {"text": "Departments ","sref": "app.departmentlistings"},
+         {"text": "Cost Centers ","sref": "app.costcenters"},
+         { "text": "User Setup","sref": "app.user_settings"},
+         { "text": "Task Setup","sref": "app.task"}]
+
+ 
+   
+
+  },
+
+ {
+
+    
+    "text": "PAYROLL",
+    "sref": "#",
+    "icon": "fa fa-usd",
+    "submenu": [
+      
+
+ {
+
+
+    "text": "Employee Setup",
+    "sref": "#",
+    "child": "fa fa-chevron-down",
+    
+    "submenu": [
+      {"text": "Categories ","sref": "app.employee-category"},
+     
+       {"text": " Groups", "sref": "app.employee-groups"},
+
+
+      {"text": "Pay Frequency ","sref": "app.Payfrequency"},
+         {"text": "Pay Points ","sref": "app.paypointslistings"},
+             {"text": " Details", "sref": "app.listings"},
+   
+       {"text": "Bank Setup", "sref": "app.bankcodes"}
+
+
+     
+
+      
+       
+    ]
+  },
+       
+
+
+
+
+
+       {
+
+
+    "text": "Payroll Setup",
+    "sref": "#",
+      "child": "fa fa-chevron-down",
+    "label": "label label-info",
+  
+    "submenu": [
+    
+       {"text": " Codes ", "sref": "app.payroll-codes"},
+         {"text": "Groups ", "sref": "app.payroll-groups"},
+           {"text": "Exemptions ", "sref": "app.exemptions"},
+            {"text": "Formulas ", "sref": "app.formula-setup"}
+      
+  
+       
+    ]
+  },
+
+        {
+
+
+    "text": "Leave",
+    "sref": "#",
+      "child": "fa fa-chevron-down",
+    "label": "label label-info",
+  
+    "submenu": [
+    
+       {"text": "Leave Types ", "sref": "app.leave-setup"},
+         {"text": "Leave Transaction Types ", "sref": "app.Leave-transaction"},
+           {"text": "Leave Posting", "sref": "app.leaveposting"}
+      
+  
+       
+    ]
+  },
+
+
+
+       {
+    "text": " Payroll Processing",
+    "sref": "#",
+    "child": "fa fa-chevron-down",
+   
+    "submenu": [
+      {"text": " Employee Posting", "sref": "app.payroll-process"},
+       {"text": "Batch Posting", "sref": "app.bulktrans_input"},
+      
+       {"text": "Run Payroll", "sref": "app.run"},
+        
+         {"text": "Month End", "sref": "app.endmonth"}
+       
+    ]
+  
+  },
+ 
+       {
+    "text": "Reports",
+    "child": "fa fa-chevron-down",
+    
+   
+    "submenu": [
+   
+       {
+        "text": "Monthly ",
+        "child": "fa fa-chevron-down",
+      
+        
+        "submenu": [
+          {"text": "Payslips", "sref": "app.payslip" },
+        
+          {"text": "company summary", "sref": "app.companysummary" },
+           {"text": "company totals", "sref": "app.companytotals" },
+{
+        "text": "Statutory ",
+        "child": "fa fa-chevron-down",
+      
+
+        "submenu": [
+         {"text": "PAYE", "sref": "app.paye" },
+         {"text": "NHIF", "sref": "app.nhif" },
+             {"text": "NSSF", "sref": "app.nssf" },
+              {"text": "HELB", "sref": "app.helb" }
+     
+         
+        ]
+      },
+  {"text": "Scheduler", "sref": "app.scheduler" },
+  {"text": "Bank Files", "sref": "app.bankfiles" },
+  {"text": "Journals", "sref": "app.payroll-journals" },
+    {"text": "Leave", "sref": "app.leave" }
+            
+        ]
+      },
+             {
+        "text": "Annual  Reports",
+       
+        "child": "fa fa-chevron-down",
+       
+        "submenu": [
+          {"text": "P9A", "sref": "app.p9a" },
+          {
+            "text": "P9B",
+            "sref": "app.p9b"
+            
+       
+          },
+           {
+            "text": "P10",
+            "sref": "app.p10"
+           
+       
+          },
+           {
+            "text": "P10A",
+            "sref": "app.p10a"
+     
+       
+          },
+          {
+            "text": "P10B",
+            "sref": "app.p10b"
+            
+       
+          },
+          {
+            "text": "P10C",
+            "sref": "app.p10c"
+           
+       
+          },
+          {
+            "text": "P10D",
+            "sref": "app.p10d"
+            
+       
+          }
+        ]
+      }
+
+    ]
+  }
+    ]
+  }
+ 
+ 
+ 
+
+  
+
+   
+
+]

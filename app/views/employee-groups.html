@@ -1,0 +1,145 @@
+<h3>Employee Groups
+   
+</h3>
+
+    <div class="panel panel-default">
+<!--      <div class="panel-heading">Employee Groups</div> -->
+     <div class="panel-body"  ng-controller="EmpGroupController">
+      <div class="table-responsive">
+       <table class="table table-striped"  >
+         <thead>
+          <tr>
+           <th> Code</th>
+           <th>Description</th>
+           <th> Annual Leave Entitlement</th>
+           <th> Sick Leave Entitlement</th>
+           <th>Action</th>
+         </tr>
+       </thead>
+       <tbody>
+        <tr ng-repeat="group in groups">
+        
+          <td>{{group.code}}</td>
+          <td>{{group.description }}</td>
+          <td>{{group.annualLeaveEntitlement}}</td>
+          <td>{{group.sickLeaveEntitlement}}</td>
+
+          <td>
+            <div class="buttons" >
+             <button class="btn btn-info pull-left mr" type="button" ng-click="showgroup(group)" > <em class="fa fa-pencil"></em></button>
+                   
+                        <button class="btn btn-sm btn-danger"  ng-click="delete(group)" title="Delete">
+                          <em class="fa fa-trash"></em>
+                        </button>
+                      </div>
+                    </td>          
+                  </tr>
+
+                </tbody>
+              </table>
+
+
+            </div>
+            <button class="btn btn-info pull-left mr" type="button" ng-click="open()">Add New</button>
+            
+<script type="text/ng-template" id="newGroup.html">
+        <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Add Employee Group</h4></div><div class="modal-body">
+      
+          <form class="form-horizontal"  ng-controller="EmpGroupController">
+
+           <div class="form-group">
+            <label class="col-lg-3 control-label"> Group Code</label>
+            <div class="col-lg-9">
+             <input class="form-control" type="text" name="cat_code" ng-model="groupone.code"  placeholder="Enter Group Code"/>
+           </div>
+         </div>
+         <div class="form-group">
+           <label class="col-lg-3 control-label">Descriptions</label>
+           <div class="col-lg-9">
+             <input class="form-control" type="text" name="cat_description" ng-model="groupone.description"   placeholder=" Enter Group Descriptions"/>
+           </div>
+         </div>
+         <div class="form-group">
+          <label class="col-lg-3 control-label"> Annual Leave Entitlement</label>
+          <div class="col-lg-9">
+           <input class="form-control" type="text"  name="a_leave" ng-model="groupone.annualLeaveEntitlement"  placeholder="Enter Annual Leave days"/>
+         </div>
+       </div>
+       <div class="form-group">
+        <label class="col-lg-3 control-label"> Sick Leave Entitlement</label>
+        <div class="col-lg-9">
+         <input class="form-control" type="text"  name="s_leave" ng-model="groupone.sickLeaveEntitlement"  placeholder="Enter Sick Leave Days"/>
+       </div>
+     </div>
+
+     <div class="form-group">
+      <div class="col-lg-offset-3 col-lg-9">
+       <button class="btn btn-info btn-sm" ng-click="submitGroup()">Save and New</button>
+         <button class="btn btn-info btn-sm" ng-click="closeGroup()">Save and Close</button>
+          <button class="btn btn-warning btn-sm" type="reset">Reset</button>
+     </div>
+   
+   </div>
+           <div class="text-center text-success" margin-top="md" ng-show="SuccessMsg">{{SuccessMsg}}</div>
+             <div class="text-center text-danger"  margin-top="md" ng-show="errorMsg">{{errorMsg}}</div>
+ </form>
+
+</div>
+<div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
+</script>
+
+<script type="text/ng-template" id="editGroup.html">
+     <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Edit Employee Group</h4></div><div class="modal-body" >
+  
+          <form class="form-horizontal" ng-controller="EmpGroupController">
+
+           <div class="form-group">
+           
+            <div class="col-lg-9">
+             <input class="form-control" type="hidden" name="cat_code" ng-model="group.id"  placeholder="Enter Group Code"/>
+           </div>
+         </div>
+         <div class="form-group">
+            <label class="col-lg-3 control-label"> Group Code</label>
+            <div class="col-lg-9">
+             <input class="form-control" type="text" name="cat_code" ng-model="group.code"  placeholder="Enter Group Code"/>
+           </div>
+         </div>
+         <div class="form-group">
+           <label class="col-lg-3 control-label">Descriptions</label>
+           <div class="col-lg-9">
+             <input class="form-control" type="text" name="cat_description" ng-model="group.description"   placeholder="Enter Descriptions"/>
+           </div>
+         </div>
+         <div class="form-group">
+          <label class="col-lg-3 control-label"> Annual Leave Entitlement</label>
+          <div class="col-lg-9">
+           <input class="form-control" type="text"  name="a_leave" ng-model="group.annualLeaveEntitlement"  placeholder="Enter Annual Leave Entitlement"/>
+         </div>
+       </div>
+       <div class="form-group">
+        <label class="col-lg-3 control-label"> Sick Leave Entitlement</label>
+        <div class="col-lg-9">
+         <input class="form-control" type="text"  name="s_leave" ng-model="group.sickLeaveEntitlement"  placeholder=" Enter Sick Leave Entitlement"/>
+       </div>
+     </div>
+
+     <div class="form-group">
+      <div class="col-lg-offset-3 col-lg-9">
+       <button class="btn btn-info btn-sm" ng-click="updategroup(group)">Update</button>
+          <button class="btn btn-warning btn-sm" type="reset">Reset</button>
+     </div>
+   </div>
+ </form>
+
+</div>
+<div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
+
+</script>
+          </div>
+        </div>
+
+
+      
+
+

@@ -1,0 +1,231 @@
+
+
+<h3>Employees
+    <div class="clearfix">
+     
+      <a class="btn btn-primary pull-right mr"  ui-sref="app.batchemployees" >
+      <em class="fa fa-plus-circle fa-fw mr"></em>Batch Entry</a>
+          
+         <a class="btn btn-primary pull-right mr"
+        ui-sref="app.employee-setup">  
+        <em class="fa fa-plus-circle fa-fw mr"></em>Add</a>
+        
+      </div>
+
+      
+</h3>
+
+<div class="panel panel-default">
+   
+   <div class="panel-body">
+      <div ng-controller="EmployeesController">
+
+    
+         <table class=" table row-border hover" >
+            <thead>
+               <tr>
+                  
+                  <th>Name </th>
+                  <th>Employee Number</th>
+                  <th>Department</th>
+                  <th>Action</th>
+              
+
+                 
+               </tr>
+            </thead>
+            <tbody>
+               <tr ng-repeat="employee in employees">
+                  <td>{{ employee.firstName}}</td>
+                  <td>{{employee.id }}</td>
+                  <td>{{employee.department}}</td>
+                  <td> 
+                    <div class="buttons" >
+                        <a class="btn btn-info pull-left mr"  ui-sref="app.employeeinfo({Employee:employee.id})">Details 
+                        </a>
+                     <a class="btn btn-primary" title="edit"
+                          ui-sref="app.employee-edit({EmployeeId:employee.id})">  <em class="fa fa-pencil"></em></a>
+                       
+                        <button  class="btn btn-sm btn-danger"  ng-click="delete(employee)" title="Delete">
+                          <em class="fa fa-trash"></em>
+                        </button>
+                      </div>
+
+                 </td> 
+
+                  
+               </tr>
+              <!--  <td ng-controller="CreateEmplController as  cat"> 
+<button class="btn btn-primary" ng-click="cat.show()" >Add</button></td> -->
+            </tbody>
+         </table>
+<script type="text/ng-template" id="myModalContent.html">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Add pension</h4></div><div class="modal-body">
+ {{user}}
+
+</div>
+<div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">OK</button></div>
+         </script>
+
+         <script type="text/ng-template" id="ModalContent.html">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Add Employee Category</h4></div><div class="modal-body"><!-- START panel-->
+
+ <form class="form-horizontal" ng-submit="submitEmpMaster()">
+               
+               <div class="form-group">
+                  <label class="col-lg-3 control-label">Code</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="cat_code" ng-model="code"  placeholder="Category code"/>
+                  </div>
+               </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Descriptions</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="cat_description"  ng-model="description" placeholder="Descriptions"/>
+                  </div>
+               </div>
+               <div class="form-group">
+                        <label class="col-sm-3 control-label">Pay Frequency</label>
+                        <div class="col-lg-9">
+                    <select class="form-control" name="fcode"  ng-model="fcode">
+                              <option value="">Nothing</option>
+                              <option value="1">Monthly</option>
+                              <option value="2">Weekly</option>
+                            
+                           </select>
+                           
+                     
+                        <!-- <div class="col-sm-4">
+                           <small class="text-muted">type='number'</small>
+                        </div> -->
+                  </div>
+                           
+                     </div>
+              
+              
+              
+               <div class="form-group">
+                  <div class="col-lg-offset-3 col-lg-9">
+                     <button class="btn btn-info btn-lg" type="submit">Done</button>
+                  </div>
+               </div>
+            </form>
+<!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">OK</button></div>
+         </script>
+        <!--  <div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+      {{oneUser}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div> -->
+      </div>
+   </div>
+</div>
+
+
+
+
+<!-- Modal -->
+
+
+
+<!-- <table class=" table table-bordered" ng-controller="UserInfo">
+    <thead>
+    <tr>
+        <th class="first">Customer Name <span class="sortable"></span></th>
+        <th class="opp-detail">Email</th>
+    </tr>
+    </thead>
+    <tbody ng-repeat="user in users">
+    <tr>
+        <td>{{user.name}}</td>
+        <td class="opp-detail">{{user.email}}</td>
+    </tr>
+    <tr class="collapsed">
+        <td colspan="2">
+
+            <table class="customer-details collapsed table table-bordered">
+                <thead>
+                <tr>
+                    <th class="opp-detail">Name</th>
+                    <th class="opp-detail">Address</th>
+                    <th class="opp-detail">City</th>
+                    <th class="opp-detail">Zip Code</th>
+                    <th class="opp-detail">Contact</th>
+                    <th class="opp-detail">Email</th>
+                    <th class="opp-detail">Phone</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="opp-detail">{{user.name}}</td>
+                    <td class="opp-detail">{{user.name}}</td>
+                    <td class="opp-detail">{{user.name}}</td>
+                    <td class="opp-detail">{{user.name}}</td>
+                    <td class="opp-detail">{{user.name}}</td>
+                    <td class="opp-detail">{{user.name}}</td>
+                    <td class="opp-detail">{{user.name}}</td>
+                </tr>
+                </tbody>
+            </table>
+
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+ -->
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<h3>List of employees
+   
+</h3>
+<div class="panel panel-default">
+   
+   <div class="panel-body">
+      <div ng-controller="DataTableController as table1">
+         <table class="row-border hover" datatable="ng">
+            <thead>
+               <tr>
+                  
+                  <th>Number </th>
+                  <th>First Name</th>
+                  <th>Other Name</th>
+                  <th>Department</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr ng-repeat="person in table1.persons">
+                  <td>{{ person.id }}</td>
+                  <td>{{ person.firstName }}</td>
+                  <td>{{ person.lastName }}</td>
+                  <td>{{ person.lastName }}</td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+   </div>
+</div>
+ -->
