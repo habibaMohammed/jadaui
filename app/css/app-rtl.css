@@ -1,6 +1,7 @@
 @charset "UTF-8";
 /*!
  *
+ * Angle - Bootstrap Admin App + AngularJS
  *
  * Version: 3.6
  * Author: @themicon_co
@@ -33,12 +34,17 @@
   4.4  progress-extra
   4.5  radial-bar / .radial-bar
   4.6  user-block / .user-block
+  4.7  circles / .circle
   4.8  timeline / .timeline
   4.9  dropdown-extra
   4.10 row-extra / .row-table .row-flush
   4.11 half-float / .half-float
   4.12 masonry-grid / .row-masonry
+  4.13 widget / .widget
+  4.14 typeahead / .typeahead-ctrl
+  4.15 animate
   4.16 loading-bar
+  4.17 table-grid
   4.18 todo / .todo
   4.19 ngwig
   4.20 ngDialog
