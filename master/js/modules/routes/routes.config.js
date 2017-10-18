@@ -732,7 +732,8 @@
            .state('app.bankcodes', {
               url: '/bankcodes',
               title: 'bank codes',
-              templateUrl: helper.basepath('bank-codes.html')
+              templateUrl: helper.basepath('bank-codes.html'),
+                resolve: helper.resolveFor('datatables')
           })
 
            .state('app.payroll-process', {

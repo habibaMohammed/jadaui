@@ -156,8 +156,8 @@ department.$remove().then(function () {
             };
 
             $scope.dept=new DeptService();
-           $scope.submitdept=function(data) {
-           $scope.dept.$save().then(function(){
+           $scope.submitdept=function() {
+           $scope.dept.$save().then(function(data){
               var response=angular.fromJson(data);
           
             if(response.Status=="1"){

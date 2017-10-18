@@ -10,8 +10,8 @@
         .module('app.bootstrapui')
         .controller('BankCodeController', BankCodeController);
 
-    BankCodeController.$inject = ['$scope', '$rootScope','$uibModal','bankcodeService','$stateParams', '$state'];
-    function BankCodeController($scope,$rootScope, $uibModal, bankcodeService,$stateParams, $state) {
+    BankCodeController.$inject = ['$scope', '$rootScope','$uibModal','bankcodeService','$stateParams', '$state','DTOptionsBuilder', 'DTColumnDefBuilder'];
+    function BankCodeController($scope,$rootScope, $uibModal, bankcodeService,$stateParams, $state,DTOptionsBuilder, DTColumnDefBuilder) {
         var vm = this;
 
         activate();
