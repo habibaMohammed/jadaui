@@ -28,17 +28,6 @@
 $scope.periods=financialPeriodService.query();
 
 
- $scope.updateEmpCategory=function(userid){
-    $scope.user=financialPeriodService.get({user:userid});
-  $scope.buttonText="Updating. . ."; //Once clicked change button text
-  financialPeriodService.update({user: userid}, $scope.user);
-// $scope.oneuser.$update(function(){
-//   console.log('Saving user: ' +$scope.oneuser.name);
-// $state.go('app.userinfo'); //Once updated go to state `admin.postViewAll`
-// });
-
-};
-
 
    $scope.loadPeriods = function () {
    $scope.periods=financialPeriodService.query();
@@ -50,30 +39,59 @@ $scope.periods=financialPeriodService.query();
         });
 
 
-//  $scope.updatedept=function(id){
+$scope.months = [];
+$scope.selectedMonth = {};
 
-//   $scope.buttonText="Updating. . ."; //Once clicked change button text
-//   DeptService.update({ID: id}, $scope.department);
-// // $scope.oneuser.$update(function(){
-// //   console.log('Saving user: ' +$scope.oneuser.name);
-// // $state.go('app.userinfo'); //Once updated go to state `admin.postViewAll`
-// // });
-
-
-  
-
-//    $scope.dept= new DeptService();
-//   $scope.submitdept = function() {
-         
-
-            
-//              $scope.dept.$save().then(function(newDepartment) {
-//  $scope.departments.push(newDepartment);
-
-              
-// });
-//  }
-
+$scope.loadMonths = function() {
+  if ($scope.months.length == 0) {
+    $scope.months = [{
+      id:1,
+      name: 'JANUARY'
+    }, {
+      id:2,
+      name: 'FEBRUAY'
+    }, {
+      id:3,
+      name: 'MARCH'
+    },
+     {
+      id:4,
+      name: 'APRIL'
+    },
+     {
+      id:5,
+      name: 'MAY'
+    },
+     {
+      id:6,
+      name: 'JUNE'
+    },
+     {
+      id:7,
+      name: 'JULY'
+    },
+     {
+      id:8,
+      name: 'AUGUST'
+    },
+     {
+      id:9,
+      name: 'SEPTEMBER'
+    },
+     {
+      id:10,
+      name: 'OCTOBER'
+    },
+     {
+      id:11,
+      name: 'NOVEMBER'
+    },
+     {
+      id:12,
+      name: 'DECEMBER'
+    }];
+  }
+}
 
 
 

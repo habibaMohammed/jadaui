@@ -10,14 +10,14 @@
    <div class="panel-body " ng-controller="BankCodeController">
    
       <div class="table-responsive table-bordered mb-lg">
-         <table class="table">
+         <table class="table" datatable="ng">
             <thead>
                <tr>
                   <th>Bank Code</th>
                   <th>Branch Code</th>
                   <th>Bank Name</th>
                   <th>Branch Name</th>
-                  <th>Bank Branch Code</th>
+                  <th>Swift Code</th>
                    <th>Action</th>
                </tr>
             </thead>
@@ -27,7 +27,7 @@
                     <td>{{ bank.branchCode }}</td>
                     <td>{{ bank.bankName }}</td>
                     <td>{{ bank.branchName }}</td>
-                     <td>{{ bank.id }}</td>
+                     <td>{{ bank.swiftCode}}</td>
                  
             
                       <td>
