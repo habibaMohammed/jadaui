@@ -80,8 +80,7 @@ $scope.buttonText="Login";
 
               $http
                 .post(jadaApiUrl+'api/login', {username: $scope.formlg.userName, password:$scope.formlg.password}).success(function(data){
-                  console.log(data);
-                  console.log(data.response);
+               $scope.buttonText="Logging in. . .";
                   var response=angular.fromJson(data.response);
                   var userAccount=angular.fromJson(data.userAccount);
 
