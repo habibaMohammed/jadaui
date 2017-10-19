@@ -404,3 +404,12 @@ ul.nav-wizard.nav-wizard-backnav .active ~ li a:focus {
 {
   color: #24B145;
 }
+
+/*
+.scheduler.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus{
+ z-index: 2;
+    color: #000;
+    background-color: #ccc;
+    border-color: #ccc;
+
+}*/
