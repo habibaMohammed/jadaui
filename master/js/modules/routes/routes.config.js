@@ -711,7 +711,8 @@
            .state('app.payroll-codes', {
               url: '/payroll-codes',
               title: 'payroll-codes',
-              templateUrl: helper.basepath('payroll-codes.html')
+              templateUrl: helper.basepath('payroll-codes.html'),
+               resolve: helper.resolveFor('datatables')
           })
 
            .state('app.payroll-groups', {
@@ -872,8 +873,8 @@
           .state('app.scheduler', {
               url: '/schedules',
               title: 'schedules',
-                templateUrl: helper.basepath('scheduler.html'),
-                 resolve: helper.resolveFor('ui.grid')
+                templateUrl: helper.basepath('scheduler.html')
+               
                 
              
           })
