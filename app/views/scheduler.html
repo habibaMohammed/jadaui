@@ -19,6 +19,7 @@
          	 <div class="panel-heading bg-gray-lighter  text-bold"> Headers</div>
             <uib-tabset>
                <uib-tab heading="Company Details">     <div class="panel-body">
+
                   <div class="form-group">
                <label class="col-sm-3 control-label">Company Name</label>
                <div class="col-sm-9">
@@ -123,6 +124,9 @@
             <div class="list-group" ng-init="settingActive = 1"><a class="list-group-item" href="" ng-click="settingActive=1" ng-class="{'active': (settingActive == 1)}">Employee</a><a class="list-group-item" href="" ng-click="settingActive=2" ng-class="{'active': (settingActive == 2)}">Category</a><a class="list-group-item"
                href="" ng-click="settingActive=3" ng-class="{'active': (settingActive == 3)}">Departments</a><a class="list-group-item" href="" ng-click="settingActive=4" ng-class="{'active': (settingActive == 4)}">Cost Centers</a><a class="list-group-item"
                href="" ng-click="settingActive=5" ng-class="{'active': (settingActive == 5)}">Payroll Codes</a>
+
+               <a class="list-group-item"
+               href="" ng-click="settingActive=5" ng-class="{'active': (settingActive == 6)}">Totals</a>
             </div>
          </div>
       </div>
@@ -131,58 +135,87 @@
             <div class="panel b">
                <div class="panel-heading bg-gray-lighter text-bold">Employee Details</div>
                <div class="panel-body">
-                  <div class="form-group">
-               <label class="col-sm-3 control-label">Payroll Number</label>
-               <div class="col-sm-9">
-                  <div class="checkbox c-checkbox needsclick">
+             
+                    <table class="table table-bordered-white " >
+            <thead>
+               <tr><th>Employee Atributes</th>
+                    <th>Add to colums</th>
+                     <th>Total Numeric Field</th>
+               
+                 
+                 
+               </tr>
+            </thead>
+            <tbody >
+               <tr>
+                  <td >First Name</td>
+            
+                  <td><div class="checkbox c-checkbox needsclick">
                      <label class="needsclick">
                         <input class="needsclick" type="checkbox" value="" />
                         <span class="fa fa-check"></span></label>
-                  </div>
-               </div>
-            </div>
+                  </div></td>
 
-             <div class="form-group">
-               <label class="col-sm-3 control-label">First Name</label>
-               <div class="col-sm-9">
-                  <div class="checkbox c-checkbox needsclick">
-                     <label class="needsclick">
-                        <input class="needsclick" type="checkbox" value="" />
-                        <span class="fa fa-check"></span></label>
-                  </div>
-               </div>
-            </div>
-             <div class="form-group">
-               <label class="col-sm-3 control-label">Last Name</label>
-               <div class="col-sm-9">
-                  <div class="checkbox c-checkbox needsclick">
-                     <label class="needsclick">
-                        <input class="needsclick" type="checkbox" value="" />
-                        <span class="fa fa-check"></span></label>
-                  </div>
-               </div>
-            </div>
-             <div class="form-group">
-               <label class="col-sm-3 control-label">ID Number</label>
-               <div class="col-sm-9">
-                  <div class="checkbox c-checkbox needsclick">
-                     <label class="needsclick">
-                        <input class="needsclick" type="checkbox" value="" />
-                        <span class="fa fa-check"></span></label>
-                  </div>
-               </div>
-            </div>
+                    
+               </tr>
+               
 
-            <div class="form-group">
-               <label class="col-sm-3 control-label">Pension Number</label>
-               <div class="col-sm-9">
-                  <div class="checkbox c-checkbox needsclick">
+                <tr>
+                  <td >Last Name</td>
+            
+                  <td ><div class="checkbox c-checkbox needsclick">
                      <label class="needsclick">
                         <input class="needsclick" type="checkbox" value="" />
                         <span class="fa fa-check"></span></label>
-                  </div>
-               </div>
-            </div>
+                  </div></td>
+
+                    
+               </tr>
+
+                <tr>
+                  <td >Payroll Number</td>
+            
+                  <td ><div class="checkbox c-checkbox needsclick">
+                     <label class="needsclick">
+                        <input class="needsclick" type="checkbox" value="" />
+                        <span class="fa fa-check"></span></label>
+                  </div></td>
+
+                 
+               </tr>
+                <tr>
+                  <td>Pension Number</td>
+            
+                  <td ><div class="checkbox c-checkbox needsclick">
+                     <label class="needsclick">
+                        <input class="needsclick" type="checkbox" value="" />
+                        <span class="fa fa-check"></span></label>
+                  </div></td>
+
+                  
+               </tr>
+
+
+                <tr>
+                  <td>Basic Pay</td>
+            
+                  <td ><div class="checkbox c-checkbox needsclick">
+                     <label class="needsclick">
+                        <input class="needsclick" type="checkbox" value="" />
+                        <span class="fa fa-check"></span></label>
+                  </div></td>
+
+                   <td ><div class="checkbox c-checkbox needsclick">
+                     <label class="needsclick">
+                        <input class="needsclick" type="checkbox" value="" />
+                        <span class="fa fa-check"></span></label>
+                  </div></td>  
+               </tr>
+              
+             
+            
+            </tbody>
+         </table>
              
                </div>
             </div>
@@ -191,32 +224,27 @@
             <div class="panel b">
                <div class="panel-heading bg-gray-lighter text-bold">Category</div>
                <div class="panel-body">
-                  <table class="table table-bordered-white " >
-            <thead>
-               <tr><th>Month</th>
-                    <th>Leave Accrued</th>
-                  <th>Leave Taken</th>
-                 <th>Balance</th>
-                 
-                 
-               </tr>
-            </thead>
-            <tbody >
-               <tr>
-                  <td >August</td>
-                  <td >21 </td>
-                  <td >1.73 </td>
-                   <td >2</td>
-                  
-                 
-                
-               </tr>
-               
-              
-             
-            
-            </tbody>
-         </table>
+                     <div class="form-group">
+               <label class="col-sm-3 control-label">Code</label>
+               <div class="col-sm-9">
+                  <div class="checkbox c-checkbox needsclick">
+                     <label class="needsclick">
+                        <input class="needsclick" type="checkbox" value="" />
+                        <span class="fa fa-check"></span></label>
+                  </div>
+               </div>
+            </div>
+
+             <div class="form-group">
+               <label class="col-sm-3 control-label">Description</label>
+               <div class="col-sm-9">
+                  <div class="checkbox c-checkbox needsclick">
+                     <label class="needsclick">
+                        <input class="needsclick" type="checkbox" value="" />
+                        <span class="fa fa-check"></span></label>
+                  </div>
+               </div>
+            </div>
                </div>
             </div>
             
@@ -225,32 +253,27 @@
             <div class="panel b">
                <div class="panel-heading bg-gray-lighter text-bold" >Departments</div>
                <div class="panel-body">
-                  <table class="table table-bordered-white " >
-            <thead>
-               <tr><th>Month</th>
-                  <th>Leave Accrued</th>
-                  <th>Leave Taken</th>
-                 <th>Balance</th>
-                 
-                 
-               </tr>
-            </thead>
-            <tbody >
-               <tr>
-                  <td >August</td>
-                  <td >21 </td>
-                  <td >1.73 </td>
-                   <td >2</td>
-                  
-                 
-                
-               </tr>
-               
-              
-             
-            
-            </tbody>
-         </table>
+                      <div class="form-group">
+               <label class="col-sm-3 control-label">Code</label>
+               <div class="col-sm-9">
+                  <div class="checkbox c-checkbox needsclick">
+                     <label class="needsclick">
+                        <input class="needsclick" type="checkbox" value="" />
+                        <span class="fa fa-check"></span></label>
+                  </div>
+               </div>
+            </div>
+
+             <div class="form-group">
+               <label class="col-sm-3 control-label">Description</label>
+               <div class="col-sm-9">
+                  <div class="checkbox c-checkbox needsclick">
+                     <label class="needsclick">
+                        <input class="needsclick" type="checkbox" value="" />
+                        <span class="fa fa-check"></span></label>
+                  </div>
+               </div>
+            </div>
                </div>
               
             </div>
@@ -259,32 +282,27 @@
   <div class="panel b">
                <div class="panel-heading bg-gray-lighter text-bold">Cost Centers</div>
                <div class="panel-body">
-                  <table class="table table-bordered-white " >
-            <thead>
-               <tr><th>Month</th>
-                       <th>Leave Accrued</th>
-                  <th>Leave Taken</th>
-                 <th>Balance</th>
-                 
-                 
-               </tr>
-            </thead>
-            <tbody >
-               <tr>
-                  <td >August</td>
-                  <td >21 </td>
-                  <td >1.73 </td>
-                   <td >2</td>
-                  
-                 
-                
-               </tr>
-               
-              
-             
-            
-            </tbody>
-         </table>
+                     <div class="form-group">
+               <label class="col-sm-3 control-label">Code</label>
+               <div class="col-sm-9">
+                  <div class="checkbox c-checkbox needsclick">
+                     <label class="needsclick">
+                        <input class="needsclick" type="checkbox" value="" />
+                        <span class="fa fa-check"></span></label>
+                  </div>
+               </div>
+            </div>
+
+             <div class="form-group">
+               <label class="col-sm-3 control-label">Description</label>
+               <div class="col-sm-9">
+                  <div class="checkbox c-checkbox needsclick">
+                     <label class="needsclick">
+                        <input class="needsclick" type="checkbox" value="" />
+                        <span class="fa fa-check"></span></label>
+                  </div>
+               </div>
+            </div>
                </div>
               
             </div>
@@ -293,21 +311,25 @@
             <div class="panel b">
                <div class="panel-heading bg-gray-lighter text-bold">Payroll Codes</div>
                <div class="panel-body">
-                  <table class="table table-bordered-white " >
+                    <table class="table table-bordered-white " >
             <thead>
-               <tr><th>Month</th>
-                    <th>Leave Accrued</th>
-                  <th>Leave Taken</th>
-                 <th>Balance</th>
+               <tr><th>Payroll Code</th>
+                    <th>Description</th>
+               
+                 
                  
                </tr>
             </thead>
             <tbody >
                <tr>
-                  <td >August</td>
-                  <td >21 </td>
-                  <td >1.73 </td>
-                   <td >2</td>
+                  <td >E001</td>
+                  <td >Basic Pay</td>
+                  <td ><div class="checkbox c-checkbox needsclick">
+                     <label class="needsclick">
+                        <input class="needsclick" type="checkbox" value="" />
+                        <span class="fa fa-check"></span></label>
+                  </div></td>
+                 
                   
                  
                 
@@ -319,6 +341,29 @@
             </tbody>
          </table>
                </div>
+            </div>
+         </div>
+
+
+
+         <div ng-show="settingActive == 4">
+  <div class="panel b">
+               <div class="panel-heading bg-gray-lighter text-bold">Cost Centers</div>
+               <div class="panel-body">
+                     <div class="form-group">
+               <label class="col-sm-3 control-label">Add to Columns</label>
+               <div class="col-sm-9">
+                  <div class="checkbox c-checkbox needsclick">
+                     <label class="needsclick">
+                        <input class="needsclick" type="checkbox" value="" />
+                        <span class="fa fa-check"></span></label>
+                  </div>
+               </div>
+            </div>
+
+          
+               </div>
+              
             </div>
          </div>
       </div>
