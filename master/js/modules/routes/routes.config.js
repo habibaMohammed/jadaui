@@ -699,7 +699,8 @@
            .state('app.formula-setup', {
               url: '/formula-setup',
               title: 'formula-setup',
-              templateUrl: helper.basepath('formula-setup.html')
+              templateUrl: helper.basepath('formula-setup.html'),
+                resolve: helper.resolveFor('datatables')
           })
             .state('app.employee-setup', {
               url: '/employee details',
@@ -718,14 +719,16 @@
            .state('app.payroll-groups', {
               url: '/payrollgroups',
               title: 'payroll-codes',
-              templateUrl: helper.basepath('payroll-groups.html')
+              templateUrl: helper.basepath('payroll-groups.html'),
+              resolve: helper.resolveFor('datatables')
           })
 
 
             .state('app.exemptions', {
               url: '/exemptions',
               title: 'exemptions',
-              templateUrl: helper.basepath('exemptions.html')
+              templateUrl: helper.basepath('exemptions.html'),
+                resolve: helper.resolveFor('datatables')
           })
 
 
@@ -944,8 +947,8 @@
          .state('app.Payfrequency', {
               url: '/Payfrequency',
               title: 'Payfrequency',
-                templateUrl: helper.basepath('payrollcodes-listings.html'),
-                 resolve: helper.resolveFor('datatables')
+                templateUrl: helper.basepath('payrollcodes-listings.html')
+           
              
           })
        .state('app.departmentlistings', {
