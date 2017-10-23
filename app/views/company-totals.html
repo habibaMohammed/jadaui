@@ -1,7 +1,40 @@
-<div class="col-lg-12 " ><div class="panel panel-default">
+ <h3>Company Totals</h3>
+<div  ng-controller="CompanyTotalsController">
+  <div class="row">
+   <div class="col-lg-4">
+      <form class="form-inline">
+
+  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+    <label class="col-lg-3" >Period
+    </label>
+        <div class="col-lg-9">
+                    <select class="form-control" name="pay_mode"  ng-model="empMaster.payMode">
+                              <option value="">Financial Periods</option>
+                              <option value="1">Option 1</option>
+                              <option value="2">Option 2</option>
+                              <option value="3">Option 3</option>
+                              <option value="4">Option 4</option>
+                           </select>
+                          
+                     
+                        <!-- <div class="col-sm-4">
+                           <small class="text-muted">type='number'</small>
+                        </div> -->
+                  </div>
+  </div>
+
+</form>
+   </div>
+ </div>
+<!--  <hr/> -->
+<br/>
+
+  <div class="panel panel-default">
    <!-- <div class="panel-heading">
       <small>Company Totals</small>
    </div> -->
+
+
    <div class="panel-body">
    <div class="row">
      <div class="col-lg-6 col-xs-12 pv">
@@ -24,9 +57,13 @@
          </div>
          </div>
 <div class="row">
-   <div class="col-lg-6">
-      
-         <table class="table table-bordered-white   table-bordered-whitecol-lg-6" >
+   <div class="col-lg-12">
+      <div class="table-responsive">
+         <table class="table table-bordered-white" >
+           
+            <tbody >
+               <tr >
+                  <td >     <table class="table table-bordered-white" >
             <thead>
                <tr><th>Earnings</th>
                   <th>Amount</th>
@@ -35,25 +72,18 @@
                </tr>
             </thead>
             <tbody >
-               <tr>
-                  <td >Basic Pay </td>
-                  <td >200000</td>
+               <tr ng-repeat="totals in companytotals">
+                  <td >{{totals.id}} </td>
+                     <td >{{totals.id}} </td>
                 
-               </tr>
-               <tr>
-                  <td >Gross Pay </td>
-                  <td >275000</td>
                 
                </tr>
             
-            
+           
+        
             </tbody>
-         </table>
-             
-   </div>
-    <div class="col-lg-6">
-      
-         <table class="table table-bordered-white col-lg-6" >
+         </table> </td>
+                     <td >     <table class="table table-bordered-white" >
             <thead>
                <tr><th>Deductions</th>
                   <th>Amount</th>
@@ -62,53 +92,51 @@
                </tr>
             </thead>
             <tbody >
-               <tr>
-                  <td >PAYE</td>
-                  <td >123341</td>
-                 
-                 
+               <tr ng-repeat="totals in companytotals">
+                  <td >{{totals.id}} </td>
+                     <td >{{totals.id}} </td>
+                
+                
                </tr>
-                <tr>
-                  <td >NSSF</td>
-                  <td >800</td>
-                 
-                 
-               </tr>
-               <tr>
-                  <td >NHIF</td>
-                  <td >3400</td>
-                 
-                 </tr>
             
-                <tr>
-                  <td >Helb</td>
-                  <td >5000</td>
-                 
-                 </tr>
-                 <tr>
-                  <td >Pension</td>
-                  <td >5000</td>
-                 
-                 </tr>
-                 <tr>
-                  <td >Insurance</td>
-                  <td >5000</td>
-                 
-                 </tr>
-                 <tr>
-                  <td >Sacco</td>
-                  <td >5000</td>
-                 
-                 </tr>
-                  <tr>
-                  <td >Net pay </td>
-                  <td >5000</td>
-                 
-                 </tr>
+           
+        
+            </tbody>
+         </table> </td>
+                
+                
+               </tr>
+             
+            
+            
             </tbody>
          </table>
              
    </div>
+ </div>
+  <!--   <div class="col-lg-6">
+      
+         <table class="table table-bordered-white col-lg-6" >
+            <thead>
+               <tr><th>Deductions</th>
+                  <th>Amount</th>
+              
+               </tr>
+            </thead>
+            <tbody >
+               <tr ng-repeat="totals in companytotals">
+                  <td >{{totals.id}} </td>
+                     <td >{{totals.id}} </td>
+                
+                
+               </tr>
+            
+           
+        
+            </tbody>
+         </table>
+             
+   </div> -->
 
    
    </div>
@@ -158,14 +186,13 @@
 
     <br/>
     <div class="col-lg-8">
-          <div class="clearfix">
+            <div class="clearfix">
+         <button class="btn btn-info pull-left mr" type="button">Pdf</button>
          <button class="btn btn-default pull-left mr" type="button" onclick="window.print();">Print</button>
-        <!--  <button class="btn btn-default pull-left" type="button" onclick="window.print();">Print</button> -->
-         <button class="btn btn-default pull-left mr" type="button">Pdf</button>
-         <button class="btn btn-default pull-left mr" type="button">Mail</button>
-         
+         <button class="btn btn-success pull-left mr" type="button">CSV</button>
       </div>
 
       </div>
       </div>
       </div>
+    </div>

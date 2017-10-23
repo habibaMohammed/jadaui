@@ -5,8 +5,8 @@
         .module('app.reports')
         .controller('CompanySumarryController', CompanySumarryController);
 
-    CompanySumarryController.$inject = ['$resource', 'CompanySummaryService'];
-    function CompanySumarryController($resource,CompanySummaryService) {
+    CompanySumarryController.$inject = ['$scope','$resource', 'CompanySummaryService'];
+    function CompanySumarryController($scope,$resource,CompanySummaryService) {
         var vm = this;
 
         activate();
@@ -16,7 +16,7 @@
         function activate() {
 
 
-        vm.persons=CompanySummaryService.query();
+        $scope.companysumaries=CompanySummaryService.query();
 
           
 
