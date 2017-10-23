@@ -5,8 +5,11 @@ margin-right: auto;
 }
 .bold{font-weight: bold;}
 .ml{margin-left: 10px;}
-.table-bordered-white > tbody > tr > td{border-top: 1px solid #fff!important;}
-.panel-payslip{margin-right: 5px!important;}
+.table-bordered-white > tbody > tr > td{
+  border-top: 1px solid #eee!important;
+background: #fff!important;}
+.panel-payslip{
+  margin-right: 5px!important;}
 
 .horiztbl td {
   min-width: 80px;

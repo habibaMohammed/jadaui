@@ -417,14 +417,51 @@
 
     
      
-         <!--    <div class="panel b">
-               <div class="panel-heading bg-gray-lighter text-bold">Leave Status</div>
+           
+        
+  
+     
+               
+              
+        <div >
+
+      <!-- Modal Controller-->
+      <div ng-controller="ModalGmapController as gmapmodal">
+         <!-- Button trigger modal -->
+         <button class="btn btn-primary" ng-click="gmapmodal.open('lg')">Leave History</button>
+         <!-- Modal inline template-->
+         <script type="text/ng-template" id="/myModalContent.html">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel"></h4></div>
+            <div class="modal-body"> <div class="panel b">
+               <div class="panel-heading bg-gray-lighter text-bold">Leave History</div>
                <div class="panel-body">
+
+                  <div class="row">
+     <div class="col-lg-6 col-xs-12 pv">
+           
+            <div class="clearfix">
+               <p class="pull-left mr"><strong>Employee Number:</strong></p>
+            <p class="pull-left mr"><strong>20456789</strong></p>
+            </div>
+           
+            <div class="clearfix">
+               <p class="pull-left mr"><strong>Employee Name:</strong></p>
+               <p class="pull-left mr"><strong>XYZ Limited P.O. BOX 20744-KNH 00200</strong></p>
+               
+            </div>
+             <div class="clearfix">
+               <p class="pull-left mr"><strong>Period:</strong></p>
+               <p class="pull-left mr"><strong>January 2017</strong></p>
+               
+            </div>
+         </div>
+         </div>
                   <table class="table table-bordered-white " >
             <thead>
                <tr><th>Date applied</th>
                    <th>Leave type</th>
-                  <th>Status</th>
+                      <th>Balance b/d</th>
+                  <th>Balance c/d</th>
                  
                  
                </tr>
@@ -433,7 +470,8 @@
                <tr>
                   <td >17/8/2017</td>
                   <td >Annual </td>
-                  <td >Pending </td>
+                  <td >1.7</td>
+                    <td >1.7</td>
            
                   
                  
@@ -447,26 +485,16 @@
          </table>
              
                </div>
-            </div>
-        
-  
-       
-          <div class="panel b">
-               
-               <div class="panel-body">
-                   <div class="col-lg-8">
-          <div class="clearfix">
-         <button class="btn btn-info pull-left mr" type="button">Leave history</button>
-  
-         <button class="btn btn-info pull-left mr" type="button">Apply</button>
-        
+            </div></div>
+           <!--  <div class="modal-footer"><button class="btn btn-primary" ng-click="ok()"></button></div> -->
+         </script>
       </div>
+   </div>
 
-      </div>
-               </div>
-            </div>
+
+         
         
-      -->
+     
 
 
 
