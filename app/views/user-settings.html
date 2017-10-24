@@ -14,22 +14,32 @@
           
 
                
-               <uib-tab heading="User Groups"> <div class=" companydetails"><div class="panel panel-default">
-         <div class="panel-heading">user groups</div>
-         <div class="panel-body" ng-controller="UserGroupController">
+               <uib-tab heading="User Groups"> <div class=" companydetails"><div class="panel panel-default" ng-controller="UserGroupController">
+         <div class="panel-heading">
+     
+ <div class="clearfix">
+     
+    <button class="btn btn-primary pull-right mr" ng-click="open()">
+            <em class="fa fa-plus-circle fa-fw mr"></em>Add
+               </button>
+        
+        
+      </div>
+          
+        
+      </div>
+         <div class="panel-body" >
 
          <div class="table-responsive">
-         <table class="table table-striped">
+         <table class="table table-striped" datatable="ng">
                  <thead>
                <tr>
                   
                   <th>user</th>
-                  <th>Module</th>
-                  <th> Read Only</th>
-                   <th>Read and Write</th>
-                  <th>process payroll</th>
-                   <th>approve payroll</th>
-                  
+                 
+                  <th>Approve payroll</th>
+                   <th>Approve Leave</th>
+                  <th>Action</th>
                </tr>
             </thead>
                 <tbody>
@@ -39,10 +49,7 @@
            
                 <td>{{usergroup.id}}</td>
 
-                  <td> {{usergroup.id}}</td>
-                        <td> {{usergroup.name}}</td>
-           
-                <td>{{usergroup.name}}</td>
+                
 
                   <td> <div class="clearfix">
         
@@ -66,7 +73,7 @@
 
           
       </div>
-           <button class="btn btn-info pull-left mr" type="button" ng-click="open()">Add New</button>
+      
           
          
          </div>
@@ -74,35 +81,69 @@
       </div>
 
 <script type="text/ng-template" id="newUserGroup.html">
-            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Add Leave Transaction</h4></div><div class="modal-body"><!-- START panel-->
-herer {{oneUser.username }}
- <form class="form-horizontal">
-                <div class="form-group">
-                  <label class="col-lg-3 control-label">Transaction Type
-</label>
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Add User Groups</h4></div><div class="modal-body"><!-- START panel-->
+
+ <form class="form-horizontal" ng-controller="UserGroupController">
+                 <div class="form-group">
+                  <label class="col-lg-3 control-label">Description</label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="trans_type" ng-model="trans_type" placeholder="Transaction Type"/>
+                     <input class="form-control" type="text" name="trans_desc" ng-model="usergroup.description"  placeholder="Enter group Description"/>
                   </div>
                </div>
-               <div class="form-group">
-                  <label class="col-lg-3 control-label">Trasaction Description</label>
-                  <div class="col-lg-9">
-                     <input class="form-control" type="text" name="trans_desc" ng-model="trans_desc"  placeholder="eg. Paid"/>
-                  </div>
-               </div>
+               
+
+
+                 <div class="form-group">
+ <label class="col-lg-3 control-label">Payroll Approve</label>
+   <div class="col-lg-9">
+            <div class="radio c-radio">
+                <label>
+                    <input type="radio" name="f_country" ng-value="true" ng-model="usergroup.payrollApprove">
+                   <span class="fa fa-circle"></span> Yes
+                </label>
+            </div>
+            <div class="radio c-radio">
+                <label>
+                    <input type="radio" name="f_custom" ng-value="false" ng-model="usergroup.payrollApprove">
+                    <span class="fa fa-circle"></span>No
+                </label>
+            </div>
+            </div>
+        </div>
             
 
+
+             <div class="form-group">
+ <label class="col-lg-3 control-label">Approve Leave</label>
+   <div class="col-lg-9">
+            <div class="radio c-radio">
+                <label>
+                    <input type="radio" name="f_country" ng-value="true" ng-model="usergroup.leaveApprove">
+                   <span class="fa fa-circle"></span> Yes
+                </label>
+            </div>
+            <div class="radio c-radio">
+                <label>
+                    <input type="radio" name="f_custom" ng-value="false" ng-model="usergroup.leaveApprove">
+                    <span class="fa fa-circle"></span>No
+                </label>
+            </div>
+            </div>
+        </div>
+        
+
               
-              
+         
               
                <div class="form-group">
                   <div class="col-lg-offset-3 col-lg-9">
-                     <button class="btn btn-info btn-lg" type="submit">Save</button>
-                      <button class="btn btn-info btn-lg" type="reset">Cancel</button>
+                     <button class="btn btn-info btn-sm" ng-click="submitUserGroup()">Save and New</button>
+                       <button class="btn btn-info btn-sm" ng-click="submitUserGroupClose()">Save and Close</button>
+                      <button class="btn btn-warning btn-sm" type="reset">Reset</button>
                   </div>
                </div>
             </form>
-<!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">OK</button></div>
+<!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
          </script>
 
 
@@ -111,51 +152,69 @@ herer {{oneUser.username }}
 <script type="text/ng-template" id="EditUserGroup.html">
             <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">New User</h4></div><div class="modal-body"><!-- START panel-->
 
- <form class="form-horizontal">
-                <div class="form-group">
-                  <label class="col-lg-3 control-label">Email Address
-</label>
+ <form class="form-horizontal" ng-controller="UserGroupController">
+                  <div class="form-group">
+                  <label class="col-lg-3 control-label">Description</label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="leave_name"  ng-model="leave_name" placeholder="Enter Email"/>
+                     <input class="form-control" type="text" name="trans_desc" ng-model="usergroup.description"  placeholder="Enter group Description"/>
                   </div>
                </div>
-                <div class="form-group">
-                  <label class="col-lg-3 control-label"> Username</label>
-                  <div class="col-lg-9">
-                     <input class="form-control" type="text" name="leave_desc" ng-model="leave_desc" placeholder="Enter Username"/>
-                  </div>
-               </div>
-               <div class="form-group">
-                  <label class="col-lg-3 control-label"> Phone Number </label>
-                  <div class="col-lg-9">
-                     <input class="form-control" type="text" name="leave_desc" ng-model="leave_desc" placeholder="Enter Phone Number"/>
-                  </div>
-               </div>
-                <div class="form-group">
-                  <label class="col-lg-3 control-label">Group</label>
-                  <div class="col-lg-9">
-                     <input class="form-control" type="text" name="l_entitlement" ng-model="l_entitlement"  placeholder="Enter group"/>
-                  </div>
-               </div>
-             
+               
+
+
+                 <div class="form-group">
+ <label class="col-lg-3 control-label">Payroll Approve</label>
+   <div class="col-lg-9">
+            <div class="radio c-radio">
+                <label>
+                    <input type="radio" name="f_country" ng-value="true" ng-model="usergroup.payrollApprove">
+                   <span class="fa fa-circle"></span> Yes
+                </label>
+            </div>
+            <div class="radio c-radio">
+                <label>
+                    <input type="radio" name="f_custom" ng-value="false" ng-model="usergroup.payrollApprove">
+                    <span class="fa fa-circle"></span>No
+                </label>
+            </div>
+            </div>
+        </div>
+            
+
+
              <div class="form-group">
-                  <label class="col-lg-3 control-label">Active</label>
-                  <div class="col-lg-9">
-                     <input class="form-control" type="text" name="l_entitlement" ng-model="l_entitlement"  placeholder="YES"/>
-                  </div>
-               </div>
+ <label class="col-lg-3 control-label">Approve Leave</label>
+   <div class="col-lg-9">
+            <div class="radio c-radio">
+                <label>
+                    <input type="radio" name="f_country" ng-value="true" ng-model="usergroup.leaveApprove">
+                   <span class="fa fa-circle"></span> Yes
+                </label>
+            </div>
+            <div class="radio c-radio">
+                <label>
+                    <input type="radio" name="f_custom" ng-value="false" ng-model="usergroup.leaveApprove">
+                    <span class="fa fa-circle"></span>No
+                </label>
+            </div>
+            </div>
+        </div>
+        
+
+        
 
               
-              
+         
               
                <div class="form-group">
                   <div class="col-lg-offset-3 col-lg-9">
-                     <button class="btn btn-info btn-sm" type="submit">Save</button>
-                      <button class="btn btn-warning btn-sm" type="submit">Cancel</button>
+                     <button class="btn btn-info btn-sm" ng-click="updateUserGroup(usergroup)">Update</button>
+              
+                      <button class="btn btn-warning btn-sm" type="reset">Reset</button>
                   </div>
                </div>
             </form>
-<!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">OK</button></div>
+<!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
          </script>
 
 
@@ -165,12 +224,22 @@ herer {{oneUser.username }}
                  <uib-tab heading="Users">
             
 
-               <div class="col-lg-12  companydetails"><div class="panel panel-default">
-         <div class="panel-heading">users</div>
-         <div class="panel-body" ng-controller="UserAdminController">
+               <div class="col-lg-12  companydetails"><div class="panel panel-default" ng-controller="UserAdminController">
+         <div class="panel-heading">  <div class="clearfix">
+     
+    <button class="btn btn-primary pull-right mr" ng-click="open()">
+            <em class="fa fa-plus-circle fa-fw mr"></em>Add
+               </button>
+        
+        
+      </div>
+          
+
+          </div>
+         <div class="panel-body" >
 
          <div class="table-responsive">
-         <table class="table table-striped">
+         <table class="table table-striped" datatable="ng">
                  <thead>
                <tr>
                   <th> Email Address</th>
@@ -192,7 +261,7 @@ herer {{oneUser.username }}
                   <td>{{ user.username }}</td>
                   <td>{{ user.id }}</td>
                   <td>  <div class="buttons" >
-                <button class="btn btn-sm btn-info" ng-click="show()"  title="Edit">
+                <button class="btn btn-sm btn-info" ng-click="show(user)"  title="Edit">
                   <em class="fa fa-pencil"></em>
                </button>
                <button class="btn btn-sm btn-danger"  title="Delete">
@@ -210,115 +279,133 @@ herer {{oneUser.username }}
 
           
       </div>
-              <button class="btn btn-sm btn-info" ng-click="open()">
-            Add
-               </button>
-          
+             
          
          </div>
          </div>
       </div>
 
-      <script type="text/ng-template" id="ModalContent.html">
+      <script type="text/ng-template" id="NewUser.html">
             <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">New User</h4></div><div class="modal-body"><!-- START panel-->
 
- <form class="form-horizontal">
+ <form class="form-horizontal" ng-controller="UserAdminController">
                 <div class="form-group">
                   <label class="col-lg-3 control-label">Email Address
 </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="leave_name"  ng-model="leave_name" placeholder="Enter Email"/>
+                     <input class="form-control" type="email"  name="email"  ng-model="user.email" placeholder="Enter Email"/>
                   </div>
                </div>
                 <div class="form-group">
                   <label class="col-lg-3 control-label"> Username</label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" name="leave_desc" ng-model="leave_desc" placeholder="Enter Username"/>
+                     <input class="form-control" type="text" name="username" ng-model="user.username" placeholder="Enter Username"/>
                   </div>
                </div>
                <div class="form-group">
                   <label class="col-lg-3 control-label"> Phone Number </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" name="leave_desc" ng-model="leave_desc" placeholder="Enter Phone Number"/>
+                     <input class="form-control" type="text" name="phone" ng-model="user.phoneNumber" placeholder="Enter Phone Number"/>
                   </div>
                </div>
                 <div class="form-group">
                   <label class="col-lg-3 control-label">Group</label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" name="l_entitlement" ng-model="l_entitlement"  placeholder="Enter group"/>
+                     <input class="form-control" type="text" name="group" ng-model="user.group"  placeholder="Enter group"/>
                   </div>
                </div>
-             
-             <div class="form-group">
-                  <label class="col-lg-3 control-label">Active</label>
-                  <div class="col-lg-9">
-                     <input class="form-control" type="text" name="l_entitlement" ng-model="l_entitlement"  placeholder="YES"/>
-                  </div>
-               </div>
-
+          
+                 <div class="form-group">
+ <label class="col-lg-3 control-label">Active</label>
+   <div class="col-lg-9">
+            <div class="radio c-radio">
+                <label>
+                    <input type="radio" name="f_country" ng-value="true" ng-model="user.active">
+                   <span class="fa fa-circle"></span> Yes
+                </label>
+            </div>
+            <div class="radio c-radio">
+                <label>
+                    <input type="radio" name="f_custom" ng-value="false" ng-model="user.active">
+                    <span class="fa fa-circle"></span>No
+                </label>
+            </div>
+            </div>
+        </div>
               
               
               
                <div class="form-group">
                   <div class="col-lg-offset-3 col-lg-9">
-                     <button class="btn btn-info btn-sm" type="submit">Save</button>
-                      <button class="btn btn-warning btn-sm" type="submit">Cancel</button>
+                     <button class="btn btn-info btn-sm" ng-click="submitUser()">Save and New</button>
+                            <button class="btn btn-info btn-sm" ng-click="submitUserClose()">Save and Close</button>
+                      <button class="btn btn-warning btn-sm" type="submit">Reset</button>
                   </div>
                </div>
             </form>
-<!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">OK</button></div>
+<!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
          </script>
 
 
 
-         <script type="text/ng-template" id="edit-user-setting.html">
+         <script type="text/ng-template" id="EditUser.html">
             <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Edit User</h4></div><div class="modal-body"><!-- START panel-->
 
  <form class="form-horizontal">
-                <div class="form-group">
+                  <div class="form-group">
                   <label class="col-lg-3 control-label">Email Address
 </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="leave_name"  ng-model="leave_name" placeholder="Enter Email"/>
+                     <input class="form-control" type="email"  name="email"  ng-model="user.email" placeholder="Enter Email"/>
                   </div>
                </div>
                 <div class="form-group">
                   <label class="col-lg-3 control-label"> Username</label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" name="leave_desc" ng-model="leave_desc" placeholder="Enter Username"/>
+                     <input class="form-control" type="text" name="username" ng-model="user.username" placeholder="Enter Username"/>
                   </div>
                </div>
                <div class="form-group">
                   <label class="col-lg-3 control-label"> Phone Number </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" name="leave_desc" ng-model="leave_desc" placeholder="Enter Phone Number"/>
+                     <input class="form-control" type="text" name="phone" ng-model="user.phoneNumber" placeholder="Enter Phone Number"/>
                   </div>
                </div>
                 <div class="form-group">
                   <label class="col-lg-3 control-label">Group</label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" name="l_entitlement" ng-model="l_entitlement"  placeholder="Enter group"/>
+                     <input class="form-control" type="text" name="group" ng-model="user.group"  placeholder="Enter group"/>
                   </div>
                </div>
-             
-             <div class="form-group">
-                  <label class="col-lg-3 control-label">Active</label>
-                  <div class="col-lg-9">
-                     <input class="form-control" type="text" name="l_entitlement" ng-model="l_entitlement"  placeholder="YES"/>
-                  </div>
-               </div>
-
+          
+                 <div class="form-group">
+ <label class="col-lg-3 control-label">Active</label>
+   <div class="col-lg-9">
+            <div class="radio c-radio">
+                <label>
+                    <input type="radio" name="f_country" ng-value="true" ng-model="user.active">
+                   <span class="fa fa-circle"></span> Yes
+                </label>
+            </div>
+            <div class="radio c-radio">
+                <label>
+                    <input type="radio" name="f_custom" ng-value="false" ng-model="user.active">
+                    <span class="fa fa-circle"></span>No
+                </label>
+            </div>
+            </div>
+        </div>
               
               
               
                <div class="form-group">
                   <div class="col-lg-offset-3 col-lg-9">
-                     <button class="btn btn-info btn-sm" type="submit">Save</button>
+                     <button class="btn btn-info btn-sm" ng-click="updateUser()">Update</button>
                       <button class="btn btn-warning btn-sm" type="submit">Cancel</button>
                   </div>
                </div>
             </form>
-<!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">OK</button></div>
+<!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
          </script>
 </uib-tab>
 

@@ -1061,6 +1061,7 @@
               url: '/adminsettings',
               title: 'user settings',
                 templateUrl: helper.basepath('user-settings.html'),
+                    resolve: helper.resolveFor('datatables'),
                  
              
           })

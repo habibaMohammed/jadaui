@@ -107,10 +107,27 @@ $scope.show = function(transaction) {
             
                $scope.type=new leaveTTypeService();
            $scope.submitLeaveTType=function() {
-           $scope.type.$save().then(function(){
+           $scope.type.$save().then(function(data){
+
+            var response=angular.fromJson(data);
+            console.log(response.Message);
+            // $scope.authMsg=response.Message;
+            if(response.Status=="1"){
+                     $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+            }else{
+           
+                  $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+          
+            }
              $rootScope.$emit("CallLoadLeaveTTypes", {});
 
-           });
+           },
+           function() {
+                $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
     
           }
 
@@ -119,7 +136,11 @@ $scope.show = function(transaction) {
              $rootScope.$emit("CallLoadLeaveTTypes", {});
                $scope.ok ();
 
-           });
+           },
+           function() {
+                $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
     
           }
         }

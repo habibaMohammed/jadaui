@@ -14,6 +14,9 @@
         ////////////////
 
         function activate() {
+           var SuccessMsg;
+            var errorMsg;
+
 
  $scope.usergroups=UserGroupService.query();
 
@@ -45,7 +48,7 @@
 
   $scope.delete= function (usergroup) {
 usergroup.$remove().then(function () {
-$scope.loadWorkflows();
+$scope.loadUserGroups();
 });
 }
 
@@ -124,10 +127,41 @@ $scope.loadWorkflows();
 
               $scope.usergroup=new UserGroupService();
              $scope.submitUserGroup=function() {
-          $scope.usergroup.$save().then(function(){
+          $scope.usergroup.$save().then(function(data){
+              var response=angular.fromJson(data);
+          
+            if(response.Status=="1"){
+              $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+            }else{
            
-                $rootScope.$emit("CallLoadWorkflows", {});
-          });
+               $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+           
+            }
+           
+                $rootScope.$emit("CallLoadUserGroups", {});
+          },
+
+           function() {
+             $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+        
+          };
+
+
+             $scope.submitUserGroupClose=function() {
+          $scope.usergroup.$save().then(function(){
+            
+                $rootScope.$emit("CallLoadUserGroups", {});
+                $scope.ok();
+          },
+          
+           function() {
+                $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
         
           };
           
@@ -135,8 +169,8 @@ $scope.loadWorkflows();
           }
 
 
-  ModalInstanceCtrl.$inject = ['$scope', '$rootScope', '$http','$uibModalInstance','WorkflowService','usergroup'];
-          function ModalInstanceCtrl($scope,$rootScope, $http, $uibModalInstance, WorkflowService,usergroup) {
+  ModalInstanceCtrl.$inject = ['$scope', '$rootScope', '$http','$uibModalInstance','UserGroupService','usergroup'];
+          function ModalInstanceCtrl($scope,$rootScope, $http, $uibModalInstance, UserGroupService,usergroup) {
             $scope.currentgroup=usergroup;
     //       if (x) {
     //     $scope.oneUser = { id : x};
