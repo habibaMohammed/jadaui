@@ -107,10 +107,27 @@ $scope.show = function(leaveType) {
             
                $scope.leave=new leaveService();
            $scope.submitLeaveTypes=function() {
-           $scope.leave.$save().then(function(){
+           $scope.leave.$save().then(function(data){
+
+             var response=angular.fromJson(data);
+            console.log(response.Message);
+            // $scope.authMsg=response.Message;
+            if(response.Status=="1"){
+                     $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+            }else{
+           
+                  $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+          
+            }
              $rootScope.$emit("CallLoadLeaveTypes", {});
 
-           });
+           },
+           function() {
+                $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
     
           }
              $scope.closesubmitLeaveTypes=function() {
@@ -118,7 +135,11 @@ $scope.show = function(leaveType) {
              $rootScope.$emit("CallLoadLeaveTypes", {});
                $scope.ok();
 
-           });
+           },
+            function() {
+                $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
     
           }
 

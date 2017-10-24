@@ -63,6 +63,12 @@
     'use strict';
 
     angular
+        .module('app.colors', []);
+})();
+(function() {
+    'use strict';
+
+    angular
         .module('app.charts', []);
 })();
 (function() {
@@ -70,18 +76,6 @@
 
     angular
         .module('app.company', [ ]);
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.colors', []);
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.companydetails', []);
 })();
 (function() {
     'use strict';
@@ -108,7 +102,7 @@
     'use strict';
 
     angular
-        .module('app.dashboard', []);
+        .module('app.companydetails', []);
 })();
 (function() {
     'use strict';
@@ -120,7 +114,7 @@
     'use strict';
 
     angular
-        .module('app.extras', []);
+        .module('app.dashboard', []);
 })();
 (function() {
     'use strict';
@@ -132,13 +126,19 @@
     'use strict';
 
     angular
-        .module('app.forms', []);
+        .module('app.flatdoc', []);
 })();
 (function() {
     'use strict';
 
     angular
-        .module('app.flatdoc', []);
+        .module('app.extras', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.forms', []);
 })();
 (function() {
     'use strict';
@@ -150,19 +150,25 @@
     'use strict';
 
     angular
-        .module('app.loadingbar', []);
-})();
-(function() {
-    'use strict';
-
-    angular
         .module('app.lazyload', []);
 })();
 (function() {
     'use strict';
 
     angular
+        .module('app.loadingbar', []);
+})();
+(function() {
+    'use strict';
+
+    angular
         .module('app.locale', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.maintenance', ['ui.bootstrap']);
 })();
 (function() {
     'use strict';
@@ -180,7 +186,7 @@
     'use strict';
 
     angular
-        .module('app.maintenance', ['ui.bootstrap']);
+        .module('app.navsearch', []);
 })();
 (function() {
     'use strict';
@@ -192,19 +198,7 @@
     'use strict';
 
     angular
-        .module('app.navsearch', []);
-})();
-(function() {
-    'use strict';
-
-    angular
         .module('app.pages', []);
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.payrollcodes', [ ]);
 })();
 (function() {
     'use strict';
@@ -224,7 +218,7 @@
     'use strict';
 
     angular
-        .module('app.reports', []);
+        .module('app.payrollcodes', [ ]);
 })();
 (function() {
     'use strict';
@@ -238,7 +232,7 @@
     'use strict';
 
     angular
-        .module('app.sidebar', []);
+        .module('app.reports', []);
 })();
 (function() {
     'use strict';
@@ -250,13 +244,13 @@
     'use strict';
 
     angular
-        .module('app.tables', []);
+        .module('app.sidebar', []);
 })();
 (function() {
     'use strict';
 
     angular
-        .module('app.transactions', []);
+        .module('app.tables', []);
 })();
 (function() {
     'use strict';
@@ -268,17 +262,23 @@
     'use strict';
 
     angular
-        .module('app.utils', [
-          'app.colors'
-          ]);
+        .module('app.transactions', []);
 })();
-
 (function() {
     'use strict';
 
     angular
         .module('app.useradministration', [ ]);
 })();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.utils', [
+          'app.colors'
+          ]);
+})();
+
 // angular.module('angle').constant('jadaApiUrl',
 // 'http://localhost:56135/api');
 
@@ -994,6 +994,56 @@ angular.module('app.bootstrapui').controller('YearpickerCtrl', ["$scope", functi
     opened: false
   };
 }]);
+(function() {
+    'use strict';
+
+    angular
+        .module('app.colors')
+        .constant('APP_COLORS', {
+          'primary':                '#5d9cec',
+          'success':                '#27c24c',
+          'info':                   '#23b7e5',
+          'warning':                '#ff902b',
+          'danger':                 '#f05050',
+          'inverse':                '#131e26',
+          'green':                  '#37bc9b',
+          'pink':                   '#f532e5',
+          'purple':                 '#7266ba',
+          'dark':                   '#3a3f51',
+          'yellow':                 '#fad732',
+          'gray-darker':            '#232735',
+          'gray-dark':              '#3a3f51',
+          'gray':                   '#dde6e9',
+          'gray-light':             '#e4eaec',
+          'gray-lighter':           '#edf1f2'
+        })
+        ;
+})();
+/**=========================================================
+ * Module: colors.js
+ * Services to retrieve global colors
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.colors')
+        .service('Colors', Colors);
+
+    Colors.$inject = ['APP_COLORS'];
+    function Colors(APP_COLORS) {
+        this.byName = byName;
+
+        ////////////////
+
+        function byName(name) {
+          return (APP_COLORS[name] || '#fff');
+        }
+    }
+
+})();
+
 /**=========================================================
  * Module: chartist.js
  =========================================================*/
@@ -3075,52 +3125,168 @@ $scope.loadPeriods();
     'use strict';
 
     angular
-        .module('app.colors')
-        .constant('APP_COLORS', {
-          'primary':                '#5d9cec',
-          'success':                '#27c24c',
-          'info':                   '#23b7e5',
-          'warning':                '#ff902b',
-          'danger':                 '#f05050',
-          'inverse':                '#131e26',
-          'green':                  '#37bc9b',
-          'pink':                   '#f532e5',
-          'purple':                 '#7266ba',
-          'dark':                   '#3a3f51',
-          'yellow':                 '#fad732',
-          'gray-darker':            '#232735',
-          'gray-dark':              '#3a3f51',
-          'gray':                   '#dde6e9',
-          'gray-light':             '#e4eaec',
-          'gray-lighter':           '#edf1f2'
-        })
-        ;
+        .module('app.core')
+        .config(coreConfig);
+
+    coreConfig.$inject = ['$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$animateProvider'];
+    function coreConfig($controllerProvider, $compileProvider, $filterProvider, $provide, $animateProvider){
+
+      var core = angular.module('app.core');
+      // registering components after bootstrap
+      core.controller = $controllerProvider.register;
+      core.directive  = $compileProvider.directive;
+      core.filter     = $filterProvider.register;
+      core.factory    = $provide.factory;
+      core.service    = $provide.service;
+      core.constant   = $provide.constant;
+      core.value      = $provide.value;
+
+
+      // Disables animation on items with class .ng-no-animation
+      $animateProvider.classNameFilter(/^((?!(ng-no-animation)).)*$/);
+
+      // Improve performance disabling debugging features
+      // $compileProvider.debugInfoEnabled(false);
+
+    }
+
+
 })();
+    
+
+
 /**=========================================================
- * Module: colors.js
- * Services to retrieve global colors
+ * Module: constants.js
+ * Define constants to inject across the application
  =========================================================*/
 
 (function() {
     'use strict';
 
     angular
-        .module('app.colors')
-        .service('Colors', Colors);
+        .module('app.core')
+        .constant('APP_MEDIAQUERY', {
+          'desktopLG':             1200,
+          'desktop':                992,
+          'tablet':                 768,
+          'mobile':                 480
+        })
+      ;
 
-    Colors.$inject = ['APP_COLORS'];
-    function Colors(APP_COLORS) {
-        this.byName = byName;
+})();
+(function() {
+    'use strict';
 
-        ////////////////
+    angular
+        .module('app.core')
+        .run(appRun);
 
-        function byName(name) {
-          return (APP_COLORS[name] || '#fff');
+    appRun.$inject = ['$http','$rootScope', '$state', '$stateParams', '$window', '$templateCache', 'Colors','$location', '$localStorage'];
+
+    function appRun($http,$rootScope, $state, $stateParams, $window, $templateCache, Colors , $location, $localStorage) {
+
+if ($localStorage.currentUser) {
+            $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
         }
+
+
+        // Hook into ocLazyLoad to setup AngularGrid before inject into the app
+        // See "Creating the AngularJS Module" at
+        // https://www.ag-grid.com/best-angularjs-data-grid/index.php
+        var offevent = $rootScope.$on('ocLazyLoad.fileLoaded', function(e, file) {
+            if (file.indexOf('ag-grid.js') > -1) {
+                agGrid.initialiseAgGridWithAngular1(angular);
+                offevent();
+            }
+        });
+
+        // Set reference to access them from any scope
+        $rootScope.$state = $state;
+        $rootScope.$stateParams = $stateParams;
+        $rootScope.$storage = $window.localStorage;
+
+        // Uncomment this to disable template cache
+        /*$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+            if (typeof(toState) !== 'undefined'){
+              $templateCache.remove(toState.templateUrl);
+            }
+        });*/
+   $rootScope.$on('$locationChangeStart', function (event, next, current) {
+            var publicPages = ['/page/login'];
+            var restrictedPage = publicPages.indexOf($location.path()) === -1;
+            if (restrictedPage && !$localStorage.currentUser) {
+                $location.path('/page/login');
+                 
+            }
+        });
+
+
+
+// routerApp.run(function ($rootScope, $state, AuthService) {
+//     $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+//         if (toState.authenticate && !AuthService.IsAuthenticated()) {
+//             alert("Not Authenticated");
+//             // User isn’t authenticated
+//             $state.transitionTo("login");
+//             event.preventDefault(); 
+//         }
+//     });
+// });
+
+        // Allows to use branding color with interpolation
+        // {{ colorByName('primary') }}
+        $rootScope.colorByName = Colors.byName;
+
+        // cancel click event easily
+        $rootScope.cancel = function($event) {
+            $event.stopPropagation();
+        };
+
+        // Hooks Example
+        // -----------------------------------
+
+        // Hook not found
+        $rootScope.$on('$stateNotFound',
+            function(event, unfoundState /*, fromState, fromParams*/ ) {
+                console.log(unfoundState.to); // "lazy.state"
+                console.log(unfoundState.toParams); // {a:1, b:2}
+                console.log(unfoundState.options); // {inherit:false} + default options
+            });
+        // Hook error
+        $rootScope.$on('$stateChangeError',
+            function(event, toState, toParams, fromState, fromParams, error) {
+                console.log(error);
+            });
+        // Hook success
+        $rootScope.$on('$stateChangeSuccess',
+            function( /*event, toState, toParams, fromState, fromParams*/ ) {
+                // display new view from top
+                $window.scrollTo(0, 0);
+                // Save the route title
+                $rootScope.currTitle = $state.current.title;
+            });
+
+        // Load a title dynamically
+        $rootScope.currTitle = $state.current.title;
+        $rootScope.pageTitle = function() {
+            var title = $rootScope.app.name + ' - ' + ($rootScope.currTitle || $rootScope.app.description);
+            document.title = title;
+            return title;
+        };
+
     }
 
 })();
 
+
+
+// routerApp.service('AuthService', function () {
+//     this._isAuthenticated = false;
+//     this._isAccessToken = '';
+//     this.IsAuthenticated = function () {
+//         return this._isAuthenticated;
+//     }
+// });
 /**=========================================================
  * Module: modals.js
  * Provides a simple way to implement bootstrap modals from templates
@@ -4372,10 +4538,27 @@ $scope.show = function(transaction) {
             
                $scope.type=new leaveTTypeService();
            $scope.submitLeaveTType=function() {
-           $scope.type.$save().then(function(){
+           $scope.type.$save().then(function(data){
+
+            var response=angular.fromJson(data);
+            console.log(response.Message);
+            // $scope.authMsg=response.Message;
+            if(response.Status=="1"){
+                     $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+            }else{
+           
+                  $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+          
+            }
              $rootScope.$emit("CallLoadLeaveTTypes", {});
 
-           });
+           },
+           function() {
+                $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
     
           }
 
@@ -4384,7 +4567,11 @@ $scope.show = function(transaction) {
              $rootScope.$emit("CallLoadLeaveTTypes", {});
                $scope.ok ();
 
-           });
+           },
+           function() {
+                $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
     
           }
         }
@@ -4567,10 +4754,27 @@ $scope.show = function(leaveType) {
             
                $scope.leave=new leaveService();
            $scope.submitLeaveTypes=function() {
-           $scope.leave.$save().then(function(){
+           $scope.leave.$save().then(function(data){
+
+             var response=angular.fromJson(data);
+            console.log(response.Message);
+            // $scope.authMsg=response.Message;
+            if(response.Status=="1"){
+                     $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+            }else{
+           
+                  $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+          
+            }
              $rootScope.$emit("CallLoadLeaveTypes", {});
 
-           });
+           },
+           function() {
+                $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
     
           }
              $scope.closesubmitLeaveTypes=function() {
@@ -4578,7 +4782,11 @@ $scope.show = function(leaveType) {
              $rootScope.$emit("CallLoadLeaveTypes", {});
                $scope.ok();
 
-           });
+           },
+            function() {
+                $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
     
           }
 
@@ -5098,499 +5306,6 @@ for(var r=0;r<accountRights.length;r++){
 
 })();
 
-(function() {
-    'use strict';
-
-    angular
-        .module('app.core')
-        .config(coreConfig);
-
-    coreConfig.$inject = ['$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$animateProvider'];
-    function coreConfig($controllerProvider, $compileProvider, $filterProvider, $provide, $animateProvider){
-
-      var core = angular.module('app.core');
-      // registering components after bootstrap
-      core.controller = $controllerProvider.register;
-      core.directive  = $compileProvider.directive;
-      core.filter     = $filterProvider.register;
-      core.factory    = $provide.factory;
-      core.service    = $provide.service;
-      core.constant   = $provide.constant;
-      core.value      = $provide.value;
-
-
-      // Disables animation on items with class .ng-no-animation
-      $animateProvider.classNameFilter(/^((?!(ng-no-animation)).)*$/);
-
-      // Improve performance disabling debugging features
-      // $compileProvider.debugInfoEnabled(false);
-
-    }
-
-
-})();
-    
-
-
-/**=========================================================
- * Module: constants.js
- * Define constants to inject across the application
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.core')
-        .constant('APP_MEDIAQUERY', {
-          'desktopLG':             1200,
-          'desktop':                992,
-          'tablet':                 768,
-          'mobile':                 480
-        })
-      ;
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.core')
-        .run(appRun);
-
-    appRun.$inject = ['$http','$rootScope', '$state', '$stateParams', '$window', '$templateCache', 'Colors','$location', '$localStorage'];
-
-    function appRun($http,$rootScope, $state, $stateParams, $window, $templateCache, Colors , $location, $localStorage) {
-
-if ($localStorage.currentUser) {
-            $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
-        }
-
-
-        // Hook into ocLazyLoad to setup AngularGrid before inject into the app
-        // See "Creating the AngularJS Module" at
-        // https://www.ag-grid.com/best-angularjs-data-grid/index.php
-        var offevent = $rootScope.$on('ocLazyLoad.fileLoaded', function(e, file) {
-            if (file.indexOf('ag-grid.js') > -1) {
-                agGrid.initialiseAgGridWithAngular1(angular);
-                offevent();
-            }
-        });
-
-        // Set reference to access them from any scope
-        $rootScope.$state = $state;
-        $rootScope.$stateParams = $stateParams;
-        $rootScope.$storage = $window.localStorage;
-
-        // Uncomment this to disable template cache
-        /*$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-            if (typeof(toState) !== 'undefined'){
-              $templateCache.remove(toState.templateUrl);
-            }
-        });*/
-   $rootScope.$on('$locationChangeStart', function (event, next, current) {
-            var publicPages = ['/page/login'];
-            var restrictedPage = publicPages.indexOf($location.path()) === -1;
-            if (restrictedPage && !$localStorage.currentUser) {
-                $location.path('/page/login');
-                 
-            }
-        });
-
-
-
-// routerApp.run(function ($rootScope, $state, AuthService) {
-//     $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-//         if (toState.authenticate && !AuthService.IsAuthenticated()) {
-//             alert("Not Authenticated");
-//             // User isn’t authenticated
-//             $state.transitionTo("login");
-//             event.preventDefault(); 
-//         }
-//     });
-// });
-
-        // Allows to use branding color with interpolation
-        // {{ colorByName('primary') }}
-        $rootScope.colorByName = Colors.byName;
-
-        // cancel click event easily
-        $rootScope.cancel = function($event) {
-            $event.stopPropagation();
-        };
-
-        // Hooks Example
-        // -----------------------------------
-
-        // Hook not found
-        $rootScope.$on('$stateNotFound',
-            function(event, unfoundState /*, fromState, fromParams*/ ) {
-                console.log(unfoundState.to); // "lazy.state"
-                console.log(unfoundState.toParams); // {a:1, b:2}
-                console.log(unfoundState.options); // {inherit:false} + default options
-            });
-        // Hook error
-        $rootScope.$on('$stateChangeError',
-            function(event, toState, toParams, fromState, fromParams, error) {
-                console.log(error);
-            });
-        // Hook success
-        $rootScope.$on('$stateChangeSuccess',
-            function( /*event, toState, toParams, fromState, fromParams*/ ) {
-                // display new view from top
-                $window.scrollTo(0, 0);
-                // Save the route title
-                $rootScope.currTitle = $state.current.title;
-            });
-
-        // Load a title dynamically
-        $rootScope.currTitle = $state.current.title;
-        $rootScope.pageTitle = function() {
-            var title = $rootScope.app.name + ' - ' + ($rootScope.currTitle || $rootScope.app.description);
-            document.title = title;
-            return title;
-        };
-
-    }
-
-})();
-
-
-
-// routerApp.service('AuthService', function () {
-//     this._isAuthenticated = false;
-//     this._isAccessToken = '';
-//     this.IsAuthenticated = function () {
-//         return this._isAuthenticated;
-//     }
-// });
-(function() {
-    'use strict';
-
-    angular
-        .module('app.dashboard')
-        .controller('DashboardController', DashboardController);
-
-    DashboardController.$inject = ['$scope', 'ChartData', '$timeout','$localStorage'];
-    function DashboardController($scope, ChartData, $timeout,$localStorage) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          // SPLINE
-          // ----------------------------------- 
-          vm.splineData = ChartData.load('server/chart/spline.json');
-          vm.splineOptions = {
-              series: {
-                  lines: {
-                      show: false
-                  },
-                  points: {
-                      show: true,
-                      radius: 4
-                  },
-                  splines: {
-                      show: true,
-                      tension: 0.4,
-                      lineWidth: 1,
-                      fill: 0.5
-                  }
-              },
-              grid: {
-                  borderColor: '#eee',
-                  borderWidth: 1,
-                  hoverable: true,
-                  backgroundColor: '#fcfcfc'
-              },
-              tooltip: true,
-              tooltipOpts: {
-                  content: function (label, x, y) { return x + ' : ' + y; }
-              },
-              xaxis: {
-                  tickColor: '#fcfcfc',
-                  mode: 'categories'
-              },
-              yaxis: {
-                  min: 0,
-                  max: 150, // optional: use it for a clear represetation
-                  tickColor: '#eee',
-                  position: ($scope.app.layout.isRTL ? 'right' : 'left'),
-                  tickFormatter: function (v) {
-                      return v/* + ' visitors'*/;
-                  }
-              },
-              shadowSize: 0
-          };
-
-
-          // PANEL REFRESH EVENTS
-          // ----------------------------------- 
-
-          $scope.$on('panel-refresh', function(event, id) {
-            
-            console.log('Simulating chart refresh during 3s on #'+id);
-
-            // Instead of timeout you can request a chart data
-            $timeout(function(){
-              
-              // directive listen for to remove the spinner 
-              // after we end up to perform own operations
-              $scope.$broadcast('removeSpinner', id);
-              
-              console.log('Refreshed #' + id);
-
-            }, 3000);
-
-          });
-
-
-          // PANEL DISMISS EVENTS
-          // ----------------------------------- 
-
-          // Before remove panel
-          $scope.$on('panel-remove', function(event, id, deferred){
-            
-            console.log('Panel #' + id + ' removing');
-            
-            // Here is obligatory to call the resolve() if we pretend to remove the panel finally
-            // Not calling resolve() will NOT remove the panel
-            // It's up to your app to decide if panel should be removed or not
-            deferred.resolve();
-          
-          });
-
-          // Panel removed ( only if above was resolved() )
-          $scope.$on('panel-removed', function(event, id){
-
-            console.log('Panel #' + id + ' removed');
-
-          });
-
-        }
-        
-
-        $scope.Logout=function() {
-            // remove user from local storage and clear http auth header
-            delete $localStorage.currentUser;
-            $http.defaults.headers.common.Authorization = '';
-            aler("logging out")
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.dashboard')
-        .controller('DashboardV2Controller', DashboardV2Controller);
-
-    DashboardV2Controller.$inject = ['$rootScope', '$scope', '$state'];
-    function DashboardV2Controller($rootScope, $scope, $state) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          // Change layout mode
-          if( $state.includes('app-h') ) {
-            // Setup layout horizontal for demo
-            $rootScope.app.layout.horizontal = true;
-            $scope.$on('$destroy', function(){
-                $rootScope.app.layout.horizontal = false;
-            });
-          }
-          else {
-            if(!$rootScope.app.layout.isCollapsedText)
-                $rootScope.app.layout.isCollapsed = true;
-          }
-
-          // BAR STACKED
-          // -----------------------------------
-          vm.barStackedOptions = {
-              series: {
-                  stack: true,
-                  bars: {
-                      align: 'center',
-                      lineWidth: 0,
-                      show: true,
-                      barWidth: 0.6,
-                      fill: 0.9
-                  }
-              },
-              grid: {
-                  borderColor: '#eee',
-                  borderWidth: 1,
-                  hoverable: true,
-                  backgroundColor: '#fcfcfc'
-              },
-              tooltip: true,
-              tooltipOpts: {
-                  content: function (label, x, y) { return x + ' : ' + y; }
-              },
-              xaxis: {
-                  tickColor: '#fcfcfc',
-                  mode: 'categories'
-              },
-              yaxis: {
-                  min: 0,
-                  max: 200, // optional: use it for a clear represetation
-                  position: ($rootScope.app.layout.isRTL ? 'right' : 'left'),
-                  tickColor: '#eee'
-              },
-              shadowSize: 0
-          };
-
-          // SPLINE
-          // -----------------------------------
-
-          vm.splineOptions = {
-              series: {
-                  lines: {
-                      show: false
-                  },
-                  points: {
-                      show: true,
-                      radius: 4
-                  },
-                  splines: {
-                      show: true,
-                      tension: 0.4,
-                      lineWidth: 1,
-                      fill: 0.5
-                  }
-              },
-              grid: {
-                  borderColor: '#eee',
-                  borderWidth: 1,
-                  hoverable: true,
-                  backgroundColor: '#fcfcfc'
-              },
-              tooltip: true,
-              tooltipOpts: {
-                  content: function (label, x, y) { return x + ' : ' + y; }
-              },
-              xaxis: {
-                  tickColor: '#fcfcfc',
-                  mode: 'categories'
-              },
-              yaxis: {
-                  min: 0,
-                  max: 150, // optional: use it for a clear represetation
-                  tickColor: '#eee',
-                  position: ($rootScope.app.layout.isRTL ? 'right' : 'left'),
-                  tickFormatter: function (v) {
-                      return v/* + ' visitors'*/;
-                  }
-              },
-              shadowSize: 0
-          };
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.dashboard')
-        .controller('DashboardV3Controller', DashboardV3Controller);
-
-    DashboardV3Controller.$inject = ['$rootScope'];
-    function DashboardV3Controller($rootScope) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          // SPLINE
-          // ----------------------------------- 
-
-          vm.splineOptions = {
-              series: {
-                  lines: {
-                      show: false
-                  },
-                  points: {
-                      show: true,
-                      radius: 4
-                  },
-                  splines: {
-                      show: true,
-                      tension: 0.4,
-                      lineWidth: 1,
-                      fill: 0.5
-                  }
-              },
-              grid: {
-                  borderColor: '#eee',
-                  borderWidth: 1,
-                  hoverable: true,
-                  backgroundColor: '#fcfcfc'
-              },
-              tooltip: true,
-              tooltipOpts: {
-                  content: function (label, x, y) { return x + ' : ' + y; }
-              },
-              xaxis: {
-                  tickColor: '#fcfcfc',
-                  mode: 'categories'
-              },
-              yaxis: {
-                  min: 0,
-                  max: 150, // optional: use it for a clear represetation
-                  tickColor: '#eee',
-                  position: ($rootScope.app.layout.isRTL ? 'right' : 'left'),
-                  tickFormatter: function (v) {
-                      return v/* + ' visitors'*/;
-                  }
-              },
-              shadowSize: 0
-          };
-
-
-          vm.seriesData = {
-            'CA': 11100,   // Canada
-            'DE': 2510,    // Germany
-            'FR': 3710,    // France
-            'AU': 5710,    // Australia
-            'GB': 8310,    // Great Britain
-            'RU': 9310,    // Russia
-            'BR': 6610,    // Brazil
-            'IN': 7810,    // India
-            'CN': 4310,    // China
-            'US': 839,     // USA
-            'SA': 410      // Saudi Arabia
-          };
-          
-          vm.markersData = [
-            { latLng:[41.90, 12.45],  name:'Vatican City'          },
-            { latLng:[43.73, 7.41],   name:'Monaco'                },
-            { latLng:[-0.52, 166.93], name:'Nauru'                 },
-            { latLng:[-8.51, 179.21], name:'Tuvalu'                },
-            { latLng:[7.11,171.06],   name:'Marshall Islands'      },
-            { latLng:[17.3,-62.73],   name:'Saint Kitts and Nevis' },
-            { latLng:[3.2,73.22],     name:'Maldives'              },
-            { latLng:[35.88,14.5],    name:'Malta'                 },
-            { latLng:[41.0,-71.06],   name:'New England'           },
-            { latLng:[12.05,-61.75],  name:'Grenada'               },
-            { latLng:[13.16,-59.55],  name:'Barbados'              },
-            { latLng:[17.11,-61.85],  name:'Antigua and Barbuda'   },
-            { latLng:[-4.61,55.45],   name:'Seychelles'            },
-            { latLng:[7.35,134.46],   name:'Palau'                 },
-            { latLng:[42.5,1.51],     name:'Andorra'               }
-          ];
-        }
-    }
-})();
 
 (function() {
     'use strict';
@@ -6576,17 +6291,15 @@ if ($localStorage.currentUser) {
     }
 })();
 
-/**=========================================================
- * Module: article.js
- =========================================================*/
 (function() {
     'use strict';
 
     angular
-        .module('app.extras')
-        .controller('ArticleController', ArticleController);
+        .module('app.dashboard')
+        .controller('DashboardController', DashboardController);
 
-    function ArticleController() {
+    DashboardController.$inject = ['$scope', 'ChartData', '$timeout','$localStorage'];
+    function DashboardController($scope, ChartData, $timeout,$localStorage) {
         var vm = this;
 
         activate();
@@ -6594,485 +6307,229 @@ if ($localStorage.currentUser) {
         ////////////////
 
         function activate() {
-          vm.htmlContent = 'Article content...';
 
-          vm.postDemo = {};
-          vm.postDemo.tags = ['coding', 'less'];
-          vm.availableTags = ['coding', 'less', 'sass', 'angularjs', 'node', 'expressJS'];
-          vm.postDemo.categories = ['JAVASCRIPT','WEB'];
-          vm.availableCategories = ['JAVASCRIPT','WEB', 'BOOTSTRAP', 'SERVER', 'HTML5', 'CSS'];
-
-          vm.reviewers = [
-            { name: 'Adam',      email: 'adam@email.com',      age: 10 },
-            { name: 'Amalie',    email: 'amalie@email.com',    age: 12 },
-            { name: 'Wladimir',  email: 'wladimir@email.com',  age: 30 },
-            { name: 'Samantha',  email: 'samantha@email.com',  age: 31 },
-            { name: 'Estefanía', email: 'estefanía@email.com', age: 16 },
-            { name: 'Natasha',   email: 'natasha@email.com',   age: 54 },
-            { name: 'Nicole',    email: 'nicole@email.com',    age: 43 },
-            { name: 'Adrian',    email: 'adrian@email.com',    age: 21 }
-          ];
-
-
-          vm.alerts = [
-            { type: 'info', msg: 'There is an autosaved version of this article that is more recent than the version below. <a href="#" class="text-white">Restore</a>' }
-          ];
-
-          vm.closeAlert = function(index) {
-            vm.alerts.splice(index, 1);
+          // SPLINE
+          // ----------------------------------- 
+          vm.splineData = ChartData.load('server/chart/spline.json');
+          vm.splineOptions = {
+              series: {
+                  lines: {
+                      show: false
+                  },
+                  points: {
+                      show: true,
+                      radius: 4
+                  },
+                  splines: {
+                      show: true,
+                      tension: 0.4,
+                      lineWidth: 1,
+                      fill: 0.5
+                  }
+              },
+              grid: {
+                  borderColor: '#eee',
+                  borderWidth: 1,
+                  hoverable: true,
+                  backgroundColor: '#fcfcfc'
+              },
+              tooltip: true,
+              tooltipOpts: {
+                  content: function (label, x, y) { return x + ' : ' + y; }
+              },
+              xaxis: {
+                  tickColor: '#fcfcfc',
+                  mode: 'categories'
+              },
+              yaxis: {
+                  min: 0,
+                  max: 150, // optional: use it for a clear represetation
+                  tickColor: '#eee',
+                  position: ($scope.app.layout.isRTL ? 'right' : 'left'),
+                  tickFormatter: function (v) {
+                      return v/* + ' visitors'*/;
+                  }
+              },
+              shadowSize: 0
           };
-        }
-    }
-})();
 
-(function() {
-    'use strict';
 
-    angular
-        .module('app.extras')
-        .controller('CalendarController', CalendarController);
+          // PANEL REFRESH EVENTS
+          // ----------------------------------- 
 
-    CalendarController.$inject = ['$scope', '$compile', 'uiCalendarConfig'];
-    function CalendarController($scope, $compile, uiCalendarConfig) {
-        var vm = this;
-        vm.title = 'CalendarController';
+          $scope.$on('panel-refresh', function(event, id) {
+            
+            console.log('Simulating chart refresh during 3s on #'+id);
 
-        activate();
+            // Instead of timeout you can request a chart data
+            $timeout(function(){
+              
+              // directive listen for to remove the spinner 
+              // after we end up to perform own operations
+              $scope.$broadcast('removeSpinner', id);
+              
+              console.log('Refreshed #' + id);
 
-        ////////////////
+            }, 3000);
 
-        function activate() {
+          });
 
-            var date = new Date();
-            var d = date.getDate();
-            var m = date.getMonth();
-            var y = date.getFullYear();
 
-            $scope.changeTo = 'Hungarian';
-            /* event source that pulls from google.com */
-            $scope.eventSource = {
-                url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
-                className: 'gcal-event', // an option!
-                currentTimezone: 'America/Chicago' // an option!
-            };
-            /* event source that contains custom events on the scope */
-            $scope.events = [{
-                title: 'All Day Event',
-                start: new Date(y, m, 1),
-                backgroundColor: '#f56954', //red
-                borderColor: '#f56954' //red
-            }, {
-                title: 'Long Event',
-                start: new Date(y, m, d - 5),
-                end: new Date(y, m, d - 2),
-                backgroundColor: '#f39c12', //yellow
-                borderColor: '#f39c12' //yellow
-            }, {
-                id: 999,
-                title: 'Repeating Event',
-                start: new Date(y, m, d + 4, 16, 0),
-                allDay: false,
-                backgroundColor: '#00c0ef', //Info (aqua)
-                borderColor: '#00c0ef' //Info (aqua)
-            }, {
-                title: 'Birthday Party',
-                start: new Date(y, m, d + 1, 19, 0),
-                end: new Date(y, m, d + 1, 22, 30),
-                allDay: false,
-                backgroundColor: '#00a65a', //Success (green)
-                borderColor: '#00a65a' //Success (green)
-            }, {
-                title: 'Click for Google',
-                start: new Date(y, m, 28),
-                end: new Date(y, m, 29),
-                url: 'http://google.com/',
-                backgroundColor: '#2f80e7', //Primary (light-blue)
-                borderColor: '#2f80e7' //Primary (light-blue)
-            }];
-            /* event source that calls a function on every view switch */
-            $scope.eventsF = function(start, end, timezone, callback) {
-                var s = new Date(start).getTime() / 1000;
-                var e = new Date(end).getTime() / 1000;
-                var m = new Date(start).getMonth();
-                var events = [{
-                    title: 'Feed Me ' + m,
-                    start: s + (50000),
-                    end: s + (100000),
-                    allDay: false,
-                    className: ['customFeed']
-                }];
-                callback(events);
-            };
+          // PANEL DISMISS EVENTS
+          // ----------------------------------- 
 
-            $scope.calEventsExt = {
-                color: '#f00',
-                textColor: 'white',
-                events: [{
-                    type: 'party',
-                    title: 'Lunch',
-                    start: new Date(y, m, d, 12, 0),
-                    end: new Date(y, m, d, 14, 0),
-                    allDay: false,
-                    backgroundColor: '#9289ca', //pink
-                    borderColor: '#9289ca' //pink
-                }, {
-                    type: 'party',
-                    title: 'Lunch 2',
-                    start: new Date(y, m, d, 12, 0),
-                    end: new Date(y, m, d, 14, 0),
-                    allDay: false,
-                    backgroundColor: '#9289ca', //pink
-                    borderColor: '#9289ca' //pink
-                }, {
-                    type: 'party',
-                    title: 'Click for Google',
-                    start: new Date(y, m, 28),
-                    end: new Date(y, m, 29),
-                    url: 'http://google.com/',
-                    backgroundColor: '#9289ca', //pink
-                    borderColor: '#9289ca' //pink
-
-                }]
-            };
-            /* alert on eventClick */
-            $scope.alertOnEventClick = function(date, jsEvent, view) {
-                $scope.alertMessage = (date.title + ' was clicked ');
-            };
-            /* alert on Drop */
-            $scope.alertOnDrop = function(event, delta, revertFunc, jsEvent, ui, view) {
-                $scope.alertMessage = ('Event Droped');// to make dayDelta ' + delta);
-            };
-            /* alert on Resize */
-            $scope.alertOnResize = function(event, delta, revertFunc, jsEvent, ui, view) {
-                $scope.alertMessage = ('Event Resized'); // to make dayDelta ' + delta);
-            };
-            /* add and removes an event source of choice */
-            $scope.addRemoveEventSource = function(sources, source) {
-                var canAdd = 0;
-                angular.forEach(sources, function(value, key) {
-                    if (sources[key] === source) {
-                        sources.splice(key, 1);
-                        canAdd = 1;
-                    }
-                });
-                if (canAdd === 0) {
-                    sources.push(source);
-                }
-            };
-            /* add custom event*/
-            $scope.addEvent = function() {
-                $scope.events.push({
-                    title: 'Open Sesame',
-                    start: new Date(y, m, 28),
-                    end: new Date(y, m, 29),
-                    className: ['openSesame']
-                });
-            };
-            /* remove event */
-            $scope.remove = function(index) {
-                $scope.events.splice(index, 1);
-            };
-            /* Change View */
-            $scope.changeView = function(view, calendar) {
-                uiCalendarConfig.calendars[calendar].fullCalendar('changeView', view);
-            };
-            /* Change View */
-            $scope.renderCalender = function(calendar) {
-                if (uiCalendarConfig.calendars[calendar]) {
-                    uiCalendarConfig.calendars[calendar].fullCalendar('render');
-                }
-            };
-            /* Render Tooltip */
-            $scope.eventRender = function(event, element, view) {
-                element.attr({
-                    'tooltip': event.title,
-                    'tooltip-append-to-body': true
-                });
-                $compile(element)($scope);
-            };
-            /* config object */
-            $scope.uiConfig = {
-                calendar: {
-                    height: 450,
-                    editable: true,
-                    header: {
-                        left: 'prev,next today',
-                        center: 'title',
-                        right: 'month,agendaWeek,agendaDay'
-                    },
-                    buttonIcons: { // note the space at the beginning
-                        prev: ' fa fa-caret-left',
-                        next: ' fa fa-caret-right'
-                    },
-                    buttonText: {
-                        today: 'today',
-                        month: 'month',
-                        week: 'week',
-                        day: 'day'
-                    },
-                    eventClick: $scope.alertOnEventClick,
-                    eventDrop: $scope.alertOnDrop,
-                    eventResize: $scope.alertOnResize,
-                    eventRender: $scope.eventRender
-                }
-            };
-
-            $scope.changeLang = function() {
-                if ($scope.changeTo === 'Hungarian') {
-                    $scope.uiConfig.calendar.dayNames = ["Vasárnap", "Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek", "Szombat"];
-                    $scope.uiConfig.calendar.dayNamesShort = ["Vas", "Hét", "Kedd", "Sze", "Csüt", "Pén", "Szo"];
-                    $scope.changeTo = 'English';
-                } else {
-                    $scope.uiConfig.calendar.dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-                    $scope.uiConfig.calendar.dayNamesShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-                    $scope.changeTo = 'Hungarian';
-                }
-            };
-            /* event sources array*/
-            // $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
-            $scope.eventSources = [$scope.calEventsExt, $scope.eventsF, $scope.events];
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.extras')
-        .service('LoadTreeService', LoadTreeService);
-
-    LoadTreeService.$inject = ['$resource'];
-    function LoadTreeService($resource) {
-        // Loads the list of files to populate the treeview
-        return $resource('server/editor/filetree.json');
-    }
-
-})();
-/**=========================================================
- * Module: code-editor.js
- * Codemirror code editor controller
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.extras')
-        .controller('CodeEditorController', CodeEditorController);
-
-    CodeEditorController.$inject = ['$rootScope', '$scope', '$http', '$ocLazyLoad', 'filetree'];
-    function CodeEditorController($rootScope, $scope, $http, $ocLazyLoad, filetree) {
-        var vm = this;
-
-        layout();
-        activate();
-
-        ////////////////
-        /*jshint -W106*/
-        function layout() {
-          // Setup the layout mode 
-          $rootScope.app.useFullLayout = true;
-          $rootScope.app.hiddenFooter = true;
-          $rootScope.app.layout.isCollapsed = true;
+          // Before remove panel
+          $scope.$on('panel-remove', function(event, id, deferred){
+            
+            console.log('Panel #' + id + ' removing');
+            
+            // Here is obligatory to call the resolve() if we pretend to remove the panel finally
+            // Not calling resolve() will NOT remove the panel
+            // It's up to your app to decide if panel should be removed or not
+            deferred.resolve();
           
-          // Restore layout for demo
-          $scope.$on('$destroy', function(){
-              $rootScope.app.useFullLayout = false;
-              $rootScope.app.hiddenFooter = false;
+          });
+
+          // Panel removed ( only if above was resolved() )
+          $scope.$on('panel-removed', function(event, id){
+
+            console.log('Panel #' + id + ' removed');
+
           });
 
         }
+        
+
+        $scope.Logout=function() {
+            // remove user from local storage and clear http auth header
+            delete $localStorage.currentUser;
+            $http.defaults.headers.common.Authorization = '';
+            aler("logging out")
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.dashboard')
+        .controller('DashboardV2Controller', DashboardV2Controller);
+
+    DashboardV2Controller.$inject = ['$rootScope', '$scope', '$state'];
+    function DashboardV2Controller($rootScope, $scope, $state) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
 
         function activate() {
 
-          // Set the tree data into the scope
-          vm.filetree_data = filetree;
-
-          // Available themes
-          vm.editorThemes = ['3024-day','3024-night','ambiance-mobile','ambiance','base16-dark','base16-light','blackboard','cobalt','eclipse','elegant','erlang-dark','lesser-dark','mbo','mdn-like','midnight','monokai','neat','neo','night','paraiso-dark','paraiso-light','pastel-on-dark','rubyblue','solarized','the-matrix','tomorrow-night-eighties','twilight','vibrant-ink','xq-dark','xq-light'];
-
-          vm.editorOpts = {
-            mode: 'javascript',
-            lineNumbers: true,
-            matchBrackets: true,
-            theme: 'mbo',
-            viewportMargin: Infinity
-          };
-
-          vm.refreshEditor = 0;
-
-          // Load dinamically the stylesheet for the selected theme
-          // You can use ozLazyLoad to load also the mode js based 
-          // on the file extension that is loaded (see handle_filetree)
-          vm.loadTheme = function() {
-            var BASE = 'vendor/codemirror/theme/';
-            $ocLazyLoad.load(BASE + vm.editorOpts.theme + '.css');
-            vm.refreshEditor = !vm.refreshEditor;
-          };
-          // load default theme
-          vm.loadTheme(vm.editorOpts.theme);
-          // Add some initial text
-          vm.code = '// Open a file from the left menu \n' +
-                        '// It will be requested to the server and loaded into the editor\n' +
-                        '// Also try adding a New File from the toolbar\n';
-
-
-          // Tree
-
-          var selectedBranch;
-          vm.handle_filetree = function(branch) {
-            
-            selectedBranch = branch;
-
-            var basePath = 'server/editor/';
-            var isFolder = !!branch.children.length;
-
-            console.log('You selected: ' + branch.label + ' - isFolder? ' + isFolder);
-
-            if ( ! isFolder ) {
-
-              $http
-                .get( basePath + branch.path )
-                .success(function(response){
-                  
-                  console.log('Loaded.. ' + branch.path);
-                  // set the new code into the editor
-                  vm.code = response;
-                  
-                  vm.editorOpts.mode = detectMode(branch.path);
-                  console.log( 'Mode is: ' + vm.editorOpts.mode);
-
-                });
-            }
-          };
-
-          function detectMode(file) {
-            var ext = file.split('.');
-            ext = ext ? ext[ext.length - 1] : '';
-            switch (ext) {
-              case 'html':  return 'htmlmixed';
-              case 'css':   return 'css';
-              default:      return 'javascript';
-            }
+          // Change layout mode
+          if( $state.includes('app-h') ) {
+            // Setup layout horizontal for demo
+            $rootScope.app.layout.horizontal = true;
+            $scope.$on('$destroy', function(){
+                $rootScope.app.layout.horizontal = false;
+            });
+          }
+          else {
+            if(!$rootScope.app.layout.isCollapsedText)
+                $rootScope.app.layout.isCollapsed = true;
           }
 
-          var tree;
-          tree = vm.filetree = {};
+          // BAR STACKED
+          // -----------------------------------
+          vm.barStackedOptions = {
+              series: {
+                  stack: true,
+                  bars: {
+                      align: 'center',
+                      lineWidth: 0,
+                      show: true,
+                      barWidth: 0.6,
+                      fill: 0.9
+                  }
+              },
+              grid: {
+                  borderColor: '#eee',
+                  borderWidth: 1,
+                  hoverable: true,
+                  backgroundColor: '#fcfcfc'
+              },
+              tooltip: true,
+              tooltipOpts: {
+                  content: function (label, x, y) { return x + ' : ' + y; }
+              },
+              xaxis: {
+                  tickColor: '#fcfcfc',
+                  mode: 'categories'
+              },
+              yaxis: {
+                  min: 0,
+                  max: 200, // optional: use it for a clear represetation
+                  position: ($rootScope.app.layout.isRTL ? 'right' : 'left'),
+                  tickColor: '#eee'
+              },
+              shadowSize: 0
+          };
 
-          // Adds a new branch to the tree
-          vm.new_filetree = function() {
-            var b;
-            b = tree.get_selected_branch();
+          // SPLINE
+          // -----------------------------------
 
-            // if we select a leaf -> select the parent folder
-            if ( b && b.children.length === 0 ) {
-              b = tree.get_parent_branch(b);
-            }
-            
-            return tree.add_branch(b, {
-              'label': 'another.html',
-              'path': 'source/another.html'
-            });
+          vm.splineOptions = {
+              series: {
+                  lines: {
+                      show: false
+                  },
+                  points: {
+                      show: true,
+                      radius: 4
+                  },
+                  splines: {
+                      show: true,
+                      tension: 0.4,
+                      lineWidth: 1,
+                      fill: 0.5
+                  }
+              },
+              grid: {
+                  borderColor: '#eee',
+                  borderWidth: 1,
+                  hoverable: true,
+                  backgroundColor: '#fcfcfc'
+              },
+              tooltip: true,
+              tooltipOpts: {
+                  content: function (label, x, y) { return x + ' : ' + y; }
+              },
+              xaxis: {
+                  tickColor: '#fcfcfc',
+                  mode: 'categories'
+              },
+              yaxis: {
+                  min: 0,
+                  max: 150, // optional: use it for a clear represetation
+                  tickColor: '#eee',
+                  position: ($rootScope.app.layout.isRTL ? 'right' : 'left'),
+                  tickFormatter: function (v) {
+                      return v/* + ' visitors'*/;
+                  }
+              },
+              shadowSize: 0
           };
         }
     }
 })();
-
-
 (function() {
     'use strict';
 
     angular
-        .module('app.extras')
-        .controller('TodoController', TodoController);
+        .module('app.dashboard')
+        .controller('DashboardV3Controller', DashboardV3Controller);
 
-    TodoController.$inject = ['$filter'];
-    function TodoController($filter) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-           vm.items = [
-            {
-              todo: {title: 'Meeting with Mark at 7am.', description: 'Pellentesque convallis mauris eu elit imperdiet quis eleifend quam aliquet. '},
-              complete: true
-            },
-            {
-              todo: {title: 'Call Sonya. Talk about the new project.', description: ''},
-              complete: false
-            },
-            {
-              todo: {title: 'Find a new place for vacations', description: ''},
-              complete: false
-            }
-            ];
-          
-          vm.editingTodo = false;
-          vm.todo = {};
-
-          vm.addTodo = function() {
-            
-            if( vm.todo.title === '' ) return;
-            if( !vm.todo.description ) vm.todo.description = '';
-            
-            if( vm.editingTodo ) {
-              vm.todo = {};
-              vm.editingTodo = false;
-            }
-            else {
-              vm.items.push({todo: angular.copy(vm.todo), complete: false});
-              vm.todo.title = '';
-              vm.todo.description = '';
-            }
-          };
-          
-          vm.editTodo = function(index, $event) {
-            $event.preventDefault();
-            $event.stopPropagation();
-            vm.todo = vm.items[index].todo;
-            vm.editingTodo = true;
-          };
-
-          vm.removeTodo = function(index/*, $event*/) {
-            vm.items.splice(index, 1);
-          };
-          
-          vm.clearAll = function() {
-            vm.items = [];
-          };
-
-          vm.totalCompleted = function() {
-            return $filter('filter')(vm.items, function(item){
-              return item.complete;
-            }).length;
-          };
-
-          vm.totalPending = function() {
-            return $filter('filter')(vm.items, function(item){
-              return !item.complete;
-            }).length;
-          };
-
-        }
-    }
-})();
-
-/**=========================================================
- * Module: word-cloud.js
- * Controller for jqCloud
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.extras')
-        .controller('WordCloudController', WordCloudController);
-
-    function WordCloudController() {
+    DashboardV3Controller.$inject = ['$rootScope'];
+    function DashboardV3Controller($rootScope) {
         var vm = this;
 
         activate();
@@ -7081,47 +6538,86 @@ if ($localStorage.currentUser) {
 
         function activate() {
 
-          vm.words = [
-              {
-                text: 'Lorem',
-                weight: 13
-                //link: 'http://themicon.co'
-              }, {
-                text: 'Ipsum',
-                weight: 10.5
-              }, {
-                text: 'Dolor',
-                weight: 9.4
-              }, {
-                text: 'Sit',
-                weight: 8
-              }, {
-                text: 'Amet',
-                weight: 6.2
-              }, {
-                text: 'Consectetur',
-                weight: 5
-              }, {
-                text: 'Adipiscing',
-                weight: 5
-              }, {
-                text: 'Sit',
-                weight: 8
-              }, {
-                text: 'Amet',
-                weight: 6.2
-              }, {
-                text: 'Consectetur',
-                weight: 5
-              }, {
-                text: 'Adipiscing',
-                weight: 5
-              }
+          // SPLINE
+          // ----------------------------------- 
+
+          vm.splineOptions = {
+              series: {
+                  lines: {
+                      show: false
+                  },
+                  points: {
+                      show: true,
+                      radius: 4
+                  },
+                  splines: {
+                      show: true,
+                      tension: 0.4,
+                      lineWidth: 1,
+                      fill: 0.5
+                  }
+              },
+              grid: {
+                  borderColor: '#eee',
+                  borderWidth: 1,
+                  hoverable: true,
+                  backgroundColor: '#fcfcfc'
+              },
+              tooltip: true,
+              tooltipOpts: {
+                  content: function (label, x, y) { return x + ' : ' + y; }
+              },
+              xaxis: {
+                  tickColor: '#fcfcfc',
+                  mode: 'categories'
+              },
+              yaxis: {
+                  min: 0,
+                  max: 150, // optional: use it for a clear represetation
+                  tickColor: '#eee',
+                  position: ($rootScope.app.layout.isRTL ? 'right' : 'left'),
+                  tickFormatter: function (v) {
+                      return v/* + ' visitors'*/;
+                  }
+              },
+              shadowSize: 0
+          };
+
+
+          vm.seriesData = {
+            'CA': 11100,   // Canada
+            'DE': 2510,    // Germany
+            'FR': 3710,    // France
+            'AU': 5710,    // Australia
+            'GB': 8310,    // Great Britain
+            'RU': 9310,    // Russia
+            'BR': 6610,    // Brazil
+            'IN': 7810,    // India
+            'CN': 4310,    // China
+            'US': 839,     // USA
+            'SA': 410      // Saudi Arabia
+          };
+          
+          vm.markersData = [
+            { latLng:[41.90, 12.45],  name:'Vatican City'          },
+            { latLng:[43.73, 7.41],   name:'Monaco'                },
+            { latLng:[-0.52, 166.93], name:'Nauru'                 },
+            { latLng:[-8.51, 179.21], name:'Tuvalu'                },
+            { latLng:[7.11,171.06],   name:'Marshall Islands'      },
+            { latLng:[17.3,-62.73],   name:'Saint Kitts and Nevis' },
+            { latLng:[3.2,73.22],     name:'Maldives'              },
+            { latLng:[35.88,14.5],    name:'Malta'                 },
+            { latLng:[41.0,-71.06],   name:'New England'           },
+            { latLng:[12.05,-61.75],  name:'Grenada'               },
+            { latLng:[13.16,-59.55],  name:'Barbados'              },
+            { latLng:[17.11,-61.85],  name:'Antigua and Barbuda'   },
+            { latLng:[-4.61,55.45],   name:'Seychelles'            },
+            { latLng:[7.35,134.46],   name:'Palau'                 },
+            { latLng:[42.5,1.51],     name:'Andorra'               }
           ];
         }
     }
 })();
-
 /**=========================================================
  * Module: modals.js
  * Provides a simple way to implement bootstrap modals from templates
@@ -7723,6 +7219,613 @@ $scope.searchEmp=function(userId) {
          
 //     });
 // })();
+/**=========================================================
+ * Module: flatdoc.js
+ * Creates the flatdoc markup and initializes the plugin
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.flatdoc')
+        .directive('flatdoc', flatdoc);
+
+    function flatdoc() {
+
+        var directive = {
+            template: '<div role="flatdoc"><div role="flatdoc-menu"></div><div role="flatdoc-content"></div></div>',
+            link: link,
+            restrict: 'EA'
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+
+            Flatdoc.run({
+                fetcher: Flatdoc.file(attrs.src)
+            });
+
+            var $root = $('html, body');
+            var menuLinks;
+
+            var $doc = $(document).on('flatdoc:ready', function() {
+
+                var docMenu = $('[role="flatdoc-menu"]');
+
+                menuLinks = docMenu.find('a').on('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    var $this = $(this);
+
+                    docMenu.find('a.active').removeClass('active');
+                    $this.addClass('active');
+
+                    $root.animate({
+                        scrollTop: $(this.getAttribute('href')).offset().top - ($('.topnavbar').height() + 10)
+                    }, 800);
+                });
+
+            });
+
+            // dettach all events
+            scope.$on('$destroy', function() {
+                menuLinks && menuLinks.off();
+                $doc.off('flatdoc:ready');
+            });
+
+        }
+    }
+
+})();
+
+/**=========================================================
+ * Module: article.js
+ =========================================================*/
+(function() {
+    'use strict';
+
+    angular
+        .module('app.extras')
+        .controller('ArticleController', ArticleController);
+
+    function ArticleController() {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          vm.htmlContent = 'Article content...';
+
+          vm.postDemo = {};
+          vm.postDemo.tags = ['coding', 'less'];
+          vm.availableTags = ['coding', 'less', 'sass', 'angularjs', 'node', 'expressJS'];
+          vm.postDemo.categories = ['JAVASCRIPT','WEB'];
+          vm.availableCategories = ['JAVASCRIPT','WEB', 'BOOTSTRAP', 'SERVER', 'HTML5', 'CSS'];
+
+          vm.reviewers = [
+            { name: 'Adam',      email: 'adam@email.com',      age: 10 },
+            { name: 'Amalie',    email: 'amalie@email.com',    age: 12 },
+            { name: 'Wladimir',  email: 'wladimir@email.com',  age: 30 },
+            { name: 'Samantha',  email: 'samantha@email.com',  age: 31 },
+            { name: 'Estefanía', email: 'estefanía@email.com', age: 16 },
+            { name: 'Natasha',   email: 'natasha@email.com',   age: 54 },
+            { name: 'Nicole',    email: 'nicole@email.com',    age: 43 },
+            { name: 'Adrian',    email: 'adrian@email.com',    age: 21 }
+          ];
+
+
+          vm.alerts = [
+            { type: 'info', msg: 'There is an autosaved version of this article that is more recent than the version below. <a href="#" class="text-white">Restore</a>' }
+          ];
+
+          vm.closeAlert = function(index) {
+            vm.alerts.splice(index, 1);
+          };
+        }
+    }
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.extras')
+        .controller('CalendarController', CalendarController);
+
+    CalendarController.$inject = ['$scope', '$compile', 'uiCalendarConfig'];
+    function CalendarController($scope, $compile, uiCalendarConfig) {
+        var vm = this;
+        vm.title = 'CalendarController';
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+            var date = new Date();
+            var d = date.getDate();
+            var m = date.getMonth();
+            var y = date.getFullYear();
+
+            $scope.changeTo = 'Hungarian';
+            /* event source that pulls from google.com */
+            $scope.eventSource = {
+                url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
+                className: 'gcal-event', // an option!
+                currentTimezone: 'America/Chicago' // an option!
+            };
+            /* event source that contains custom events on the scope */
+            $scope.events = [{
+                title: 'All Day Event',
+                start: new Date(y, m, 1),
+                backgroundColor: '#f56954', //red
+                borderColor: '#f56954' //red
+            }, {
+                title: 'Long Event',
+                start: new Date(y, m, d - 5),
+                end: new Date(y, m, d - 2),
+                backgroundColor: '#f39c12', //yellow
+                borderColor: '#f39c12' //yellow
+            }, {
+                id: 999,
+                title: 'Repeating Event',
+                start: new Date(y, m, d + 4, 16, 0),
+                allDay: false,
+                backgroundColor: '#00c0ef', //Info (aqua)
+                borderColor: '#00c0ef' //Info (aqua)
+            }, {
+                title: 'Birthday Party',
+                start: new Date(y, m, d + 1, 19, 0),
+                end: new Date(y, m, d + 1, 22, 30),
+                allDay: false,
+                backgroundColor: '#00a65a', //Success (green)
+                borderColor: '#00a65a' //Success (green)
+            }, {
+                title: 'Click for Google',
+                start: new Date(y, m, 28),
+                end: new Date(y, m, 29),
+                url: 'http://google.com/',
+                backgroundColor: '#2f80e7', //Primary (light-blue)
+                borderColor: '#2f80e7' //Primary (light-blue)
+            }];
+            /* event source that calls a function on every view switch */
+            $scope.eventsF = function(start, end, timezone, callback) {
+                var s = new Date(start).getTime() / 1000;
+                var e = new Date(end).getTime() / 1000;
+                var m = new Date(start).getMonth();
+                var events = [{
+                    title: 'Feed Me ' + m,
+                    start: s + (50000),
+                    end: s + (100000),
+                    allDay: false,
+                    className: ['customFeed']
+                }];
+                callback(events);
+            };
+
+            $scope.calEventsExt = {
+                color: '#f00',
+                textColor: 'white',
+                events: [{
+                    type: 'party',
+                    title: 'Lunch',
+                    start: new Date(y, m, d, 12, 0),
+                    end: new Date(y, m, d, 14, 0),
+                    allDay: false,
+                    backgroundColor: '#9289ca', //pink
+                    borderColor: '#9289ca' //pink
+                }, {
+                    type: 'party',
+                    title: 'Lunch 2',
+                    start: new Date(y, m, d, 12, 0),
+                    end: new Date(y, m, d, 14, 0),
+                    allDay: false,
+                    backgroundColor: '#9289ca', //pink
+                    borderColor: '#9289ca' //pink
+                }, {
+                    type: 'party',
+                    title: 'Click for Google',
+                    start: new Date(y, m, 28),
+                    end: new Date(y, m, 29),
+                    url: 'http://google.com/',
+                    backgroundColor: '#9289ca', //pink
+                    borderColor: '#9289ca' //pink
+
+                }]
+            };
+            /* alert on eventClick */
+            $scope.alertOnEventClick = function(date, jsEvent, view) {
+                $scope.alertMessage = (date.title + ' was clicked ');
+            };
+            /* alert on Drop */
+            $scope.alertOnDrop = function(event, delta, revertFunc, jsEvent, ui, view) {
+                $scope.alertMessage = ('Event Droped');// to make dayDelta ' + delta);
+            };
+            /* alert on Resize */
+            $scope.alertOnResize = function(event, delta, revertFunc, jsEvent, ui, view) {
+                $scope.alertMessage = ('Event Resized'); // to make dayDelta ' + delta);
+            };
+            /* add and removes an event source of choice */
+            $scope.addRemoveEventSource = function(sources, source) {
+                var canAdd = 0;
+                angular.forEach(sources, function(value, key) {
+                    if (sources[key] === source) {
+                        sources.splice(key, 1);
+                        canAdd = 1;
+                    }
+                });
+                if (canAdd === 0) {
+                    sources.push(source);
+                }
+            };
+            /* add custom event*/
+            $scope.addEvent = function() {
+                $scope.events.push({
+                    title: 'Open Sesame',
+                    start: new Date(y, m, 28),
+                    end: new Date(y, m, 29),
+                    className: ['openSesame']
+                });
+            };
+            /* remove event */
+            $scope.remove = function(index) {
+                $scope.events.splice(index, 1);
+            };
+            /* Change View */
+            $scope.changeView = function(view, calendar) {
+                uiCalendarConfig.calendars[calendar].fullCalendar('changeView', view);
+            };
+            /* Change View */
+            $scope.renderCalender = function(calendar) {
+                if (uiCalendarConfig.calendars[calendar]) {
+                    uiCalendarConfig.calendars[calendar].fullCalendar('render');
+                }
+            };
+            /* Render Tooltip */
+            $scope.eventRender = function(event, element, view) {
+                element.attr({
+                    'tooltip': event.title,
+                    'tooltip-append-to-body': true
+                });
+                $compile(element)($scope);
+            };
+            /* config object */
+            $scope.uiConfig = {
+                calendar: {
+                    height: 450,
+                    editable: true,
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,agendaWeek,agendaDay'
+                    },
+                    buttonIcons: { // note the space at the beginning
+                        prev: ' fa fa-caret-left',
+                        next: ' fa fa-caret-right'
+                    },
+                    buttonText: {
+                        today: 'today',
+                        month: 'month',
+                        week: 'week',
+                        day: 'day'
+                    },
+                    eventClick: $scope.alertOnEventClick,
+                    eventDrop: $scope.alertOnDrop,
+                    eventResize: $scope.alertOnResize,
+                    eventRender: $scope.eventRender
+                }
+            };
+
+            $scope.changeLang = function() {
+                if ($scope.changeTo === 'Hungarian') {
+                    $scope.uiConfig.calendar.dayNames = ["Vasárnap", "Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek", "Szombat"];
+                    $scope.uiConfig.calendar.dayNamesShort = ["Vas", "Hét", "Kedd", "Sze", "Csüt", "Pén", "Szo"];
+                    $scope.changeTo = 'English';
+                } else {
+                    $scope.uiConfig.calendar.dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                    $scope.uiConfig.calendar.dayNamesShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+                    $scope.changeTo = 'Hungarian';
+                }
+            };
+            /* event sources array*/
+            // $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
+            $scope.eventSources = [$scope.calEventsExt, $scope.eventsF, $scope.events];
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.extras')
+        .service('LoadTreeService', LoadTreeService);
+
+    LoadTreeService.$inject = ['$resource'];
+    function LoadTreeService($resource) {
+        // Loads the list of files to populate the treeview
+        return $resource('server/editor/filetree.json');
+    }
+
+})();
+/**=========================================================
+ * Module: code-editor.js
+ * Codemirror code editor controller
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.extras')
+        .controller('CodeEditorController', CodeEditorController);
+
+    CodeEditorController.$inject = ['$rootScope', '$scope', '$http', '$ocLazyLoad', 'filetree'];
+    function CodeEditorController($rootScope, $scope, $http, $ocLazyLoad, filetree) {
+        var vm = this;
+
+        layout();
+        activate();
+
+        ////////////////
+        /*jshint -W106*/
+        function layout() {
+          // Setup the layout mode 
+          $rootScope.app.useFullLayout = true;
+          $rootScope.app.hiddenFooter = true;
+          $rootScope.app.layout.isCollapsed = true;
+          
+          // Restore layout for demo
+          $scope.$on('$destroy', function(){
+              $rootScope.app.useFullLayout = false;
+              $rootScope.app.hiddenFooter = false;
+          });
+
+        }
+
+        function activate() {
+
+          // Set the tree data into the scope
+          vm.filetree_data = filetree;
+
+          // Available themes
+          vm.editorThemes = ['3024-day','3024-night','ambiance-mobile','ambiance','base16-dark','base16-light','blackboard','cobalt','eclipse','elegant','erlang-dark','lesser-dark','mbo','mdn-like','midnight','monokai','neat','neo','night','paraiso-dark','paraiso-light','pastel-on-dark','rubyblue','solarized','the-matrix','tomorrow-night-eighties','twilight','vibrant-ink','xq-dark','xq-light'];
+
+          vm.editorOpts = {
+            mode: 'javascript',
+            lineNumbers: true,
+            matchBrackets: true,
+            theme: 'mbo',
+            viewportMargin: Infinity
+          };
+
+          vm.refreshEditor = 0;
+
+          // Load dinamically the stylesheet for the selected theme
+          // You can use ozLazyLoad to load also the mode js based 
+          // on the file extension that is loaded (see handle_filetree)
+          vm.loadTheme = function() {
+            var BASE = 'vendor/codemirror/theme/';
+            $ocLazyLoad.load(BASE + vm.editorOpts.theme + '.css');
+            vm.refreshEditor = !vm.refreshEditor;
+          };
+          // load default theme
+          vm.loadTheme(vm.editorOpts.theme);
+          // Add some initial text
+          vm.code = '// Open a file from the left menu \n' +
+                        '// It will be requested to the server and loaded into the editor\n' +
+                        '// Also try adding a New File from the toolbar\n';
+
+
+          // Tree
+
+          var selectedBranch;
+          vm.handle_filetree = function(branch) {
+            
+            selectedBranch = branch;
+
+            var basePath = 'server/editor/';
+            var isFolder = !!branch.children.length;
+
+            console.log('You selected: ' + branch.label + ' - isFolder? ' + isFolder);
+
+            if ( ! isFolder ) {
+
+              $http
+                .get( basePath + branch.path )
+                .success(function(response){
+                  
+                  console.log('Loaded.. ' + branch.path);
+                  // set the new code into the editor
+                  vm.code = response;
+                  
+                  vm.editorOpts.mode = detectMode(branch.path);
+                  console.log( 'Mode is: ' + vm.editorOpts.mode);
+
+                });
+            }
+          };
+
+          function detectMode(file) {
+            var ext = file.split('.');
+            ext = ext ? ext[ext.length - 1] : '';
+            switch (ext) {
+              case 'html':  return 'htmlmixed';
+              case 'css':   return 'css';
+              default:      return 'javascript';
+            }
+          }
+
+          var tree;
+          tree = vm.filetree = {};
+
+          // Adds a new branch to the tree
+          vm.new_filetree = function() {
+            var b;
+            b = tree.get_selected_branch();
+
+            // if we select a leaf -> select the parent folder
+            if ( b && b.children.length === 0 ) {
+              b = tree.get_parent_branch(b);
+            }
+            
+            return tree.add_branch(b, {
+              'label': 'another.html',
+              'path': 'source/another.html'
+            });
+          };
+        }
+    }
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.extras')
+        .controller('TodoController', TodoController);
+
+    TodoController.$inject = ['$filter'];
+    function TodoController($filter) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+           vm.items = [
+            {
+              todo: {title: 'Meeting with Mark at 7am.', description: 'Pellentesque convallis mauris eu elit imperdiet quis eleifend quam aliquet. '},
+              complete: true
+            },
+            {
+              todo: {title: 'Call Sonya. Talk about the new project.', description: ''},
+              complete: false
+            },
+            {
+              todo: {title: 'Find a new place for vacations', description: ''},
+              complete: false
+            }
+            ];
+          
+          vm.editingTodo = false;
+          vm.todo = {};
+
+          vm.addTodo = function() {
+            
+            if( vm.todo.title === '' ) return;
+            if( !vm.todo.description ) vm.todo.description = '';
+            
+            if( vm.editingTodo ) {
+              vm.todo = {};
+              vm.editingTodo = false;
+            }
+            else {
+              vm.items.push({todo: angular.copy(vm.todo), complete: false});
+              vm.todo.title = '';
+              vm.todo.description = '';
+            }
+          };
+          
+          vm.editTodo = function(index, $event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            vm.todo = vm.items[index].todo;
+            vm.editingTodo = true;
+          };
+
+          vm.removeTodo = function(index/*, $event*/) {
+            vm.items.splice(index, 1);
+          };
+          
+          vm.clearAll = function() {
+            vm.items = [];
+          };
+
+          vm.totalCompleted = function() {
+            return $filter('filter')(vm.items, function(item){
+              return item.complete;
+            }).length;
+          };
+
+          vm.totalPending = function() {
+            return $filter('filter')(vm.items, function(item){
+              return !item.complete;
+            }).length;
+          };
+
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: word-cloud.js
+ * Controller for jqCloud
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.extras')
+        .controller('WordCloudController', WordCloudController);
+
+    function WordCloudController() {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          vm.words = [
+              {
+                text: 'Lorem',
+                weight: 13
+                //link: 'http://themicon.co'
+              }, {
+                text: 'Ipsum',
+                weight: 10.5
+              }, {
+                text: 'Dolor',
+                weight: 9.4
+              }, {
+                text: 'Sit',
+                weight: 8
+              }, {
+                text: 'Amet',
+                weight: 6.2
+              }, {
+                text: 'Consectetur',
+                weight: 5
+              }, {
+                text: 'Adipiscing',
+                weight: 5
+              }, {
+                text: 'Sit',
+                weight: 8
+              }, {
+                text: 'Amet',
+                weight: 6.2
+              }, {
+                text: 'Consectetur',
+                weight: 5
+              }, {
+                text: 'Adipiscing',
+                weight: 5
+              }
+          ];
+        }
+    }
+})();
+
 (function() {
     'use strict';
 
@@ -8723,67 +8826,6 @@ $scope.searchEmp=function(userId) {
 })();
 
 /**=========================================================
- * Module: flatdoc.js
- * Creates the flatdoc markup and initializes the plugin
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.flatdoc')
-        .directive('flatdoc', flatdoc);
-
-    function flatdoc() {
-
-        var directive = {
-            template: '<div role="flatdoc"><div role="flatdoc-menu"></div><div role="flatdoc-content"></div></div>',
-            link: link,
-            restrict: 'EA'
-        };
-        return directive;
-
-        function link(scope, element, attrs) {
-
-            Flatdoc.run({
-                fetcher: Flatdoc.file(attrs.src)
-            });
-
-            var $root = $('html, body');
-            var menuLinks;
-
-            var $doc = $(document).on('flatdoc:ready', function() {
-
-                var docMenu = $('[role="flatdoc-menu"]');
-
-                menuLinks = docMenu.find('a').on('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    var $this = $(this);
-
-                    docMenu.find('a.active').removeClass('active');
-                    $this.addClass('active');
-
-                    $root.animate({
-                        scrollTop: $(this.getAttribute('href')).offset().top - ($('.topnavbar').height() + 10)
-                    }, 800);
-                });
-
-            });
-
-            // dettach all events
-            scope.$on('$destroy', function() {
-                menuLinks && menuLinks.off();
-                $doc.off('flatdoc:ready');
-            });
-
-        }
-    }
-
-})();
-
-/**=========================================================
  * Module: skycons.js
  * Include any animated weather icon from Skycons
  =========================================================*/
@@ -8816,50 +8858,6 @@ $scope.searchEmp=function(userId) {
 
 })();
 
-(function() {
-    'use strict';
-
-    angular
-        .module('app.loadingbar')
-        .config(loadingbarConfig)
-        ;
-    loadingbarConfig.$inject = ['cfpLoadingBarProvider'];
-    function loadingbarConfig(cfpLoadingBarProvider){
-      cfpLoadingBarProvider.includeBar = true;
-      cfpLoadingBarProvider.includeSpinner = false;
-      cfpLoadingBarProvider.latencyThreshold = 500;
-      cfpLoadingBarProvider.parentSelector = '.wrapper > section';
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.loadingbar')
-        .run(loadingbarRun)
-        ;
-    loadingbarRun.$inject = ['$rootScope', '$timeout', 'cfpLoadingBar'];
-    function loadingbarRun($rootScope, $timeout, cfpLoadingBar){
-
-      // Loading bar transition
-      // ----------------------------------- 
-      var thBar;
-      $rootScope.$on('$stateChangeStart', function() {
-          if($('.wrapper > section').length) // check if bar container exists
-            thBar = $timeout(function() {
-              cfpLoadingBar.start();
-            }, 0); // sets a latency Threshold
-      });
-      $rootScope.$on('$stateChangeSuccess', function(event) {
-          event.targetScope.$watch('$viewContentLoaded', function () {
-            $timeout.cancel(thBar);
-            cfpLoadingBar.complete();
-          });
-      });
-
-    }
-
-})();
 (function() {
     'use strict';
 
@@ -9034,6 +9032,50 @@ $scope.searchEmp=function(userId) {
     'use strict';
 
     angular
+        .module('app.loadingbar')
+        .config(loadingbarConfig)
+        ;
+    loadingbarConfig.$inject = ['cfpLoadingBarProvider'];
+    function loadingbarConfig(cfpLoadingBarProvider){
+      cfpLoadingBarProvider.includeBar = true;
+      cfpLoadingBarProvider.includeSpinner = false;
+      cfpLoadingBarProvider.latencyThreshold = 500;
+      cfpLoadingBarProvider.parentSelector = '.wrapper > section';
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.loadingbar')
+        .run(loadingbarRun)
+        ;
+    loadingbarRun.$inject = ['$rootScope', '$timeout', 'cfpLoadingBar'];
+    function loadingbarRun($rootScope, $timeout, cfpLoadingBar){
+
+      // Loading bar transition
+      // ----------------------------------- 
+      var thBar;
+      $rootScope.$on('$stateChangeStart', function() {
+          if($('.wrapper > section').length) // check if bar container exists
+            thBar = $timeout(function() {
+              cfpLoadingBar.start();
+            }, 0); // sets a latency Threshold
+      });
+      $rootScope.$on('$stateChangeSuccess', function(event) {
+          event.targetScope.$watch('$viewContentLoaded', function () {
+            $timeout.cancel(thBar);
+            cfpLoadingBar.complete();
+          });
+      });
+
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
         .module('app.locale')
         .config(localeConfig)
         ;
@@ -9079,484 +9121,6 @@ $scope.searchEmp=function(userId) {
           $rootScope.$locale = $locale;
           
           $rootScope.changeLocale = tmhDynamicLocale.set;
-        }
-    }
-})();
-
-/**=========================================================
- * Module: demo-pagination.js
- * Provides a simple demo for pagination
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.mailbox')
-        .controller('MailboxController', MailboxController);
-
-    function MailboxController() {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          vm.folders = [
-            {name: 'Inbox',   folder: 'inbox',   alert: 42, icon: 'fa-inbox' },
-            {name: 'Starred', folder: 'starred', alert: 10, icon: 'fa-star' },
-            {name: 'Sent',    folder: 'sent',    alert: 0,  icon: 'fa-paper-plane-o' },
-            {name: 'Draft',   folder: 'draft',   alert: 5,  icon: 'fa-edit' },
-            {name: 'Trash',   folder: 'trash',   alert: 0,  icon: 'fa-trash'}
-          ];
-
-          vm.labels = [
-            {name: 'Red',     color: 'danger'},
-            {name: 'Pink',    color: 'pink'},
-            {name: 'Blue',    color: 'info'},
-            {name: 'Yellow',  color: 'warning'}
-          ];
-
-          vm.mail = {
-            cc: false,
-            bcc: false
-          };
-          // Mailbox editr initial content
-          vm.content = '<p>Type something..</p>';
-        }
-    }
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.mailbox')
-        .controller('MailFolderController', MailFolderController);
-
-    MailFolderController.$inject = ['mails', '$stateParams'];
-    function MailFolderController(mails, $stateParams) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          
-          vm.folder = {};
-          // no filter for inbox
-          vm.folder.folder = $stateParams.folder === 'inbox' ? '' : $stateParams.folder;
-
-          mails.all().then(function(mails){
-            vm.mails = mails;
-          });
-        }
-    }
-})();
-
-// A RESTful factory for retrieving mails from json file
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.mailbox')
-        .factory('mails', mails);
-
-    mails.$inject = ['$http'];
-    function mails($http) {
-        var service = {
-            all: all,
-            get: get
-        };
-        return service;
-
-        ////////////////
-        
-        function readMails() {
-          var path = 'server/mails.json';
-          return $http.get(path).then(function (resp) {
-            return resp.data.mails;
-          });
-        }
-
-        function all() {
-          return readMails();
-        }
-
-        function get(id) {
-          return readMails().then(function(mails){
-            for (var i = 0; i < mails.length; i++) {
-              if (+mails[i].id === +id) return mails[i];
-            }
-            return null;
-          });
-        }
-    }
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.mailbox')
-        .controller('MailViewController', MailViewController);
-
-    MailViewController.$inject = ['mails', '$stateParams'];
-    function MailViewController(mails, $stateParams) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          mails.get($stateParams.mid).then(function(mail){
-            vm.mail = mail;
-          });
-        }
-    }
-})();
-
-/**=========================================================
- * Module: modals.js
- * Provides a simple way to implement bootstrap modals from templates
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.maps')
-        .controller('ModalGmapController', ModalGmapController);
-
-    ModalGmapController.$inject = ['$uibModal'];
-    function ModalGmapController($uibModal) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          vm.open = function (size) {
-
-            //var modalInstance =
-            $uibModal.open({
-              templateUrl: '/myModalContent.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-
-            
-          };
-
-
-
-          // Please note that $uibModalInstance represents a modal window (instance) dependency.
-          // It is not the same as the $uibModal service used above.
-
-          ModalInstanceCtrl.$inject = ['$scope', '$uibModalInstance', '$timeout'];
-          function ModalInstanceCtrl($scope, $uibModalInstance, $timeout) {
-
-            $uibModalInstance.opened.then(function () {
-              var position = new google.maps.LatLng(33.790807, -117.835734);
-
-              $scope.mapOptionsModal = {
-                zoom: 14,
-                center: position,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-              };
-
-              // we use timeout to wait maps to be ready before add a markers
-              $timeout(function(){
-                // 1. Add a marker at the position it was initialized
-                new google.maps.Marker({
-                  map: $scope.myMapModal,
-                  position: position
-                });
-                // 2. Trigger a resize so the map is redrawed
-                google.maps.event.trigger($scope.myMapModal, 'resize');
-                // 3. Move to the center if it is misaligned
-                $scope.myMapModal.panTo(position);
-              });
-
-            });
-
-            $scope.ok = function () {
-              $uibModalInstance.close('closed');
-            };
-
-            $scope.cancel = function () {
-              $uibModalInstance.dismiss('cancel');
-            };
-
-          }
-
-        }
-    }
-
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.maps')
-        .controller('GMapController', GMapController);
-
-    GMapController.$inject = ['$timeout'];
-    function GMapController($timeout) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          var position = [
-              new google.maps.LatLng(33.790807, -117.835734),
-              new google.maps.LatLng(33.790807, -117.835734),
-              new google.maps.LatLng(33.790807, -117.835734),
-              new google.maps.LatLng(33.790807, -117.835734),
-              new google.maps.LatLng(33.787453, -117.835858)
-            ];
-          
-          vm.addMarker = addMarker;
-          // we use timeout to wait maps to be ready before add a markers
-          $timeout(function(){
-            addMarker(vm.myMap1, position[0]);
-            addMarker(vm.myMap2, position[1]);
-            addMarker(vm.myMap3, position[2]);
-            addMarker(vm.myMap5, position[3]);
-          });
-
-          vm.mapOptions1 = {
-            zoom: 14,
-            center: position[0],
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            scrollwheel: false
-          };
-
-          vm.mapOptions2 = {
-            zoom: 19,
-            center: position[1],
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          };
-
-          vm.mapOptions3 = {
-            zoom: 14,
-            center: position[2],
-            mapTypeId: google.maps.MapTypeId.SATELLITE
-          };
-
-          vm.mapOptions4 = {
-            zoom: 14,
-            center: position[3],
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          };
-
-          // for multiple markers
-          $timeout(function(){
-            addMarker(vm.myMap4, position[3]);
-            addMarker(vm.myMap4, position[4]);
-          });
-
-          // custom map style
-          var MapStyles = [{'featureType':'water','stylers':[{'visibility':'on'},{'color':'#bdd1f9'}]},{'featureType':'all','elementType':'labels.text.fill','stylers':[{'color':'#334165'}]},{featureType:'landscape',stylers:[{color:'#e9ebf1'}]},{featureType:'road.highway',elementType:'geometry',stylers:[{color:'#c5c6c6'}]},{featureType:'road.arterial',elementType:'geometry',stylers:[{color:'#fff'}]},{featureType:'road.local',elementType:'geometry',stylers:[{color:'#fff'}]},{featureType:'transit',elementType:'geometry',stylers:[{color:'#d8dbe0'}]},{featureType:'poi',elementType:'geometry',stylers:[{color:'#cfd5e0'}]},{featureType:'administrative',stylers:[{visibility:'on'},{lightness:33}]},{featureType:'poi.park',elementType:'labels',stylers:[{visibility:'on'},{lightness:20}]},{featureType:'road',stylers:[{color:'#d8dbe0',lightness:20}]}];
-          vm.mapOptions5 = {
-            zoom: 14,
-            center: position[3],
-            styles: MapStyles,
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            scrollwheel: false
-          };
-
-          ///////////////
-          
-          function addMarker(map, position) {
-            return new google.maps.Marker({
-              map: map,
-              position: position
-            });
-          }
-
-        }
-    }
-})();
-
-/**=========================================================
- * Module: vector-map.js.js
- * Init jQuery Vector Map plugin
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.maps')
-        .directive('vectorMap', vectorMap);
-
-    vectorMap.$inject = ['VectorMap'];
-    function vectorMap (VectorMap) {
-        var directive = {
-            link: link,
-            restrict: 'EA',
-            scope: {
-              seriesData: '=',
-              markersData: '='
-            }
-        };
-        return directive;
-
-        function link(scope, element, attrs) {
-          
-          var defaultColors = {
-              markerColor:  '#23b7e5',      // the marker points
-              bgColor:      'transparent',      // the background
-              scaleColors:  ['#878c9a'],    // the color of the region in the serie
-              regionFill:   '#bbbec6'       // the base region color
-          };
-
-          var mapHeight   = attrs.height || '300',
-              options     = {
-                markerColor:  attrs.markerColor  || defaultColors.markerColor,
-                bgColor:      attrs.bgColor      || defaultColors.bgColor,
-                scale:        attrs.scale        || 1,
-                scaleColors:  attrs.scaleColors  || defaultColors.scaleColors,
-                regionFill:   attrs.regionFill   || defaultColors.regionFill,
-                mapName:      attrs.mapName      || 'world_mill_en'
-              };
-          
-          element.css('height', mapHeight);
-          
-          VectorMap.init( element , options, scope.seriesData, scope.markersData);
-        }
-    }
-
-})();
-
-/**=========================================================
- * Module: vector-map.js
- * Services to initialize vector map plugin
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.maps')
-        .service('VectorMap', VectorMap);
-
-    function VectorMap() {
-        this.init = init;
-
-        ////////////////
-
-        function init($element, opts, series, markers) {
-          $element.vectorMap({
-            map:             opts.mapName,
-            backgroundColor: opts.bgColor,
-            zoomMin:         1,
-            zoomMax:         8,
-            zoomOnScroll:    false,
-            regionStyle: {
-              initial: {
-                'fill':           opts.regionFill,
-                'fill-opacity':   1,
-                'stroke':         'none',
-                'stroke-width':   1.5,
-                'stroke-opacity': 1
-              },
-              hover: {
-                'fill-opacity': 0.8
-              },
-              selected: {
-                fill: 'blue'
-              },
-              selectedHover: {
-              }
-            },
-            focusOn:{ x:0.4, y:0.6, scale: opts.scale},
-            markerStyle: {
-              initial: {
-                fill: opts.markerColor,
-                stroke: opts.markerColor
-              }
-            },
-            onRegionLabelShow: function(e, el, code) {
-              if ( series && series[code] )
-                el.html(el.html() + ': ' + series[code] + ' visitors');
-            },
-            markers: markers,
-            series: {
-                regions: [{
-                    values: series,
-                    scale: opts.scaleColors,
-                    normalizeFunction: 'polynomial'
-                }]
-            },
-          });
-        }
-    }
-})();
-
-/**=========================================================
- * Module: vmaps,js
- * jVector Maps support
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.maps')
-        .controller('VectorMapController', VectorMapController);
-
-    function VectorMapController() {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          vm.seriesData = {
-            'CA': 11100,   // Canada
-            'DE': 2510,    // Germany
-            'FR': 3710,    // France
-            'AU': 5710,    // Australia
-            'GB': 8310,    // Great Britain
-            'RU': 9310,    // Russia
-            'BR': 6610,    // Brazil
-            'IN': 7810,    // India
-            'CN': 4310,    // China
-            'US': 839,     // USA
-            'SA': 410      // Saudi Arabia
-          };
-          
-          vm.markersData = [
-            { latLng:[41.90, 12.45],  name:'Vatican City'          },
-            { latLng:[43.73, 7.41],   name:'Monaco'                },
-            { latLng:[-0.52, 166.93], name:'Nauru'                 },
-            { latLng:[-8.51, 179.21], name:'Tuvalu'                },
-            { latLng:[7.11,171.06],   name:'Marshall Islands'      },
-            { latLng:[17.3,-62.73],   name:'Saint Kitts and Nevis' },
-            { latLng:[3.2,73.22],     name:'Maldives'              },
-            { latLng:[35.88,14.5],    name:'Malta'                 },
-            { latLng:[41.0,-71.06],   name:'New England'           },
-            { latLng:[12.05,-61.75],  name:'Grenada'               },
-            { latLng:[13.16,-59.55],  name:'Barbados'              },
-            { latLng:[17.11,-61.85],  name:'Antigua and Barbuda'   },
-            { latLng:[-4.61,55.45],   name:'Seychelles'            },
-            { latLng:[7.35,134.46],   name:'Palau'                 },
-            { latLng:[42.5,1.51],     name:'Andorra'               }
-          ];
         }
     }
 })();
@@ -10506,6 +10070,593 @@ $scope.banks=bankcodeService.query();
 
 })();
 /**=========================================================
+ * Module: demo-pagination.js
+ * Provides a simple demo for pagination
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.mailbox')
+        .controller('MailboxController', MailboxController);
+
+    function MailboxController() {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          vm.folders = [
+            {name: 'Inbox',   folder: 'inbox',   alert: 42, icon: 'fa-inbox' },
+            {name: 'Starred', folder: 'starred', alert: 10, icon: 'fa-star' },
+            {name: 'Sent',    folder: 'sent',    alert: 0,  icon: 'fa-paper-plane-o' },
+            {name: 'Draft',   folder: 'draft',   alert: 5,  icon: 'fa-edit' },
+            {name: 'Trash',   folder: 'trash',   alert: 0,  icon: 'fa-trash'}
+          ];
+
+          vm.labels = [
+            {name: 'Red',     color: 'danger'},
+            {name: 'Pink',    color: 'pink'},
+            {name: 'Blue',    color: 'info'},
+            {name: 'Yellow',  color: 'warning'}
+          ];
+
+          vm.mail = {
+            cc: false,
+            bcc: false
+          };
+          // Mailbox editr initial content
+          vm.content = '<p>Type something..</p>';
+        }
+    }
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.mailbox')
+        .controller('MailFolderController', MailFolderController);
+
+    MailFolderController.$inject = ['mails', '$stateParams'];
+    function MailFolderController(mails, $stateParams) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          
+          vm.folder = {};
+          // no filter for inbox
+          vm.folder.folder = $stateParams.folder === 'inbox' ? '' : $stateParams.folder;
+
+          mails.all().then(function(mails){
+            vm.mails = mails;
+          });
+        }
+    }
+})();
+
+// A RESTful factory for retrieving mails from json file
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.mailbox')
+        .factory('mails', mails);
+
+    mails.$inject = ['$http'];
+    function mails($http) {
+        var service = {
+            all: all,
+            get: get
+        };
+        return service;
+
+        ////////////////
+        
+        function readMails() {
+          var path = 'server/mails.json';
+          return $http.get(path).then(function (resp) {
+            return resp.data.mails;
+          });
+        }
+
+        function all() {
+          return readMails();
+        }
+
+        function get(id) {
+          return readMails().then(function(mails){
+            for (var i = 0; i < mails.length; i++) {
+              if (+mails[i].id === +id) return mails[i];
+            }
+            return null;
+          });
+        }
+    }
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.mailbox')
+        .controller('MailViewController', MailViewController);
+
+    MailViewController.$inject = ['mails', '$stateParams'];
+    function MailViewController(mails, $stateParams) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          mails.get($stateParams.mid).then(function(mail){
+            vm.mail = mail;
+          });
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: modals.js
+ * Provides a simple way to implement bootstrap modals from templates
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.maps')
+        .controller('ModalGmapController', ModalGmapController);
+
+    ModalGmapController.$inject = ['$uibModal'];
+    function ModalGmapController($uibModal) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          vm.open = function (size) {
+
+            //var modalInstance =
+            $uibModal.open({
+              templateUrl: '/myModalContent.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+
+            
+          };
+
+
+
+          // Please note that $uibModalInstance represents a modal window (instance) dependency.
+          // It is not the same as the $uibModal service used above.
+
+          ModalInstanceCtrl.$inject = ['$scope', '$uibModalInstance', '$timeout'];
+          function ModalInstanceCtrl($scope, $uibModalInstance, $timeout) {
+
+            $uibModalInstance.opened.then(function () {
+              var position = new google.maps.LatLng(33.790807, -117.835734);
+
+              $scope.mapOptionsModal = {
+                zoom: 14,
+                center: position,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+              };
+
+              // we use timeout to wait maps to be ready before add a markers
+              $timeout(function(){
+                // 1. Add a marker at the position it was initialized
+                new google.maps.Marker({
+                  map: $scope.myMapModal,
+                  position: position
+                });
+                // 2. Trigger a resize so the map is redrawed
+                google.maps.event.trigger($scope.myMapModal, 'resize');
+                // 3. Move to the center if it is misaligned
+                $scope.myMapModal.panTo(position);
+              });
+
+            });
+
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+
+          }
+
+        }
+    }
+
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.maps')
+        .controller('GMapController', GMapController);
+
+    GMapController.$inject = ['$timeout'];
+    function GMapController($timeout) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          var position = [
+              new google.maps.LatLng(33.790807, -117.835734),
+              new google.maps.LatLng(33.790807, -117.835734),
+              new google.maps.LatLng(33.790807, -117.835734),
+              new google.maps.LatLng(33.790807, -117.835734),
+              new google.maps.LatLng(33.787453, -117.835858)
+            ];
+          
+          vm.addMarker = addMarker;
+          // we use timeout to wait maps to be ready before add a markers
+          $timeout(function(){
+            addMarker(vm.myMap1, position[0]);
+            addMarker(vm.myMap2, position[1]);
+            addMarker(vm.myMap3, position[2]);
+            addMarker(vm.myMap5, position[3]);
+          });
+
+          vm.mapOptions1 = {
+            zoom: 14,
+            center: position[0],
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            scrollwheel: false
+          };
+
+          vm.mapOptions2 = {
+            zoom: 19,
+            center: position[1],
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+
+          vm.mapOptions3 = {
+            zoom: 14,
+            center: position[2],
+            mapTypeId: google.maps.MapTypeId.SATELLITE
+          };
+
+          vm.mapOptions4 = {
+            zoom: 14,
+            center: position[3],
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+
+          // for multiple markers
+          $timeout(function(){
+            addMarker(vm.myMap4, position[3]);
+            addMarker(vm.myMap4, position[4]);
+          });
+
+          // custom map style
+          var MapStyles = [{'featureType':'water','stylers':[{'visibility':'on'},{'color':'#bdd1f9'}]},{'featureType':'all','elementType':'labels.text.fill','stylers':[{'color':'#334165'}]},{featureType:'landscape',stylers:[{color:'#e9ebf1'}]},{featureType:'road.highway',elementType:'geometry',stylers:[{color:'#c5c6c6'}]},{featureType:'road.arterial',elementType:'geometry',stylers:[{color:'#fff'}]},{featureType:'road.local',elementType:'geometry',stylers:[{color:'#fff'}]},{featureType:'transit',elementType:'geometry',stylers:[{color:'#d8dbe0'}]},{featureType:'poi',elementType:'geometry',stylers:[{color:'#cfd5e0'}]},{featureType:'administrative',stylers:[{visibility:'on'},{lightness:33}]},{featureType:'poi.park',elementType:'labels',stylers:[{visibility:'on'},{lightness:20}]},{featureType:'road',stylers:[{color:'#d8dbe0',lightness:20}]}];
+          vm.mapOptions5 = {
+            zoom: 14,
+            center: position[3],
+            styles: MapStyles,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            scrollwheel: false
+          };
+
+          ///////////////
+          
+          function addMarker(map, position) {
+            return new google.maps.Marker({
+              map: map,
+              position: position
+            });
+          }
+
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: vector-map.js.js
+ * Init jQuery Vector Map plugin
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.maps')
+        .directive('vectorMap', vectorMap);
+
+    vectorMap.$inject = ['VectorMap'];
+    function vectorMap (VectorMap) {
+        var directive = {
+            link: link,
+            restrict: 'EA',
+            scope: {
+              seriesData: '=',
+              markersData: '='
+            }
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+          
+          var defaultColors = {
+              markerColor:  '#23b7e5',      // the marker points
+              bgColor:      'transparent',      // the background
+              scaleColors:  ['#878c9a'],    // the color of the region in the serie
+              regionFill:   '#bbbec6'       // the base region color
+          };
+
+          var mapHeight   = attrs.height || '300',
+              options     = {
+                markerColor:  attrs.markerColor  || defaultColors.markerColor,
+                bgColor:      attrs.bgColor      || defaultColors.bgColor,
+                scale:        attrs.scale        || 1,
+                scaleColors:  attrs.scaleColors  || defaultColors.scaleColors,
+                regionFill:   attrs.regionFill   || defaultColors.regionFill,
+                mapName:      attrs.mapName      || 'world_mill_en'
+              };
+          
+          element.css('height', mapHeight);
+          
+          VectorMap.init( element , options, scope.seriesData, scope.markersData);
+        }
+    }
+
+})();
+
+/**=========================================================
+ * Module: vector-map.js
+ * Services to initialize vector map plugin
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.maps')
+        .service('VectorMap', VectorMap);
+
+    function VectorMap() {
+        this.init = init;
+
+        ////////////////
+
+        function init($element, opts, series, markers) {
+          $element.vectorMap({
+            map:             opts.mapName,
+            backgroundColor: opts.bgColor,
+            zoomMin:         1,
+            zoomMax:         8,
+            zoomOnScroll:    false,
+            regionStyle: {
+              initial: {
+                'fill':           opts.regionFill,
+                'fill-opacity':   1,
+                'stroke':         'none',
+                'stroke-width':   1.5,
+                'stroke-opacity': 1
+              },
+              hover: {
+                'fill-opacity': 0.8
+              },
+              selected: {
+                fill: 'blue'
+              },
+              selectedHover: {
+              }
+            },
+            focusOn:{ x:0.4, y:0.6, scale: opts.scale},
+            markerStyle: {
+              initial: {
+                fill: opts.markerColor,
+                stroke: opts.markerColor
+              }
+            },
+            onRegionLabelShow: function(e, el, code) {
+              if ( series && series[code] )
+                el.html(el.html() + ': ' + series[code] + ' visitors');
+            },
+            markers: markers,
+            series: {
+                regions: [{
+                    values: series,
+                    scale: opts.scaleColors,
+                    normalizeFunction: 'polynomial'
+                }]
+            },
+          });
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: vmaps,js
+ * jVector Maps support
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.maps')
+        .controller('VectorMapController', VectorMapController);
+
+    function VectorMapController() {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          vm.seriesData = {
+            'CA': 11100,   // Canada
+            'DE': 2510,    // Germany
+            'FR': 3710,    // France
+            'AU': 5710,    // Australia
+            'GB': 8310,    // Great Britain
+            'RU': 9310,    // Russia
+            'BR': 6610,    // Brazil
+            'IN': 7810,    // India
+            'CN': 4310,    // China
+            'US': 839,     // USA
+            'SA': 410      // Saudi Arabia
+          };
+          
+          vm.markersData = [
+            { latLng:[41.90, 12.45],  name:'Vatican City'          },
+            { latLng:[43.73, 7.41],   name:'Monaco'                },
+            { latLng:[-0.52, 166.93], name:'Nauru'                 },
+            { latLng:[-8.51, 179.21], name:'Tuvalu'                },
+            { latLng:[7.11,171.06],   name:'Marshall Islands'      },
+            { latLng:[17.3,-62.73],   name:'Saint Kitts and Nevis' },
+            { latLng:[3.2,73.22],     name:'Maldives'              },
+            { latLng:[35.88,14.5],    name:'Malta'                 },
+            { latLng:[41.0,-71.06],   name:'New England'           },
+            { latLng:[12.05,-61.75],  name:'Grenada'               },
+            { latLng:[13.16,-59.55],  name:'Barbados'              },
+            { latLng:[17.11,-61.85],  name:'Antigua and Barbuda'   },
+            { latLng:[-4.61,55.45],   name:'Seychelles'            },
+            { latLng:[7.35,134.46],   name:'Palau'                 },
+            { latLng:[42.5,1.51],     name:'Andorra'               }
+          ];
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: navbar-search.js
+ * Navbar search toggler * Auto dismiss on ESC key
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.navsearch')
+        .directive('searchOpen', searchOpen)
+        .directive('searchDismiss', searchDismiss);
+
+    //
+    // directives definition
+    // 
+    
+    function searchOpen () {
+        var directive = {
+            controller: searchOpenController,
+            restrict: 'A'
+        };
+        return directive;
+
+    }
+
+    function searchDismiss () {
+        var directive = {
+            controller: searchDismissController,
+            restrict: 'A'
+        };
+        return directive;
+        
+    }
+
+    //
+    // Contrller definition
+    // 
+    
+    searchOpenController.$inject = ['$scope', '$element', 'NavSearch'];
+    function searchOpenController ($scope, $element, NavSearch) {
+      $element
+        .on('click', function (e) { e.stopPropagation(); })
+        .on('click', NavSearch.toggle);
+    }
+
+    searchDismissController.$inject = ['$scope', '$element', 'NavSearch'];
+    function searchDismissController ($scope, $element, NavSearch) {
+      
+      var inputSelector = '.navbar-form input[type="text"]';
+
+      $(inputSelector)
+        .on('click', function (e) { e.stopPropagation(); })
+        .on('keyup', function(e) {
+          if (e.keyCode === 27) // ESC
+            NavSearch.dismiss();
+        });
+        
+      // click anywhere closes the search
+      $(document).on('click', NavSearch.dismiss);
+      // dismissable options
+      $element
+        .on('click', function (e) { e.stopPropagation(); })
+        .on('click', NavSearch.dismiss);
+    }
+
+})();
+
+
+/**=========================================================
+ * Module: nav-search.js
+ * Services to share navbar search functions
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.navsearch')
+        .service('NavSearch', NavSearch);
+
+    function NavSearch() {
+        this.toggle = toggle;
+        this.dismiss = dismiss;
+
+        ////////////////
+
+        var navbarFormSelector = 'form.navbar-form';
+
+        function toggle() {
+          var navbarForm = $(navbarFormSelector);
+
+          navbarForm.toggleClass('open');
+
+          var isOpen = navbarForm.hasClass('open');
+
+          navbarForm.find('input')[isOpen ? 'focus' : 'blur']();
+        }
+
+        function dismiss() {
+          $(navbarFormSelector)
+            .removeClass('open') // Close control
+            .find('input[type="text"]').blur() // remove focus
+            // .val('') // Empty input
+            ;
+        }
+    }
+})();
+
+/**=========================================================
  * Module: demo-notify.js
  * Provides a simple demo for notify
  =========================================================*/
@@ -10736,115 +10887,6 @@ $scope.banks=bankcodeService.query();
     
     return notify;
 }(jQuery));
-
-/**=========================================================
- * Module: navbar-search.js
- * Navbar search toggler * Auto dismiss on ESC key
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.navsearch')
-        .directive('searchOpen', searchOpen)
-        .directive('searchDismiss', searchDismiss);
-
-    //
-    // directives definition
-    // 
-    
-    function searchOpen () {
-        var directive = {
-            controller: searchOpenController,
-            restrict: 'A'
-        };
-        return directive;
-
-    }
-
-    function searchDismiss () {
-        var directive = {
-            controller: searchDismissController,
-            restrict: 'A'
-        };
-        return directive;
-        
-    }
-
-    //
-    // Contrller definition
-    // 
-    
-    searchOpenController.$inject = ['$scope', '$element', 'NavSearch'];
-    function searchOpenController ($scope, $element, NavSearch) {
-      $element
-        .on('click', function (e) { e.stopPropagation(); })
-        .on('click', NavSearch.toggle);
-    }
-
-    searchDismissController.$inject = ['$scope', '$element', 'NavSearch'];
-    function searchDismissController ($scope, $element, NavSearch) {
-      
-      var inputSelector = '.navbar-form input[type="text"]';
-
-      $(inputSelector)
-        .on('click', function (e) { e.stopPropagation(); })
-        .on('keyup', function(e) {
-          if (e.keyCode === 27) // ESC
-            NavSearch.dismiss();
-        });
-        
-      // click anywhere closes the search
-      $(document).on('click', NavSearch.dismiss);
-      // dismissable options
-      $element
-        .on('click', function (e) { e.stopPropagation(); })
-        .on('click', NavSearch.dismiss);
-    }
-
-})();
-
-
-/**=========================================================
- * Module: nav-search.js
- * Services to share navbar search functions
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.navsearch')
-        .service('NavSearch', NavSearch);
-
-    function NavSearch() {
-        this.toggle = toggle;
-        this.dismiss = dismiss;
-
-        ////////////////
-
-        var navbarFormSelector = 'form.navbar-form';
-
-        function toggle() {
-          var navbarForm = $(navbarFormSelector);
-
-          navbarForm.toggleClass('open');
-
-          var isOpen = navbarForm.hasClass('open');
-
-          navbarForm.find('input')[isOpen ? 'focus' : 'blur']();
-        }
-
-        function dismiss() {
-          $(navbarFormSelector)
-            .removeClass('open') // Close control
-            .find('input[type="text"]').blur() // remove focus
-            // .val('') // Empty input
-            ;
-        }
-    }
-})();
 
 // /**=========================================================
 //  * Module: access-login.js
@@ -11321,6 +11363,581 @@ $scope.buttonText="Login";
     
           
        
+    }
+
+})();
+/**=========================================================
+ * Collapse panels * [panel-collapse]
+ =========================================================*/
+(function() {
+    'use strict';
+
+    angular
+        .module('app.panels')
+        .directive('panelCollapse', panelCollapse);
+
+    function panelCollapse () {
+        var directive = {
+            controller: Controller,
+            restrict: 'A',
+            scope: false
+        };
+        return directive;
+    }
+
+    Controller.$inject = ['$scope', '$element', '$timeout', '$localStorage'];
+    function Controller ($scope, $element, $timeout, $localStorage) {
+      var storageKeyName = 'panelState';
+
+      // Prepare the panel to be collapsible
+      var $elem   = $($element),
+          parent  = $elem.closest('.panel'), // find the first parent panel
+          panelId = parent.attr('id');
+
+      // Load the saved state if exists
+      var currentState = loadPanelState( panelId );
+      if ( typeof currentState !== 'undefined') {
+        $timeout(function(){
+            $scope[panelId] = currentState; },
+          10);
+      }
+
+      // bind events to switch icons
+      $element.bind('click', function(e) {
+        e.preventDefault();
+        savePanelState( panelId, !$scope[panelId] );
+
+      });
+  
+      // Controller helpers
+      function savePanelState(id, state) {
+        if(!id) return false;
+        var data = angular.fromJson($localStorage[storageKeyName]);
+        if(!data) { data = {}; }
+        data[id] = state;
+        $localStorage[storageKeyName] = angular.toJson(data);
+      }
+      function loadPanelState(id) {
+        if(!id) return false;
+        var data = angular.fromJson($localStorage[storageKeyName]);
+        if(data) {
+          return data[id];
+        }
+      }
+    }
+
+})();
+
+/**=========================================================
+ * Dismiss panels * [panel-dismiss]
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.panels')
+        .directive('panelDismiss', panelDismiss);
+
+    function panelDismiss () {
+
+        var directive = {
+            controller: Controller,
+            restrict: 'A'
+        };
+        return directive;
+
+    }
+
+    Controller.$inject = ['$scope', '$element', '$q', 'Utils'];
+    function Controller ($scope, $element, $q, Utils) {
+      var removeEvent   = 'panel-remove',
+          removedEvent  = 'panel-removed';
+
+      $element.on('click', function (e) {
+        e.preventDefault();
+
+        // find the first parent panel
+        var parent = $(this).closest('.panel');
+
+        removeElement();
+
+        function removeElement() {
+          var deferred = $q.defer();
+          var promise = deferred.promise;
+          
+          // Communicate event destroying panel
+          $scope.$emit(removeEvent, parent.attr('id'), deferred);
+          promise.then(destroyMiddleware);
+        }
+
+        // Run the animation before destroy the panel
+        function destroyMiddleware() {
+          if(Utils.support.animation) {
+            parent.animo({animation: 'bounceOut'}, destroyPanel);
+          }
+          else destroyPanel();
+        }
+
+        function destroyPanel() {
+
+          var col = parent.parent();
+          parent.remove();
+          // remove the parent if it is a row and is empty and not a sortable (portlet)
+          col
+            .filter(function() {
+            var el = $(this);
+            return (el.is('[class*="col-"]:not(.sortable)') && el.children('*').length === 0);
+          }).remove();
+
+          // Communicate event destroyed panel
+          $scope.$emit(removedEvent, parent.attr('id'));
+
+        }
+
+      });
+    }
+})();
+
+
+
+/**=========================================================
+ * Refresh panels
+ * [panel-refresh] * [data-spinner="standard"]
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.panels')
+        .directive('panelRefresh', panelRefresh);
+
+    function panelRefresh () {
+        var directive = {
+            controller: Controller,
+            restrict: 'A',
+            scope: false
+        };
+        return directive;
+
+    }
+
+    Controller.$inject = ['$scope', '$element'];
+    function Controller ($scope, $element) {
+      var refreshEvent   = 'panel-refresh',
+          whirlClass     = 'whirl',
+          defaultSpinner = 'standard';
+
+      // catch clicks to toggle panel refresh
+      $element.on('click', function (e) {
+        e.preventDefault();
+
+        var $this   = $(this),
+            panel   = $this.parents('.panel').eq(0),
+            spinner = $this.data('spinner') || defaultSpinner
+            ;
+
+        // start showing the spinner
+        panel.addClass(whirlClass + ' ' + spinner);
+
+        // Emit event when refresh clicked
+        $scope.$emit(refreshEvent, panel.attr('id'));
+
+      });
+
+      // listen to remove spinner
+      $scope.$on('removeSpinner', removeSpinner);
+
+      // method to clear the spinner when done
+      function removeSpinner (ev, id) {
+        if (!id) return;
+        var newid = id.charAt(0) === '#' ? id : ('#'+id);
+        angular
+          .element(newid)
+          .removeClass(whirlClass);
+      }
+    }
+})();
+
+
+
+/**=========================================================
+ * Module panel-tools.js
+ * Directive tools to control panels.
+ * Allows collapse, refresh and dismiss (remove)
+ * Saves panel state in browser storage
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.panels')
+        .directive('paneltool', paneltool);
+
+    paneltool.$inject = ['$compile', '$timeout'];
+    function paneltool ($compile, $timeout) {
+        var directive = {
+            link: link,
+            restrict: 'E',
+            scope: false
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+
+          var templates = {
+            /* jshint multistr: true */
+            collapse:'<a href="#" panel-collapse="" uib-tooltip="Collapse Panel" ng-click="{{panelId}} = !{{panelId}}"> \
+                        <em ng-show="{{panelId}}" class="fa fa-plus ng-no-animation"></em> \
+                        <em ng-show="!{{panelId}}" class="fa fa-minus ng-no-animation"></em> \
+                      </a>',
+            dismiss: '<a href="#" panel-dismiss="" uib-tooltip="Close Panel">\
+                       <em class="fa fa-times"></em>\
+                     </a>',
+            refresh: '<a href="#" panel-refresh="" data-spinner="{{spinner}}" uib-tooltip="Refresh Panel">\
+                       <em class="fa fa-refresh"></em>\
+                     </a>'
+          };
+
+          var tools = scope.panelTools || attrs;
+
+          $timeout(function() {
+            element.html(getTemplate(element, tools )).show();
+            $compile(element.contents())(scope);
+
+            element.addClass('pull-right');
+          });
+
+          function getTemplate( elem, attrs ){
+            var temp = '';
+            attrs = attrs || {};
+            if(attrs.toolCollapse)
+              temp += templates.collapse.replace(/{{panelId}}/g, (elem.parent().parent().attr('id')) );
+            if(attrs.toolDismiss)
+              temp += templates.dismiss;
+            if(attrs.toolRefresh)
+              temp += templates.refresh.replace(/{{spinner}}/g, attrs.toolRefresh);
+            return temp;
+          }
+        }// link
+    }
+
+})();
+
+/**=========================================================
+ * Module: demo-panels.js
+ * Provides a simple demo for panel actions
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.panels')
+        .controller('PanelsCtrl', PanelsCtrl);
+
+    PanelsCtrl.$inject = ['$scope', '$timeout'];
+    function PanelsCtrl($scope, $timeout) {
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          // PANEL COLLAPSE EVENTS
+          // ----------------------------------- 
+
+          // We can use panel id name for the boolean flag to [un]collapse the panel
+          $scope.$watch('panelDemo1',function(newVal){
+              
+              console.log('panelDemo1 collapsed: ' + newVal);
+
+          });
+
+
+          // PANEL DISMISS EVENTS
+          // ----------------------------------- 
+
+          // Before remove panel
+          $scope.$on('panel-remove', function(event, id, deferred){
+            
+            console.log('Panel #' + id + ' removing');
+            
+            // Here is obligatory to call the resolve() if we pretend to remove the panel finally
+            // Not calling resolve() will NOT remove the panel
+            // It's up to your app to decide if panel should be removed or not
+            deferred.resolve();
+          
+          });
+
+          // Panel removed ( only if above was resolved() )
+          $scope.$on('panel-removed', function(event, id){
+
+            console.log('Panel #' + id + ' removed');
+
+          });
+
+
+          // PANEL REFRESH EVENTS
+          // ----------------------------------- 
+
+          $scope.$on('panel-refresh', function(event, id) {
+            var secs = 3;
+            
+            console.log('Refreshing during ' + secs +'s #'+id);
+
+            $timeout(function(){
+              // directive listen for to remove the spinner 
+              // after we end up to perform own operations
+              $scope.$broadcast('removeSpinner', id);
+              
+              console.log('Refreshed #' + id);
+
+            }, 3000);
+
+          });
+
+          // PANELS VIA NG-REPEAT
+          // ----------------------------------- 
+
+          $scope.panels = [
+            {
+              id: 'panelRepeat1',
+              title: 'Panel Title 1',
+              body: 'Nulla eget lorem leo, sit amet elementum lorem. '
+            },
+            {
+              id: 'panelRepeat2',
+              title: 'Panel Title 2',
+              body: 'Nulla eget lorem leo, sit amet elementum lorem. '
+            },
+            {
+              id: 'panelRepeat3',
+              title: 'Panel Title 3',
+              body: 'Nulla eget lorem leo, sit amet elementum lorem. '
+            }
+          ];
+        }
+
+    } //PanelsCtrl
+
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.panels')
+        .controller('DraggablePanelController', DraggablePanelController);
+
+    DraggablePanelController.$inject = ['$timeout', '$localStorage'];
+
+    function DraggablePanelController($timeout, $localStorage) {
+        var vm = this;
+        var storageKeyName = 'portletState';
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+            vm.panels = [
+                [{
+                    id: 'panelPortlet1',
+                    type: 'default',
+                    heading: 'Panel heading',
+                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
+                    footer: 'Panale footer'
+                }, {
+                    id: 'panelPortlet2',
+                    type: 'primary',
+                    heading: 'Panel heading',
+                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
+                    footer: 'Panale footer'
+                }, {
+                    id: 'panelPortlet3',
+                    type: 'success',
+                    heading: 'Panel heading',
+                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
+                    footer: 'Panale footer'
+                }],
+                [{
+                    id: 'panelPortlet4',
+                    type: 'info',
+                    heading: 'Panel heading',
+                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
+                    footer: 'Panale footer'
+                }, {
+                    id: 'panelPortlet5',
+                    type: 'warning',
+                    heading: 'Panel heading',
+                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
+                    footer: 'Panale footer'
+                }, {
+                    id: 'panelPortlet6',
+                    type: 'danger',
+                    heading: 'Panel heading',
+                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
+                    footer: 'Panale footer'
+                }],
+                [{
+                    id: 'panelPortlet7',
+                    type: 'inverse',
+                    heading: 'Panel heading',
+                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
+                    footer: 'Panale footer'
+                }, {
+                    id: 'panelPortlet8',
+                    type: 'purple',
+                    heading: 'Panel heading',
+                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
+                    footer: 'Panale footer'
+                }, {
+                    id: 'panelPortlet9',
+                    type: 'green',
+                    heading: 'Panel heading',
+                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
+                    footer: 'Panale footer'
+                }]
+            ];
+
+            vm.panelList1 = vm.panels[0];
+            vm.panelList2 = vm.panels[1];
+            vm.panelList3 = vm.panels[2];
+
+            // https://github.com/angular-ui/ui-sortable
+            vm.sortablePortletOptions = {
+                connectWith: '.portlet-connect',
+                handle: '.panel-heading',
+                opacity: 0.7,
+                placeholder: 'portlet box-placeholder',
+                cancel: '.portlet-cancel',
+                forcePlaceholderSize: true,
+                iframeFix: false,
+                tolerance: 'pointer',
+                helper: 'original',
+                revert: 200,
+                forceHelperSize: true,
+                update: savePortletOrder,
+                create: loadPortletOrder
+            };
+
+            function savePortletOrder(event) {
+                $timeout(function() {
+                    $localStorage[storageKeyName] = angular.toJson(vm.panels);
+                });
+            }
+
+            function loadPortletOrder(event) {
+                var data = angular.fromJson($localStorage[storageKeyName]);
+                if (data) {
+                    $timeout(function() {
+                        vm.panels = data;
+                        vm.panelList1 = vm.panels[0];
+                        vm.panelList2 = vm.panels[1];
+                        vm.panelList3 = vm.panels[2];
+                    });
+                }
+            }
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.preloader')
+        .directive('preloader', preloader);
+
+    preloader.$inject = ['$animate', '$timeout', '$q'];
+    function preloader ($animate, $timeout, $q) {
+
+        var directive = {
+            restrict: 'EAC',
+            template: 
+              '<div class="preloader-progress">' +
+                  '<div class="preloader-progress-bar" ' +
+                       'ng-style="{width: loadCounter + \'%\'}"></div>' +
+              '</div>'
+            ,
+            link: link
+        };
+        return directive;
+
+        ///////
+
+        function link(scope, el) {
+
+          scope.loadCounter = 0;
+
+          var counter  = 0,
+              timeout;
+
+          // disables scrollbar
+          angular.element('body').css('overflow', 'hidden');
+          // ensure class is present for styling
+          el.addClass('preloader');
+
+          appReady().then(endCounter);
+
+          timeout = $timeout(startCounter);
+
+          ///////
+
+          function startCounter() {
+
+            var remaining = 100 - counter;
+            counter = counter + (0.015 * Math.pow(1 - Math.sqrt(remaining), 2));
+
+            scope.loadCounter = parseInt(counter, 10);
+
+            timeout = $timeout(startCounter, 20);
+          }
+
+          function endCounter() {
+
+            $timeout.cancel(timeout);
+
+            scope.loadCounter = 100;
+
+            $timeout(function(){
+              // animate preloader hiding
+              $animate.addClass(el, 'preloader-hidden');
+              // retore scrollbar
+              angular.element('body').css('overflow', '');
+            }, 300);
+          }
+
+          function appReady() {
+            var deferred = $q.defer();
+            var viewsLoaded = 0;
+            // if this doesn't sync with the real app ready
+            // a custom event must be used instead
+            var off = scope.$on('$viewContentLoaded', function () {
+              viewsLoaded ++;
+              // we know there are at least two views to be loaded 
+              // before the app is ready (1-index.html 2-app*.html)
+              if ( viewsLoaded === 2) {
+                // with resolve this fires only once
+                $timeout(function(){
+                  deferred.resolve();
+                }, 3000);
+
+                off();
+              }
+
+            });
+
+            return deferred.promise;
+          }
+
+        } //link
     }
 
 })();
@@ -11991,884 +12608,6 @@ group.$remove().then(function () {
 
 
 
-/**=========================================================
- * Collapse panels * [panel-collapse]
- =========================================================*/
-(function() {
-    'use strict';
-
-    angular
-        .module('app.panels')
-        .directive('panelCollapse', panelCollapse);
-
-    function panelCollapse () {
-        var directive = {
-            controller: Controller,
-            restrict: 'A',
-            scope: false
-        };
-        return directive;
-    }
-
-    Controller.$inject = ['$scope', '$element', '$timeout', '$localStorage'];
-    function Controller ($scope, $element, $timeout, $localStorage) {
-      var storageKeyName = 'panelState';
-
-      // Prepare the panel to be collapsible
-      var $elem   = $($element),
-          parent  = $elem.closest('.panel'), // find the first parent panel
-          panelId = parent.attr('id');
-
-      // Load the saved state if exists
-      var currentState = loadPanelState( panelId );
-      if ( typeof currentState !== 'undefined') {
-        $timeout(function(){
-            $scope[panelId] = currentState; },
-          10);
-      }
-
-      // bind events to switch icons
-      $element.bind('click', function(e) {
-        e.preventDefault();
-        savePanelState( panelId, !$scope[panelId] );
-
-      });
-  
-      // Controller helpers
-      function savePanelState(id, state) {
-        if(!id) return false;
-        var data = angular.fromJson($localStorage[storageKeyName]);
-        if(!data) { data = {}; }
-        data[id] = state;
-        $localStorage[storageKeyName] = angular.toJson(data);
-      }
-      function loadPanelState(id) {
-        if(!id) return false;
-        var data = angular.fromJson($localStorage[storageKeyName]);
-        if(data) {
-          return data[id];
-        }
-      }
-    }
-
-})();
-
-/**=========================================================
- * Dismiss panels * [panel-dismiss]
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.panels')
-        .directive('panelDismiss', panelDismiss);
-
-    function panelDismiss () {
-
-        var directive = {
-            controller: Controller,
-            restrict: 'A'
-        };
-        return directive;
-
-    }
-
-    Controller.$inject = ['$scope', '$element', '$q', 'Utils'];
-    function Controller ($scope, $element, $q, Utils) {
-      var removeEvent   = 'panel-remove',
-          removedEvent  = 'panel-removed';
-
-      $element.on('click', function (e) {
-        e.preventDefault();
-
-        // find the first parent panel
-        var parent = $(this).closest('.panel');
-
-        removeElement();
-
-        function removeElement() {
-          var deferred = $q.defer();
-          var promise = deferred.promise;
-          
-          // Communicate event destroying panel
-          $scope.$emit(removeEvent, parent.attr('id'), deferred);
-          promise.then(destroyMiddleware);
-        }
-
-        // Run the animation before destroy the panel
-        function destroyMiddleware() {
-          if(Utils.support.animation) {
-            parent.animo({animation: 'bounceOut'}, destroyPanel);
-          }
-          else destroyPanel();
-        }
-
-        function destroyPanel() {
-
-          var col = parent.parent();
-          parent.remove();
-          // remove the parent if it is a row and is empty and not a sortable (portlet)
-          col
-            .filter(function() {
-            var el = $(this);
-            return (el.is('[class*="col-"]:not(.sortable)') && el.children('*').length === 0);
-          }).remove();
-
-          // Communicate event destroyed panel
-          $scope.$emit(removedEvent, parent.attr('id'));
-
-        }
-
-      });
-    }
-})();
-
-
-
-/**=========================================================
- * Refresh panels
- * [panel-refresh] * [data-spinner="standard"]
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.panels')
-        .directive('panelRefresh', panelRefresh);
-
-    function panelRefresh () {
-        var directive = {
-            controller: Controller,
-            restrict: 'A',
-            scope: false
-        };
-        return directive;
-
-    }
-
-    Controller.$inject = ['$scope', '$element'];
-    function Controller ($scope, $element) {
-      var refreshEvent   = 'panel-refresh',
-          whirlClass     = 'whirl',
-          defaultSpinner = 'standard';
-
-      // catch clicks to toggle panel refresh
-      $element.on('click', function (e) {
-        e.preventDefault();
-
-        var $this   = $(this),
-            panel   = $this.parents('.panel').eq(0),
-            spinner = $this.data('spinner') || defaultSpinner
-            ;
-
-        // start showing the spinner
-        panel.addClass(whirlClass + ' ' + spinner);
-
-        // Emit event when refresh clicked
-        $scope.$emit(refreshEvent, panel.attr('id'));
-
-      });
-
-      // listen to remove spinner
-      $scope.$on('removeSpinner', removeSpinner);
-
-      // method to clear the spinner when done
-      function removeSpinner (ev, id) {
-        if (!id) return;
-        var newid = id.charAt(0) === '#' ? id : ('#'+id);
-        angular
-          .element(newid)
-          .removeClass(whirlClass);
-      }
-    }
-})();
-
-
-
-/**=========================================================
- * Module panel-tools.js
- * Directive tools to control panels.
- * Allows collapse, refresh and dismiss (remove)
- * Saves panel state in browser storage
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.panels')
-        .directive('paneltool', paneltool);
-
-    paneltool.$inject = ['$compile', '$timeout'];
-    function paneltool ($compile, $timeout) {
-        var directive = {
-            link: link,
-            restrict: 'E',
-            scope: false
-        };
-        return directive;
-
-        function link(scope, element, attrs) {
-
-          var templates = {
-            /* jshint multistr: true */
-            collapse:'<a href="#" panel-collapse="" uib-tooltip="Collapse Panel" ng-click="{{panelId}} = !{{panelId}}"> \
-                        <em ng-show="{{panelId}}" class="fa fa-plus ng-no-animation"></em> \
-                        <em ng-show="!{{panelId}}" class="fa fa-minus ng-no-animation"></em> \
-                      </a>',
-            dismiss: '<a href="#" panel-dismiss="" uib-tooltip="Close Panel">\
-                       <em class="fa fa-times"></em>\
-                     </a>',
-            refresh: '<a href="#" panel-refresh="" data-spinner="{{spinner}}" uib-tooltip="Refresh Panel">\
-                       <em class="fa fa-refresh"></em>\
-                     </a>'
-          };
-
-          var tools = scope.panelTools || attrs;
-
-          $timeout(function() {
-            element.html(getTemplate(element, tools )).show();
-            $compile(element.contents())(scope);
-
-            element.addClass('pull-right');
-          });
-
-          function getTemplate( elem, attrs ){
-            var temp = '';
-            attrs = attrs || {};
-            if(attrs.toolCollapse)
-              temp += templates.collapse.replace(/{{panelId}}/g, (elem.parent().parent().attr('id')) );
-            if(attrs.toolDismiss)
-              temp += templates.dismiss;
-            if(attrs.toolRefresh)
-              temp += templates.refresh.replace(/{{spinner}}/g, attrs.toolRefresh);
-            return temp;
-          }
-        }// link
-    }
-
-})();
-
-/**=========================================================
- * Module: demo-panels.js
- * Provides a simple demo for panel actions
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.panels')
-        .controller('PanelsCtrl', PanelsCtrl);
-
-    PanelsCtrl.$inject = ['$scope', '$timeout'];
-    function PanelsCtrl($scope, $timeout) {
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          // PANEL COLLAPSE EVENTS
-          // ----------------------------------- 
-
-          // We can use panel id name for the boolean flag to [un]collapse the panel
-          $scope.$watch('panelDemo1',function(newVal){
-              
-              console.log('panelDemo1 collapsed: ' + newVal);
-
-          });
-
-
-          // PANEL DISMISS EVENTS
-          // ----------------------------------- 
-
-          // Before remove panel
-          $scope.$on('panel-remove', function(event, id, deferred){
-            
-            console.log('Panel #' + id + ' removing');
-            
-            // Here is obligatory to call the resolve() if we pretend to remove the panel finally
-            // Not calling resolve() will NOT remove the panel
-            // It's up to your app to decide if panel should be removed or not
-            deferred.resolve();
-          
-          });
-
-          // Panel removed ( only if above was resolved() )
-          $scope.$on('panel-removed', function(event, id){
-
-            console.log('Panel #' + id + ' removed');
-
-          });
-
-
-          // PANEL REFRESH EVENTS
-          // ----------------------------------- 
-
-          $scope.$on('panel-refresh', function(event, id) {
-            var secs = 3;
-            
-            console.log('Refreshing during ' + secs +'s #'+id);
-
-            $timeout(function(){
-              // directive listen for to remove the spinner 
-              // after we end up to perform own operations
-              $scope.$broadcast('removeSpinner', id);
-              
-              console.log('Refreshed #' + id);
-
-            }, 3000);
-
-          });
-
-          // PANELS VIA NG-REPEAT
-          // ----------------------------------- 
-
-          $scope.panels = [
-            {
-              id: 'panelRepeat1',
-              title: 'Panel Title 1',
-              body: 'Nulla eget lorem leo, sit amet elementum lorem. '
-            },
-            {
-              id: 'panelRepeat2',
-              title: 'Panel Title 2',
-              body: 'Nulla eget lorem leo, sit amet elementum lorem. '
-            },
-            {
-              id: 'panelRepeat3',
-              title: 'Panel Title 3',
-              body: 'Nulla eget lorem leo, sit amet elementum lorem. '
-            }
-          ];
-        }
-
-    } //PanelsCtrl
-
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.panels')
-        .controller('DraggablePanelController', DraggablePanelController);
-
-    DraggablePanelController.$inject = ['$timeout', '$localStorage'];
-
-    function DraggablePanelController($timeout, $localStorage) {
-        var vm = this;
-        var storageKeyName = 'portletState';
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-            vm.panels = [
-                [{
-                    id: 'panelPortlet1',
-                    type: 'default',
-                    heading: 'Panel heading',
-                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
-                    footer: 'Panale footer'
-                }, {
-                    id: 'panelPortlet2',
-                    type: 'primary',
-                    heading: 'Panel heading',
-                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
-                    footer: 'Panale footer'
-                }, {
-                    id: 'panelPortlet3',
-                    type: 'success',
-                    heading: 'Panel heading',
-                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
-                    footer: 'Panale footer'
-                }],
-                [{
-                    id: 'panelPortlet4',
-                    type: 'info',
-                    heading: 'Panel heading',
-                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
-                    footer: 'Panale footer'
-                }, {
-                    id: 'panelPortlet5',
-                    type: 'warning',
-                    heading: 'Panel heading',
-                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
-                    footer: 'Panale footer'
-                }, {
-                    id: 'panelPortlet6',
-                    type: 'danger',
-                    heading: 'Panel heading',
-                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
-                    footer: 'Panale footer'
-                }],
-                [{
-                    id: 'panelPortlet7',
-                    type: 'inverse',
-                    heading: 'Panel heading',
-                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
-                    footer: 'Panale footer'
-                }, {
-                    id: 'panelPortlet8',
-                    type: 'purple',
-                    heading: 'Panel heading',
-                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
-                    footer: 'Panale footer'
-                }, {
-                    id: 'panelPortlet9',
-                    type: 'green',
-                    heading: 'Panel heading',
-                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
-                    footer: 'Panale footer'
-                }]
-            ];
-
-            vm.panelList1 = vm.panels[0];
-            vm.panelList2 = vm.panels[1];
-            vm.panelList3 = vm.panels[2];
-
-            // https://github.com/angular-ui/ui-sortable
-            vm.sortablePortletOptions = {
-                connectWith: '.portlet-connect',
-                handle: '.panel-heading',
-                opacity: 0.7,
-                placeholder: 'portlet box-placeholder',
-                cancel: '.portlet-cancel',
-                forcePlaceholderSize: true,
-                iframeFix: false,
-                tolerance: 'pointer',
-                helper: 'original',
-                revert: 200,
-                forceHelperSize: true,
-                update: savePortletOrder,
-                create: loadPortletOrder
-            };
-
-            function savePortletOrder(event) {
-                $timeout(function() {
-                    $localStorage[storageKeyName] = angular.toJson(vm.panels);
-                });
-            }
-
-            function loadPortletOrder(event) {
-                var data = angular.fromJson($localStorage[storageKeyName]);
-                if (data) {
-                    $timeout(function() {
-                        vm.panels = data;
-                        vm.panelList1 = vm.panels[0];
-                        vm.panelList2 = vm.panels[1];
-                        vm.panelList3 = vm.panels[2];
-                    });
-                }
-            }
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.preloader')
-        .directive('preloader', preloader);
-
-    preloader.$inject = ['$animate', '$timeout', '$q'];
-    function preloader ($animate, $timeout, $q) {
-
-        var directive = {
-            restrict: 'EAC',
-            template: 
-              '<div class="preloader-progress">' +
-                  '<div class="preloader-progress-bar" ' +
-                       'ng-style="{width: loadCounter + \'%\'}"></div>' +
-              '</div>'
-            ,
-            link: link
-        };
-        return directive;
-
-        ///////
-
-        function link(scope, el) {
-
-          scope.loadCounter = 0;
-
-          var counter  = 0,
-              timeout;
-
-          // disables scrollbar
-          angular.element('body').css('overflow', 'hidden');
-          // ensure class is present for styling
-          el.addClass('preloader');
-
-          appReady().then(endCounter);
-
-          timeout = $timeout(startCounter);
-
-          ///////
-
-          function startCounter() {
-
-            var remaining = 100 - counter;
-            counter = counter + (0.015 * Math.pow(1 - Math.sqrt(remaining), 2));
-
-            scope.loadCounter = parseInt(counter, 10);
-
-            timeout = $timeout(startCounter, 20);
-          }
-
-          function endCounter() {
-
-            $timeout.cancel(timeout);
-
-            scope.loadCounter = 100;
-
-            $timeout(function(){
-              // animate preloader hiding
-              $animate.addClass(el, 'preloader-hidden');
-              // retore scrollbar
-              angular.element('body').css('overflow', '');
-            }, 300);
-          }
-
-          function appReady() {
-            var deferred = $q.defer();
-            var viewsLoaded = 0;
-            // if this doesn't sync with the real app ready
-            // a custom event must be used instead
-            var off = scope.$on('$viewContentLoaded', function () {
-              viewsLoaded ++;
-              // we know there are at least two views to be loaded 
-              // before the app is ready (1-index.html 2-app*.html)
-              if ( viewsLoaded === 2) {
-                // with resolve this fires only once
-                $timeout(function(){
-                  deferred.resolve();
-                }, 3000);
-
-                off();
-              }
-
-            });
-
-            return deferred.promise;
-          }
-
-        } //link
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('CompanySumarryController', CompanySumarryController);
-
-    CompanySumarryController.$inject = ['$scope','$resource', 'CompanySummaryService'];
-    function CompanySumarryController($scope,$resource,CompanySummaryService) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.companysumaries=CompanySummaryService.query();
-
-          
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('CompanySummaryService', CompanySummaryService);
-
-    CompanySummaryService.$inject = ['$resource','jadaApiUrl'];
-    function CompanySummaryService($resource,jadaApiUrl) {
-     var data=$resource('https://jsonplaceholder.typicode.com/users/:user', {user: '@user'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('CompanyTotalsController', CompanyTotalsController);
-
-    CompanyTotalsController.$inject = ['$scope','$resource', 'CompanyTotalsService'];
-    function CompanyTotalsController($scope,$resource,CompanyTotalsService) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.companytotals=CompanyTotalsService.query();
-
-          
-          $scope.greaterThan = function(prop, val){
-    return function(item){
-      return item[prop] > val;
-    }
-}
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('CompanyTotalsService', CompanyTotalsService);
-
-    CompanyTotalsService.$inject = ['$resource','jadaApiUrl'];
-    function CompanyTotalsService($resource,jadaApiUrl) {
-     var data=$resource('https://jsonplaceholder.typicode.com/users/:user', {user: '@user'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('HelbController', HelbController);
-
-    HelbController.$inject = ['$scope','$resource', 'HelbService'];
-    function HelbController($scope,$resource,HelbService) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.companysumaries=HelbService.query();
-
-          
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('HelbService', HelbService);
-
-    HelbService.$inject = ['$resource','jadaApiUrl'];
-    function HelbService($resource,jadaApiUrl) {
-     var data=$resource('https://jsonplaceholder.typicode.com/users/:user', {user: '@user'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('NhifController', NhifController);
-
-    NhifController.$inject = ['$scope','$resource', 'NhifService'];
-    function NhifController($scope,$resource,NhifService) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.companysumaries=NhifService.query();
-
-          
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('NhifService', NhifService);
-
-    NhifService.$inject = ['$resource','jadaApiUrl'];
-    function NhifService($resource,jadaApiUrl) {
-     var data=$resource('https://jsonplaceholder.typicode.com/users/:user', {user: '@user'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('NssfController', NssfController);
-
-    NssfController.$inject = ['$scope','$resource', 'NhifService'];
-    function NssfController($scope,$resource,NhifService) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.companysumaries=NhifService.query();
-
-          
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('NssfService', NssfService);
-
-    NssfService.$inject = ['$resource','jadaApiUrl'];
-    function NssfService($resource,jadaApiUrl) {
-     var data=$resource('https://jsonplaceholder.typicode.com/users/:user', {user: '@user'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('PayslipController', PayslipController);
-
-    PayslipController.$inject = ['$http','$resource', 'PayslipService','jadaApiUrl'];
-    function PayslipController($http,$resource,PayslipService,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        // vm.persons=PayslipService.get({id:1});
-        // console.log(vm.persons);
-var id=1;
-          
-
-$http.get(jadaApiUrl+'api/payslipreport/'+id).success(function(data) {
-              vm.persons = data;
-              console.log(vm.persons);
-
-            });
-
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('PayslipService', PayslipService);
-
-    PayslipService.$inject = ['$resource','jadaApiUrl'];
-    function PayslipService($resource,jadaApiUrl) {
-     var data=$resource('http://localhost:56135/api/payslipreport/:id', {id: '@id'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
 /**=========================================================
  * Module: helpers.js
  * Provides helper functions for routes definition
@@ -14016,6 +13755,7 @@ $http.get(jadaApiUrl+'api/payslipreport/'+id).success(function(data) {
               url: '/adminsettings',
               title: 'user settings',
                 templateUrl: helper.basepath('user-settings.html'),
+                    resolve: helper.resolveFor('datatables'),
                  
              
           })
@@ -14099,6 +13839,487 @@ $http.get(jadaApiUrl+'api/payslipreport/'+id).success(function(data) {
 
 })();
 
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('BankFilesController', BankFilesController);
+
+    BankFilesController.$inject = ['$scope','$resource', 'CompanySummaryService'];
+    function BankFilesController($scope,$resource,CompanySummaryService) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.companysumaries=CompanySummaryService.query();
+
+          
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('CompanySumarryController', CompanySumarryController);
+
+    CompanySumarryController.$inject = ['$scope','$resource', 'CompanySummaryService'];
+    function CompanySumarryController($scope,$resource,CompanySummaryService) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.companysumaries=CompanySummaryService.query();
+
+          
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('CompanySummaryService', CompanySummaryService);
+
+    CompanySummaryService.$inject = ['$resource','jadaApiUrl'];
+    function CompanySummaryService($resource,jadaApiUrl) {
+     var data=$resource('https://jsonplaceholder.typicode.com/users/:user', {user: '@user'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('CompanyTotalsController', CompanyTotalsController);
+
+    CompanyTotalsController.$inject = ['$scope','$resource', 'CompanyTotalsService'];
+    function CompanyTotalsController($scope,$resource,CompanyTotalsService) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.companytotals=CompanyTotalsService.query();
+
+          
+          $scope.greaterThan = function(prop, val){
+    return function(item){
+      return item[prop] > val;
+    }
+}
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('CompanyTotalsService', CompanyTotalsService);
+
+    CompanyTotalsService.$inject = ['$resource','jadaApiUrl'];
+    function CompanyTotalsService($resource,jadaApiUrl) {
+     var data=$resource('https://jsonplaceholder.typicode.com/users/:user', {user: '@user'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('EvolutionController', EvolutionController);
+
+    EvolutionController.$inject = ['$scope','$resource', 'CompanySummaryService'];
+    function EvolutionController($scope,$resource,CompanySummaryService) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.companysumaries=CompanySummaryService.query();
+
+          
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('HelbController', HelbController);
+
+    HelbController.$inject = ['$scope','$resource', 'HelbService'];
+    function HelbController($scope,$resource,HelbService) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.companysumaries=HelbService.query();
+
+          
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('HelbService', HelbService);
+
+    HelbService.$inject = ['$resource','jadaApiUrl'];
+    function HelbService($resource,jadaApiUrl) {
+     var data=$resource('https://jsonplaceholder.typicode.com/users/:user', {user: '@user'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('NhifController', NhifController);
+
+    NhifController.$inject = ['$scope','$resource', 'NhifService'];
+    function NhifController($scope,$resource,NhifService) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.companysumaries=NhifService.query();
+
+          
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('NhifService', NhifService);
+
+    NhifService.$inject = ['$resource','jadaApiUrl'];
+    function NhifService($resource,jadaApiUrl) {
+     var data=$resource('https://jsonplaceholder.typicode.com/users/:user', {user: '@user'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('NssfController', NssfController);
+
+    NssfController.$inject = ['$scope','$resource', 'NhifService'];
+    function NssfController($scope,$resource,NhifService) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.companysumaries=NhifService.query();
+
+          
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('NssfService', NssfService);
+
+    NssfService.$inject = ['$resource','jadaApiUrl'];
+    function NssfService($resource,jadaApiUrl) {
+     var data=$resource('https://jsonplaceholder.typicode.com/users/:user', {user: '@user'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('PartnerJournalController', PartnerJournalController);
+
+    PartnerJournalController.$inject = ['$scope','$resource', 'CompanySummaryService'];
+    function PartnerJournalController($scope,$resource,CompanySummaryService) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.companysumaries=CompanySummaryService.query();
+
+          
+
+        }
+    }
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('PayslipController', PayslipController);
+
+    PayslipController.$inject = ['$http','$resource', 'PayslipService','jadaApiUrl'];
+    function PayslipController($http,$resource,PayslipService,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        // vm.persons=PayslipService.get({id:1});
+        // console.log(vm.persons);
+var id=1;
+          
+
+$http.get(jadaApiUrl+'api/payslipreport/'+id).success(function(data) {
+              vm.persons = data;
+              console.log(vm.persons);
+
+            });
+
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('PayslipService', PayslipService);
+
+    PayslipService.$inject = ['$resource','jadaApiUrl'];
+    function PayslipService($resource,jadaApiUrl) {
+     var data=$resource('http://localhost:56135/api/payslipreport/:id', {id: '@id'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('SchedulerController', SchedulerController);
+
+    SchedulerController.$inject = ['$scope','$resource', 'CompanySummaryService'];
+    function SchedulerController($scope,$resource,CompanySummaryService) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.companysumaries=CompanySummaryService.query();
+
+          
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.settings')
+        .run(settingsRun);
+
+    settingsRun.$inject = ['$rootScope', '$localStorage'];
+
+    function settingsRun($rootScope, $localStorage){
+
+
+      // User Settings
+      // -----------------------------------
+      $rootScope.user = {
+        name:     'John',
+        job:      'ng-developer',
+        picture:  'app/img/user/02.jpg'
+      };
+
+      // Hides/show user avatar on sidebar from any element
+      $rootScope.toggleUserBlock = function(){
+        $rootScope.$broadcast('toggleUserBlock');
+      };
+
+      // Global Settings
+      // -----------------------------------
+      $rootScope.app = {
+        name: 'Jada',
+        description: 'Jada Payroll',
+        year: ((new Date()).getFullYear()),
+        layout: {
+          isFixed: true,
+          isCollapsed: false,
+          isBoxed: false,
+          isRTL: false,
+          horizontal: false,
+          isFloat: false,
+          asideHover: false,
+          theme: null,
+          asideScrollbar: false,
+          isCollapsedText: false
+        },
+        useFullLayout: false,
+        hiddenFooter: false,
+        offsidebarOpen: false,
+        asideToggled: false,
+        viewAnimation: 'ng-fadeInUp'
+      };
+
+      // Setup the layout mode
+      $rootScope.app.layout.horizontal = ( $rootScope.$stateParams.layout === 'app-h') ;
+
+      // Restore layout settings
+      if( angular.isDefined($localStorage.layout) )
+        $rootScope.app.layout = $localStorage.layout;
+      else
+        $localStorage.layout = $rootScope.app.layout;
+
+      $rootScope.$watch('app.layout', function () {
+        $localStorage.layout = $rootScope.app.layout;
+      }, true);
+
+      // Close submenu when sidebar change from collapsed to normal
+      $rootScope.$watch('app.layout.isCollapsed', function(newValue) {
+        if( newValue === false )
+          $rootScope.$broadcast('closeSidebarMenu');
+      });
+
+    }
+       function Logout() {
+            // remove user from local storage and clear http auth header
+            delete $localStorage.currentUser;
+            $http.defaults.headers.common.Authorization = '';
+        }
+
+})();
 
 /**=========================================================
  * Module: sidebar-menu.js
@@ -14459,84 +14680,6 @@ $http.get(jadaApiUrl+'api/payslipreport/'+id).success(function(data) {
           $scope.$on('$destroy', detach);
         }
     }
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.settings')
-        .run(settingsRun);
-
-    settingsRun.$inject = ['$rootScope', '$localStorage'];
-
-    function settingsRun($rootScope, $localStorage){
-
-
-      // User Settings
-      // -----------------------------------
-      $rootScope.user = {
-        name:     'John',
-        job:      'ng-developer',
-        picture:  'app/img/user/02.jpg'
-      };
-
-      // Hides/show user avatar on sidebar from any element
-      $rootScope.toggleUserBlock = function(){
-        $rootScope.$broadcast('toggleUserBlock');
-      };
-
-      // Global Settings
-      // -----------------------------------
-      $rootScope.app = {
-        name: 'Jada',
-        description: 'Jada Payroll',
-        year: ((new Date()).getFullYear()),
-        layout: {
-          isFixed: true,
-          isCollapsed: false,
-          isBoxed: false,
-          isRTL: false,
-          horizontal: false,
-          isFloat: false,
-          asideHover: false,
-          theme: null,
-          asideScrollbar: false,
-          isCollapsedText: false
-        },
-        useFullLayout: false,
-        hiddenFooter: false,
-        offsidebarOpen: false,
-        asideToggled: false,
-        viewAnimation: 'ng-fadeInUp'
-      };
-
-      // Setup the layout mode
-      $rootScope.app.layout.horizontal = ( $rootScope.$stateParams.layout === 'app-h') ;
-
-      // Restore layout settings
-      if( angular.isDefined($localStorage.layout) )
-        $rootScope.app.layout = $localStorage.layout;
-      else
-        $localStorage.layout = $rootScope.app.layout;
-
-      $rootScope.$watch('app.layout', function () {
-        $localStorage.layout = $rootScope.app.layout;
-      }, true);
-
-      // Close submenu when sidebar change from collapsed to normal
-      $rootScope.$watch('app.layout.isCollapsed', function(newValue) {
-        if( newValue === false )
-          $rootScope.$broadcast('closeSidebarMenu');
-      });
-
-    }
-       function Logout() {
-            // remove user from local storage and clear http auth header
-            delete $localStorage.currentUser;
-            $http.defaults.headers.common.Authorization = '';
-        }
-
 })();
 
 /**=========================================================
@@ -15563,6 +15706,70 @@ $http.get(jadaApiUrl+'api/payslipreport/'+id).success(function(data) {
         }
     }
 })();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.translate')
+        .config(translateConfig)
+        ;
+    translateConfig.$inject = ['$translateProvider'];
+    function translateConfig($translateProvider){
+
+      $translateProvider.useStaticFilesLoader({
+          prefix : 'app/i18n/',
+          suffix : '.json'
+      });
+
+      $translateProvider.preferredLanguage('en');
+      $translateProvider.useLocalStorage();
+      $translateProvider.usePostCompiling(true);
+      $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
+
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.translate')
+        .run(translateRun)
+        ;
+    translateRun.$inject = ['$rootScope', '$translate'];
+    
+    function translateRun($rootScope, $translate){
+
+      // Internationalization
+      // ----------------------
+
+      $rootScope.language = {
+        // Handles language dropdown
+        listIsOpen: false,
+        // list of available languages
+        available: {
+          'en':       'English',
+          'es_AR':    'Español'
+        },
+        // display always the current ui language
+        init: function () {
+          var proposedLanguage = $translate.proposedLanguage() || $translate.use();
+          var preferredLanguage = $translate.preferredLanguage(); // we know we have set a preferred one in app.config
+          $rootScope.language.selected = $rootScope.language.available[ (proposedLanguage || preferredLanguage) ];
+        },
+        set: function (localeId) {
+          // Set the new idiom
+          $translate.use(localeId);
+          // save a reference for the current language
+          $rootScope.language.selected = $rootScope.language.available[localeId];
+          // finally toggle dropdown
+          $rootScope.language.listIsOpen = ! $rootScope.language.listIsOpen;
+        }
+      };
+
+      $rootScope.language.init();
+
+    }
+})();
 
 /**=========================================================
  * Module: modals.js
@@ -16022,65 +16229,887 @@ $scope.clickBtn = function() {
     'use strict';
 
     angular
-        .module('app.translate')
-        .config(translateConfig)
-        ;
-    translateConfig.$inject = ['$translateProvider'];
-    function translateConfig($translateProvider){
+        .module('app.useradministration')
+        .controller('TasksController', TasksController);
 
-      $translateProvider.useStaticFilesLoader({
-          prefix : 'app/i18n/',
-          suffix : '.json'
+    TasksController.$inject = ['$scope','$rootScope', '$http', '$stateParams', '$state','$uibModal', '$log', 'TaskService'];
+        function TasksController($scope, $rootScope, $http, $stateParams, $state,$uibModal, $log, TaskService) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+ var SuccessMsg;
+ var errorMsg;
+
+          //  var id=$stateParams.Id;
+
+          //  console.log( id);
+          //   if(id!=null){
+          //  $scope.currentworkflow=TaskService.get({id:id});
+          // }
+           
+         
+ $scope.tasks=TaskService.query();
+
+
+
+
+ $scope.loadTasks = function () {
+     
+ $scope.tasks=TaskService.query();
+   }
+
+ $rootScope.$on("CallLoadTasks", function(){
+           $scope.loadTasks();
+        });
+
+
+
+
+//$scope.oneuser=CompanyInfoService.get({user:1}); //Obtain the Post from backend. Search by Id
+
+
+
+
+  $scope.delete= function (task) {
+task.$remove().then(function () {
+$scope.loadTasks();
+});
+}
+
+
+
+
+   $scope.open = function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'newTask.html',
+              controller: ModalOpenTaskInstanceCtrl,
+              size: size
+            });
+
+
+
+
+
+            var state = $('#modal-state');
+            modalInstance.result.then(function () {
+              state.text('Modal dismissed with OK status');
+            }, function () {
+              state.text('Modal dismissed with Cancel status');
+            });
+          };
+
+
+
+
+
+    
+
+
+ $scope.show = function(task) {
+
+      var modalInstance = $uibModal.open({
+        templateUrl: 'EditTask.html',
+        controller: ModalInstanceCtrl,
+        resolve: {
+           task: function () {
+             return task;
+           }
+         }        
+
       });
+    };
 
-      $translateProvider.preferredLanguage('en');
-      $translateProvider.useLocalStorage();
-      $translateProvider.usePostCompiling(true);
-      $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
 
+;
+//   };
+
+           
+
+          // Please note that $uibModalInstance represents a modal window (instance) dependency.
+          // It is not the same as the $uibModal service used above.
+
+          ModalOpenTaskInstanceCtrl.$inject = ['$scope', '$rootScope', '$http','$uibModalInstance','TaskService'];
+          function ModalOpenTaskInstanceCtrl($scope,$rootScope, $http, $uibModalInstance, TaskService) {
+
+
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+
+
+              $scope.task=new TaskService();
+             $scope.submitTask=function() {
+          $scope.task.$save().then(function(data){
+            var response=angular.fromJson(data);
+          
+            if(response.Status=="1"){
+              $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+            }else{
+           
+               $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+           
+            }
+           
+                $rootScope.$emit("CallLoadTasks", {});
+          },
+           function() {
+             $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+        
+          };
+
+           $scope.closeTask=function() {
+          $scope.task.$save().then(function(){
+           
+                $rootScope.$emit("CallLoadTasks", {});
+                $scope.ok();
+          },function() {
+                 $scope.errorMsg = 'Server Request Error';
+                });
+        
+          };
+          
+          
+         
+          }
+
+
+
+          ModalInstanceCtrl.$inject = ['$scope', '$rootScope', '$http','$uibModalInstance','TaskService','task'];
+          function ModalInstanceCtrl($scope,$rootScope, $http, $uibModalInstance, TaskService,task) {
+            $scope.currenttask=task;
+
+
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+          
+         
+
+
+                $scope.updateTask=function(currenttask){
+             currenttask.$update().then(function(){
+                 $rootScope.$emit("CallLoadTasks", {});
+            });
+          
+              };
+          }
+        }
     }
+
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.useradministration')
+        .factory('TaskService', TaskService);
+
+    TaskService.$inject = ['$resource','jadaApiUrl'];
+    function TaskService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/task/:id', {id: '@id'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
 })();
 (function() {
     'use strict';
 
     angular
-        .module('app.translate')
-        .run(translateRun)
-        ;
-    translateRun.$inject = ['$rootScope', '$translate'];
+        .module('app.useradministration')
+        .controller('UserAdminController', UserAdminController);
+
+    UserAdminController.$inject = ['$scope','$rootScope', '$http', '$stateParams', '$state', '$uibModal', '$log', 'userAdminService'];
+        function UserAdminController($scope, $rootScope, $http, $stateParams, $state, $uibModal, $log,userAdminService) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+  $scope.users=userAdminService.query();
+
+
+ $scope.loadUsers = function () {
+     
+$scope.users=userAdminService.query();
+}
+ $rootScope.$on("CallLoadUsers", function(){
+           $scope.loadUsers();
+        });
+
+
+
+
+//$scope.oneuser=CompanyInfoService.get({user:1}); //Obtain the Post from backend. Search by Id
+
+
+
+
+  $scope.delete= function (user) {
+usergroup.$remove().then(function () {
+$scope.loadUsers();
+});
+}
+
+
+
+
+   $scope.open = function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'NewUser.html',
+              controller: ModalOpenUserInstanceCtrl,
+              size: size
+            });
+
+
+
+
+
+            var state = $('#modal-state');
+            modalInstance.result.then(function () {
+              state.text('Modal dismissed with OK status');
+            }, function () {
+              state.text('Modal dismissed with Cancel status');
+            });
+          };
+
+
+
+ $scope.show = function(user) {
+
+      var modalInstance = $uibModal.open({
+        templateUrl: 'EditUser.html',
+        controller: ModalInstanceCtrl,
+        resolve: {
+           user: function () {
+             return user;
+           }
+         }        
+
+      });
+    };
+
+
+// $scope.show = function(x) {
+//     $scope.x = x;
+//     var modalInstance = $uibModal.open({
+//       templateUrl: 'edit-user-setting.html',
+//       controller: ModalInstanceCtrl,
+//       scope : $scope
+//     });
+//   };
+
+           
+
+          // Please note that $uibModalInstance represents a modal window (instance) dependency.
+          // It is not the same as the $uibModal service used above.
+
+             ModalOpenUserInstanceCtrl.$inject = ['$scope', '$rootScope', '$http','$uibModalInstance','userAdminService'];
+          function ModalOpenUserInstanceCtrl($scope,$rootScope, $http, $uibModalInstance, userAdminService) {
+
+
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+
+
+              $scope.user=new userAdminService();
+             $scope.submitUser=function() {
+          $scope.user.$save().then(function(data){
+              var response=angular.fromJson(data);
+          
+            if(response.Status=="1"){
+              $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+            }else{
+           
+               $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+           
+            }
+           
+                $rootScope.$emit("CallLoadUsers", {});
+          },
+
+           function() {
+             $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+        
+          };
+
+
+             $scope.submitUserClose=function() {
+          $scope.user.$save().then(function(){
+            
+                $rootScope.$emit("CallLoadUsers", {});
+                $scope.ok();
+          },
+          
+           function() {
+                $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+        
+          };
+          
+         
+          }
+  
+
+          
+  ModalInstanceCtrl.$inject = ['$scope', '$rootScope', '$http','$uibModalInstance','userAdminService','user'];
+          function ModalInstanceCtrl($scope,$rootScope, $http, $uibModalInstance, userAdminService,user) {
+            $scope.currentgroup=user;
     
-    function translateRun($rootScope, $translate){
 
-      // Internationalization
-      // ----------------------
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
 
-      $rootScope.language = {
-        // Handles language dropdown
-        listIsOpen: false,
-        // list of available languages
-        available: {
-          'en':       'English',
-          'es_AR':    'Español'
-        },
-        // display always the current ui language
-        init: function () {
-          var proposedLanguage = $translate.proposedLanguage() || $translate.use();
-          var preferredLanguage = $translate.preferredLanguage(); // we know we have set a preferred one in app.config
-          $rootScope.language.selected = $rootScope.language.available[ (proposedLanguage || preferredLanguage) ];
-        },
-        set: function (localeId) {
-          // Set the new idiom
-          $translate.use(localeId);
-          // save a reference for the current language
-          $rootScope.language.selected = $rootScope.language.available[localeId];
-          // finally toggle dropdown
-          $rootScope.language.listIsOpen = ! $rootScope.language.listIsOpen;
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+          
+         
+
+
+                $scope.updateUser=function(user){
+             currentgroup.$update().then(function(){
+                 $rootScope.$emit("CallLoadUsers", {});
+            });
+          
+              };
+          }
+
+
+          
+
         }
-      };
-
-      $rootScope.language.init();
-
     }
+
+})();
+// (function() {
+//     'use strict';
+
+//     angular
+//         .module('app.useradministration')
+//         .factory('userAdminService',  function($resource,jadaApiUrl) {
+        
+//         return $resource(jadaApiUrl+'users/:user', {user: '@user'}); 
+       
+//        // return $resource(' http://localhost:9418/jada/payroll/CompanyRegistrationData/');
+//         // http://localhost:9418/jada/Authentication/CompanyRegistration
+//     });
+// })();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.useradministration')
+        .factory('userAdminService', userAdminService);
+
+    userAdminService.$inject = ['$resource','jadaApiUrl'];
+    function userAdminService($resource,jadaApiUrl) {
+          
+        return $resource('https://jsonplaceholder.typicode.com/users/:user', {user: '@user'}); 
+    }
+
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.useradministration')
+        .controller('UserGroupController', UserGroupController);
+
+    UserGroupController.$inject = ['$scope','$rootScope', '$http', '$stateParams', '$state', '$uibModal', '$log', 'UserGroupService'];
+        function UserGroupController($scope, $rootScope, $http, $stateParams, $state, $uibModal, $log, UserGroupService) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+           var SuccessMsg;
+            var errorMsg;
+
+
+ $scope.usergroups=UserGroupService.query();
+
+
+ // var id=$stateParams.Id;
+
+ //           console.log( id);
+ //            if(id!=null){
+ //           $scope.currentworkflow=WorkflowService.get({id:id});
+ //          }
+           
+
+ $scope.loadUserGroups = function () {
+     
+ $scope.usergroups=UserGroupService.query();
+   }
+
+ $rootScope.$on("CallLoadUserGroups", function(){
+           $scope.loadUserGroups();
+        });
+
+
+
+
+//$scope.oneuser=CompanyInfoService.get({user:1}); //Obtain the Post from backend. Search by Id
+
+
+
+
+  $scope.delete= function (usergroup) {
+usergroup.$remove().then(function () {
+$scope.loadUserGroups();
+});
+}
+
+
+
+
+   $scope.open = function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'newUserGroup.html',
+              controller: ModalOpenUserGroupInstanceCtrl,
+              size: size
+            });
+
+
+
+
+
+            var state = $('#modal-state');
+            modalInstance.result.then(function () {
+              state.text('Modal dismissed with OK status');
+            }, function () {
+              state.text('Modal dismissed with Cancel status');
+            });
+          };
+
+
+
+
+
+    
+
+
+ $scope.show = function(usergroup) {
+
+      var modalInstance = $uibModal.open({
+        templateUrl: 'EditUserGroup.html',
+        controller: ModalInstanceCtrl,
+        resolve: {
+           usergroup: function () {
+             return usergroup;
+           }
+         }        
+
+      });
+    };
+
+
+
+
+           
+
+          // Please note that $uibModalInstance represents a modal window (instance) dependency.
+          // It is not the same as the $uibModal service used above.
+
+          ModalOpenUserGroupInstanceCtrl.$inject = ['$scope', '$rootScope', '$http','$uibModalInstance','UserGroupService'];
+          function ModalOpenUserGroupInstanceCtrl($scope,$rootScope, $http, $uibModalInstance, UserGroupService) {
+    //       if (x) {
+    //     $scope.oneUser = { id : x};
+    //    // $scope.oneUser = { name : x};
+
+
+    // } else 
+    // {
+    //     $scope.thing = { name: null };
+    // }
+
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+
+
+              $scope.usergroup=new UserGroupService();
+             $scope.submitUserGroup=function() {
+          $scope.usergroup.$save().then(function(data){
+              var response=angular.fromJson(data);
+          
+            if(response.Status=="1"){
+              $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+            }else{
+           
+               $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+           
+            }
+           
+                $rootScope.$emit("CallLoadUserGroups", {});
+          },
+
+           function() {
+             $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+        
+          };
+
+
+             $scope.submitUserGroupClose=function() {
+          $scope.usergroup.$save().then(function(){
+            
+                $rootScope.$emit("CallLoadUserGroups", {});
+                $scope.ok();
+          },
+          
+           function() {
+                $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+        
+          };
+          
+         
+          }
+
+
+  ModalInstanceCtrl.$inject = ['$scope', '$rootScope', '$http','$uibModalInstance','UserGroupService','usergroup'];
+          function ModalInstanceCtrl($scope,$rootScope, $http, $uibModalInstance, UserGroupService,usergroup) {
+            $scope.currentgroup=usergroup;
+    //       if (x) {
+    //     $scope.oneUser = { id : x};
+    //    // $scope.oneUser = { name : x};
+
+
+    // } else 
+    // {
+    //     $scope.thing = { name: null };
+    // }
+
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+          
+         
+
+
+                $scope.updateUserGroup=function(currentgroup){
+             currentgroup.$update().then(function(){
+                 $rootScope.$emit("CallLoadUserGroups", {});
+            });
+          
+              };
+          }
+        }
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.companydetails')
+        .factory('UserGroupService',  ["$resource", function($resource) {
+               // return $resource('http://localhost:56135/api/exemption/:id', {id: '@id'});
+//         //return $resource('http://localhost:9418/jada/payroll/CreateEmployeeGroups/');
+     var data=$resource('https://jsonplaceholder.typicode.com/users/:user', {user: '@user'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+    }]);
+})();
+
+// angular.module('app.companydetails').value('jadaApiUrl',
+// 'http://localhost:56135/api/exemption/');
+
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.useradministration')
+        .controller('WorkflowController', WorkflowController);
+
+    WorkflowController.$inject = ['$scope','$rootScope', '$http', '$stateParams', '$state', '$uibModal', '$log', 'WorkflowService'];
+        function WorkflowController($scope, $rootScope, $http, $stateParams, $state, $uibModal, $log, WorkflowService) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+ var SuccessMsg;
+ var errorMsg;
+
+ $scope.workflows=WorkflowService.query();
+
+
+ // var id=$stateParams.Id;
+
+ //           console.log( id);
+ //            if(id!=null){
+ //           $scope.currentworkflow=WorkflowService.get({id:id});
+ //          }
+           
+
+ $scope.loadWorkflows = function () {
+     
+ $scope.workflows=WorkflowService.query();
+   }
+
+ $rootScope.$on("CallLoadWorkflows", function(){
+           $scope.loadWorkflows();
+        });
+
+
+
+
+//$scope.oneuser=CompanyInfoService.get({user:1}); //Obtain the Post from backend. Search by Id
+
+
+
+
+  $scope.delete= function (workflow) {
+workflow.$remove().then(function () {
+$scope.loadWorkflows();
+});
+}
+
+
+
+
+   $scope.open = function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'newWorkflow.html',
+              controller: ModalOpenWorkflowInstanceCtrl,
+              size: size
+            });
+
+
+
+
+
+            var state = $('#modal-state');
+            modalInstance.result.then(function () {
+              state.text('Modal dismissed with OK status');
+            }, function () {
+              state.text('Modal dismissed with Cancel status');
+            });
+          };
+
+
+
+
+
+    
+
+
+ $scope.show = function(workflow) {
+
+      var modalInstance = $uibModal.open({
+        templateUrl: 'Editworkflow.html',
+        controller: ModalInstanceCtrl,
+        resolve: {
+           workflow: function () {
+             return workflow;
+           }
+         }        
+
+      });
+    };
+
+
+
+
+           
+
+          // Please note that $uibModalInstance represents a modal window (instance) dependency.
+          // It is not the same as the $uibModal service used above.
+
+          ModalOpenWorkflowInstanceCtrl.$inject = ['$scope', '$rootScope', '$http','$uibModalInstance','WorkflowService'];
+          function ModalOpenWorkflowInstanceCtrl($scope,$rootScope, $http, $uibModalInstance, WorkflowService) {
+    //       if (x) {
+    //     $scope.oneUser = { id : x};
+    //    // $scope.oneUser = { name : x};
+
+
+    // } else 
+    // {
+    //     $scope.thing = { name: null };
+    // }
+
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+
+
+              $scope.workflow=new WorkflowService();
+             $scope.submitWorkflow=function() {
+          $scope.workflow.$save().then(function(data){
+            var response=angular.fromJson(data);
+          
+            if(response.Status=="1"){
+              $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+            }else{
+           
+               $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+           
+            }
+           
+                $rootScope.$emit("CallLoadWorkflows", {});
+          },function() {
+             $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+        
+          };
+          
+
+            $scope.closeWorkflow=function() {
+          $scope.workflow.$save().then(function(){
+           
+                $rootScope.$emit("CallLoadWorkflows", {});
+                $scope.ok();
+          },function() {
+             $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+        
+          };
+         
+          }
+
+
+  ModalInstanceCtrl.$inject = ['$scope', '$rootScope', '$http','$uibModalInstance','WorkflowService','workflow'];
+          function ModalInstanceCtrl($scope,$rootScope, $http, $uibModalInstance, WorkflowService,workflow) {
+            $scope.currentworkflow=workflow;
+    //       if (x) {
+    //     $scope.oneUser = { id : x};
+    //    // $scope.oneUser = { name : x};
+
+
+    // } else 
+    // {
+    //     $scope.thing = { name: null };
+    // }
+
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+          
+         
+
+
+                $scope.updateWorkflow=function(workflow){
+             workflow.$update().then(function(){
+                 $rootScope.$emit("CallLoadWorkflows", {});
+            });
+          
+              };
+          }
+        }
+    }
+
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.useradministration')
+        .factory('WorkflowService', WorkflowService);
+
+    WorkflowService.$inject = ['$resource','jadaApiUrl'];
+    function WorkflowService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/workflow/:id', {id: '@id'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
 })();
 /**=========================================================
  * Module: animate-enabled.js
@@ -16512,768 +17541,6 @@ $scope.clickBtn = function() {
     }
 })();
 
-(function() {
-    'use strict';
-
-    angular
-        .module('app.useradministration')
-        .controller('TasksController', TasksController);
-
-    TasksController.$inject = ['$scope','$rootScope', '$http', '$stateParams', '$state','$uibModal', '$log', 'TaskService'];
-        function TasksController($scope, $rootScope, $http, $stateParams, $state,$uibModal, $log, TaskService) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
- var SuccessMsg;
- var errorMsg;
-
-          //  var id=$stateParams.Id;
-
-          //  console.log( id);
-          //   if(id!=null){
-          //  $scope.currentworkflow=TaskService.get({id:id});
-          // }
-           
-         
- $scope.tasks=TaskService.query();
-
-
-
-
- $scope.loadTasks = function () {
-     
- $scope.tasks=TaskService.query();
-   }
-
- $rootScope.$on("CallLoadTasks", function(){
-           $scope.loadTasks();
-        });
-
-
-
-
-//$scope.oneuser=CompanyInfoService.get({user:1}); //Obtain the Post from backend. Search by Id
-
-
-
-
-  $scope.delete= function (task) {
-task.$remove().then(function () {
-$scope.loadTasks();
-});
-}
-
-
-
-
-   $scope.open = function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'newTask.html',
-              controller: ModalOpenTaskInstanceCtrl,
-              size: size
-            });
-
-
-
-
-
-            var state = $('#modal-state');
-            modalInstance.result.then(function () {
-              state.text('Modal dismissed with OK status');
-            }, function () {
-              state.text('Modal dismissed with Cancel status');
-            });
-          };
-
-
-
-
-
-    
-
-
- $scope.show = function(task) {
-
-      var modalInstance = $uibModal.open({
-        templateUrl: 'EditTask.html',
-        controller: ModalInstanceCtrl,
-        resolve: {
-           task: function () {
-             return task;
-           }
-         }        
-
-      });
-    };
-
-
-;
-//   };
-
-           
-
-          // Please note that $uibModalInstance represents a modal window (instance) dependency.
-          // It is not the same as the $uibModal service used above.
-
-          ModalOpenTaskInstanceCtrl.$inject = ['$scope', '$rootScope', '$http','$uibModalInstance','TaskService'];
-          function ModalOpenTaskInstanceCtrl($scope,$rootScope, $http, $uibModalInstance, TaskService) {
-
-
-            $scope.ok = function () {
-              $uibModalInstance.close('closed');
-            };
-
-            $scope.cancel = function () {
-              $uibModalInstance.dismiss('cancel');
-            };
-
-
-              $scope.task=new TaskService();
-             $scope.submitTask=function() {
-          $scope.task.$save().then(function(data){
-            var response=angular.fromJson(data);
-          
-            if(response.Status=="1"){
-              $scope.errorMsg=false;
-                    $scope.SuccessMsg =response.Message;
-            }else{
-           
-               $scope.SuccessMsg=false;
-                   $scope.errorMsg=response.Message;
-           
-            }
-           
-                $rootScope.$emit("CallLoadTasks", {});
-          },
-           function() {
-             $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
-        
-          };
-
-           $scope.closeTask=function() {
-          $scope.task.$save().then(function(){
-           
-                $rootScope.$emit("CallLoadTasks", {});
-                $scope.ok();
-          },function() {
-                 $scope.errorMsg = 'Server Request Error';
-                });
-        
-          };
-          
-          
-         
-          }
-
-
-
-          ModalInstanceCtrl.$inject = ['$scope', '$rootScope', '$http','$uibModalInstance','TaskService','task'];
-          function ModalInstanceCtrl($scope,$rootScope, $http, $uibModalInstance, TaskService,task) {
-            $scope.currenttask=task;
-
-
-            $scope.ok = function () {
-              $uibModalInstance.close('closed');
-            };
-
-            $scope.cancel = function () {
-              $uibModalInstance.dismiss('cancel');
-            };
-          
-         
-
-
-                $scope.updateTask=function(currenttask){
-             currenttask.$update().then(function(){
-                 $rootScope.$emit("CallLoadTasks", {});
-            });
-          
-              };
-          }
-        }
-    }
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.useradministration')
-        .factory('TaskService', TaskService);
-
-    TaskService.$inject = ['$resource','jadaApiUrl'];
-    function TaskService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/task/:id', {id: '@id'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.useradministration')
-        .controller('UserAdminController', UserAdminController);
-
-    UserAdminController.$inject = ['$scope', '$http', '$uibModal', '$log', 'userAdminService'];
-        function UserAdminController($scope, $http, $uibModal, $log, userAdminService) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-  $scope.users=userAdminService.query();
-
-  $scope.updateUser=function(userId) {
- $scope.oneUser=userAdminService.get({user:userId});
-  // $scope.oneUser = { id : userId};
-  //  $scope.oneUser = { name : oneUser.name};
- userAdminService.update({user:userId}, $scope.oneuser);
-
-// $scope.oneUser.$update(function(){
-// $state.go('app.userinfo'); //Once updated go to state `admin.postViewAll`
-// });
-//           $scope.updatePost=function(){
-// $scope.buttonText="Updating. . ."; //Once clicked change button text
-
-// $scope.oneuser.$update(function(){
-// $state.go('app.userinfo'); //Once updated go to state `admin.postViewAll`
-// });
-// };
-
-
-         };
-
-
-
-
-
-$scope.open = function() {
-    //$scope.x = x;
-    var modalInstance = $uibModal.open({
-      templateUrl: 'ModalContent.html',
-      controller: ModalInstanceCtrl,
-     // scope : $scope
-       // resolve: {
-       //   x: function() {
-       //        return x;
-       //    }}
-    });
-  };
-$scope.show = function(x) {
-    $scope.x = x;
-    var modalInstance = $uibModal.open({
-      templateUrl: 'edit-user-setting.html',
-      controller: ModalInstanceCtrl,
-      scope : $scope
-    });
-  };
-
-           
-
-          // Please note that $uibModalInstance represents a modal window (instance) dependency.
-          // It is not the same as the $uibModal service used above.
-
-          ModalInstanceCtrl.$inject = ['$scope', '$uibModalInstance','userAdminService'];
-          function ModalInstanceCtrl($scope, $uibModalInstance, userAdminService) {
-    //       if (x) {
-    //     $scope.oneUser = { id : x};
-    //    // $scope.oneUser = { name : x};
-
-
-    // } else 
-    // {
-    //     $scope.thing = { name: null };
-    // }
-
-            $scope.ok = function () {
-              $uibModalInstance.close('closed');
-            };
-
-            $scope.cancel = function () {
-              $uibModalInstance.dismiss('cancel');
-            };
-          
-         
-          }
-        }
-    }
-
-})();
-// (function() {
-//     'use strict';
-
-//     angular
-//         .module('app.useradministration')
-//         .factory('userAdminService',  function($resource,jadaApiUrl) {
-        
-//         return $resource(jadaApiUrl+'users/:user', {user: '@user'}); 
-       
-//        // return $resource(' http://localhost:9418/jada/payroll/CompanyRegistrationData/');
-//         // http://localhost:9418/jada/Authentication/CompanyRegistration
-//     });
-// })();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.useradministration')
-        .factory('userAdminService', userAdminService);
-
-    userAdminService.$inject = ['$resource','jadaApiUrl'];
-    function userAdminService($resource,jadaApiUrl) {
-          
-        return $resource('https://jsonplaceholder.typicode.com/users/:user', {user: '@user'}); 
-    }
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.useradministration')
-        .controller('UserGroupController', UserGroupController);
-
-    UserGroupController.$inject = ['$scope','$rootScope', '$http', '$stateParams', '$state', '$uibModal', '$log', 'UserGroupService'];
-        function UserGroupController($scope, $rootScope, $http, $stateParams, $state, $uibModal, $log, UserGroupService) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
- $scope.usergroups=UserGroupService.query();
-
-
- // var id=$stateParams.Id;
-
- //           console.log( id);
- //            if(id!=null){
- //           $scope.currentworkflow=WorkflowService.get({id:id});
- //          }
-           
-
- $scope.loadUserGroups = function () {
-     
- $scope.usergroups=UserGroupService.query();
-   }
-
- $rootScope.$on("CallLoadUserGroups", function(){
-           $scope.loadUserGroups();
-        });
-
-
-
-
-//$scope.oneuser=CompanyInfoService.get({user:1}); //Obtain the Post from backend. Search by Id
-
-
-
-
-  $scope.delete= function (usergroup) {
-usergroup.$remove().then(function () {
-$scope.loadWorkflows();
-});
-}
-
-
-
-
-   $scope.open = function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'newUserGroup.html',
-              controller: ModalOpenUserGroupInstanceCtrl,
-              size: size
-            });
-
-
-
-
-
-            var state = $('#modal-state');
-            modalInstance.result.then(function () {
-              state.text('Modal dismissed with OK status');
-            }, function () {
-              state.text('Modal dismissed with Cancel status');
-            });
-          };
-
-
-
-
-
-    
-
-
- $scope.show = function(usergroup) {
-
-      var modalInstance = $uibModal.open({
-        templateUrl: 'EditUserGroup.html',
-        controller: ModalInstanceCtrl,
-        resolve: {
-           usergroup: function () {
-             return usergroup;
-           }
-         }        
-
-      });
-    };
-
-
-
-
-           
-
-          // Please note that $uibModalInstance represents a modal window (instance) dependency.
-          // It is not the same as the $uibModal service used above.
-
-          ModalOpenUserGroupInstanceCtrl.$inject = ['$scope', '$rootScope', '$http','$uibModalInstance','UserGroupService'];
-          function ModalOpenUserGroupInstanceCtrl($scope,$rootScope, $http, $uibModalInstance, UserGroupService) {
-    //       if (x) {
-    //     $scope.oneUser = { id : x};
-    //    // $scope.oneUser = { name : x};
-
-
-    // } else 
-    // {
-    //     $scope.thing = { name: null };
-    // }
-
-            $scope.ok = function () {
-              $uibModalInstance.close('closed');
-            };
-
-            $scope.cancel = function () {
-              $uibModalInstance.dismiss('cancel');
-            };
-
-
-              $scope.usergroup=new UserGroupService();
-             $scope.submitUserGroup=function() {
-          $scope.usergroup.$save().then(function(){
-           
-                $rootScope.$emit("CallLoadWorkflows", {});
-          });
-        
-          };
-          
-         
-          }
-
-
-  ModalInstanceCtrl.$inject = ['$scope', '$rootScope', '$http','$uibModalInstance','WorkflowService','usergroup'];
-          function ModalInstanceCtrl($scope,$rootScope, $http, $uibModalInstance, WorkflowService,usergroup) {
-            $scope.currentgroup=usergroup;
-    //       if (x) {
-    //     $scope.oneUser = { id : x};
-    //    // $scope.oneUser = { name : x};
-
-
-    // } else 
-    // {
-    //     $scope.thing = { name: null };
-    // }
-
-            $scope.ok = function () {
-              $uibModalInstance.close('closed');
-            };
-
-            $scope.cancel = function () {
-              $uibModalInstance.dismiss('cancel');
-            };
-          
-         
-
-
-                $scope.updateUserGroup=function(currentgroup){
-             currentgroup.$update().then(function(){
-                 $rootScope.$emit("CallLoadUserGroups", {});
-            });
-          
-              };
-          }
-        }
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.companydetails')
-        .factory('UserGroupService',  ["$resource", function($resource) {
-               // return $resource('http://localhost:56135/api/exemption/:id', {id: '@id'});
-//         //return $resource('http://localhost:9418/jada/payroll/CreateEmployeeGroups/');
-     var data=$resource('https://jsonplaceholder.typicode.com/users/:user', {user: '@user'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-    }]);
-})();
-
-// angular.module('app.companydetails').value('jadaApiUrl',
-// 'http://localhost:56135/api/exemption/');
-
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.useradministration')
-        .controller('WorkflowController', WorkflowController);
-
-    WorkflowController.$inject = ['$scope','$rootScope', '$http', '$stateParams', '$state', '$uibModal', '$log', 'WorkflowService'];
-        function WorkflowController($scope, $rootScope, $http, $stateParams, $state, $uibModal, $log, WorkflowService) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
- var SuccessMsg;
- var errorMsg;
-
- $scope.workflows=WorkflowService.query();
-
-
- // var id=$stateParams.Id;
-
- //           console.log( id);
- //            if(id!=null){
- //           $scope.currentworkflow=WorkflowService.get({id:id});
- //          }
-           
-
- $scope.loadWorkflows = function () {
-     
- $scope.workflows=WorkflowService.query();
-   }
-
- $rootScope.$on("CallLoadWorkflows", function(){
-           $scope.loadWorkflows();
-        });
-
-
-
-
-//$scope.oneuser=CompanyInfoService.get({user:1}); //Obtain the Post from backend. Search by Id
-
-
-
-
-  $scope.delete= function (workflow) {
-workflow.$remove().then(function () {
-$scope.loadWorkflows();
-});
-}
-
-
-
-
-   $scope.open = function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'newWorkflow.html',
-              controller: ModalOpenWorkflowInstanceCtrl,
-              size: size
-            });
-
-
-
-
-
-            var state = $('#modal-state');
-            modalInstance.result.then(function () {
-              state.text('Modal dismissed with OK status');
-            }, function () {
-              state.text('Modal dismissed with Cancel status');
-            });
-          };
-
-
-
-
-
-    
-
-
- $scope.show = function(workflow) {
-
-      var modalInstance = $uibModal.open({
-        templateUrl: 'Editworkflow.html',
-        controller: ModalInstanceCtrl,
-        resolve: {
-           workflow: function () {
-             return workflow;
-           }
-         }        
-
-      });
-    };
-
-
-
-
-           
-
-          // Please note that $uibModalInstance represents a modal window (instance) dependency.
-          // It is not the same as the $uibModal service used above.
-
-          ModalOpenWorkflowInstanceCtrl.$inject = ['$scope', '$rootScope', '$http','$uibModalInstance','WorkflowService'];
-          function ModalOpenWorkflowInstanceCtrl($scope,$rootScope, $http, $uibModalInstance, WorkflowService) {
-    //       if (x) {
-    //     $scope.oneUser = { id : x};
-    //    // $scope.oneUser = { name : x};
-
-
-    // } else 
-    // {
-    //     $scope.thing = { name: null };
-    // }
-
-            $scope.ok = function () {
-              $uibModalInstance.close('closed');
-            };
-
-            $scope.cancel = function () {
-              $uibModalInstance.dismiss('cancel');
-            };
-
-
-              $scope.workflow=new WorkflowService();
-             $scope.submitWorkflow=function() {
-          $scope.workflow.$save().then(function(data){
-            var response=angular.fromJson(data);
-          
-            if(response.Status=="1"){
-              $scope.errorMsg=false;
-                    $scope.SuccessMsg =response.Message;
-            }else{
-           
-               $scope.SuccessMsg=false;
-                   $scope.errorMsg=response.Message;
-           
-            }
-           
-                $rootScope.$emit("CallLoadWorkflows", {});
-          },function() {
-             $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
-        
-          };
-          
-
-            $scope.closeWorkflow=function() {
-          $scope.workflow.$save().then(function(){
-           
-                $rootScope.$emit("CallLoadWorkflows", {});
-                $scope.ok();
-          },function() {
-             $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
-        
-          };
-         
-          }
-
-
-  ModalInstanceCtrl.$inject = ['$scope', '$rootScope', '$http','$uibModalInstance','WorkflowService','workflow'];
-          function ModalInstanceCtrl($scope,$rootScope, $http, $uibModalInstance, WorkflowService,workflow) {
-            $scope.currentworkflow=workflow;
-    //       if (x) {
-    //     $scope.oneUser = { id : x};
-    //    // $scope.oneUser = { name : x};
-
-
-    // } else 
-    // {
-    //     $scope.thing = { name: null };
-    // }
-
-            $scope.ok = function () {
-              $uibModalInstance.close('closed');
-            };
-
-            $scope.cancel = function () {
-              $uibModalInstance.dismiss('cancel');
-            };
-          
-         
-
-
-                $scope.updateWorkflow=function(workflow){
-             workflow.$update().then(function(){
-                 $rootScope.$emit("CallLoadWorkflows", {});
-            });
-          
-              };
-          }
-        }
-    }
-
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.useradministration')
-        .factory('WorkflowService', WorkflowService);
-
-    WorkflowService.$inject = ['$resource','jadaApiUrl'];
-    function WorkflowService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/workflow/:id', {id: '@id'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
 (function() {
     'use strict';
 

@@ -11,7 +11,7 @@
     
       <div class="form-group mb-xl">
          <label class="control-label mb">by Department</label>
-         <br/>      <select name="Category" class="slider slider-lg form-control" ng-model="selectedCategory" ng-options="department.ID as department.description for department in departments">
+         <br/>      <select name="Category" class="slider slider-lg form-control" ng-model="selectedDepartment" ng-options="department.ID as department.description for department in departments">
     <option value="" disabled selected>Departments</option>
   </select>
              
@@ -21,7 +21,7 @@
          <label class="control-label mb">Employee Name</label>
          <br/>
 
-           <select name="Category" class="slider slider-lg form-control" ng-model="userId" ng-options="employee.id as employee.firstName for employee in employees | filter:{department: selectedCategory}" ng-change="searchEmployee(userId)">
+           <select name="Category" class="slider slider-lg form-control" ng-model="userId" ng-options="employee.id as employee.firstName for employee in employees | filter:{department: selectedDepartment}" ng-change="searchEmployee(userId)">
     <option value="" disabled selected>Employees</option>
   </select>
                 <!-- <input class="slider slider-lg form-control" id="sl2" ui-slider=""
