@@ -16,7 +16,8 @@
         function activate() {
 
 
-        $scope.companysumaries=CompanySummaryService.query();
+        $scope.companysumaries=CompanySummaryService.get({periodId:1});
+        console.log( $scope.companysumaries);
 
           
 
