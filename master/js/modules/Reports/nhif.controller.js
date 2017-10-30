@@ -16,7 +16,7 @@
         function activate() {
 
 
-        $scope.companysumaries=NhifService.query();
+        $scope.nhifs=NhifService.query();
 
           
 

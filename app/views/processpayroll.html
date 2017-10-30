@@ -21,7 +21,7 @@
          <label class="control-label mb">Employee Name</label>
          <br/>
 
-           <select name="Category" class="slider slider-lg form-control" ng-model="userId" ng-options="employee.id as employee.firstName for employee in employees | filter:{department: selectedDepartment}" ng-change="searchEmployee(userId)">
+           <select name="Category" class="slider slider-lg form-control" ng-model="userId" ng-options="employee.id as employee.firstName for employee in employees | filter:{department:selectedDepartment}" >
     <option value="" disabled selected>Employees</option>
   </select>
                 <!-- <input class="slider slider-lg form-control" id="sl2" ui-slider=""
@@ -36,10 +36,26 @@
 
           
                 <input class="slider slider-lg form-control" id="sl2" ui-slider=""
-                 type="text" ng-model="userId"
+                 type="text" ng-model="user.userId"
                  value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,750]" />
       </div>
-      <button class="btn btn-default"  ng-click="searchEmployee(userId)"><i class="fa fa-search" aria-hidden="true"></i></button>
+
+      <div class="form-group mb-xl">
+         <label class="control-label mb">Period</label>
+         <br/>
+
+          
+                <input class="slider slider-lg form-control" id="sl2" ui-slider=""
+                 type="text" ng-model="user.period"
+                 value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,750]" />
+      </div>
+
+         
+
+
+      <button class="btn btn-default"  ng-click="searchEmployee(user)"><i class="fa fa-search" aria-hidden="true"></i></button>
+
+
       </form>
 
 
@@ -53,20 +69,20 @@
    <small>Search and filter results</small>
 </h3> -->
       
-      {{selectedCategory}}
+    
              <div class="table-responsive">
                     <div class="col-lg-4 col-xs-12 pv">
             <div class="clearfix">
                <p class="pull-left">Employee NO.</p>
-               <p class="pull-right mr">{{oneUser.employeeNumber}}</p>
+               <p class="pull-right mr">{{oneUser.employeeInfo.employeeNumber}}</p>
             </div>
             <div class="clearfix">
                <p class="pull-left">Employee Name</p>
-               <p  class="pull-right mr">{{oneUser.name}}</p>
+               <p  class="pull-right mr">{{oneUser.employeeInfo.employeeName}}</p>
             </div>
             <div class="clearfix">
                <p class="pull-left">Pay Period</p>
-               <p class="pull-right mr">{{oneUser.period}}</p>
+               <p class="pull-right mr">{{oneUser.employeeInfo.period}}</p>
             </div>
          </div>
          <br/>
@@ -80,7 +96,7 @@
 
       </tr>
       <div>
-      <tr  ng-repeat="transaction in transactions">
+      <tr  ng-repeat="transaction in oneUser.payrollCodeReportList">
          <td>
             {{transaction.code}}    </td> 
              <td> {{transaction.description}}    </td> 

@@ -305,7 +305,7 @@
                    </label>
                   <div class="col-lg-9">
                      <input class="form-control" type="text"  name="phone_number" ng-model="empMaster.phoneNumber" placeholder="Phone Number" required="" />
-                      <span class="text-danger" ng-show="formStep1.$submitted &amp;&amp; formStep1.phone_number.$invalid">This field is required</span>
+                      <span class="text-danger" ng-show="formStep2.$submitted &amp;&amp; formStep2.phone_number.$invalid">This field is required</span>
                   </div>
                     
                </div>
@@ -313,9 +313,9 @@
                   <label class="col-lg-3 ">Email address
                    </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="email" name=" email" ng-model="empMaster.emailAddress" placeholder=" Email address
+                     <input class="form-control" type="email" name="email" ng-model="empMaster.emailAddress" placeholder=" Email address
                    "  required="" />
-                     <span class="text-danger" ng-show="formStep1.$submitted &amp;&amp; formStep1.email.$invalid">This field is invalid</span>
+                     <span class="text-danger" ng-show="formStep2.$submitted &amp;&amp; formStep2.email.$invalid">This field is invalid</span>
                   </div>
                </div>
                  
@@ -326,7 +326,7 @@
                   <div class="col-lg-9">
                      <input class="form-control" type="text"  name="physical_address" ng-model="empMaster.physicalAddress" placeholder="Physical Address
                    " required="" />
-                    <span class="text-danger" ng-show="formStep1.$submitted &amp;&amp; formStep1.physical_address.$invalid">This field is invalid</span>
+                    <span class="text-danger" ng-show="formStep2.$submitted &amp;&amp; formStep2.physical_address.$invalid">This field is invalid</span>
                   </div>
                  
                </div>
@@ -335,7 +335,7 @@
                    </label>
                   <div class="col-lg-9">
                      <input class="form-control" type="text"  name="postal_address"  ng-model="empMaster.postalAddress" placeholder="Physical Address " required="" />
-                     <span class="text-danger" ng-show="formStep1.$submitted &amp;&amp; formStep1.postal_address.$invalid">This field is invalid</span>
+                     <span class="text-danger" ng-show="formStep2.$submitted &amp;&amp; formStep2.postal_address.$invalid">This field is invalid</span>
 
                   </div>
                   
@@ -346,7 +346,7 @@
                    </label>
                   <div class="col-lg-9">
                      <input class="form-control" type="text"  name="postal_code"  ng-model="empMaster.postalCode"  placeholder="Postal Code" required="" />
-                     <span class="text-danger" ng-show="formStep1.$submitted &amp;&amp; formStep1.postal_address.$invalid">This field is invalid</span>
+                     <span class="text-danger" ng-show="formStep2.$submitted &amp;&amp; formStep2.postal_code.$invalid">This field is invalid</span>
                   </div>
                </div>
               
@@ -384,17 +384,21 @@
                   <label class="col-lg-3"> PIN number
                    </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="pin_number" ng-model="empMaster.pinNumber" placeholder="PIN Number
-                   " />
+                     <input class="form-control" type="text"  name="pinNumber" ng-model="empMaster.pinNumber" placeholder="PIN Number" required=""  />
+
+
+                      <span class="text-danger" ng-show="formStep3.$submitted &amp;&amp; formStep3.pinNumber.$invalid">This field is required</span>
                   </div>
+
+                 
+            <!--    <span class="text-danger" ng-show="formStep1.account_server_name.$dirty &amp;&amp; formStep1.account_server_name.$error.pattern">This field must be a valid name</span> -->
                </div>
                <div class="form-group">
                   <label class="col-lg-3 "> NHIF number
                    </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" name="nhif_number" ng-model="empMaster.nhifNumber" placeholder=" NHIF Number
-                   "  />
-                     <!-- <span class="text-danger" ng-show="formStep1.$submitted &amp;&amp; formStep1.nhif_number.$invalid">This field is invalid  required="required" ></span> -->
+                     <input class="form-control" type="text" name="nhif_number" ng-model="empMaster.nhifNumber" placeholder=" NHIF Number " required="required"  />
+                     <span class="text-danger" ng-show="formStep3.$submitted &amp;&amp; formStep3.nhif_number.$invalid">This field is required  ></span>
                   </div>
                </div>
                  
@@ -403,16 +407,16 @@
                   <label class="col-lg-3 "> NSSF number
                    </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="nssf_number" ng-model="empMaster.nssfNumber" placeholder="NSSF number
-                   " />
+                     <input class="form-control" type="text"  name="nssf_number" ng-model="empMaster.nssfNumber" placeholder="NSSF number" required="" />
+                      <span class="text-danger" ng-show="formStep3.$submitted &amp;&amp; formStep3.nssf_number.$invalid">This field is required  ></span>
                   </div>
                </div>
                <div class="form-group">
                   <label class="col-lg-3 "> HELB
                    </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="helb" ng-model="empMaster.helbNumber" placeholder="HELB number
-                   " />
+                     <input class="form-control" type="text"  name="helb" ng-model="empMaster.helbNumber" placeholder="HELB number "  />
+
                   </div>
                </div>
                
@@ -435,7 +439,7 @@
             <!-- START Wizard Step inputs-->
              <div id="step4" ng-show="wizard.active(4)">
                <!-- Wizard with validation require inner forms to group step inputs to be validated-->
-               <section ng-form="formStep3">
+               <section ng-form="formStep4">
                   <legend>Financial</legend>
                   <!-- START row-->
                   <div class="row">
@@ -452,12 +456,14 @@
                   <div class="col-lg-9">
                     <p class="input-group"> 
                               <input class="form-control" type="text" name="date_of_employment" uib-datepicker-popup="{{dpick.format}}" ng-model="empMaster.employmentDate" is-open="dpick.opened" min-date="dpick.minDate" uib-datepicker-options="dpick.dateOptions"
-                              date-disabled="dpick.disabled(date, mode)" close-text="Close" />
+                              date-disabled="dpick.disabled(date, mode)" close-text="Close" required="" />
                               <span class="input-group-btn">
                                  <button class="btn btn-default" type="button" ng-click="dpick.open($event)">
                                     <em class="fa fa-calendar"></em>
                                  </button>
                               </span>
+
+                                 <span class="text-danger" ng-show="formStep4.$submitted &amp;&amp; formStep4.date_of_employment.$invalid">This field is required  ></span>
                            </p>
                   </div>
                </div>
@@ -472,9 +478,13 @@
                        <div class="form-group">
                         <label class="col-sm-3">Pay Point</label>
                         <div class="col-lg-9">
-                          <select  class="form-control" name="payPoint" ng-model="empMaster.payPoint" ng-options="point.id as point.description for point in points">
-    <option value="" disabled selected>Select Pay Point</option>
+                          <select  class="form-control" name="payPoint" ng-model="empMaster.payPoint" ng-options="point.id as point.description for point in points" required="">
+    <option value="" disabled selected >Select Pay Point</option>
+
+ 
   </select>
+     <span class="text-danger" ng-show="formStep4.$submitted &amp;&amp; formStep4.payPoint.$invalid">This field is required
+     </span>
                           <!--  <span class="text-danger" ng-show="form.validateInput('pay_point', 'required')">This field is required</span> -->
                      
                         <!-- <div class="col-sm-4">
@@ -490,14 +500,15 @@
 <div class="form-group">
                         <label class="col-sm-3 ">Pay Mode</label>
                         <div class="col-lg-9">
-                    <select class="form-control" name="pay_mode"  ng-model="empMaster.payMode">
+                    <select class="form-control" name="pay_mode"  ng-model="empMaster.payMode" required="">
                               <option value="">Select Pay Mode</option>
                               <option value="1">Option 1</option>
                               <option value="2">Option 2</option>
                               <option value="3">Option 3</option>
                               <option value="4">Option 4</option>
+                             
                            </select>
-                          
+                            <span class="text-danger" ng-show="formStep4.$submitted &amp;&amp; formStep4.pay_mode.$invalid">This field is required  ></span>
                      
                         <!-- <div class="col-sm-4">
                            <small class="text-muted">type='number'</small>
@@ -588,10 +599,13 @@
                <div class="form-group">
                         <label class="col-sm-3 ">Department</label>
                         <div class="col-lg-9">
-                    <select  class="form-control" name="department"  ng-model="empMaster.department" ng-options="department.ID as department.description for department in departments">
+                    <select  class="form-control" name="department"  ng-model="empMaster.department" ng-options="department.ID as department.description for department in departments" required="">
                      <option value="" disabled selected>Select Department</option>
+
+                     
                      </select>
                
+                   <span class="text-danger" ng-show="formStep5.$submitted &amp;&amp; formStep5.department.$invalid">This field is required  ></span>
                           <!--  <span class="text-danger" ng-show="form.validateInput('pay_point', 'required')">This field is required</span> -->
                      
                         <!-- <div class="col-sm-4">
@@ -661,8 +675,9 @@
                   <label class="col-lg-3"> Position
                    </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="position"  ng-model="empMaster.position" placeholder="Position
-                   " />
+                     <input class="form-control" type="text"  name="position"  ng-model="empMaster.position" placeholder="Position " required="" />
+
+                         <span class="text-danger" ng-show="formStep5.$submitted &amp;&amp; formStep5.position.$invalid">This field is required  ></span>
                   </div>
                </div>
 

@@ -98,10 +98,10 @@
                      </tr> -->
                   </thead>
                   <tbody>
-                     <tr ng-repeat="payslipcode in payslip.payslipCodeList">
+                     <tr ng-repeat="earning in payslip.earnings.payslipCodeList">
                      <!--    <td >{{payslipcode.code}}</td> -->
-                        <td style="width:50%">{{payslipcode.description}}</td>
-                        <td style="width:50%">{{payslipcode.amount}}</td>
+                        <td style="width:50%">{{earning.description}}</td>
+                        <td style="width:50%">{{earning.amount}}</td>
                      </tr>
                   </tbody>
                </table>
@@ -124,34 +124,10 @@
                      </tr>
                   </thead> -->
                   <tbody>
-                     <tr>
-                        
-                        <td style="width:50%">Defined Contribution</td>
-                        <td style="width:50%">2700
-</td>
-                     </tr>
-                     <tr>
-                        
-                        <td>Total Benefits</td>
-                        <td>10000
-
-</td>
-                     </tr>
-
-                     <tr>
-                        
-
-                        <td>Taxable pay
-</td>
-                        <td>500</td>
-                     </tr>
-                     <tr>
-     
-                        <td>Personal relief
-
-</td>
-                        <td>1280
-</td>
+          <tr ng-repeat="earning in payslip.earnings.payslipCodeList">
+                     <!--    <td >{{payslipcode.code}}</td> -->
+                        <td style="width:50%">{{earning.description}}</td>
+                        <td style="width:50%">{{earning.amount}}</td>
                      </tr>
                   </tbody>
                </table>
@@ -178,33 +154,10 @@
                      </tr>
                   </thead> -->
                   <tbody>
-                     <tr>
-                       
-                        <td style="width:50%">Defined Contribution</td>
-                        <td style="width:50%">2700
-</td>
-                     </tr>
-                     <tr>
-                       
-                        <td>Total Benefits</td>
-                        <td>10000
-
-</td>
-                     </tr>
-
-                     <tr>
-                        
-                        <td>Taxable pay
-                        </td>
-                        <td>500</td>
-                     </tr>
-                     <tr>
-                        
-                        <td>Personal relief
-
-</td>
-                        <td>1280
-</td>
+                     <tr ng-repeat="deduction in payslip.deductions.payslipCodeList">
+                     <!--    <td >{{payslipcode.code}}</td> -->
+                        <td style="width:50%">{{deduction.description}}</td>
+                        <td style="width:50%">{{deduction.amount}}</td>
                      </tr>
                   </tbody>
                </table>
@@ -232,33 +185,10 @@
                      </tr>
                   </thead> -->
                   <tbody>
-                     <tr>
-                       
-                        <td style="width:50%">Car</td>
-                        <td style="width:50%">2700
-</td>
-                     </tr>
-                     <tr>
-                       
-                        <td>Alarm</td>
-                        <td>1000
-
-</td>
-                     </tr>
-
-                     <tr>
-                        
-                        <td>Water
-                        </td>
-                        <td>500</td>
-                     </tr>
-                     <tr>
-                        
-                        <td>Personal relief
-
-</td>
-                        <td>1280
-</td>
+                    <tr ng-repeat="earning in payslip.earnings.payslipCodeList">
+                     <!--    <td >{{payslipcode.code}}</td> -->
+                        <td style="width:50%">{{earning.description}}</td>
+                        <td style="width:50%">{{earning.amount}}</td>
                      </tr>
                   </tbody>
                </table>

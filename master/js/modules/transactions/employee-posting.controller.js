@@ -10,8 +10,8 @@
         .module('app.transactions')
         .controller('EmployeePostingController', EmployeePostingController);
 
-    EmployeePostingController.$inject = ['$scope','$http', '$rootScope','$uibModal','employeePostingService','$stateParams', '$state','$resource','jadaApiUrl'];
-    function EmployeePostingController($scope,$http, $rootScope, $uibModal, employeePostingService,$stateParams, $state,$resource,jadaApiUrl) {
+    EmployeePostingController.$inject = ['$scope','$http', '$rootScope','$uibModal','employeePostingService','GetemployeeService', '$state','$resource','jadaApiUrl'];
+    function EmployeePostingController($scope,$http, $rootScope, $uibModal, employeePostingService,GetemployeeService, $state,$resource,jadaApiUrl) {
         var vm = this;
 
         activate();
@@ -23,14 +23,34 @@
  var SuccessMsg;
  var errorMsg;
         
-        $scope.currentemployee = $resource(jadaApiUrl + "api/employee/:id", { id: "@id" });
+        // $scope.currentemployee = $resource(jadaApiUrl + "api/employee/:id", { id: "@id" });
 
-         $scope.searchEmployee=function(userId) {
-          if(userId!=null && userId!="")
-          $scope.oneUser=$scope.currentemployee.get({id:userId});
+         $scope.searchEmployee=function(user) {
+
+          if(user.period!=null && user.period!=""){
+                  var employeeId=user.userId;
+          var periodId=user.period;
+          console.log("period - "+periodId+" employee - "+employeeId);
+          $http.get(jadaApiUrl+'api/payrollpostingReport/'+employeeId+'/'+periodId).success(function(data) {
+              $scope.oneUser = data;
+              console.log($scope.oneUser
+);
+
+            });
+
+          }
           
+          //   $scope.oneUser = employeePostingService.get({employeeId:userId, periodId:period});
+          // // $scope.oneUser=$scope.currentemployee.get({id:userId});
+        
 
          };
+
+
+
+
+ 
+
 
  $scope.transactions=employeePostingService.query();
 

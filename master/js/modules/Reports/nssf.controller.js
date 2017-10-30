@@ -5,8 +5,8 @@
         .module('app.reports')
         .controller('NssfController', NssfController);
 
-    NssfController.$inject = ['$scope','$resource', 'NhifService'];
-    function NssfController($scope,$resource,NhifService) {
+    NssfController.$inject = ['$scope','$resource', 'NssfService'];
+    function NssfController($scope,$resource,NssfService) {
         var vm = this;
 
         activate();
@@ -16,7 +16,7 @@
         function activate() {
 
 
-        $scope.companysumaries=NhifService.query();
+        $scope.nssfs=NssfService.query();
 
           
 
