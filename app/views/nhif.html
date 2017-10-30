@@ -1,4 +1,4 @@
-<div class="col-lg-12 " ><div class="panel panel-default">
+<div class="col-lg-12 " ><div class="panel panel-default" ng-controller="NhifController">
    <!-- <div class="panel-heading">
       <small>Company Totals</small>
    </div> -->
@@ -29,7 +29,7 @@
 <div class="row">
    <div class="col-lg-12">
       
-         <table class="table table-bordered-white   table-bordered-whitecol-lg-6" >
+         <table class="table table-bordered-white " >
             <thead>
                <tr><th>PAYROLL NUMBER</th>
                   <th>LAST NAME</th>
@@ -41,38 +41,18 @@
                </tr>
             </thead>
             <tbody >
-               <tr>
-                  <td >P001</td>
-                  <td >Amani </td>
-                   <td >Esther Namalome</td>
+               <tr  ng-repeat="nhif in nhifs">
+                  <td >{{nhif.id}}</td>
+                  <td >{{nhif.name}}</td>
+                   <td >{{nhif.name}}</td>
                   
-                  <td >21145632</td>
-                  <td >456663</td>
-                   <td >1700 </td>
-                  
-                
-               </tr>
-               <tr>
-                  <td >P002</td>
-                  <td >Wamae </td>
-                   <td >Andrew Gacheru </td>
-                   <td >21145632</td>
-                  <td >478552</td>
-                  <td >1700</td>
-                   
-               </tr>
-              
-             <tr>
-                  <td </td>
-                  <td ></td>
-                  <td > </td>
-                  <td > </td>
-                   <td >TOTALS </td>
-                
-                  <td >1700</td>
+                  <td >{{nhif.id}}</td>
+                  <td >{{nhif.id}}</td>
+                   <td >{{nhif.id}} </td>
                   
                 
                </tr>
+            
             
             </tbody>
          </table>
@@ -91,11 +71,14 @@
 
     <br/>
     <div class="col-lg-8">
+
+
+
           <div class="clearfix">
-         <button class="btn btn-default pull-left mr" type="button">Print</button>
+         <button class="btn btn-info pull-left mr" type="button">Print</button>
         <!--  <button class="btn btn-default pull-left" type="button" onclick="window.print();">Print</button> -->
-         <button class="btn btn-default pull-left mr" type="button">Pdf</button>
-         <button class="btn btn-default pull-left mr" type="button">Mail</button>
+         <button class="btn btn-info pull-left mr" type="button">Pdf</button>
+         <button class="btn btn-success pull-left mr" type="button">Mail</button>
          
       </div>
 

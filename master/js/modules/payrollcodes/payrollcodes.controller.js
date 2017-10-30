@@ -8,8 +8,8 @@
         .module('app.bootstrapui')
         .controller('PayrollCodesController', PayrollCodesController);
 
-    PayrollCodesController.$inject =['$scope','$rootScope', '$uibModal','PayrollCodesService','$stateParams', '$state'];
-    function PayrollCodesController($scope,$rootScope, $uibModal, PayrollCodesService,$stateParams, $state) {
+    PayrollCodesController.$inject =['$scope','$http','$rootScope', '$uibModal','PayrollCodesService','$stateParams', '$state','jadaApiUrl'];
+    function PayrollCodesController($scope,$http,$rootScope, $uibModal, PayrollCodesService,$stateParams, $state,jadaApiUrl) {
         var vm = this;
 
         activate();
@@ -45,6 +45,9 @@ $scope.plist=PayrollCodesService.query();
 
     //       };
           
+          $http.get(jadaApiUrl+'api/payrollcodegroup').success(function(data) {
+              $scope.pgroups = data;
+            });
 
   $scope.delete= function (code) {
 code.$remove().then(function () {
