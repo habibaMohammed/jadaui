@@ -26,7 +26,7 @@
 
  $scope.company=companyService.get({ID:1});
 
-
+console.log( $scope.company);
 
 
 
