@@ -124,10 +124,10 @@
                      </tr>
                   </thead> -->
                   <tbody>
-          <tr ng-repeat="earning in payslip.earnings.payslipCodeList">
+          <tr ng-repeat="tax in payslip.taxCalculations.payslipCodeList">
                      <!--    <td >{{payslipcode.code}}</td> -->
-                        <td style="width:50%">{{earning.description}}</td>
-                        <td style="width:50%">{{earning.amount}}</td>
+                        <td style="width:50%">{{tax.description}}</td>
+                        <td style="width:50%">{{tax.amount}}</td>
                      </tr>
                   </tbody>
                </table>
@@ -185,10 +185,10 @@
                      </tr>
                   </thead> -->
                   <tbody>
-                    <tr ng-repeat="earning in payslip.earnings.payslipCodeList">
+                    <tr ng-repeat="benefit in payslip.benefits.payslipCodeList">
                      <!--    <td >{{payslipcode.code}}</td> -->
-                        <td style="width:50%">{{earning.description}}</td>
-                        <td style="width:50%">{{earning.amount}}</td>
+                        <td style="width:50%">{{benefit.description}}</td>
+                        <td style="width:50%">{{benefit.amount}}</td>
                      </tr>
                   </tbody>
                </table>

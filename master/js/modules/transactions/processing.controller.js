@@ -25,11 +25,19 @@
 
 $scope.groups=PayrollProcessingService.query();
 
+$scope.buttonText="process";
 
  $scope.process= function () {
-      $http.post(jadaApiUrl+'api/payrolltransaction');
-      console.log('hellow');
-   }
+    $scope.buttonText="processing";
+      $http.post(jadaApiUrl+'api/payrolltransaction').success(function(){
+    
+ $scope.buttonText="processing";
+                  },function(err){
+            $scope.buttonText="failed";
+            }).finally(function(){
+            $scope.buttonText="process";
+            });
+            };
 
 
 
