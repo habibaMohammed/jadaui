@@ -1,10 +1,11 @@
 
 
+
 (function() {
     'use strict';
 
     angular
-        .module('app.bootstrapui')
+        .module('app.employees')
         .controller('EmployeesController', EmployeesController);
 
 EmployeesController.$inject = ['$stateParams', '$rootScope','$state','$http','$scope', '$uibModal','EmployeeService','jadaApiUrl'];
@@ -98,6 +99,31 @@ $http.get(jadaApiUrl+'api/employeecategory').success(function(data) {
               $scope.categories = data;
 
             });
+
+$http.get(jadaApiUrl+'api/bankbranchcode').success(function(data) {
+              $scope.bankcodes = data;
+              console.log($scope.bankcodes)
+
+            });
+
+
+
+$scope.updateBankCodes=function(id){
+  
+  $scope.bankBranchName=[];
+  for(var r=0;r<$scope.bankcodes.length;r++){
+    if($scope.bankcodes[r].bankCode==id){
+      $scope.bankBranchName.push($scope.bankcodes[r]);
+      console.log($scope.bankcodes[r]);
+    }
+
+    console.log("///////////////////////////////////");
+
+    console.log($scope.bankBranchName);
+  }
+
+  
+}
 
 $http.get(jadaApiUrl+'api/paypoint').success(function(data) {
               $scope.points = data;
