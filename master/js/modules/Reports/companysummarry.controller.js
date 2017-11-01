@@ -5,8 +5,8 @@
         .module('app.reports')
         .controller('CompanySumarryController', CompanySumarryController);
 
-    CompanySumarryController.$inject = ['$scope','$resource', 'CompanySummaryService'];
-    function CompanySumarryController($scope,$resource,CompanySummaryService) {
+    CompanySumarryController.$inject = ['$scope','$http','$resource', 'CompanySummaryService','jadaApiUrl'];
+    function CompanySumarryController($scope,$http, $resource,CompanySummaryService,jadaApiUrl) {
         var vm = this;
 
         activate();
@@ -20,6 +20,11 @@
         console.log( $scope.companysumaries);
 
           
+
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
 
         }
     }

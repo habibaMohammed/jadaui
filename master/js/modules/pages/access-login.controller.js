@@ -79,7 +79,8 @@ $scope.buttonText="Login";
             if($scope.loginForm.$valid) {
 
               $http
-                .post(jadaApiUrl+'api/login', {username: $scope.formlg.userName, password:$scope.formlg.password}).success(function(data){
+                .post(jadaApiUrl+'api/login', {username: $scope.formlg.userName, password:$scope.formlg.password})
+                .success(function(data){
                $scope.buttonText="Logging in. . .";
                   var response=angular.fromJson(data.response);
                   var userAccount=angular.fromJson(data.userAccount);

@@ -1,31 +1,22 @@
  <h3>Company Totals</h3>
 <div  ng-controller="CompanyTotalsController">
-  <div class="row">
-   <div class="col-lg-4">
+ <div class="row">
+   <div class="col-lg-8">
       <form class="form-inline">
-
   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-    <label class="col-lg-3" >Period
-    </label>
-        <div class="col-lg-9">
-                    <select class="form-control" name="pay_mode"  ng-model="empMaster.payMode">
-                              <option value="">Financial Periods</option>
-                              <option value="1">Option 1</option>
-                              <option value="2">Option 2</option>
-                              <option value="3">Option 3</option>
-                              <option value="4">Option 4</option>
-                           </select>
-                          
-                     
-                        <!-- <div class="col-sm-4">
-                           <small class="text-muted">type='number'</small>
-                        </div> -->
-                  </div>
+    <div class="input-group-addon">Period</div>
+  
+         <select name="period" class="slider slider-lg form-control" ng-model="user.period" ng-options="period.id as period.period for period in periods" >
+        <option value="" disabled selected>Periods</option>
+  </select>
   </div>
 
+  <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
 </form>
-   </div>
+  
+
  </div>
+   </div>
 <!--  <hr/> -->
 <br/>
 

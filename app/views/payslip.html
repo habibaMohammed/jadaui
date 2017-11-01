@@ -1,43 +1,24 @@
 
 <h3>Payslip</h3>
 
-<div class="row">
+<div class="row" ng-controller="PayslipController">
    
-
- 
-   <div class="col-lg-4">
-      <form class="form-inline">
-
-  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-    <label class="col-lg-3" >Month
-    </label>
-    <div class="col-lg-9" ng-controller="DatepickerDemoCtrl as dpick">
-                      <p class="input-group">
-                              <input class="form-control" type="text" name="ex_date" ng-model="empMaster.Emp_Expiry_date" uib-datepicker-popup="{{dpick.format}}" ng-model="dpick.date" is-open="dpick.opened" min-date="dpick.minDate" max-date="'2019-12-22'" uib-datepicker-options="dpick.dateOptions"
-                              date-disabled="dpick.disabled(date, mode)" close-text="Close" />
-                              <span class="input-group-btn">
-                                 <button class="btn btn-default" type="button" ng-click="dpick.open($event)">
-                                    <em class="fa fa-calendar"></em>
-                                 </button>
-                              </span>
-                           </p>
-                           
-                  </div>
-  </div>
-
-</form>
-  
-
-
-   </div>
 
 
    <div class="col-lg-8">
       <form class="form-inline">
-
+  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+    <div class="input-group-addon">Period</div>
+  
+         <select name="period" class="slider slider-lg form-control" ng-model="user.period" ng-options="period.id as period.period for period in periods" >
+        <option value="" disabled selected>Periods</option>
+  </select>
+  </div>
   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
     <div class="input-group-addon">Employee Number</div>
-    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Number">
+    <select name="employeeNumber" class="slider slider-lg form-control" ng-model="user.employeeNumber" ng-options="employee.id as employee.employeeNumber for employee in employees" >
+        <option value="" disabled selected>Employees</option>
+  </select>
   </div>
   <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
 </form>
@@ -47,19 +28,16 @@
    </div>
 
 
+</div>
 <br/>
 
-<br/>
-<br/>
-
-<br/>
-<div class="row" ng-controller="PayslipController as table">
+<div class="row" ng-controller="PayslipController">
     
    <div class="col-lg-12" >
 
 
       <!-- START widget-->
-      <div class="panel panel-default" ng-repeat="payslip in table.persons">
+      <div class="panel panel-default" ng-repeat="payslip in persons">
          <div class="panel-body" >
            <div class="row">
              

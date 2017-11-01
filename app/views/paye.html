@@ -4,9 +4,36 @@
 
 
 </h3>
+<div class="paye" ng-controller="PayeController">
+
+<div class="row" ng-controller="PayeController" >
+   
 
 
+   <div class="col-lg-8">
+      <form class="form-inline">
+  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+    <div class="input-group-addon">Period</div>
+  
+         <select name="period" class="slider slider-lg form-control" ng-model="user.period" ng-options="period.id as period.period for period in periods" >
+        <option value="" disabled selected>Periods</option>
+  </select>
+  </div>
+  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+    <div class="input-group-addon">Employee Number</div>
+    <select name="employeeNumber" class="slider slider-lg form-control" ng-model="user.employeeNumber" ng-options="employee.id as employee.employeeNumber for employee in employees" >
+        <option value="" disabled selected>Employees</option>
+  </select>
+  </div>
+  <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+</form>
+  
 
+
+   </div>
+
+
+</div>
 
       <!-- START panel-->
       <div class="panel panel-default" id="panelDemo15">
@@ -1474,9 +1501,9 @@
 
 
       </uib-tab>
+</uib-tabset>
 
-
-            </uib-tabset>
+   </div>
          </div>
       </div>
- 
+ </div>

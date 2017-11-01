@@ -9,25 +9,23 @@
 <form class="form-inline" role="form">
       
     
-      <div class="form-group mb-xl">
+   <!--    <div class="form-group mb-xl">
          <label class="control-label mb">by Department</label>
          <br/>      <select name="Category" class="slider slider-lg form-control" ng-model="selectedDepartment" ng-options="department.ID as department.description for department in departments">
     <option value="" disabled selected>Departments</option>
   </select>
              
  
-      </div>
-      <div class="form-group mb-xl">
+      </div> -->
+    <!--   <div class="form-group mb-xl">
          <label class="control-label mb">Employee Name</label>
          <br/>
 
-           <select name="Category" class="slider slider-lg form-control" ng-model="userId" ng-options="employee.id as employee.firstName for employee in employees | filter:{department:selectedDepartment}" >
+           <select name="Category" class="slider slider-lg form-control" ng-model="userId" ng-options="employee.id as employee.firstName for employee in employees" >
     <option value="" disabled selected>Employees</option>
   </select>
-                <!-- <input class="slider slider-lg form-control" id="sl2" ui-slider=""
-                 type="text" ng-model="userId"
-                 value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,750]" /> -->
-      </div>
+                
+      </div> -->
 
 
       <div class="form-group mb-xl">
@@ -35,19 +33,19 @@
          <br/>
 
           
-                <input class="slider slider-lg form-control" id="sl2" ui-slider=""
-                 type="text" ng-model="user.userId"
-                 value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,750]" />
+              
+           <select name="employeeNumber" class="slider slider-lg form-control" ng-model="user.userId" ng-options="employee.id as employee.employeeNumber for employee in employees | filter:{department:selectedDepartment}" >
+    <option value="" disabled selected>Employees</option>
+  </select>
       </div>
 
       <div class="form-group mb-xl">
          <label class="control-label mb">Period</label>
          <br/>
 
-          
-                <input class="slider slider-lg form-control" id="sl2" ui-slider=""
-                 type="text" ng-model="user.period"
-                 value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,750]" />
+         <select name="period" class="slider slider-lg form-control" ng-model="user.period" ng-options="period.id as period.period for period in periods" >
+        <option value="" disabled selected>Periods</option>
+  </select>
       </div>
 
          
@@ -130,9 +128,11 @@
 
                  </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" ng-model="transaction.periodId" name="element_code
-" placeholder="Element code
-" />
+
+                      <select name="period" class="slider slider-lg form-control" ng-model="transaction.periodId" ng-options="period.id as period.period for period in periods" >
+        <option value="" disabled selected>Periods</option>
+  </select>
+          
                   </div>
                </div>
 
@@ -141,17 +141,23 @@
 
                  </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" ng-model="transaction.employeeId" name="element_code
+ <!--                     <input class="form-control" type="text" ng-model="transaction.employeeId" name="element_code
 " placeholder="Element code
-" />
+
+
+" /> -->
+
+  <select name="employee" class="slider slider-lg form-control" ng-model="transaction.employeeId" ng-options="employee.id as employee.employeeNumber for employee in employees" >
+        <option value="" disabled selected>Employees</option>
+  </select>
                   </div>
                </div>
            <div class="form-group">
-                  <label class="col-lg-3 control-label"> code
+                  <label class="col-lg-3 control-label">Payroll Code
 
                  </label>
                   <div class="col-lg-9">
-                    <select class="form-control" name="payrollcode" ng-model="transaction.payrollCodeId"  ng-options="code.id as code.code for code in pcodes" ng-change="codeChange(transaction.payrollCodeId)">
+                    <select class="form-control" name="payrollcode" ng-model="transaction.payrollCodeId"  ng-options="code.id as code.description for code in pcodes" ng-change="codeChange(transaction.payrollCodeId)">
     <option value="" disabled selected>All Codes</option>
   </select>
           <!--            <input class="form-control" type="text" ng-model="transaction.payrollCodeId" name="element_code
@@ -159,7 +165,7 @@
 " /> -->
                   </div>
                </div>
-               <div class="form-group">
+             <!--   <div class="form-group">
                   <label class="col-lg-3 control-label">Descriptions
 
                  </label>
@@ -167,7 +173,7 @@
                      <input class="form-control" type="text"   ng-model="description" name="code_desc
 " placeholder="Descriptions" disabled />
                   </div>
-               </div>
+               </div> -->
 
                <div class="form-group">
                   <label class="col-lg-3 control-label">Amount
@@ -210,11 +216,9 @@
 
 
     <div class="form-group">
-                  <label class="col-lg-3 control-label"> Period
-
-                 </label>
+                
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" ng-model="transaction.id" name="element_code
+                     <input class="form-control" type="hidden" ng-model="transaction.id" name="element_code
 " placeholder="Element code
 " />
                   </div>
@@ -224,9 +228,10 @@
 
                  </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" ng-model="transaction.payrollCodeId" name="element_code
-" placeholder="Element code
-" />
+         <select name="period" class="slider slider-lg form-control" ng-model="transaction.periodId" ng-options="period.id as period.period for period in periods" >
+        <option value="" disabled selected>Periods</option>
+  </select>
+          
                   </div>
                </div>
 
@@ -235,21 +240,20 @@
 
                  </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" ng-model="transaction.employeeId" name="element_code
-" placeholder="Element code
-" />
-                  </div>
+         <select name="employee" class="slider slider-lg form-control" ng-model="transaction.employeeId" ng-options="employee.id as employee.employeeNumber for employee in employees" >
+        <option value="" disabled selected>Employees</option>
+  </select>         </div>
                </div>
            <div class="form-group">
                   <label class="col-lg-3 control-label"> code
 
                  </label>
                   <div class="col-lg-9">
-              <select class="form-control" name="payrollcode" ng-model="transaction.payrollCodeId"  ng-options="code.id as code.code for code in pcodes" ng-change="codeChange(transaction.payrollCodeId)">
+              <select class="form-control" name="payrollcode" ng-model="transaction.payrollCodeId"  ng-options="code.id as code.description for code in pcodes">
     <option value="" disabled selected>All Codes</option>
   </select>      </div>
                </div>
-               <div class="form-group">
+          <!--      <div class="form-group">
                   <label class="col-lg-3 control-label">Descriptions
 
                  </label>
@@ -259,7 +263,7 @@
 
                    " disabled/>
                   </div>
-               </div>
+               </div> -->
 
                <div class="form-group">
                   <label class="col-lg-3 control-label">Amount

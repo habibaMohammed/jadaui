@@ -3,10 +3,10 @@
 
     angular
         .module('app.reports')
-        .controller('NssfController', NssfController);
+        .controller('PayeController', PayeController);
 
-    NssfController.$inject = ['$scope','$http','$resource', 'NssfService','jadaApiUrl'];
-    function NssfController($scope,$http,$resource,NssfService,jadaApiUrl) {
+    PayeController.$inject = ['$scope','$http','$resource' ,'jadaApiUrl'];
+    function PayeController($scope,$http,$resource,jadaApiUrl) {
         var vm = this;
 
         activate();
@@ -16,10 +16,9 @@
         function activate() {
 
 
-        $scope.nssfs=NssfService.query();
+        
 
-          
-            
+    
               $http.get(jadaApiUrl+'api/period').success(function(data) {
               $scope.periods = data;
 
@@ -30,6 +29,7 @@
               $scope.employees = data;
           
             });
+
 
         }
     }

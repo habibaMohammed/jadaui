@@ -5,8 +5,8 @@
         .module('app.reports')
         .controller('CompanyTotalsController', CompanyTotalsController);
 
-    CompanyTotalsController.$inject = ['$scope','$resource', 'CompanyTotalsService'];
-    function CompanyTotalsController($scope,$resource,CompanyTotalsService) {
+    CompanyTotalsController.$inject = ['$scope','$http','$resource', 'CompanyTotalsService','jadaApiUrl'];
+    function CompanyTotalsController($scope,$http,$resource,CompanyTotalsService,jadaApiUrl) {
         var vm = this;
 
         activate();
@@ -24,6 +24,14 @@
       return item[prop] > val;
     }
 }
+
+
+    
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
 
         }
     }

@@ -73,7 +73,10 @@
 
 
 
-    
+    $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
 
 $http.get(jadaApiUrl+'api/department').success(function(data) {
               $scope.departments = data;
@@ -147,14 +150,14 @@ $scope.codeChange=function(id){
 
 
 
-$scope.show = function(transaction) {
+$scope.show = function(trans) {
       // $scope.x = x;
       var modalInstance = $uibModal.open({
         templateUrl: 'editTransaction.html',
         controller: ModalInstanceCtrl,
         resolve: {
-           transaction: function () {
-             return transaction;
+           trans: function () {
+             return trans;
            }
          }        
         // scope : $scope
@@ -223,9 +226,9 @@ $scope.show = function(transaction) {
           }
             
 
-             ModalInstanceCtrl.$inject = ['$scope', '$http', '$rootScope','$uibModalInstance','employeePostingService','transaction','jadaApiUrl'];
-          function ModalInstanceCtrl($scope,$http, $rootScope,$uibModalInstance, employeePostingService,transaction,jadaApiUrl) {
-          $scope.transaction=transaction;
+             ModalInstanceCtrl.$inject = ['$scope', '$http', '$rootScope','$uibModalInstance','employeePostingService','trans','jadaApiUrl'];
+          function ModalInstanceCtrl($scope,$http, $rootScope,$uibModalInstance, employeePostingService,trans,jadaApiUrl) {
+          $scope.transaction=trans;
             $scope.ok = function () {
               $uibModalInstance.close('closed');
             };

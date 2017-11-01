@@ -7,8 +7,8 @@
         .module('app.reports')
         .controller('PayslipController', PayslipController);
 
-    PayslipController.$inject = ['$http','$resource', 'PayslipService','jadaApiUrl'];
-    function PayslipController($http,$resource,PayslipService,jadaApiUrl) {
+    PayslipController.$inject = ['$scope','$http','$resource', 'PayslipService','jadaApiUrl'];
+    function PayslipController($scope,$http,$resource,PayslipService,jadaApiUrl) {
         var vm = this;
 
         activate();
@@ -24,12 +24,24 @@ var id=1;
           
 
 $http.get(jadaApiUrl+'api/payslipreport/'+id).success(function(data) {
-              vm.persons = data;
-              console.log(vm.persons);
+              $scope.persons = data;
+              console.log($scope.persons);
 
             });
 
 
+
+
+  $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+     $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
         }
     }
 })();
