@@ -60,7 +60,7 @@
 
       {"text": "Pay Frequency ","sref": "app.Payfrequency"},
          {"text": "Pay Points ","sref": "app.paypointslistings"},
-             {"text": " Details", "sref": "app.listings"},
+             {"text": "Employee Details", "sref": "app.listings"},
    
        {"text": "Bank Setup", "sref": "app.bankcodes"}
 
@@ -74,7 +74,24 @@
        
 
 
+ {
 
+
+    "text": "Leave",
+    "sref": "#",
+      "child": "fa fa-chevron-down",
+    "label": "label label-info",
+  
+    "submenu": [
+    
+       {"text": "Types ", "sref": "app.leave-setup"},
+         {"text": "Transaction Types ", "sref": "app.Leave-transaction"},
+           {"text": "Leave Processing", "sref": "app.leaveposting"}
+      
+  
+       
+    ]
+  },
 
 
        {
@@ -97,24 +114,7 @@
     ]
   },
 
-        {
-
-
-    "text": "Leave",
-    "sref": "#",
-      "child": "fa fa-chevron-down",
-    "label": "label label-info",
-  
-    "submenu": [
-    
-       {"text": "Leave Types ", "sref": "app.leave-setup"},
-         {"text": "Leave Transaction Types ", "sref": "app.Leave-transaction"},
-           {"text": "Leave Posting", "sref": "app.leaveposting"}
-      
-  
        
-    ]
-  },
 
 
 
@@ -127,7 +127,7 @@
       {"text": " Employee Posting", "sref": "app.payroll-process"},
        {"text": "Batch Posting", "sref": "app.bulktrans_input"},
       
-       {"text": "Run Payroll", "sref": "app.run"},
+       {"text": "Payroll Run ", "sref": "app.run"},
         
          {"text": "Month End", "sref": "app.endmonth"}
        
@@ -220,8 +220,43 @@
       }
 
     ]
-  }
+  },
+  {
+    "text": " Exports",
+    "sref": "#",
+    "child": "fa fa-chevron-down",
+   
+    "submenu": [
+      {"text": " Bank Files", "sref": "app.bankfiles"},
+       {"text": "Gl Journals", "sref": "app.payroll-journals"},
+      
+       {"text": "Gl Mapping", "sref": "app.gl-mapping"}
+        
+         
+       
     ]
+  
+  }
+ 
+
+
+    ]
+  },
+      {
+    "text": " HELP",
+    "sref": "#",
+    "child": "fa fa-chevron-down",
+   
+    "submenu": [
+      {"text": " About", "sref": "app.help-center"},
+       {"text": "Content", "sref": "app.help-center"},
+      
+       {"text": "Support ", "sref": "app.help-center"}
+        
+         
+       
+    ]
+  
   }
  
  

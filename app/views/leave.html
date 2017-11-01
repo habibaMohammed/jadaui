@@ -1,4 +1,29 @@
 <h3>Leaves Report </h3>
+
+
+<div class="row" ng-controller="LeaveReportController" >
+   
+
+
+   <div class="col-lg-8">
+      <form class="form-inline">
+  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+    <div class="input-group-addon">Period</div>
+  
+         <select name="period" class="slider slider-lg form-control" ng-model="user.period" ng-options="period.id as period.period for period in periods" >
+        <option value="" disabled selected>Periods</option>
+  </select>
+  </div>
+
+  <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+</form>
+  
+
+
+   </div>
+
+
+</div>
 <div class="panel b">
 <!-- <div class="panel-heading bg-gray-lighter text-bold">Leaves Report
   
@@ -433,8 +458,40 @@
          <script type="text/ng-template" id="/myModalContent.html">
             <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel"></h4></div>
             <div class="modal-body"> <div class="panel b">
+<div class="row" ng-controller="LeaveReportController" >
+   
+
+
+   <div class="col-lg-8">
+      <form class="form-inline">
+  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+    <div class="input-group-addon">Period</div>
+  
+         <select name="period" class="slider slider-lg form-control" ng-model="user.period" ng-options="period.id as period.period for period in periods" >
+        <option value="" disabled selected>Periods</option>
+  </select>
+  </div>
+  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+    <div class="input-group-addon">Employee Number</div>
+    <select name="employeeNumber" class="slider slider-lg form-control" ng-model="user.employeeNumber" ng-options="employee.id as employee.employeeNumber for employee in employees" >
+        <option value="" disabled selected>Employees</option>
+  </select>
+  </div>
+  <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+</form>
+  
+
+
+   </div>
+<br/>
+
+</div>
+              
                <div class="panel-heading bg-gray-lighter text-bold">Leave History</div>
                <div class="panel-body">
+
+
+
 
                   <div class="row">
      <div class="col-lg-6 col-xs-12 pv">

@@ -3,10 +3,10 @@
 
     angular
         .module('app.reports')
-        .controller('NssfController', NssfController);
+        .controller('P9aController', P9aController);
 
-    NssfController.$inject = ['$scope','$http','$resource', 'NssfService','jadaApiUrl'];
-    function NssfController($scope,$http,$resource,NssfService,jadaApiUrl) {
+    P9aController.$inject = ['$scope','$http','$resource', 'LeaveReportService','jadaApiUrl'];
+    function P9aController($scope,$http,$resource,LeaveReportService,jadaApiUrl) {
         var vm = this;
 
         activate();
@@ -16,10 +16,9 @@
         function activate() {
 
 
-        $scope.nssfs=NssfService.query();
+        $scope.leaves=LeaveReportService.query();
 
           
-            
               $http.get(jadaApiUrl+'api/period').success(function(data) {
               $scope.periods = data;
 
@@ -30,6 +29,7 @@
               $scope.employees = data;
           
             });
+
 
         }
     }
