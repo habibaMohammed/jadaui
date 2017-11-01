@@ -182,7 +182,7 @@ $scope.show = function(transaction) {
             };
             $scope.transaction=new employeePostingService();
              $scope.submitTransaction=function() {
-          $scope.transaction.$save().then(function(){
+          $scope.transaction.$save().then(function(data){
              var response=angular.fromJson(data);
           
             if(response.Status=="1"){
