@@ -114,13 +114,19 @@
     'use strict';
 
     angular
+        .module('app.employees', ['ui.bootstrap']);
+})();
+(function() {
+    'use strict';
+
+    angular
         .module('app.elements', []);
 })();
 (function() {
     'use strict';
 
     angular
-        .module('app.employees', ['ui.bootstrap']);
+        .module('app.flatdoc', []);
 })();
 (function() {
     'use strict';
@@ -138,12 +144,6 @@
     'use strict';
 
     angular
-        .module('app.flatdoc', []);
-})();
-(function() {
-    'use strict';
-
-    angular
         .module('app.icons', []);
 })();
 (function() {
@@ -156,13 +156,13 @@
     'use strict';
 
     angular
-        .module('app.lazyload', []);
+        .module('app.locale', []);
 })();
 (function() {
     'use strict';
 
     angular
-        .module('app.locale', []);
+        .module('app.lazyload', []);
 })();
 (function() {
     'use strict';
@@ -180,12 +180,6 @@
     'use strict';
 
     angular
-        .module('app.navsearch', []);
-})();
-(function() {
-    'use strict';
-
-    angular
         .module('app.maps', []);
 })();
 (function() {
@@ -198,13 +192,19 @@
     'use strict';
 
     angular
-        .module('app.panels', []);
+        .module('app.navsearch', []);
 })();
 (function() {
     'use strict';
 
     angular
         .module('app.pages', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.panels', []);
 })();
 (function() {
     'use strict';
@@ -230,12 +230,6 @@
     'use strict';
 
     angular
-        .module('app.settings', []);
-})();
-(function() {
-    'use strict';
-
-    angular
         .module('app.routes', [
             'app.lazyload'
         ]);
@@ -244,13 +238,19 @@
     'use strict';
 
     angular
-        .module('app.tables', []);
+        .module('app.settings', []);
 })();
 (function() {
     'use strict';
 
     angular
         .module('app.sidebar', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.tables', []);
 })();
 (function() {
     'use strict';
@@ -5633,6 +5633,727 @@ if ($localStorage.currentUser) {
 //         return this._isAuthenticated;
 //     }
 // });
+/**=========================================================
+ * Module: modals.js
+ * Provides a simple way to implement bootstrap modals from templates
+ =========================================================*/
+(function() {
+    'use strict';
+
+    angular
+        .module('app.employees')
+        .controller('CreateEmplController', CreateEmplController);
+
+    CreateEmplController.$inject = ['$uibModal'];
+    function CreateEmplController($uibModal) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          vm.open = function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: '/myModalContent.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+
+
+
+
+            var state = $('#modal-state');
+            modalInstance.result.then(function () {
+              state.text('Modal dismissed with OK status');
+            }, function () {
+              state.text('Modal dismissed with Cancel status');
+            });
+          };
+
+
+
+   vm.show= function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'ModalContent.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+
+
+
+
+            var state = $('#modal-state');
+            modalInstance.result.then(function () {
+              state.text('Modal dismissed with OK status');
+            }, function () {
+              state.text('Modal dismissed with Cancel status');
+            });
+          };
+
+
+ vm.showStatutory= function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'StatutoryModalContent.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+
+
+
+
+            var state = $('#modal-state');
+            modalInstance.result.then(function () {
+              state.text('Modal dismissed with OK status');
+            }, function () {
+              state.text('Modal dismissed with Cancel status');
+            });
+          };
+
+          vm.showloans= function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'loansModalContent.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+          };
+
+           vm.showpension= function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'PensionModalContent.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+          };
+
+        vm.display= function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'template.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+          };
+
+
+          vm.add= function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'add.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+          };
+
+           vm.more= function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'mytemplate.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+          };
+
+
+           vm.info= function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'myContent.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+          };
+
+
+          // Please note that $uibModalInstance represents a modal window (instance) dependency.
+          // It is not the same as the $uibModal service used above.
+
+          ModalInstanceCtrl.$inject = ['$scope', '$uibModalInstance'];
+          function ModalInstanceCtrl($scope, $uibModalInstance) {
+          
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+
+              $scope.submitEmpMaster = function() {
+                console.log($scope.description);
+        
+        // UserService.save($scope.empMaster);
+  };
+          }
+        }
+    }
+
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.bootstrapui')
+        .controller('EmployeesDetailsController', EmployeesDetailsController);
+
+EmployeesDetailsController.$inject = ['$stateParams', '$state','$http','$scope', '$uibModal','EmployeeService'];
+    function EmployeesDetailsController($stateParams, $state,$http,$scope, $uibModal, EmployeeService) {
+      
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+ 
+           var empid=$stateParams.Employee;
+
+           console.log( empid);
+            if(empid!=null){
+           $scope.currentemployee=EmployeeService.get({id:empid});
+          }
+           
+         
+          
+
+
+     
+
+
+
+
+  
+
+
+ 
+
+
+        }
+    }
+
+})();
+
+
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.employees')
+        .controller('EmployeesController', EmployeesController);
+
+EmployeesController.$inject = ['$stateParams', '$rootScope','$state','$http','$scope', '$uibModal','EmployeeService','jadaApiUrl'];
+    function EmployeesController($stateParams, $rootScope,$state,$http,$scope, $uibModal, EmployeeService,jadaApiUrl) {
+      
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+
+             $scope.today = function() {
+             $scope.dt = new Date();
+          };
+          $scope.today();
+
+       $scope.clear = function () {
+           $scope.dt = null;
+          };
+
+          // Disable weekend selection
+         $scope.disabled = function(date, mode) {
+            return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+          };
+
+         $scope.toggleMin = function() {
+           $scope.minDate =  $scope.minDate ? null : new Date();
+          };
+          $scope.toggleMin();
+
+       $scope.open = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+        $scope.opened = true;
+          };
+
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1
+          };
+
+         $scope.initDate = new Date('2019-10-20');
+        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+        $scope.format =  $scope.formats[0];
+        
+           var SuccessMsg;
+            var errorMsg;
+
+           var id = $stateParams.EmployeeId;
+      
+          if(id!=null){
+           $scope.employee=EmployeeService.get({id:id}); 
+          }
+           
+          
+        $scope.employees=EmployeeService.query();
+
+
+  $scope.loadEmployees = function () {
+          $scope.employees=EmployeeService.query();
+
+   }
+
+ $rootScope.$on("CallLoadEmployees", function(){
+           $scope.loadEmployees();
+        });
+
+
+$http.get(jadaApiUrl+'api/department').success(function(data) {
+              $scope.departments = data;
+
+            });
+
+
+$http.get(jadaApiUrl+'api/costcenter').success(function(data) {
+              $scope.centers = data;
+
+            });
+
+$http.get(jadaApiUrl+'api/employeegroup').success(function(data) {
+              $scope.groups = data;
+
+            });
+
+$http.get(jadaApiUrl+'api/employeecategory').success(function(data) {
+              $scope.categories = data;
+
+            });
+
+$http.get(jadaApiUrl+'api/bankbranchcode').success(function(data) {
+              $scope.bankcodes = data;
+              console.log($scope.bankcodes)
+
+            });
+
+
+
+$scope.updateBankCodes=function(id){
+  
+  $scope.bankBranchName=[];
+  for(var r=0;r<$scope.bankcodes.length;r++){
+    if($scope.bankcodes[r].bankCode==id){
+      $scope.bankBranchName.push($scope.bankcodes[r]);
+      console.log($scope.bankcodes[r]);
+    }
+
+    console.log("///////////////////////////////////");
+
+    console.log($scope.bankBranchName);
+  }
+
+  
+}
+
+$http.get(jadaApiUrl+'api/paypoint').success(function(data) {
+              $scope.points = data;
+
+            });
+
+       $scope.empMaster= new EmployeeService();
+            $scope.submitEmpMaster = function() {
+              $scope.empMaster.$save().then(function(data){
+                var response=angular.fromJson(data);
+          
+            if(response.Status=="1"){
+                   $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+            }else{
+           
+                    $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+    
+            }
+                  $scope.loadEmployees();
+
+              },
+               function() {
+                $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+             
+        };
+
+         $scope.delete= function (employee) {
+            employee.$remove().then(function () {
+             $scope.loadEmployees();
+
+            });
+            }
+
+
+               
+            $scope.updateEmpMaster=function(employee){
+             employee.$update().then(function(){
+                     $scope.loadEmployees();
+            },
+              function() {
+                 $scope.errorMsg = 'Server Request Error';
+                });
+          
+              };
+        
+
+
+       $scope.departments = [];
+       $scope.selectDepartments= function() {
+           $rootScope.$emit("CallLoadDepartment", {});
+          };
+
+
+   
+
+
+ 
+
+
+        }
+    }
+
+})();
+
+
+
+
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.employees')
+        .factory('EmployeeService', EmployeeService);
+
+    EmployeeService.$inject = ['$resource','jadaApiUrl'];
+    function EmployeeService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/employee/:id', {id: '@id'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.employees')
+        .filter('unique', function() { 
+                
+        return function(input, key) {
+        var unique = {};
+        var uniqueList = [];
+        for(var i = 0; i < input.length; i++){
+            if(typeof unique[input[i][key]] == "undefined"){
+                unique[input[i][key]] = "";
+                uniqueList.push(input[i]);
+            }
+        }
+        return uniqueList;
+    };
+});
+
+
+
+
+         
+   
+})();
+
+
+
+
+// (function() {
+//     'use strict';
+
+//     angular
+//         .module('app.employees')
+//         .controller('ModalInstanceCtrl',['$scope', '$uibModalInstance', 'items',  function($scope, $uibModalInstance, items) { 
+                
+//       $scope.items = items;
+//   $scope.editable = items[0];
+
+//   $scope.ok = function() {
+//     $modalInstance.close($scope.editable);
+//   };
+
+//   $scope.cancel = function() {
+//     $modalInstance.dismiss(false);
+//   };
+         
+//     }]);
+// })();
+
+
+
+
+// angle.filter('unique', function() {
+//     return function(input, key) {
+//         var unique = {};
+//         var uniqueList = [];
+//         for(var i = 0; i < input.length; i++){
+//             if(typeof unique[input[i][key]] == "undefined"){
+//                 unique[input[i][key]] = "";
+//                 uniqueList.push(input[i]);
+//             }
+//         }
+//         return uniqueList;
+//     };
+// });
+
+
+
+// (function() {
+//     'use strict';
+
+//     angular
+//         .module('app.employees')
+//         .filter('unique', unique);
+
+
+//     function unique() {
+//    return function(input, key) {
+//         var unique = {};
+//         var uniqueList = [];
+//         for(var i = 0; i < input.length; i++){
+//             if(typeof unique[input[i][key]] == "undefined"){
+//                 unique[input[i][key]] = "";
+//                 uniqueList.push(input[i]);
+//             }
+//         }
+//         return uniqueList;
+//     };   
+       
+//     }
+
+// })();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.employees')
+        .controller('UpdateDemoCtrl', ["$scope", "$http", "$uibModal", "$log", "UserService", function($scope, $http, $uibModal, $log, UserService) { 
+                
+         $scope.data = {
+    name: '',
+    serial: ''
+  };
+  $scope.didSelect = false;
+  $scope.items = [{
+    name: '1',
+    serial: '1s'
+  }, {
+    name: '2',
+    serial: '2s'
+  }, {
+    name: '3',
+    serial: '3s'
+  }];
+  
+  $scope.open = function() {
+
+    var modalInstance = $uibModal.open({
+      templateUrl: 'myModalContent.html',
+      controller: 'ModalInstanceCtrl',
+      resolve: {
+        items: function() {
+          return $scope.items;
+        }
+      }
+    });
+
+    modalInstance.result.then(function(selectedItem) {
+      $scope.selected = selectedItem;
+
+
+    console.log(selectedItem);
+ if(selectedItem) {
+         $scope.data.name = $scope.selected.name;
+      $scope.data.serial = $scope.selected.serial;
+      $scope.didSelect = true;
+ }
+
+
+    }, function(result) {
+      $log.info('Modal dismissed at: ' + new Date());
+      $scope.didSelect = false;
+    });
+  };
+}]);
+
+
+
+
+         
+   
+})();
+
+
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.employees')
+        .controller('ModalInstanceCtrl',['$scope', '$uibModalInstance', 'items',  function($scope, $uibModalInstance, items) { 
+                
+      $scope.items = items;
+  $scope.editable = items[0];
+
+  $scope.ok = function() {
+    $modalInstance.close($scope.editable);
+  };
+
+  $scope.cancel = function() {
+    $modalInstance.dismiss(false);
+  };
+         
+    }]);
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.employees')
+        .controller('UserInfo', ["$scope", "$http", "$uibModal", "$log", "UserService", function($scope, $http, $uibModal, $log, UserService) { 
+                
+         // var usersdata= $http.get('https://jsonplaceholder.typicode.com/users');
+         // usersdata.then(function(result){
+         //   $scope.users=result.data;
+         // })
+         $scope.users=UserService.query();
+
+         $scope.setDataForUsers=function(userId) {
+          $scope.oneUser=UserService.get({user:userId});
+
+         };
+
+$scope.searchEmp=function(userId) {
+   $scope.oneUser=UserService.get({user:userId});
+ 
+ };
+
+          $scope.open = function (size) {
+
+    var modalInstance = $uibModal.open({
+      templateUrl: 'myModalContent.html',
+      controller: 'ModalInstanceCtrl',
+      size: size,
+      resolve: {
+        users: function () {
+          return $scope.users;
+        },
+        user: function(){
+          return size;
+        }
+      }
+    });
+
+  };
+
+
+
+
+
+          $scope.show = function (size) {
+
+    var modalInstance = $uibModal.open({  
+      templateUrl: 'ModalContent.html',
+      controller: 'ModalInstanceCtrl',
+      size: size
+    
+    });
+
+  };
+         
+    }]);
+})();
+
+
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.employees')
+        .controller('ModalInstanceCtrl',['$scope', '$uibModalInstance', 'users', 'user', function($scope, $uibModalInstance, users, user) { 
+                
+         console.log(user);
+  $scope.user = user;
+  
+  $scope.users = users;
+  $scope.selected = {
+   user: $scope.users[0]
+  };
+
+  $scope.ok = function () {
+    $uibModalInstance.close($scope.selected.user);
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+         
+    }]);
+})();
+
+// (function() {
+//     'use strict';
+
+//     angular
+//         .module('app.employees')
+//         .controller('UserInfo', function($scope, $http, UserService) { 
+                
+//          // var usersdata= $http.get('https://jsonplaceholder.typicode.com/users');
+//          // usersdata.then(function(result){
+//          //  $scope.users=result.data;
+//          // })
+//          $scope.users=UserService.query();
+
+//          $scope.setDataForUsers=function(userId) {
+//            $scope.oneUser=UserService.get({user:userId});
+
+//          };
+         
+//     });
+// })();
 
 (function() {
     'use strict';
@@ -6619,726 +7340,66 @@ if ($localStorage.currentUser) {
 })();
 
 /**=========================================================
- * Module: modals.js
- * Provides a simple way to implement bootstrap modals from templates
+ * Module: flatdoc.js
+ * Creates the flatdoc markup and initializes the plugin
  =========================================================*/
-(function() {
-    'use strict';
-
-    angular
-        .module('app.employees')
-        .controller('CreateEmplController', CreateEmplController);
-
-    CreateEmplController.$inject = ['$uibModal'];
-    function CreateEmplController($uibModal) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          vm.open = function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: '/myModalContent.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-
-
-
-
-            var state = $('#modal-state');
-            modalInstance.result.then(function () {
-              state.text('Modal dismissed with OK status');
-            }, function () {
-              state.text('Modal dismissed with Cancel status');
-            });
-          };
-
-
-
-   vm.show= function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'ModalContent.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-
-
-
-
-            var state = $('#modal-state');
-            modalInstance.result.then(function () {
-              state.text('Modal dismissed with OK status');
-            }, function () {
-              state.text('Modal dismissed with Cancel status');
-            });
-          };
-
-
- vm.showStatutory= function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'StatutoryModalContent.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-
-
-
-
-            var state = $('#modal-state');
-            modalInstance.result.then(function () {
-              state.text('Modal dismissed with OK status');
-            }, function () {
-              state.text('Modal dismissed with Cancel status');
-            });
-          };
-
-          vm.showloans= function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'loansModalContent.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-          };
-
-           vm.showpension= function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'PensionModalContent.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-          };
-
-        vm.display= function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'template.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-          };
-
-
-          vm.add= function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'add.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-          };
-
-           vm.more= function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'mytemplate.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-          };
-
-
-           vm.info= function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'myContent.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-          };
-
-
-          // Please note that $uibModalInstance represents a modal window (instance) dependency.
-          // It is not the same as the $uibModal service used above.
-
-          ModalInstanceCtrl.$inject = ['$scope', '$uibModalInstance'];
-          function ModalInstanceCtrl($scope, $uibModalInstance) {
-          
-            $scope.ok = function () {
-              $uibModalInstance.close('closed');
-            };
-
-            $scope.cancel = function () {
-              $uibModalInstance.dismiss('cancel');
-            };
-
-              $scope.submitEmpMaster = function() {
-                console.log($scope.description);
-        
-        // UserService.save($scope.empMaster);
-  };
-          }
-        }
-    }
-
-})();
-
 
 (function() {
     'use strict';
 
     angular
-        .module('app.bootstrapui')
-        .controller('EmployeesDetailsController', EmployeesDetailsController);
+        .module('app.flatdoc')
+        .directive('flatdoc', flatdoc);
 
-EmployeesDetailsController.$inject = ['$stateParams', '$state','$http','$scope', '$uibModal','EmployeeService'];
-    function EmployeesDetailsController($stateParams, $state,$http,$scope, $uibModal, EmployeeService) {
-      
-        var vm = this;
+    function flatdoc() {
 
-        activate();
-
-        ////////////////
-
-        function activate() {
-
- 
-           var empid=$stateParams.Employee;
-
-           console.log( empid);
-            if(empid!=null){
-           $scope.currentemployee=EmployeeService.get({id:empid});
-          }
-           
-         
-          
-
-
-     
-
-
-
-
-  
-
-
- 
-
-
-        }
-    }
-
-})();
-
-
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.employees')
-        .controller('EmployeesController', EmployeesController);
-
-EmployeesController.$inject = ['$stateParams', '$rootScope','$state','$http','$scope', '$uibModal','EmployeeService','jadaApiUrl'];
-    function EmployeesController($stateParams, $rootScope,$state,$http,$scope, $uibModal, EmployeeService,jadaApiUrl) {
-      
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-
-             $scope.today = function() {
-             $scope.dt = new Date();
-          };
-          $scope.today();
-
-       $scope.clear = function () {
-           $scope.dt = null;
-          };
-
-          // Disable weekend selection
-         $scope.disabled = function(date, mode) {
-            return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-          };
-
-         $scope.toggleMin = function() {
-           $scope.minDate =  $scope.minDate ? null : new Date();
-          };
-          $scope.toggleMin();
-
-       $scope.open = function($event) {
-            $event.preventDefault();
-            $event.stopPropagation();
-
-        $scope.opened = true;
-          };
-
-        $scope.dateOptions = {
-            formatYear: 'yy',
-            startingDay: 1
-          };
-
-         $scope.initDate = new Date('2019-10-20');
-        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-        $scope.format =  $scope.formats[0];
-        
-           var SuccessMsg;
-            var errorMsg;
-
-           var id = $stateParams.EmployeeId;
-      
-          if(id!=null){
-           $scope.employee=EmployeeService.get({id:id}); 
-          }
-           
-          
-        $scope.employees=EmployeeService.query();
-
-
-  $scope.loadEmployees = function () {
-          $scope.employees=EmployeeService.query();
-
-   }
-
- $rootScope.$on("CallLoadEmployees", function(){
-           $scope.loadEmployees();
-        });
-
-
-$http.get(jadaApiUrl+'api/department').success(function(data) {
-              $scope.departments = data;
-
-            });
-
-
-$http.get(jadaApiUrl+'api/costcenter').success(function(data) {
-              $scope.centers = data;
-
-            });
-
-$http.get(jadaApiUrl+'api/employeegroup').success(function(data) {
-              $scope.groups = data;
-
-            });
-
-$http.get(jadaApiUrl+'api/employeecategory').success(function(data) {
-              $scope.categories = data;
-
-            });
-
-$http.get(jadaApiUrl+'api/bankbranchcode').success(function(data) {
-              $scope.bankcodes = data;
-              console.log($scope.bankcodes)
-
-            });
-
-
-
-$scope.updateBankCodes=function(id){
-  
-  $scope.bankBranchName=[];
-  for(var r=0;r<$scope.bankcodes.length;r++){
-    if($scope.bankcodes[r].bankCode==id){
-      $scope.bankBranchName.push($scope.bankcodes[r]);
-      console.log($scope.bankcodes[r]);
-    }
-
-    console.log("///////////////////////////////////");
-
-    console.log($scope.bankBranchName);
-  }
-
-  
-}
-
-$http.get(jadaApiUrl+'api/paypoint').success(function(data) {
-              $scope.points = data;
-
-            });
-
-       $scope.empMaster= new EmployeeService();
-            $scope.submitEmpMaster = function() {
-              $scope.empMaster.$save().then(function(data){
-                var response=angular.fromJson(data);
-          
-            if(response.Status=="1"){
-                   $scope.errorMsg=false;
-                    $scope.SuccessMsg =response.Message;
-            }else{
-           
-                    $scope.SuccessMsg=false;
-                   $scope.errorMsg=response.Message;
-    
-            }
-                  $scope.loadEmployees();
-
-              },
-               function() {
-                $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
-             
+        var directive = {
+            template: '<div role="flatdoc"><div role="flatdoc-menu"></div><div role="flatdoc-content"></div></div>',
+            link: link,
+            restrict: 'EA'
         };
+        return directive;
 
-         $scope.delete= function (employee) {
-            employee.$remove().then(function () {
-             $scope.loadEmployees();
+        function link(scope, element, attrs) {
+
+            Flatdoc.run({
+                fetcher: Flatdoc.file(attrs.src)
+            });
+
+            var $root = $('html, body');
+            var menuLinks;
+
+            var $doc = $(document).on('flatdoc:ready', function() {
+
+                var docMenu = $('[role="flatdoc-menu"]');
+
+                menuLinks = docMenu.find('a').on('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    var $this = $(this);
+
+                    docMenu.find('a.active').removeClass('active');
+                    $this.addClass('active');
+
+                    $root.animate({
+                        scrollTop: $(this.getAttribute('href')).offset().top - ($('.topnavbar').height() + 10)
+                    }, 800);
+                });
 
             });
-            }
 
-
-               
-            $scope.updateEmpMaster=function(employee){
-             employee.$update().then(function(){
-                     $scope.loadEmployees();
-            },
-              function() {
-                 $scope.errorMsg = 'Server Request Error';
-                });
-          
-              };
-        
-
-
-       $scope.departments = [];
-       $scope.selectDepartments= function() {
-           $rootScope.$emit("CallLoadDepartment", {});
-          };
-
-
-   
-
-
- 
-
+            // dettach all events
+            scope.$on('$destroy', function() {
+                menuLinks && menuLinks.off();
+                $doc.off('flatdoc:ready');
+            });
 
         }
     }
 
 })();
 
-
-
-
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.employees')
-        .factory('EmployeeService', EmployeeService);
-
-    EmployeeService.$inject = ['$resource','jadaApiUrl'];
-    function EmployeeService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/employee/:id', {id: '@id'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.employees')
-        .filter('unique', function() { 
-                
-        return function(input, key) {
-        var unique = {};
-        var uniqueList = [];
-        for(var i = 0; i < input.length; i++){
-            if(typeof unique[input[i][key]] == "undefined"){
-                unique[input[i][key]] = "";
-                uniqueList.push(input[i]);
-            }
-        }
-        return uniqueList;
-    };
-});
-
-
-
-
-         
-   
-})();
-
-
-
-
-// (function() {
-//     'use strict';
-
-//     angular
-//         .module('app.employees')
-//         .controller('ModalInstanceCtrl',['$scope', '$uibModalInstance', 'items',  function($scope, $uibModalInstance, items) { 
-                
-//       $scope.items = items;
-//   $scope.editable = items[0];
-
-//   $scope.ok = function() {
-//     $modalInstance.close($scope.editable);
-//   };
-
-//   $scope.cancel = function() {
-//     $modalInstance.dismiss(false);
-//   };
-         
-//     }]);
-// })();
-
-
-
-
-// angle.filter('unique', function() {
-//     return function(input, key) {
-//         var unique = {};
-//         var uniqueList = [];
-//         for(var i = 0; i < input.length; i++){
-//             if(typeof unique[input[i][key]] == "undefined"){
-//                 unique[input[i][key]] = "";
-//                 uniqueList.push(input[i]);
-//             }
-//         }
-//         return uniqueList;
-//     };
-// });
-
-
-
-// (function() {
-//     'use strict';
-
-//     angular
-//         .module('app.employees')
-//         .filter('unique', unique);
-
-
-//     function unique() {
-//    return function(input, key) {
-//         var unique = {};
-//         var uniqueList = [];
-//         for(var i = 0; i < input.length; i++){
-//             if(typeof unique[input[i][key]] == "undefined"){
-//                 unique[input[i][key]] = "";
-//                 uniqueList.push(input[i]);
-//             }
-//         }
-//         return uniqueList;
-//     };   
-       
-//     }
-
-// })();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.employees')
-        .controller('UpdateDemoCtrl', ["$scope", "$http", "$uibModal", "$log", "UserService", function($scope, $http, $uibModal, $log, UserService) { 
-                
-         $scope.data = {
-    name: '',
-    serial: ''
-  };
-  $scope.didSelect = false;
-  $scope.items = [{
-    name: '1',
-    serial: '1s'
-  }, {
-    name: '2',
-    serial: '2s'
-  }, {
-    name: '3',
-    serial: '3s'
-  }];
-  
-  $scope.open = function() {
-
-    var modalInstance = $uibModal.open({
-      templateUrl: 'myModalContent.html',
-      controller: 'ModalInstanceCtrl',
-      resolve: {
-        items: function() {
-          return $scope.items;
-        }
-      }
-    });
-
-    modalInstance.result.then(function(selectedItem) {
-      $scope.selected = selectedItem;
-
-
-    console.log(selectedItem);
- if(selectedItem) {
-         $scope.data.name = $scope.selected.name;
-      $scope.data.serial = $scope.selected.serial;
-      $scope.didSelect = true;
- }
-
-
-    }, function(result) {
-      $log.info('Modal dismissed at: ' + new Date());
-      $scope.didSelect = false;
-    });
-  };
-}]);
-
-
-
-
-         
-   
-})();
-
-
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.employees')
-        .controller('ModalInstanceCtrl',['$scope', '$uibModalInstance', 'items',  function($scope, $uibModalInstance, items) { 
-                
-      $scope.items = items;
-  $scope.editable = items[0];
-
-  $scope.ok = function() {
-    $modalInstance.close($scope.editable);
-  };
-
-  $scope.cancel = function() {
-    $modalInstance.dismiss(false);
-  };
-         
-    }]);
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.employees')
-        .controller('UserInfo', ["$scope", "$http", "$uibModal", "$log", "UserService", function($scope, $http, $uibModal, $log, UserService) { 
-                
-         // var usersdata= $http.get('https://jsonplaceholder.typicode.com/users');
-         // usersdata.then(function(result){
-         //   $scope.users=result.data;
-         // })
-         $scope.users=UserService.query();
-
-         $scope.setDataForUsers=function(userId) {
-          $scope.oneUser=UserService.get({user:userId});
-
-         };
-
-$scope.searchEmp=function(userId) {
-   $scope.oneUser=UserService.get({user:userId});
- 
- };
-
-          $scope.open = function (size) {
-
-    var modalInstance = $uibModal.open({
-      templateUrl: 'myModalContent.html',
-      controller: 'ModalInstanceCtrl',
-      size: size,
-      resolve: {
-        users: function () {
-          return $scope.users;
-        },
-        user: function(){
-          return size;
-        }
-      }
-    });
-
-  };
-
-
-
-
-
-          $scope.show = function (size) {
-
-    var modalInstance = $uibModal.open({  
-      templateUrl: 'ModalContent.html',
-      controller: 'ModalInstanceCtrl',
-      size: size
-    
-    });
-
-  };
-         
-    }]);
-})();
-
-
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.employees')
-        .controller('ModalInstanceCtrl',['$scope', '$uibModalInstance', 'users', 'user', function($scope, $uibModalInstance, users, user) { 
-                
-         console.log(user);
-  $scope.user = user;
-  
-  $scope.users = users;
-  $scope.selected = {
-   user: $scope.users[0]
-  };
-
-  $scope.ok = function () {
-    $uibModalInstance.close($scope.selected.user);
-  };
-
-  $scope.cancel = function () {
-    $uibModalInstance.dismiss('cancel');
-  };
-         
-    }]);
-})();
-
-// (function() {
-//     'use strict';
-
-//     angular
-//         .module('app.employees')
-//         .controller('UserInfo', function($scope, $http, UserService) { 
-                
-//          // var usersdata= $http.get('https://jsonplaceholder.typicode.com/users');
-//          // usersdata.then(function(result){
-//          //  $scope.users=result.data;
-//          // })
-//          $scope.users=UserService.query();
-
-//          $scope.setDataForUsers=function(userId) {
-//            $scope.oneUser=UserService.get({user:userId});
-
-//          };
-         
-//     });
-// })();
 /**=========================================================
  * Module: article.js
  =========================================================*/
@@ -8885,67 +8946,6 @@ $scope.searchEmp=function(userId) {
 })();
 
 /**=========================================================
- * Module: flatdoc.js
- * Creates the flatdoc markup and initializes the plugin
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.flatdoc')
-        .directive('flatdoc', flatdoc);
-
-    function flatdoc() {
-
-        var directive = {
-            template: '<div role="flatdoc"><div role="flatdoc-menu"></div><div role="flatdoc-content"></div></div>',
-            link: link,
-            restrict: 'EA'
-        };
-        return directive;
-
-        function link(scope, element, attrs) {
-
-            Flatdoc.run({
-                fetcher: Flatdoc.file(attrs.src)
-            });
-
-            var $root = $('html, body');
-            var menuLinks;
-
-            var $doc = $(document).on('flatdoc:ready', function() {
-
-                var docMenu = $('[role="flatdoc-menu"]');
-
-                menuLinks = docMenu.find('a').on('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    var $this = $(this);
-
-                    docMenu.find('a.active').removeClass('active');
-                    $this.addClass('active');
-
-                    $root.animate({
-                        scrollTop: $(this.getAttribute('href')).offset().top - ($('.topnavbar').height() + 10)
-                    }, 800);
-                });
-
-            });
-
-            // dettach all events
-            scope.$on('$destroy', function() {
-                menuLinks && menuLinks.off();
-                $doc.off('flatdoc:ready');
-            });
-
-        }
-    }
-
-})();
-
-/**=========================================================
  * Module: skycons.js
  * Include any animated weather icon from Skycons
  =========================================================*/
@@ -9022,6 +9022,59 @@ $scope.searchEmp=function(userId) {
     }
 
 })();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.locale')
+        .config(localeConfig)
+        ;
+    localeConfig.$inject = ['tmhDynamicLocaleProvider'];
+    function localeConfig(tmhDynamicLocaleProvider){
+  
+      tmhDynamicLocaleProvider.localeLocationPattern('vendor/angular-i18n/angular-locale_{{locale}}.js');
+      // tmhDynamicLocaleProvider.useStorage('$cookieStore');
+
+    }
+})();
+/**=========================================================
+ * Module: locale.js
+ * Demo for locale settings
+ =========================================================*/
+(function() {
+    'use strict';
+
+    angular
+        .module('app.locale')
+        .controller('LocalizationController', LocalizationController);
+
+    LocalizationController.$inject = ['$rootScope', 'tmhDynamicLocale', '$locale'];
+    function LocalizationController($rootScope, tmhDynamicLocale, $locale) {
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          $rootScope.availableLocales = {
+            'en': 'English',
+            'es': 'Spanish',
+            'de': 'German',
+            'fr': 'French',
+            'ar': 'Arabic',
+            'ja': 'Japanese',
+            'ko': 'Korean',
+            'zh': 'Chinese'};
+          
+          $rootScope.model = {selectedLocale: 'en'};
+          
+          $rootScope.$locale = $locale;
+          
+          $rootScope.changeLocale = tmhDynamicLocale.set;
+        }
+    }
+})();
+
 (function() {
     'use strict';
 
@@ -9190,59 +9243,6 @@ $scope.searchEmp=function(userId) {
         })
         ;
 
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.locale')
-        .config(localeConfig)
-        ;
-    localeConfig.$inject = ['tmhDynamicLocaleProvider'];
-    function localeConfig(tmhDynamicLocaleProvider){
-  
-      tmhDynamicLocaleProvider.localeLocationPattern('vendor/angular-i18n/angular-locale_{{locale}}.js');
-      // tmhDynamicLocaleProvider.useStorage('$cookieStore');
-
-    }
-})();
-/**=========================================================
- * Module: locale.js
- * Demo for locale settings
- =========================================================*/
-(function() {
-    'use strict';
-
-    angular
-        .module('app.locale')
-        .controller('LocalizationController', LocalizationController);
-
-    LocalizationController.$inject = ['$rootScope', 'tmhDynamicLocale', '$locale'];
-    function LocalizationController($rootScope, tmhDynamicLocale, $locale) {
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          $rootScope.availableLocales = {
-            'en': 'English',
-            'es': 'Spanish',
-            'de': 'German',
-            'fr': 'French',
-            'ar': 'Arabic',
-            'ja': 'Japanese',
-            'ko': 'Korean',
-            'zh': 'Chinese'};
-          
-          $rootScope.model = {selectedLocale: 'en'};
-          
-          $rootScope.$locale = $locale;
-          
-          $rootScope.changeLocale = tmhDynamicLocale.set;
-        }
-    }
 })();
 
 /**=========================================================
@@ -10328,115 +10328,6 @@ $scope.banks=bankcodeService.query();
 
 })();
 /**=========================================================
- * Module: navbar-search.js
- * Navbar search toggler * Auto dismiss on ESC key
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.navsearch')
-        .directive('searchOpen', searchOpen)
-        .directive('searchDismiss', searchDismiss);
-
-    //
-    // directives definition
-    // 
-    
-    function searchOpen () {
-        var directive = {
-            controller: searchOpenController,
-            restrict: 'A'
-        };
-        return directive;
-
-    }
-
-    function searchDismiss () {
-        var directive = {
-            controller: searchDismissController,
-            restrict: 'A'
-        };
-        return directive;
-        
-    }
-
-    //
-    // Contrller definition
-    // 
-    
-    searchOpenController.$inject = ['$scope', '$element', 'NavSearch'];
-    function searchOpenController ($scope, $element, NavSearch) {
-      $element
-        .on('click', function (e) { e.stopPropagation(); })
-        .on('click', NavSearch.toggle);
-    }
-
-    searchDismissController.$inject = ['$scope', '$element', 'NavSearch'];
-    function searchDismissController ($scope, $element, NavSearch) {
-      
-      var inputSelector = '.navbar-form input[type="text"]';
-
-      $(inputSelector)
-        .on('click', function (e) { e.stopPropagation(); })
-        .on('keyup', function(e) {
-          if (e.keyCode === 27) // ESC
-            NavSearch.dismiss();
-        });
-        
-      // click anywhere closes the search
-      $(document).on('click', NavSearch.dismiss);
-      // dismissable options
-      $element
-        .on('click', function (e) { e.stopPropagation(); })
-        .on('click', NavSearch.dismiss);
-    }
-
-})();
-
-
-/**=========================================================
- * Module: nav-search.js
- * Services to share navbar search functions
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.navsearch')
-        .service('NavSearch', NavSearch);
-
-    function NavSearch() {
-        this.toggle = toggle;
-        this.dismiss = dismiss;
-
-        ////////////////
-
-        var navbarFormSelector = 'form.navbar-form';
-
-        function toggle() {
-          var navbarForm = $(navbarFormSelector);
-
-          navbarForm.toggleClass('open');
-
-          var isOpen = navbarForm.hasClass('open');
-
-          navbarForm.find('input')[isOpen ? 'focus' : 'blur']();
-        }
-
-        function dismiss() {
-          $(navbarFormSelector)
-            .removeClass('open') // Close control
-            .find('input[type="text"]').blur() // remove focus
-            // .val('') // Empty input
-            ;
-        }
-    }
-})();
-
-/**=========================================================
  * Module: modals.js
  * Provides a simple way to implement bootstrap modals from templates
  =========================================================*/
@@ -11009,6 +10900,593 @@ $scope.banks=bankcodeService.query();
 }(jQuery));
 
 /**=========================================================
+ * Module: navbar-search.js
+ * Navbar search toggler * Auto dismiss on ESC key
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.navsearch')
+        .directive('searchOpen', searchOpen)
+        .directive('searchDismiss', searchDismiss);
+
+    //
+    // directives definition
+    // 
+    
+    function searchOpen () {
+        var directive = {
+            controller: searchOpenController,
+            restrict: 'A'
+        };
+        return directive;
+
+    }
+
+    function searchDismiss () {
+        var directive = {
+            controller: searchDismissController,
+            restrict: 'A'
+        };
+        return directive;
+        
+    }
+
+    //
+    // Contrller definition
+    // 
+    
+    searchOpenController.$inject = ['$scope', '$element', 'NavSearch'];
+    function searchOpenController ($scope, $element, NavSearch) {
+      $element
+        .on('click', function (e) { e.stopPropagation(); })
+        .on('click', NavSearch.toggle);
+    }
+
+    searchDismissController.$inject = ['$scope', '$element', 'NavSearch'];
+    function searchDismissController ($scope, $element, NavSearch) {
+      
+      var inputSelector = '.navbar-form input[type="text"]';
+
+      $(inputSelector)
+        .on('click', function (e) { e.stopPropagation(); })
+        .on('keyup', function(e) {
+          if (e.keyCode === 27) // ESC
+            NavSearch.dismiss();
+        });
+        
+      // click anywhere closes the search
+      $(document).on('click', NavSearch.dismiss);
+      // dismissable options
+      $element
+        .on('click', function (e) { e.stopPropagation(); })
+        .on('click', NavSearch.dismiss);
+    }
+
+})();
+
+
+/**=========================================================
+ * Module: nav-search.js
+ * Services to share navbar search functions
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.navsearch')
+        .service('NavSearch', NavSearch);
+
+    function NavSearch() {
+        this.toggle = toggle;
+        this.dismiss = dismiss;
+
+        ////////////////
+
+        var navbarFormSelector = 'form.navbar-form';
+
+        function toggle() {
+          var navbarForm = $(navbarFormSelector);
+
+          navbarForm.toggleClass('open');
+
+          var isOpen = navbarForm.hasClass('open');
+
+          navbarForm.find('input')[isOpen ? 'focus' : 'blur']();
+        }
+
+        function dismiss() {
+          $(navbarFormSelector)
+            .removeClass('open') // Close control
+            .find('input[type="text"]').blur() // remove focus
+            // .val('') // Empty input
+            ;
+        }
+    }
+})();
+
+// /**=========================================================
+//  * Module: access-login.js
+//  * Demo for login api
+//  =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.pages')
+        .controller('LoginFormController', LoginFormController);
+
+    LoginFormController.$inject = ['$scope','$http', '$state','$localStorage','jadaApiUrl'];
+    function LoginFormController($scope, $http, $state,$localStorage,jadaApiUrl) {
+$scope.formlg={};
+
+
+  
+$scope.buttonText="Login";
+// $scope.login=function(){
+//   $scope.authMsg = '';
+// $scope.buttonText="Logging in. . .";
+// authService.login($scope.formlg.userName,  $scope.
+// formlg.password).then(function(data, status){
+   
+// alert(data);
+
+//    // if ( !response.token ) {
+//    //             vm.authMsg = 'Incorrect credentials.';
+//    //              }else{
+//    //              $state.go('app.dashboard');
+//    //              }
+              
+
+// },function(error,status){
+//  $scope.authMsg = 'Server Request Error';
+// }).finally(function(){
+// $scope.buttonText="Login";
+// });
+// }
+
+
+    // $scope.login = function () {
+    //                         var env = {
+    //                             username:$scope.formlg.username,
+    //                             DBName:$scope.formlg.DBName, 
+    //                             password:$scope.formlg.password
+    //                         };
+
+    //                         $http({
+    //                             method: 'POST',
+    //                             url: 'http://localhost:9418/jada/login',
+    //                             data: env,
+    //                             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    //                             transformRequest: function(obj) {
+    //                               var str = [];
+    //                               for(var p in obj)
+    //                               str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+    //                               return str.join("&");
+    //                             }
+    //                         }).
+    //                         then(function (data, status, headers, config) {
+    //                             $scope.postStatus = 'success: ' + data;
+    //                         },
+    //                         function (error, status, headers, config) {
+    //                             $scope.postStatus = 'error: ' + status;
+    //                         });
+                            
+    //                     }
+
+
+
+
+
+
+       $scope.login = function() {
+            $scope.authMsg = '';
+
+            if($scope.loginForm.$valid) {
+
+              $http
+                .post(jadaApiUrl+'api/login', {username: $scope.formlg.userName, password:$scope.formlg.password}).success(function(data){
+               $scope.buttonText="Logging in. . .";
+                  var response=angular.fromJson(data.response);
+                  var userAccount=angular.fromJson(data.userAccount);
+
+
+
+                  // alert(response.Message);  
+                  if(response.Status=="1"){
+                     if (data.token) {
+                        // store username and token in local storage to keep user logged in between page refreshes
+                        $localStorage.currentUser = { username: userAccount.userName, token: data.token ,accountRights:data.accountRights};
+                        
+                        // add jwt token to auth header for all requests made by the $http service
+                        $http.defaults.headers.common.Authorization = 'Bearer ' + data.token;
+
+                        // execute callback with true to indicate successful login
+                      
+                    }                    
+                    $state.go('app.dashboard')
+                  }  
+                  else{
+                    $scope.authMsg = response.Message;           
+                  }
+
+                    
+                })
+                // .then(function(result) {
+                
+                //   // assumes if ok, response is an object with some data, if not, a string with error
+                //   // customize according to your api
+                //   if ( !result.formlg) {
+                //    $scope.authMsg = 'Incorrect credentials.';
+                //   }else{
+                //     // $state.go('app.dashboard');
+                //       vm.authMsg = 'hellow';
+                //   }
+                //      alert(result.token);
+                // }, function() {
+                //   vm.authMsg = 'Server Request Error';
+                // });
+            
+            }
+            else {
+              // set as dirty if the user click directly to login so we show the validation messages
+              /*jshint -W106*/
+              vm.loginForm.account_email.$dirty = true;
+              vm.loginForm.account_password.$dirty = true;
+            }
+          };
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          // bind here all data from the form
+          vm.account = {};
+          // place the message if something goes wrong
+          vm.authMsg = '';
+
+         
+        }
+    }
+
+
+})();
+
+/**=========================================================
+ * Module: access-register.js
+ * Demo for register account api
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.pages')
+        .controller('RegisterFormController', RegisterFormController);
+
+    RegisterFormController.$inject = ['$scope','$http', '$state', 'register'];
+    function RegisterFormController($scope,$http, $state,register) {
+      // $scope.message=register.query();
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          // bind here all data from the form
+          vm.account = {};
+          // place the message if something goes wrong
+          vm.authMsg = '';
+
+          vm.auth=false;
+             vm.account= new register();
+  //     $scope.submitCompany = function() {
+  //       $scope.company.$save(function(){
+  //           console.log($scope.company.Company_Name);});
+  // }
+          vm.register = function() {
+            vm.authMsg = '';
+               vm.error='';
+
+            if(vm.registerForm.$valid) {
+              vm.account.$save(function(data){
+
+            var response=angular.fromJson(data);
+            console.log(response.Message);
+            vm.authMsg=response.Message;
+            if(response.Status=="1"){
+                    vm.authMsg =response.Message;
+            }else{
+              vm.auth=false;
+               
+                   vm.error=response.Message;
+              // vm.auth=true;
+            }
+            ;});
+
+              // $http
+              //   .post('api/account/register', {email: vm.account.email, password: vm.account.password})
+              //   .then(function(response) {
+              //     // assumes if ok, response is an object with some data, if not, a string with error
+              //     // customize according to your api
+              //     if (!response.account ) {
+              //       vm.authMsg = response;
+              //     }else{
+              //       $state.go('app.dashboard');
+              //     }
+              //   }, function() {
+              //     vm.authMsg = 'Server Request Error';
+              //   });
+            }
+            else {
+              // set as dirty if the user click directly to login so we show the validation messages
+              /*jshint -W106*/
+              vm.registerForm.password.$dirty = true;
+              vm.registerForm.account_password.$dirty = true;
+              // vm.registerForm.account_agreed.$dirty = true;
+              
+            }
+          };
+        }
+    }
+})();
+
+// (function () {
+//     'use strict';
+
+//     angular
+//         .module('app.pages')
+//         .factory('AuthenticationService', Service);
+
+//     function Service($http, $localStorage) {
+//         var service = {};
+
+//                          service.authMsg="";
+//         service.Login = Login;
+//         service.Logout = Logout;
+
+//         return service;
+
+//         function Login(username, password, callback) {
+//             $http.post('http://localhost:56135/api/login', { username: username, password: password })
+//                 .success(function (response) {
+
+//                     // login successful if there's a token in the response
+//                     if (response.token) {
+//                         // store username and token in local storage to keep user logged in between page refreshes
+//                         $localStorage.currentUser = { username: username, token: response.token, isAuthenticated:true };
+
+
+//                         // add jwt token to auth header for all requests made by the $http service
+//                         $http.defaults.headers.common.Authorization = 'Bearer ' + response.token;
+
+//                         // execute callback with true to indicate successful login
+//                         callback(true);
+//                     } else {
+//                         // execute callback with false to indicate failed login
+//                         callback(false);
+
+//                          service.authMsg = response;
+                     
+//                     }
+//                 });
+//         }
+
+//         function Logout() {
+//             // remove user from local storage and clear http auth header
+//             delete $localStorage.currentUser;
+//             $http.defaults.headers.common.Authorization = '';
+//         }
+//     }
+// })();
+
+
+//    // $http
+//    //              .post('api/account/register', {email: vm.account.email, password: vm.account.password})
+//    //              .then(function(response) {
+//    //                // assumes if ok, response is an object with some data, if not, a string with error
+//    //                // customize according to your api
+//    //                if (!response.account ) {
+//    //                  vm.authMsg = response;
+//    //                }else{
+//    //                  $state.go('app.dashboard');
+//    //                }
+//    //              }, function() {
+//    //                vm.authMsg = 'Server Request Error';
+//    //              });
+// angular.module('app.pages').factory('authService',
+// ['AUTH_ENDPOINT','LOGOUT_ENDPOINT','$http','$cookieStore',
+// function(AUTH_ENDPOINT,LOGOUT_ENDPOINT,$http,$cookieStore){
+// var auth={};
+
+// auth.login=function(username, password){
+// 	var env = {
+//                                 username:username,
+                                                    
+//                                 password:password
+//                             };
+//                          return $http({
+//                                 method: 'POST',
+//                                 url: 'http://localhost:56135/api/login',
+//                                 data: env,
+//                                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+//                                 transformRequest: function(obj) {
+//                                   var str = [];
+//                                   for(var p in obj)
+//                                   str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+//                                   return str.join("&");
+//                                 }
+//                             })
+//                            .then(function(response,status){
+
+//                             alert(response.token);
+//                             // login successful if there's a token in the response
+//                     if (response.token) {
+//                         // store username and token in local storage to keep user logged in between page refreshes
+//                         $localStorage.currentUser = { username: username, token: response.token };
+
+//                         // add jwt token to auth header for all requests made by the $http service
+//                         $http.defaults.headers.common.Authorization = 'Bearer ' + response.token;
+
+
+//                     }
+//                     //      auth.user=response.data;
+//                     // $cookieStore.put('user',auth.user);
+//                     //    return auth.postStatus = 'success: ' + status;
+//                       },
+//                             function (error, status, headers, config) {
+//                              return   auth.postStatus = 'error: ' + status;
+//                             });
+                            
+//                         }
+
+// // return $http.post(AUTH_ENDPOINT,{env},
+// // {
+// //     headers: {
+// //       'Content-Type': 'application/x-www-form-urlencoded'
+    
+// //     }
+// //   },{
+// //   	   transformRequest: function(obj) {
+// //                                   var str = [];
+// //                                   for(var p in obj)
+// //                                   str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+// //                                   return str.join("&");
+// //                                 }
+// //   }).then(function(response,status){
+// // auth.user=response.data;
+// // $cookieStore.put('user',auth.user);
+// // return auth.user;
+// // });
+// // }
+// auth.logout=function(){
+// return $http.post(LOGOUT_ENDPOINT).then(function(response){
+// auth.user=undefined;
+// $cookieStore.remove('user');
+// });
+// }
+// return auth;
+// }]);
+
+// angular.module('app.pages').value('AUTH_ENDPOINT',
+// 'http://localhost:56135/api/login');
+// angular.module('app.pages').value('LOGOUT_ENDPOINT',
+// 'http://spblogger-sitepointdemos.rhcloud.com/logout');
+// // 'http://spblogger-sitepointdemos.rhcloud.com/login');
+// (function () {
+//     'use strict';
+
+//     angular
+//         .module('app.pages')
+//         .controller('AuthLoginController', Controller);
+
+//     function Controller($location, AuthenticationService) {
+//         var vm = this;
+
+//         vm.login = login;
+
+//         initController();
+
+//         function initController() {
+//             // reset login status
+//             AuthenticationService.Logout();
+//         };
+
+//         function login() {
+
+
+//             vm.loading = true;
+//             AuthenticationService.Login(vm.username, vm.password, function (result,status) {
+              
+//                 if (result === true) {
+//                     $location.path('/app/dashboard');
+//                 } else {
+//                       vm.loading = false;
+             
+
+
+
+//                        vm.error = 'Username or password is incorrect';
+
+//                 }
+//             });
+//         };
+//     }
+
+// })();
+
+
+
+// /**=========================================================
+//  * Module: access-login.js
+//  * Demo for login api
+//  =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.pages')
+        .controller('LogoutController', LoginFormController);
+
+    LoginFormController.$inject = ['$scope','$http', '$state','$localStorage','jadaApiUrl'];
+    function LoginFormController($scope, $http, $state,$localStorage,jadaApiUrl) {
+
+
+ $scope.Logout=function() {
+            // remove user from local storage and clear http auth header
+            delete $localStorage.currentUser;
+            $http.defaults.headers.common.Authorization = '';
+                $state.go('page.login');
+        }
+
+
+    }
+
+
+})();
+
+// (function() {
+//     'use strict';
+
+//     angular
+//         .module('app.pages')
+//         .factory('register',  function($resource) {
+        
+//         return $resource('http://localhost:56135/api/systemsetup');
+//         // return $resource('http://localhost:9418/jada/Management/CompanyRegistration/');
+//         // http://localhost:9418/jada/Authentication/CompanyRegistration
+//     });
+// })();
+
+
+
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.pages')
+        .factory('register', register);
+
+    register.$inject = ['$resource','jadaApiUrl'];
+    function register($resource,jadaApiUrl) {
+    	  return $resource(jadaApiUrl+'api/systemsetup');
+    
+          
+       
+    }
+
+})();
+/**=========================================================
  * Collapse panels * [panel-collapse]
  =========================================================*/
 (function() {
@@ -11489,484 +11967,6 @@ $scope.banks=bankcodeService.query();
 
         }
     }
-})();
-// /**=========================================================
-//  * Module: access-login.js
-//  * Demo for login api
-//  =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.pages')
-        .controller('LoginFormController', LoginFormController);
-
-    LoginFormController.$inject = ['$scope','$http', '$state','$localStorage','jadaApiUrl'];
-    function LoginFormController($scope, $http, $state,$localStorage,jadaApiUrl) {
-$scope.formlg={};
-
-
-  
-$scope.buttonText="Login";
-// $scope.login=function(){
-//   $scope.authMsg = '';
-// $scope.buttonText="Logging in. . .";
-// authService.login($scope.formlg.userName,  $scope.
-// formlg.password).then(function(data, status){
-   
-// alert(data);
-
-//    // if ( !response.token ) {
-//    //             vm.authMsg = 'Incorrect credentials.';
-//    //              }else{
-//    //              $state.go('app.dashboard');
-//    //              }
-              
-
-// },function(error,status){
-//  $scope.authMsg = 'Server Request Error';
-// }).finally(function(){
-// $scope.buttonText="Login";
-// });
-// }
-
-
-    // $scope.login = function () {
-    //                         var env = {
-    //                             username:$scope.formlg.username,
-    //                             DBName:$scope.formlg.DBName, 
-    //                             password:$scope.formlg.password
-    //                         };
-
-    //                         $http({
-    //                             method: 'POST',
-    //                             url: 'http://localhost:9418/jada/login',
-    //                             data: env,
-    //                             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    //                             transformRequest: function(obj) {
-    //                               var str = [];
-    //                               for(var p in obj)
-    //                               str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-    //                               return str.join("&");
-    //                             }
-    //                         }).
-    //                         then(function (data, status, headers, config) {
-    //                             $scope.postStatus = 'success: ' + data;
-    //                         },
-    //                         function (error, status, headers, config) {
-    //                             $scope.postStatus = 'error: ' + status;
-    //                         });
-                            
-    //                     }
-
-
-
-
-
-
-       $scope.login = function() {
-            $scope.authMsg = '';
-
-            if($scope.loginForm.$valid) {
-
-              $http
-                .post(jadaApiUrl+'api/login', {username: $scope.formlg.userName, password:$scope.formlg.password}).success(function(data){
-               $scope.buttonText="Logging in. . .";
-                  var response=angular.fromJson(data.response);
-                  var userAccount=angular.fromJson(data.userAccount);
-
-
-
-                  // alert(response.Message);  
-                  if(response.Status=="1"){
-                     if (data.token) {
-                        // store username and token in local storage to keep user logged in between page refreshes
-                        $localStorage.currentUser = { username: userAccount.userName, token: data.token ,accountRights:data.accountRights};
-                        
-                        // add jwt token to auth header for all requests made by the $http service
-                        $http.defaults.headers.common.Authorization = 'Bearer ' + data.token;
-
-                        // execute callback with true to indicate successful login
-                      
-                    }                    
-                    $state.go('app.dashboard')
-                  }  
-                  else{
-                    $scope.authMsg = response.Message;           
-                  }
-
-                    
-                })
-                // .then(function(result) {
-                
-                //   // assumes if ok, response is an object with some data, if not, a string with error
-                //   // customize according to your api
-                //   if ( !result.formlg) {
-                //    $scope.authMsg = 'Incorrect credentials.';
-                //   }else{
-                //     // $state.go('app.dashboard');
-                //       vm.authMsg = 'hellow';
-                //   }
-                //      alert(result.token);
-                // }, function() {
-                //   vm.authMsg = 'Server Request Error';
-                // });
-            
-            }
-            else {
-              // set as dirty if the user click directly to login so we show the validation messages
-              /*jshint -W106*/
-              vm.loginForm.account_email.$dirty = true;
-              vm.loginForm.account_password.$dirty = true;
-            }
-          };
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          // bind here all data from the form
-          vm.account = {};
-          // place the message if something goes wrong
-          vm.authMsg = '';
-
-         
-        }
-    }
-
-
-})();
-
-/**=========================================================
- * Module: access-register.js
- * Demo for register account api
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.pages')
-        .controller('RegisterFormController', RegisterFormController);
-
-    RegisterFormController.$inject = ['$scope','$http', '$state', 'register'];
-    function RegisterFormController($scope,$http, $state,register) {
-      // $scope.message=register.query();
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          // bind here all data from the form
-          vm.account = {};
-          // place the message if something goes wrong
-          vm.authMsg = '';
-
-          vm.auth=false;
-             vm.account= new register();
-  //     $scope.submitCompany = function() {
-  //       $scope.company.$save(function(){
-  //           console.log($scope.company.Company_Name);});
-  // }
-          vm.register = function() {
-            vm.authMsg = '';
-               vm.error='';
-
-            if(vm.registerForm.$valid) {
-              vm.account.$save(function(data){
-
-            var response=angular.fromJson(data);
-            console.log(response.Message);
-            vm.authMsg=response.Message;
-            if(response.Status=="1"){
-                    vm.authMsg =response.Message;
-            }else{
-              vm.auth=false;
-               
-                   vm.error=response.Message;
-              // vm.auth=true;
-            }
-            ;});
-
-              // $http
-              //   .post('api/account/register', {email: vm.account.email, password: vm.account.password})
-              //   .then(function(response) {
-              //     // assumes if ok, response is an object with some data, if not, a string with error
-              //     // customize according to your api
-              //     if (!response.account ) {
-              //       vm.authMsg = response;
-              //     }else{
-              //       $state.go('app.dashboard');
-              //     }
-              //   }, function() {
-              //     vm.authMsg = 'Server Request Error';
-              //   });
-            }
-            else {
-              // set as dirty if the user click directly to login so we show the validation messages
-              /*jshint -W106*/
-              vm.registerForm.password.$dirty = true;
-              vm.registerForm.account_password.$dirty = true;
-              // vm.registerForm.account_agreed.$dirty = true;
-              
-            }
-          };
-        }
-    }
-})();
-
-// (function () {
-//     'use strict';
-
-//     angular
-//         .module('app.pages')
-//         .factory('AuthenticationService', Service);
-
-//     function Service($http, $localStorage) {
-//         var service = {};
-
-//                          service.authMsg="";
-//         service.Login = Login;
-//         service.Logout = Logout;
-
-//         return service;
-
-//         function Login(username, password, callback) {
-//             $http.post('http://localhost:56135/api/login', { username: username, password: password })
-//                 .success(function (response) {
-
-//                     // login successful if there's a token in the response
-//                     if (response.token) {
-//                         // store username and token in local storage to keep user logged in between page refreshes
-//                         $localStorage.currentUser = { username: username, token: response.token, isAuthenticated:true };
-
-
-//                         // add jwt token to auth header for all requests made by the $http service
-//                         $http.defaults.headers.common.Authorization = 'Bearer ' + response.token;
-
-//                         // execute callback with true to indicate successful login
-//                         callback(true);
-//                     } else {
-//                         // execute callback with false to indicate failed login
-//                         callback(false);
-
-//                          service.authMsg = response;
-                     
-//                     }
-//                 });
-//         }
-
-//         function Logout() {
-//             // remove user from local storage and clear http auth header
-//             delete $localStorage.currentUser;
-//             $http.defaults.headers.common.Authorization = '';
-//         }
-//     }
-// })();
-
-
-//    // $http
-//    //              .post('api/account/register', {email: vm.account.email, password: vm.account.password})
-//    //              .then(function(response) {
-//    //                // assumes if ok, response is an object with some data, if not, a string with error
-//    //                // customize according to your api
-//    //                if (!response.account ) {
-//    //                  vm.authMsg = response;
-//    //                }else{
-//    //                  $state.go('app.dashboard');
-//    //                }
-//    //              }, function() {
-//    //                vm.authMsg = 'Server Request Error';
-//    //              });
-// angular.module('app.pages').factory('authService',
-// ['AUTH_ENDPOINT','LOGOUT_ENDPOINT','$http','$cookieStore',
-// function(AUTH_ENDPOINT,LOGOUT_ENDPOINT,$http,$cookieStore){
-// var auth={};
-
-// auth.login=function(username, password){
-// 	var env = {
-//                                 username:username,
-                                                    
-//                                 password:password
-//                             };
-//                          return $http({
-//                                 method: 'POST',
-//                                 url: 'http://localhost:56135/api/login',
-//                                 data: env,
-//                                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-//                                 transformRequest: function(obj) {
-//                                   var str = [];
-//                                   for(var p in obj)
-//                                   str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-//                                   return str.join("&");
-//                                 }
-//                             })
-//                            .then(function(response,status){
-
-//                             alert(response.token);
-//                             // login successful if there's a token in the response
-//                     if (response.token) {
-//                         // store username and token in local storage to keep user logged in between page refreshes
-//                         $localStorage.currentUser = { username: username, token: response.token };
-
-//                         // add jwt token to auth header for all requests made by the $http service
-//                         $http.defaults.headers.common.Authorization = 'Bearer ' + response.token;
-
-
-//                     }
-//                     //      auth.user=response.data;
-//                     // $cookieStore.put('user',auth.user);
-//                     //    return auth.postStatus = 'success: ' + status;
-//                       },
-//                             function (error, status, headers, config) {
-//                              return   auth.postStatus = 'error: ' + status;
-//                             });
-                            
-//                         }
-
-// // return $http.post(AUTH_ENDPOINT,{env},
-// // {
-// //     headers: {
-// //       'Content-Type': 'application/x-www-form-urlencoded'
-    
-// //     }
-// //   },{
-// //   	   transformRequest: function(obj) {
-// //                                   var str = [];
-// //                                   for(var p in obj)
-// //                                   str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-// //                                   return str.join("&");
-// //                                 }
-// //   }).then(function(response,status){
-// // auth.user=response.data;
-// // $cookieStore.put('user',auth.user);
-// // return auth.user;
-// // });
-// // }
-// auth.logout=function(){
-// return $http.post(LOGOUT_ENDPOINT).then(function(response){
-// auth.user=undefined;
-// $cookieStore.remove('user');
-// });
-// }
-// return auth;
-// }]);
-
-// angular.module('app.pages').value('AUTH_ENDPOINT',
-// 'http://localhost:56135/api/login');
-// angular.module('app.pages').value('LOGOUT_ENDPOINT',
-// 'http://spblogger-sitepointdemos.rhcloud.com/logout');
-// // 'http://spblogger-sitepointdemos.rhcloud.com/login');
-// (function () {
-//     'use strict';
-
-//     angular
-//         .module('app.pages')
-//         .controller('AuthLoginController', Controller);
-
-//     function Controller($location, AuthenticationService) {
-//         var vm = this;
-
-//         vm.login = login;
-
-//         initController();
-
-//         function initController() {
-//             // reset login status
-//             AuthenticationService.Logout();
-//         };
-
-//         function login() {
-
-
-//             vm.loading = true;
-//             AuthenticationService.Login(vm.username, vm.password, function (result,status) {
-              
-//                 if (result === true) {
-//                     $location.path('/app/dashboard');
-//                 } else {
-//                       vm.loading = false;
-             
-
-
-
-//                        vm.error = 'Username or password is incorrect';
-
-//                 }
-//             });
-//         };
-//     }
-
-// })();
-
-
-
-// /**=========================================================
-//  * Module: access-login.js
-//  * Demo for login api
-//  =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.pages')
-        .controller('LogoutController', LoginFormController);
-
-    LoginFormController.$inject = ['$scope','$http', '$state','$localStorage','jadaApiUrl'];
-    function LoginFormController($scope, $http, $state,$localStorage,jadaApiUrl) {
-
-
- $scope.Logout=function() {
-            // remove user from local storage and clear http auth header
-            delete $localStorage.currentUser;
-            $http.defaults.headers.common.Authorization = '';
-                $state.go('page.login');
-        }
-
-
-    }
-
-
-})();
-
-// (function() {
-//     'use strict';
-
-//     angular
-//         .module('app.pages')
-//         .factory('register',  function($resource) {
-        
-//         return $resource('http://localhost:56135/api/systemsetup');
-//         // return $resource('http://localhost:9418/jada/Management/CompanyRegistration/');
-//         // http://localhost:9418/jada/Authentication/CompanyRegistration
-//     });
-// })();
-
-
-
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.pages')
-        .factory('register', register);
-
-    register.$inject = ['$resource','jadaApiUrl'];
-    function register($resource,jadaApiUrl) {
-    	  return $resource(jadaApiUrl+'api/systemsetup');
-    
-          
-       
-    }
-
 })();
 /**=========================================================
  * Module: modals.js
@@ -13186,84 +13186,6 @@ $http.get(jadaApiUrl+'api/payslipreport/'+id).success(function(data) {
         }
     }
 })();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.settings')
-        .run(settingsRun);
-
-    settingsRun.$inject = ['$rootScope', '$localStorage'];
-
-    function settingsRun($rootScope, $localStorage){
-
-
-      // User Settings
-      // -----------------------------------
-      $rootScope.user = {
-        name:     'John',
-        job:      'ng-developer',
-        picture:  'app/img/user/02.jpg'
-      };
-
-      // Hides/show user avatar on sidebar from any element
-      $rootScope.toggleUserBlock = function(){
-        $rootScope.$broadcast('toggleUserBlock');
-      };
-
-      // Global Settings
-      // -----------------------------------
-      $rootScope.app = {
-        name: 'Jada',
-        description: 'Jada Payroll',
-        year: ((new Date()).getFullYear()),
-        layout: {
-          isFixed: true,
-          isCollapsed: false,
-          isBoxed: false,
-          isRTL: false,
-          horizontal: false,
-          isFloat: false,
-          asideHover: false,
-          theme: null,
-          asideScrollbar: false,
-          isCollapsedText: false
-        },
-        useFullLayout: false,
-        hiddenFooter: false,
-        offsidebarOpen: false,
-        asideToggled: false,
-        viewAnimation: 'ng-fadeInUp'
-      };
-
-      // Setup the layout mode
-      $rootScope.app.layout.horizontal = ( $rootScope.$stateParams.layout === 'app-h') ;
-
-      // Restore layout settings
-      if( angular.isDefined($localStorage.layout) )
-        $rootScope.app.layout = $localStorage.layout;
-      else
-        $localStorage.layout = $rootScope.app.layout;
-
-      $rootScope.$watch('app.layout', function () {
-        $localStorage.layout = $rootScope.app.layout;
-      }, true);
-
-      // Close submenu when sidebar change from collapsed to normal
-      $rootScope.$watch('app.layout.isCollapsed', function(newValue) {
-        if( newValue === false )
-          $rootScope.$broadcast('closeSidebarMenu');
-      });
-
-    }
-       function Logout() {
-            // remove user from local storage and clear http auth header
-            delete $localStorage.currentUser;
-            $http.defaults.headers.common.Authorization = '';
-        }
-
-})();
-
 /**=========================================================
  * Module: helpers.js
  * Provides helper functions for routes definition
@@ -14496,6 +14418,445 @@ $http.get(jadaApiUrl+'api/payslipreport/'+id).success(function(data) {
 })();
 
 
+(function() {
+    'use strict';
+
+    angular
+        .module('app.settings')
+        .run(settingsRun);
+
+    settingsRun.$inject = ['$rootScope', '$localStorage'];
+
+    function settingsRun($rootScope, $localStorage){
+
+
+      // User Settings
+      // -----------------------------------
+      $rootScope.user = {
+        name:     'John',
+        job:      'ng-developer',
+        picture:  'app/img/user/02.jpg'
+      };
+
+      // Hides/show user avatar on sidebar from any element
+      $rootScope.toggleUserBlock = function(){
+        $rootScope.$broadcast('toggleUserBlock');
+      };
+
+      // Global Settings
+      // -----------------------------------
+      $rootScope.app = {
+        name: 'Jada',
+        description: 'Jada Payroll',
+        year: ((new Date()).getFullYear()),
+        layout: {
+          isFixed: true,
+          isCollapsed: false,
+          isBoxed: false,
+          isRTL: false,
+          horizontal: false,
+          isFloat: false,
+          asideHover: false,
+          theme: null,
+          asideScrollbar: false,
+          isCollapsedText: false
+        },
+        useFullLayout: false,
+        hiddenFooter: false,
+        offsidebarOpen: false,
+        asideToggled: false,
+        viewAnimation: 'ng-fadeInUp'
+      };
+
+      // Setup the layout mode
+      $rootScope.app.layout.horizontal = ( $rootScope.$stateParams.layout === 'app-h') ;
+
+      // Restore layout settings
+      if( angular.isDefined($localStorage.layout) )
+        $rootScope.app.layout = $localStorage.layout;
+      else
+        $localStorage.layout = $rootScope.app.layout;
+
+      $rootScope.$watch('app.layout', function () {
+        $localStorage.layout = $rootScope.app.layout;
+      }, true);
+
+      // Close submenu when sidebar change from collapsed to normal
+      $rootScope.$watch('app.layout.isCollapsed', function(newValue) {
+        if( newValue === false )
+          $rootScope.$broadcast('closeSidebarMenu');
+      });
+
+    }
+       function Logout() {
+            // remove user from local storage and clear http auth header
+            delete $localStorage.currentUser;
+            $http.defaults.headers.common.Authorization = '';
+        }
+
+})();
+
+/**=========================================================
+ * Module: sidebar-menu.js
+ * Handle sidebar collapsible elements
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.sidebar')
+        .controller('SidebarController', SidebarController);
+
+    SidebarController.$inject = ['$rootScope', '$scope', '$state', 'SidebarLoader', 'Utils'];
+    function SidebarController($rootScope, $scope, $state, SidebarLoader,  Utils) {
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          var collapseList = [];
+
+          // demo: when switch from collapse to hover, close all items
+          var watchOff1 = $rootScope.$watch('app.layout.asideHover', function(oldVal, newVal){
+            if ( newVal === false && oldVal === true) {
+              closeAllBut(-1);
+            }
+          });
+
+
+          // Load menu from json file
+          // -----------------------------------
+
+          SidebarLoader.getMenu(sidebarReady);
+
+          function sidebarReady(items) {
+            $scope.menuItems = items;
+          }
+
+          // Handle sidebar and collapse items
+          // ----------------------------------
+
+          $scope.getMenuItemPropClasses = function(item) {
+            return (item.heading ? 'nav-heading' : '') +
+                   (isActive(item) ? ' active' : '') ;
+          };
+
+          $scope.addCollapse = function($index, item) {
+            collapseList[$index] = $rootScope.app.layout.asideHover ? true : !isActive(item);
+          };
+
+          $scope.isCollapse = function($index) {
+            return (collapseList[$index]);
+          };
+
+          $scope.toggleCollapse = function($index, isParentItem) {
+
+            // collapsed sidebar doesn't toggle drodopwn
+            if( Utils.isSidebarCollapsed() || $rootScope.app.layout.asideHover ) return true;
+
+            // make sure the item index exists
+            if( angular.isDefined( collapseList[$index] ) ) {
+              if ( ! $scope.lastEventFromChild ) {
+                collapseList[$index] = !collapseList[$index];
+                closeAllBut($index);
+              }
+            }
+            else if ( isParentItem ) {
+              closeAllBut(-1);
+            }
+
+            $scope.lastEventFromChild = isChild($index);
+
+            return true;
+
+          };
+
+          // Controller helpers
+          // -----------------------------------
+
+            // Check item and children active state
+            function isActive(item) {
+
+              if(!item) return;
+
+              if( !item.sref || item.sref === '#') {
+                var foundActive = false;
+                angular.forEach(item.submenu, function(value) {
+                  if(isActive(value)) foundActive = true;
+                });
+                return foundActive;
+              }
+              else
+                return $state.is(item.sref) || $state.includes(item.sref);
+            }
+
+            function closeAllBut(index) {
+              index += '';
+              for(var i in collapseList) {
+                if(index < 0 || index.indexOf(i) < 0)
+                  collapseList[i] = true;
+              }
+            }
+
+            function isChild($index) {
+              /*jshint -W018*/
+              return (typeof $index === 'string') && !($index.indexOf('-') < 0);
+            }
+
+            $scope.$on('$destroy', function() {
+                watchOff1();
+            });
+
+        } // activate
+    }
+
+})();
+
+/**=========================================================
+ * Module: sidebar.js
+ * Wraps the sidebar and handles collapsed state
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.sidebar')
+        .directive('sidebar', sidebar);
+
+    sidebar.$inject = ['$rootScope', '$timeout', '$window', 'Utils'];
+    function sidebar ($rootScope, $timeout, $window, Utils) {
+        var $win = angular.element($window);
+        var directive = {
+            // bindToController: true,
+            // controller: Controller,
+            // controllerAs: 'vm',
+            link: link,
+            restrict: 'EA',
+            template: '<nav class="sidebar" ng-transclude></nav>',
+            transclude: true,
+            replace: true
+            // scope: {}
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+
+          var currentState = $rootScope.$state.current.name;
+          var $sidebar = element;
+
+          var eventName = Utils.isTouch() ? 'click' : 'mouseenter' ;
+          var subNav = $();
+
+          $sidebar.on( eventName, '.nav > li', function() {
+
+            if( Utils.isSidebarCollapsed() || $rootScope.app.layout.asideHover ) {
+
+              subNav.trigger('mouseleave');
+              subNav = toggleMenuItem( $(this), $sidebar);
+
+              // Used to detect click and touch events outside the sidebar
+              sidebarAddBackdrop();
+
+            }
+
+          });
+
+          var eventOff1 = scope.$on('closeSidebarMenu', function() {
+            removeFloatingNav();
+          });
+
+          // Normalize state when resize to mobile
+          $win.on('resize.sidebar', function() {
+            if( ! Utils.isMobile() )
+          	asideToggleOff();
+          });
+
+          // Adjustment on route changes
+          var eventOff2 = $rootScope.$on('$stateChangeStart', function(event, toState) {
+            currentState = toState.name;
+            // Hide sidebar automatically on mobile
+            asideToggleOff();
+
+            $rootScope.$broadcast('closeSidebarMenu');
+          });
+
+      	  // Autoclose when click outside the sidebar
+          if ( angular.isDefined(attrs.sidebarAnyclickClose) ) {
+
+            var wrapper = $('.wrapper');
+            var sbclickEvent = 'click.sidebar';
+
+            var watchOff1 = $rootScope.$watch('app.asideToggled', watchExternalClicks);
+
+          }
+
+          //////
+
+          function watchExternalClicks(newVal) {
+            // if sidebar becomes visible
+            if ( newVal === true ) {
+              $timeout(function(){ // render after current digest cycle
+                wrapper.on(sbclickEvent, function(e){
+                  // if not child of sidebar
+                  if( ! $(e.target).parents('.aside').length ) {
+                    asideToggleOff();
+                  }
+                });
+              });
+            }
+            else {
+              // dettach event
+              wrapper.off(sbclickEvent);
+            }
+          }
+
+          function asideToggleOff() {
+            $rootScope.app.asideToggled = false;
+            if(!scope.$$phase) scope.$apply(); // anti-pattern but sometimes necessary
+      	  }
+
+          scope.$on('$destroy', function() {
+            // detach scope events
+            eventOff1();
+            eventOff2();
+            watchOff1();
+            // detach dom events
+            $sidebar.off(eventName);
+            $win.off('resize.sidebar');
+            wrapper.off(sbclickEvent);
+          });
+
+        }
+
+        ///////
+
+        function sidebarAddBackdrop() {
+          var $backdrop = $('<div/>', { 'class': 'dropdown-backdrop'} );
+          $backdrop.insertAfter('.aside-inner').on('click mouseenter', function () {
+            removeFloatingNav();
+          });
+        }
+
+        // Open the collapse sidebar submenu items when on touch devices
+        // - desktop only opens on hover
+        function toggleTouchItem($element){
+          $element
+            .siblings('li')
+            .removeClass('open')
+            .end()
+            .toggleClass('open');
+        }
+
+        // Handles hover to open items under collapsed menu
+        // -----------------------------------
+        function toggleMenuItem($listItem, $sidebar) {
+
+          removeFloatingNav();
+
+          var ul = $listItem.children('ul');
+
+          if( !ul.length ) return $();
+          if( $listItem.hasClass('open') ) {
+            toggleTouchItem($listItem);
+            return $();
+          }
+
+          var $aside = $('.aside');
+          var $asideInner = $('.aside-inner'); // for top offset calculation
+          // float aside uses extra padding on aside
+          var mar = parseInt( $asideInner.css('padding-top'), 0) + parseInt( $aside.css('padding-top'), 0);
+          var subNav = ul.clone().appendTo( $aside );
+
+          toggleTouchItem($listItem);
+
+          var itemTop = ($listItem.position().top + mar) - $sidebar.scrollTop();
+          var vwHeight = $win.height();
+
+          subNav
+            .addClass('nav-floating')
+            .css({
+              position: $rootScope.app.layout.isFixed ? 'fixed' : 'absolute',
+              top:      itemTop,
+              bottom:   (subNav.outerHeight(true) + itemTop > vwHeight) ? 0 : 'auto'
+            });
+
+          subNav.on('mouseleave', function() {
+            toggleTouchItem($listItem);
+            subNav.remove();
+          });
+
+          return subNav;
+        }
+
+        function removeFloatingNav() {
+          $('.dropdown-backdrop').remove();
+          $('.sidebar-subnav.nav-floating').remove();
+          $('.sidebar li.open').removeClass('open');
+        }
+    }
+
+
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.sidebar')
+        .service('SidebarLoader', SidebarLoader);
+
+    SidebarLoader.$inject = ['$http'];
+    function SidebarLoader($http) {
+        this.getMenu = getMenu;
+
+        ////////////////
+
+        function getMenu(onReady, onError) {
+          var menuJson = 'server/sidebar-menu.json',
+              menuURL  = menuJson + '?v=' + (new Date().getTime()); // jumps cache
+            
+          onError = onError || function() { alert('Failure loading menu'); };
+
+          $http
+            .get(menuURL)
+            .success(onReady)
+            .error(onError);
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.sidebar')
+        .controller('UserBlockController', UserBlockController);
+
+    UserBlockController.$inject = ['$scope'];
+    function UserBlockController($scope) {
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          $scope.userBlockVisible = true;
+
+          var detach = $scope.$on('toggleUserBlock', function(/*event, args*/) {
+
+            $scope.userBlockVisible = ! $scope.userBlockVisible;
+
+          });
+
+          $scope.$on('$destroy', detach);
+        }
+    }
+})();
+
 /**=========================================================
  * Module: angular-grid.js
  * Example for Angular Grid
@@ -15520,367 +15881,6 @@ $http.get(jadaApiUrl+'api/payslipreport/'+id).success(function(data) {
         }
     }
 })();
-/**=========================================================
- * Module: sidebar-menu.js
- * Handle sidebar collapsible elements
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.sidebar')
-        .controller('SidebarController', SidebarController);
-
-    SidebarController.$inject = ['$rootScope', '$scope', '$state', 'SidebarLoader', 'Utils'];
-    function SidebarController($rootScope, $scope, $state, SidebarLoader,  Utils) {
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          var collapseList = [];
-
-          // demo: when switch from collapse to hover, close all items
-          var watchOff1 = $rootScope.$watch('app.layout.asideHover', function(oldVal, newVal){
-            if ( newVal === false && oldVal === true) {
-              closeAllBut(-1);
-            }
-          });
-
-
-          // Load menu from json file
-          // -----------------------------------
-
-          SidebarLoader.getMenu(sidebarReady);
-
-          function sidebarReady(items) {
-            $scope.menuItems = items;
-          }
-
-          // Handle sidebar and collapse items
-          // ----------------------------------
-
-          $scope.getMenuItemPropClasses = function(item) {
-            return (item.heading ? 'nav-heading' : '') +
-                   (isActive(item) ? ' active' : '') ;
-          };
-
-          $scope.addCollapse = function($index, item) {
-            collapseList[$index] = $rootScope.app.layout.asideHover ? true : !isActive(item);
-          };
-
-          $scope.isCollapse = function($index) {
-            return (collapseList[$index]);
-          };
-
-          $scope.toggleCollapse = function($index, isParentItem) {
-
-            // collapsed sidebar doesn't toggle drodopwn
-            if( Utils.isSidebarCollapsed() || $rootScope.app.layout.asideHover ) return true;
-
-            // make sure the item index exists
-            if( angular.isDefined( collapseList[$index] ) ) {
-              if ( ! $scope.lastEventFromChild ) {
-                collapseList[$index] = !collapseList[$index];
-                closeAllBut($index);
-              }
-            }
-            else if ( isParentItem ) {
-              closeAllBut(-1);
-            }
-
-            $scope.lastEventFromChild = isChild($index);
-
-            return true;
-
-          };
-
-          // Controller helpers
-          // -----------------------------------
-
-            // Check item and children active state
-            function isActive(item) {
-
-              if(!item) return;
-
-              if( !item.sref || item.sref === '#') {
-                var foundActive = false;
-                angular.forEach(item.submenu, function(value) {
-                  if(isActive(value)) foundActive = true;
-                });
-                return foundActive;
-              }
-              else
-                return $state.is(item.sref) || $state.includes(item.sref);
-            }
-
-            function closeAllBut(index) {
-              index += '';
-              for(var i in collapseList) {
-                if(index < 0 || index.indexOf(i) < 0)
-                  collapseList[i] = true;
-              }
-            }
-
-            function isChild($index) {
-              /*jshint -W018*/
-              return (typeof $index === 'string') && !($index.indexOf('-') < 0);
-            }
-
-            $scope.$on('$destroy', function() {
-                watchOff1();
-            });
-
-        } // activate
-    }
-
-})();
-
-/**=========================================================
- * Module: sidebar.js
- * Wraps the sidebar and handles collapsed state
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.sidebar')
-        .directive('sidebar', sidebar);
-
-    sidebar.$inject = ['$rootScope', '$timeout', '$window', 'Utils'];
-    function sidebar ($rootScope, $timeout, $window, Utils) {
-        var $win = angular.element($window);
-        var directive = {
-            // bindToController: true,
-            // controller: Controller,
-            // controllerAs: 'vm',
-            link: link,
-            restrict: 'EA',
-            template: '<nav class="sidebar" ng-transclude></nav>',
-            transclude: true,
-            replace: true
-            // scope: {}
-        };
-        return directive;
-
-        function link(scope, element, attrs) {
-
-          var currentState = $rootScope.$state.current.name;
-          var $sidebar = element;
-
-          var eventName = Utils.isTouch() ? 'click' : 'mouseenter' ;
-          var subNav = $();
-
-          $sidebar.on( eventName, '.nav > li', function() {
-
-            if( Utils.isSidebarCollapsed() || $rootScope.app.layout.asideHover ) {
-
-              subNav.trigger('mouseleave');
-              subNav = toggleMenuItem( $(this), $sidebar);
-
-              // Used to detect click and touch events outside the sidebar
-              sidebarAddBackdrop();
-
-            }
-
-          });
-
-          var eventOff1 = scope.$on('closeSidebarMenu', function() {
-            removeFloatingNav();
-          });
-
-          // Normalize state when resize to mobile
-          $win.on('resize.sidebar', function() {
-            if( ! Utils.isMobile() )
-          	asideToggleOff();
-          });
-
-          // Adjustment on route changes
-          var eventOff2 = $rootScope.$on('$stateChangeStart', function(event, toState) {
-            currentState = toState.name;
-            // Hide sidebar automatically on mobile
-            asideToggleOff();
-
-            $rootScope.$broadcast('closeSidebarMenu');
-          });
-
-      	  // Autoclose when click outside the sidebar
-          if ( angular.isDefined(attrs.sidebarAnyclickClose) ) {
-
-            var wrapper = $('.wrapper');
-            var sbclickEvent = 'click.sidebar';
-
-            var watchOff1 = $rootScope.$watch('app.asideToggled', watchExternalClicks);
-
-          }
-
-          //////
-
-          function watchExternalClicks(newVal) {
-            // if sidebar becomes visible
-            if ( newVal === true ) {
-              $timeout(function(){ // render after current digest cycle
-                wrapper.on(sbclickEvent, function(e){
-                  // if not child of sidebar
-                  if( ! $(e.target).parents('.aside').length ) {
-                    asideToggleOff();
-                  }
-                });
-              });
-            }
-            else {
-              // dettach event
-              wrapper.off(sbclickEvent);
-            }
-          }
-
-          function asideToggleOff() {
-            $rootScope.app.asideToggled = false;
-            if(!scope.$$phase) scope.$apply(); // anti-pattern but sometimes necessary
-      	  }
-
-          scope.$on('$destroy', function() {
-            // detach scope events
-            eventOff1();
-            eventOff2();
-            watchOff1();
-            // detach dom events
-            $sidebar.off(eventName);
-            $win.off('resize.sidebar');
-            wrapper.off(sbclickEvent);
-          });
-
-        }
-
-        ///////
-
-        function sidebarAddBackdrop() {
-          var $backdrop = $('<div/>', { 'class': 'dropdown-backdrop'} );
-          $backdrop.insertAfter('.aside-inner').on('click mouseenter', function () {
-            removeFloatingNav();
-          });
-        }
-
-        // Open the collapse sidebar submenu items when on touch devices
-        // - desktop only opens on hover
-        function toggleTouchItem($element){
-          $element
-            .siblings('li')
-            .removeClass('open')
-            .end()
-            .toggleClass('open');
-        }
-
-        // Handles hover to open items under collapsed menu
-        // -----------------------------------
-        function toggleMenuItem($listItem, $sidebar) {
-
-          removeFloatingNav();
-
-          var ul = $listItem.children('ul');
-
-          if( !ul.length ) return $();
-          if( $listItem.hasClass('open') ) {
-            toggleTouchItem($listItem);
-            return $();
-          }
-
-          var $aside = $('.aside');
-          var $asideInner = $('.aside-inner'); // for top offset calculation
-          // float aside uses extra padding on aside
-          var mar = parseInt( $asideInner.css('padding-top'), 0) + parseInt( $aside.css('padding-top'), 0);
-          var subNav = ul.clone().appendTo( $aside );
-
-          toggleTouchItem($listItem);
-
-          var itemTop = ($listItem.position().top + mar) - $sidebar.scrollTop();
-          var vwHeight = $win.height();
-
-          subNav
-            .addClass('nav-floating')
-            .css({
-              position: $rootScope.app.layout.isFixed ? 'fixed' : 'absolute',
-              top:      itemTop,
-              bottom:   (subNav.outerHeight(true) + itemTop > vwHeight) ? 0 : 'auto'
-            });
-
-          subNav.on('mouseleave', function() {
-            toggleTouchItem($listItem);
-            subNav.remove();
-          });
-
-          return subNav;
-        }
-
-        function removeFloatingNav() {
-          $('.dropdown-backdrop').remove();
-          $('.sidebar-subnav.nav-floating').remove();
-          $('.sidebar li.open').removeClass('open');
-        }
-    }
-
-
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.sidebar')
-        .service('SidebarLoader', SidebarLoader);
-
-    SidebarLoader.$inject = ['$http'];
-    function SidebarLoader($http) {
-        this.getMenu = getMenu;
-
-        ////////////////
-
-        function getMenu(onReady, onError) {
-          var menuJson = 'server/sidebar-menu.json',
-              menuURL  = menuJson + '?v=' + (new Date().getTime()); // jumps cache
-            
-          onError = onError || function() { alert('Failure loading menu'); };
-
-          $http
-            .get(menuURL)
-            .success(onReady)
-            .error(onError);
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.sidebar')
-        .controller('UserBlockController', UserBlockController);
-
-    UserBlockController.$inject = ['$scope'];
-    function UserBlockController($scope) {
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          $scope.userBlockVisible = true;
-
-          var detach = $scope.$on('toggleUserBlock', function(/*event, args*/) {
-
-            $scope.userBlockVisible = ! $scope.userBlockVisible;
-
-          });
-
-          $scope.$on('$destroy', detach);
-        }
-    }
-})();
-
 
 /**=========================================================
  * Module: modals.js
@@ -16065,7 +16065,7 @@ $scope.show = function(transaction) {
             };
             $scope.transaction=new employeePostingService();
              $scope.submitTransaction=function() {
-          $scope.transaction.$save().then(function(){
+          $scope.transaction.$save().then(function(data){
              var response=angular.fromJson(data);
           
             if(response.Status=="1"){
