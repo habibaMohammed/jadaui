@@ -62,14 +62,17 @@
          <div class="col-md-4 " ng-controller="PayrollProcessController">
          <div class="clearfix1">
         
-         <button class="btn btn-success pull-left"  ng-click="process()" type="button">{{buttonText}}</button>
+         <button class="btn btn-success pull-left " ng-class="currentclass" ng-click="process()" type="button">{{buttonText}}</button>
+
           <!-- <uib-progressbar class="progress-striped" value="22" type="warning">22%</uib-progressbar> -->
 
-
+  <!--    <div class="whirl traditional" ng-show="process">{{process}}</div> -->
        <!--   <button ladda="loading" ng-click="clickBtn()">
   Button
 </button> -->
          </div>
+
+
          </div>
 
      

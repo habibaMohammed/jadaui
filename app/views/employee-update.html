@@ -180,7 +180,7 @@
   
 </div>
             
-               <div class="form-group">
+             <!--   <div class="form-group">
                   <label class="col-lg-2 ">  Date of Birth
                    </label>
 
@@ -200,8 +200,29 @@
                               </span>
                            </p>
                   </div>
-               </div>
+               </div> -->
 
+
+                  <div class="form-group">
+                  <label class="col-lg-2 ">  Date of Birth
+                   </label>
+                  <div class="col-lg-10">
+                     <div class="col-lg-10">
+                     <input class="form-control" type="hidden" name=" date_of_birth" ng-model="employee.dateOfBirth" placeholder="Middle Name
+                   "   is-open="popup.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                 
+                    <p class="input-group" >
+
+          <input  ng-init="myText='Hello World!'" type="text" class="form-control"  
+          {{myText}} ng-model="employee.dateOfBirth"  uib-datepicker-popup is-open="popup.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"  />
+
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open()"><i class="fa fa-calendar"></i></button>
+          </span>
+        </p>
+                  </div>
+               </div>
+</div>
              <div class="form-group">
                   <label class="col-lg-2 "> Marital Status
                    </label>

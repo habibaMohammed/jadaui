@@ -22,6 +22,7 @@
     <div class="panel panel-default">
          <!-- <div class="panel-heading"></div> -->
          <div class="panel-body">
+          <div id="printable">
           <div class="table-responsive table-bordered horiztbl">
          <table class="table ">
                  <thead>
@@ -288,9 +289,11 @@
                <br/>
                </div>
             </div>
+</div>
 
      <div class="clearfix">
          <button class="btn btn-info pull-left mr" type="button">Pdf</button>
+          <button ng-click="printDiv('printable');">Print Div</button>
          <button class="btn btn-default pull-left mr" type="button" onclick="window.print();">Print</button>
          <button class="btn btn-success pull-left mr" type="button">CSV</button>
       </div>
