@@ -2,12 +2,12 @@
 
 
 
-
+<div class="page" ng-controller="EmployeesDetailsController">
 
 <h3>
-   <button class="btn btn-primary pull-right" type="button">
-      <em class="fa fa-plus-circle fa-fw mr-sm"></em>Edit</button>Employee Details</h3>
-<div class="panel" ng-controller="EmployeesDetailsController">
+   <a class="btn btn-primary pull-right" type="button"  ui-sref="app.employee-edit({EmployeeId:currentemployee.id})">
+    Edit</a>Employee Details{{currentemployee.id}}</h3>
+<div class="panel" >
    <div class="panel-body">
    
       <h3 class="mt0">Personal Information</h3>
@@ -65,7 +65,7 @@
              
                <div class="col-md-10">
                     <div class="clearfix">
-               <p class="pull-left"><b> Date of Birth<b></p>
+               <p class="pull-left"><b> Date of Birth</b></p>
                <p class="pull-right mr">{{currentemployee.dateOfBirth}}</p>
             </div>
                      <div class="clearfix">
@@ -383,3 +383,4 @@
 
 </div>
 
+</div>

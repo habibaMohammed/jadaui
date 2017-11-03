@@ -25,16 +25,20 @@
 
 $scope.groups=PayrollProcessingService.query();
 
-$scope.buttonText="process";
+$scope.currentclass='danger';
+    $scope.buttonText="process";
 
  $scope.process= function () {
-    $scope.buttonText="processing";
+    // $scope.buttonText="processing";
+    $scope.currentclass='whirl ringed';
+    $scope.buttonprocess=true;
       $http.post(jadaApiUrl+'api/payrolltransaction').success(function(){
     
  $scope.buttonText="processing";
                   },function(err){
             $scope.buttonText="failed";
             }).finally(function(){
+              $scope.currentclass='process';
             $scope.buttonText="process";
             });
             };

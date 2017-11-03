@@ -19,42 +19,59 @@ EmployeesController.$inject = ['$stateParams', '$rootScope','$state','$http','$s
 
         function activate() {
 
+  $scope.date = new Date();
 
+  $scope.testDate = new Date($scope.date.getFullYear() - 10, $scope.date.getMonth(), 1);
 
-             $scope.today = function() {
-             $scope.dt = new Date();
-          };
-          $scope.today();
+  $scope.dateOptions = {
+    formatYear: 'yy',
+    maxDate: new Date(2020, 5, 22),
+    minDate: new Date(2000, 1, 1),
+    startingDay: 1
+  };
 
-       $scope.clear = function () {
-           $scope.dt = null;
-          };
+  $scope.open = function() {
+    $scope.popup.opened = true;
+  };
 
-          // Disable weekend selection
-         $scope.disabled = function(date, mode) {
-            return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-          };
+  $scope.popup = {
+    opened: false
+  };
 
-         $scope.toggleMin = function() {
-           $scope.minDate =  $scope.minDate ? null : new Date();
-          };
-          $scope.toggleMin();
+       //       $scope.today = function() {
+       //       $scope.dt = new Date();
+       //    };
+       //    $scope.today();
 
-       $scope.open = function($event) {
-            $event.preventDefault();
-            $event.stopPropagation();
+       // $scope.clear = function () {
+       //     $scope.dt = null;
+       //    };
 
-        $scope.opened = true;
-          };
+       //    // Disable weekend selection
+       //   $scope.disabled = function(date, mode) {
+       //      return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+       //    };
 
-        $scope.dateOptions = {
-            formatYear: 'yy',
-            startingDay: 1
-          };
+       //   $scope.toggleMin = function() {
+       //     $scope.minDate =  $scope.minDate ? null : new Date();
+       //    };
+       //    $scope.toggleMin();
 
-         $scope.initDate = new Date('2019-10-20');
-        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-        $scope.format =  $scope.formats[0];
+       // $scope.open = function($event) {
+       //      $event.preventDefault();
+       //      $event.stopPropagation();
+
+       //  $scope.opened = true;
+       //    };
+
+       //  $scope.dateOptions = {
+       //      formatYear: 'yy',
+       //      startingDay: 1
+       //    };
+
+       //   $scope.initDate = new Date('2019-10-20');
+       //  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+       //  $scope.format =  $scope.formats[0];
         
            var SuccessMsg;
             var errorMsg;
