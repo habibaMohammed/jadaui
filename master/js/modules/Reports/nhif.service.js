@@ -3,11 +3,11 @@
 
     angular
         .module('app.reports')
-        .factory('NhifService', NhifService);
+        .factory('NhifService1', NhifService1);
 
-    NhifService.$inject = ['$resource','jadaApiUrl'];
-    function NhifService($resource,jadaApiUrl) {
-     var data=$resource('https://jsonplaceholder.typicode.com/users/:user', {user: '@user'},
+    NhifService1.$inject = ['$resource','jadaApiUrl'];
+    function NhifService1($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/nhifreport/:periodId', {periodId: '@periodId'},
     { 'get':    {method:'GET', isArray:false},
   'save':   {method:'POST'},
   'query':  {method:'GET', isArray:true},

@@ -18,6 +18,7 @@
         ////////////////
 
         function activate() {
+          vm.date='2019-10-20';
           vm.today = function() {
             vm.dt = new Date();
           };

@@ -9,12 +9,12 @@
   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
     <div class="input-group-addon">Period</div>
   
-         <select name="period" class="slider slider-lg form-control" ng-model="user.period" ng-options="period.id as period.period for period in periods" >
+         <select name="period" class="slider slider-lg form-control" ng-model="period" ng-options="period.id as period.period for period in periods" >
         <option value="" disabled selected>Periods</option>
   </select>
   </div>
  
-  <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+  <button ng-click="getByperiod(period)" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
 </form>
   
 
@@ -66,14 +66,14 @@
                </tr>
             </thead>
             <tbody >
-               <tr  ng-repeat="nhif in nhifs">
-                  <td >{{nhif.id}}</td>
-                  <td >{{nhif.name}}</td>
-                   <td >{{nhif.name}}</td>
+               <tr  ng-repeat="nhif in nhifs.employeeNHIFReportList">
+                  <td >{{nhif.employeeNo}}</td>
+                  <td >{{nhif.lastName}}</td>
+                   <td >{{nhif.firstName}}</td>
                   
-                  <td >{{nhif.id}}</td>
-                  <td >{{nhif.id}}</td>
-                   <td >{{nhif.id}} </td>
+                  <td >{{nhif.idNumber}}</td>
+                  <td >{{nhif.nhifNo}}</td>
+                   <td >{{nhif.amount}} </td>
                   
                 
                </tr>

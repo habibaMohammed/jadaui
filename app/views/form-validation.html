@@ -364,7 +364,7 @@
                         <label class="col-sm-2 control-label">Datepicker</label>
                         <div class="col-sm-6">
                            <p class="input-group">
-                              <input class="form-control" type="text" name="date" required="" uib-datepicker-popup="{{dpick.format}}" ng-model="dpick.date" is-open="dpick.opened" min-date="dpick.minDate" max-date="'2019-12-22'" uib-datepicker-options="dpick.dateOptions"
+                              <input class="form-control" type="text" name="date" ng-model="date" required="" uib-datepicker-popup="{{dpick.format}}" ng-model="dpick.date" is-open="dpick.opened" min-date="dpick.minDate" max-date="'2019-12-22'" uib-datepicker-options="dpick.dateOptions"
                               date-disabled="dpick.disabled(date, mode)" close-text="Close" />
                               <span class="input-group-btn">
                                  <button class="btn btn-default" type="button" ng-click="dpick.open($event)">

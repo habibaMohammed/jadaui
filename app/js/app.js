@@ -63,25 +63,13 @@
     'use strict';
 
     angular
-        .module('app.colors', []);
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.charts', []);
-})();
-(function() {
-    'use strict';
-
-    angular
         .module('app.company', [ ]);
 })();
 (function() {
     'use strict';
 
     angular
-        .module('app.companydetails', []);
+        .module('app.colors', []);
 })();
 (function() {
     'use strict';
@@ -114,7 +102,13 @@
     'use strict';
 
     angular
-        .module('app.employees', ['ui.bootstrap']);
+        .module('app.charts', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.companydetails', []);
 })();
 (function() {
     'use strict';
@@ -126,7 +120,7 @@
     'use strict';
 
     angular
-        .module('app.extras', []);
+        .module('app.employees', ['ui.bootstrap']);
 })();
 (function() {
     'use strict';
@@ -138,19 +132,13 @@
     'use strict';
 
     angular
+        .module('app.extras', []);
+})();
+(function() {
+    'use strict';
+
+    angular
         .module('app.icons', []);
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.locale', []);
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.lazyload', []);
 })();
 (function() {
     'use strict';
@@ -168,19 +156,13 @@
     'use strict';
 
     angular
-        .module('app.maintenance', ['ui.bootstrap']);
+        .module('app.lazyload', []);
 })();
 (function() {
     'use strict';
 
     angular
-        .module('app.navsearch', []);
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.maps', []);
+        .module('app.locale', []);
 })();
 (function() {
     'use strict';
@@ -192,7 +174,25 @@
     'use strict';
 
     angular
+        .module('app.maps', []);
+})();
+(function() {
+    'use strict';
+
+    angular
         .module('app.notify', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.maintenance', ['ui.bootstrap']);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.panels', []);
 })();
 (function() {
     'use strict';
@@ -204,7 +204,7 @@
     'use strict';
 
     angular
-        .module('app.panels', []);
+        .module('app.payrollcodes', [ ]);
 })();
 (function() {
     'use strict';
@@ -218,19 +218,13 @@
     'use strict';
 
     angular
-        .module('app.payrollcodes', [ ]);
+        .module('app.navsearch', []);
 })();
 (function() {
     'use strict';
 
     angular
         .module('app.reports', []);
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.settings', []);
 })();
 (function() {
     'use strict';
@@ -244,13 +238,13 @@
     'use strict';
 
     angular
-        .module('app.sidebar', []);
+        .module('app.tables', []);
 })();
 (function() {
     'use strict';
 
     angular
-        .module('app.tables', []);
+        .module('app.settings', []);
 })();
 (function() {
     'use strict';
@@ -279,6 +273,12 @@
           ]);
 })();
 
+(function() {
+    'use strict';
+
+    angular
+        .module('app.sidebar', []);
+})();
 // angular.module('angle').constant('jadaApiUrl',
 // 'http://localhost:56135/');
 
@@ -426,6 +426,7 @@ angular.module('angle').constant('jadaApiUrl',
         ////////////////
 
         function activate() {
+          vm.date='2019-10-20';
           vm.today = function() {
             vm.dt = new Date();
           };
@@ -994,6 +995,421 @@ angular.module('app.bootstrapui').controller('YearpickerCtrl', ["$scope", functi
     opened: false
   };
 }]);
+
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.bootstrapui')
+        .controller('CompanyRegController', CompanyRegController);
+
+    CompanyRegController.$inject = ['$http','$scope', '$rootScope','$uibModal','companyService','$stateParams', '$state','$localStorage'];
+    function CompanyRegController($http,$scope, $rootScope,$uibModal, companyService,$stateParams, $state,$localStorage) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+
+ var SuccessMsg;
+ var errorMsg;
+
+
+ $scope.company=companyService.get({ID:1});
+
+console.log( $scope.company);
+
+
+
+  $scope.loadCompany = function () {
+   
+ $scope.company=companyService.get({ID:1});
+   }
+
+ $rootScope.$on("CallLoadCompany", function(){
+           $scope.loadCompany ();
+        });
+
+          
+          vm.open = function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'CompInfoContent.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+
+
+
+
+
+            var state = $('#modal-state');
+            modalInstance.result.then(function () {
+              state.text('Modal dismissed with OK status');
+            }, function () {
+              state.text('Modal dismissed with Cancel status');
+            });
+          };
+
+
+
+
+
+$scope.show = function(EditCompany) {
+      // $scope.x = x;
+      var modalInstance = $uibModal.open({
+        templateUrl: 'GeneralCompanyEdit.html',
+        controller: ModalInstanceCtrl,
+        resolve: {
+           EditCompany: function () {
+             return EditCompany;
+           }
+         }        
+        // scope : $scope
+      });
+    };
+    
+    
+
+
+
+          
+ 
+
+
+          // Please note that $uibModalInstance represents a modal window (instance) dependency.
+          // It is not the same as the $uibModal service used above.
+
+          ModalInstanceCtrl.$inject = ['$scope', '$rootScope','$uibModalInstance','companyService','EditCompany'];
+          function ModalInstanceCtrl($scope, $rootScope,$uibModalInstance, companyService,EditCompany) {
+          $scope.company=EditCompany;
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+          //   $scope.Company=new companyService();
+          //    $scope.submitCompinfo=function() {
+          // $scope.Company.$save();
+          // console.log('Saving user: ' +$scope.Company.pin_number);
+          // };
+
+
+  
+           $scope.EditGenCompany=function(company){
+             company.$update().then(function(data){
+              var response=angular.fromJson(data);
+          
+            if(response.Status=="1"){
+                  $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+            }else{
+           
+                   $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+              // vm.auth=true;
+            }
+                   $rootScope.$emit("CallLoadCompany", {});
+            },
+             function() {
+                 $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+          
+              };
+         
+          }
+        }
+    }
+
+})();
+
+
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.company')
+        .factory('companyService', companyService);
+
+    companyService.$inject = ['$resource','jadaApiUrl'];
+    function companyService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/company/:ID', {ID: '@ID'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.company')
+        .factory('financialPeriodService', financialPeriodService);
+
+    financialPeriodService.$inject = ['$resource','jadaApiUrl'];
+    function financialPeriodService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/period/:id', {id: '@id'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+
+
+
+/**=========================================================
+ * Module: modals.js
+ * Provides a simple way to implement bootstrap modals from templates
+ =========================================================*/
+(function() {
+    'use strict';
+
+    angular
+        .module('app.bootstrapui')
+        .controller('FinancialPeriodsController', FinancialPeriodsController);
+
+    FinancialPeriodsController.$inject = ['$scope', '$rootScope','$uibModal','financialPeriodService','$stateParams', '$state'];
+    function FinancialPeriodsController($scope, $rootScope, $uibModal, financialPeriodService,$stateParams, $state) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+ var SuccessMsg;
+ var errorMsg;
+
+$scope.periods=financialPeriodService.query();
+
+
+
+   $scope.loadPeriods = function () {
+   $scope.periods=financialPeriodService.query();
+
+   }
+
+ $rootScope.$on("CallLoadPeriods", function(){
+           $scope.loadPeriods();
+        });
+
+
+$scope.months = [];
+$scope.selectedMonth = {};
+
+$scope.loadMonths = function() {
+  if ($scope.months.length == 0) {
+    $scope.months = [{
+      id:1,
+      name: 'JANUARY'
+    }, {
+      id:2,
+      name: 'FEBRUAY'
+    }, {
+      id:3,
+      name: 'MARCH'
+    },
+     {
+      id:4,
+      name: 'APRIL'
+    },
+     {
+      id:5,
+      name: 'MAY'
+    },
+     {
+      id:6,
+      name: 'JUNE'
+    },
+     {
+      id:7,
+      name: 'JULY'
+    },
+     {
+      id:8,
+      name: 'AUGUST'
+    },
+     {
+      id:9,
+      name: 'SEPTEMBER'
+    },
+     {
+      id:10,
+      name: 'OCTOBER'
+    },
+     {
+      id:11,
+      name: 'NOVEMBER'
+    },
+     {
+      id:12,
+      name: 'DECEMBER'
+    }];
+  }
+}
+
+
+
+
+  $scope.delete= function (period) {
+period.$remove().then(function () {
+$scope.loadPeriods();
+});
+}
+
+
+
+          
+          $scope.open = function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'newFperiods.html',
+              controller: ModalOpenFperiodsInstanceCtrl,
+              size: size
+            });
+
+
+
+
+
+            var state = $('#modal-state');
+            modalInstance.result.then(function () {
+              state.text('Modal dismissed with OK status');
+            }, function () {
+              state.text('Modal dismissed with Cancel status');
+            });
+          };
+
+
+
+
+    
+
+
+  $scope.show = function(period) {
+      // $scope.x = x;
+      var modalInstance = $uibModal.open({
+        templateUrl: 'editFperiods.html',
+        controller: ModalInstanceCtrl,
+        resolve: {
+           period: function () {
+             return period;
+           }
+         }        
+        // scope : $scope
+      });
+    };
+
+
+
+ 
+
+
+          // Please note that $uibModalInstance represents a modal window (instance) dependency.
+          // It is not the same as the $uibModal service used above.
+
+          ModalOpenFperiodsInstanceCtrl.$inject = ['$scope','$rootScope', '$uibModalInstance','financialPeriodService'];
+          function ModalOpenFperiodsInstanceCtrl($scope,$rootScope, $uibModalInstance, financialPeriodService) {
+          
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+            $scope.period=new financialPeriodService();
+             $scope.submitPeriod=function() {
+          $scope.period.$save().then(function(data){
+            var response=angular.fromJson(data);
+          
+            if(response.Status=="1"){
+                    $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+            }else{
+                   
+                   $scope.SuccessMsg=false;
+               
+                   $scope.errorMsg=response.Message;
+              // vm.auth=true;
+            }
+              $rootScope.$emit("CallLoadPeriods", {}); 
+          }, 
+          function() {
+                 $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+    
+          };
+
+              $scope.submitClosePeriod=function() {
+          $scope.period.$save().then(function(){
+            
+              $rootScope.$emit("CallLoadPeriods", {}); 
+                 $scope.ok();
+          }, 
+          function() {
+                 $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+    
+          };
+         
+          }
+
+
+          ModalInstanceCtrl.$inject = ['$scope', '$rootScope','$uibModalInstance','financialPeriodService','period'];
+          function ModalInstanceCtrl($scope, $rootScope,$uibModalInstance, financialPeriodService,period) {
+          $scope.period=period;
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+         
+                $scope.updatePeriods=function(period){
+             period.$update().then(function(){
+                   $rootScope.$emit("CallLoadPeriods", {});
+            });
+          
+              };
+          }
+        }
+    }
+
+})();
+
 (function() {
     'use strict';
 
@@ -1044,6 +1460,499 @@ angular.module('app.bootstrapui').controller('YearpickerCtrl', ["$scope", functi
 
 })();
 
+(function() {
+    'use strict';
+
+    angular
+        .module('app.dashboard')
+        .controller('DashboardController', DashboardController);
+
+    DashboardController.$inject = ['$scope', 'ChartData', '$timeout','$localStorage'];
+    function DashboardController($scope, ChartData, $timeout,$localStorage) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          // SPLINE
+          // ----------------------------------- 
+          vm.splineData = ChartData.load('server/chart/spline.json');
+          vm.splineOptions = {
+              series: {
+                  lines: {
+                      show: false
+                  },
+                  points: {
+                      show: true,
+                      radius: 4
+                  },
+                  splines: {
+                      show: true,
+                      tension: 0.4,
+                      lineWidth: 1,
+                      fill: 0.5
+                  }
+              },
+              grid: {
+                  borderColor: '#eee',
+                  borderWidth: 1,
+                  hoverable: true,
+                  backgroundColor: '#fcfcfc'
+              },
+              tooltip: true,
+              tooltipOpts: {
+                  content: function (label, x, y) { return x + ' : ' + y; }
+              },
+              xaxis: {
+                  tickColor: '#fcfcfc',
+                  mode: 'categories'
+              },
+              yaxis: {
+                  min: 0,
+                  max: 150, // optional: use it for a clear represetation
+                  tickColor: '#eee',
+                  position: ($scope.app.layout.isRTL ? 'right' : 'left'),
+                  tickFormatter: function (v) {
+                      return v/* + ' visitors'*/;
+                  }
+              },
+              shadowSize: 0
+          };
+
+
+          // PANEL REFRESH EVENTS
+          // ----------------------------------- 
+
+          $scope.$on('panel-refresh', function(event, id) {
+            
+            console.log('Simulating chart refresh during 3s on #'+id);
+
+            // Instead of timeout you can request a chart data
+            $timeout(function(){
+              
+              // directive listen for to remove the spinner 
+              // after we end up to perform own operations
+              $scope.$broadcast('removeSpinner', id);
+              
+              console.log('Refreshed #' + id);
+
+            }, 3000);
+
+          });
+
+
+          // PANEL DISMISS EVENTS
+          // ----------------------------------- 
+
+          // Before remove panel
+          $scope.$on('panel-remove', function(event, id, deferred){
+            
+            console.log('Panel #' + id + ' removing');
+            
+            // Here is obligatory to call the resolve() if we pretend to remove the panel finally
+            // Not calling resolve() will NOT remove the panel
+            // It's up to your app to decide if panel should be removed or not
+            deferred.resolve();
+          
+          });
+
+          // Panel removed ( only if above was resolved() )
+          $scope.$on('panel-removed', function(event, id){
+
+            console.log('Panel #' + id + ' removed');
+
+          });
+
+        }
+        
+
+        $scope.Logout=function() {
+            // remove user from local storage and clear http auth header
+            delete $localStorage.currentUser;
+            $http.defaults.headers.common.Authorization = '';
+            aler("logging out")
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.dashboard')
+        .controller('DashboardV2Controller', DashboardV2Controller);
+
+    DashboardV2Controller.$inject = ['$rootScope', '$scope', '$state'];
+    function DashboardV2Controller($rootScope, $scope, $state) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          // Change layout mode
+          if( $state.includes('app-h') ) {
+            // Setup layout horizontal for demo
+            $rootScope.app.layout.horizontal = true;
+            $scope.$on('$destroy', function(){
+                $rootScope.app.layout.horizontal = false;
+            });
+          }
+          else {
+            if(!$rootScope.app.layout.isCollapsedText)
+                $rootScope.app.layout.isCollapsed = true;
+          }
+
+          // BAR STACKED
+          // -----------------------------------
+          vm.barStackedOptions = {
+              series: {
+                  stack: true,
+                  bars: {
+                      align: 'center',
+                      lineWidth: 0,
+                      show: true,
+                      barWidth: 0.6,
+                      fill: 0.9
+                  }
+              },
+              grid: {
+                  borderColor: '#eee',
+                  borderWidth: 1,
+                  hoverable: true,
+                  backgroundColor: '#fcfcfc'
+              },
+              tooltip: true,
+              tooltipOpts: {
+                  content: function (label, x, y) { return x + ' : ' + y; }
+              },
+              xaxis: {
+                  tickColor: '#fcfcfc',
+                  mode: 'categories'
+              },
+              yaxis: {
+                  min: 0,
+                  max: 200, // optional: use it for a clear represetation
+                  position: ($rootScope.app.layout.isRTL ? 'right' : 'left'),
+                  tickColor: '#eee'
+              },
+              shadowSize: 0
+          };
+
+          // SPLINE
+          // -----------------------------------
+
+          vm.splineOptions = {
+              series: {
+                  lines: {
+                      show: false
+                  },
+                  points: {
+                      show: true,
+                      radius: 4
+                  },
+                  splines: {
+                      show: true,
+                      tension: 0.4,
+                      lineWidth: 1,
+                      fill: 0.5
+                  }
+              },
+              grid: {
+                  borderColor: '#eee',
+                  borderWidth: 1,
+                  hoverable: true,
+                  backgroundColor: '#fcfcfc'
+              },
+              tooltip: true,
+              tooltipOpts: {
+                  content: function (label, x, y) { return x + ' : ' + y; }
+              },
+              xaxis: {
+                  tickColor: '#fcfcfc',
+                  mode: 'categories'
+              },
+              yaxis: {
+                  min: 0,
+                  max: 150, // optional: use it for a clear represetation
+                  tickColor: '#eee',
+                  position: ($rootScope.app.layout.isRTL ? 'right' : 'left'),
+                  tickFormatter: function (v) {
+                      return v/* + ' visitors'*/;
+                  }
+              },
+              shadowSize: 0
+          };
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.dashboard')
+        .controller('DashboardV3Controller', DashboardV3Controller);
+
+    DashboardV3Controller.$inject = ['$rootScope'];
+    function DashboardV3Controller($rootScope) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          // SPLINE
+          // ----------------------------------- 
+
+          vm.splineOptions = {
+              series: {
+                  lines: {
+                      show: false
+                  },
+                  points: {
+                      show: true,
+                      radius: 4
+                  },
+                  splines: {
+                      show: true,
+                      tension: 0.4,
+                      lineWidth: 1,
+                      fill: 0.5
+                  }
+              },
+              grid: {
+                  borderColor: '#eee',
+                  borderWidth: 1,
+                  hoverable: true,
+                  backgroundColor: '#fcfcfc'
+              },
+              tooltip: true,
+              tooltipOpts: {
+                  content: function (label, x, y) { return x + ' : ' + y; }
+              },
+              xaxis: {
+                  tickColor: '#fcfcfc',
+                  mode: 'categories'
+              },
+              yaxis: {
+                  min: 0,
+                  max: 150, // optional: use it for a clear represetation
+                  tickColor: '#eee',
+                  position: ($rootScope.app.layout.isRTL ? 'right' : 'left'),
+                  tickFormatter: function (v) {
+                      return v/* + ' visitors'*/;
+                  }
+              },
+              shadowSize: 0
+          };
+
+
+          vm.seriesData = {
+            'CA': 11100,   // Canada
+            'DE': 2510,    // Germany
+            'FR': 3710,    // France
+            'AU': 5710,    // Australia
+            'GB': 8310,    // Great Britain
+            'RU': 9310,    // Russia
+            'BR': 6610,    // Brazil
+            'IN': 7810,    // India
+            'CN': 4310,    // China
+            'US': 839,     // USA
+            'SA': 410      // Saudi Arabia
+          };
+          
+          vm.markersData = [
+            { latLng:[41.90, 12.45],  name:'Vatican City'          },
+            { latLng:[43.73, 7.41],   name:'Monaco'                },
+            { latLng:[-0.52, 166.93], name:'Nauru'                 },
+            { latLng:[-8.51, 179.21], name:'Tuvalu'                },
+            { latLng:[7.11,171.06],   name:'Marshall Islands'      },
+            { latLng:[17.3,-62.73],   name:'Saint Kitts and Nevis' },
+            { latLng:[3.2,73.22],     name:'Maldives'              },
+            { latLng:[35.88,14.5],    name:'Malta'                 },
+            { latLng:[41.0,-71.06],   name:'New England'           },
+            { latLng:[12.05,-61.75],  name:'Grenada'               },
+            { latLng:[13.16,-59.55],  name:'Barbados'              },
+            { latLng:[17.11,-61.85],  name:'Antigua and Barbuda'   },
+            { latLng:[-4.61,55.45],   name:'Seychelles'            },
+            { latLng:[7.35,134.46],   name:'Palau'                 },
+            { latLng:[42.5,1.51],     name:'Andorra'               }
+          ];
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.core')
+        .config(coreConfig);
+
+    coreConfig.$inject = ['$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$animateProvider'];
+    function coreConfig($controllerProvider, $compileProvider, $filterProvider, $provide, $animateProvider){
+
+      var core = angular.module('app.core');
+      // registering components after bootstrap
+      core.controller = $controllerProvider.register;
+      core.directive  = $compileProvider.directive;
+      core.filter     = $filterProvider.register;
+      core.factory    = $provide.factory;
+      core.service    = $provide.service;
+      core.constant   = $provide.constant;
+      core.value      = $provide.value;
+
+
+      // Disables animation on items with class .ng-no-animation
+      $animateProvider.classNameFilter(/^((?!(ng-no-animation)).)*$/);
+
+      // Improve performance disabling debugging features
+      // $compileProvider.debugInfoEnabled(false);
+
+    }
+
+
+})();
+    
+
+
+/**=========================================================
+ * Module: constants.js
+ * Define constants to inject across the application
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.core')
+        .constant('APP_MEDIAQUERY', {
+          'desktopLG':             1200,
+          'desktop':                992,
+          'tablet':                 768,
+          'mobile':                 480
+        })
+      ;
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.core')
+        .run(appRun);
+
+    appRun.$inject = ['$http','$rootScope', '$state', '$stateParams', '$window', '$templateCache', 'Colors','$location', '$localStorage'];
+
+    function appRun($http,$rootScope, $state, $stateParams, $window, $templateCache, Colors , $location, $localStorage) {
+
+if ($localStorage.currentUser) {
+            $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
+        }
+
+
+        // Hook into ocLazyLoad to setup AngularGrid before inject into the app
+        // See "Creating the AngularJS Module" at
+        // https://www.ag-grid.com/best-angularjs-data-grid/index.php
+        var offevent = $rootScope.$on('ocLazyLoad.fileLoaded', function(e, file) {
+            if (file.indexOf('ag-grid.js') > -1) {
+                agGrid.initialiseAgGridWithAngular1(angular);
+                offevent();
+            }
+        });
+
+        // Set reference to access them from any scope
+        $rootScope.$state = $state;
+        $rootScope.$stateParams = $stateParams;
+        $rootScope.$storage = $window.localStorage;
+
+        // Uncomment this to disable template cache
+        /*$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+            if (typeof(toState) !== 'undefined'){
+              $templateCache.remove(toState.templateUrl);
+            }
+        });*/
+   $rootScope.$on('$locationChangeStart', function (event, next, current) {
+            var publicPages = ['/page/login'];
+            var restrictedPage = publicPages.indexOf($location.path()) === -1;
+            if (restrictedPage && !$localStorage.currentUser) {
+                $location.path('/page/login');
+                 
+            }
+        });
+
+
+
+// routerApp.run(function ($rootScope, $state, AuthService) {
+//     $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+//         if (toState.authenticate && !AuthService.IsAuthenticated()) {
+//             alert("Not Authenticated");
+//             // User isn’t authenticated
+//             $state.transitionTo("login");
+//             event.preventDefault(); 
+//         }
+//     });
+// });
+
+        // Allows to use branding color with interpolation
+        // {{ colorByName('primary') }}
+        $rootScope.colorByName = Colors.byName;
+
+        // cancel click event easily
+        $rootScope.cancel = function($event) {
+            $event.stopPropagation();
+        };
+
+        // Hooks Example
+        // -----------------------------------
+
+        // Hook not found
+        $rootScope.$on('$stateNotFound',
+            function(event, unfoundState /*, fromState, fromParams*/ ) {
+                console.log(unfoundState.to); // "lazy.state"
+                console.log(unfoundState.toParams); // {a:1, b:2}
+                console.log(unfoundState.options); // {inherit:false} + default options
+            });
+        // Hook error
+        $rootScope.$on('$stateChangeError',
+            function(event, toState, toParams, fromState, fromParams, error) {
+                console.log(error);
+            });
+        // Hook success
+        $rootScope.$on('$stateChangeSuccess',
+            function( /*event, toState, toParams, fromState, fromParams*/ ) {
+                // display new view from top
+                $window.scrollTo(0, 0);
+                // Save the route title
+                $rootScope.currTitle = $state.current.title;
+            });
+
+        // Load a title dynamically
+        $rootScope.currTitle = $state.current.title;
+        $rootScope.pageTitle = function() {
+            var title = $rootScope.app.name + ' - ' + ($rootScope.currTitle || $rootScope.app.description);
+            document.title = title;
+            return title;
+        };
+
+    }
+
+})();
+
+
+
+// routerApp.service('AuthService', function () {
+//     this._isAuthenticated = false;
+//     this._isAccessToken = '';
+//     this.IsAuthenticated = function () {
+//         return this._isAuthenticated;
+//     }
+// });
 /**=========================================================
  * Module: chartist.js
  =========================================================*/
@@ -2703,421 +3612,6 @@ angular.module('app.bootstrapui').controller('YearpickerCtrl', ["$scope", functi
 
     }
 
-
-})();
-
-
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.bootstrapui')
-        .controller('CompanyRegController', CompanyRegController);
-
-    CompanyRegController.$inject = ['$http','$scope', '$rootScope','$uibModal','companyService','$stateParams', '$state','$localStorage'];
-    function CompanyRegController($http,$scope, $rootScope,$uibModal, companyService,$stateParams, $state,$localStorage) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-
- var SuccessMsg;
- var errorMsg;
-
-
- $scope.company=companyService.get({ID:1});
-
-console.log( $scope.company);
-
-
-
-  $scope.loadCompany = function () {
-   
- $scope.company=companyService.get({ID:1});
-   }
-
- $rootScope.$on("CallLoadCompany", function(){
-           $scope.loadCompany ();
-        });
-
-          
-          vm.open = function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'CompInfoContent.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-
-
-
-
-
-            var state = $('#modal-state');
-            modalInstance.result.then(function () {
-              state.text('Modal dismissed with OK status');
-            }, function () {
-              state.text('Modal dismissed with Cancel status');
-            });
-          };
-
-
-
-
-
-$scope.show = function(EditCompany) {
-      // $scope.x = x;
-      var modalInstance = $uibModal.open({
-        templateUrl: 'GeneralCompanyEdit.html',
-        controller: ModalInstanceCtrl,
-        resolve: {
-           EditCompany: function () {
-             return EditCompany;
-           }
-         }        
-        // scope : $scope
-      });
-    };
-    
-    
-
-
-
-          
- 
-
-
-          // Please note that $uibModalInstance represents a modal window (instance) dependency.
-          // It is not the same as the $uibModal service used above.
-
-          ModalInstanceCtrl.$inject = ['$scope', '$rootScope','$uibModalInstance','companyService','EditCompany'];
-          function ModalInstanceCtrl($scope, $rootScope,$uibModalInstance, companyService,EditCompany) {
-          $scope.company=EditCompany;
-            $scope.ok = function () {
-              $uibModalInstance.close('closed');
-            };
-
-            $scope.cancel = function () {
-              $uibModalInstance.dismiss('cancel');
-            };
-          //   $scope.Company=new companyService();
-          //    $scope.submitCompinfo=function() {
-          // $scope.Company.$save();
-          // console.log('Saving user: ' +$scope.Company.pin_number);
-          // };
-
-
-  
-           $scope.EditGenCompany=function(company){
-             company.$update().then(function(data){
-              var response=angular.fromJson(data);
-          
-            if(response.Status=="1"){
-                  $scope.errorMsg=false;
-                    $scope.SuccessMsg =response.Message;
-            }else{
-           
-                   $scope.SuccessMsg=false;
-                   $scope.errorMsg=response.Message;
-              // vm.auth=true;
-            }
-                   $rootScope.$emit("CallLoadCompany", {});
-            },
-             function() {
-                 $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
-          
-              };
-         
-          }
-        }
-    }
-
-})();
-
-
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.company')
-        .factory('companyService', companyService);
-
-    companyService.$inject = ['$resource','jadaApiUrl'];
-    function companyService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/company/:ID', {ID: '@ID'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.company')
-        .factory('financialPeriodService', financialPeriodService);
-
-    financialPeriodService.$inject = ['$resource','jadaApiUrl'];
-    function financialPeriodService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/period/:id', {id: '@id'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-
-
-
-/**=========================================================
- * Module: modals.js
- * Provides a simple way to implement bootstrap modals from templates
- =========================================================*/
-(function() {
-    'use strict';
-
-    angular
-        .module('app.bootstrapui')
-        .controller('FinancialPeriodsController', FinancialPeriodsController);
-
-    FinancialPeriodsController.$inject = ['$scope', '$rootScope','$uibModal','financialPeriodService','$stateParams', '$state'];
-    function FinancialPeriodsController($scope, $rootScope, $uibModal, financialPeriodService,$stateParams, $state) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
- var SuccessMsg;
- var errorMsg;
-
-$scope.periods=financialPeriodService.query();
-
-
-
-   $scope.loadPeriods = function () {
-   $scope.periods=financialPeriodService.query();
-
-   }
-
- $rootScope.$on("CallLoadPeriods", function(){
-           $scope.loadPeriods();
-        });
-
-
-$scope.months = [];
-$scope.selectedMonth = {};
-
-$scope.loadMonths = function() {
-  if ($scope.months.length == 0) {
-    $scope.months = [{
-      id:1,
-      name: 'JANUARY'
-    }, {
-      id:2,
-      name: 'FEBRUAY'
-    }, {
-      id:3,
-      name: 'MARCH'
-    },
-     {
-      id:4,
-      name: 'APRIL'
-    },
-     {
-      id:5,
-      name: 'MAY'
-    },
-     {
-      id:6,
-      name: 'JUNE'
-    },
-     {
-      id:7,
-      name: 'JULY'
-    },
-     {
-      id:8,
-      name: 'AUGUST'
-    },
-     {
-      id:9,
-      name: 'SEPTEMBER'
-    },
-     {
-      id:10,
-      name: 'OCTOBER'
-    },
-     {
-      id:11,
-      name: 'NOVEMBER'
-    },
-     {
-      id:12,
-      name: 'DECEMBER'
-    }];
-  }
-}
-
-
-
-
-  $scope.delete= function (period) {
-period.$remove().then(function () {
-$scope.loadPeriods();
-});
-}
-
-
-
-          
-          $scope.open = function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'newFperiods.html',
-              controller: ModalOpenFperiodsInstanceCtrl,
-              size: size
-            });
-
-
-
-
-
-            var state = $('#modal-state');
-            modalInstance.result.then(function () {
-              state.text('Modal dismissed with OK status');
-            }, function () {
-              state.text('Modal dismissed with Cancel status');
-            });
-          };
-
-
-
-
-    
-
-
-  $scope.show = function(period) {
-      // $scope.x = x;
-      var modalInstance = $uibModal.open({
-        templateUrl: 'editFperiods.html',
-        controller: ModalInstanceCtrl,
-        resolve: {
-           period: function () {
-             return period;
-           }
-         }        
-        // scope : $scope
-      });
-    };
-
-
-
- 
-
-
-          // Please note that $uibModalInstance represents a modal window (instance) dependency.
-          // It is not the same as the $uibModal service used above.
-
-          ModalOpenFperiodsInstanceCtrl.$inject = ['$scope','$rootScope', '$uibModalInstance','financialPeriodService'];
-          function ModalOpenFperiodsInstanceCtrl($scope,$rootScope, $uibModalInstance, financialPeriodService) {
-          
-            $scope.ok = function () {
-              $uibModalInstance.close('closed');
-            };
-            $scope.cancel = function () {
-              $uibModalInstance.dismiss('cancel');
-            };
-            $scope.period=new financialPeriodService();
-             $scope.submitPeriod=function() {
-          $scope.period.$save().then(function(data){
-            var response=angular.fromJson(data);
-          
-            if(response.Status=="1"){
-                    $scope.errorMsg=false;
-                    $scope.SuccessMsg =response.Message;
-            }else{
-                   
-                   $scope.SuccessMsg=false;
-               
-                   $scope.errorMsg=response.Message;
-              // vm.auth=true;
-            }
-              $rootScope.$emit("CallLoadPeriods", {}); 
-          }, 
-          function() {
-                 $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
-    
-          };
-
-              $scope.submitClosePeriod=function() {
-          $scope.period.$save().then(function(){
-            
-              $rootScope.$emit("CallLoadPeriods", {}); 
-                 $scope.ok();
-          }, 
-          function() {
-                 $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
-    
-          };
-         
-          }
-
-
-          ModalInstanceCtrl.$inject = ['$scope', '$rootScope','$uibModalInstance','financialPeriodService','period'];
-          function ModalInstanceCtrl($scope, $rootScope,$uibModalInstance, financialPeriodService,period) {
-          $scope.period=period;
-            $scope.ok = function () {
-              $uibModalInstance.close('closed');
-            };
-
-            $scope.cancel = function () {
-              $uibModalInstance.dismiss('cancel');
-            };
-         
-                $scope.updatePeriods=function(period){
-             period.$update().then(function(){
-                   $rootScope.$emit("CallLoadPeriods", {});
-            });
-          
-              };
-          }
-        }
-    }
 
 })();
 
@@ -5140,1237 +5634,6 @@ for(var r=0;r<accountRights.length;r++){
 
 })();
 
-(function() {
-    'use strict';
-
-    angular
-        .module('app.dashboard')
-        .controller('DashboardController', DashboardController);
-
-    DashboardController.$inject = ['$scope', 'ChartData', '$timeout','$localStorage'];
-    function DashboardController($scope, ChartData, $timeout,$localStorage) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          // SPLINE
-          // ----------------------------------- 
-          vm.splineData = ChartData.load('server/chart/spline.json');
-          vm.splineOptions = {
-              series: {
-                  lines: {
-                      show: false
-                  },
-                  points: {
-                      show: true,
-                      radius: 4
-                  },
-                  splines: {
-                      show: true,
-                      tension: 0.4,
-                      lineWidth: 1,
-                      fill: 0.5
-                  }
-              },
-              grid: {
-                  borderColor: '#eee',
-                  borderWidth: 1,
-                  hoverable: true,
-                  backgroundColor: '#fcfcfc'
-              },
-              tooltip: true,
-              tooltipOpts: {
-                  content: function (label, x, y) { return x + ' : ' + y; }
-              },
-              xaxis: {
-                  tickColor: '#fcfcfc',
-                  mode: 'categories'
-              },
-              yaxis: {
-                  min: 0,
-                  max: 150, // optional: use it for a clear represetation
-                  tickColor: '#eee',
-                  position: ($scope.app.layout.isRTL ? 'right' : 'left'),
-                  tickFormatter: function (v) {
-                      return v/* + ' visitors'*/;
-                  }
-              },
-              shadowSize: 0
-          };
-
-
-          // PANEL REFRESH EVENTS
-          // ----------------------------------- 
-
-          $scope.$on('panel-refresh', function(event, id) {
-            
-            console.log('Simulating chart refresh during 3s on #'+id);
-
-            // Instead of timeout you can request a chart data
-            $timeout(function(){
-              
-              // directive listen for to remove the spinner 
-              // after we end up to perform own operations
-              $scope.$broadcast('removeSpinner', id);
-              
-              console.log('Refreshed #' + id);
-
-            }, 3000);
-
-          });
-
-
-          // PANEL DISMISS EVENTS
-          // ----------------------------------- 
-
-          // Before remove panel
-          $scope.$on('panel-remove', function(event, id, deferred){
-            
-            console.log('Panel #' + id + ' removing');
-            
-            // Here is obligatory to call the resolve() if we pretend to remove the panel finally
-            // Not calling resolve() will NOT remove the panel
-            // It's up to your app to decide if panel should be removed or not
-            deferred.resolve();
-          
-          });
-
-          // Panel removed ( only if above was resolved() )
-          $scope.$on('panel-removed', function(event, id){
-
-            console.log('Panel #' + id + ' removed');
-
-          });
-
-        }
-        
-
-        $scope.Logout=function() {
-            // remove user from local storage and clear http auth header
-            delete $localStorage.currentUser;
-            $http.defaults.headers.common.Authorization = '';
-            aler("logging out")
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.dashboard')
-        .controller('DashboardV2Controller', DashboardV2Controller);
-
-    DashboardV2Controller.$inject = ['$rootScope', '$scope', '$state'];
-    function DashboardV2Controller($rootScope, $scope, $state) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          // Change layout mode
-          if( $state.includes('app-h') ) {
-            // Setup layout horizontal for demo
-            $rootScope.app.layout.horizontal = true;
-            $scope.$on('$destroy', function(){
-                $rootScope.app.layout.horizontal = false;
-            });
-          }
-          else {
-            if(!$rootScope.app.layout.isCollapsedText)
-                $rootScope.app.layout.isCollapsed = true;
-          }
-
-          // BAR STACKED
-          // -----------------------------------
-          vm.barStackedOptions = {
-              series: {
-                  stack: true,
-                  bars: {
-                      align: 'center',
-                      lineWidth: 0,
-                      show: true,
-                      barWidth: 0.6,
-                      fill: 0.9
-                  }
-              },
-              grid: {
-                  borderColor: '#eee',
-                  borderWidth: 1,
-                  hoverable: true,
-                  backgroundColor: '#fcfcfc'
-              },
-              tooltip: true,
-              tooltipOpts: {
-                  content: function (label, x, y) { return x + ' : ' + y; }
-              },
-              xaxis: {
-                  tickColor: '#fcfcfc',
-                  mode: 'categories'
-              },
-              yaxis: {
-                  min: 0,
-                  max: 200, // optional: use it for a clear represetation
-                  position: ($rootScope.app.layout.isRTL ? 'right' : 'left'),
-                  tickColor: '#eee'
-              },
-              shadowSize: 0
-          };
-
-          // SPLINE
-          // -----------------------------------
-
-          vm.splineOptions = {
-              series: {
-                  lines: {
-                      show: false
-                  },
-                  points: {
-                      show: true,
-                      radius: 4
-                  },
-                  splines: {
-                      show: true,
-                      tension: 0.4,
-                      lineWidth: 1,
-                      fill: 0.5
-                  }
-              },
-              grid: {
-                  borderColor: '#eee',
-                  borderWidth: 1,
-                  hoverable: true,
-                  backgroundColor: '#fcfcfc'
-              },
-              tooltip: true,
-              tooltipOpts: {
-                  content: function (label, x, y) { return x + ' : ' + y; }
-              },
-              xaxis: {
-                  tickColor: '#fcfcfc',
-                  mode: 'categories'
-              },
-              yaxis: {
-                  min: 0,
-                  max: 150, // optional: use it for a clear represetation
-                  tickColor: '#eee',
-                  position: ($rootScope.app.layout.isRTL ? 'right' : 'left'),
-                  tickFormatter: function (v) {
-                      return v/* + ' visitors'*/;
-                  }
-              },
-              shadowSize: 0
-          };
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.dashboard')
-        .controller('DashboardV3Controller', DashboardV3Controller);
-
-    DashboardV3Controller.$inject = ['$rootScope'];
-    function DashboardV3Controller($rootScope) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          // SPLINE
-          // ----------------------------------- 
-
-          vm.splineOptions = {
-              series: {
-                  lines: {
-                      show: false
-                  },
-                  points: {
-                      show: true,
-                      radius: 4
-                  },
-                  splines: {
-                      show: true,
-                      tension: 0.4,
-                      lineWidth: 1,
-                      fill: 0.5
-                  }
-              },
-              grid: {
-                  borderColor: '#eee',
-                  borderWidth: 1,
-                  hoverable: true,
-                  backgroundColor: '#fcfcfc'
-              },
-              tooltip: true,
-              tooltipOpts: {
-                  content: function (label, x, y) { return x + ' : ' + y; }
-              },
-              xaxis: {
-                  tickColor: '#fcfcfc',
-                  mode: 'categories'
-              },
-              yaxis: {
-                  min: 0,
-                  max: 150, // optional: use it for a clear represetation
-                  tickColor: '#eee',
-                  position: ($rootScope.app.layout.isRTL ? 'right' : 'left'),
-                  tickFormatter: function (v) {
-                      return v/* + ' visitors'*/;
-                  }
-              },
-              shadowSize: 0
-          };
-
-
-          vm.seriesData = {
-            'CA': 11100,   // Canada
-            'DE': 2510,    // Germany
-            'FR': 3710,    // France
-            'AU': 5710,    // Australia
-            'GB': 8310,    // Great Britain
-            'RU': 9310,    // Russia
-            'BR': 6610,    // Brazil
-            'IN': 7810,    // India
-            'CN': 4310,    // China
-            'US': 839,     // USA
-            'SA': 410      // Saudi Arabia
-          };
-          
-          vm.markersData = [
-            { latLng:[41.90, 12.45],  name:'Vatican City'          },
-            { latLng:[43.73, 7.41],   name:'Monaco'                },
-            { latLng:[-0.52, 166.93], name:'Nauru'                 },
-            { latLng:[-8.51, 179.21], name:'Tuvalu'                },
-            { latLng:[7.11,171.06],   name:'Marshall Islands'      },
-            { latLng:[17.3,-62.73],   name:'Saint Kitts and Nevis' },
-            { latLng:[3.2,73.22],     name:'Maldives'              },
-            { latLng:[35.88,14.5],    name:'Malta'                 },
-            { latLng:[41.0,-71.06],   name:'New England'           },
-            { latLng:[12.05,-61.75],  name:'Grenada'               },
-            { latLng:[13.16,-59.55],  name:'Barbados'              },
-            { latLng:[17.11,-61.85],  name:'Antigua and Barbuda'   },
-            { latLng:[-4.61,55.45],   name:'Seychelles'            },
-            { latLng:[7.35,134.46],   name:'Palau'                 },
-            { latLng:[42.5,1.51],     name:'Andorra'               }
-          ];
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.core')
-        .config(coreConfig);
-
-    coreConfig.$inject = ['$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$animateProvider'];
-    function coreConfig($controllerProvider, $compileProvider, $filterProvider, $provide, $animateProvider){
-
-      var core = angular.module('app.core');
-      // registering components after bootstrap
-      core.controller = $controllerProvider.register;
-      core.directive  = $compileProvider.directive;
-      core.filter     = $filterProvider.register;
-      core.factory    = $provide.factory;
-      core.service    = $provide.service;
-      core.constant   = $provide.constant;
-      core.value      = $provide.value;
-
-
-      // Disables animation on items with class .ng-no-animation
-      $animateProvider.classNameFilter(/^((?!(ng-no-animation)).)*$/);
-
-      // Improve performance disabling debugging features
-      // $compileProvider.debugInfoEnabled(false);
-
-    }
-
-
-})();
-    
-
-
-/**=========================================================
- * Module: constants.js
- * Define constants to inject across the application
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.core')
-        .constant('APP_MEDIAQUERY', {
-          'desktopLG':             1200,
-          'desktop':                992,
-          'tablet':                 768,
-          'mobile':                 480
-        })
-      ;
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.core')
-        .run(appRun);
-
-    appRun.$inject = ['$http','$rootScope', '$state', '$stateParams', '$window', '$templateCache', 'Colors','$location', '$localStorage'];
-
-    function appRun($http,$rootScope, $state, $stateParams, $window, $templateCache, Colors , $location, $localStorage) {
-
-if ($localStorage.currentUser) {
-            $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
-        }
-
-
-        // Hook into ocLazyLoad to setup AngularGrid before inject into the app
-        // See "Creating the AngularJS Module" at
-        // https://www.ag-grid.com/best-angularjs-data-grid/index.php
-        var offevent = $rootScope.$on('ocLazyLoad.fileLoaded', function(e, file) {
-            if (file.indexOf('ag-grid.js') > -1) {
-                agGrid.initialiseAgGridWithAngular1(angular);
-                offevent();
-            }
-        });
-
-        // Set reference to access them from any scope
-        $rootScope.$state = $state;
-        $rootScope.$stateParams = $stateParams;
-        $rootScope.$storage = $window.localStorage;
-
-        // Uncomment this to disable template cache
-        /*$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-            if (typeof(toState) !== 'undefined'){
-              $templateCache.remove(toState.templateUrl);
-            }
-        });*/
-   $rootScope.$on('$locationChangeStart', function (event, next, current) {
-            var publicPages = ['/page/login'];
-            var restrictedPage = publicPages.indexOf($location.path()) === -1;
-            if (restrictedPage && !$localStorage.currentUser) {
-                $location.path('/page/login');
-                 
-            }
-        });
-
-
-
-// routerApp.run(function ($rootScope, $state, AuthService) {
-//     $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-//         if (toState.authenticate && !AuthService.IsAuthenticated()) {
-//             alert("Not Authenticated");
-//             // User isn’t authenticated
-//             $state.transitionTo("login");
-//             event.preventDefault(); 
-//         }
-//     });
-// });
-
-        // Allows to use branding color with interpolation
-        // {{ colorByName('primary') }}
-        $rootScope.colorByName = Colors.byName;
-
-        // cancel click event easily
-        $rootScope.cancel = function($event) {
-            $event.stopPropagation();
-        };
-
-        // Hooks Example
-        // -----------------------------------
-
-        // Hook not found
-        $rootScope.$on('$stateNotFound',
-            function(event, unfoundState /*, fromState, fromParams*/ ) {
-                console.log(unfoundState.to); // "lazy.state"
-                console.log(unfoundState.toParams); // {a:1, b:2}
-                console.log(unfoundState.options); // {inherit:false} + default options
-            });
-        // Hook error
-        $rootScope.$on('$stateChangeError',
-            function(event, toState, toParams, fromState, fromParams, error) {
-                console.log(error);
-            });
-        // Hook success
-        $rootScope.$on('$stateChangeSuccess',
-            function( /*event, toState, toParams, fromState, fromParams*/ ) {
-                // display new view from top
-                $window.scrollTo(0, 0);
-                // Save the route title
-                $rootScope.currTitle = $state.current.title;
-            });
-
-        // Load a title dynamically
-        $rootScope.currTitle = $state.current.title;
-        $rootScope.pageTitle = function() {
-            var title = $rootScope.app.name + ' - ' + ($rootScope.currTitle || $rootScope.app.description);
-            document.title = title;
-            return title;
-        };
-
-    }
-
-})();
-
-
-
-// routerApp.service('AuthService', function () {
-//     this._isAuthenticated = false;
-//     this._isAccessToken = '';
-//     this.IsAuthenticated = function () {
-//         return this._isAuthenticated;
-//     }
-// });
-/**=========================================================
- * Module: modals.js
- * Provides a simple way to implement bootstrap modals from templates
- =========================================================*/
-(function() {
-    'use strict';
-
-    angular
-        .module('app.employees')
-        .controller('CreateEmplController', CreateEmplController);
-
-    CreateEmplController.$inject = ['$uibModal'];
-    function CreateEmplController($uibModal) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          vm.open = function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: '/myModalContent.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-
-
-
-
-            var state = $('#modal-state');
-            modalInstance.result.then(function () {
-              state.text('Modal dismissed with OK status');
-            }, function () {
-              state.text('Modal dismissed with Cancel status');
-            });
-          };
-
-
-
-   vm.show= function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'ModalContent.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-
-
-
-
-            var state = $('#modal-state');
-            modalInstance.result.then(function () {
-              state.text('Modal dismissed with OK status');
-            }, function () {
-              state.text('Modal dismissed with Cancel status');
-            });
-          };
-
-
- vm.showStatutory= function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'StatutoryModalContent.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-
-
-
-
-            var state = $('#modal-state');
-            modalInstance.result.then(function () {
-              state.text('Modal dismissed with OK status');
-            }, function () {
-              state.text('Modal dismissed with Cancel status');
-            });
-          };
-
-          vm.showloans= function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'loansModalContent.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-          };
-
-           vm.showpension= function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'PensionModalContent.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-          };
-
-        vm.display= function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'template.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-          };
-
-
-          vm.add= function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'add.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-          };
-
-           vm.more= function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'mytemplate.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-          };
-
-
-           vm.info= function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'myContent.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-          };
-
-
-          // Please note that $uibModalInstance represents a modal window (instance) dependency.
-          // It is not the same as the $uibModal service used above.
-
-          ModalInstanceCtrl.$inject = ['$scope', '$uibModalInstance'];
-          function ModalInstanceCtrl($scope, $uibModalInstance) {
-          
-            $scope.ok = function () {
-              $uibModalInstance.close('closed');
-            };
-
-            $scope.cancel = function () {
-              $uibModalInstance.dismiss('cancel');
-            };
-
-              $scope.submitEmpMaster = function() {
-                console.log($scope.description);
-        
-        // UserService.save($scope.empMaster);
-  };
-          }
-        }
-    }
-
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.bootstrapui')
-        .controller('EmployeesDetailsController', EmployeesDetailsController);
-
-EmployeesDetailsController.$inject = ['$stateParams', '$state','$http','$scope', '$uibModal','EmployeeService'];
-    function EmployeesDetailsController($stateParams, $state,$http,$scope, $uibModal, EmployeeService) {
-      
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
- 
-           var empid=$stateParams.Employee;
-
-           console.log( empid);
-            if(empid!=null){
-           $scope.currentemployee=EmployeeService.get({id:empid});
-          }
-           
-         
-          
-
-
-     
-
-
-
-
-  
-
-
- 
-
-
-        }
-    }
-
-})();
-
-
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.employees')
-        .controller('EmployeesController', EmployeesController);
-
-EmployeesController.$inject = ['$stateParams', '$rootScope','$state','$http','$scope', '$uibModal','EmployeeService','jadaApiUrl'];
-    function EmployeesController($stateParams, $rootScope,$state,$http,$scope, $uibModal, EmployeeService,jadaApiUrl) {
-      
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-  $scope.date = new Date();
-
-  $scope.testDate = new Date($scope.date.getFullYear() - 10, $scope.date.getMonth(), 1);
-
-  $scope.dateOptions = {
-    formatYear: 'yy',
-    maxDate: new Date(2020, 5, 22),
-    minDate: new Date(2000, 1, 1),
-    startingDay: 1
-  };
-
-  $scope.open = function() {
-    $scope.popup.opened = true;
-  };
-
-  $scope.popup = {
-    opened: false
-  };
-
-       //       $scope.today = function() {
-       //       $scope.dt = new Date();
-       //    };
-       //    $scope.today();
-
-       // $scope.clear = function () {
-       //     $scope.dt = null;
-       //    };
-
-       //    // Disable weekend selection
-       //   $scope.disabled = function(date, mode) {
-       //      return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-       //    };
-
-       //   $scope.toggleMin = function() {
-       //     $scope.minDate =  $scope.minDate ? null : new Date();
-       //    };
-       //    $scope.toggleMin();
-
-       // $scope.open = function($event) {
-       //      $event.preventDefault();
-       //      $event.stopPropagation();
-
-       //  $scope.opened = true;
-       //    };
-
-       //  $scope.dateOptions = {
-       //      formatYear: 'yy',
-       //      startingDay: 1
-       //    };
-
-       //   $scope.initDate = new Date('2019-10-20');
-       //  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-       //  $scope.format =  $scope.formats[0];
-        
-           var SuccessMsg;
-            var errorMsg;
-
-           var id = $stateParams.EmployeeId;
-      
-          if(id!=null){
-           $scope.employee=EmployeeService.get({id:id}); 
-          }
-           
-          
-        $scope.employees=EmployeeService.query();
-
-
-  $scope.loadEmployees = function () {
-          $scope.employees=EmployeeService.query();
-
-   }
-
- $rootScope.$on("CallLoadEmployees", function(){
-           $scope.loadEmployees();
-        });
-
-
-$http.get(jadaApiUrl+'api/department').success(function(data) {
-              $scope.departments = data;
-
-            });
-
-
-$http.get(jadaApiUrl+'api/costcenter').success(function(data) {
-              $scope.centers = data;
-
-            });
-
-$http.get(jadaApiUrl+'api/employeegroup').success(function(data) {
-              $scope.groups = data;
-
-            });
-
-$http.get(jadaApiUrl+'api/employeecategory').success(function(data) {
-              $scope.categories = data;
-
-            });
-
-$http.get(jadaApiUrl+'api/bankbranchcode').success(function(data) {
-              $scope.bankcodes = data;
-              console.log($scope.bankcodes)
-
-            });
-
-
-
-$scope.updateBankCodes=function(id){
-  
-  $scope.bankBranchName=[];
-  for(var r=0;r<$scope.bankcodes.length;r++){
-    if($scope.bankcodes[r].bankCode==id){
-      $scope.bankBranchName.push($scope.bankcodes[r]);
-      console.log($scope.bankcodes[r]);
-    }
-
-    console.log("///////////////////////////////////");
-
-    console.log($scope.bankBranchName);
-  }
-
-  
-}
-
-$http.get(jadaApiUrl+'api/paypoint').success(function(data) {
-              $scope.points = data;
-
-            });
-
-       $scope.empMaster= new EmployeeService();
-            $scope.submitEmpMaster = function() {
-              $scope.empMaster.$save().then(function(data){
-                var response=angular.fromJson(data);
-          
-            if(response.Status=="1"){
-                   $scope.errorMsg=false;
-                    $scope.SuccessMsg =response.Message;
-            }else{
-           
-                    $scope.SuccessMsg=false;
-                   $scope.errorMsg=response.Message;
-    
-            }
-                  $scope.loadEmployees();
-
-              },
-               function() {
-                $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
-             
-        };
-
-         $scope.delete= function (employee) {
-            employee.$remove().then(function () {
-             $scope.loadEmployees();
-
-            });
-            }
-
-
-               
-            $scope.updateEmpMaster=function(employee){
-             employee.$update().then(function(){
-                     $scope.loadEmployees();
-            },
-              function() {
-                 $scope.errorMsg = 'Server Request Error';
-                });
-          
-              };
-        
-
-
-       $scope.departments = [];
-       $scope.selectDepartments= function() {
-           $rootScope.$emit("CallLoadDepartment", {});
-          };
-
-
-   
-
-
- 
-
-
-        }
-    }
-
-})();
-
-
-
-
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.employees')
-        .factory('EmployeeService', EmployeeService);
-
-    EmployeeService.$inject = ['$resource','jadaApiUrl'];
-    function EmployeeService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/employee/:id', {id: '@id'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.employees')
-        .filter('unique', function() { 
-                
-        return function(input, key) {
-        var unique = {};
-        var uniqueList = [];
-        for(var i = 0; i < input.length; i++){
-            if(typeof unique[input[i][key]] == "undefined"){
-                unique[input[i][key]] = "";
-                uniqueList.push(input[i]);
-            }
-        }
-        return uniqueList;
-    };
-});
-
-
-
-
-         
-   
-})();
-
-
-
-
-// (function() {
-//     'use strict';
-
-//     angular
-//         .module('app.employees')
-//         .controller('ModalInstanceCtrl',['$scope', '$uibModalInstance', 'items',  function($scope, $uibModalInstance, items) { 
-                
-//       $scope.items = items;
-//   $scope.editable = items[0];
-
-//   $scope.ok = function() {
-//     $modalInstance.close($scope.editable);
-//   };
-
-//   $scope.cancel = function() {
-//     $modalInstance.dismiss(false);
-//   };
-         
-//     }]);
-// })();
-
-
-
-
-// angle.filter('unique', function() {
-//     return function(input, key) {
-//         var unique = {};
-//         var uniqueList = [];
-//         for(var i = 0; i < input.length; i++){
-//             if(typeof unique[input[i][key]] == "undefined"){
-//                 unique[input[i][key]] = "";
-//                 uniqueList.push(input[i]);
-//             }
-//         }
-//         return uniqueList;
-//     };
-// });
-
-
-
-// (function() {
-//     'use strict';
-
-//     angular
-//         .module('app.employees')
-//         .filter('unique', unique);
-
-
-//     function unique() {
-//    return function(input, key) {
-//         var unique = {};
-//         var uniqueList = [];
-//         for(var i = 0; i < input.length; i++){
-//             if(typeof unique[input[i][key]] == "undefined"){
-//                 unique[input[i][key]] = "";
-//                 uniqueList.push(input[i]);
-//             }
-//         }
-//         return uniqueList;
-//     };   
-       
-//     }
-
-// })();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.employees')
-        .controller('UpdateDemoCtrl', ["$scope", "$http", "$uibModal", "$log", "UserService", function($scope, $http, $uibModal, $log, UserService) { 
-                
-         $scope.data = {
-    name: '',
-    serial: ''
-  };
-  $scope.didSelect = false;
-  $scope.items = [{
-    name: '1',
-    serial: '1s'
-  }, {
-    name: '2',
-    serial: '2s'
-  }, {
-    name: '3',
-    serial: '3s'
-  }];
-  
-  $scope.open = function() {
-
-    var modalInstance = $uibModal.open({
-      templateUrl: 'myModalContent.html',
-      controller: 'ModalInstanceCtrl',
-      resolve: {
-        items: function() {
-          return $scope.items;
-        }
-      }
-    });
-
-    modalInstance.result.then(function(selectedItem) {
-      $scope.selected = selectedItem;
-
-
-    console.log(selectedItem);
- if(selectedItem) {
-         $scope.data.name = $scope.selected.name;
-      $scope.data.serial = $scope.selected.serial;
-      $scope.didSelect = true;
- }
-
-
-    }, function(result) {
-      $log.info('Modal dismissed at: ' + new Date());
-      $scope.didSelect = false;
-    });
-  };
-}]);
-
-
-
-
-         
-   
-})();
-
-
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.employees')
-        .controller('ModalInstanceCtrl',['$scope', '$uibModalInstance', 'items',  function($scope, $uibModalInstance, items) { 
-                
-      $scope.items = items;
-  $scope.editable = items[0];
-
-  $scope.ok = function() {
-    $modalInstance.close($scope.editable);
-  };
-
-  $scope.cancel = function() {
-    $modalInstance.dismiss(false);
-  };
-         
-    }]);
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.employees')
-        .controller('UserInfo', ["$scope", "$http", "$uibModal", "$log", "UserService", function($scope, $http, $uibModal, $log, UserService) { 
-                
-         // var usersdata= $http.get('https://jsonplaceholder.typicode.com/users');
-         // usersdata.then(function(result){
-         //   $scope.users=result.data;
-         // })
-         $scope.users=UserService.query();
-
-         $scope.setDataForUsers=function(userId) {
-          $scope.oneUser=UserService.get({user:userId});
-
-         };
-
-$scope.searchEmp=function(userId) {
-   $scope.oneUser=UserService.get({user:userId});
- 
- };
-
-          $scope.open = function (size) {
-
-    var modalInstance = $uibModal.open({
-      templateUrl: 'myModalContent.html',
-      controller: 'ModalInstanceCtrl',
-      size: size,
-      resolve: {
-        users: function () {
-          return $scope.users;
-        },
-        user: function(){
-          return size;
-        }
-      }
-    });
-
-  };
-
-
-
-
-
-          $scope.show = function (size) {
-
-    var modalInstance = $uibModal.open({  
-      templateUrl: 'ModalContent.html',
-      controller: 'ModalInstanceCtrl',
-      size: size
-    
-    });
-
-  };
-         
-    }]);
-})();
-
-
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.employees')
-        .controller('ModalInstanceCtrl',['$scope', '$uibModalInstance', 'users', 'user', function($scope, $uibModalInstance, users, user) { 
-                
-         console.log(user);
-  $scope.user = user;
-  
-  $scope.users = users;
-  $scope.selected = {
-   user: $scope.users[0]
-  };
-
-  $scope.ok = function () {
-    $uibModalInstance.close($scope.selected.user);
-  };
-
-  $scope.cancel = function () {
-    $uibModalInstance.dismiss('cancel');
-  };
-         
-    }]);
-})();
-
-// (function() {
-//     'use strict';
-
-//     angular
-//         .module('app.employees')
-//         .controller('UserInfo', function($scope, $http, UserService) { 
-                
-//          // var usersdata= $http.get('https://jsonplaceholder.typicode.com/users');
-//          // usersdata.then(function(result){
-//          //  $scope.users=result.data;
-//          // })
-//          $scope.users=UserService.query();
-
-//          $scope.setDataForUsers=function(userId) {
-//            $scope.oneUser=UserService.get({user:userId});
-
-//          };
-         
-//     });
-// })();
 
 (function() {
     'use strict';
@@ -7357,6 +6620,817 @@ $scope.searchEmp=function(userId) {
 })();
 
 /**=========================================================
+ * Module: modals.js
+ * Provides a simple way to implement bootstrap modals from templates
+ =========================================================*/
+(function() {
+    'use strict';
+
+    angular
+        .module('app.employees')
+        .controller('CreateEmplController', CreateEmplController);
+
+    CreateEmplController.$inject = ['$uibModal'];
+    function CreateEmplController($uibModal) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          vm.open = function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: '/myModalContent.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+
+
+
+
+            var state = $('#modal-state');
+            modalInstance.result.then(function () {
+              state.text('Modal dismissed with OK status');
+            }, function () {
+              state.text('Modal dismissed with Cancel status');
+            });
+          };
+
+
+
+   vm.show= function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'ModalContent.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+
+
+
+
+            var state = $('#modal-state');
+            modalInstance.result.then(function () {
+              state.text('Modal dismissed with OK status');
+            }, function () {
+              state.text('Modal dismissed with Cancel status');
+            });
+          };
+
+
+ vm.showStatutory= function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'StatutoryModalContent.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+
+
+
+
+            var state = $('#modal-state');
+            modalInstance.result.then(function () {
+              state.text('Modal dismissed with OK status');
+            }, function () {
+              state.text('Modal dismissed with Cancel status');
+            });
+          };
+
+          vm.showloans= function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'loansModalContent.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+          };
+
+           vm.showpension= function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'PensionModalContent.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+          };
+
+        vm.display= function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'template.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+          };
+
+
+          vm.add= function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'add.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+          };
+
+           vm.more= function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'mytemplate.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+          };
+
+
+           vm.info= function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'myContent.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+          };
+
+
+          // Please note that $uibModalInstance represents a modal window (instance) dependency.
+          // It is not the same as the $uibModal service used above.
+
+          ModalInstanceCtrl.$inject = ['$scope', '$uibModalInstance'];
+          function ModalInstanceCtrl($scope, $uibModalInstance) {
+          
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+
+              $scope.submitEmpMaster = function() {
+                console.log($scope.description);
+        
+        // UserService.save($scope.empMaster);
+  };
+          }
+        }
+    }
+
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.bootstrapui')
+        .controller('EmployeesDetailsController', EmployeesDetailsController);
+
+EmployeesDetailsController.$inject = ['$stateParams', '$state','$http','$scope', '$uibModal','EmployeeService'];
+    function EmployeesDetailsController($stateParams, $state,$http,$scope, $uibModal, EmployeeService) {
+      
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+ 
+           var empid=$stateParams.Employee;
+
+           console.log( empid);
+            if(empid!=null){
+           $scope.currentemployee=EmployeeService.get({id:empid});
+          }
+           
+         
+          
+
+
+     
+
+
+
+
+  
+
+
+ 
+
+
+        }
+    }
+
+})();
+
+
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.employees')
+        .controller('EmployeesController', EmployeesController);
+
+EmployeesController.$inject = ['$stateParams', '$rootScope','$state','$http','$scope', '$uibModal','EmployeeService','jadaApiUrl'];
+    function EmployeesController($stateParams, $rootScope,$state,$http,$scope, $uibModal, EmployeeService,jadaApiUrl) {
+      
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+  $scope.employee = new Date();
+$scope.date= new Date();
+
+
+           var id = $stateParams.EmployeeId;
+      
+          if(id!=null){
+           $scope.employee=EmployeeService.get({id:id}); 
+           var dob=$scope.employee.dateOfBirth;
+           console.log("date of birth : "+dob);
+           $scope.employee.dateOfBirth=  new Date(dob);
+          }
+  
+  $scope.testDate = new Date($scope.date.getFullYear() - 10, $scope.date.getMonth(), 1);
+
+  $scope.dateOptions = {
+    formatYear: 'yy',
+    maxDate: new Date(2020, 5, 22),
+    minDate: new Date(2000, 1, 1),
+    startingDay: 1
+  };
+
+  $scope.open = function() {
+    $scope.popup.opened = true;
+  };
+
+  $scope.popup = {
+    opened: false
+  };
+
+       //       $scope.today = function() {
+       //       $scope.dt = new Date();
+       //    };
+       //    $scope.today();
+
+       // $scope.clear = function () {
+       //     $scope.dt = null;
+       //    };
+
+       //    // Disable weekend selection
+       //   $scope.disabled = function(date, mode) {
+       //      return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+       //    };
+
+       //   $scope.toggleMin = function() {
+       //     $scope.minDate =  $scope.minDate ? null : new Date();
+       //    };
+       //    $scope.toggleMin();
+
+       // $scope.open = function($event) {
+       //      $event.preventDefault();
+       //      $event.stopPropagation();
+
+       //  $scope.opened = true;
+       //    };
+
+       //  $scope.dateOptions = {
+       //      formatYear: 'yy',
+       //      startingDay: 1
+       //    };
+
+       //   $scope.initDate = new Date('2019-10-20');
+       //  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+       //  $scope.format =  $scope.formats[0];
+        
+           var SuccessMsg;
+            var errorMsg;
+
+           
+          
+        $scope.employees=EmployeeService.query();
+
+
+  $scope.loadEmployees = function () {
+          $scope.employees=EmployeeService.query();
+        
+
+   }
+
+ $rootScope.$on("CallLoadEmployees", function(){
+           $scope.loadEmployees();
+        });
+
+
+$http.get(jadaApiUrl+'api/department').success(function(data) {
+              $scope.departments = data;
+
+            });
+
+
+$http.get(jadaApiUrl+'api/costcenter').success(function(data) {
+              $scope.centers = data;
+
+            });
+
+$http.get(jadaApiUrl+'api/employeegroup').success(function(data) {
+              $scope.groups = data;
+
+            });
+
+$http.get(jadaApiUrl+'api/employeecategory').success(function(data) {
+              $scope.categories = data;
+
+            });
+
+$http.get(jadaApiUrl+'api/bankbranchcode').success(function(data) {
+              $scope.bankcodes = data;
+              console.log($scope.bankcodes)
+
+            });
+
+
+
+$scope.updateBankCodes=function(id){
+  
+  $scope.bankBranchName=[];
+  for(var r=0;r<$scope.bankcodes.length;r++){
+    if($scope.bankcodes[r].bankCode==id){
+      $scope.bankBranchName.push($scope.bankcodes[r]);
+      console.log($scope.bankcodes[r]);
+    }
+
+    console.log("///////////////////////////////////");
+
+    console.log($scope.bankBranchName);
+  }
+
+  
+}
+
+$http.get(jadaApiUrl+'api/paypoint').success(function(data) {
+              $scope.points = data;
+
+            });
+
+       $scope.empMaster= new EmployeeService();
+            $scope.submitEmpMaster = function() {
+              $scope.empMaster.$save().then(function(data){
+                var response=angular.fromJson(data);
+          
+            if(response.Status=="1"){
+                   $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+            }else{
+           
+                    $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+    
+            }
+                  $scope.loadEmployees();
+
+              },
+               function() {
+                $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+             
+        };
+
+         $scope.delete= function (employee) {
+            employee.$remove().then(function () {
+             $scope.loadEmployees();
+
+            });
+            }
+
+
+               
+            $scope.updateEmpMaster=function(employee){
+             employee.$update().then(function(){
+                     $scope.loadEmployees();
+            },
+              function() {
+                 $scope.errorMsg = 'Server Request Error';
+                });
+          
+              };
+        
+
+
+       $scope.departments = [];
+       $scope.selectDepartments= function() {
+           $rootScope.$emit("CallLoadDepartment", {});
+          };
+
+
+   
+
+
+ 
+
+
+        }
+    }
+
+})();
+
+
+
+   // $(function() {
+   //   $("#datepicker").datepicker();
+   // });
+
+
+
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.employees')
+        .factory('EmployeeService', EmployeeService);
+
+    EmployeeService.$inject = ['$resource','jadaApiUrl'];
+    function EmployeeService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/employee/:id', {id: '@id'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.employees')
+        .filter('unique', function() { 
+                
+        return function(input, key) {
+        var unique = {};
+        var uniqueList = [];
+        for(var i = 0; i < input.length; i++){
+            if(typeof unique[input[i][key]] == "undefined"){
+                unique[input[i][key]] = "";
+                uniqueList.push(input[i]);
+            }
+        }
+        return uniqueList;
+    };
+});
+
+
+
+
+         
+   
+})();
+
+
+
+
+// (function() {
+//     'use strict';
+
+//     angular
+//         .module('app.employees')
+//         .controller('ModalInstanceCtrl',['$scope', '$uibModalInstance', 'items',  function($scope, $uibModalInstance, items) { 
+                
+//       $scope.items = items;
+//   $scope.editable = items[0];
+
+//   $scope.ok = function() {
+//     $modalInstance.close($scope.editable);
+//   };
+
+//   $scope.cancel = function() {
+//     $modalInstance.dismiss(false);
+//   };
+         
+//     }]);
+// })();
+
+
+
+
+// angle.filter('unique', function() {
+//     return function(input, key) {
+//         var unique = {};
+//         var uniqueList = [];
+//         for(var i = 0; i < input.length; i++){
+//             if(typeof unique[input[i][key]] == "undefined"){
+//                 unique[input[i][key]] = "";
+//                 uniqueList.push(input[i]);
+//             }
+//         }
+//         return uniqueList;
+//     };
+// });
+
+
+
+// (function() {
+//     'use strict';
+
+//     angular
+//         .module('app.employees')
+//         .filter('unique', unique);
+
+
+//     function unique() {
+//    return function(input, key) {
+//         var unique = {};
+//         var uniqueList = [];
+//         for(var i = 0; i < input.length; i++){
+//             if(typeof unique[input[i][key]] == "undefined"){
+//                 unique[input[i][key]] = "";
+//                 uniqueList.push(input[i]);
+//             }
+//         }
+//         return uniqueList;
+//     };   
+       
+//     }
+
+// })();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.employees')
+        .controller('UpdateDemoCtrl', ["$scope", "$http", "$uibModal", "$log", "UserService", function($scope, $http, $uibModal, $log, UserService) { 
+                
+         $scope.data = {
+    name: '',
+    serial: ''
+  };
+  $scope.didSelect = false;
+  $scope.items = [{
+    name: '1',
+    serial: '1s'
+  }, {
+    name: '2',
+    serial: '2s'
+  }, {
+    name: '3',
+    serial: '3s'
+  }];
+  
+  $scope.open = function() {
+
+    var modalInstance = $uibModal.open({
+      templateUrl: 'myModalContent.html',
+      controller: 'ModalInstanceCtrl',
+      resolve: {
+        items: function() {
+          return $scope.items;
+        }
+      }
+    });
+
+    modalInstance.result.then(function(selectedItem) {
+      $scope.selected = selectedItem;
+
+
+    console.log(selectedItem);
+ if(selectedItem) {
+         $scope.data.name = $scope.selected.name;
+      $scope.data.serial = $scope.selected.serial;
+      $scope.didSelect = true;
+ }
+
+
+    }, function(result) {
+      $log.info('Modal dismissed at: ' + new Date());
+      $scope.didSelect = false;
+    });
+  };
+}]);
+
+
+
+
+         
+   
+})();
+
+
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.employees')
+        .controller('ModalInstanceCtrl',['$scope', '$uibModalInstance', 'items',  function($scope, $uibModalInstance, items) { 
+                
+      $scope.items = items;
+  $scope.editable = items[0];
+
+  $scope.ok = function() {
+    $modalInstance.close($scope.editable);
+  };
+
+  $scope.cancel = function() {
+    $modalInstance.dismiss(false);
+  };
+         
+    }]);
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.employees')
+        .controller('UserInfo', ["$scope", "$http", "$uibModal", "$log", "UserService", function($scope, $http, $uibModal, $log, UserService) { 
+                
+         // var usersdata= $http.get('https://jsonplaceholder.typicode.com/users');
+         // usersdata.then(function(result){
+         //   $scope.users=result.data;
+         // })
+         $scope.users=UserService.query();
+
+         $scope.setDataForUsers=function(userId) {
+          $scope.oneUser=UserService.get({user:userId});
+
+         };
+
+$scope.searchEmp=function(userId) {
+   $scope.oneUser=UserService.get({user:userId});
+ 
+ };
+
+          $scope.open = function (size) {
+
+    var modalInstance = $uibModal.open({
+      templateUrl: 'myModalContent.html',
+      controller: 'ModalInstanceCtrl',
+      size: size,
+      resolve: {
+        users: function () {
+          return $scope.users;
+        },
+        user: function(){
+          return size;
+        }
+      }
+    });
+
+  };
+
+
+
+
+
+          $scope.show = function (size) {
+
+    var modalInstance = $uibModal.open({  
+      templateUrl: 'ModalContent.html',
+      controller: 'ModalInstanceCtrl',
+      size: size
+    
+    });
+
+  };
+         
+    }]);
+})();
+
+
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.employees')
+        .controller('ModalInstanceCtrl',['$scope', '$uibModalInstance', 'users', 'user', function($scope, $uibModalInstance, users, user) { 
+                
+         console.log(user);
+  $scope.user = user;
+  
+  $scope.users = users;
+  $scope.selected = {
+   user: $scope.users[0]
+  };
+
+  $scope.ok = function () {
+    $uibModalInstance.close($scope.selected.user);
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+         
+    }]);
+})();
+
+// (function() {
+//     'use strict';
+
+//     angular
+//         .module('app.employees')
+//         .controller('UserInfo', function($scope, $http, UserService) { 
+                
+//          // var usersdata= $http.get('https://jsonplaceholder.typicode.com/users');
+//          // usersdata.then(function(result){
+//          //  $scope.users=result.data;
+//          // })
+//          $scope.users=UserService.query();
+
+//          $scope.setDataForUsers=function(userId) {
+//            $scope.oneUser=UserService.get({user:userId});
+
+//          };
+         
+//     });
+// })();
+/**=========================================================
+ * Module: flatdoc.js
+ * Creates the flatdoc markup and initializes the plugin
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.flatdoc')
+        .directive('flatdoc', flatdoc);
+
+    function flatdoc() {
+
+        var directive = {
+            template: '<div role="flatdoc"><div role="flatdoc-menu"></div><div role="flatdoc-content"></div></div>',
+            link: link,
+            restrict: 'EA'
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+
+            Flatdoc.run({
+                fetcher: Flatdoc.file(attrs.src)
+            });
+
+            var $root = $('html, body');
+            var menuLinks;
+
+            var $doc = $(document).on('flatdoc:ready', function() {
+
+                var docMenu = $('[role="flatdoc-menu"]');
+
+                menuLinks = docMenu.find('a').on('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    var $this = $(this);
+
+                    docMenu.find('a.active').removeClass('active');
+                    $this.addClass('active');
+
+                    $root.animate({
+                        scrollTop: $(this.getAttribute('href')).offset().top - ($('.topnavbar').height() + 10)
+                    }, 800);
+                });
+
+            });
+
+            // dettach all events
+            scope.$on('$destroy', function() {
+                menuLinks && menuLinks.off();
+                $doc.off('flatdoc:ready');
+            });
+
+        }
+    }
+
+})();
+
+/**=========================================================
  * Module: article.js
  =========================================================*/
 (function() {
@@ -7903,67 +7977,6 @@ $scope.searchEmp=function(userId) {
 })();
 
 /**=========================================================
- * Module: flatdoc.js
- * Creates the flatdoc markup and initializes the plugin
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.flatdoc')
-        .directive('flatdoc', flatdoc);
-
-    function flatdoc() {
-
-        var directive = {
-            template: '<div role="flatdoc"><div role="flatdoc-menu"></div><div role="flatdoc-content"></div></div>',
-            link: link,
-            restrict: 'EA'
-        };
-        return directive;
-
-        function link(scope, element, attrs) {
-
-            Flatdoc.run({
-                fetcher: Flatdoc.file(attrs.src)
-            });
-
-            var $root = $('html, body');
-            var menuLinks;
-
-            var $doc = $(document).on('flatdoc:ready', function() {
-
-                var docMenu = $('[role="flatdoc-menu"]');
-
-                menuLinks = docMenu.find('a').on('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    var $this = $(this);
-
-                    docMenu.find('a.active').removeClass('active');
-                    $this.addClass('active');
-
-                    $root.animate({
-                        scrollTop: $(this.getAttribute('href')).offset().top - ($('.topnavbar').height() + 10)
-                    }, 800);
-                });
-
-            });
-
-            // dettach all events
-            scope.$on('$destroy', function() {
-                menuLinks && menuLinks.off();
-                $doc.off('flatdoc:ready');
-            });
-
-        }
-    }
-
-})();
-
-/**=========================================================
  * Module: skycons.js
  * Include any animated weather icon from Skycons
  =========================================================*/
@@ -7993,229 +8006,6 @@ $scope.searchEmp=function(userId) {
           skycons.play();
         }
     }
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.locale')
-        .config(localeConfig)
-        ;
-    localeConfig.$inject = ['tmhDynamicLocaleProvider'];
-    function localeConfig(tmhDynamicLocaleProvider){
-  
-      tmhDynamicLocaleProvider.localeLocationPattern('vendor/angular-i18n/angular-locale_{{locale}}.js');
-      // tmhDynamicLocaleProvider.useStorage('$cookieStore');
-
-    }
-})();
-/**=========================================================
- * Module: locale.js
- * Demo for locale settings
- =========================================================*/
-(function() {
-    'use strict';
-
-    angular
-        .module('app.locale')
-        .controller('LocalizationController', LocalizationController);
-
-    LocalizationController.$inject = ['$rootScope', 'tmhDynamicLocale', '$locale'];
-    function LocalizationController($rootScope, tmhDynamicLocale, $locale) {
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          $rootScope.availableLocales = {
-            'en': 'English',
-            'es': 'Spanish',
-            'de': 'German',
-            'fr': 'French',
-            'ar': 'Arabic',
-            'ja': 'Japanese',
-            'ko': 'Korean',
-            'zh': 'Chinese'};
-          
-          $rootScope.model = {selectedLocale: 'en'};
-          
-          $rootScope.$locale = $locale;
-          
-          $rootScope.changeLocale = tmhDynamicLocale.set;
-        }
-    }
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.lazyload')
-        .config(lazyloadConfig);
-
-    lazyloadConfig.$inject = ['$ocLazyLoadProvider', 'APP_REQUIRES'];
-    function lazyloadConfig($ocLazyLoadProvider, APP_REQUIRES){
-
-      // Lazy Load modules configuration
-      $ocLazyLoadProvider.config({
-        debug: false,
-        events: true,
-        modules: APP_REQUIRES.modules
-      });
-
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.lazyload')
-        .constant('APP_REQUIRES', {
-          // jQuery based and standalone scripts
-          scripts: {
-            'whirl':              ['vendor/whirl/dist/whirl.css'],
-            'classyloader':       ['vendor/jquery-classyloader/js/jquery.classyloader.min.js'],
-            'animo':              ['vendor/animo.js/animo.js'],
-            'fastclick':          ['vendor/fastclick/lib/fastclick.js'],
-            'modernizr':          ['vendor/modernizr/modernizr.custom.js'],
-            'animate':            ['vendor/animate.css/animate.min.css'],
-            'skycons':            ['vendor/skycons/skycons.js'],
-            'icons':              ['vendor/fontawesome/css/font-awesome.min.css',
-                                   'vendor/simple-line-icons/css/simple-line-icons.css'],
-            'weather-icons':      ['vendor/weather-icons/css/weather-icons.min.css',
-                                   'vendor/weather-icons/css/weather-icons-wind.min.css'],
-            'sparklines':         ['vendor/sparkline/index.js'],
-            'wysiwyg':            ['vendor/bootstrap-wysiwyg/bootstrap-wysiwyg.js',
-                                   'vendor/bootstrap-wysiwyg/external/jquery.hotkeys.js'],
-            'slimscroll':         ['vendor/slimScroll/jquery.slimscroll.min.js'],
-            'screenfull':         ['vendor/screenfull/dist/screenfull.js'],
-            'vector-map':         ['vendor/ika.jvectormap/jquery-jvectormap-1.2.2.min.js',
-                                   'vendor/ika.jvectormap/jquery-jvectormap-1.2.2.css'],
-            'vector-map-maps':    ['vendor/ika.jvectormap/jquery-jvectormap-world-mill-en.js',
-                                   'vendor/ika.jvectormap/jquery-jvectormap-us-mill-en.js'],
-            'loadGoogleMapsJS':   ['vendor/load-google-maps/load-google-maps.js'],
-            'flot-chart':         ['vendor/Flot/jquery.flot.js'],
-            'flot-chart-plugins': ['vendor/flot.tooltip/js/jquery.flot.tooltip.min.js',
-                                   'vendor/Flot/jquery.flot.resize.js',
-                                   'vendor/Flot/jquery.flot.pie.js',
-                                   'vendor/Flot/jquery.flot.time.js',
-                                   'vendor/Flot/jquery.flot.categories.js',
-                                   'vendor/flot-spline/js/jquery.flot.spline.min.js'],
-            'moment' :            ['vendor/moment/min/moment-with-locales.min.js'],
-            'inputmask':          ['vendor/jquery.inputmask/dist/jquery.inputmask.bundle.js'],
-            'flatdoc':            ['vendor/flatdoc/flatdoc.js'],
-            'codemirror':         ['vendor/codemirror/lib/codemirror.js',
-                                   'vendor/codemirror/lib/codemirror.css'],
-            // modes for common web files
-            'codemirror-modes-web': ['vendor/codemirror/mode/javascript/javascript.js',
-                                     'vendor/codemirror/mode/xml/xml.js',
-                                     'vendor/codemirror/mode/htmlmixed/htmlmixed.js',
-                                     'vendor/codemirror/mode/css/css.js'],
-            'taginput' :          ['vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.css',
-                                   'vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js'],
-            'filestyle':          ['vendor/bootstrap-filestyle/src/bootstrap-filestyle.js'],
-            'chartjs':            ['vendor/Chart.js/Chart.js'],
-            'morris':             ['vendor/raphael/raphael.js',
-                                   'vendor/morris.js/morris.js',
-                                   'vendor/morris.js/morris.css'],
-            'loaders.css':          ['vendor/loaders.css/loaders.css'],
-            'spinkit':              ['vendor/spinkit/css/spinkit.css']
-          },
-          // Angular based script (use the right module name)
-          modules: [
-            {name: 'toaster',                   files: ['vendor/angularjs-toaster/toaster.js',
-                                                       'vendor/angularjs-toaster/toaster.css']},
-            {name: 'localytics.directives',     files: ['vendor/chosen_v1.2.0/chosen.jquery.min.js',
-                                                       'vendor/chosen_v1.2.0/chosen.min.css',
-                                                       'vendor/angular-chosen-localytics/dist/angular-chosen.js'],
-                                                        serie: true},
-            {name: 'ngDialog',                  files: ['vendor/ngDialog/js/ngDialog.min.js',
-                                                       'vendor/ngDialog/css/ngDialog.min.css',
-                                                       'vendor/ngDialog/css/ngDialog-theme-default.min.css'] },
-            {name: 'ngWig',                     files: ['vendor/ngWig/dist/ng-wig.min.js'] },
-            {name: 'ngTable',                   files: ['vendor/ng-table/dist/ng-table.min.js',
-                                                        'vendor/ng-table/dist/ng-table.min.css']},
-            {name: 'ngTableExport',             files: ['vendor/ng-table-export/ng-table-export.js']},
-            {name: 'angularBootstrapNavTree',   files: ['vendor/angular-bootstrap-nav-tree/dist/abn_tree_directive.js',
-                                                        'vendor/angular-bootstrap-nav-tree/dist/abn_tree.css']},
-            {name: 'xeditable',                 files: ['vendor/angular-xeditable/dist/js/xeditable.js',
-                                                        'vendor/angular-xeditable/dist/css/xeditable.css']},
-            {name: 'angularFileUpload',         files: ['vendor/angular-file-upload/dist/angular-file-upload.js']},
-            {name: 'ngImgCrop',                 files: ['vendor/ng-img-crop/compile/unminified/ng-img-crop.js',
-                                                        'vendor/ng-img-crop/compile/unminified/ng-img-crop.css']},
-            {name: 'ui.select',                 files: ['vendor/angular-ui-select/dist/select.js',
-                                                        'vendor/angular-ui-select/dist/select.css']},
-            {name: 'ui.codemirror',             files: ['vendor/angular-ui-codemirror/ui-codemirror.js']},
-            {name: 'angular-carousel',          files: ['vendor/angular-carousel/dist/angular-carousel.css',
-                                                        'vendor/angular-carousel/dist/angular-carousel.js']},
-            {name: 'infinite-scroll',           files: ['vendor/ngInfiniteScroll/build/ng-infinite-scroll.js']},
-            {name: 'ui.bootstrap-slider',       files: ['vendor/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js',
-                                                        'vendor/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css',
-                                                        'vendor/angular-bootstrap-slider/slider.js'], serie: true},
-            {name: 'ui.grid',                   files: ['vendor/angular-ui-grid/ui-grid.min.css',
-                                                        'vendor/angular-ui-grid/ui-grid.min.js']},
-            {name: 'summernote',                files: ['vendor/bootstrap/js/modal.js',
-                                                        'vendor/bootstrap/js/dropdown.js',
-                                                        'vendor/bootstrap/js/tooltip.js',
-                                                        'vendor/summernote/dist/summernote.css',
-                                                        'vendor/summernote/dist/summernote.js',
-                                                        'vendor/angular-summernote/dist/angular-summernote.js'
-                                                        ], serie: true},
-            {name: 'angular-rickshaw',          files: ['vendor/d3/d3.min.js',
-                                                        'vendor/rickshaw/rickshaw.js',
-                                                        'vendor/rickshaw/rickshaw.min.css',
-                                                        'vendor/angular-rickshaw/rickshaw.js'], serie: true},
-            {name: 'angular-chartist',          files: ['vendor/chartist/dist/chartist.min.css',
-                                                        'vendor/chartist/dist/chartist.js',
-                                                        'vendor/angular-chartist.js/dist/angular-chartist.js'], serie: true},
-            {name: 'ui.map',                    files: ['vendor/angular-ui-map/ui-map.js']},
-            {name: 'datatables',                files: ['vendor/datatables/media/css/jquery.dataTables.css',
-                                                        'vendor/datatables/media/js/jquery.dataTables.js',
-                                                        'vendor/datatables-buttons/js/dataTables.buttons.js',
-                                                        //'vendor/datatables-buttons/css/buttons.bootstrap.css',
-                                                        'vendor/datatables-buttons/js/buttons.bootstrap.js',
-                                                        'vendor/datatables-buttons/js/buttons.colVis.js',
-                                                        'vendor/datatables-buttons/js/buttons.flash.js',
-                                                        'vendor/datatables-buttons/js/buttons.html5.js',
-                                                        'vendor/datatables-buttons/js/buttons.print.js',
-                                                        'vendor/angular-datatables/dist/angular-datatables.js',
-                                                        'vendor/angular-datatables/dist/plugins/buttons/angular-datatables.buttons.js'],
-                                                        serie: true},
-            {name: 'angular-jqcloud',           files: ['vendor/jqcloud2/dist/jqcloud.css',
-                                                        'vendor/jqcloud2/dist/jqcloud.js',
-                                                        'vendor/angular-jqcloud/angular-jqcloud.js']},
-            {name: 'angularGrid',               files: ['vendor/ag-grid/dist/styles/ag-grid.css',
-                                                        'vendor/ag-grid/dist/ag-grid.js',
-                                                        'vendor/ag-grid/dist/styles/theme-dark.css',
-                                                        'vendor/ag-grid/dist/styles/theme-fresh.css']},
-            {name: 'ng-nestable',               files: ['vendor/ng-nestable/src/angular-nestable.js',
-                                                        'vendor/nestable/jquery.nestable.js']},
-            {name: 'akoenig.deckgrid',          files: ['vendor/angular-deckgrid/angular-deckgrid.js']},
-            {name: 'oitozero.ngSweetAlert',     files: ['vendor/sweetalert/dist/sweetalert.css',
-                                                        'vendor/sweetalert/dist/sweetalert.min.js',
-                                                        'vendor/angular-sweetalert/SweetAlert.js']},
-            {name: 'bm.bsTour',                 files: ['vendor/bootstrap-tour/build/css/bootstrap-tour.css',
-                                                        'vendor/bootstrap-tour/build/js/bootstrap-tour-standalone.js',
-                                                        'vendor/angular-bootstrap-tour/dist/angular-bootstrap-tour.js'], serie: true},
-            {name: 'ui.knob',                   files: ['vendor/angular-knob/src/angular-knob.js',
-                                                        'vendor/jquery-knob/dist/jquery.knob.min.js']},
-            {name: 'easypiechart',              files: ['vendor/jquery.easy-pie-chart/dist/angular.easypiechart.min.js']},
-            {name: 'colorpicker.module',        files: ['vendor/angular-bootstrap-colorpicker/css/colorpicker.css',
-                                                        'vendor/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js']},
-            {name: 'ui.sortable',               files: ['vendor/jquery-ui/jquery-ui.min.js',
-                                                        'vendor/angular-ui-sortable/sortable.js'], serie: true},
-            {name: 'ui.calendar',               files: ['vendor/jquery-ui/jquery-ui.min.js',
-                                                        'vendor/jqueryui-touch-punch/jquery.ui.touch-punch.min.js',
-                                                        'vendor/fullcalendar/dist/fullcalendar.min.js',
-                                                        'vendor/fullcalendar/dist/gcal.js',
-                                                        'vendor/fullcalendar/dist/fullcalendar.css',
-                                                        'vendor/angular-ui-calendar/src/calendar.js'], serie: true}
-          ]
-        })
-        ;
 
 })();
 
@@ -9262,6 +9052,939 @@ $scope.searchEmp=function(userId) {
     }
 
 })();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.lazyload')
+        .config(lazyloadConfig);
+
+    lazyloadConfig.$inject = ['$ocLazyLoadProvider', 'APP_REQUIRES'];
+    function lazyloadConfig($ocLazyLoadProvider, APP_REQUIRES){
+
+      // Lazy Load modules configuration
+      $ocLazyLoadProvider.config({
+        debug: false,
+        events: true,
+        modules: APP_REQUIRES.modules
+      });
+
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.lazyload')
+        .constant('APP_REQUIRES', {
+          // jQuery based and standalone scripts
+          scripts: {
+            'whirl':              ['vendor/whirl/dist/whirl.css'],
+            'classyloader':       ['vendor/jquery-classyloader/js/jquery.classyloader.min.js'],
+            'animo':              ['vendor/animo.js/animo.js'],
+            'fastclick':          ['vendor/fastclick/lib/fastclick.js'],
+            'modernizr':          ['vendor/modernizr/modernizr.custom.js'],
+            'animate':            ['vendor/animate.css/animate.min.css'],
+            'skycons':            ['vendor/skycons/skycons.js'],
+            'icons':              ['vendor/fontawesome/css/font-awesome.min.css',
+                                   'vendor/simple-line-icons/css/simple-line-icons.css'],
+            'weather-icons':      ['vendor/weather-icons/css/weather-icons.min.css',
+                                   'vendor/weather-icons/css/weather-icons-wind.min.css'],
+            'sparklines':         ['vendor/sparkline/index.js'],
+            'wysiwyg':            ['vendor/bootstrap-wysiwyg/bootstrap-wysiwyg.js',
+                                   'vendor/bootstrap-wysiwyg/external/jquery.hotkeys.js'],
+            'slimscroll':         ['vendor/slimScroll/jquery.slimscroll.min.js'],
+            'screenfull':         ['vendor/screenfull/dist/screenfull.js'],
+            'vector-map':         ['vendor/ika.jvectormap/jquery-jvectormap-1.2.2.min.js',
+                                   'vendor/ika.jvectormap/jquery-jvectormap-1.2.2.css'],
+            'vector-map-maps':    ['vendor/ika.jvectormap/jquery-jvectormap-world-mill-en.js',
+                                   'vendor/ika.jvectormap/jquery-jvectormap-us-mill-en.js'],
+            'loadGoogleMapsJS':   ['vendor/load-google-maps/load-google-maps.js'],
+            'flot-chart':         ['vendor/Flot/jquery.flot.js'],
+            'flot-chart-plugins': ['vendor/flot.tooltip/js/jquery.flot.tooltip.min.js',
+                                   'vendor/Flot/jquery.flot.resize.js',
+                                   'vendor/Flot/jquery.flot.pie.js',
+                                   'vendor/Flot/jquery.flot.time.js',
+                                   'vendor/Flot/jquery.flot.categories.js',
+                                   'vendor/flot-spline/js/jquery.flot.spline.min.js'],
+            'moment' :            ['vendor/moment/min/moment-with-locales.min.js'],
+            'inputmask':          ['vendor/jquery.inputmask/dist/jquery.inputmask.bundle.js'],
+            'flatdoc':            ['vendor/flatdoc/flatdoc.js'],
+            'codemirror':         ['vendor/codemirror/lib/codemirror.js',
+                                   'vendor/codemirror/lib/codemirror.css'],
+            // modes for common web files
+            'codemirror-modes-web': ['vendor/codemirror/mode/javascript/javascript.js',
+                                     'vendor/codemirror/mode/xml/xml.js',
+                                     'vendor/codemirror/mode/htmlmixed/htmlmixed.js',
+                                     'vendor/codemirror/mode/css/css.js'],
+            'taginput' :          ['vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.css',
+                                   'vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js'],
+            'filestyle':          ['vendor/bootstrap-filestyle/src/bootstrap-filestyle.js'],
+            'chartjs':            ['vendor/Chart.js/Chart.js'],
+            'morris':             ['vendor/raphael/raphael.js',
+                                   'vendor/morris.js/morris.js',
+                                   'vendor/morris.js/morris.css'],
+            'loaders.css':          ['vendor/loaders.css/loaders.css'],
+            'spinkit':              ['vendor/spinkit/css/spinkit.css']
+          },
+          // Angular based script (use the right module name)
+          modules: [
+            {name: 'toaster',                   files: ['vendor/angularjs-toaster/toaster.js',
+                                                       'vendor/angularjs-toaster/toaster.css']},
+            {name: 'localytics.directives',     files: ['vendor/chosen_v1.2.0/chosen.jquery.min.js',
+                                                       'vendor/chosen_v1.2.0/chosen.min.css',
+                                                       'vendor/angular-chosen-localytics/dist/angular-chosen.js'],
+                                                        serie: true},
+            {name: 'ngDialog',                  files: ['vendor/ngDialog/js/ngDialog.min.js',
+                                                       'vendor/ngDialog/css/ngDialog.min.css',
+                                                       'vendor/ngDialog/css/ngDialog-theme-default.min.css'] },
+            {name: 'ngWig',                     files: ['vendor/ngWig/dist/ng-wig.min.js'] },
+            {name: 'ngTable',                   files: ['vendor/ng-table/dist/ng-table.min.js',
+                                                        'vendor/ng-table/dist/ng-table.min.css']},
+            {name: 'ngTableExport',             files: ['vendor/ng-table-export/ng-table-export.js']},
+            {name: 'angularBootstrapNavTree',   files: ['vendor/angular-bootstrap-nav-tree/dist/abn_tree_directive.js',
+                                                        'vendor/angular-bootstrap-nav-tree/dist/abn_tree.css']},
+            {name: 'xeditable',                 files: ['vendor/angular-xeditable/dist/js/xeditable.js',
+                                                        'vendor/angular-xeditable/dist/css/xeditable.css']},
+            {name: 'angularFileUpload',         files: ['vendor/angular-file-upload/dist/angular-file-upload.js']},
+            {name: 'ngImgCrop',                 files: ['vendor/ng-img-crop/compile/unminified/ng-img-crop.js',
+                                                        'vendor/ng-img-crop/compile/unminified/ng-img-crop.css']},
+            {name: 'ui.select',                 files: ['vendor/angular-ui-select/dist/select.js',
+                                                        'vendor/angular-ui-select/dist/select.css']},
+            {name: 'ui.codemirror',             files: ['vendor/angular-ui-codemirror/ui-codemirror.js']},
+            {name: 'angular-carousel',          files: ['vendor/angular-carousel/dist/angular-carousel.css',
+                                                        'vendor/angular-carousel/dist/angular-carousel.js']},
+            {name: 'infinite-scroll',           files: ['vendor/ngInfiniteScroll/build/ng-infinite-scroll.js']},
+            {name: 'ui.bootstrap-slider',       files: ['vendor/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js',
+                                                        'vendor/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css',
+                                                        'vendor/angular-bootstrap-slider/slider.js'], serie: true},
+            {name: 'ui.grid',                   files: ['vendor/angular-ui-grid/ui-grid.min.css',
+                                                        'vendor/angular-ui-grid/ui-grid.min.js']},
+            {name: 'summernote',                files: ['vendor/bootstrap/js/modal.js',
+                                                        'vendor/bootstrap/js/dropdown.js',
+                                                        'vendor/bootstrap/js/tooltip.js',
+                                                        'vendor/summernote/dist/summernote.css',
+                                                        'vendor/summernote/dist/summernote.js',
+                                                        'vendor/angular-summernote/dist/angular-summernote.js'
+                                                        ], serie: true},
+            {name: 'angular-rickshaw',          files: ['vendor/d3/d3.min.js',
+                                                        'vendor/rickshaw/rickshaw.js',
+                                                        'vendor/rickshaw/rickshaw.min.css',
+                                                        'vendor/angular-rickshaw/rickshaw.js'], serie: true},
+            {name: 'angular-chartist',          files: ['vendor/chartist/dist/chartist.min.css',
+                                                        'vendor/chartist/dist/chartist.js',
+                                                        'vendor/angular-chartist.js/dist/angular-chartist.js'], serie: true},
+            {name: 'ui.map',                    files: ['vendor/angular-ui-map/ui-map.js']},
+            {name: 'datatables',                files: ['vendor/datatables/media/css/jquery.dataTables.css',
+                                                        'vendor/datatables/media/js/jquery.dataTables.js',
+                                                        'vendor/datatables-buttons/js/dataTables.buttons.js',
+                                                        //'vendor/datatables-buttons/css/buttons.bootstrap.css',
+                                                        'vendor/datatables-buttons/js/buttons.bootstrap.js',
+                                                        'vendor/datatables-buttons/js/buttons.colVis.js',
+                                                        'vendor/datatables-buttons/js/buttons.flash.js',
+                                                        'vendor/datatables-buttons/js/buttons.html5.js',
+                                                        'vendor/datatables-buttons/js/buttons.print.js',
+                                                        'vendor/angular-datatables/dist/angular-datatables.js',
+                                                        'vendor/angular-datatables/dist/plugins/buttons/angular-datatables.buttons.js'],
+                                                        serie: true},
+            {name: 'angular-jqcloud',           files: ['vendor/jqcloud2/dist/jqcloud.css',
+                                                        'vendor/jqcloud2/dist/jqcloud.js',
+                                                        'vendor/angular-jqcloud/angular-jqcloud.js']},
+            {name: 'angularGrid',               files: ['vendor/ag-grid/dist/styles/ag-grid.css',
+                                                        'vendor/ag-grid/dist/ag-grid.js',
+                                                        'vendor/ag-grid/dist/styles/theme-dark.css',
+                                                        'vendor/ag-grid/dist/styles/theme-fresh.css']},
+            {name: 'ng-nestable',               files: ['vendor/ng-nestable/src/angular-nestable.js',
+                                                        'vendor/nestable/jquery.nestable.js']},
+            {name: 'akoenig.deckgrid',          files: ['vendor/angular-deckgrid/angular-deckgrid.js']},
+            {name: 'oitozero.ngSweetAlert',     files: ['vendor/sweetalert/dist/sweetalert.css',
+                                                        'vendor/sweetalert/dist/sweetalert.min.js',
+                                                        'vendor/angular-sweetalert/SweetAlert.js']},
+            {name: 'bm.bsTour',                 files: ['vendor/bootstrap-tour/build/css/bootstrap-tour.css',
+                                                        'vendor/bootstrap-tour/build/js/bootstrap-tour-standalone.js',
+                                                        'vendor/angular-bootstrap-tour/dist/angular-bootstrap-tour.js'], serie: true},
+            {name: 'ui.knob',                   files: ['vendor/angular-knob/src/angular-knob.js',
+                                                        'vendor/jquery-knob/dist/jquery.knob.min.js']},
+            {name: 'easypiechart',              files: ['vendor/jquery.easy-pie-chart/dist/angular.easypiechart.min.js']},
+            {name: 'colorpicker.module',        files: ['vendor/angular-bootstrap-colorpicker/css/colorpicker.css',
+                                                        'vendor/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js']},
+            {name: 'ui.sortable',               files: ['vendor/jquery-ui/jquery-ui.min.js',
+                                                        'vendor/angular-ui-sortable/sortable.js'], serie: true},
+            {name: 'ui.calendar',               files: ['vendor/jquery-ui/jquery-ui.min.js',
+                                                        'vendor/jqueryui-touch-punch/jquery.ui.touch-punch.min.js',
+                                                        'vendor/fullcalendar/dist/fullcalendar.min.js',
+                                                        'vendor/fullcalendar/dist/gcal.js',
+                                                        'vendor/fullcalendar/dist/fullcalendar.css',
+                                                        'vendor/angular-ui-calendar/src/calendar.js'], serie: true}
+          ]
+        })
+        ;
+
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.locale')
+        .config(localeConfig)
+        ;
+    localeConfig.$inject = ['tmhDynamicLocaleProvider'];
+    function localeConfig(tmhDynamicLocaleProvider){
+  
+      tmhDynamicLocaleProvider.localeLocationPattern('vendor/angular-i18n/angular-locale_{{locale}}.js');
+      // tmhDynamicLocaleProvider.useStorage('$cookieStore');
+
+    }
+})();
+/**=========================================================
+ * Module: locale.js
+ * Demo for locale settings
+ =========================================================*/
+(function() {
+    'use strict';
+
+    angular
+        .module('app.locale')
+        .controller('LocalizationController', LocalizationController);
+
+    LocalizationController.$inject = ['$rootScope', 'tmhDynamicLocale', '$locale'];
+    function LocalizationController($rootScope, tmhDynamicLocale, $locale) {
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          $rootScope.availableLocales = {
+            'en': 'English',
+            'es': 'Spanish',
+            'de': 'German',
+            'fr': 'French',
+            'ar': 'Arabic',
+            'ja': 'Japanese',
+            'ko': 'Korean',
+            'zh': 'Chinese'};
+          
+          $rootScope.model = {selectedLocale: 'en'};
+          
+          $rootScope.$locale = $locale;
+          
+          $rootScope.changeLocale = tmhDynamicLocale.set;
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: demo-pagination.js
+ * Provides a simple demo for pagination
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.mailbox')
+        .controller('MailboxController', MailboxController);
+
+    function MailboxController() {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          vm.folders = [
+            {name: 'Inbox',   folder: 'inbox',   alert: 42, icon: 'fa-inbox' },
+            {name: 'Starred', folder: 'starred', alert: 10, icon: 'fa-star' },
+            {name: 'Sent',    folder: 'sent',    alert: 0,  icon: 'fa-paper-plane-o' },
+            {name: 'Draft',   folder: 'draft',   alert: 5,  icon: 'fa-edit' },
+            {name: 'Trash',   folder: 'trash',   alert: 0,  icon: 'fa-trash'}
+          ];
+
+          vm.labels = [
+            {name: 'Red',     color: 'danger'},
+            {name: 'Pink',    color: 'pink'},
+            {name: 'Blue',    color: 'info'},
+            {name: 'Yellow',  color: 'warning'}
+          ];
+
+          vm.mail = {
+            cc: false,
+            bcc: false
+          };
+          // Mailbox editr initial content
+          vm.content = '<p>Type something..</p>';
+        }
+    }
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.mailbox')
+        .controller('MailFolderController', MailFolderController);
+
+    MailFolderController.$inject = ['mails', '$stateParams'];
+    function MailFolderController(mails, $stateParams) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          
+          vm.folder = {};
+          // no filter for inbox
+          vm.folder.folder = $stateParams.folder === 'inbox' ? '' : $stateParams.folder;
+
+          mails.all().then(function(mails){
+            vm.mails = mails;
+          });
+        }
+    }
+})();
+
+// A RESTful factory for retrieving mails from json file
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.mailbox')
+        .factory('mails', mails);
+
+    mails.$inject = ['$http'];
+    function mails($http) {
+        var service = {
+            all: all,
+            get: get
+        };
+        return service;
+
+        ////////////////
+        
+        function readMails() {
+          var path = 'server/mails.json';
+          return $http.get(path).then(function (resp) {
+            return resp.data.mails;
+          });
+        }
+
+        function all() {
+          return readMails();
+        }
+
+        function get(id) {
+          return readMails().then(function(mails){
+            for (var i = 0; i < mails.length; i++) {
+              if (+mails[i].id === +id) return mails[i];
+            }
+            return null;
+          });
+        }
+    }
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.mailbox')
+        .controller('MailViewController', MailViewController);
+
+    MailViewController.$inject = ['mails', '$stateParams'];
+    function MailViewController(mails, $stateParams) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          mails.get($stateParams.mid).then(function(mail){
+            vm.mail = mail;
+          });
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: modals.js
+ * Provides a simple way to implement bootstrap modals from templates
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.maps')
+        .controller('ModalGmapController', ModalGmapController);
+
+    ModalGmapController.$inject = ['$uibModal'];
+    function ModalGmapController($uibModal) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          vm.open = function (size) {
+
+            //var modalInstance =
+            $uibModal.open({
+              templateUrl: '/myModalContent.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+
+            
+          };
+
+
+
+          // Please note that $uibModalInstance represents a modal window (instance) dependency.
+          // It is not the same as the $uibModal service used above.
+
+          ModalInstanceCtrl.$inject = ['$scope', '$uibModalInstance', '$timeout'];
+          function ModalInstanceCtrl($scope, $uibModalInstance, $timeout) {
+
+            $uibModalInstance.opened.then(function () {
+              var position = new google.maps.LatLng(33.790807, -117.835734);
+
+              $scope.mapOptionsModal = {
+                zoom: 14,
+                center: position,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+              };
+
+              // we use timeout to wait maps to be ready before add a markers
+              $timeout(function(){
+                // 1. Add a marker at the position it was initialized
+                new google.maps.Marker({
+                  map: $scope.myMapModal,
+                  position: position
+                });
+                // 2. Trigger a resize so the map is redrawed
+                google.maps.event.trigger($scope.myMapModal, 'resize');
+                // 3. Move to the center if it is misaligned
+                $scope.myMapModal.panTo(position);
+              });
+
+            });
+
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+
+          }
+
+        }
+    }
+
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.maps')
+        .controller('GMapController', GMapController);
+
+    GMapController.$inject = ['$timeout'];
+    function GMapController($timeout) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          var position = [
+              new google.maps.LatLng(33.790807, -117.835734),
+              new google.maps.LatLng(33.790807, -117.835734),
+              new google.maps.LatLng(33.790807, -117.835734),
+              new google.maps.LatLng(33.790807, -117.835734),
+              new google.maps.LatLng(33.787453, -117.835858)
+            ];
+          
+          vm.addMarker = addMarker;
+          // we use timeout to wait maps to be ready before add a markers
+          $timeout(function(){
+            addMarker(vm.myMap1, position[0]);
+            addMarker(vm.myMap2, position[1]);
+            addMarker(vm.myMap3, position[2]);
+            addMarker(vm.myMap5, position[3]);
+          });
+
+          vm.mapOptions1 = {
+            zoom: 14,
+            center: position[0],
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            scrollwheel: false
+          };
+
+          vm.mapOptions2 = {
+            zoom: 19,
+            center: position[1],
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+
+          vm.mapOptions3 = {
+            zoom: 14,
+            center: position[2],
+            mapTypeId: google.maps.MapTypeId.SATELLITE
+          };
+
+          vm.mapOptions4 = {
+            zoom: 14,
+            center: position[3],
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+
+          // for multiple markers
+          $timeout(function(){
+            addMarker(vm.myMap4, position[3]);
+            addMarker(vm.myMap4, position[4]);
+          });
+
+          // custom map style
+          var MapStyles = [{'featureType':'water','stylers':[{'visibility':'on'},{'color':'#bdd1f9'}]},{'featureType':'all','elementType':'labels.text.fill','stylers':[{'color':'#334165'}]},{featureType:'landscape',stylers:[{color:'#e9ebf1'}]},{featureType:'road.highway',elementType:'geometry',stylers:[{color:'#c5c6c6'}]},{featureType:'road.arterial',elementType:'geometry',stylers:[{color:'#fff'}]},{featureType:'road.local',elementType:'geometry',stylers:[{color:'#fff'}]},{featureType:'transit',elementType:'geometry',stylers:[{color:'#d8dbe0'}]},{featureType:'poi',elementType:'geometry',stylers:[{color:'#cfd5e0'}]},{featureType:'administrative',stylers:[{visibility:'on'},{lightness:33}]},{featureType:'poi.park',elementType:'labels',stylers:[{visibility:'on'},{lightness:20}]},{featureType:'road',stylers:[{color:'#d8dbe0',lightness:20}]}];
+          vm.mapOptions5 = {
+            zoom: 14,
+            center: position[3],
+            styles: MapStyles,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            scrollwheel: false
+          };
+
+          ///////////////
+          
+          function addMarker(map, position) {
+            return new google.maps.Marker({
+              map: map,
+              position: position
+            });
+          }
+
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: vector-map.js.js
+ * Init jQuery Vector Map plugin
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.maps')
+        .directive('vectorMap', vectorMap);
+
+    vectorMap.$inject = ['VectorMap'];
+    function vectorMap (VectorMap) {
+        var directive = {
+            link: link,
+            restrict: 'EA',
+            scope: {
+              seriesData: '=',
+              markersData: '='
+            }
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+          
+          var defaultColors = {
+              markerColor:  '#23b7e5',      // the marker points
+              bgColor:      'transparent',      // the background
+              scaleColors:  ['#878c9a'],    // the color of the region in the serie
+              regionFill:   '#bbbec6'       // the base region color
+          };
+
+          var mapHeight   = attrs.height || '300',
+              options     = {
+                markerColor:  attrs.markerColor  || defaultColors.markerColor,
+                bgColor:      attrs.bgColor      || defaultColors.bgColor,
+                scale:        attrs.scale        || 1,
+                scaleColors:  attrs.scaleColors  || defaultColors.scaleColors,
+                regionFill:   attrs.regionFill   || defaultColors.regionFill,
+                mapName:      attrs.mapName      || 'world_mill_en'
+              };
+          
+          element.css('height', mapHeight);
+          
+          VectorMap.init( element , options, scope.seriesData, scope.markersData);
+        }
+    }
+
+})();
+
+/**=========================================================
+ * Module: vector-map.js
+ * Services to initialize vector map plugin
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.maps')
+        .service('VectorMap', VectorMap);
+
+    function VectorMap() {
+        this.init = init;
+
+        ////////////////
+
+        function init($element, opts, series, markers) {
+          $element.vectorMap({
+            map:             opts.mapName,
+            backgroundColor: opts.bgColor,
+            zoomMin:         1,
+            zoomMax:         8,
+            zoomOnScroll:    false,
+            regionStyle: {
+              initial: {
+                'fill':           opts.regionFill,
+                'fill-opacity':   1,
+                'stroke':         'none',
+                'stroke-width':   1.5,
+                'stroke-opacity': 1
+              },
+              hover: {
+                'fill-opacity': 0.8
+              },
+              selected: {
+                fill: 'blue'
+              },
+              selectedHover: {
+              }
+            },
+            focusOn:{ x:0.4, y:0.6, scale: opts.scale},
+            markerStyle: {
+              initial: {
+                fill: opts.markerColor,
+                stroke: opts.markerColor
+              }
+            },
+            onRegionLabelShow: function(e, el, code) {
+              if ( series && series[code] )
+                el.html(el.html() + ': ' + series[code] + ' visitors');
+            },
+            markers: markers,
+            series: {
+                regions: [{
+                    values: series,
+                    scale: opts.scaleColors,
+                    normalizeFunction: 'polynomial'
+                }]
+            },
+          });
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: vmaps,js
+ * jVector Maps support
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.maps')
+        .controller('VectorMapController', VectorMapController);
+
+    function VectorMapController() {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          vm.seriesData = {
+            'CA': 11100,   // Canada
+            'DE': 2510,    // Germany
+            'FR': 3710,    // France
+            'AU': 5710,    // Australia
+            'GB': 8310,    // Great Britain
+            'RU': 9310,    // Russia
+            'BR': 6610,    // Brazil
+            'IN': 7810,    // India
+            'CN': 4310,    // China
+            'US': 839,     // USA
+            'SA': 410      // Saudi Arabia
+          };
+          
+          vm.markersData = [
+            { latLng:[41.90, 12.45],  name:'Vatican City'          },
+            { latLng:[43.73, 7.41],   name:'Monaco'                },
+            { latLng:[-0.52, 166.93], name:'Nauru'                 },
+            { latLng:[-8.51, 179.21], name:'Tuvalu'                },
+            { latLng:[7.11,171.06],   name:'Marshall Islands'      },
+            { latLng:[17.3,-62.73],   name:'Saint Kitts and Nevis' },
+            { latLng:[3.2,73.22],     name:'Maldives'              },
+            { latLng:[35.88,14.5],    name:'Malta'                 },
+            { latLng:[41.0,-71.06],   name:'New England'           },
+            { latLng:[12.05,-61.75],  name:'Grenada'               },
+            { latLng:[13.16,-59.55],  name:'Barbados'              },
+            { latLng:[17.11,-61.85],  name:'Antigua and Barbuda'   },
+            { latLng:[-4.61,55.45],   name:'Seychelles'            },
+            { latLng:[7.35,134.46],   name:'Palau'                 },
+            { latLng:[42.5,1.51],     name:'Andorra'               }
+          ];
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: demo-notify.js
+ * Provides a simple demo for notify
+ =========================================================*/
+(function() {
+    'use strict';
+
+    angular
+        .module('app.notify')
+        .controller('NotifyDemoCtrl', NotifyDemoCtrl);
+
+    NotifyDemoCtrl.$inject = ['Notify', '$timeout'];
+    function NotifyDemoCtrl(Notify, $timeout) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          vm.msgHtml = '<em class="fa fa-check"></em> Message with icon..';
+
+          vm.notifyMsg = 'Some messages here..';
+          vm.notifyOpts = {
+            status: 'danger',
+            pos: 'bottom-center'
+          };
+
+          // Service usage example
+          $timeout(function(){
+            
+            Notify.alert( 
+                'This is a custom message from notify..', 
+                {status: 'success'}
+            );
+          
+          }, 500);
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: notify.js
+ * Directive for notify plugin
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.notify')
+        .directive('notify', notify);
+
+    notify.$inject = ['$window', 'Notify'];
+    function notify ($window, Notify) {
+
+        var directive = {
+            link: link,
+            restrict: 'A',
+            scope: {
+              options: '=',
+              message: '='
+            }
+        };
+        return directive;
+
+        function link(scope, element) {
+
+          element.on('click', function (e) {
+            e.preventDefault();
+            Notify.alert(scope.message, scope.options);
+          });
+        }
+
+    }
+
+})();
+
+
+/**=========================================================
+ * Module: notify.js
+ * Create a notifications that fade out automatically.
+ * Based on Notify addon from UIKit (http://getuikit.com/docs/addons_notify.html)
+ =========================================================*/
+
+(function() {
+    'use strict';
+    angular
+        .module('app.notify')
+        .service('Notify', Notify);
+
+    Notify.$inject = ['$timeout'];
+    function Notify($timeout) {
+
+        this.alert = notifyAlert;
+
+        ////////////////
+
+        function notifyAlert(msg, opts) {
+            if ( msg ) {
+                $timeout(function(){
+                    $.notify(msg, opts || {});
+                });
+            }
+        }
+    }
+
+})();
+
+/**
+ * Notify Addon definition as jQuery plugin
+ * Adapted version to work with Bootstrap classes
+ * More information http://getuikit.com/docs/addons_notify.html
+ */
+(function($){
+    'use strict';
+    var containers = {},
+        messages   = {},
+        notify     =  function(options){
+            if ($.type(options) === 'string') {
+                options = { message: options };
+            }
+            if (arguments[1]) {
+                options = $.extend(options, $.type(arguments[1]) === 'string' ? {status:arguments[1]} : arguments[1]);
+            }
+            return (new Message(options)).show();
+        },
+        closeAll  = function(group, instantly){
+            var id;
+            if(group) {
+                for(id in messages) { if(group===messages[id].group) messages[id].close(instantly); }
+            } else {
+                for(id in messages) { messages[id].close(instantly); }
+            }
+        };
+    var Message = function(options){
+        // var $this = this;
+        this.options = $.extend({}, Message.defaults, options);
+        this.uuid    = 'ID'+(new Date().getTime())+'RAND'+(Math.ceil(Math.random() * 100000));
+        this.element = $([
+            // @geedmo: alert-dismissable enables bs close icon
+            '<div class="uk-notify-message alert-dismissable">',
+                '<a class="close">&times;</a>',
+                '<div>'+this.options.message+'</div>',
+            '</div>'
+        ].join('')).data('notifyMessage', this);
+        // status
+        if (this.options.status) {
+            this.element.addClass('alert alert-'+this.options.status);
+            this.currentstatus = this.options.status;
+        }
+        this.group = this.options.group;
+        messages[this.uuid] = this;
+        if(!containers[this.options.pos]) {
+            containers[this.options.pos] = $('<div class="uk-notify uk-notify-'+this.options.pos+'"></div>').appendTo('body').on('click', '.uk-notify-message', function(){
+                $(this).data('notifyMessage').close();
+            });
+        }
+    };
+    $.extend(Message.prototype, {
+        uuid: false,
+        element: false,
+        timout: false,
+        currentstatus: '',
+        group: false,
+        show: function() {
+            if (this.element.is(':visible')) return;
+            var $this = this;
+            containers[this.options.pos].show().prepend(this.element);
+            var marginbottom = parseInt(this.element.css('margin-bottom'), 10);
+            this.element.css({'opacity':0, 'margin-top': -1*this.element.outerHeight(), 'margin-bottom':0}).animate({'opacity':1, 'margin-top': 0, 'margin-bottom':marginbottom}, function(){
+                if ($this.options.timeout) {
+                    var closefn = function(){ $this.close(); };
+                    $this.timeout = setTimeout(closefn, $this.options.timeout);
+                    $this.element.hover(
+                        function() { clearTimeout($this.timeout); },
+                        function() { $this.timeout = setTimeout(closefn, $this.options.timeout);  }
+                    );
+                }
+            });
+            return this;
+        },
+        close: function(instantly) {
+            var $this    = this,
+                finalize = function(){
+                    $this.element.remove();
+                    if(!containers[$this.options.pos].children().length) {
+                        containers[$this.options.pos].hide();
+                    }
+                    delete messages[$this.uuid];
+                };
+            if(this.timeout) clearTimeout(this.timeout);
+            if(instantly) {
+                finalize();
+            } else {
+                this.element.animate({'opacity':0, 'margin-top': -1* this.element.outerHeight(), 'margin-bottom':0}, function(){
+                    finalize();
+                });
+            }
+        },
+        content: function(html){
+            var container = this.element.find('>div');
+            if(!html) {
+                return container.html();
+            }
+            container.html(html);
+            return this;
+        },
+        status: function(status) {
+            if(!status) {
+                return this.currentstatus;
+            }
+            this.element.removeClass('alert alert-'+this.currentstatus).addClass('alert alert-'+status);
+            this.currentstatus = status;
+            return this;
+        }
+    });
+    Message.defaults = {
+        message: '',
+        status: 'normal',
+        timeout: 5000,
+        group: null,
+        pos: 'top-center'
+    };
+    
+    $.notify          = notify;
+    $.notify.message  = Message;
+    $.notify.closeAll = closeAll;
+    
+    return notify;
+}(jQuery));
+
 
 /**=========================================================
  * Module: modals.js
@@ -10207,1304 +10930,6 @@ $scope.banks=bankcodeService.query();
 
 })();
 /**=========================================================
- * Module: navbar-search.js
- * Navbar search toggler * Auto dismiss on ESC key
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.navsearch')
-        .directive('searchOpen', searchOpen)
-        .directive('searchDismiss', searchDismiss);
-
-    //
-    // directives definition
-    // 
-    
-    function searchOpen () {
-        var directive = {
-            controller: searchOpenController,
-            restrict: 'A'
-        };
-        return directive;
-
-    }
-
-    function searchDismiss () {
-        var directive = {
-            controller: searchDismissController,
-            restrict: 'A'
-        };
-        return directive;
-        
-    }
-
-    //
-    // Contrller definition
-    // 
-    
-    searchOpenController.$inject = ['$scope', '$element', 'NavSearch'];
-    function searchOpenController ($scope, $element, NavSearch) {
-      $element
-        .on('click', function (e) { e.stopPropagation(); })
-        .on('click', NavSearch.toggle);
-    }
-
-    searchDismissController.$inject = ['$scope', '$element', 'NavSearch'];
-    function searchDismissController ($scope, $element, NavSearch) {
-      
-      var inputSelector = '.navbar-form input[type="text"]';
-
-      $(inputSelector)
-        .on('click', function (e) { e.stopPropagation(); })
-        .on('keyup', function(e) {
-          if (e.keyCode === 27) // ESC
-            NavSearch.dismiss();
-        });
-        
-      // click anywhere closes the search
-      $(document).on('click', NavSearch.dismiss);
-      // dismissable options
-      $element
-        .on('click', function (e) { e.stopPropagation(); })
-        .on('click', NavSearch.dismiss);
-    }
-
-})();
-
-
-/**=========================================================
- * Module: nav-search.js
- * Services to share navbar search functions
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.navsearch')
-        .service('NavSearch', NavSearch);
-
-    function NavSearch() {
-        this.toggle = toggle;
-        this.dismiss = dismiss;
-
-        ////////////////
-
-        var navbarFormSelector = 'form.navbar-form';
-
-        function toggle() {
-          var navbarForm = $(navbarFormSelector);
-
-          navbarForm.toggleClass('open');
-
-          var isOpen = navbarForm.hasClass('open');
-
-          navbarForm.find('input')[isOpen ? 'focus' : 'blur']();
-        }
-
-        function dismiss() {
-          $(navbarFormSelector)
-            .removeClass('open') // Close control
-            .find('input[type="text"]').blur() // remove focus
-            // .val('') // Empty input
-            ;
-        }
-    }
-})();
-
-/**=========================================================
- * Module: modals.js
- * Provides a simple way to implement bootstrap modals from templates
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.maps')
-        .controller('ModalGmapController', ModalGmapController);
-
-    ModalGmapController.$inject = ['$uibModal'];
-    function ModalGmapController($uibModal) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          vm.open = function (size) {
-
-            //var modalInstance =
-            $uibModal.open({
-              templateUrl: '/myModalContent.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-
-            
-          };
-
-
-
-          // Please note that $uibModalInstance represents a modal window (instance) dependency.
-          // It is not the same as the $uibModal service used above.
-
-          ModalInstanceCtrl.$inject = ['$scope', '$uibModalInstance', '$timeout'];
-          function ModalInstanceCtrl($scope, $uibModalInstance, $timeout) {
-
-            $uibModalInstance.opened.then(function () {
-              var position = new google.maps.LatLng(33.790807, -117.835734);
-
-              $scope.mapOptionsModal = {
-                zoom: 14,
-                center: position,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-              };
-
-              // we use timeout to wait maps to be ready before add a markers
-              $timeout(function(){
-                // 1. Add a marker at the position it was initialized
-                new google.maps.Marker({
-                  map: $scope.myMapModal,
-                  position: position
-                });
-                // 2. Trigger a resize so the map is redrawed
-                google.maps.event.trigger($scope.myMapModal, 'resize');
-                // 3. Move to the center if it is misaligned
-                $scope.myMapModal.panTo(position);
-              });
-
-            });
-
-            $scope.ok = function () {
-              $uibModalInstance.close('closed');
-            };
-
-            $scope.cancel = function () {
-              $uibModalInstance.dismiss('cancel');
-            };
-
-          }
-
-        }
-    }
-
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.maps')
-        .controller('GMapController', GMapController);
-
-    GMapController.$inject = ['$timeout'];
-    function GMapController($timeout) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          var position = [
-              new google.maps.LatLng(33.790807, -117.835734),
-              new google.maps.LatLng(33.790807, -117.835734),
-              new google.maps.LatLng(33.790807, -117.835734),
-              new google.maps.LatLng(33.790807, -117.835734),
-              new google.maps.LatLng(33.787453, -117.835858)
-            ];
-          
-          vm.addMarker = addMarker;
-          // we use timeout to wait maps to be ready before add a markers
-          $timeout(function(){
-            addMarker(vm.myMap1, position[0]);
-            addMarker(vm.myMap2, position[1]);
-            addMarker(vm.myMap3, position[2]);
-            addMarker(vm.myMap5, position[3]);
-          });
-
-          vm.mapOptions1 = {
-            zoom: 14,
-            center: position[0],
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            scrollwheel: false
-          };
-
-          vm.mapOptions2 = {
-            zoom: 19,
-            center: position[1],
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          };
-
-          vm.mapOptions3 = {
-            zoom: 14,
-            center: position[2],
-            mapTypeId: google.maps.MapTypeId.SATELLITE
-          };
-
-          vm.mapOptions4 = {
-            zoom: 14,
-            center: position[3],
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          };
-
-          // for multiple markers
-          $timeout(function(){
-            addMarker(vm.myMap4, position[3]);
-            addMarker(vm.myMap4, position[4]);
-          });
-
-          // custom map style
-          var MapStyles = [{'featureType':'water','stylers':[{'visibility':'on'},{'color':'#bdd1f9'}]},{'featureType':'all','elementType':'labels.text.fill','stylers':[{'color':'#334165'}]},{featureType:'landscape',stylers:[{color:'#e9ebf1'}]},{featureType:'road.highway',elementType:'geometry',stylers:[{color:'#c5c6c6'}]},{featureType:'road.arterial',elementType:'geometry',stylers:[{color:'#fff'}]},{featureType:'road.local',elementType:'geometry',stylers:[{color:'#fff'}]},{featureType:'transit',elementType:'geometry',stylers:[{color:'#d8dbe0'}]},{featureType:'poi',elementType:'geometry',stylers:[{color:'#cfd5e0'}]},{featureType:'administrative',stylers:[{visibility:'on'},{lightness:33}]},{featureType:'poi.park',elementType:'labels',stylers:[{visibility:'on'},{lightness:20}]},{featureType:'road',stylers:[{color:'#d8dbe0',lightness:20}]}];
-          vm.mapOptions5 = {
-            zoom: 14,
-            center: position[3],
-            styles: MapStyles,
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            scrollwheel: false
-          };
-
-          ///////////////
-          
-          function addMarker(map, position) {
-            return new google.maps.Marker({
-              map: map,
-              position: position
-            });
-          }
-
-        }
-    }
-})();
-
-/**=========================================================
- * Module: vector-map.js.js
- * Init jQuery Vector Map plugin
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.maps')
-        .directive('vectorMap', vectorMap);
-
-    vectorMap.$inject = ['VectorMap'];
-    function vectorMap (VectorMap) {
-        var directive = {
-            link: link,
-            restrict: 'EA',
-            scope: {
-              seriesData: '=',
-              markersData: '='
-            }
-        };
-        return directive;
-
-        function link(scope, element, attrs) {
-          
-          var defaultColors = {
-              markerColor:  '#23b7e5',      // the marker points
-              bgColor:      'transparent',      // the background
-              scaleColors:  ['#878c9a'],    // the color of the region in the serie
-              regionFill:   '#bbbec6'       // the base region color
-          };
-
-          var mapHeight   = attrs.height || '300',
-              options     = {
-                markerColor:  attrs.markerColor  || defaultColors.markerColor,
-                bgColor:      attrs.bgColor      || defaultColors.bgColor,
-                scale:        attrs.scale        || 1,
-                scaleColors:  attrs.scaleColors  || defaultColors.scaleColors,
-                regionFill:   attrs.regionFill   || defaultColors.regionFill,
-                mapName:      attrs.mapName      || 'world_mill_en'
-              };
-          
-          element.css('height', mapHeight);
-          
-          VectorMap.init( element , options, scope.seriesData, scope.markersData);
-        }
-    }
-
-})();
-
-/**=========================================================
- * Module: vector-map.js
- * Services to initialize vector map plugin
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.maps')
-        .service('VectorMap', VectorMap);
-
-    function VectorMap() {
-        this.init = init;
-
-        ////////////////
-
-        function init($element, opts, series, markers) {
-          $element.vectorMap({
-            map:             opts.mapName,
-            backgroundColor: opts.bgColor,
-            zoomMin:         1,
-            zoomMax:         8,
-            zoomOnScroll:    false,
-            regionStyle: {
-              initial: {
-                'fill':           opts.regionFill,
-                'fill-opacity':   1,
-                'stroke':         'none',
-                'stroke-width':   1.5,
-                'stroke-opacity': 1
-              },
-              hover: {
-                'fill-opacity': 0.8
-              },
-              selected: {
-                fill: 'blue'
-              },
-              selectedHover: {
-              }
-            },
-            focusOn:{ x:0.4, y:0.6, scale: opts.scale},
-            markerStyle: {
-              initial: {
-                fill: opts.markerColor,
-                stroke: opts.markerColor
-              }
-            },
-            onRegionLabelShow: function(e, el, code) {
-              if ( series && series[code] )
-                el.html(el.html() + ': ' + series[code] + ' visitors');
-            },
-            markers: markers,
-            series: {
-                regions: [{
-                    values: series,
-                    scale: opts.scaleColors,
-                    normalizeFunction: 'polynomial'
-                }]
-            },
-          });
-        }
-    }
-})();
-
-/**=========================================================
- * Module: vmaps,js
- * jVector Maps support
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.maps')
-        .controller('VectorMapController', VectorMapController);
-
-    function VectorMapController() {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          vm.seriesData = {
-            'CA': 11100,   // Canada
-            'DE': 2510,    // Germany
-            'FR': 3710,    // France
-            'AU': 5710,    // Australia
-            'GB': 8310,    // Great Britain
-            'RU': 9310,    // Russia
-            'BR': 6610,    // Brazil
-            'IN': 7810,    // India
-            'CN': 4310,    // China
-            'US': 839,     // USA
-            'SA': 410      // Saudi Arabia
-          };
-          
-          vm.markersData = [
-            { latLng:[41.90, 12.45],  name:'Vatican City'          },
-            { latLng:[43.73, 7.41],   name:'Monaco'                },
-            { latLng:[-0.52, 166.93], name:'Nauru'                 },
-            { latLng:[-8.51, 179.21], name:'Tuvalu'                },
-            { latLng:[7.11,171.06],   name:'Marshall Islands'      },
-            { latLng:[17.3,-62.73],   name:'Saint Kitts and Nevis' },
-            { latLng:[3.2,73.22],     name:'Maldives'              },
-            { latLng:[35.88,14.5],    name:'Malta'                 },
-            { latLng:[41.0,-71.06],   name:'New England'           },
-            { latLng:[12.05,-61.75],  name:'Grenada'               },
-            { latLng:[13.16,-59.55],  name:'Barbados'              },
-            { latLng:[17.11,-61.85],  name:'Antigua and Barbuda'   },
-            { latLng:[-4.61,55.45],   name:'Seychelles'            },
-            { latLng:[7.35,134.46],   name:'Palau'                 },
-            { latLng:[42.5,1.51],     name:'Andorra'               }
-          ];
-        }
-    }
-})();
-
-/**=========================================================
- * Module: demo-pagination.js
- * Provides a simple demo for pagination
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.mailbox')
-        .controller('MailboxController', MailboxController);
-
-    function MailboxController() {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          vm.folders = [
-            {name: 'Inbox',   folder: 'inbox',   alert: 42, icon: 'fa-inbox' },
-            {name: 'Starred', folder: 'starred', alert: 10, icon: 'fa-star' },
-            {name: 'Sent',    folder: 'sent',    alert: 0,  icon: 'fa-paper-plane-o' },
-            {name: 'Draft',   folder: 'draft',   alert: 5,  icon: 'fa-edit' },
-            {name: 'Trash',   folder: 'trash',   alert: 0,  icon: 'fa-trash'}
-          ];
-
-          vm.labels = [
-            {name: 'Red',     color: 'danger'},
-            {name: 'Pink',    color: 'pink'},
-            {name: 'Blue',    color: 'info'},
-            {name: 'Yellow',  color: 'warning'}
-          ];
-
-          vm.mail = {
-            cc: false,
-            bcc: false
-          };
-          // Mailbox editr initial content
-          vm.content = '<p>Type something..</p>';
-        }
-    }
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.mailbox')
-        .controller('MailFolderController', MailFolderController);
-
-    MailFolderController.$inject = ['mails', '$stateParams'];
-    function MailFolderController(mails, $stateParams) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          
-          vm.folder = {};
-          // no filter for inbox
-          vm.folder.folder = $stateParams.folder === 'inbox' ? '' : $stateParams.folder;
-
-          mails.all().then(function(mails){
-            vm.mails = mails;
-          });
-        }
-    }
-})();
-
-// A RESTful factory for retrieving mails from json file
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.mailbox')
-        .factory('mails', mails);
-
-    mails.$inject = ['$http'];
-    function mails($http) {
-        var service = {
-            all: all,
-            get: get
-        };
-        return service;
-
-        ////////////////
-        
-        function readMails() {
-          var path = 'server/mails.json';
-          return $http.get(path).then(function (resp) {
-            return resp.data.mails;
-          });
-        }
-
-        function all() {
-          return readMails();
-        }
-
-        function get(id) {
-          return readMails().then(function(mails){
-            for (var i = 0; i < mails.length; i++) {
-              if (+mails[i].id === +id) return mails[i];
-            }
-            return null;
-          });
-        }
-    }
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.mailbox')
-        .controller('MailViewController', MailViewController);
-
-    MailViewController.$inject = ['mails', '$stateParams'];
-    function MailViewController(mails, $stateParams) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          mails.get($stateParams.mid).then(function(mail){
-            vm.mail = mail;
-          });
-        }
-    }
-})();
-
-/**=========================================================
- * Module: demo-notify.js
- * Provides a simple demo for notify
- =========================================================*/
-(function() {
-    'use strict';
-
-    angular
-        .module('app.notify')
-        .controller('NotifyDemoCtrl', NotifyDemoCtrl);
-
-    NotifyDemoCtrl.$inject = ['Notify', '$timeout'];
-    function NotifyDemoCtrl(Notify, $timeout) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          vm.msgHtml = '<em class="fa fa-check"></em> Message with icon..';
-
-          vm.notifyMsg = 'Some messages here..';
-          vm.notifyOpts = {
-            status: 'danger',
-            pos: 'bottom-center'
-          };
-
-          // Service usage example
-          $timeout(function(){
-            
-            Notify.alert( 
-                'This is a custom message from notify..', 
-                {status: 'success'}
-            );
-          
-          }, 500);
-        }
-    }
-})();
-
-/**=========================================================
- * Module: notify.js
- * Directive for notify plugin
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.notify')
-        .directive('notify', notify);
-
-    notify.$inject = ['$window', 'Notify'];
-    function notify ($window, Notify) {
-
-        var directive = {
-            link: link,
-            restrict: 'A',
-            scope: {
-              options: '=',
-              message: '='
-            }
-        };
-        return directive;
-
-        function link(scope, element) {
-
-          element.on('click', function (e) {
-            e.preventDefault();
-            Notify.alert(scope.message, scope.options);
-          });
-        }
-
-    }
-
-})();
-
-
-/**=========================================================
- * Module: notify.js
- * Create a notifications that fade out automatically.
- * Based on Notify addon from UIKit (http://getuikit.com/docs/addons_notify.html)
- =========================================================*/
-
-(function() {
-    'use strict';
-    angular
-        .module('app.notify')
-        .service('Notify', Notify);
-
-    Notify.$inject = ['$timeout'];
-    function Notify($timeout) {
-
-        this.alert = notifyAlert;
-
-        ////////////////
-
-        function notifyAlert(msg, opts) {
-            if ( msg ) {
-                $timeout(function(){
-                    $.notify(msg, opts || {});
-                });
-            }
-        }
-    }
-
-})();
-
-/**
- * Notify Addon definition as jQuery plugin
- * Adapted version to work with Bootstrap classes
- * More information http://getuikit.com/docs/addons_notify.html
- */
-(function($){
-    'use strict';
-    var containers = {},
-        messages   = {},
-        notify     =  function(options){
-            if ($.type(options) === 'string') {
-                options = { message: options };
-            }
-            if (arguments[1]) {
-                options = $.extend(options, $.type(arguments[1]) === 'string' ? {status:arguments[1]} : arguments[1]);
-            }
-            return (new Message(options)).show();
-        },
-        closeAll  = function(group, instantly){
-            var id;
-            if(group) {
-                for(id in messages) { if(group===messages[id].group) messages[id].close(instantly); }
-            } else {
-                for(id in messages) { messages[id].close(instantly); }
-            }
-        };
-    var Message = function(options){
-        // var $this = this;
-        this.options = $.extend({}, Message.defaults, options);
-        this.uuid    = 'ID'+(new Date().getTime())+'RAND'+(Math.ceil(Math.random() * 100000));
-        this.element = $([
-            // @geedmo: alert-dismissable enables bs close icon
-            '<div class="uk-notify-message alert-dismissable">',
-                '<a class="close">&times;</a>',
-                '<div>'+this.options.message+'</div>',
-            '</div>'
-        ].join('')).data('notifyMessage', this);
-        // status
-        if (this.options.status) {
-            this.element.addClass('alert alert-'+this.options.status);
-            this.currentstatus = this.options.status;
-        }
-        this.group = this.options.group;
-        messages[this.uuid] = this;
-        if(!containers[this.options.pos]) {
-            containers[this.options.pos] = $('<div class="uk-notify uk-notify-'+this.options.pos+'"></div>').appendTo('body').on('click', '.uk-notify-message', function(){
-                $(this).data('notifyMessage').close();
-            });
-        }
-    };
-    $.extend(Message.prototype, {
-        uuid: false,
-        element: false,
-        timout: false,
-        currentstatus: '',
-        group: false,
-        show: function() {
-            if (this.element.is(':visible')) return;
-            var $this = this;
-            containers[this.options.pos].show().prepend(this.element);
-            var marginbottom = parseInt(this.element.css('margin-bottom'), 10);
-            this.element.css({'opacity':0, 'margin-top': -1*this.element.outerHeight(), 'margin-bottom':0}).animate({'opacity':1, 'margin-top': 0, 'margin-bottom':marginbottom}, function(){
-                if ($this.options.timeout) {
-                    var closefn = function(){ $this.close(); };
-                    $this.timeout = setTimeout(closefn, $this.options.timeout);
-                    $this.element.hover(
-                        function() { clearTimeout($this.timeout); },
-                        function() { $this.timeout = setTimeout(closefn, $this.options.timeout);  }
-                    );
-                }
-            });
-            return this;
-        },
-        close: function(instantly) {
-            var $this    = this,
-                finalize = function(){
-                    $this.element.remove();
-                    if(!containers[$this.options.pos].children().length) {
-                        containers[$this.options.pos].hide();
-                    }
-                    delete messages[$this.uuid];
-                };
-            if(this.timeout) clearTimeout(this.timeout);
-            if(instantly) {
-                finalize();
-            } else {
-                this.element.animate({'opacity':0, 'margin-top': -1* this.element.outerHeight(), 'margin-bottom':0}, function(){
-                    finalize();
-                });
-            }
-        },
-        content: function(html){
-            var container = this.element.find('>div');
-            if(!html) {
-                return container.html();
-            }
-            container.html(html);
-            return this;
-        },
-        status: function(status) {
-            if(!status) {
-                return this.currentstatus;
-            }
-            this.element.removeClass('alert alert-'+this.currentstatus).addClass('alert alert-'+status);
-            this.currentstatus = status;
-            return this;
-        }
-    });
-    Message.defaults = {
-        message: '',
-        status: 'normal',
-        timeout: 5000,
-        group: null,
-        pos: 'top-center'
-    };
-    
-    $.notify          = notify;
-    $.notify.message  = Message;
-    $.notify.closeAll = closeAll;
-    
-    return notify;
-}(jQuery));
-
-// /**=========================================================
-//  * Module: access-login.js
-//  * Demo for login api
-//  =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.pages')
-        .controller('LoginFormController', LoginFormController);
-
-    LoginFormController.$inject = ['$scope','$http', '$state','$localStorage','jadaApiUrl'];
-    function LoginFormController($scope, $http, $state,$localStorage,jadaApiUrl) {
-$scope.formlg={};
-
-
-  
-$scope.buttonText="Login";
-// $scope.login=function(){
-//   $scope.authMsg = '';
-// $scope.buttonText="Logging in. . .";
-// authService.login($scope.formlg.userName,  $scope.
-// formlg.password).then(function(data, status){
-   
-// alert(data);
-
-//    // if ( !response.token ) {
-//    //             vm.authMsg = 'Incorrect credentials.';
-//    //              }else{
-//    //              $state.go('app.dashboard');
-//    //              }
-              
-
-// },function(error,status){
-//  $scope.authMsg = 'Server Request Error';
-// }).finally(function(){
-// $scope.buttonText="Login";
-// });
-// }
-
-
-    // $scope.login = function () {
-    //                         var env = {
-    //                             username:$scope.formlg.username,
-    //                             DBName:$scope.formlg.DBName, 
-    //                             password:$scope.formlg.password
-    //                         };
-
-    //                         $http({
-    //                             method: 'POST',
-    //                             url: 'http://localhost:9418/jada/login',
-    //                             data: env,
-    //                             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    //                             transformRequest: function(obj) {
-    //                               var str = [];
-    //                               for(var p in obj)
-    //                               str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-    //                               return str.join("&");
-    //                             }
-    //                         }).
-    //                         then(function (data, status, headers, config) {
-    //                             $scope.postStatus = 'success: ' + data;
-    //                         },
-    //                         function (error, status, headers, config) {
-    //                             $scope.postStatus = 'error: ' + status;
-    //                         });
-                            
-    //                     }
-
-
-
-
-
-
-       $scope.login = function() {
-            $scope.authMsg = '';
-
-            if($scope.loginForm.$valid) {
-
-              $http
-                .post(jadaApiUrl+'api/login', {username: $scope.formlg.userName, password:$scope.formlg.password})
-                .success(function(data){
-               $scope.buttonText="Logging in. . .";
-                  var response=angular.fromJson(data.response);
-                  var userAccount=angular.fromJson(data.userAccount);
-
-
-
-                  // alert(response.Message);  
-                  if(response.Status=="1"){
-                     if (data.token) {
-                        // store username and token in local storage to keep user logged in between page refreshes
-                        $localStorage.currentUser = { username: userAccount.userName, token: data.token ,accountRights:data.accountRights};
-                        
-                        // add jwt token to auth header for all requests made by the $http service
-                        $http.defaults.headers.common.Authorization = 'Bearer ' + data.token;
-
-                        // execute callback with true to indicate successful login
-                      
-                    }                    
-                    $state.go('app.dashboard')
-                  }  
-                  else{
-                    $scope.authMsg = response.Message;           
-                  }
-
-                    
-                })
-                // .then(function(result) {
-                
-                //   // assumes if ok, response is an object with some data, if not, a string with error
-                //   // customize according to your api
-                //   if ( !result.formlg) {
-                //    $scope.authMsg = 'Incorrect credentials.';
-                //   }else{
-                //     // $state.go('app.dashboard');
-                //       vm.authMsg = 'hellow';
-                //   }
-                //      alert(result.token);
-                // }, function() {
-                //   vm.authMsg = 'Server Request Error';
-                // });
-            
-            }
-            else {
-              // set as dirty if the user click directly to login so we show the validation messages
-              /*jshint -W106*/
-              vm.loginForm.account_email.$dirty = true;
-              vm.loginForm.account_password.$dirty = true;
-            }
-          };
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          // bind here all data from the form
-          vm.account = {};
-          // place the message if something goes wrong
-          vm.authMsg = '';
-
-         
-        }
-    }
-
-
-})();
-
-/**=========================================================
- * Module: access-register.js
- * Demo for register account api
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.pages')
-        .controller('RegisterFormController', RegisterFormController);
-
-    RegisterFormController.$inject = ['$scope','$http', '$state', 'register'];
-    function RegisterFormController($scope,$http, $state,register) {
-      // $scope.message=register.query();
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          // bind here all data from the form
-          vm.account = {};
-          // place the message if something goes wrong
-          vm.authMsg = '';
-
-          vm.auth=false;
-             vm.account= new register();
-  //     $scope.submitCompany = function() {
-  //       $scope.company.$save(function(){
-  //           console.log($scope.company.Company_Name);});
-  // }
-          vm.register = function() {
-            vm.authMsg = '';
-               vm.error='';
-
-            if(vm.registerForm.$valid) {
-              vm.account.$save(function(data){
-
-            var response=angular.fromJson(data);
-            console.log(response.Message);
-            vm.authMsg=response.Message;
-            if(response.Status=="1"){
-                    vm.authMsg =response.Message;
-            }else{
-              vm.auth=false;
-               
-                   vm.error=response.Message;
-              // vm.auth=true;
-            }
-            ;});
-
-              // $http
-              //   .post('api/account/register', {email: vm.account.email, password: vm.account.password})
-              //   .then(function(response) {
-              //     // assumes if ok, response is an object with some data, if not, a string with error
-              //     // customize according to your api
-              //     if (!response.account ) {
-              //       vm.authMsg = response;
-              //     }else{
-              //       $state.go('app.dashboard');
-              //     }
-              //   }, function() {
-              //     vm.authMsg = 'Server Request Error';
-              //   });
-            }
-            else {
-              // set as dirty if the user click directly to login so we show the validation messages
-              /*jshint -W106*/
-              vm.registerForm.password.$dirty = true;
-              vm.registerForm.account_password.$dirty = true;
-              // vm.registerForm.account_agreed.$dirty = true;
-              
-            }
-          };
-        }
-    }
-})();
-
-// (function () {
-//     'use strict';
-
-//     angular
-//         .module('app.pages')
-//         .factory('AuthenticationService', Service);
-
-//     function Service($http, $localStorage) {
-//         var service = {};
-
-//                          service.authMsg="";
-//         service.Login = Login;
-//         service.Logout = Logout;
-
-//         return service;
-
-//         function Login(username, password, callback) {
-//             $http.post('http://localhost:56135/api/login', { username: username, password: password })
-//                 .success(function (response) {
-
-//                     // login successful if there's a token in the response
-//                     if (response.token) {
-//                         // store username and token in local storage to keep user logged in between page refreshes
-//                         $localStorage.currentUser = { username: username, token: response.token, isAuthenticated:true };
-
-
-//                         // add jwt token to auth header for all requests made by the $http service
-//                         $http.defaults.headers.common.Authorization = 'Bearer ' + response.token;
-
-//                         // execute callback with true to indicate successful login
-//                         callback(true);
-//                     } else {
-//                         // execute callback with false to indicate failed login
-//                         callback(false);
-
-//                          service.authMsg = response;
-                     
-//                     }
-//                 });
-//         }
-
-//         function Logout() {
-//             // remove user from local storage and clear http auth header
-//             delete $localStorage.currentUser;
-//             $http.defaults.headers.common.Authorization = '';
-//         }
-//     }
-// })();
-
-
-//    // $http
-//    //              .post('api/account/register', {email: vm.account.email, password: vm.account.password})
-//    //              .then(function(response) {
-//    //                // assumes if ok, response is an object with some data, if not, a string with error
-//    //                // customize according to your api
-//    //                if (!response.account ) {
-//    //                  vm.authMsg = response;
-//    //                }else{
-//    //                  $state.go('app.dashboard');
-//    //                }
-//    //              }, function() {
-//    //                vm.authMsg = 'Server Request Error';
-//    //              });
-// angular.module('app.pages').factory('authService',
-// ['AUTH_ENDPOINT','LOGOUT_ENDPOINT','$http','$cookieStore',
-// function(AUTH_ENDPOINT,LOGOUT_ENDPOINT,$http,$cookieStore){
-// var auth={};
-
-// auth.login=function(username, password){
-// 	var env = {
-//                                 username:username,
-                                                    
-//                                 password:password
-//                             };
-//                          return $http({
-//                                 method: 'POST',
-//                                 url: 'http://localhost:56135/api/login',
-//                                 data: env,
-//                                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-//                                 transformRequest: function(obj) {
-//                                   var str = [];
-//                                   for(var p in obj)
-//                                   str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-//                                   return str.join("&");
-//                                 }
-//                             })
-//                            .then(function(response,status){
-
-//                             alert(response.token);
-//                             // login successful if there's a token in the response
-//                     if (response.token) {
-//                         // store username and token in local storage to keep user logged in between page refreshes
-//                         $localStorage.currentUser = { username: username, token: response.token };
-
-//                         // add jwt token to auth header for all requests made by the $http service
-//                         $http.defaults.headers.common.Authorization = 'Bearer ' + response.token;
-
-
-//                     }
-//                     //      auth.user=response.data;
-//                     // $cookieStore.put('user',auth.user);
-//                     //    return auth.postStatus = 'success: ' + status;
-//                       },
-//                             function (error, status, headers, config) {
-//                              return   auth.postStatus = 'error: ' + status;
-//                             });
-                            
-//                         }
-
-// // return $http.post(AUTH_ENDPOINT,{env},
-// // {
-// //     headers: {
-// //       'Content-Type': 'application/x-www-form-urlencoded'
-    
-// //     }
-// //   },{
-// //   	   transformRequest: function(obj) {
-// //                                   var str = [];
-// //                                   for(var p in obj)
-// //                                   str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-// //                                   return str.join("&");
-// //                                 }
-// //   }).then(function(response,status){
-// // auth.user=response.data;
-// // $cookieStore.put('user',auth.user);
-// // return auth.user;
-// // });
-// // }
-// auth.logout=function(){
-// return $http.post(LOGOUT_ENDPOINT).then(function(response){
-// auth.user=undefined;
-// $cookieStore.remove('user');
-// });
-// }
-// return auth;
-// }]);
-
-// angular.module('app.pages').value('AUTH_ENDPOINT',
-// 'http://localhost:56135/api/login');
-// angular.module('app.pages').value('LOGOUT_ENDPOINT',
-// 'http://spblogger-sitepointdemos.rhcloud.com/logout');
-// // 'http://spblogger-sitepointdemos.rhcloud.com/login');
-// (function () {
-//     'use strict';
-
-//     angular
-//         .module('app.pages')
-//         .controller('AuthLoginController', Controller);
-
-//     function Controller($location, AuthenticationService) {
-//         var vm = this;
-
-//         vm.login = login;
-
-//         initController();
-
-//         function initController() {
-//             // reset login status
-//             AuthenticationService.Logout();
-//         };
-
-//         function login() {
-
-
-//             vm.loading = true;
-//             AuthenticationService.Login(vm.username, vm.password, function (result,status) {
-              
-//                 if (result === true) {
-//                     $location.path('/app/dashboard');
-//                 } else {
-//                       vm.loading = false;
-             
-
-
-
-//                        vm.error = 'Username or password is incorrect';
-
-//                 }
-//             });
-//         };
-//     }
-
-// })();
-
-
-
-// /**=========================================================
-//  * Module: access-login.js
-//  * Demo for login api
-//  =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.pages')
-        .controller('LogoutController', LoginFormController);
-
-    LoginFormController.$inject = ['$scope','$http', '$state','$localStorage','jadaApiUrl'];
-    function LoginFormController($scope, $http, $state,$localStorage,jadaApiUrl) {
-
-
- $scope.Logout=function() {
-            // remove user from local storage and clear http auth header
-            delete $localStorage.currentUser;
-            $http.defaults.headers.common.Authorization = '';
-                $state.go('page.login');
-        }
-
-
-    }
-
-
-})();
-
-// (function() {
-//     'use strict';
-
-//     angular
-//         .module('app.pages')
-//         .factory('register',  function($resource) {
-        
-//         return $resource('http://localhost:56135/api/systemsetup');
-//         // return $resource('http://localhost:9418/jada/Management/CompanyRegistration/');
-//         // http://localhost:9418/jada/Authentication/CompanyRegistration
-//     });
-// })();
-
-
-
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.pages')
-        .factory('register', register);
-
-    register.$inject = ['$resource','jadaApiUrl'];
-    function register($resource,jadaApiUrl) {
-    	  return $resource(jadaApiUrl+'api/systemsetup');
-    
-          
-       
-    }
-
-})();
-/**=========================================================
  * Collapse panels * [panel-collapse]
  =========================================================*/
 (function() {
@@ -11986,96 +11411,482 @@ $scope.buttonText="Login";
         }
     }
 })();
+// /**=========================================================
+//  * Module: access-login.js
+//  * Demo for login api
+//  =========================================================*/
+
 (function() {
     'use strict';
 
     angular
-        .module('app.preloader')
-        .directive('preloader', preloader);
+        .module('app.pages')
+        .controller('LoginFormController', LoginFormController);
 
-    preloader.$inject = ['$animate', '$timeout', '$q'];
-    function preloader ($animate, $timeout, $q) {
+    LoginFormController.$inject = ['$scope','$http', '$state','$localStorage','jadaApiUrl'];
+    function LoginFormController($scope, $http, $state,$localStorage,jadaApiUrl) {
+$scope.formlg={};
 
-        var directive = {
-            restrict: 'EAC',
-            template: 
-              '<div class="preloader-progress">' +
-                  '<div class="preloader-progress-bar" ' +
-                       'ng-style="{width: loadCounter + \'%\'}"></div>' +
-              '</div>'
-            ,
-            link: link
-        };
-        return directive;
 
-        ///////
+  
+$scope.buttonText="Login";
+// $scope.login=function(){
+//   $scope.authMsg = '';
+// $scope.buttonText="Logging in. . .";
+// authService.login($scope.formlg.userName,  $scope.
+// formlg.password).then(function(data, status){
+   
+// alert(data);
 
-        function link(scope, el) {
+//    // if ( !response.token ) {
+//    //             vm.authMsg = 'Incorrect credentials.';
+//    //              }else{
+//    //              $state.go('app.dashboard');
+//    //              }
+              
 
-          scope.loadCounter = 0;
+// },function(error,status){
+//  $scope.authMsg = 'Server Request Error';
+// }).finally(function(){
+// $scope.buttonText="Login";
+// });
+// }
 
-          var counter  = 0,
-              timeout;
 
-          // disables scrollbar
-          angular.element('body').css('overflow', 'hidden');
-          // ensure class is present for styling
-          el.addClass('preloader');
+    // $scope.login = function () {
+    //                         var env = {
+    //                             username:$scope.formlg.username,
+    //                             DBName:$scope.formlg.DBName, 
+    //                             password:$scope.formlg.password
+    //                         };
 
-          appReady().then(endCounter);
+    //                         $http({
+    //                             method: 'POST',
+    //                             url: 'http://localhost:9418/jada/login',
+    //                             data: env,
+    //                             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    //                             transformRequest: function(obj) {
+    //                               var str = [];
+    //                               for(var p in obj)
+    //                               str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+    //                               return str.join("&");
+    //                             }
+    //                         }).
+    //                         then(function (data, status, headers, config) {
+    //                             $scope.postStatus = 'success: ' + data;
+    //                         },
+    //                         function (error, status, headers, config) {
+    //                             $scope.postStatus = 'error: ' + status;
+    //                         });
+                            
+    //                     }
 
-          timeout = $timeout(startCounter);
 
-          ///////
 
-          function startCounter() {
 
-            var remaining = 100 - counter;
-            counter = counter + (0.015 * Math.pow(1 - Math.sqrt(remaining), 2));
 
-            scope.loadCounter = parseInt(counter, 10);
 
-            timeout = $timeout(startCounter, 20);
-          }
+       $scope.login = function() {
+            $scope.authMsg = '';
 
-          function endCounter() {
+            if($scope.loginForm.$valid) {
 
-            $timeout.cancel(timeout);
+              $http
+                .post(jadaApiUrl+'api/login', {username: $scope.formlg.userName, password:$scope.formlg.password})
+                .success(function(data){
+               $scope.buttonText="Logging in. . .";
+                  var response=angular.fromJson(data.response);
+                  var userAccount=angular.fromJson(data.userAccount);
 
-            scope.loadCounter = 100;
 
-            $timeout(function(){
-              // animate preloader hiding
-              $animate.addClass(el, 'preloader-hidden');
-              // retore scrollbar
-              angular.element('body').css('overflow', '');
-            }, 300);
-          }
 
-          function appReady() {
-            var deferred = $q.defer();
-            var viewsLoaded = 0;
-            // if this doesn't sync with the real app ready
-            // a custom event must be used instead
-            var off = scope.$on('$viewContentLoaded', function () {
-              viewsLoaded ++;
-              // we know there are at least two views to be loaded 
-              // before the app is ready (1-index.html 2-app*.html)
-              if ( viewsLoaded === 2) {
-                // with resolve this fires only once
-                $timeout(function(){
-                  deferred.resolve();
-                }, 3000);
+                  // alert(response.Message);  
+                  if(response.Status=="1"){
+                     if (data.token) {
+                        // store username and token in local storage to keep user logged in between page refreshes
+                        $localStorage.currentUser = { username: userAccount.userName, token: data.token ,accountRights:data.accountRights};
+                        
+                        // add jwt token to auth header for all requests made by the $http service
+                        $http.defaults.headers.common.Authorization = 'Bearer ' + data.token;
 
-                off();
-              }
+                        // execute callback with true to indicate successful login
+                      
+                    }                    
+                    $state.go('app.dashboard')
+                  }  
+                  else{
+                    $scope.authMsg = response.Message;           
+                  }
 
-            });
+                    
+                })
+                // .then(function(result) {
+                
+                //   // assumes if ok, response is an object with some data, if not, a string with error
+                //   // customize according to your api
+                //   if ( !result.formlg) {
+                //    $scope.authMsg = 'Incorrect credentials.';
+                //   }else{
+                //     // $state.go('app.dashboard');
+                //       vm.authMsg = 'hellow';
+                //   }
+                //      alert(result.token);
+                // }, function() {
+                //   vm.authMsg = 'Server Request Error';
+                // });
+            
+            }
+            else {
+              // set as dirty if the user click directly to login so we show the validation messages
+              /*jshint -W106*/
+              vm.loginForm.account_email.$dirty = true;
+              vm.loginForm.account_password.$dirty = true;
+            }
+          };
+        var vm = this;
 
-            return deferred.promise;
-          }
+        activate();
 
-        } //link
+        ////////////////
+
+        function activate() {
+          // bind here all data from the form
+          vm.account = {};
+          // place the message if something goes wrong
+          vm.authMsg = '';
+
+         
+        }
+    }
+
+
+})();
+
+/**=========================================================
+ * Module: access-register.js
+ * Demo for register account api
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.pages')
+        .controller('RegisterFormController', RegisterFormController);
+
+    RegisterFormController.$inject = ['$scope','$http', '$state', 'register'];
+    function RegisterFormController($scope,$http, $state,register) {
+      // $scope.message=register.query();
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          // bind here all data from the form
+          vm.account = {};
+          // place the message if something goes wrong
+          vm.authMsg = '';
+
+          vm.auth=false;
+             vm.account= new register();
+  //     $scope.submitCompany = function() {
+  //       $scope.company.$save(function(){
+  //           console.log($scope.company.Company_Name);});
+  // }
+          vm.register = function() {
+            vm.authMsg = '';
+               vm.error='';
+
+            if(vm.registerForm.$valid) {
+              vm.account.$save(function(data){
+
+            var response=angular.fromJson(data);
+            console.log(response.Message);
+            vm.authMsg=response.Message;
+            if(response.Status=="1"){
+                    vm.authMsg =response.Message;
+            }else{
+              vm.auth=false;
+               
+                   vm.error=response.Message;
+              // vm.auth=true;
+            }
+            ;});
+
+              // $http
+              //   .post('api/account/register', {email: vm.account.email, password: vm.account.password})
+              //   .then(function(response) {
+              //     // assumes if ok, response is an object with some data, if not, a string with error
+              //     // customize according to your api
+              //     if (!response.account ) {
+              //       vm.authMsg = response;
+              //     }else{
+              //       $state.go('app.dashboard');
+              //     }
+              //   }, function() {
+              //     vm.authMsg = 'Server Request Error';
+              //   });
+            }
+            else {
+              // set as dirty if the user click directly to login so we show the validation messages
+              /*jshint -W106*/
+              vm.registerForm.password.$dirty = true;
+              vm.registerForm.account_password.$dirty = true;
+              // vm.registerForm.account_agreed.$dirty = true;
+              
+            }
+          };
+        }
+    }
+})();
+
+// (function () {
+//     'use strict';
+
+//     angular
+//         .module('app.pages')
+//         .factory('AuthenticationService', Service);
+
+//     function Service($http, $localStorage) {
+//         var service = {};
+
+//                          service.authMsg="";
+//         service.Login = Login;
+//         service.Logout = Logout;
+
+//         return service;
+
+//         function Login(username, password, callback) {
+//             $http.post('http://localhost:56135/api/login', { username: username, password: password })
+//                 .success(function (response) {
+
+//                     // login successful if there's a token in the response
+//                     if (response.token) {
+//                         // store username and token in local storage to keep user logged in between page refreshes
+//                         $localStorage.currentUser = { username: username, token: response.token, isAuthenticated:true };
+
+
+//                         // add jwt token to auth header for all requests made by the $http service
+//                         $http.defaults.headers.common.Authorization = 'Bearer ' + response.token;
+
+//                         // execute callback with true to indicate successful login
+//                         callback(true);
+//                     } else {
+//                         // execute callback with false to indicate failed login
+//                         callback(false);
+
+//                          service.authMsg = response;
+                     
+//                     }
+//                 });
+//         }
+
+//         function Logout() {
+//             // remove user from local storage and clear http auth header
+//             delete $localStorage.currentUser;
+//             $http.defaults.headers.common.Authorization = '';
+//         }
+//     }
+// })();
+
+
+//    // $http
+//    //              .post('api/account/register', {email: vm.account.email, password: vm.account.password})
+//    //              .then(function(response) {
+//    //                // assumes if ok, response is an object with some data, if not, a string with error
+//    //                // customize according to your api
+//    //                if (!response.account ) {
+//    //                  vm.authMsg = response;
+//    //                }else{
+//    //                  $state.go('app.dashboard');
+//    //                }
+//    //              }, function() {
+//    //                vm.authMsg = 'Server Request Error';
+//    //              });
+// angular.module('app.pages').factory('authService',
+// ['AUTH_ENDPOINT','LOGOUT_ENDPOINT','$http','$cookieStore',
+// function(AUTH_ENDPOINT,LOGOUT_ENDPOINT,$http,$cookieStore){
+// var auth={};
+
+// auth.login=function(username, password){
+// 	var env = {
+//                                 username:username,
+                                                    
+//                                 password:password
+//                             };
+//                          return $http({
+//                                 method: 'POST',
+//                                 url: 'http://localhost:56135/api/login',
+//                                 data: env,
+//                                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+//                                 transformRequest: function(obj) {
+//                                   var str = [];
+//                                   for(var p in obj)
+//                                   str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+//                                   return str.join("&");
+//                                 }
+//                             })
+//                            .then(function(response,status){
+
+//                             alert(response.token);
+//                             // login successful if there's a token in the response
+//                     if (response.token) {
+//                         // store username and token in local storage to keep user logged in between page refreshes
+//                         $localStorage.currentUser = { username: username, token: response.token };
+
+//                         // add jwt token to auth header for all requests made by the $http service
+//                         $http.defaults.headers.common.Authorization = 'Bearer ' + response.token;
+
+
+//                     }
+//                     //      auth.user=response.data;
+//                     // $cookieStore.put('user',auth.user);
+//                     //    return auth.postStatus = 'success: ' + status;
+//                       },
+//                             function (error, status, headers, config) {
+//                              return   auth.postStatus = 'error: ' + status;
+//                             });
+                            
+//                         }
+
+// // return $http.post(AUTH_ENDPOINT,{env},
+// // {
+// //     headers: {
+// //       'Content-Type': 'application/x-www-form-urlencoded'
+    
+// //     }
+// //   },{
+// //   	   transformRequest: function(obj) {
+// //                                   var str = [];
+// //                                   for(var p in obj)
+// //                                   str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+// //                                   return str.join("&");
+// //                                 }
+// //   }).then(function(response,status){
+// // auth.user=response.data;
+// // $cookieStore.put('user',auth.user);
+// // return auth.user;
+// // });
+// // }
+// auth.logout=function(){
+// return $http.post(LOGOUT_ENDPOINT).then(function(response){
+// auth.user=undefined;
+// $cookieStore.remove('user');
+// });
+// }
+// return auth;
+// }]);
+
+// angular.module('app.pages').value('AUTH_ENDPOINT',
+// 'http://localhost:56135/api/login');
+// angular.module('app.pages').value('LOGOUT_ENDPOINT',
+// 'http://spblogger-sitepointdemos.rhcloud.com/logout');
+// // 'http://spblogger-sitepointdemos.rhcloud.com/login');
+// (function () {
+//     'use strict';
+
+//     angular
+//         .module('app.pages')
+//         .controller('AuthLoginController', Controller);
+
+//     function Controller($location, AuthenticationService) {
+//         var vm = this;
+
+//         vm.login = login;
+
+//         initController();
+
+//         function initController() {
+//             // reset login status
+//             AuthenticationService.Logout();
+//         };
+
+//         function login() {
+
+
+//             vm.loading = true;
+//             AuthenticationService.Login(vm.username, vm.password, function (result,status) {
+              
+//                 if (result === true) {
+//                     $location.path('/app/dashboard');
+//                 } else {
+//                       vm.loading = false;
+             
+
+
+
+//                        vm.error = 'Username or password is incorrect';
+
+//                 }
+//             });
+//         };
+//     }
+
+// })();
+
+
+
+// /**=========================================================
+//  * Module: access-login.js
+//  * Demo for login api
+//  =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.pages')
+        .controller('LogoutController', LoginFormController);
+
+    LoginFormController.$inject = ['$scope','$http', '$state','$localStorage','jadaApiUrl'];
+    function LoginFormController($scope, $http, $state,$localStorage,jadaApiUrl) {
+
+
+ $scope.Logout=function() {
+            // remove user from local storage and clear http auth header
+            delete $localStorage.currentUser;
+            $http.defaults.headers.common.Authorization = '';
+                $state.go('page.login');
+        }
+
+
+    }
+
+
+})();
+
+// (function() {
+//     'use strict';
+
+//     angular
+//         .module('app.pages')
+//         .factory('register',  function($resource) {
+        
+//         return $resource('http://localhost:56135/api/systemsetup');
+//         // return $resource('http://localhost:9418/jada/Management/CompanyRegistration/');
+//         // http://localhost:9418/jada/Authentication/CompanyRegistration
+//     });
+// })();
+
+
+
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.pages')
+        .factory('register', register);
+
+    register.$inject = ['$resource','jadaApiUrl'];
+    function register($resource,jadaApiUrl) {
+    	  return $resource(jadaApiUrl+'api/systemsetup');
+    
+          
+       
     }
 
 })();
@@ -12753,6 +12564,208 @@ group.$remove().then(function () {
     'use strict';
 
     angular
+        .module('app.preloader')
+        .directive('preloader', preloader);
+
+    preloader.$inject = ['$animate', '$timeout', '$q'];
+    function preloader ($animate, $timeout, $q) {
+
+        var directive = {
+            restrict: 'EAC',
+            template: 
+              '<div class="preloader-progress">' +
+                  '<div class="preloader-progress-bar" ' +
+                       'ng-style="{width: loadCounter + \'%\'}"></div>' +
+              '</div>'
+            ,
+            link: link
+        };
+        return directive;
+
+        ///////
+
+        function link(scope, el) {
+
+          scope.loadCounter = 0;
+
+          var counter  = 0,
+              timeout;
+
+          // disables scrollbar
+          angular.element('body').css('overflow', 'hidden');
+          // ensure class is present for styling
+          el.addClass('preloader');
+
+          appReady().then(endCounter);
+
+          timeout = $timeout(startCounter);
+
+          ///////
+
+          function startCounter() {
+
+            var remaining = 100 - counter;
+            counter = counter + (0.015 * Math.pow(1 - Math.sqrt(remaining), 2));
+
+            scope.loadCounter = parseInt(counter, 10);
+
+            timeout = $timeout(startCounter, 20);
+          }
+
+          function endCounter() {
+
+            $timeout.cancel(timeout);
+
+            scope.loadCounter = 100;
+
+            $timeout(function(){
+              // animate preloader hiding
+              $animate.addClass(el, 'preloader-hidden');
+              // retore scrollbar
+              angular.element('body').css('overflow', '');
+            }, 300);
+          }
+
+          function appReady() {
+            var deferred = $q.defer();
+            var viewsLoaded = 0;
+            // if this doesn't sync with the real app ready
+            // a custom event must be used instead
+            var off = scope.$on('$viewContentLoaded', function () {
+              viewsLoaded ++;
+              // we know there are at least two views to be loaded 
+              // before the app is ready (1-index.html 2-app*.html)
+              if ( viewsLoaded === 2) {
+                // with resolve this fires only once
+                $timeout(function(){
+                  deferred.resolve();
+                }, 3000);
+
+                off();
+              }
+
+            });
+
+            return deferred.promise;
+          }
+
+        } //link
+    }
+
+})();
+/**=========================================================
+ * Module: navbar-search.js
+ * Navbar search toggler * Auto dismiss on ESC key
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.navsearch')
+        .directive('searchOpen', searchOpen)
+        .directive('searchDismiss', searchDismiss);
+
+    //
+    // directives definition
+    // 
+    
+    function searchOpen () {
+        var directive = {
+            controller: searchOpenController,
+            restrict: 'A'
+        };
+        return directive;
+
+    }
+
+    function searchDismiss () {
+        var directive = {
+            controller: searchDismissController,
+            restrict: 'A'
+        };
+        return directive;
+        
+    }
+
+    //
+    // Contrller definition
+    // 
+    
+    searchOpenController.$inject = ['$scope', '$element', 'NavSearch'];
+    function searchOpenController ($scope, $element, NavSearch) {
+      $element
+        .on('click', function (e) { e.stopPropagation(); })
+        .on('click', NavSearch.toggle);
+    }
+
+    searchDismissController.$inject = ['$scope', '$element', 'NavSearch'];
+    function searchDismissController ($scope, $element, NavSearch) {
+      
+      var inputSelector = '.navbar-form input[type="text"]';
+
+      $(inputSelector)
+        .on('click', function (e) { e.stopPropagation(); })
+        .on('keyup', function(e) {
+          if (e.keyCode === 27) // ESC
+            NavSearch.dismiss();
+        });
+        
+      // click anywhere closes the search
+      $(document).on('click', NavSearch.dismiss);
+      // dismissable options
+      $element
+        .on('click', function (e) { e.stopPropagation(); })
+        .on('click', NavSearch.dismiss);
+    }
+
+})();
+
+
+/**=========================================================
+ * Module: nav-search.js
+ * Services to share navbar search functions
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.navsearch')
+        .service('NavSearch', NavSearch);
+
+    function NavSearch() {
+        this.toggle = toggle;
+        this.dismiss = dismiss;
+
+        ////////////////
+
+        var navbarFormSelector = 'form.navbar-form';
+
+        function toggle() {
+          var navbarForm = $(navbarFormSelector);
+
+          navbarForm.toggleClass('open');
+
+          var isOpen = navbarForm.hasClass('open');
+
+          navbarForm.find('input')[isOpen ? 'focus' : 'blur']();
+        }
+
+        function dismiss() {
+          $(navbarFormSelector)
+            .removeClass('open') // Close control
+            .find('input[type="text"]').blur() // remove focus
+            // .val('') // Empty input
+            ;
+        }
+    }
+})();
+
+(function() {
+    'use strict';
+
+    angular
         .module('app.reports')
         .controller('BankFilesController', BankFilesController);
 
@@ -12851,8 +12864,8 @@ $scope.printDiv = function (div) {
         .module('app.reports')
         .controller('CompanyTotalsController', CompanyTotalsController);
 
-    CompanyTotalsController.$inject = ['$scope','$http','$resource', 'CompanyTotalsService','jadaApiUrl'];
-    function CompanyTotalsController($scope,$http,$resource,CompanyTotalsService,jadaApiUrl) {
+    CompanyTotalsController.$inject = ['$scope','$http','$resource', 'CompanyTotalsService','jadaApiUrl','Excel','$timeout'];
+    function CompanyTotalsController($scope,$http,$resource,CompanyTotalsService,jadaApiUrl,Excel,$timeout) {
         var vm = this;
 
         activate();
@@ -12861,10 +12874,15 @@ $scope.printDiv = function (div) {
 
         function activate() {
 
+       var period=1;
+        $scope.companytotals=CompanyTotalsService.get({periodId:1});
 
-        $scope.companytotals=CompanyTotalsService.query();
+          $scope.getByperiod=function(period){
+        
+            $scope.companytotals=CompanyTotalsService.get({periodId:period});
 
-          
+          }
+
           $scope.greaterThan = function(prop, val){
     return function(item){
       return item[prop] > val;
@@ -12895,6 +12913,15 @@ $scope.printDiv = function (div) {
   newWin.focus();
 }
 
+
+
+ $scope.exportToExcel=function(tableId){ // ex: '#my-table'
+            var exportHref=Excel.tableToExcel(tableId,'WireWorkbenchDataExport');
+            $timeout(function(){location.href=exportHref;},100); // trigger download
+        }
+
+
+
         }
     }
 })();
@@ -12907,7 +12934,7 @@ $scope.printDiv = function (div) {
 
     CompanyTotalsService.$inject = ['$resource','jadaApiUrl'];
     function CompanyTotalsService($resource,jadaApiUrl) {
-     var data=$resource('https://jsonplaceholder.typicode.com/users/:user', {user: '@user'},
+     var data=$resource(jadaApiUrl+'api/CompanyTotalsReport/:periodId', {periodId: '@periodId'},
     { 'get':    {method:'GET', isArray:false},
   'save':   {method:'POST'},
   'query':  {method:'GET', isArray:true},
@@ -12921,6 +12948,7 @@ $scope.printDiv = function (div) {
     }
 
 })();
+
 (function() {
     'use strict';
 
@@ -12945,6 +12973,30 @@ $scope.printDiv = function (div) {
 
         }
     }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('Excel', Excel);
+
+    Excel.$inject = ['$window'];
+    function Excel($window) {
+    var uri='data:application/vnd.ms-excel;base64,',
+            template='<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
+            base64=function(s){return $window.btoa(unescape(encodeURIComponent(s)));},
+            format=function(s,c){return s.replace(/{(\w+)}/g,function(m,p){return c[p];})};
+        return {
+            tableToExcel:function(tableId,worksheetName){
+                var table=$(tableId),
+                    ctx={worksheet:worksheetName,table:table.html()},
+                    href=uri+base64(format(template,ctx));
+                return href;
+            }
+        };   
+    }
+
 })();
 (function() {
     'use strict';
@@ -13072,8 +13124,8 @@ $scope.printDiv = function (div) {
         .module('app.reports')
         .controller('NhifController', NhifController);
 
-    NhifController.$inject = ['$scope','$http','$resource', 'NhifService','jadaApiUrl'];
-    function NhifController($scope,$http,$resource,NhifService,jadaApiUrl) {
+    NhifController.$inject = ['$scope','$http','$resource', 'NhifService1','jadaApiUrl'];
+    function NhifController($scope,$http,$resource,NhifService1,jadaApiUrl) {
         var vm = this;
 
         activate();
@@ -13083,10 +13135,16 @@ $scope.printDiv = function (div) {
         function activate() {
 
 
-        $scope.nhifs=NhifService.query();
-
+        $scope.nhifs=NhifService1.get({periodId:1});
+        
+console.log( $scope.nhifs);
           
 
+          $scope.getByperiod=function(period){
+        
+            $scope.nhifs=NhifService.get({periodId:period});
+
+          }
 
             
               $http.get(jadaApiUrl+'api/period').success(function(data) {
@@ -13107,11 +13165,11 @@ $scope.printDiv = function (div) {
 
     angular
         .module('app.reports')
-        .factory('NhifService', NhifService);
+        .factory('NhifService1', NhifService1);
 
-    NhifService.$inject = ['$resource','jadaApiUrl'];
-    function NhifService($resource,jadaApiUrl) {
-     var data=$resource('https://jsonplaceholder.typicode.com/users/:user', {user: '@user'},
+    NhifService1.$inject = ['$resource','jadaApiUrl'];
+    function NhifService1($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/nhifreport/:periodId', {periodId: '@periodId'},
     { 'get':    {method:'GET', isArray:false},
   'save':   {method:'POST'},
   'query':  {method:'GET', isArray:true},
@@ -13170,7 +13228,7 @@ $scope.printDiv = function (div) {
 
     NssfService.$inject = ['$resource','jadaApiUrl'];
     function NssfService($resource,jadaApiUrl) {
-     var data=$resource('https://jsonplaceholder.typicode.com/users/:user', {user: '@user'},
+     var data=$resource(jadaApiUrl+'api/nhifreport/:periodId', {periodId: '@periodId'},
     { 'get':    {method:'GET', isArray:false},
   'save':   {method:'POST'},
   'query':  {method:'GET', isArray:true},
@@ -13637,84 +13695,6 @@ $http.get(jadaApiUrl+'api/payslipreport/'+id).success(function(data) {
         }
     }
 })();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.settings')
-        .run(settingsRun);
-
-    settingsRun.$inject = ['$rootScope', '$localStorage'];
-
-    function settingsRun($rootScope, $localStorage){
-
-
-      // User Settings
-      // -----------------------------------
-      $rootScope.user = {
-        name:     'John',
-        job:      'ng-developer',
-        picture:  'app/img/user/02.jpg'
-      };
-
-      // Hides/show user avatar on sidebar from any element
-      $rootScope.toggleUserBlock = function(){
-        $rootScope.$broadcast('toggleUserBlock');
-      };
-
-      // Global Settings
-      // -----------------------------------
-      $rootScope.app = {
-        name: 'Jada',
-        description: 'Jada Payroll',
-        year: ((new Date()).getFullYear()),
-        layout: {
-          isFixed: true,
-          isCollapsed: false,
-          isBoxed: false,
-          isRTL: false,
-          horizontal: false,
-          isFloat: false,
-          asideHover: false,
-          theme: null,
-          asideScrollbar: false,
-          isCollapsedText: false
-        },
-        useFullLayout: false,
-        hiddenFooter: false,
-        offsidebarOpen: false,
-        asideToggled: false,
-        viewAnimation: 'ng-fadeInUp'
-      };
-
-      // Setup the layout mode
-      $rootScope.app.layout.horizontal = ( $rootScope.$stateParams.layout === 'app-h') ;
-
-      // Restore layout settings
-      if( angular.isDefined($localStorage.layout) )
-        $rootScope.app.layout = $localStorage.layout;
-      else
-        $localStorage.layout = $rootScope.app.layout;
-
-      $rootScope.$watch('app.layout', function () {
-        $localStorage.layout = $rootScope.app.layout;
-      }, true);
-
-      // Close submenu when sidebar change from collapsed to normal
-      $rootScope.$watch('app.layout.isCollapsed', function(newValue) {
-        if( newValue === false )
-          $rootScope.$broadcast('closeSidebarMenu');
-      });
-
-    }
-       function Logout() {
-            // remove user from local storage and clear http auth header
-            delete $localStorage.currentUser;
-            $http.defaults.headers.common.Authorization = '';
-        }
-
-})();
-
 /**=========================================================
  * Module: helpers.js
  * Provides helper functions for routes definition
@@ -14948,367 +14928,6 @@ $http.get(jadaApiUrl+'api/payslipreport/'+id).success(function(data) {
 
 
 /**=========================================================
- * Module: sidebar-menu.js
- * Handle sidebar collapsible elements
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.sidebar')
-        .controller('SidebarController', SidebarController);
-
-    SidebarController.$inject = ['$rootScope', '$scope', '$state', 'SidebarLoader', 'Utils'];
-    function SidebarController($rootScope, $scope, $state, SidebarLoader,  Utils) {
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          var collapseList = [];
-
-          // demo: when switch from collapse to hover, close all items
-          var watchOff1 = $rootScope.$watch('app.layout.asideHover', function(oldVal, newVal){
-            if ( newVal === false && oldVal === true) {
-              closeAllBut(-1);
-            }
-          });
-
-
-          // Load menu from json file
-          // -----------------------------------
-
-          SidebarLoader.getMenu(sidebarReady);
-
-          function sidebarReady(items) {
-            $scope.menuItems = items;
-          }
-
-          // Handle sidebar and collapse items
-          // ----------------------------------
-
-          $scope.getMenuItemPropClasses = function(item) {
-            return (item.heading ? 'nav-heading' : '') +
-                   (isActive(item) ? ' active' : '') ;
-          };
-
-          $scope.addCollapse = function($index, item) {
-            collapseList[$index] = $rootScope.app.layout.asideHover ? true : !isActive(item);
-          };
-
-          $scope.isCollapse = function($index) {
-            return (collapseList[$index]);
-          };
-
-          $scope.toggleCollapse = function($index, isParentItem) {
-
-            // collapsed sidebar doesn't toggle drodopwn
-            if( Utils.isSidebarCollapsed() || $rootScope.app.layout.asideHover ) return true;
-
-            // make sure the item index exists
-            if( angular.isDefined( collapseList[$index] ) ) {
-              if ( ! $scope.lastEventFromChild ) {
-                collapseList[$index] = !collapseList[$index];
-                closeAllBut($index);
-              }
-            }
-            else if ( isParentItem ) {
-              closeAllBut(-1);
-            }
-
-            $scope.lastEventFromChild = isChild($index);
-
-            return true;
-
-          };
-
-          // Controller helpers
-          // -----------------------------------
-
-            // Check item and children active state
-            function isActive(item) {
-
-              if(!item) return;
-
-              if( !item.sref || item.sref === '#') {
-                var foundActive = false;
-                angular.forEach(item.submenu, function(value) {
-                  if(isActive(value)) foundActive = true;
-                });
-                return foundActive;
-              }
-              else
-                return $state.is(item.sref) || $state.includes(item.sref);
-            }
-
-            function closeAllBut(index) {
-              index += '';
-              for(var i in collapseList) {
-                if(index < 0 || index.indexOf(i) < 0)
-                  collapseList[i] = true;
-              }
-            }
-
-            function isChild($index) {
-              /*jshint -W018*/
-              return (typeof $index === 'string') && !($index.indexOf('-') < 0);
-            }
-
-            $scope.$on('$destroy', function() {
-                watchOff1();
-            });
-
-        } // activate
-    }
-
-})();
-
-/**=========================================================
- * Module: sidebar.js
- * Wraps the sidebar and handles collapsed state
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.sidebar')
-        .directive('sidebar', sidebar);
-
-    sidebar.$inject = ['$rootScope', '$timeout', '$window', 'Utils'];
-    function sidebar ($rootScope, $timeout, $window, Utils) {
-        var $win = angular.element($window);
-        var directive = {
-            // bindToController: true,
-            // controller: Controller,
-            // controllerAs: 'vm',
-            link: link,
-            restrict: 'EA',
-            template: '<nav class="sidebar" ng-transclude></nav>',
-            transclude: true,
-            replace: true
-            // scope: {}
-        };
-        return directive;
-
-        function link(scope, element, attrs) {
-
-          var currentState = $rootScope.$state.current.name;
-          var $sidebar = element;
-
-          var eventName = Utils.isTouch() ? 'click' : 'mouseenter' ;
-          var subNav = $();
-
-          $sidebar.on( eventName, '.nav > li', function() {
-
-            if( Utils.isSidebarCollapsed() || $rootScope.app.layout.asideHover ) {
-
-              subNav.trigger('mouseleave');
-              subNav = toggleMenuItem( $(this), $sidebar);
-
-              // Used to detect click and touch events outside the sidebar
-              sidebarAddBackdrop();
-
-            }
-
-          });
-
-          var eventOff1 = scope.$on('closeSidebarMenu', function() {
-            removeFloatingNav();
-          });
-
-          // Normalize state when resize to mobile
-          $win.on('resize.sidebar', function() {
-            if( ! Utils.isMobile() )
-          	asideToggleOff();
-          });
-
-          // Adjustment on route changes
-          var eventOff2 = $rootScope.$on('$stateChangeStart', function(event, toState) {
-            currentState = toState.name;
-            // Hide sidebar automatically on mobile
-            asideToggleOff();
-
-            $rootScope.$broadcast('closeSidebarMenu');
-          });
-
-      	  // Autoclose when click outside the sidebar
-          if ( angular.isDefined(attrs.sidebarAnyclickClose) ) {
-
-            var wrapper = $('.wrapper');
-            var sbclickEvent = 'click.sidebar';
-
-            var watchOff1 = $rootScope.$watch('app.asideToggled', watchExternalClicks);
-
-          }
-
-          //////
-
-          function watchExternalClicks(newVal) {
-            // if sidebar becomes visible
-            if ( newVal === true ) {
-              $timeout(function(){ // render after current digest cycle
-                wrapper.on(sbclickEvent, function(e){
-                  // if not child of sidebar
-                  if( ! $(e.target).parents('.aside').length ) {
-                    asideToggleOff();
-                  }
-                });
-              });
-            }
-            else {
-              // dettach event
-              wrapper.off(sbclickEvent);
-            }
-          }
-
-          function asideToggleOff() {
-            $rootScope.app.asideToggled = false;
-            if(!scope.$$phase) scope.$apply(); // anti-pattern but sometimes necessary
-      	  }
-
-          scope.$on('$destroy', function() {
-            // detach scope events
-            eventOff1();
-            eventOff2();
-            watchOff1();
-            // detach dom events
-            $sidebar.off(eventName);
-            $win.off('resize.sidebar');
-            wrapper.off(sbclickEvent);
-          });
-
-        }
-
-        ///////
-
-        function sidebarAddBackdrop() {
-          var $backdrop = $('<div/>', { 'class': 'dropdown-backdrop'} );
-          $backdrop.insertAfter('.aside-inner').on('click mouseenter', function () {
-            removeFloatingNav();
-          });
-        }
-
-        // Open the collapse sidebar submenu items when on touch devices
-        // - desktop only opens on hover
-        function toggleTouchItem($element){
-          $element
-            .siblings('li')
-            .removeClass('open')
-            .end()
-            .toggleClass('open');
-        }
-
-        // Handles hover to open items under collapsed menu
-        // -----------------------------------
-        function toggleMenuItem($listItem, $sidebar) {
-
-          removeFloatingNav();
-
-          var ul = $listItem.children('ul');
-
-          if( !ul.length ) return $();
-          if( $listItem.hasClass('open') ) {
-            toggleTouchItem($listItem);
-            return $();
-          }
-
-          var $aside = $('.aside');
-          var $asideInner = $('.aside-inner'); // for top offset calculation
-          // float aside uses extra padding on aside
-          var mar = parseInt( $asideInner.css('padding-top'), 0) + parseInt( $aside.css('padding-top'), 0);
-          var subNav = ul.clone().appendTo( $aside );
-
-          toggleTouchItem($listItem);
-
-          var itemTop = ($listItem.position().top + mar) - $sidebar.scrollTop();
-          var vwHeight = $win.height();
-
-          subNav
-            .addClass('nav-floating')
-            .css({
-              position: $rootScope.app.layout.isFixed ? 'fixed' : 'absolute',
-              top:      itemTop,
-              bottom:   (subNav.outerHeight(true) + itemTop > vwHeight) ? 0 : 'auto'
-            });
-
-          subNav.on('mouseleave', function() {
-            toggleTouchItem($listItem);
-            subNav.remove();
-          });
-
-          return subNav;
-        }
-
-        function removeFloatingNav() {
-          $('.dropdown-backdrop').remove();
-          $('.sidebar-subnav.nav-floating').remove();
-          $('.sidebar li.open').removeClass('open');
-        }
-    }
-
-
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.sidebar')
-        .service('SidebarLoader', SidebarLoader);
-
-    SidebarLoader.$inject = ['$http'];
-    function SidebarLoader($http) {
-        this.getMenu = getMenu;
-
-        ////////////////
-
-        function getMenu(onReady, onError) {
-          var menuJson = 'server/sidebar-menu.json',
-              menuURL  = menuJson + '?v=' + (new Date().getTime()); // jumps cache
-            
-          onError = onError || function() { alert('Failure loading menu'); };
-
-          $http
-            .get(menuURL)
-            .success(onReady)
-            .error(onError);
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.sidebar')
-        .controller('UserBlockController', UserBlockController);
-
-    UserBlockController.$inject = ['$scope'];
-    function UserBlockController($scope) {
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          $scope.userBlockVisible = true;
-
-          var detach = $scope.$on('toggleUserBlock', function(/*event, args*/) {
-
-            $scope.userBlockVisible = ! $scope.userBlockVisible;
-
-          });
-
-          $scope.$on('$destroy', detach);
-        }
-    }
-})();
-
-/**=========================================================
  * Module: angular-grid.js
  * Example for Angular Grid
  =========================================================*/
@@ -16332,6 +15951,84 @@ $http.get(jadaApiUrl+'api/payslipreport/'+id).success(function(data) {
         }
     }
 })();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.settings')
+        .run(settingsRun);
+
+    settingsRun.$inject = ['$rootScope', '$localStorage'];
+
+    function settingsRun($rootScope, $localStorage){
+
+
+      // User Settings
+      // -----------------------------------
+      $rootScope.user = {
+        name:     'John',
+        job:      'ng-developer',
+        picture:  'app/img/user/02.jpg'
+      };
+
+      // Hides/show user avatar on sidebar from any element
+      $rootScope.toggleUserBlock = function(){
+        $rootScope.$broadcast('toggleUserBlock');
+      };
+
+      // Global Settings
+      // -----------------------------------
+      $rootScope.app = {
+        name: 'Jada',
+        description: 'Jada Payroll',
+        year: ((new Date()).getFullYear()),
+        layout: {
+          isFixed: true,
+          isCollapsed: false,
+          isBoxed: false,
+          isRTL: false,
+          horizontal: false,
+          isFloat: false,
+          asideHover: false,
+          theme: null,
+          asideScrollbar: false,
+          isCollapsedText: false
+        },
+        useFullLayout: false,
+        hiddenFooter: false,
+        offsidebarOpen: false,
+        asideToggled: false,
+        viewAnimation: 'ng-fadeInUp'
+      };
+
+      // Setup the layout mode
+      $rootScope.app.layout.horizontal = ( $rootScope.$stateParams.layout === 'app-h') ;
+
+      // Restore layout settings
+      if( angular.isDefined($localStorage.layout) )
+        $rootScope.app.layout = $localStorage.layout;
+      else
+        $localStorage.layout = $rootScope.app.layout;
+
+      $rootScope.$watch('app.layout', function () {
+        $localStorage.layout = $rootScope.app.layout;
+      }, true);
+
+      // Close submenu when sidebar change from collapsed to normal
+      $rootScope.$watch('app.layout.isCollapsed', function(newValue) {
+        if( newValue === false )
+          $rootScope.$broadcast('closeSidebarMenu');
+      });
+
+    }
+       function Logout() {
+            // remove user from local storage and clear http auth header
+            delete $localStorage.currentUser;
+            $http.defaults.headers.common.Authorization = '';
+        }
+
+})();
+
 
 /**=========================================================
  * Module: modals.js
@@ -18236,6 +17933,367 @@ $scope.loadWorkflows();
           }
 
         };
+    }
+})();
+
+/**=========================================================
+ * Module: sidebar-menu.js
+ * Handle sidebar collapsible elements
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.sidebar')
+        .controller('SidebarController', SidebarController);
+
+    SidebarController.$inject = ['$rootScope', '$scope', '$state', 'SidebarLoader', 'Utils'];
+    function SidebarController($rootScope, $scope, $state, SidebarLoader,  Utils) {
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          var collapseList = [];
+
+          // demo: when switch from collapse to hover, close all items
+          var watchOff1 = $rootScope.$watch('app.layout.asideHover', function(oldVal, newVal){
+            if ( newVal === false && oldVal === true) {
+              closeAllBut(-1);
+            }
+          });
+
+
+          // Load menu from json file
+          // -----------------------------------
+
+          SidebarLoader.getMenu(sidebarReady);
+
+          function sidebarReady(items) {
+            $scope.menuItems = items;
+          }
+
+          // Handle sidebar and collapse items
+          // ----------------------------------
+
+          $scope.getMenuItemPropClasses = function(item) {
+            return (item.heading ? 'nav-heading' : '') +
+                   (isActive(item) ? ' active' : '') ;
+          };
+
+          $scope.addCollapse = function($index, item) {
+            collapseList[$index] = $rootScope.app.layout.asideHover ? true : !isActive(item);
+          };
+
+          $scope.isCollapse = function($index) {
+            return (collapseList[$index]);
+          };
+
+          $scope.toggleCollapse = function($index, isParentItem) {
+
+            // collapsed sidebar doesn't toggle drodopwn
+            if( Utils.isSidebarCollapsed() || $rootScope.app.layout.asideHover ) return true;
+
+            // make sure the item index exists
+            if( angular.isDefined( collapseList[$index] ) ) {
+              if ( ! $scope.lastEventFromChild ) {
+                collapseList[$index] = !collapseList[$index];
+                closeAllBut($index);
+              }
+            }
+            else if ( isParentItem ) {
+              closeAllBut(-1);
+            }
+
+            $scope.lastEventFromChild = isChild($index);
+
+            return true;
+
+          };
+
+          // Controller helpers
+          // -----------------------------------
+
+            // Check item and children active state
+            function isActive(item) {
+
+              if(!item) return;
+
+              if( !item.sref || item.sref === '#') {
+                var foundActive = false;
+                angular.forEach(item.submenu, function(value) {
+                  if(isActive(value)) foundActive = true;
+                });
+                return foundActive;
+              }
+              else
+                return $state.is(item.sref) || $state.includes(item.sref);
+            }
+
+            function closeAllBut(index) {
+              index += '';
+              for(var i in collapseList) {
+                if(index < 0 || index.indexOf(i) < 0)
+                  collapseList[i] = true;
+              }
+            }
+
+            function isChild($index) {
+              /*jshint -W018*/
+              return (typeof $index === 'string') && !($index.indexOf('-') < 0);
+            }
+
+            $scope.$on('$destroy', function() {
+                watchOff1();
+            });
+
+        } // activate
+    }
+
+})();
+
+/**=========================================================
+ * Module: sidebar.js
+ * Wraps the sidebar and handles collapsed state
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.sidebar')
+        .directive('sidebar', sidebar);
+
+    sidebar.$inject = ['$rootScope', '$timeout', '$window', 'Utils'];
+    function sidebar ($rootScope, $timeout, $window, Utils) {
+        var $win = angular.element($window);
+        var directive = {
+            // bindToController: true,
+            // controller: Controller,
+            // controllerAs: 'vm',
+            link: link,
+            restrict: 'EA',
+            template: '<nav class="sidebar" ng-transclude></nav>',
+            transclude: true,
+            replace: true
+            // scope: {}
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+
+          var currentState = $rootScope.$state.current.name;
+          var $sidebar = element;
+
+          var eventName = Utils.isTouch() ? 'click' : 'mouseenter' ;
+          var subNav = $();
+
+          $sidebar.on( eventName, '.nav > li', function() {
+
+            if( Utils.isSidebarCollapsed() || $rootScope.app.layout.asideHover ) {
+
+              subNav.trigger('mouseleave');
+              subNav = toggleMenuItem( $(this), $sidebar);
+
+              // Used to detect click and touch events outside the sidebar
+              sidebarAddBackdrop();
+
+            }
+
+          });
+
+          var eventOff1 = scope.$on('closeSidebarMenu', function() {
+            removeFloatingNav();
+          });
+
+          // Normalize state when resize to mobile
+          $win.on('resize.sidebar', function() {
+            if( ! Utils.isMobile() )
+          	asideToggleOff();
+          });
+
+          // Adjustment on route changes
+          var eventOff2 = $rootScope.$on('$stateChangeStart', function(event, toState) {
+            currentState = toState.name;
+            // Hide sidebar automatically on mobile
+            asideToggleOff();
+
+            $rootScope.$broadcast('closeSidebarMenu');
+          });
+
+      	  // Autoclose when click outside the sidebar
+          if ( angular.isDefined(attrs.sidebarAnyclickClose) ) {
+
+            var wrapper = $('.wrapper');
+            var sbclickEvent = 'click.sidebar';
+
+            var watchOff1 = $rootScope.$watch('app.asideToggled', watchExternalClicks);
+
+          }
+
+          //////
+
+          function watchExternalClicks(newVal) {
+            // if sidebar becomes visible
+            if ( newVal === true ) {
+              $timeout(function(){ // render after current digest cycle
+                wrapper.on(sbclickEvent, function(e){
+                  // if not child of sidebar
+                  if( ! $(e.target).parents('.aside').length ) {
+                    asideToggleOff();
+                  }
+                });
+              });
+            }
+            else {
+              // dettach event
+              wrapper.off(sbclickEvent);
+            }
+          }
+
+          function asideToggleOff() {
+            $rootScope.app.asideToggled = false;
+            if(!scope.$$phase) scope.$apply(); // anti-pattern but sometimes necessary
+      	  }
+
+          scope.$on('$destroy', function() {
+            // detach scope events
+            eventOff1();
+            eventOff2();
+            watchOff1();
+            // detach dom events
+            $sidebar.off(eventName);
+            $win.off('resize.sidebar');
+            wrapper.off(sbclickEvent);
+          });
+
+        }
+
+        ///////
+
+        function sidebarAddBackdrop() {
+          var $backdrop = $('<div/>', { 'class': 'dropdown-backdrop'} );
+          $backdrop.insertAfter('.aside-inner').on('click mouseenter', function () {
+            removeFloatingNav();
+          });
+        }
+
+        // Open the collapse sidebar submenu items when on touch devices
+        // - desktop only opens on hover
+        function toggleTouchItem($element){
+          $element
+            .siblings('li')
+            .removeClass('open')
+            .end()
+            .toggleClass('open');
+        }
+
+        // Handles hover to open items under collapsed menu
+        // -----------------------------------
+        function toggleMenuItem($listItem, $sidebar) {
+
+          removeFloatingNav();
+
+          var ul = $listItem.children('ul');
+
+          if( !ul.length ) return $();
+          if( $listItem.hasClass('open') ) {
+            toggleTouchItem($listItem);
+            return $();
+          }
+
+          var $aside = $('.aside');
+          var $asideInner = $('.aside-inner'); // for top offset calculation
+          // float aside uses extra padding on aside
+          var mar = parseInt( $asideInner.css('padding-top'), 0) + parseInt( $aside.css('padding-top'), 0);
+          var subNav = ul.clone().appendTo( $aside );
+
+          toggleTouchItem($listItem);
+
+          var itemTop = ($listItem.position().top + mar) - $sidebar.scrollTop();
+          var vwHeight = $win.height();
+
+          subNav
+            .addClass('nav-floating')
+            .css({
+              position: $rootScope.app.layout.isFixed ? 'fixed' : 'absolute',
+              top:      itemTop,
+              bottom:   (subNav.outerHeight(true) + itemTop > vwHeight) ? 0 : 'auto'
+            });
+
+          subNav.on('mouseleave', function() {
+            toggleTouchItem($listItem);
+            subNav.remove();
+          });
+
+          return subNav;
+        }
+
+        function removeFloatingNav() {
+          $('.dropdown-backdrop').remove();
+          $('.sidebar-subnav.nav-floating').remove();
+          $('.sidebar li.open').removeClass('open');
+        }
+    }
+
+
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.sidebar')
+        .service('SidebarLoader', SidebarLoader);
+
+    SidebarLoader.$inject = ['$http'];
+    function SidebarLoader($http) {
+        this.getMenu = getMenu;
+
+        ////////////////
+
+        function getMenu(onReady, onError) {
+          var menuJson = 'server/sidebar-menu.json',
+              menuURL  = menuJson + '?v=' + (new Date().getTime()); // jumps cache
+            
+          onError = onError || function() { alert('Failure loading menu'); };
+
+          $http
+            .get(menuURL)
+            .success(onReady)
+            .error(onError);
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.sidebar')
+        .controller('UserBlockController', UserBlockController);
+
+    UserBlockController.$inject = ['$scope'];
+    function UserBlockController($scope) {
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          $scope.userBlockVisible = true;
+
+          var detach = $scope.$on('toggleUserBlock', function(/*event, args*/) {
+
+            $scope.userBlockVisible = ! $scope.userBlockVisible;
+
+          });
+
+          $scope.$on('$destroy', detach);
+        }
     }
 })();
 
