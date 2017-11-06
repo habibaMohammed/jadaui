@@ -5,8 +5,8 @@
         .module('app.reports')
         .controller('CompanyTotalsController', CompanyTotalsController);
 
-    CompanyTotalsController.$inject = ['$scope','$http','$resource', 'CompanyTotalsService','jadaApiUrl'];
-    function CompanyTotalsController($scope,$http,$resource,CompanyTotalsService,jadaApiUrl) {
+    CompanyTotalsController.$inject = ['$scope','$http','$resource', 'CompanyTotalsService','jadaApiUrl','Excel','$timeout'];
+    function CompanyTotalsController($scope,$http,$resource,CompanyTotalsService,jadaApiUrl,Excel,$timeout) {
         var vm = this;
 
         activate();
@@ -15,10 +15,15 @@
 
         function activate() {
 
+       var period=1;
+        $scope.companytotals=CompanyTotalsService.get({periodId:1});
 
-        $scope.companytotals=CompanyTotalsService.query();
+          $scope.getByperiod=function(period){
+        
+            $scope.companytotals=CompanyTotalsService.get({periodId:period});
 
-          
+          }
+
           $scope.greaterThan = function(prop, val){
     return function(item){
       return item[prop] > val;
@@ -48,6 +53,15 @@ $scope.printDiv = function (div) {
   writeDoc.close();
   newWin.focus();
 }
+
+
+
+ $scope.exportToExcel=function(tableId){ // ex: '#my-table'
+            var exportHref=Excel.tableToExcel(tableId,'WireWorkbenchDataExport');
+            $timeout(function(){location.href=exportHref;},100); // trigger download
+        }
+
+
 
         }
     }

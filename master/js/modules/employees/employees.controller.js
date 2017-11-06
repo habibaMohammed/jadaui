@@ -19,8 +19,19 @@ EmployeesController.$inject = ['$stateParams', '$rootScope','$state','$http','$s
 
         function activate() {
 
-  $scope.date = new Date();
+  $scope.employee = new Date();
+$scope.date= new Date();
 
+
+           var id = $stateParams.EmployeeId;
+      
+          if(id!=null){
+           $scope.employee=EmployeeService.get({id:id}); 
+           var dob=$scope.employee.dateOfBirth;
+           console.log("date of birth : "+dob);
+           $scope.employee.dateOfBirth=  new Date(dob);
+          }
+  
   $scope.testDate = new Date($scope.date.getFullYear() - 10, $scope.date.getMonth(), 1);
 
   $scope.dateOptions = {
@@ -76,11 +87,6 @@ EmployeesController.$inject = ['$stateParams', '$rootScope','$state','$http','$s
            var SuccessMsg;
             var errorMsg;
 
-           var id = $stateParams.EmployeeId;
-      
-          if(id!=null){
-           $scope.employee=EmployeeService.get({id:id}); 
-          }
            
           
         $scope.employees=EmployeeService.query();
@@ -88,6 +94,7 @@ EmployeesController.$inject = ['$stateParams', '$rootScope','$state','$http','$s
 
   $scope.loadEmployees = function () {
           $scope.employees=EmployeeService.query();
+        
 
    }
 
@@ -209,3 +216,8 @@ $http.get(jadaApiUrl+'api/paypoint').success(function(data) {
 
 })();
 
+
+
+   // $(function() {
+   //   $("#datepicker").datepicker();
+   // });
