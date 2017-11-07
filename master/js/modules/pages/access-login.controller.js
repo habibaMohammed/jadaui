@@ -12,7 +12,20 @@
 
     LoginFormController.$inject = ['$scope','$http', '$state','$localStorage','jadaApiUrl'];
     function LoginFormController($scope, $http, $state,$localStorage,jadaApiUrl) {
-$scope.formlg={};
+
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          // bind here all data from the form
+          vm.account = {};
+          // place the message if something goes wrong
+          vm.authMsg = '';
+
+         $scope.formlg={};
 
 
   
@@ -75,6 +88,7 @@ $scope.buttonText="Login";
 
        $scope.login = function() {
             $scope.authMsg = '';
+            $scope.errMsg='';
 
             if($scope.loginForm.$valid) {
 
@@ -98,14 +112,20 @@ $scope.buttonText="Login";
 
                         // execute callback with true to indicate successful login
                       
-                    }                    
+                    }      
+                               
                     $state.go('app.dashboard')
                   }  
-                  else{
-                    $scope.authMsg = response.Message;           
+                  else {
+                       $scope.buttonText="Login";
+              
+                    $scope.errMsg =  'Incorrect credentials.';           
                   }
 
                     
+                },
+                function(){
+                  $scope.errMsg = 'Server Request Error';
                 })
                 // .then(function(result) {
                 
@@ -129,20 +149,8 @@ $scope.buttonText="Login";
               vm.loginForm.account_email.$dirty = true;
               vm.loginForm.account_password.$dirty = true;
             }
+
           };
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          // bind here all data from the form
-          vm.account = {};
-          // place the message if something goes wrong
-          vm.authMsg = '';
-
-         
         }
     }
 

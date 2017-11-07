@@ -1,10 +1,14 @@
- 
- <div class="panel panel-default">
-            <div class="panel-heading">Workflow
-               
+ <h3> Workflow</h3>
+ <div class="panel panel-default" ng-controller="WorkflowController">
+            <div class="panel-heading">
+                  <div class="clearfix">
+          <button class="btn btn-sm btn-info pull-right  mr" type="button" ng-click="open()">  Add New</button>
+       
+         
+      </div>
             </div>
           
-  <div class="panel-body " ng-controller="WorkflowController">
+  <div class="panel-body " >
            <div class="row">
    <div class="col-lg-12">
 
@@ -60,9 +64,9 @@
    <hr class="hidden-print" />
 
      <div class="clearfix">
-          <button class="btn btn-sm btn-info  mr" type="button" ng-click="open()">  <em class="fa fa-plus-circle fa-fw mr"></em> Add New</button>
+        
        
-         <a  class="btn btn-success pull-right mr" ui-sref="app.task" ui-sref-active="active">Back</a>
+         <a  class="btn btn-success pull-left mr" ui-sref="app.task" ui-sref-active="active">Back</a>
       </div>
          </div>
          </div>

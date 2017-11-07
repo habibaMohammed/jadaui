@@ -15,9 +15,8 @@
 
         function activate() {
 
-
-        $scope.nssfs=NssfService.query();
-
+        $scope.nssfs=NssfService.get({periodId:1});
+console.log( $scope.nssfs);
           
             
               $http.get(jadaApiUrl+'api/period').success(function(data) {

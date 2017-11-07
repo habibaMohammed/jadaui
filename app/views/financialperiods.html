@@ -1,7 +1,12 @@
-  
-    <div class="panel panel-default">
-         <div class="panel-heading">Financial Periods</div>
-         <div class="panel-body " ng-controller="FinancialPeriodsController">
+ 
+ <h3>Financial Periods </h3> 
+    <div class="panel panel-default"  ng-controller="FinancialPeriodsController">
+         <div class="panel-heading"> <div class="clearfix">
+   <button class="btn btn-info pull-right mr" type="button" ng-click="open()">New Financial Period </button>
+        
+        
+      </div></div>
+         <div class="panel-body ">
 
          <div class="table-responsive">
          <table class="table table-striped">
@@ -47,11 +52,7 @@
           
       </div>
 
-      <div class="clearfix">
-   <button class="btn btn-info pull-left mr" type="button" ng-click="open()">New Financial Period </button>
-        
-        
-      </div>
+     
           
           
          

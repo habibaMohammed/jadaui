@@ -15,34 +15,34 @@
 <form class="form-horizontal">
 
 <div class="form-group">
-                  <label class="col-lg-2">Employee Number
+                  <label class="col-lg-3">Employee Number
 </label>
-                  <div class="col-lg-10">
+                  <div class="col-lg-9">
                      <input class="form-control" type="text"  name="empNumber"  ng-model="fempNumber" placeholder="Number"/>
                   </div>
                </div>
                 <div class="form-group">
-                  <label class="col-lg-2 ">Full Name
+                  <label class="col-lg-3 ">Full Name
 </label>
-                  <div class="col-lg-10">
+                  <div class="col-lg-9">
                      <input class="form-control" type="text"  name="empName"  ng-model="empName" placeholder="Name"/>
                   </div>
                </div>
                <div class="form-group">
-                  <label class="col-lg-2 ">Department
+                  <label class="col-lg-3 ">Department
 </label>
-                  <div class="col-lg-10">
+                  <div class="col-lg-9">
                      <input class="form-control" type="text"  name="empDept" ng-model="empDept" placeholder="Department"/>
                   </div>
                </div>
 
                 
                 <div class="form-group">
-                        <label class="col-sm-2 ">Leave Type</label>
-                        <div class="col-lg-4">
+                        <label class="col-sm-3 ">Leave Type</label>
+                        <div class="col-lg-5">
                        
                     <select class="form-control " name="leaveType"  ng-model="leaveType">
-                              <option value="">Nothing</option>
+                              <option value="">Select Leave Type</option>
                               <option value="1">Annual</option>
                               <option value="2">Sick</option>
                               <option value="3">Exam</option>
@@ -68,7 +68,7 @@
  <div class="form-group" >
                  
 
-                 <label class="col-lg-2">   Start Date 
+                 <label class="col-lg-3">   Start Date 
                    </label>
                    <div class="col-lg-3" ng-controller="DatepickerDemoCtrl as dpick">
                       <p class="input-group">
@@ -84,7 +84,7 @@
                   </div>
 
                    
-                   <label class="col-lg-2 control-label">  End Date
+                   <label class="col-lg-3 control-label">  End Date
                    </label>
                   <div class="col-lg-3" ng-controller="DatepickerDemoCtrl as dpick">
                       <p class="input-group">
@@ -98,11 +98,18 @@
                            </p>
                            
                   </div>
-                  <label class="col-lg-2 control-label"> Duration: <span class="text-success h4" >5</span>
-                   </label>
-                  
+               
 </div>
-                 
+           
+
+
+<div class="form-group">
+                  <label class="col-lg-3">Duration
+</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text"  name="empNumber"  ng-model="fempNumber" placeholder="days" disabled="" />
+                  </div>
+               </div>      
             <!--  <div class="form-group" >
                  
                   <div class="  col-lg-4" ng-controller="DatepickerDemoCtrl as dpick">
@@ -145,8 +152,8 @@
                    
 
                   <div class="form-group">
-  <label class="col-lg-2 ">Comment:</label>
-   <div class="col-lg-10">
+  <label class="col-lg-3 ">Comment:</label>
+   <div class="col-lg-9">
   <textarea class="form-control" name="leaveComment" ng-model="leaveComment" id="comment"></textarea>
   </div>
 </div> 
@@ -162,8 +169,8 @@
               
                <div class="form-group">
                   <div class="col-lg-offset-3 col-lg-9">
-                     <button class="btn btn-primary btn-sm" type="submit">Send for Approval</button>
-                      <button class="btn btn-warning btn-sm" type="reset">Cancel</button>
+                     <button class="btn btn-info btn-sm" type="submit">Send for Approval</button>
+                      <button class="btn btn-warning btn-sm" type="reset">Reset</button>
                   </div>
                </div>
             </form>

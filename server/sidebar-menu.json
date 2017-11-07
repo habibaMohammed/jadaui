@@ -7,7 +7,7 @@
   {
     "text": "DASHBOARD",
     "sref": "app.dashboard",
-    "icon": "icon-speedometer",
+    "icon": "fa fa-dashboard",
    
     "label": "label label-info"
    
@@ -17,7 +17,7 @@
 {
     "text": "ADMINISTRATION",
    
-    "icon": "icon-speedometer",
+    "icon": "fa fa-user",
    
     "label": "label label-info",
 
@@ -41,7 +41,7 @@
     
     "text": "PAYROLL",
     "sref": "#",
-    "icon": "fa fa-usd",
+    "icon": "fa fa-briefcase",
     "submenu": [
       
 
@@ -245,14 +245,14 @@
       {
     "text": " HELP",
     "sref": "#",
-    "child": "fa fa-chevron-down",
+        
+      "icon": "fa fa-question-circle",
    
     "submenu": [
       {"text": " About", "sref": "app.help-center"},
        {"text": "Content", "sref": "app.help-center"},
       
        {"text": "Support ", "sref": "app.help-center"}
-        
          
        
     ]

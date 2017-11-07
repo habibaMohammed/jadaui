@@ -6,58 +6,34 @@
 
 <div class="container-fluid"  ng-controller="EmployeePostingController" >
 
-<form class="form-inline" role="form">
-      
-    
-   <!--    <div class="form-group mb-xl">
-         <label class="control-label mb">by Department</label>
-         <br/>      <select name="Category" class="slider slider-lg form-control" ng-model="selectedDepartment" ng-options="department.ID as department.description for department in departments">
-    <option value="" disabled selected>Departments</option>
-  </select>
-             
- 
-      </div> -->
-    <!--   <div class="form-group mb-xl">
-         <label class="control-label mb">Employee Name</label>
-         <br/>
 
-           <select name="Category" class="slider slider-lg form-control" ng-model="userId" ng-options="employee.id as employee.firstName for employee in employees" >
-    <option value="" disabled selected>Employees</option>
-  </select>
-                
-      </div> -->
-
-
-      <div class="form-group mb-xl">
-         <label class="control-label mb">Employee Number</label>
-         <br/>
-
-          
-              
-           <select name="employeeNumber" class="slider slider-lg form-control" ng-model="user.userId" ng-options="employee.id as employee.employeeNumber for employee in employees | filter:{department:selectedDepartment}" >
-    <option value="" disabled selected>Employees</option>
-  </select>
-      </div>
-
-      <div class="form-group mb-xl">
-         <label class="control-label mb">Period</label>
-         <br/>
-
+<div class="row">
+   
+   <div class="col-lg-8">
+      <form class="form-inline">
+  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+    <div class="input-group-addon">Period</div>
+  
          <select name="period" class="slider slider-lg form-control" ng-model="user.period" ng-options="period.id as period.period for period in periods" >
         <option value="" disabled selected>Periods</option>
   </select>
-      </div>
+  </div>
+  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+    <div class="input-group-addon">Employee Number</div>
+    <select name="employeeNumber" class="slider slider-lg form-control" ng-model="user.userId" ng-options="employee.id as employee.employeeNumber for employee in employees" >
+        <option value="" disabled selected>Employees</option>
+  </select>
+  </div>
+  <button  ng-click="searchEmployee(user)" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+</form>
+  
 
-         
+
+   </div>
 
 
-      <button class="btn btn-default"  ng-click="searchEmployee(user)"><i class="fa fa-search" aria-hidden="true"></i></button>
-
-
-      </form>
-
-
-
+</div>
+<br/>
           <!-- START panel-->
 
       <div class="panel panel-default">
@@ -87,10 +63,10 @@
 <!--  <h4 class="page-header">Current details</h4> -->
    <table class="table table-bordered table-hover bg-white">
       <tr style="font-weight: bold">
-         <td style="width:35%">Code</td>
-         <td style="width:20%">Description </td>
+         <td style="width:20%">Code</td>
+         <td style="width:35%">Description </td>
          <td style="width:20%">Amount</td>
-         <td style="width:25%">Action</td>
+         <td style="width:20%">Action</td>
 
       </tr>
       <div>
@@ -118,7 +94,8 @@
       </tr>
    </div>
    </table>
-   <button class="btn btn-primary" ng-click="open()" >+</button>
+   <br/>
+   <button class="btn btn-primary" ng-click="open()" >Add New</button>
 
 <script type="text/ng-template" id="addTransactions.html">
             <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Transaction posting</h4></div><div class="modal-body">

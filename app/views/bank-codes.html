@@ -3,11 +3,19 @@
 <!--    <button class="btn btn-primary pull-right mr" type="button">
       <em class="fa fa-plus-circle fa-fw mr"></em>Single Entry</button> -->
 
-      <button class="btn btn-primary pull-right mr" type="button">
-      <em class="fa fa-plus-circle fa-fw mr "></em>Batch Entry</button>
+     
       Bank Codes</h3>
-<div class="panel">
-   <div class="panel-body " ng-controller="BankCodeController">
+<div class="panel panel-default" ng-controller="BankCodeController">
+<div class="panel-heading">
+  <div class="clearfix">
+
+         <button class="btn btn-info pull-right mr" type="button">
+Batch Entry</button>
+   <button class="btn btn-info pull-right mr" type="button" ng-click="open()">Add New</button>
+        
+      </div>
+    </div>
+   <div class="panel-body " >
    
       <div class="table-responsive table-bordered mb-lg">
          <table class="table" datatable="ng">

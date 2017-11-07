@@ -1,22 +1,24 @@
 
 
 <h3>Employees
-    <div class="clearfix">
-     
-      <a class="btn btn-primary pull-right mr"  ui-sref="app.batchemployees" >
-      <em class="fa fa-plus-circle fa-fw mr"></em>Batch Entry</a>
-          
-         <a class="btn btn-primary pull-right mr"
-        ui-sref="app.employee-setup">  
-        <em class="fa fa-plus-circle fa-fw mr"></em>Add</a>
-        
-      </div>
+ 
 
       
 </h3>
 
 <div class="panel panel-default">
-   
+    <div class="panel-heading">
+      <div class="clearfix">
+     
+      <a class="btn btn-info pull-right mr"  ui-sref="app.batchemployees" >
+  Batch Entry</a>
+          
+         <a class="btn btn-info pull-right mr"
+        ui-sref="app.employee-setup">  
+      Add New</a>
+        
+      </div>
+    </div>
    <div class="panel-body">
       <div ng-controller="EmployeesController">
 
