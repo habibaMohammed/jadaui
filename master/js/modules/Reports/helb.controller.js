@@ -16,10 +16,16 @@
         function activate() {
 
 
-        $scope.companysumaries=HelbService.query();
+        $scope.helbs=HelbService.get({periodId:1});
+        console.log($scope.helbs);
 
           
-            
+                     $scope.getByperiod=function(period){
+        
+        $scope.helbs=HelbService.get({periodId:period});
+
+          }
+
               $http.get(jadaApiUrl+'api/period').success(function(data) {
               $scope.periods = data;
 

@@ -31,6 +31,7 @@
    
 $scope.formulas=formulasService.query();
    }
+   console.log($scope.formulas);
 
  $rootScope.$on("CallLoadFormulas", function(){
            $scope.loadFormulas ();

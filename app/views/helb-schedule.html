@@ -16,7 +16,7 @@
   </select>
   </div>
  
-  <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+  <button ng-click="getByPeriod(period)" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
 </form>
   
 
@@ -25,7 +25,7 @@
 
 
 </div>
-
+<br/>
 <div class="panel">
    <div class="panel-body">
      <!--  <button class="pull-right btn btn-default btn-sm" type="button">Copy this invoice</button>
@@ -138,23 +138,17 @@
                </tr>
             </thead>
             <tbody>
-               <tr>
-                  <td>1</td>
-                  <td>P001</td>
-                  <td>AMANI ESTHER NAMALOME</td>
-                  <td>D33/2545/2012</td>
-                  <td>25478963</td>
-                  <td>5000</td>
+               <tr ng-repeat="helb in helbs.employeeHelbReportList
+">
+                  <td>{{$index+1}}</td>
+                  <td>{{helb.employeeNumber}}
+</td>
+                  <td>{{helb.employeeName}}</td>
+                  <td>{{helb.universityRegNo}}</td>
+                  <td>{{helb.idNumber}}</td>
+                  <td>{{helb.amount}}</td>
                </tr>
-             <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>TOTAL DEDUCTIONS (KSHS.)</td>
-                  <td>5000</td>
-               </tr>
-               
+         
                
             </tbody>
          </table>

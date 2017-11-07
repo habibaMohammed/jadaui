@@ -43,7 +43,7 @@
                 <tbody>
                       <tr ng-repeat="formula in formulas">
                     <td>{{ formula.code }}</td>
-                    <td>{{ formula.description }}</td>
+                    <td >{{ formula.description }}</td>
                      <td>{{ formula.type }}</td>
                      <td>{{ formula.formula }}</td>
                      <td>{{ formula.payrollCodeId }}</td>
@@ -210,7 +210,7 @@
                         <label class="col-sm-3 control-label">Formula Code</label>
                         <div class="col-lg-9">
                   
-                           <input class="form-control" type="text"  name="pcode" ng-model="formula.pcode" placeholder="Enter Description"/>
+                           <input class="form-control" type="text"  name="pcode" ng-model="formula.code" placeholder="Enter Description"/>
                      
                      
                   </div>
@@ -243,13 +243,13 @@
         </div>
 
    
-               <div class="form-group">
+           <!--     <div class="form-group">
                   <label class="col-lg-3 control-label">Type</label>
                   <div class="col-lg-9">
                      <input class="form-control" type="text" name="formula" ng-model="formula.type" placeholder="Formula"/>
                   </div>
                </div>
-              
+               -->
 
 
                <div class="form-group">

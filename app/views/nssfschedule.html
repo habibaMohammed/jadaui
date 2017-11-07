@@ -66,14 +66,16 @@
                </tr>
             </thead>
             <tbody >
-               <tr ng-repeat="nssf in nssfs">
-                  <td >{{nssf.id}}</td>
-                  <td >{{nssf.username}}</td>
-                   <td >{{nssf.id}}</td>
-                  <td >{{nssf.id}}</td>
-                   <td >{{nssf.id}}</td>
-                  <td >{{nssf.id}}</td>
-                  <td >{{nssf.id}}</td>
+               <tr ng-repeat="nssf in nssfs.employeeNSSFReportList
+">
+                  <td >{{nssf.employeeNumber}}</td>
+                  <td >{{nssf.employeeName}}</td>
+                   <td >{{nssf.nssfNumber}}</td>
+                  <td >{{nssf.stdAmt}}</td>
+                   
+                  <td >{{nssf.volAmt}}</td>
+                  <td >{{nssf.totAmt}}</td>
+                  <td >{{nssf.idNumber}}</td>
                 
                </tr>
              
