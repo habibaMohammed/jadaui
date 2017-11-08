@@ -5,8 +5,8 @@
         .module('app.reports')
         .controller('BankFilesController', BankFilesController);
 
-    BankFilesController.$inject = ['$scope','$resource', 'CompanySummaryService'];
-    function BankFilesController($scope,$resource,CompanySummaryService) {
+    BankFilesController.$inject = ['$scope','$http','$resource', 'BankfileService','jadaApiUrl'];
+    function BankFilesController($scope,$http,$resource,BankfileService,jadaApiUrl) {
         var vm = this;
 
         activate();
@@ -15,10 +15,29 @@
 
         function activate() {
 
-
-        $scope.companysumaries=CompanySummaryService.query();
+       var currentPeriod=1;
+        $scope.bankfiles=BankfileService.get({periodId:currentPeriod});
 
           
+                     $scope.getByperiod=function(period){
+        
+         $scope.bankfiles=BankfileService.get({periodId:period});
+
+          }
+
+
+
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+              $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+
 
         }
     }

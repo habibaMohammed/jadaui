@@ -156,7 +156,7 @@
                <div class="form-group">
                   <label class="col-lg-2 ">  Date of Birth
                    </label>
-                  <div class="col-lg-10">
+              <!--     <div class="col-lg-10">
                     <p class="input-group">
                               <input class="form-control" type="text" name="date_of_birth" uib-datepicker-popup="{{format}}" ng-model="empMaster.dateOfBirth" is-open="opened" min-date="minDate" uib-datepicker-options="dateOptions"
                               date-disabled="disabled(date, mode)" close-text="Close"  required="" />
@@ -167,6 +167,19 @@
                               </span>
                                <span class="text-danger" ng-show="formStep1.$submitted &amp;&amp; formStep1.date_of_birth.$invalid">This field is required</span>
                            </p>
+                  </div> -->
+
+                     <div class="col-lg-10" ng-controller="DatepickerDemoCtrl as dpick">
+                      <p class="input-group" ng-controller="EmployeesController">
+                              <input class="form-control" type="text" name="ex_date" ng-model="empMaster.dateOfBirth" uib-datepicker-popup="{{dpick.format}}" is-open="dpick.opened" min-date="dpick.minDate" max-date="'2019-12-22'" uib-datepicker-options="dpick.dateOptions"
+                              date-disabled="dpick.disabled(date, mode)" close-text="Close" />
+                              <span class="input-group-btn">
+                                 <button class="btn btn-default" type="button" ng-click="dpick.open($event)">
+                                    <em class="fa fa-calendar"></em>
+                                 </button>
+                              </span>
+                           </p>
+                           
                   </div>
                </div>
 
@@ -175,7 +188,7 @@
                    </label>
                   <div class="col-lg-10">
                     <select class="form-control" name="maritalStatus"  ng-model="empMaster.maritalStatus" required="">
-                              <option value="">Nothing</option>
+                              <option value="">Select Status</option>
                               <option value="Single">Single</option>
                               <option value="Married">Married</option>
                              

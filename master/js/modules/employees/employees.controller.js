@@ -19,18 +19,9 @@ EmployeesController.$inject = ['$stateParams', '$rootScope','$state','$http','$s
 
         function activate() {
 
-  $scope.employee = new Date();
 $scope.date= new Date();
 
 
-           var id = $stateParams.EmployeeId;
-      
-          if(id!=null){
-           $scope.employee=EmployeeService.get({id:id}); 
-           var dob=$scope.employee.dateOfBirth;
-           console.log("date of birth : "+dob);
-           $scope.employee.dateOfBirth=  new Date(dob);
-          }
   
   $scope.testDate = new Date($scope.date.getFullYear() - 10, $scope.date.getMonth(), 1);
 
@@ -90,6 +81,16 @@ $scope.date= new Date();
            
           
         $scope.employees=EmployeeService.query();
+
+
+           var id = $stateParams.EmployeeId;
+      
+          if(id!=null){
+           $scope.employee=EmployeeService.get({id:id}); 
+           var dob=$scope.employee.dateOfBirth;
+           console.log("date of birth : "+dob);
+    
+          }
 
 
   $scope.loadEmployees = function () {

@@ -4,6 +4,31 @@
 <!-- Zero Configuration-->
 
 <!-- ngRepeat + ngResource-->
+<div class="page"  ng-controller="BankFilesController">
+<div class="row" >
+   
+
+
+   <div class="col-lg-8">
+      <form class="form-inline">
+  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+    <div class="input-group-addon">Period</div>
+  
+         <select name="period" class="slider slider-lg form-control" ng-model="period" ng-options="period.id as period.period for period in periods" >
+        <option value="" disabled selected>Periods</option>
+  </select>
+  </div>
+ 
+  <button ng-click="getByperiod(period)" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+</form>
+  
+
+
+   </div>
+
+
+</div>
+<br/>
 <div class="panel panel-default">
    <!-- <div class="panel-heading">Datatables |
       <small>ngRepeat + ngResource</small>
@@ -26,30 +51,21 @@
                </tr>
             </thead>
             <tbody>
-               <tr>
-                <td>P001</td>
-                  <td>AMANI ESTHER AMALOME</td>
-                 <td>03</td>
-                  <td>045</td>
-                  <td>12045641752</td>
-                  <td>40461</td>
-                  <td>EQUITY</td>
+               <tr ng-repeat="bankfile in bankfiles.employeeBankFileReportList">
+                <td>{{bankfile.employeeNumber}}</td>
+                  <td>{{bankfile.employeeName}}</td>
+                 <td>{{bankfile.bankCode}}</td>
+                  <td>{{bankfile.branchCode}}</td>
+                  <td>{{bankfile.accountNumber}}</td>
+                  <td>{{bankfile.amount}}</td>
+                  <td>{{bankfile.channel}}</td>
                
                   
                </tr>
-               <tr>
-                <td>P002</td>
-                  <td>WAMAE ANDREW GACHERU</td>
-                 <td>01</td>
-                  <td>102</td>
-                  <td>10124578741</td>
-                  <td>82398</td>
-                  <td>EFT</td>
-               
-                  
-               </tr>
+            
             </tbody>
          </table>
       </div>
    </div>
+</div>
 </div>
