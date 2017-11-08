@@ -27,6 +27,11 @@
 
 
 
+              $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+
 
  $scope.loadExemptemployees = function () {
      
