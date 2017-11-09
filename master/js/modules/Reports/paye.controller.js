@@ -19,6 +19,9 @@
         $scope.payes=PayeService.get({periodId:1});
         console.log($scope.payes);
 
+        // 
+
+
     
               $http.get(jadaApiUrl+'api/period').success(function(data) {
               $scope.periods = data;

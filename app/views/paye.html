@@ -724,39 +724,43 @@
                           <td>{{arrears.directorsFee}}</td>
                                <td>{{arrears.lumpSumPayment}}</td>
                           <td>{{arrears.otherAllowance}}</td>
-                               <td>{{arrears.totalCashPay}}</td>
+                               <td class="disabled">{{arrears.totalCashPay}}</td>
                           <td>{{arrears.carBenefitValue}}</td>
                                <td>{{arrears.othernNonCashBenefits}}</td>
-                          <td>{{arrears.totalNonCashPay}}</td>
-                               <td>{{arrears.globalIncome}}</td>
-                          <td>{{arrears.globalIncome}}</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                              <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>10/21/2013</td>
-                              <td>3326</td>
-                          <td>10/21/2013</td>
+                          <td class="disabled">{{arrears.totalNonCashPay}}</td>
+                               <td class="disabled">{{arrears.globalIncome}}</td>
+                          <td>{{arrears.housingType}}</td>
+                               <td class="disabled">{{arrears.houseRent}}</td>
+                          <td class="disabled">{{arrears.computedHouseRent}}</td>
+                               <td class="disabled">{{arrears.rentRecoveredFromEmployee}}</td>
+                        
+                               <td class="disabled">{{arrears.housingValue}}</td>
+                          <td class="disabled">{{arrears.totalGrossPay}}</td>
+                               <td class="disabled">{{arrears.thirtyPercentOfCashPay}}</td>
+                          <td class="disabled">{{arrears.actualContribution}}</td>
+                               <td class="disabled">{{arrears.permissibleLimit}}</td>
+                          <td class="disabled">{{arrears.mortgageInterest}}</td>
+                               <td class="disabled">{{arrears.depositOnHomeOwnershipSavingPlan}}</td>
+                       
+                               <td class="disabled">{{arrears.amountOfBenefit}}</td>
+                          <td class="disabled">{{arrears.taxablePay}}</td>
+                              <td class="disabled">{{arrears.taxPayable}}</td>
+                          
+                               <td class="disabled">{{arrears.monthlyPersonalRelief}}</td>
+                           
+                              <td class="disabled">{{arrears.amountOfInsuranceRelief}}</td>
+                          <td class="disabled">{{arrears.payeTax}}</td>
+                             <td>{{arrears.amountOfPayeAlreadyPaid}}</td>
+                               <td class="disabled">{{arrears.finalPayeTax}}</td>
+                                <td>{{arrears.selfAssessedPayeTax}}</td>
                           
                        </tr>
                      
                       <tr>
                           <td colspan="37"></td>
                          
-                               <td><b>Total</b></td>
-                          <td>10/21/2013</td>
+                               <td class="disabled"><b>Total</b></td>
+                          <td class="disabled"></td>
                        
                          
                           
@@ -803,7 +807,7 @@
            <uib-tab heading="Arrears Details of Employees with Disabilities"> <div class=" companydetails"><div class="panel panel-default">
            <div class="panel-heading"><h3>Section H:  Details of Arrears of Salary and Benefits paid and PAYE deducted from Persons with Disability
           </h3></div>
-           <div class="panel-body " ng-controller="ModalController as  trans">
+           <div class="panel-body ">
 
             <div class="table-responsive">
                  <table class="table table-bordered table-hover table-striped largetbl">
@@ -955,7 +959,7 @@
          <uib-tab heading="Gratuity Details"> <div class=" companydetails"><div class="panel panel-default">
            <div class="panel-heading"><!-- <h3>Section I : Calculation of PAYE Tax Payable on Gratuity
   </h3> --></div>
-           <div class="panel-body " ng-controller="ModalController as  trans">
+           <div class="panel-body ">
 
             <div class="table-responsive ">
             <div class="panel-heading"><h3>Section I : Calculation of PAYE Tax Payable on Gratuity</h3></div>
@@ -978,15 +982,16 @@
                        </tr>
                     </thead>
                     <tbody>
-                       <tr>
-                          <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                         <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
+                       <tr  ng-repeat="gratuity in payes.payeGratuityDetails.payeGratuityDetailsSectionOneList">
+                          <td>{{gratuity.employeePin}}</td>
+                          <td>{{gratuity.employeeName}}</td>
+                          
+                          <td>{{gratuity.monthGratuityPaid}}</td>
+                         <td>{{gratuity.yearGratuityPaid}}</td>
+                          <td>{{gratuity.gratuityRelated}}</td>
+                               <td>{{gratuity.gratuityPeriodInYears}}</td>
+                          <td>{{gratuity.gratuityValue}}</td>
+                               <td class="disabled">{{gratuity.amountOfTaxPayableOnGratuity}}</td>
                                
                             
                          
@@ -998,8 +1003,8 @@
                       <tr>
                           <td colspan="6"></td>
                          
-                               <td><b>Total</b></td>
-                          <td>10/21/2013</td>
+                               <td class="disabled"><b>Total</b></td>
+                          <td class="disabled"></td>
                        
                          
                           
