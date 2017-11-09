@@ -37,7 +37,7 @@
            <div class="panel-heading"></div>
            <div class="panel-body">
               <uib-tabset type="pills">
-              <uib-tab heading="Basic Information">
+                   <uib-tab heading="Basic Information">
               
 
                  <div class="col-lg-12  companydetails"><div class="panel panel b">
@@ -47,20 +47,31 @@
                  <div class="list-group-item">
                   
                     Employer's Personal Identification Number
-                    <span class="  pull-right">..........</span></div>
+                    <span class="  pull-right">{{payes.payeBasicInfo.employerPin}}</span></div>
                  <div class="list-group-item">
                   
                 Type of Return
-                    <span class="label label-default pull-right">.........</span></div>
+                    <span class="label label-default pull-right">{{payes.payeBasicInfo.typeOfReturn
+
+}}</span></div>
+
+   <div class="list-group-item">
+                  
+              Entity Type
+                    <span class="label label-default pull-right">{{payes.payeBasicInfo.entityType
+
+}}</span></div>
               
                <div class="list-group-item">
                   
                   Return Period From
-                    <span class="label label-default  pull-right">.........</span></div>
+                    <span class="label label-default  pull-right">{{payes.payeBasicInfo.returnPeriodFrom
+}}</span></div>
                     <div class="list-group-item">
                   
                     Return Period To
-                    <span class=" label label-default pull-right">.........</span></div>
+                    <span class=" label label-default pull-right">{{payes.payeBasicInfo.returnPeriodTo
+}}</span></div>
               </div>
 
            
@@ -73,7 +84,6 @@
              
   </uib-tab>
 
-                 
      <uib-tab heading="Employee Details"> <div class=" companydetails"><div class="panel panel-default"> 
      <div class="panel-heading">
      <h3>Section B: Details of Salary Paid and Paye deducted from Employee(s)
@@ -127,43 +137,44 @@
                        </tr>
                     </thead>
                     <tbody>
-                       <tr>
-                          <td >3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                         <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td class="disabled"></td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                           <td class="disabled"></td>
-                                <td class="disabled"></td>
-                          <td>10/21/2013</td>
-                               <td class="disabled"></td>
-                          <td class="disabled"></td>
-                               <td class="disabled"></td>
-                          <td class="disabled"></td>
-                            <td class="disabled"></td>
-                        <td class="disabled"></td>
-                        <td class="disabled"></td>
-                           <td class="disabled"></td>
-                        <td class="disabled"></td>
-                         <td class="disabled"></td>
-                        <td class="disabled"></td>
-                         <td class="disabled"></td>
-                        <td class="disabled"></td>
-                          <td class="disabled"></td>
-                        <td class="disabled"></td>
-                            <td class="disabled"></td>
+                       <tr ng-repeat="paye in payes.payeEmployeeDetailsList">
+                          <td >{{paye.employeePin}}</td>
+                          <td >{{paye.employeeName}}</td>
+                           <td>{{paye.residentailStatus}}</td>
+                          <td>{{paye.employeeType}}</td>
+                         <td>{{paye.basicSalary}}</td>
+                          <td>{{paye.houseAllowance}}</td>
+                               <td>{{paye.transportAllowance}}</td>
+                          <td>{{paye.leavePay}}</td>
+                               <td>{{paye.overTimeAllowance}}</td>
+                          <td>{{paye.directorsFee}}</td>
+                               <td>{{paye.lumpSumPayment}}</td>
+                          <td>{{paye.otherAllowance}}</td>
+                               <td class="disabled">{{paye.totalCashPay}}</td>
+                          <td>{{paye.valueOfCarBenefit}}</td>
+                               <td>{{paye.otherNonCashBenefits}}</td>
+                           <td class="disabled">{{paye.totalNonCashPay}}</td>
+                                <td class="disabled">{{paye.totalNonCashPay}}</td>
+                              <td>{{paye.globalIncome}}</td>
+                             <td>{{paye.typeOfHousing}}</td>
+                               <td class="disabled">{{paye.rentOfHouse}}</td>
+                          <td class="disabled">{{paye.computedRentOfHouse}}</td>
+                               <td class="disabled">{{paye.rentRecoveredFromEmployee}}</td>
+                          <td class="disabled">{{paye.netValueOfHousing}}</td>
+                            <td class="disabled">{{paye.totalGrossPay}}</td>
+                        <td class="disabled">{{paye.thirtyPercentOfCashPay}}</td>
+                        <td class="disabled">{{paye.actualContribution}}</td>
+                           <td class="disabled">{{paye.permissibleLimit}}</td>
+                        <td class="disabled">{{paye.mortgageInterest}}</td>
+                         <td class="disabled">{{paye.depositOnHomeOwnershipSavingPlan}}</td>
+                        <td class="disabled">{{paye.amountOfBenefit}}</td>
+                         <td class="disabled">{{paye.taxablePay}}</td>
+                        <td class="disabled">{{paye.taxPayable}}</td>
+                          <td class="disabled">{{paye.monthlyPersonalRelief}}</td>
+                        
+                            <td class="disabled">{{paye.payeTax}}</td>
                       
-                           <td>10/21/2013</td>
+                           <td>{{paye.selfAssessedPAYETax}}</td>
                          
                           
                        </tr>
@@ -206,6 +217,10 @@
        
 
    </uib-tab>
+           
+
+                 
+  
 
 
   <uib-tab heading="Disabled Employee Details"> <div class=" companydetails"><div class="panel panel-default">
@@ -345,7 +360,7 @@
 
 
         </uib-tab>
-                 
+
 
       <uib-tab heading="Car Benefits"> <div class=" companydetails"><div class="panel panel-default">
            <div class="panel-heading"><h3>Section D: Computation of Value of Car Benefit</h3></div>
@@ -370,17 +385,17 @@
                        </tr>
                     </thead>
                     <tbody>
-                       <tr>
-                          <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                         <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
+                       <tr  ng-repeat="carbenefit in payes.payeCarBenefitComputationList">
+                          <td>{{carbenefit.employeePin}}</td>
+                          <td>{{carbenefit.referenceToSection}}</td>
+                               <td>{{carbenefit.carRegistrationNumber}}</td>
+                          <td>{{carbenefit.make}}</td>
+                         <td>{{carbenefit.bodyType}}</td>
+                          <td>{{carbenefit.ccRating}}</td>
+                               <td>{{carbenefit.typeOfCarCost}}</td>
+                          <td class="disabled">{{carbenefit.costOfHiring}}</td>
+                               <td>{{carbenefit.costOfOwnedCar}}</td>
+                          <td class="disabled">{{carbenefit.valueOfCarBenefit}}</td>
                             
                          
                          
@@ -388,11 +403,11 @@
                      
                     
                     <tr>
-                          <td colspan="8"></td>
+                          <td colspan="8" class="disabled"></td>
                          
-                               <td><b>Total</b></td>
+                               <td class="disabled"><b>Total</b></td>
                       
-                           <td>10/21/2013</td>
+                           <td class="disabled">0.0</td>
                          
                           
                        </tr>
@@ -433,6 +448,10 @@
 
 
         </uib-tab>
+
+
+                 
+
          <uib-tab heading="Insurance Relief"> <div class=" companydetails"><div class="panel panel-default">
            <div class="panel-heading"><h3>Section E: Details of Insurance Relief</h3></div>
            <div class="panel-body" ng-controller="ModalController as  trans">
@@ -461,20 +480,20 @@
                     </thead>
                     <tbody>
                        <tr>
-                          <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                         <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                             <td>10/21/2013</td>
+                          <td class="disabled"></td>
+                          <td class="disabled"></td>
+                               <td class="disabled"></td>
+                          <td class="disabled"></td>
+                         <td class="disabled">3326</td>
+                          <td class="disabled">10/21/2013</td>
+                               <td class="disabled">3326</td>
+                          <td class="disabled">10/21/2013</td>
+                               <td class="disabled">3326</td>
+                          <td class="disabled">10/21/2013</td>
+                          <td class="disabled">10/21/2013</td>
+                               <td class="disabled">3326</td>
+                          <td class="disabled">10/21/2013</td>
+                             <td class="disabled">10/21/2013</td>
                             
                             
                          
@@ -484,8 +503,8 @@
                      <tr>
                           <td colspan="12"></td>
                          
-                               <td><b>Total</b></td>
-                          <td>10/21/2013</td>
+                               <td class="disabled"><b>Total</b></td>
+                          <td class="disabled"></td>
                        
                          
                           
@@ -527,10 +546,11 @@
 
 
         </uib-tab>
-         <uib-tab heading="Lump Sum Payment"> <div class=" companydetails"><div class="panel panel-default">
+
+         <uib-tab heading="Lump Sum Payment" > <div class=" companydetails"><div class="panel panel-default">
            <div class="panel-heading"><h3>Section F : Calculation of PAYE Tax on Lump Sum Payments Paid after Termination
   </h3></div>
-           <div class="panel-body" ng-controller="ModalController as  trans">
+           <div class="panel-body">
 
            
                <div class="table-responsive">
@@ -560,19 +580,20 @@
                        </tr>
                     </thead>
                     <tbody>
-                       <tr>
-                          <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                         <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                            <td>3326</td>
-                          <td>10/21/2013</td>
+                       <tr ng-repeat="lumpsum in payes.payeLumpSumPaymentDetailsList">
+                          <td>{{lumpsum.employeePin}}</td>
+                          <td>{{lumpsum.employeeName}}</td>
+                               <td>{{lumpsum.employmentStartDate}}</td>
+                          <td>{{lumpsum.employmentEndDate}}</td>
+                         <td>{{lumpsum.lumpSumPaymentDueYear}}</td>
+                          <td>{{lumpsum.lumSumPaymentPaidYear}}</td>
+                               <td>{{lumpsum.amountOfGrossLumpSumPayment}}</td>
+                          <td>{{lumpsum.emolumentsOfLumpSumPaymentDueYear}}</td>
+                               <td class="disabled">{{lumpsum.totalRevisedIncome}}</td>
+                          <td class="disabled">{{lumpsum.payeDeductedOnRevisedIncome}}</td>
+                            <td>{{lumpsum.payePaidInLumpSumPaymentDueYear
+}}</td>
+                          <td class="disabled">{{lumpsum.amountOfPayeTaxPayable}}</td>
                             
                          
                          
@@ -583,7 +604,7 @@
                           <td colspan="10"></td>
                          
                                <td><b>Total</b></td>
-                          <td>10/21/2013</td>
+                          <td></td>
                        
                          
                           
@@ -627,6 +648,7 @@
 
 
         </uib-tab>
+
          <uib-tab heading="Arrears Details"> <div class=" companydetails"><div class="panel panel-default">
            <div class="panel-heading"><h3>Section G : Details of Arrears of Salary and Benefits paid and PAYE deducted from Employee(s)
   </h3></div>
@@ -687,54 +709,58 @@
                        </tr>
                     </thead>
                     <tbody>
-                       <tr>
-                          <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                         <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                              <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>10/21/2013</td>
-                              <td>3326</td>
-                          <td>10/21/2013</td>
+                       <tr ng-repeat="arrears in payes.payeLumpSumPaymentDetailsList">
+                          <td>{{arrears.employeePin}}</td>
+                          <td>{{arrears.employeeName}}</td>
+                               <td>{{arrears.monthArrears}}</td>
+                          <td>{{arrears.yearArrears}}</td>
+                         <td>{{arrears.residentialStatus}}</td>
+                          <td>{{arrears.employeeType}}</td>
+                               <td>{{arrears.basicSalary}}</td>
+                          <td>{{arrears.houseAllowance}}</td>
+                               <td>{{arrears.transportAllowance}}</td>
+                          <td>{{arrears.leavePay}}</td>
+                               <td>{{arrears.overTimeAllowance}}</td>
+                          <td>{{arrears.directorsFee}}</td>
+                               <td>{{arrears.lumpSumPayment}}</td>
+                          <td>{{arrears.otherAllowance}}</td>
+                               <td class="disabled">{{arrears.totalCashPay}}</td>
+                          <td>{{arrears.carBenefitValue}}</td>
+                               <td>{{arrears.othernNonCashBenefits}}</td>
+                          <td class="disabled">{{arrears.totalNonCashPay}}</td>
+                               <td class="disabled">{{arrears.globalIncome}}</td>
+                          <td>{{arrears.housingType}}</td>
+                               <td class="disabled">{{arrears.houseRent}}</td>
+                          <td class="disabled">{{arrears.computedHouseRent}}</td>
+                               <td class="disabled">{{arrears.rentRecoveredFromEmployee}}</td>
+                        
+                               <td class="disabled">{{arrears.housingValue}}</td>
+                          <td class="disabled">{{arrears.totalGrossPay}}</td>
+                               <td class="disabled">{{arrears.thirtyPercentOfCashPay}}</td>
+                          <td class="disabled">{{arrears.actualContribution}}</td>
+                               <td class="disabled">{{arrears.permissibleLimit}}</td>
+                          <td class="disabled">{{arrears.mortgageInterest}}</td>
+                               <td class="disabled">{{arrears.depositOnHomeOwnershipSavingPlan}}</td>
+                       
+                               <td class="disabled">{{arrears.amountOfBenefit}}</td>
+                          <td class="disabled">{{arrears.taxablePay}}</td>
+                              <td class="disabled">{{arrears.taxPayable}}</td>
+                          
+                               <td class="disabled">{{arrears.monthlyPersonalRelief}}</td>
+                           
+                              <td class="disabled">{{arrears.amountOfInsuranceRelief}}</td>
+                          <td class="disabled">{{arrears.payeTax}}</td>
+                             <td>{{arrears.amountOfPayeAlreadyPaid}}</td>
+                               <td class="disabled">{{arrears.finalPayeTax}}</td>
+                                <td>{{arrears.selfAssessedPayeTax}}</td>
                           
                        </tr>
                      
                       <tr>
                           <td colspan="37"></td>
                          
-                               <td><b>Total</b></td>
-                          <td>10/21/2013</td>
+                               <td class="disabled"><b>Total</b></td>
+                          <td class="disabled"></td>
                        
                          
                           
@@ -777,10 +803,11 @@
 
         </uib-tab>
 
+
            <uib-tab heading="Arrears Details of Employees with Disabilities"> <div class=" companydetails"><div class="panel panel-default">
            <div class="panel-heading"><h3>Section H:  Details of Arrears of Salary and Benefits paid and PAYE deducted from Persons with Disability
           </h3></div>
-           <div class="panel-body " ng-controller="ModalController as  trans">
+           <div class="panel-body ">
 
             <div class="table-responsive">
                  <table class="table table-bordered table-hover table-striped largetbl">
@@ -928,10 +955,11 @@
 
 
         </uib-tab>
+
          <uib-tab heading="Gratuity Details"> <div class=" companydetails"><div class="panel panel-default">
            <div class="panel-heading"><!-- <h3>Section I : Calculation of PAYE Tax Payable on Gratuity
   </h3> --></div>
-           <div class="panel-body " ng-controller="ModalController as  trans">
+           <div class="panel-body ">
 
             <div class="table-responsive ">
             <div class="panel-heading"><h3>Section I : Calculation of PAYE Tax Payable on Gratuity</h3></div>
@@ -954,15 +982,16 @@
                        </tr>
                     </thead>
                     <tbody>
-                       <tr>
-                          <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                         <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
+                       <tr  ng-repeat="gratuity in payes.payeGratuityDetails.payeGratuityDetailsSectionOneList">
+                          <td>{{gratuity.employeePin}}</td>
+                          <td>{{gratuity.employeeName}}</td>
+                          
+                          <td>{{gratuity.monthGratuityPaid}}</td>
+                         <td>{{gratuity.yearGratuityPaid}}</td>
+                          <td>{{gratuity.gratuityRelated}}</td>
+                               <td>{{gratuity.gratuityPeriodInYears}}</td>
+                          <td>{{gratuity.gratuityValue}}</td>
+                               <td class="disabled">{{gratuity.amountOfTaxPayableOnGratuity}}</td>
                                
                             
                          
@@ -974,8 +1003,8 @@
                       <tr>
                           <td colspan="6"></td>
                          
-                               <td><b>Total</b></td>
-                          <td>10/21/2013</td>
+                               <td class="disabled"><b>Total</b></td>
+                          <td class="disabled"></td>
                        
                          
                           
@@ -1073,98 +1102,11 @@
         </uib-tab>
 
 
-           <uib-tab heading="FBT Details"> <div class=" companydetails"><div class="panel panel-default">
-           <div class="panel-heading"><h3>Section J : Calculation of Fringe Benefit Tax Payable
-  </h3></div>
-           <div class="panel-body" ng-controller="ModalController as  trans">
-
-
-         <div class="table-responsive">
-                 <table class="table table-bordered table-hover table-striped largetbl">
-                    <thead>
-                       <tr>
-                          <th>PIN of Employee</th>
-                          <th>Name of Employee</th>
-
-                          <th>Loan Account Number</th>
-                          <th>Loan Amount (Ksh)</th>
-                           <th>Amount of Loan Outstanding (Ksh) (A)</th>
-                           <th>Rate of Interest on Loan(%) (B)</th>
-                          <th>Interest on Loan (Ksh)(C)=(A)*(B)</th>
-                          <th>Prescribed Market Interest Rate (%) (D)</th>
-                          <th>Prescribed Market Interest (Ksh) (E) = (A)*(D)</th>
-                          <th>Amount of Fringe Benefit (Ksh) (F) = (E - C)</th>
-                           <th>Amount of Fringe Benefit Tax (Ksh) (G) = (F) * 30%</th>
-                          
-                          
-                       </tr>
-                    </thead>
-                    <tbody>
-                       <tr>
-                          <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                         <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>3326</td>
-                          <td>10/21/2013</td>
-                               <td>10/21/2013</td>
-                            
-                         
-                         
-                       </tr>
-                     
-                    
-                      <tr>
-                          <td colspan="9"></td>
-                         
-                               <td><b>Total</b></td>
-                          <td>10/21/2013</td>
-                       
-                         
-                          
-                       </tr>
-                    
-                
-
-                    
-                        
-                        
-                    </tbody>
-              
-
-                 </table>
-                
-
-       
-
-           
-           <br/>
-           <br/>
-              </div>
-               <!-- END table responsive-->
-                  <br/>
-               <div class="clearfix">
-           <button class="btn btn-success pull-left mr" type="button">Export to CSV</button>
-          
-        </div>
-           
-           </div>
-           </div>
-        </div>
 
 
 
 
-    
-
-
-
-        </uib-tab>
-         <uib-tab heading="PAYE payment Credit"> <div class=" companydetails"><div class="panel panel-default">
+ <uib-tab heading="PAYE payment Credit"> <div class=" companydetails"><div class="panel panel-default">
            <div class="panel-heading"><h3>Section K : Details of PAYE Tax paid</h3></div>
            <div class="panel-body" ng-controller="ModalController as  trans">
              
@@ -1477,6 +1419,9 @@
 
 
         </uib-tab>
+
+
+
 
   </uib-tabset>
 
