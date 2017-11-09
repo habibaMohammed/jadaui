@@ -63,19 +63,25 @@
     'use strict';
 
     angular
-        .module('app.colors', []);
-})();
-(function() {
-    'use strict';
-
-    angular
         .module('app.charts', []);
 })();
 (function() {
     'use strict';
 
     angular
+        .module('app.colors', []);
+})();
+(function() {
+    'use strict';
+
+    angular
         .module('app.company', [ ]);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.companydetails', []);
 })();
 (function() {
     'use strict';
@@ -97,12 +103,6 @@
             'ui.utils'
       
         ]);
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.companydetails', []);
 })();
 (function() {
     'use strict';
@@ -150,13 +150,13 @@
     'use strict';
 
     angular
-        .module('app.loadingbar', []);
+        .module('app.lazyload', []);
 })();
 (function() {
     'use strict';
 
     angular
-        .module('app.lazyload', []);
+        .module('app.loadingbar', []);
 })();
 (function() {
     'use strict';
@@ -168,25 +168,25 @@
     'use strict';
 
     angular
-        .module('app.mailbox', []);
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.maps', []);
-})();
-(function() {
-    'use strict';
-
-    angular
         .module('app.maintenance', ['ui.bootstrap']);
 })();
 (function() {
     'use strict';
 
     angular
+        .module('app.mailbox', []);
+})();
+(function() {
+    'use strict';
+
+    angular
         .module('app.navsearch', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.maps', []);
 })();
 (function() {
     'use strict';
@@ -224,6 +224,12 @@
     'use strict';
 
     angular
+        .module('app.reports', []);
+})();
+(function() {
+    'use strict';
+
+    angular
         .module('app.settings', []);
 })();
 (function() {
@@ -233,12 +239,6 @@
         .module('app.routes', [
             'app.lazyload'
         ]);
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports', []);
 })();
 (function() {
     'use strict';
@@ -262,13 +262,13 @@
     'use strict';
 
     angular
-        .module('app.useradministration', [ ]);
+        .module('app.translate', []);
 })();
 (function() {
     'use strict';
 
     angular
-        .module('app.translate', []);
+        .module('app.useradministration', [ ]);
 })();
 (function() {
     'use strict';
@@ -995,56 +995,6 @@ angular.module('app.bootstrapui').controller('YearpickerCtrl', ["$scope", functi
     opened: false
   };
 }]);
-(function() {
-    'use strict';
-
-    angular
-        .module('app.colors')
-        .constant('APP_COLORS', {
-          'primary':                '#5d9cec',
-          'success':                '#27c24c',
-          'info':                   '#23b7e5',
-          'warning':                '#ff902b',
-          'danger':                 '#f05050',
-          'inverse':                '#131e26',
-          'green':                  '#37bc9b',
-          'pink':                   '#f532e5',
-          'purple':                 '#7266ba',
-          'dark':                   '#3a3f51',
-          'yellow':                 '#fad732',
-          'gray-darker':            '#232735',
-          'gray-dark':              '#3a3f51',
-          'gray':                   '#dde6e9',
-          'gray-light':             '#e4eaec',
-          'gray-lighter':           '#edf1f2'
-        })
-        ;
-})();
-/**=========================================================
- * Module: colors.js
- * Services to retrieve global colors
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.colors')
-        .service('Colors', Colors);
-
-    Colors.$inject = ['APP_COLORS'];
-    function Colors(APP_COLORS) {
-        this.byName = byName;
-
-        ////////////////
-
-        function byName(name) {
-          return (APP_COLORS[name] || '#fff');
-        }
-    }
-
-})();
-
 /**=========================================================
  * Module: chartist.js
  =========================================================*/
@@ -2707,6 +2657,56 @@ angular.module('app.bootstrapui').controller('YearpickerCtrl', ["$scope", functi
 
 })();
 
+(function() {
+    'use strict';
+
+    angular
+        .module('app.colors')
+        .constant('APP_COLORS', {
+          'primary':                '#5d9cec',
+          'success':                '#27c24c',
+          'info':                   '#23b7e5',
+          'warning':                '#ff902b',
+          'danger':                 '#f05050',
+          'inverse':                '#131e26',
+          'green':                  '#37bc9b',
+          'pink':                   '#f532e5',
+          'purple':                 '#7266ba',
+          'dark':                   '#3a3f51',
+          'yellow':                 '#fad732',
+          'gray-darker':            '#232735',
+          'gray-dark':              '#3a3f51',
+          'gray':                   '#dde6e9',
+          'gray-light':             '#e4eaec',
+          'gray-lighter':           '#edf1f2'
+        })
+        ;
+})();
+/**=========================================================
+ * Module: colors.js
+ * Services to retrieve global colors
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.colors')
+        .service('Colors', Colors);
+
+    Colors.$inject = ['APP_COLORS'];
+    function Colors(APP_COLORS) {
+        this.byName = byName;
+
+        ////////////////
+
+        function byName(name) {
+          return (APP_COLORS[name] || '#fff');
+        }
+    }
+
+})();
+
 
 
 
@@ -3122,172 +3122,6 @@ $scope.loadPeriods();
 
 })();
 
-(function() {
-    'use strict';
-
-    angular
-        .module('app.core')
-        .config(coreConfig);
-
-    coreConfig.$inject = ['$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$animateProvider'];
-    function coreConfig($controllerProvider, $compileProvider, $filterProvider, $provide, $animateProvider){
-
-      var core = angular.module('app.core');
-      // registering components after bootstrap
-      core.controller = $controllerProvider.register;
-      core.directive  = $compileProvider.directive;
-      core.filter     = $filterProvider.register;
-      core.factory    = $provide.factory;
-      core.service    = $provide.service;
-      core.constant   = $provide.constant;
-      core.value      = $provide.value;
-
-
-      // Disables animation on items with class .ng-no-animation
-      $animateProvider.classNameFilter(/^((?!(ng-no-animation)).)*$/);
-
-      // Improve performance disabling debugging features
-      // $compileProvider.debugInfoEnabled(false);
-
-    }
-
-
-})();
-    
-
-
-/**=========================================================
- * Module: constants.js
- * Define constants to inject across the application
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.core')
-        .constant('APP_MEDIAQUERY', {
-          'desktopLG':             1200,
-          'desktop':                992,
-          'tablet':                 768,
-          'mobile':                 480
-        })
-      ;
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.core')
-        .run(appRun);
-
-    appRun.$inject = ['$http','$rootScope', '$state', '$stateParams', '$window', '$templateCache', 'Colors','$location', '$localStorage'];
-
-    function appRun($http,$rootScope, $state, $stateParams, $window, $templateCache, Colors , $location, $localStorage) {
-
-if ($localStorage.currentUser) {
-            $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
-        }
-
-
-        // Hook into ocLazyLoad to setup AngularGrid before inject into the app
-        // See "Creating the AngularJS Module" at
-        // https://www.ag-grid.com/best-angularjs-data-grid/index.php
-        var offevent = $rootScope.$on('ocLazyLoad.fileLoaded', function(e, file) {
-            if (file.indexOf('ag-grid.js') > -1) {
-                agGrid.initialiseAgGridWithAngular1(angular);
-                offevent();
-            }
-        });
-
-        // Set reference to access them from any scope
-        $rootScope.$state = $state;
-        $rootScope.$stateParams = $stateParams;
-        $rootScope.$storage = $window.localStorage;
-
-        // Uncomment this to disable template cache
-        /*$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-            if (typeof(toState) !== 'undefined'){
-              $templateCache.remove(toState.templateUrl);
-            }
-        });*/
-   $rootScope.$on('$locationChangeStart', function (event, next, current) {
-            var publicPages = ['/page/login'];
-            var restrictedPage = publicPages.indexOf($location.path()) === -1;
-            if (restrictedPage && !$localStorage.currentUser) {
-                $location.path('/page/login');
-                 
-            }
-        });
-
-
-
-// routerApp.run(function ($rootScope, $state, AuthService) {
-//     $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-//         if (toState.authenticate && !AuthService.IsAuthenticated()) {
-//             alert("Not Authenticated");
-//             // User isn’t authenticated
-//             $state.transitionTo("login");
-//             event.preventDefault(); 
-//         }
-//     });
-// });
-
-        // Allows to use branding color with interpolation
-        // {{ colorByName('primary') }}
-        $rootScope.colorByName = Colors.byName;
-
-        // cancel click event easily
-        $rootScope.cancel = function($event) {
-            $event.stopPropagation();
-        };
-
-        // Hooks Example
-        // -----------------------------------
-
-        // Hook not found
-        $rootScope.$on('$stateNotFound',
-            function(event, unfoundState /*, fromState, fromParams*/ ) {
-                console.log(unfoundState.to); // "lazy.state"
-                console.log(unfoundState.toParams); // {a:1, b:2}
-                console.log(unfoundState.options); // {inherit:false} + default options
-            });
-        // Hook error
-        $rootScope.$on('$stateChangeError',
-            function(event, toState, toParams, fromState, fromParams, error) {
-                console.log(error);
-            });
-        // Hook success
-        $rootScope.$on('$stateChangeSuccess',
-            function( /*event, toState, toParams, fromState, fromParams*/ ) {
-                // display new view from top
-                $window.scrollTo(0, 0);
-                // Save the route title
-                $rootScope.currTitle = $state.current.title;
-            });
-
-        // Load a title dynamically
-        $rootScope.currTitle = $state.current.title;
-        $rootScope.pageTitle = function() {
-            var title = $rootScope.app.name + ' - ' + ($rootScope.currTitle || $rootScope.app.description);
-            document.title = title;
-            return title;
-        };
-
-    }
-
-})();
-
-
-
-// routerApp.service('AuthService', function () {
-//     this._isAuthenticated = false;
-//     this._isAccessToken = '';
-//     this.IsAuthenticated = function () {
-//         return this._isAuthenticated;
-//     }
-// });
 /**=========================================================
  * Module: modals.js
  * Provides a simple way to implement bootstrap modals from templates
@@ -5325,6 +5159,172 @@ for(var r=0;r<accountRights.length;r++){
 
 })();
 
+(function() {
+    'use strict';
+
+    angular
+        .module('app.core')
+        .config(coreConfig);
+
+    coreConfig.$inject = ['$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$animateProvider'];
+    function coreConfig($controllerProvider, $compileProvider, $filterProvider, $provide, $animateProvider){
+
+      var core = angular.module('app.core');
+      // registering components after bootstrap
+      core.controller = $controllerProvider.register;
+      core.directive  = $compileProvider.directive;
+      core.filter     = $filterProvider.register;
+      core.factory    = $provide.factory;
+      core.service    = $provide.service;
+      core.constant   = $provide.constant;
+      core.value      = $provide.value;
+
+
+      // Disables animation on items with class .ng-no-animation
+      $animateProvider.classNameFilter(/^((?!(ng-no-animation)).)*$/);
+
+      // Improve performance disabling debugging features
+      // $compileProvider.debugInfoEnabled(false);
+
+    }
+
+
+})();
+    
+
+
+/**=========================================================
+ * Module: constants.js
+ * Define constants to inject across the application
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.core')
+        .constant('APP_MEDIAQUERY', {
+          'desktopLG':             1200,
+          'desktop':                992,
+          'tablet':                 768,
+          'mobile':                 480
+        })
+      ;
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.core')
+        .run(appRun);
+
+    appRun.$inject = ['$http','$rootScope', '$state', '$stateParams', '$window', '$templateCache', 'Colors','$location', '$localStorage'];
+
+    function appRun($http,$rootScope, $state, $stateParams, $window, $templateCache, Colors , $location, $localStorage) {
+
+if ($localStorage.currentUser) {
+            $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
+        }
+
+
+        // Hook into ocLazyLoad to setup AngularGrid before inject into the app
+        // See "Creating the AngularJS Module" at
+        // https://www.ag-grid.com/best-angularjs-data-grid/index.php
+        var offevent = $rootScope.$on('ocLazyLoad.fileLoaded', function(e, file) {
+            if (file.indexOf('ag-grid.js') > -1) {
+                agGrid.initialiseAgGridWithAngular1(angular);
+                offevent();
+            }
+        });
+
+        // Set reference to access them from any scope
+        $rootScope.$state = $state;
+        $rootScope.$stateParams = $stateParams;
+        $rootScope.$storage = $window.localStorage;
+
+        // Uncomment this to disable template cache
+        /*$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+            if (typeof(toState) !== 'undefined'){
+              $templateCache.remove(toState.templateUrl);
+            }
+        });*/
+   $rootScope.$on('$locationChangeStart', function (event, next, current) {
+            var publicPages = ['/page/login'];
+            var restrictedPage = publicPages.indexOf($location.path()) === -1;
+            if (restrictedPage && !$localStorage.currentUser) {
+                $location.path('/page/login');
+                 
+            }
+        });
+
+
+
+// routerApp.run(function ($rootScope, $state, AuthService) {
+//     $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+//         if (toState.authenticate && !AuthService.IsAuthenticated()) {
+//             alert("Not Authenticated");
+//             // User isn’t authenticated
+//             $state.transitionTo("login");
+//             event.preventDefault(); 
+//         }
+//     });
+// });
+
+        // Allows to use branding color with interpolation
+        // {{ colorByName('primary') }}
+        $rootScope.colorByName = Colors.byName;
+
+        // cancel click event easily
+        $rootScope.cancel = function($event) {
+            $event.stopPropagation();
+        };
+
+        // Hooks Example
+        // -----------------------------------
+
+        // Hook not found
+        $rootScope.$on('$stateNotFound',
+            function(event, unfoundState /*, fromState, fromParams*/ ) {
+                console.log(unfoundState.to); // "lazy.state"
+                console.log(unfoundState.toParams); // {a:1, b:2}
+                console.log(unfoundState.options); // {inherit:false} + default options
+            });
+        // Hook error
+        $rootScope.$on('$stateChangeError',
+            function(event, toState, toParams, fromState, fromParams, error) {
+                console.log(error);
+            });
+        // Hook success
+        $rootScope.$on('$stateChangeSuccess',
+            function( /*event, toState, toParams, fromState, fromParams*/ ) {
+                // display new view from top
+                $window.scrollTo(0, 0);
+                // Save the route title
+                $rootScope.currTitle = $state.current.title;
+            });
+
+        // Load a title dynamically
+        $rootScope.currTitle = $state.current.title;
+        $rootScope.pageTitle = function() {
+            var title = $rootScope.app.name + ' - ' + ($rootScope.currTitle || $rootScope.app.description);
+            document.title = title;
+            return title;
+        };
+
+    }
+
+})();
+
+
+
+// routerApp.service('AuthService', function () {
+//     this._isAuthenticated = false;
+//     this._isAccessToken = '';
+//     this.IsAuthenticated = function () {
+//         return this._isAuthenticated;
+//     }
+// });
 (function() {
     'use strict';
 
@@ -9031,50 +9031,6 @@ $scope.searchEmp=function(userId) {
     'use strict';
 
     angular
-        .module('app.loadingbar')
-        .config(loadingbarConfig)
-        ;
-    loadingbarConfig.$inject = ['cfpLoadingBarProvider'];
-    function loadingbarConfig(cfpLoadingBarProvider){
-      cfpLoadingBarProvider.includeBar = true;
-      cfpLoadingBarProvider.includeSpinner = false;
-      cfpLoadingBarProvider.latencyThreshold = 500;
-      cfpLoadingBarProvider.parentSelector = '.wrapper > section';
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.loadingbar')
-        .run(loadingbarRun)
-        ;
-    loadingbarRun.$inject = ['$rootScope', '$timeout', 'cfpLoadingBar'];
-    function loadingbarRun($rootScope, $timeout, cfpLoadingBar){
-
-      // Loading bar transition
-      // ----------------------------------- 
-      var thBar;
-      $rootScope.$on('$stateChangeStart', function() {
-          if($('.wrapper > section').length) // check if bar container exists
-            thBar = $timeout(function() {
-              cfpLoadingBar.start();
-            }, 0); // sets a latency Threshold
-      });
-      $rootScope.$on('$stateChangeSuccess', function(event) {
-          event.targetScope.$watch('$viewContentLoaded', function () {
-            $timeout.cancel(thBar);
-            cfpLoadingBar.complete();
-          });
-      });
-
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
         .module('app.lazyload')
         .config(lazyloadConfig);
 
@@ -9245,6 +9201,50 @@ $scope.searchEmp=function(userId) {
     'use strict';
 
     angular
+        .module('app.loadingbar')
+        .config(loadingbarConfig)
+        ;
+    loadingbarConfig.$inject = ['cfpLoadingBarProvider'];
+    function loadingbarConfig(cfpLoadingBarProvider){
+      cfpLoadingBarProvider.includeBar = true;
+      cfpLoadingBarProvider.includeSpinner = false;
+      cfpLoadingBarProvider.latencyThreshold = 500;
+      cfpLoadingBarProvider.parentSelector = '.wrapper > section';
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.loadingbar')
+        .run(loadingbarRun)
+        ;
+    loadingbarRun.$inject = ['$rootScope', '$timeout', 'cfpLoadingBar'];
+    function loadingbarRun($rootScope, $timeout, cfpLoadingBar){
+
+      // Loading bar transition
+      // ----------------------------------- 
+      var thBar;
+      $rootScope.$on('$stateChangeStart', function() {
+          if($('.wrapper > section').length) // check if bar container exists
+            thBar = $timeout(function() {
+              cfpLoadingBar.start();
+            }, 0); // sets a latency Threshold
+      });
+      $rootScope.$on('$stateChangeSuccess', function(event) {
+          event.targetScope.$watch('$viewContentLoaded', function () {
+            $timeout.cancel(thBar);
+            cfpLoadingBar.complete();
+          });
+      });
+
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
         .module('app.locale')
         .config(localeConfig)
         ;
@@ -9290,484 +9290,6 @@ $scope.searchEmp=function(userId) {
           $rootScope.$locale = $locale;
           
           $rootScope.changeLocale = tmhDynamicLocale.set;
-        }
-    }
-})();
-
-/**=========================================================
- * Module: demo-pagination.js
- * Provides a simple demo for pagination
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.mailbox')
-        .controller('MailboxController', MailboxController);
-
-    function MailboxController() {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          vm.folders = [
-            {name: 'Inbox',   folder: 'inbox',   alert: 42, icon: 'fa-inbox' },
-            {name: 'Starred', folder: 'starred', alert: 10, icon: 'fa-star' },
-            {name: 'Sent',    folder: 'sent',    alert: 0,  icon: 'fa-paper-plane-o' },
-            {name: 'Draft',   folder: 'draft',   alert: 5,  icon: 'fa-edit' },
-            {name: 'Trash',   folder: 'trash',   alert: 0,  icon: 'fa-trash'}
-          ];
-
-          vm.labels = [
-            {name: 'Red',     color: 'danger'},
-            {name: 'Pink',    color: 'pink'},
-            {name: 'Blue',    color: 'info'},
-            {name: 'Yellow',  color: 'warning'}
-          ];
-
-          vm.mail = {
-            cc: false,
-            bcc: false
-          };
-          // Mailbox editr initial content
-          vm.content = '<p>Type something..</p>';
-        }
-    }
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.mailbox')
-        .controller('MailFolderController', MailFolderController);
-
-    MailFolderController.$inject = ['mails', '$stateParams'];
-    function MailFolderController(mails, $stateParams) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          
-          vm.folder = {};
-          // no filter for inbox
-          vm.folder.folder = $stateParams.folder === 'inbox' ? '' : $stateParams.folder;
-
-          mails.all().then(function(mails){
-            vm.mails = mails;
-          });
-        }
-    }
-})();
-
-// A RESTful factory for retrieving mails from json file
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.mailbox')
-        .factory('mails', mails);
-
-    mails.$inject = ['$http'];
-    function mails($http) {
-        var service = {
-            all: all,
-            get: get
-        };
-        return service;
-
-        ////////////////
-        
-        function readMails() {
-          var path = 'server/mails.json';
-          return $http.get(path).then(function (resp) {
-            return resp.data.mails;
-          });
-        }
-
-        function all() {
-          return readMails();
-        }
-
-        function get(id) {
-          return readMails().then(function(mails){
-            for (var i = 0; i < mails.length; i++) {
-              if (+mails[i].id === +id) return mails[i];
-            }
-            return null;
-          });
-        }
-    }
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.mailbox')
-        .controller('MailViewController', MailViewController);
-
-    MailViewController.$inject = ['mails', '$stateParams'];
-    function MailViewController(mails, $stateParams) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          mails.get($stateParams.mid).then(function(mail){
-            vm.mail = mail;
-          });
-        }
-    }
-})();
-
-/**=========================================================
- * Module: modals.js
- * Provides a simple way to implement bootstrap modals from templates
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.maps')
-        .controller('ModalGmapController', ModalGmapController);
-
-    ModalGmapController.$inject = ['$uibModal'];
-    function ModalGmapController($uibModal) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          vm.open = function (size) {
-
-            //var modalInstance =
-            $uibModal.open({
-              templateUrl: '/myModalContent.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-
-            
-          };
-
-
-
-          // Please note that $uibModalInstance represents a modal window (instance) dependency.
-          // It is not the same as the $uibModal service used above.
-
-          ModalInstanceCtrl.$inject = ['$scope', '$uibModalInstance', '$timeout'];
-          function ModalInstanceCtrl($scope, $uibModalInstance, $timeout) {
-
-            $uibModalInstance.opened.then(function () {
-              var position = new google.maps.LatLng(33.790807, -117.835734);
-
-              $scope.mapOptionsModal = {
-                zoom: 14,
-                center: position,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-              };
-
-              // we use timeout to wait maps to be ready before add a markers
-              $timeout(function(){
-                // 1. Add a marker at the position it was initialized
-                new google.maps.Marker({
-                  map: $scope.myMapModal,
-                  position: position
-                });
-                // 2. Trigger a resize so the map is redrawed
-                google.maps.event.trigger($scope.myMapModal, 'resize');
-                // 3. Move to the center if it is misaligned
-                $scope.myMapModal.panTo(position);
-              });
-
-            });
-
-            $scope.ok = function () {
-              $uibModalInstance.close('closed');
-            };
-
-            $scope.cancel = function () {
-              $uibModalInstance.dismiss('cancel');
-            };
-
-          }
-
-        }
-    }
-
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.maps')
-        .controller('GMapController', GMapController);
-
-    GMapController.$inject = ['$timeout'];
-    function GMapController($timeout) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          var position = [
-              new google.maps.LatLng(33.790807, -117.835734),
-              new google.maps.LatLng(33.790807, -117.835734),
-              new google.maps.LatLng(33.790807, -117.835734),
-              new google.maps.LatLng(33.790807, -117.835734),
-              new google.maps.LatLng(33.787453, -117.835858)
-            ];
-          
-          vm.addMarker = addMarker;
-          // we use timeout to wait maps to be ready before add a markers
-          $timeout(function(){
-            addMarker(vm.myMap1, position[0]);
-            addMarker(vm.myMap2, position[1]);
-            addMarker(vm.myMap3, position[2]);
-            addMarker(vm.myMap5, position[3]);
-          });
-
-          vm.mapOptions1 = {
-            zoom: 14,
-            center: position[0],
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            scrollwheel: false
-          };
-
-          vm.mapOptions2 = {
-            zoom: 19,
-            center: position[1],
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          };
-
-          vm.mapOptions3 = {
-            zoom: 14,
-            center: position[2],
-            mapTypeId: google.maps.MapTypeId.SATELLITE
-          };
-
-          vm.mapOptions4 = {
-            zoom: 14,
-            center: position[3],
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          };
-
-          // for multiple markers
-          $timeout(function(){
-            addMarker(vm.myMap4, position[3]);
-            addMarker(vm.myMap4, position[4]);
-          });
-
-          // custom map style
-          var MapStyles = [{'featureType':'water','stylers':[{'visibility':'on'},{'color':'#bdd1f9'}]},{'featureType':'all','elementType':'labels.text.fill','stylers':[{'color':'#334165'}]},{featureType:'landscape',stylers:[{color:'#e9ebf1'}]},{featureType:'road.highway',elementType:'geometry',stylers:[{color:'#c5c6c6'}]},{featureType:'road.arterial',elementType:'geometry',stylers:[{color:'#fff'}]},{featureType:'road.local',elementType:'geometry',stylers:[{color:'#fff'}]},{featureType:'transit',elementType:'geometry',stylers:[{color:'#d8dbe0'}]},{featureType:'poi',elementType:'geometry',stylers:[{color:'#cfd5e0'}]},{featureType:'administrative',stylers:[{visibility:'on'},{lightness:33}]},{featureType:'poi.park',elementType:'labels',stylers:[{visibility:'on'},{lightness:20}]},{featureType:'road',stylers:[{color:'#d8dbe0',lightness:20}]}];
-          vm.mapOptions5 = {
-            zoom: 14,
-            center: position[3],
-            styles: MapStyles,
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            scrollwheel: false
-          };
-
-          ///////////////
-          
-          function addMarker(map, position) {
-            return new google.maps.Marker({
-              map: map,
-              position: position
-            });
-          }
-
-        }
-    }
-})();
-
-/**=========================================================
- * Module: vector-map.js.js
- * Init jQuery Vector Map plugin
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.maps')
-        .directive('vectorMap', vectorMap);
-
-    vectorMap.$inject = ['VectorMap'];
-    function vectorMap (VectorMap) {
-        var directive = {
-            link: link,
-            restrict: 'EA',
-            scope: {
-              seriesData: '=',
-              markersData: '='
-            }
-        };
-        return directive;
-
-        function link(scope, element, attrs) {
-          
-          var defaultColors = {
-              markerColor:  '#23b7e5',      // the marker points
-              bgColor:      'transparent',      // the background
-              scaleColors:  ['#878c9a'],    // the color of the region in the serie
-              regionFill:   '#bbbec6'       // the base region color
-          };
-
-          var mapHeight   = attrs.height || '300',
-              options     = {
-                markerColor:  attrs.markerColor  || defaultColors.markerColor,
-                bgColor:      attrs.bgColor      || defaultColors.bgColor,
-                scale:        attrs.scale        || 1,
-                scaleColors:  attrs.scaleColors  || defaultColors.scaleColors,
-                regionFill:   attrs.regionFill   || defaultColors.regionFill,
-                mapName:      attrs.mapName      || 'world_mill_en'
-              };
-          
-          element.css('height', mapHeight);
-          
-          VectorMap.init( element , options, scope.seriesData, scope.markersData);
-        }
-    }
-
-})();
-
-/**=========================================================
- * Module: vector-map.js
- * Services to initialize vector map plugin
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.maps')
-        .service('VectorMap', VectorMap);
-
-    function VectorMap() {
-        this.init = init;
-
-        ////////////////
-
-        function init($element, opts, series, markers) {
-          $element.vectorMap({
-            map:             opts.mapName,
-            backgroundColor: opts.bgColor,
-            zoomMin:         1,
-            zoomMax:         8,
-            zoomOnScroll:    false,
-            regionStyle: {
-              initial: {
-                'fill':           opts.regionFill,
-                'fill-opacity':   1,
-                'stroke':         'none',
-                'stroke-width':   1.5,
-                'stroke-opacity': 1
-              },
-              hover: {
-                'fill-opacity': 0.8
-              },
-              selected: {
-                fill: 'blue'
-              },
-              selectedHover: {
-              }
-            },
-            focusOn:{ x:0.4, y:0.6, scale: opts.scale},
-            markerStyle: {
-              initial: {
-                fill: opts.markerColor,
-                stroke: opts.markerColor
-              }
-            },
-            onRegionLabelShow: function(e, el, code) {
-              if ( series && series[code] )
-                el.html(el.html() + ': ' + series[code] + ' visitors');
-            },
-            markers: markers,
-            series: {
-                regions: [{
-                    values: series,
-                    scale: opts.scaleColors,
-                    normalizeFunction: 'polynomial'
-                }]
-            },
-          });
-        }
-    }
-})();
-
-/**=========================================================
- * Module: vmaps,js
- * jVector Maps support
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.maps')
-        .controller('VectorMapController', VectorMapController);
-
-    function VectorMapController() {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          vm.seriesData = {
-            'CA': 11100,   // Canada
-            'DE': 2510,    // Germany
-            'FR': 3710,    // France
-            'AU': 5710,    // Australia
-            'GB': 8310,    // Great Britain
-            'RU': 9310,    // Russia
-            'BR': 6610,    // Brazil
-            'IN': 7810,    // India
-            'CN': 4310,    // China
-            'US': 839,     // USA
-            'SA': 410      // Saudi Arabia
-          };
-          
-          vm.markersData = [
-            { latLng:[41.90, 12.45],  name:'Vatican City'          },
-            { latLng:[43.73, 7.41],   name:'Monaco'                },
-            { latLng:[-0.52, 166.93], name:'Nauru'                 },
-            { latLng:[-8.51, 179.21], name:'Tuvalu'                },
-            { latLng:[7.11,171.06],   name:'Marshall Islands'      },
-            { latLng:[17.3,-62.73],   name:'Saint Kitts and Nevis' },
-            { latLng:[3.2,73.22],     name:'Maldives'              },
-            { latLng:[35.88,14.5],    name:'Malta'                 },
-            { latLng:[41.0,-71.06],   name:'New England'           },
-            { latLng:[12.05,-61.75],  name:'Grenada'               },
-            { latLng:[13.16,-59.55],  name:'Barbados'              },
-            { latLng:[17.11,-61.85],  name:'Antigua and Barbuda'   },
-            { latLng:[-4.61,55.45],   name:'Seychelles'            },
-            { latLng:[7.35,134.46],   name:'Palau'                 },
-            { latLng:[42.5,1.51],     name:'Andorra'               }
-          ];
         }
     }
 })();
@@ -10718,6 +10240,144 @@ $scope.banks=bankcodeService.query();
 
 })();
 /**=========================================================
+ * Module: demo-pagination.js
+ * Provides a simple demo for pagination
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.mailbox')
+        .controller('MailboxController', MailboxController);
+
+    function MailboxController() {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          vm.folders = [
+            {name: 'Inbox',   folder: 'inbox',   alert: 42, icon: 'fa-inbox' },
+            {name: 'Starred', folder: 'starred', alert: 10, icon: 'fa-star' },
+            {name: 'Sent',    folder: 'sent',    alert: 0,  icon: 'fa-paper-plane-o' },
+            {name: 'Draft',   folder: 'draft',   alert: 5,  icon: 'fa-edit' },
+            {name: 'Trash',   folder: 'trash',   alert: 0,  icon: 'fa-trash'}
+          ];
+
+          vm.labels = [
+            {name: 'Red',     color: 'danger'},
+            {name: 'Pink',    color: 'pink'},
+            {name: 'Blue',    color: 'info'},
+            {name: 'Yellow',  color: 'warning'}
+          ];
+
+          vm.mail = {
+            cc: false,
+            bcc: false
+          };
+          // Mailbox editr initial content
+          vm.content = '<p>Type something..</p>';
+        }
+    }
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.mailbox')
+        .controller('MailFolderController', MailFolderController);
+
+    MailFolderController.$inject = ['mails', '$stateParams'];
+    function MailFolderController(mails, $stateParams) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          
+          vm.folder = {};
+          // no filter for inbox
+          vm.folder.folder = $stateParams.folder === 'inbox' ? '' : $stateParams.folder;
+
+          mails.all().then(function(mails){
+            vm.mails = mails;
+          });
+        }
+    }
+})();
+
+// A RESTful factory for retrieving mails from json file
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.mailbox')
+        .factory('mails', mails);
+
+    mails.$inject = ['$http'];
+    function mails($http) {
+        var service = {
+            all: all,
+            get: get
+        };
+        return service;
+
+        ////////////////
+        
+        function readMails() {
+          var path = 'server/mails.json';
+          return $http.get(path).then(function (resp) {
+            return resp.data.mails;
+          });
+        }
+
+        function all() {
+          return readMails();
+        }
+
+        function get(id) {
+          return readMails().then(function(mails){
+            for (var i = 0; i < mails.length; i++) {
+              if (+mails[i].id === +id) return mails[i];
+            }
+            return null;
+          });
+        }
+    }
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.mailbox')
+        .controller('MailViewController', MailViewController);
+
+    MailViewController.$inject = ['mails', '$stateParams'];
+    function MailViewController(mails, $stateParams) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          mails.get($stateParams.mid).then(function(mail){
+            vm.mail = mail;
+          });
+        }
+    }
+})();
+
+/**=========================================================
  * Module: navbar-search.js
  * Navbar search toggler * Auto dismiss on ESC key
  =========================================================*/
@@ -10822,6 +10482,346 @@ $scope.banks=bankcodeService.query();
             .find('input[type="text"]').blur() // remove focus
             // .val('') // Empty input
             ;
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: modals.js
+ * Provides a simple way to implement bootstrap modals from templates
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.maps')
+        .controller('ModalGmapController', ModalGmapController);
+
+    ModalGmapController.$inject = ['$uibModal'];
+    function ModalGmapController($uibModal) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          vm.open = function (size) {
+
+            //var modalInstance =
+            $uibModal.open({
+              templateUrl: '/myModalContent.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+
+            
+          };
+
+
+
+          // Please note that $uibModalInstance represents a modal window (instance) dependency.
+          // It is not the same as the $uibModal service used above.
+
+          ModalInstanceCtrl.$inject = ['$scope', '$uibModalInstance', '$timeout'];
+          function ModalInstanceCtrl($scope, $uibModalInstance, $timeout) {
+
+            $uibModalInstance.opened.then(function () {
+              var position = new google.maps.LatLng(33.790807, -117.835734);
+
+              $scope.mapOptionsModal = {
+                zoom: 14,
+                center: position,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+              };
+
+              // we use timeout to wait maps to be ready before add a markers
+              $timeout(function(){
+                // 1. Add a marker at the position it was initialized
+                new google.maps.Marker({
+                  map: $scope.myMapModal,
+                  position: position
+                });
+                // 2. Trigger a resize so the map is redrawed
+                google.maps.event.trigger($scope.myMapModal, 'resize');
+                // 3. Move to the center if it is misaligned
+                $scope.myMapModal.panTo(position);
+              });
+
+            });
+
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+
+          }
+
+        }
+    }
+
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.maps')
+        .controller('GMapController', GMapController);
+
+    GMapController.$inject = ['$timeout'];
+    function GMapController($timeout) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          var position = [
+              new google.maps.LatLng(33.790807, -117.835734),
+              new google.maps.LatLng(33.790807, -117.835734),
+              new google.maps.LatLng(33.790807, -117.835734),
+              new google.maps.LatLng(33.790807, -117.835734),
+              new google.maps.LatLng(33.787453, -117.835858)
+            ];
+          
+          vm.addMarker = addMarker;
+          // we use timeout to wait maps to be ready before add a markers
+          $timeout(function(){
+            addMarker(vm.myMap1, position[0]);
+            addMarker(vm.myMap2, position[1]);
+            addMarker(vm.myMap3, position[2]);
+            addMarker(vm.myMap5, position[3]);
+          });
+
+          vm.mapOptions1 = {
+            zoom: 14,
+            center: position[0],
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            scrollwheel: false
+          };
+
+          vm.mapOptions2 = {
+            zoom: 19,
+            center: position[1],
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+
+          vm.mapOptions3 = {
+            zoom: 14,
+            center: position[2],
+            mapTypeId: google.maps.MapTypeId.SATELLITE
+          };
+
+          vm.mapOptions4 = {
+            zoom: 14,
+            center: position[3],
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+
+          // for multiple markers
+          $timeout(function(){
+            addMarker(vm.myMap4, position[3]);
+            addMarker(vm.myMap4, position[4]);
+          });
+
+          // custom map style
+          var MapStyles = [{'featureType':'water','stylers':[{'visibility':'on'},{'color':'#bdd1f9'}]},{'featureType':'all','elementType':'labels.text.fill','stylers':[{'color':'#334165'}]},{featureType:'landscape',stylers:[{color:'#e9ebf1'}]},{featureType:'road.highway',elementType:'geometry',stylers:[{color:'#c5c6c6'}]},{featureType:'road.arterial',elementType:'geometry',stylers:[{color:'#fff'}]},{featureType:'road.local',elementType:'geometry',stylers:[{color:'#fff'}]},{featureType:'transit',elementType:'geometry',stylers:[{color:'#d8dbe0'}]},{featureType:'poi',elementType:'geometry',stylers:[{color:'#cfd5e0'}]},{featureType:'administrative',stylers:[{visibility:'on'},{lightness:33}]},{featureType:'poi.park',elementType:'labels',stylers:[{visibility:'on'},{lightness:20}]},{featureType:'road',stylers:[{color:'#d8dbe0',lightness:20}]}];
+          vm.mapOptions5 = {
+            zoom: 14,
+            center: position[3],
+            styles: MapStyles,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            scrollwheel: false
+          };
+
+          ///////////////
+          
+          function addMarker(map, position) {
+            return new google.maps.Marker({
+              map: map,
+              position: position
+            });
+          }
+
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: vector-map.js.js
+ * Init jQuery Vector Map plugin
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.maps')
+        .directive('vectorMap', vectorMap);
+
+    vectorMap.$inject = ['VectorMap'];
+    function vectorMap (VectorMap) {
+        var directive = {
+            link: link,
+            restrict: 'EA',
+            scope: {
+              seriesData: '=',
+              markersData: '='
+            }
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+          
+          var defaultColors = {
+              markerColor:  '#23b7e5',      // the marker points
+              bgColor:      'transparent',      // the background
+              scaleColors:  ['#878c9a'],    // the color of the region in the serie
+              regionFill:   '#bbbec6'       // the base region color
+          };
+
+          var mapHeight   = attrs.height || '300',
+              options     = {
+                markerColor:  attrs.markerColor  || defaultColors.markerColor,
+                bgColor:      attrs.bgColor      || defaultColors.bgColor,
+                scale:        attrs.scale        || 1,
+                scaleColors:  attrs.scaleColors  || defaultColors.scaleColors,
+                regionFill:   attrs.regionFill   || defaultColors.regionFill,
+                mapName:      attrs.mapName      || 'world_mill_en'
+              };
+          
+          element.css('height', mapHeight);
+          
+          VectorMap.init( element , options, scope.seriesData, scope.markersData);
+        }
+    }
+
+})();
+
+/**=========================================================
+ * Module: vector-map.js
+ * Services to initialize vector map plugin
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.maps')
+        .service('VectorMap', VectorMap);
+
+    function VectorMap() {
+        this.init = init;
+
+        ////////////////
+
+        function init($element, opts, series, markers) {
+          $element.vectorMap({
+            map:             opts.mapName,
+            backgroundColor: opts.bgColor,
+            zoomMin:         1,
+            zoomMax:         8,
+            zoomOnScroll:    false,
+            regionStyle: {
+              initial: {
+                'fill':           opts.regionFill,
+                'fill-opacity':   1,
+                'stroke':         'none',
+                'stroke-width':   1.5,
+                'stroke-opacity': 1
+              },
+              hover: {
+                'fill-opacity': 0.8
+              },
+              selected: {
+                fill: 'blue'
+              },
+              selectedHover: {
+              }
+            },
+            focusOn:{ x:0.4, y:0.6, scale: opts.scale},
+            markerStyle: {
+              initial: {
+                fill: opts.markerColor,
+                stroke: opts.markerColor
+              }
+            },
+            onRegionLabelShow: function(e, el, code) {
+              if ( series && series[code] )
+                el.html(el.html() + ': ' + series[code] + ' visitors');
+            },
+            markers: markers,
+            series: {
+                regions: [{
+                    values: series,
+                    scale: opts.scaleColors,
+                    normalizeFunction: 'polynomial'
+                }]
+            },
+          });
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: vmaps,js
+ * jVector Maps support
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.maps')
+        .controller('VectorMapController', VectorMapController);
+
+    function VectorMapController() {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          vm.seriesData = {
+            'CA': 11100,   // Canada
+            'DE': 2510,    // Germany
+            'FR': 3710,    // France
+            'AU': 5710,    // Australia
+            'GB': 8310,    // Great Britain
+            'RU': 9310,    // Russia
+            'BR': 6610,    // Brazil
+            'IN': 7810,    // India
+            'CN': 4310,    // China
+            'US': 839,     // USA
+            'SA': 410      // Saudi Arabia
+          };
+          
+          vm.markersData = [
+            { latLng:[41.90, 12.45],  name:'Vatican City'          },
+            { latLng:[43.73, 7.41],   name:'Monaco'                },
+            { latLng:[-0.52, 166.93], name:'Nauru'                 },
+            { latLng:[-8.51, 179.21], name:'Tuvalu'                },
+            { latLng:[7.11,171.06],   name:'Marshall Islands'      },
+            { latLng:[17.3,-62.73],   name:'Saint Kitts and Nevis' },
+            { latLng:[3.2,73.22],     name:'Maldives'              },
+            { latLng:[35.88,14.5],    name:'Malta'                 },
+            { latLng:[41.0,-71.06],   name:'New England'           },
+            { latLng:[12.05,-61.75],  name:'Grenada'               },
+            { latLng:[13.16,-59.55],  name:'Barbados'              },
+            { latLng:[17.11,-61.85],  name:'Antigua and Barbuda'   },
+            { latLng:[-4.61,55.45],   name:'Seychelles'            },
+            { latLng:[7.35,134.46],   name:'Palau'                 },
+            { latLng:[42.5,1.51],     name:'Andorra'               }
+          ];
         }
     }
 })();
@@ -11737,6 +11737,7 @@ $scope.buttonText="Login";
                vm.error='';
 
             if(vm.registerForm.$valid) {
+
               vm.account.$save(function(data){
 
             var response=angular.fromJson(data);
@@ -11750,7 +11751,10 @@ $scope.buttonText="Login";
                    vm.error=response.Message;
               // vm.auth=true;
             }
-            ;});
+            ;},
+            function(){
+              vm.error = 'Server Request Error';
+            });
 
               // $http
               //   .post('api/account/register', {email: vm.account.email, password: vm.account.password})
@@ -11766,14 +11770,14 @@ $scope.buttonText="Login";
               //     vm.authMsg = 'Server Request Error';
               //   });
             }
-            else {
-              // set as dirty if the user click directly to login so we show the validation messages
-              /*jshint -W106*/
-              vm.registerForm.password.$dirty = true;
-              vm.registerForm.account_password.$dirty = true;
-              // vm.registerForm.account_agreed.$dirty = true;
+            // else {
+            //   // set as dirty if the user click directly to login so we show the validation messages
+            //   /*jshint -W106*/
+            //   vm.registerForm.password.$dirty = true;
+            //   vm.registerForm.account_password.$dirty = true;
+            //   // vm.registerForm.account_agreed.$dirty = true;
               
-            }
+            // }
           };
         }
     }
@@ -12799,6 +12803,1010 @@ group.$remove().then(function () {
     'use strict';
 
     angular
+        .module('app.reports')
+        .factory('BankfileService', BankfileService);
+
+    BankfileService.$inject = ['$resource','jadaApiUrl'];
+    function BankfileService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/bankfilereport/:periodId', {periodId: '@periodId'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('BankFilesController', BankFilesController);
+
+    BankFilesController.$inject = ['$scope','$http','$resource', 'BankfileService','jadaApiUrl'];
+    function BankFilesController($scope,$http,$resource,BankfileService,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+       var currentPeriod=1;
+        $scope.bankfiles=BankfileService.get({periodId:currentPeriod});
+
+          
+                     $scope.getByperiod=function(period){
+        
+         $scope.bankfiles=BankfileService.get({periodId:period});
+
+          }
+
+
+
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+              $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('CompanySumarryController', CompanySumarryController);
+
+    CompanySumarryController.$inject = ['$scope','$http','$resource', 'CompanySummaryService','jadaApiUrl'];
+    function CompanySumarryController($scope,$http, $resource,CompanySummaryService,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.companysumaries=CompanySummaryService.get({periodId:1});
+        console.log( $scope.companysumaries);
+
+          
+
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+                        
+$scope.printDiv = function (div) {
+    console.log('hellow print');
+  var docHead = document.head.outerHTML;
+  var printContents = document.getElementById(div).outerHTML;
+  var winAttr = "location=yes, statusbar=no, menubar=no, titlebar=no, toolbar=no,dependent=no, width=865, height=600, resizable=yes, screenX=200, screenY=200, personalbar=no, scrollbars=yes";
+
+  var newWin = window.open("", "_blank", winAttr);
+  var writeDoc = newWin.document;
+  writeDoc.open();
+  writeDoc.write('<!doctype html><html>' + docHead + '<body onLoad="window.print()">' + printContents + '</body></html>');
+  writeDoc.close();
+  newWin.focus();
+}
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('CompanySummaryService', CompanySummaryService);
+
+    CompanySummaryService.$inject = ['$resource','jadaApiUrl'];
+    function CompanySummaryService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/CompanySummary/:periodId', {periodId: '@periodId'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('CompanyTotalsController', CompanyTotalsController);
+
+    CompanyTotalsController.$inject = ['$scope','$http','$resource', 'CompanyTotalsService','jadaApiUrl','Excel','$timeout'];
+    function CompanyTotalsController($scope,$http,$resource,CompanyTotalsService,jadaApiUrl,Excel,$timeout) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+       var period=1;
+        $scope.companytotals=CompanyTotalsService.get({periodId:1});
+
+          $scope.getByperiod=function(period){
+        
+            $scope.companytotals=CompanyTotalsService.get({periodId:period});
+
+          }
+
+          $scope.greaterThan = function(prop, val){
+    return function(item){
+      return item[prop] > val;
+    }
+}
+
+
+    
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+
+          
+$scope.printDiv = function (div) {
+    console.log('hellow print');
+  var docHead = document.head.outerHTML;
+  var printContents = document.getElementById(div).outerHTML;
+  var winAttr = "location=yes, statusbar=no, menubar=no, titlebar=no, toolbar=no,dependent=no, width=865, height=600, resizable=yes, screenX=200, screenY=200, personalbar=no, scrollbars=yes";
+
+  var newWin = window.open("", "_blank", winAttr);
+  var writeDoc = newWin.document;
+  writeDoc.open();
+  writeDoc.write('<!doctype html><html>' + docHead + '<body onLoad="window.print()">' + printContents + '</body></html>');
+  writeDoc.close();
+  newWin.focus();
+}
+
+
+
+ $scope.exportToExcel=function(tableId){ // ex: '#my-table'
+            var exportHref=Excel.tableToExcel(tableId,'WireWorkbenchDataExport');
+            $timeout(function(){location.href=exportHref;},100); // trigger download
+        }
+
+
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('CompanyTotalsService', CompanyTotalsService);
+
+    CompanyTotalsService.$inject = ['$resource','jadaApiUrl'];
+    function CompanyTotalsService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/CompanyTotalsReport/:periodId', {periodId: '@periodId'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('EvolutionController', EvolutionController);
+
+    EvolutionController.$inject = ['$scope','$resource', 'CompanySummaryService'];
+    function EvolutionController($scope,$resource,CompanySummaryService) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.companysumaries=CompanySummaryService.query();
+
+          
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('Excel', Excel);
+
+    Excel.$inject = ['$window'];
+    function Excel($window) {
+    var uri='data:application/vnd.ms-excel;base64,',
+            template='<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
+            base64=function(s){return $window.btoa(unescape(encodeURIComponent(s)));},
+            format=function(s,c){return s.replace(/{(\w+)}/g,function(m,p){return c[p];})};
+        return {
+            tableToExcel:function(tableId,worksheetName){
+                var table=$(tableId),
+                    ctx={worksheet:worksheetName,table:table.html()},
+                    href=uri+base64(format(template,ctx));
+                return href;
+            }
+        };   
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('HelbController', HelbController);
+
+    HelbController.$inject = ['$scope','$http','$resource', 'HelbService','jadaApiUrl'];
+    function HelbController($scope,$http,$resource,HelbService,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.helbs=HelbService.get({periodId:1});
+        console.log($scope.helbs);
+
+          
+                     $scope.getByperiod=function(period){
+        
+        $scope.helbs=HelbService.get({periodId:period});
+
+          }
+
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+              $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('HelbService', HelbService);
+
+    HelbService.$inject = ['$resource','jadaApiUrl'];
+    function HelbService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/helbreport/:periodId', {periodId: '@periodId'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('LeaveReportService', LeaveReportService);
+
+    LeaveReportService.$inject = ['$resource','jadaApiUrl'];
+    function LeaveReportService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/CompanySummary/:periodId', {periodId: '@periodId'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('LeaveReportController', LeaveReportController);
+
+    LeaveReportController.$inject = ['$scope','$http','$resource', 'LeaveReportService','jadaApiUrl'];
+    function LeaveReportController($scope,$http,$resource,LeaveReportService,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.leaves=LeaveReportService.query();
+
+          
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+              $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('NhifController', NhifController);
+
+    NhifController.$inject = ['$scope','$http','$resource', 'NhifService1','jadaApiUrl'];
+    function NhifController($scope,$http,$resource,NhifService1,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.nhifs=NhifService1.get({periodId:1});
+        
+console.log( $scope.nhifs);
+          
+
+          $scope.getByperiod=function(period){
+        
+            $scope.nhifs=NhifService.get({periodId:period});
+
+          }
+
+            
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+              $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('NhifService1', NhifService1);
+
+    NhifService1.$inject = ['$resource','jadaApiUrl'];
+    function NhifService1($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/nhifreport/:periodId', {periodId: '@periodId'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('NssfController', NssfController);
+
+    NssfController.$inject = ['$scope','$http','$resource', 'NssfService','jadaApiUrl'];
+    function NssfController($scope,$http,$resource,NssfService,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+        $scope.nssfs=NssfService.get({periodId:1});
+console.log( $scope.nssfs);
+          
+            
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+              $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('NssfService', NssfService);
+
+    NssfService.$inject = ['$resource','jadaApiUrl'];
+    function NssfService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/nssfreport/:periodId', {periodId: '@periodId'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('P10Controller', P10Controller);
+
+    P10Controller.$inject = ['$scope','$http','$resource', 'LeaveReportService','jadaApiUrl'];
+    function P10Controller($scope,$http,$resource,LeaveReportService,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.leaves=LeaveReportService.query();
+
+          
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+              $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('P10aController', P10aController);
+
+    P10aController.$inject = ['$scope','$http','$resource', 'LeaveReportService','jadaApiUrl'];
+    function P10aController($scope,$http,$resource,LeaveReportService,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.leaves=LeaveReportService.query();
+
+          
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+              $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('P10bController', P10bController);
+
+    P10bController.$inject = ['$scope','$http','$resource', 'LeaveReportService','jadaApiUrl'];
+    function P10bController($scope,$http,$resource,LeaveReportService,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.leaves=LeaveReportService.query();
+
+          
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+              $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('P10cController', P10cController);
+
+    P10cController.$inject = ['$scope','$http','$resource', 'LeaveReportService','jadaApiUrl'];
+    function P10cController($scope,$http,$resource,LeaveReportService,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.leaves=LeaveReportService.query();
+
+          
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+              $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('P10dController', P10dController);
+
+    P10dController.$inject = ['$scope','$http','$resource', 'LeaveReportService','jadaApiUrl'];
+    function P10dController($scope,$http,$resource,LeaveReportService,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.leaves=LeaveReportService.query();
+
+          
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+              $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('P9aController', P9aController);
+
+    P9aController.$inject = ['$scope','$http','$resource', 'LeaveReportService','jadaApiUrl'];
+    function P9aController($scope,$http,$resource,LeaveReportService,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.leaves=LeaveReportService.query();
+
+          
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+              $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('P9bController', P9bController);
+
+    P9bController.$inject = ['$scope','$http','$resource', 'LeaveReportService','jadaApiUrl'];
+    function P9bController($scope,$http,$resource,LeaveReportService,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.leaves=LeaveReportService.query();
+
+          
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+              $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('PartnerJournalController', PartnerJournalController);
+
+    PartnerJournalController.$inject = ['$scope','$resource', 'CompanySummaryService'];
+    function PartnerJournalController($scope,$resource,CompanySummaryService) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.companysumaries=CompanySummaryService.query();
+
+          
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('PayeController', PayeController);
+
+    PayeController.$inject = ['$scope','$http','$resource' ,'jadaApiUrl','PayeService'];
+    function PayeController($scope,$http,$resource,jadaApiUrl,PayeService) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+       var currentPeriod=1;
+        $scope.payes=PayeService.get({periodId:1});
+        console.log($scope.payes);
+
+    
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+              $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('PayeService', PayeService);
+
+    PayeService.$inject = ['$resource','jadaApiUrl'];
+    function PayeService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/payereport/:periodId', {periodId: '@periodId'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('PayslipController', PayslipController);
+
+    PayslipController.$inject = ['$scope','$http','$resource', 'PayslipService','jadaApiUrl'];
+    function PayslipController($scope,$http,$resource,PayslipService,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        // vm.persons=PayslipService.get({id:1});
+        // console.log(vm.persons);
+var id=1;
+          
+
+$http.get(jadaApiUrl+'api/payslipreport/'+id).success(function(data) {
+              $scope.persons = data;
+              console.log($scope.persons);
+
+            });
+
+
+
+
+  $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+     $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('PayslipService', PayslipService);
+
+    PayslipService.$inject = ['$resource','jadaApiUrl'];
+    function PayslipService($resource,jadaApiUrl) {
+     var data=$resource('http://localhost:56135/api/payslipreport/:id', {id: '@id'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('SchedulerController', SchedulerController);
+
+    SchedulerController.$inject = ['$scope','$resource', 'CompanySummaryService'];
+    function SchedulerController($scope,$resource,CompanySummaryService) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.companysumaries=CompanySummaryService.query();
+
+          
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
         .module('app.settings')
         .run(settingsRun);
 
@@ -13806,6 +14814,15 @@ group.$remove().then(function () {
              
           })
 
+
+            .state('app.payesummary', {
+              url: '/payesummary',
+              title: 'PAYE  Report',
+                templateUrl: helper.basepath('payesummary.html')
+             
+          })
+
+
              .state('app.nhif', {
               url: '/nhif  reports',
               title: 'NHIF byproduct',
@@ -14105,986 +15122,6 @@ group.$remove().then(function () {
 })();
 
 
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('BankfileService', BankfileService);
-
-    BankfileService.$inject = ['$resource','jadaApiUrl'];
-    function BankfileService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/bankfilereport/:periodId', {periodId: '@periodId'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('BankFilesController', BankFilesController);
-
-    BankFilesController.$inject = ['$scope','$http','$resource', 'BankfileService','jadaApiUrl'];
-    function BankFilesController($scope,$http,$resource,BankfileService,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-       var currentPeriod=1;
-        $scope.bankfiles=BankfileService.get({periodId:currentPeriod});
-
-          
-                     $scope.getByperiod=function(period){
-        
-         $scope.bankfiles=BankfileService.get({periodId:period});
-
-          }
-
-
-
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-
-              $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
-
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('CompanySumarryController', CompanySumarryController);
-
-    CompanySumarryController.$inject = ['$scope','$http','$resource', 'CompanySummaryService','jadaApiUrl'];
-    function CompanySumarryController($scope,$http, $resource,CompanySummaryService,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.companysumaries=CompanySummaryService.get({periodId:1});
-        console.log( $scope.companysumaries);
-
-          
-
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-                        
-$scope.printDiv = function (div) {
-    console.log('hellow print');
-  var docHead = document.head.outerHTML;
-  var printContents = document.getElementById(div).outerHTML;
-  var winAttr = "location=yes, statusbar=no, menubar=no, titlebar=no, toolbar=no,dependent=no, width=865, height=600, resizable=yes, screenX=200, screenY=200, personalbar=no, scrollbars=yes";
-
-  var newWin = window.open("", "_blank", winAttr);
-  var writeDoc = newWin.document;
-  writeDoc.open();
-  writeDoc.write('<!doctype html><html>' + docHead + '<body onLoad="window.print()">' + printContents + '</body></html>');
-  writeDoc.close();
-  newWin.focus();
-}
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('CompanySummaryService', CompanySummaryService);
-
-    CompanySummaryService.$inject = ['$resource','jadaApiUrl'];
-    function CompanySummaryService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/CompanySummary/:periodId', {periodId: '@periodId'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('CompanyTotalsController', CompanyTotalsController);
-
-    CompanyTotalsController.$inject = ['$scope','$http','$resource', 'CompanyTotalsService','jadaApiUrl','Excel','$timeout'];
-    function CompanyTotalsController($scope,$http,$resource,CompanyTotalsService,jadaApiUrl,Excel,$timeout) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-       var period=1;
-        $scope.companytotals=CompanyTotalsService.get({periodId:1});
-
-          $scope.getByperiod=function(period){
-        
-            $scope.companytotals=CompanyTotalsService.get({periodId:period});
-
-          }
-
-          $scope.greaterThan = function(prop, val){
-    return function(item){
-      return item[prop] > val;
-    }
-}
-
-
-    
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-
-
-          
-$scope.printDiv = function (div) {
-    console.log('hellow print');
-  var docHead = document.head.outerHTML;
-  var printContents = document.getElementById(div).outerHTML;
-  var winAttr = "location=yes, statusbar=no, menubar=no, titlebar=no, toolbar=no,dependent=no, width=865, height=600, resizable=yes, screenX=200, screenY=200, personalbar=no, scrollbars=yes";
-
-  var newWin = window.open("", "_blank", winAttr);
-  var writeDoc = newWin.document;
-  writeDoc.open();
-  writeDoc.write('<!doctype html><html>' + docHead + '<body onLoad="window.print()">' + printContents + '</body></html>');
-  writeDoc.close();
-  newWin.focus();
-}
-
-
-
- $scope.exportToExcel=function(tableId){ // ex: '#my-table'
-            var exportHref=Excel.tableToExcel(tableId,'WireWorkbenchDataExport');
-            $timeout(function(){location.href=exportHref;},100); // trigger download
-        }
-
-
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('CompanyTotalsService', CompanyTotalsService);
-
-    CompanyTotalsService.$inject = ['$resource','jadaApiUrl'];
-    function CompanyTotalsService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/CompanyTotalsReport/:periodId', {periodId: '@periodId'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('EvolutionController', EvolutionController);
-
-    EvolutionController.$inject = ['$scope','$resource', 'CompanySummaryService'];
-    function EvolutionController($scope,$resource,CompanySummaryService) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.companysumaries=CompanySummaryService.query();
-
-          
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('Excel', Excel);
-
-    Excel.$inject = ['$window'];
-    function Excel($window) {
-    var uri='data:application/vnd.ms-excel;base64,',
-            template='<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
-            base64=function(s){return $window.btoa(unescape(encodeURIComponent(s)));},
-            format=function(s,c){return s.replace(/{(\w+)}/g,function(m,p){return c[p];})};
-        return {
-            tableToExcel:function(tableId,worksheetName){
-                var table=$(tableId),
-                    ctx={worksheet:worksheetName,table:table.html()},
-                    href=uri+base64(format(template,ctx));
-                return href;
-            }
-        };   
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('HelbController', HelbController);
-
-    HelbController.$inject = ['$scope','$http','$resource', 'HelbService','jadaApiUrl'];
-    function HelbController($scope,$http,$resource,HelbService,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.helbs=HelbService.get({periodId:1});
-        console.log($scope.helbs);
-
-          
-                     $scope.getByperiod=function(period){
-        
-        $scope.helbs=HelbService.get({periodId:period});
-
-          }
-
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-
-              $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('HelbService', HelbService);
-
-    HelbService.$inject = ['$resource','jadaApiUrl'];
-    function HelbService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/helbreport/:periodId', {periodId: '@periodId'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('LeaveReportService', LeaveReportService);
-
-    LeaveReportService.$inject = ['$resource','jadaApiUrl'];
-    function LeaveReportService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/CompanySummary/:periodId', {periodId: '@periodId'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('LeaveReportController', LeaveReportController);
-
-    LeaveReportController.$inject = ['$scope','$http','$resource', 'LeaveReportService','jadaApiUrl'];
-    function LeaveReportController($scope,$http,$resource,LeaveReportService,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.leaves=LeaveReportService.query();
-
-          
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-
-              $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
-
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('NhifController', NhifController);
-
-    NhifController.$inject = ['$scope','$http','$resource', 'NhifService1','jadaApiUrl'];
-    function NhifController($scope,$http,$resource,NhifService1,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.nhifs=NhifService1.get({periodId:1});
-        
-console.log( $scope.nhifs);
-          
-
-          $scope.getByperiod=function(period){
-        
-            $scope.nhifs=NhifService.get({periodId:period});
-
-          }
-
-            
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-
-              $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('NhifService1', NhifService1);
-
-    NhifService1.$inject = ['$resource','jadaApiUrl'];
-    function NhifService1($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/nhifreport/:periodId', {periodId: '@periodId'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('NssfController', NssfController);
-
-    NssfController.$inject = ['$scope','$http','$resource', 'NssfService','jadaApiUrl'];
-    function NssfController($scope,$http,$resource,NssfService,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-        $scope.nssfs=NssfService.get({periodId:1});
-console.log( $scope.nssfs);
-          
-            
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-
-              $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('NssfService', NssfService);
-
-    NssfService.$inject = ['$resource','jadaApiUrl'];
-    function NssfService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/nssfreport/:periodId', {periodId: '@periodId'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('P10Controller', P10Controller);
-
-    P10Controller.$inject = ['$scope','$http','$resource', 'LeaveReportService','jadaApiUrl'];
-    function P10Controller($scope,$http,$resource,LeaveReportService,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.leaves=LeaveReportService.query();
-
-          
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-
-              $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
-
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('P10aController', P10aController);
-
-    P10aController.$inject = ['$scope','$http','$resource', 'LeaveReportService','jadaApiUrl'];
-    function P10aController($scope,$http,$resource,LeaveReportService,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.leaves=LeaveReportService.query();
-
-          
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-
-              $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
-
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('P10bController', P10bController);
-
-    P10bController.$inject = ['$scope','$http','$resource', 'LeaveReportService','jadaApiUrl'];
-    function P10bController($scope,$http,$resource,LeaveReportService,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.leaves=LeaveReportService.query();
-
-          
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-
-              $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
-
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('P10cController', P10cController);
-
-    P10cController.$inject = ['$scope','$http','$resource', 'LeaveReportService','jadaApiUrl'];
-    function P10cController($scope,$http,$resource,LeaveReportService,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.leaves=LeaveReportService.query();
-
-          
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-
-              $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
-
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('P10dController', P10dController);
-
-    P10dController.$inject = ['$scope','$http','$resource', 'LeaveReportService','jadaApiUrl'];
-    function P10dController($scope,$http,$resource,LeaveReportService,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.leaves=LeaveReportService.query();
-
-          
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-
-              $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
-
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('P9aController', P9aController);
-
-    P9aController.$inject = ['$scope','$http','$resource', 'LeaveReportService','jadaApiUrl'];
-    function P9aController($scope,$http,$resource,LeaveReportService,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.leaves=LeaveReportService.query();
-
-          
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-
-              $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
-
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('P9bController', P9bController);
-
-    P9bController.$inject = ['$scope','$http','$resource', 'LeaveReportService','jadaApiUrl'];
-    function P9bController($scope,$http,$resource,LeaveReportService,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.leaves=LeaveReportService.query();
-
-          
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-
-              $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
-
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('PartnerJournalController', PartnerJournalController);
-
-    PartnerJournalController.$inject = ['$scope','$resource', 'CompanySummaryService'];
-    function PartnerJournalController($scope,$resource,CompanySummaryService) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.companysumaries=CompanySummaryService.query();
-
-          
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('PayeController', PayeController);
-
-    PayeController.$inject = ['$scope','$http','$resource' ,'jadaApiUrl'];
-    function PayeController($scope,$http,$resource,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        
-
-    
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-
-              $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
-
-
-        }
-    }
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('PayslipController', PayslipController);
-
-    PayslipController.$inject = ['$scope','$http','$resource', 'PayslipService','jadaApiUrl'];
-    function PayslipController($scope,$http,$resource,PayslipService,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        // vm.persons=PayslipService.get({id:1});
-        // console.log(vm.persons);
-var id=1;
-          
-
-$http.get(jadaApiUrl+'api/payslipreport/'+id).success(function(data) {
-              $scope.persons = data;
-              console.log($scope.persons);
-
-            });
-
-
-
-
-  $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-
-     $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('PayslipService', PayslipService);
-
-    PayslipService.$inject = ['$resource','jadaApiUrl'];
-    function PayslipService($resource,jadaApiUrl) {
-     var data=$resource('http://localhost:56135/api/payslipreport/:id', {id: '@id'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('SchedulerController', SchedulerController);
-
-    SchedulerController.$inject = ['$scope','$resource', 'CompanySummaryService'];
-    function SchedulerController($scope,$resource,CompanySummaryService) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.companysumaries=CompanySummaryService.query();
-
-          
-
-        }
-    }
-})();
 /**=========================================================
  * Module: sidebar-menu.js
  * Handle sidebar collapsible elements
@@ -17001,6 +17038,70 @@ $scope.clickBtn = function() {
     'use strict';
 
     angular
+        .module('app.translate')
+        .config(translateConfig)
+        ;
+    translateConfig.$inject = ['$translateProvider'];
+    function translateConfig($translateProvider){
+
+      $translateProvider.useStaticFilesLoader({
+          prefix : 'app/i18n/',
+          suffix : '.json'
+      });
+
+      $translateProvider.preferredLanguage('en');
+      $translateProvider.useLocalStorage();
+      $translateProvider.usePostCompiling(true);
+      $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
+
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.translate')
+        .run(translateRun)
+        ;
+    translateRun.$inject = ['$rootScope', '$translate'];
+    
+    function translateRun($rootScope, $translate){
+
+      // Internationalization
+      // ----------------------
+
+      $rootScope.language = {
+        // Handles language dropdown
+        listIsOpen: false,
+        // list of available languages
+        available: {
+          'en':       'English',
+          'es_AR':    'Español'
+        },
+        // display always the current ui language
+        init: function () {
+          var proposedLanguage = $translate.proposedLanguage() || $translate.use();
+          var preferredLanguage = $translate.preferredLanguage(); // we know we have set a preferred one in app.config
+          $rootScope.language.selected = $rootScope.language.available[ (proposedLanguage || preferredLanguage) ];
+        },
+        set: function (localeId) {
+          // Set the new idiom
+          $translate.use(localeId);
+          // save a reference for the current language
+          $rootScope.language.selected = $rootScope.language.available[localeId];
+          // finally toggle dropdown
+          $rootScope.language.listIsOpen = ! $rootScope.language.listIsOpen;
+        }
+      };
+
+      $rootScope.language.init();
+
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
         .module('app.useradministration')
         .controller('TasksController', TasksController);
 
@@ -17882,70 +17983,6 @@ $scope.loadWorkflows();
        
     }
 
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.translate')
-        .config(translateConfig)
-        ;
-    translateConfig.$inject = ['$translateProvider'];
-    function translateConfig($translateProvider){
-
-      $translateProvider.useStaticFilesLoader({
-          prefix : 'app/i18n/',
-          suffix : '.json'
-      });
-
-      $translateProvider.preferredLanguage('en');
-      $translateProvider.useLocalStorage();
-      $translateProvider.usePostCompiling(true);
-      $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
-
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.translate')
-        .run(translateRun)
-        ;
-    translateRun.$inject = ['$rootScope', '$translate'];
-    
-    function translateRun($rootScope, $translate){
-
-      // Internationalization
-      // ----------------------
-
-      $rootScope.language = {
-        // Handles language dropdown
-        listIsOpen: false,
-        // list of available languages
-        available: {
-          'en':       'English',
-          'es_AR':    'Español'
-        },
-        // display always the current ui language
-        init: function () {
-          var proposedLanguage = $translate.proposedLanguage() || $translate.use();
-          var preferredLanguage = $translate.preferredLanguage(); // we know we have set a preferred one in app.config
-          $rootScope.language.selected = $rootScope.language.available[ (proposedLanguage || preferredLanguage) ];
-        },
-        set: function (localeId) {
-          // Set the new idiom
-          $translate.use(localeId);
-          // save a reference for the current language
-          $rootScope.language.selected = $rootScope.language.available[localeId];
-          // finally toggle dropdown
-          $rootScope.language.listIsOpen = ! $rootScope.language.listIsOpen;
-        }
-      };
-
-      $rootScope.language.init();
-
-    }
 })();
 /**=========================================================
  * Module: animate-enabled.js

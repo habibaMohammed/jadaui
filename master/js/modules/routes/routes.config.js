@@ -847,6 +847,15 @@
              
           })
 
+
+            .state('app.payesummary', {
+              url: '/payesummary',
+              title: 'PAYE  Report',
+                templateUrl: helper.basepath('payesummary.html')
+             
+          })
+
+
              .state('app.nhif', {
               url: '/nhif  reports',
               title: 'NHIF byproduct',

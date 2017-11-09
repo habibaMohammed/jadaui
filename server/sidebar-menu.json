@@ -155,10 +155,12 @@
 {
         "text": "Statutory ",
         "child": "fa fa-chevron-down",
-      
+    
 
         "submenu": [
+
          {"text": "PAYE", "sref": "app.paye" },
+                 {"text": "PAYE summary", "sref": "app.payesummary" },
          {"text": "NHIF", "sref": "app.nhif" },
              {"text": "NSSF", "sref": "app.nssf" },
               {"text": "HELB", "sref": "app.helb" }

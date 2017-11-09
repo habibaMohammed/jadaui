@@ -36,6 +36,7 @@
                vm.error='';
 
             if(vm.registerForm.$valid) {
+
               vm.account.$save(function(data){
 
             var response=angular.fromJson(data);
@@ -49,7 +50,10 @@
                    vm.error=response.Message;
               // vm.auth=true;
             }
-            ;});
+            ;},
+            function(){
+              vm.error = 'Server Request Error';
+            });
 
               // $http
               //   .post('api/account/register', {email: vm.account.email, password: vm.account.password})
@@ -65,14 +69,14 @@
               //     vm.authMsg = 'Server Request Error';
               //   });
             }
-            else {
-              // set as dirty if the user click directly to login so we show the validation messages
-              /*jshint -W106*/
-              vm.registerForm.password.$dirty = true;
-              vm.registerForm.account_password.$dirty = true;
-              // vm.registerForm.account_agreed.$dirty = true;
+            // else {
+            //   // set as dirty if the user click directly to login so we show the validation messages
+            //   /*jshint -W106*/
+            //   vm.registerForm.password.$dirty = true;
+            //   vm.registerForm.account_password.$dirty = true;
+            //   // vm.registerForm.account_agreed.$dirty = true;
               
-            }
+            // }
           };
         }
     }
