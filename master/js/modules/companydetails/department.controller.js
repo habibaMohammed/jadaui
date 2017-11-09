@@ -155,14 +155,23 @@ department.$remove().then(function () {
               $uibModalInstance.dismiss('cancel');
             };
 
+             
             $scope.dept=new DeptService();
            $scope.submitdept=function() {
+
+
            $scope.dept.$save().then(function(data){
+
               var response=angular.fromJson(data);
           
             if(response.Status=="1"){
+              
                      $scope.errorMsg=false;
+
                     $scope.SuccessMsg =response.Message;
+
+           
+
             }else{
            
                   $scope.SuccessMsg=false;
@@ -170,14 +179,23 @@ department.$remove().then(function () {
               // vm.auth=true;
             }
              $rootScope.$emit("CallLoadDepartment", {});
+        
+                // if ($scope.deptform) $scope.deptform.$setPristine();
+
 
            },
+   
             function() {
                $scope.SuccessMsg=false;
                  $scope.errorMsg = 'Server Request Error';
                 });
       
           };
+
+    //         $scope.reset = function() {
+    //   $scope.dept = {};
+    //   $scope.deptform.$setPristine();
+    // }
 
           $scope.submitdeptClose=function() {
            $scope.dept.$save().then(function(){

@@ -64,18 +64,23 @@
 <script type="text/ng-template" id="AddCostCenter.html">
   <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Add Cost Centres</h4></div><div class="modal-body"><!-- START panel-->
 
-    <form class="form-horizontal"  ng-controller="CostCenterController" >
+    <form class="form-horizontal" name="costcentre" novalidate=""   ng-controller="CostCenterController" >
 
      <div class="form-group">
       <label class="col-lg-3 control-label">Code</label>
       <div class="col-lg-9">
-       <input class="form-control" type="text" name="cost_code" ng-model="costcenter.code" placeholder="Cost Centre code"/>
+       <input class="form-control" type="text" name="cost_code" ng-model="costcenter.code" placeholder="Cost Centre code"  ng-pattern="/^[\w,]+$/" required="" />
+           <span class="text-danger" ng-show="costcentre.cost_code.$dirty &amp;&amp; costcentre.cost_code.$error.required">This field is required</span>
+               <span class="text-danger" ng-show="costcentre.cost_code.$dirty &amp;&amp; costcentre.cost_code.$error.pattern">No special characters allowed</span>
      </div>
    </div>
    <div class="form-group">
     <label class="col-lg-3 control-label">Descriptions</label>
     <div class="col-lg-9">
-     <input class="form-control" type="text" name="cost_description" ng-model="costcenter.description" placeholder="eg. the name of the Cost Centre"/>
+     <input class="form-control" type="text" name="cost_description" ng-model="costcenter.description" placeholder="eg. the name of the Cost Centre" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/" required="" />
+
+     <span class="text-danger" ng-show="costcentre.cost_description.$dirty &amp;&amp; costcentre.cost_description.$error.required">This field is required</span>
+               <span class="text-danger" ng-show="costcentre.cost_description.$dirty &amp;&amp; costcentre.cost_description.$error.pattern"> No special characters allowed </span>
    </div>
  </div>
 
