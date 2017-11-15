@@ -6,33 +6,33 @@
 <a href="server/jm.csv" class="btn btn-primary pull-right mr" type="button"> 
 
       <em class="fa fa-download fa-fw "></em>Download the csv format</a>
-      </div> --></h3>
+       --> </div></h3>
   
-<div class="panel panel-widget">
+<div class="panel panel-widget" ng-controller="LeaveProcessController">
    <div class="panel-body">
    <div class="col-lg-10">
    
-<form class="form-horizontal">
+<form class="form-horizontal" ng-submit="submitLeaveApplication()">
 
 <div class="form-group">
                   <label class="col-lg-3">Employee Number
 </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="empNumber"  ng-model="fempNumber" placeholder="Number"/>
+                     <input class="form-control" type="text"  name="empNumber"  ng-model="leavepost.employeeNumber" placeholder="Number"/>
                   </div>
                </div>
                 <div class="form-group">
                   <label class="col-lg-3 ">Full Name
 </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="empName"  ng-model="empName" placeholder="Name"/>
+                     <input class="form-control" type="text"  name="empName"  ng-model="leavepost.name" placeholder="Name"/>
                   </div>
                </div>
                <div class="form-group">
                   <label class="col-lg-3 ">Department
 </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="empDept" ng-model="empDept" placeholder="Department"/>
+                     <input class="form-control" type="text"  name="empDept" ng-model="leavepost.department" placeholder="Department"/>
                   </div>
                </div>
 
@@ -41,7 +41,7 @@
                         <label class="col-sm-3 ">Leave Type</label>
                         <div class="col-lg-5">
                        
-                    <select class="form-control " name="leaveType"  ng-model="leaveType">
+                    <select class="form-control " name="leaveType"  ng-model="leavepost.leaveType">
                               <option value="">Select Leave Type</option>
                               <option value="1">Annual</option>
                               <option value="2">Sick</option>
@@ -72,7 +72,7 @@
                    </label>
                    <div class="col-lg-3" ng-controller="DatepickerDemoCtrl as dpick">
                       <p class="input-group">
-                              <input class="form-control" type="text" name="ex_date" ng-model="ex_date" uib-datepicker-popup="{{dpick.format}}" ng-model="startDate"  is-open="dpick.opened" min-date="dpick.minDate" max-date="'2019-12-22'" uib-datepicker-options="dpick.dateOptions"
+                              <input class="form-control" type="text" name="ex_date" uib-datepicker-popup="{{dpick.format}}" ng-model="leavepost.startDate"  is-open="dpick.opened" min-date="dpick.minDate" max-date="'2019-12-22'" uib-datepicker-options="dpick.dateOptions"
                               date-disabled="dpick.disabled(date, mode)" close-text="Close" />
                               <span class="input-group-btn">
                                  <button class="btn btn-default" type="button" ng-click="dpick.open($event)">
@@ -88,7 +88,7 @@
                    </label>
                   <div class="col-lg-3" ng-controller="DatepickerDemoCtrl as dpick">
                       <p class="input-group">
-                              <input class="form-control" type="text" name="ex_date" ng-model="ex_date" uib-datepicker-popup="{{dpick.format}}" ng-model="endDate" is-open="dpick.opened" min-date="dpick.minDate" max-date="'2019-12-22'" uib-datepicker-options="dpick.dateOptions"
+                              <input class="form-control" type="text" name="ex_date"  uib-datepicker-popup="{{dpick.format}}" ng-model="leavepost.endDate" is-open="dpick.opened" min-date="dpick.minDate" max-date="'2019-12-22'" uib-datepicker-options="dpick.dateOptions"
                               date-disabled="dpick.disabled(date, mode)" close-text="Close" />
                               <span class="input-group-btn">
                                  <button class="btn btn-default" type="button" ng-click="dpick.open($event)">
@@ -154,7 +154,7 @@
                   <div class="form-group">
   <label class="col-lg-3 ">Comment:</label>
    <div class="col-lg-9">
-  <textarea class="form-control" name="leaveComment" ng-model="leaveComment" id="comment"></textarea>
+  <textarea class="form-control" name="leaveComment" ng-model="leavepost.comment" id="comment"></textarea>
   </div>
 </div> 
                    

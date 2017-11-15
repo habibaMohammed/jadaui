@@ -143,7 +143,7 @@
     "submenu": [
    
        {
-        "text": "Monthly ",
+        "text": "Payroll ",
         "child": "fa fa-chevron-down",
       
         
@@ -151,36 +151,36 @@
           {"text": "Payslips", "sref": "app.payslip" },
         
           {"text": "company summary", "sref": "app.companysummary" },
-           {"text": "company totals", "sref": "app.companytotals" },
-{
+           {"text": "company totals", "sref": "app.companytotals" }
+
+
+            
+        ]
+      },
+
+      {
         "text": "Statutory ",
         "child": "fa fa-chevron-down",
     
 
         "submenu": [
+          {"text": "Monthly",   "child": "fa fa-chevron-down",
 
-         {"text": "PAYE", "sref": "app.paye" },
+    "submenu": [
+    {"text": "PAYE", "sref": "app.paye" },
                  {"text": "PAYE summary", "sref": "app.payesummary" },
                {"text": "NHIF", "sref": "app.nhif" },
              {"text": "NSSF", "sref": "app.nssf" },
               {"text": "HELB", "sref": "app.helb" }
-     
+        
          
-        ]
-      },
-  {"text": "Scheduler", "sref": "app.scheduler" },
-  {"text": "Bank Files", "sref": "app.bankfiles" },
-  {"text": "Journals", "sref": "app.payroll-journals" },
-    {"text": "Leave", "sref": "app.leave" }
-            
-        ]
-      },
-             {
-        "text": "Annual  Reports",
        
-        "child": "fa fa-chevron-down",
-       
-        "submenu": [
+    ]
+  
+           },
+   {"text": "Annual",   "child": "fa fa-chevron-down",
+
+      "submenu": [
           {"text": "P9A", "sref": "app.p9a" },
           {
             "text": "P9B",
@@ -219,7 +219,24 @@
        
           }
         ]
-      }
+  
+           }
+
+
+        
+     
+         
+        ]
+
+
+      },
+
+
+  {"text": "Scheduler", "sref": "app.scheduler" },
+
+    {"text": "Leave", "sref": "app.leave" }
+
+           
 
     ]
   },

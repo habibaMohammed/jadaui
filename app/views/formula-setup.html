@@ -11,14 +11,18 @@
 
        
 
-<div class="container-fluid">
+<div class="container-fluid" ng-controller="FormulasController">
 <div class="panel panel-default">
-   <div class="panel-heading"> <h3 class="panel-title"></h3> </div>
+   <div class="panel-heading">   <div class=" clearfix buttons">
+                       <button class="btn btn-info pull-right mr" type="button" ng-click="open()">Add New</button>  
+                                                      
+                     
+                    </div> </div>
 
 
 
 
-   <div class="panel-body" ng-controller="FormulasController">
+   <div class="panel-body" >
 
          <div class="table-responsive">
          <table class="table table-striped" datatable="ng">
@@ -70,7 +74,7 @@
 
           
       </div>
-           <button class="btn btn-info pull-left mr" type="button" ng-click="open()">Add New</button>
+          <!--  <button class="btn btn-info pull-left mr" type="button" ng-click="open()">Add New</button> -->
           
          
          </div>

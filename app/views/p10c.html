@@ -57,12 +57,12 @@
                 </tr>
                 <tr>
                   <td>Employer's Name </td>
-                  <td>XYZ LIMITED</td>
+                  <td>{{ptencs.employer.employerName}}</td>
                   <td colspan="3"></td>
                 </tr>
                 <tr>
                   <td>Employer's P.I.N. </td>
-                  <td>P051393868P </td>
+                  <td>{{ptencs.employer.pinNumber}}</td>
                   <td colspan="3"></td>
                 </tr>
                 <tr>
@@ -85,26 +85,15 @@
                   <th></th>
                  
                </tr>
-               <tr>
-                  <td>JANUARY</td>
-                  <td>11125</td>
-                  <td>4400</td>
-                  <td></td>
+               <tr ng-repeat="ptenc in ptencs.p10CReportDataList">
+                  <td>{{ptenc.month}}</td>
+                  <td>{{ptenc.payeTax}}</td>
+                  <td>{{ptenc.penisionFundContributions}}</td>
+                  <td>{{ptenc.datePaid}}</td>
                   
                </tr>
-               <tr>
-                  <td>FEBRUARY</td>
-                  <td>11125</td>
-                  <td>4400</td>
-                  <td></td>
-                 
-               </tr>
-               <tr>
-                  <td>MARCH</td>
-                  <td>11125</td>
-                  <td>4400</td>
-                  <td></td>
-               </tr>
+             
+              
 
                <tr>
                   <td colspan="5" height="30"></td>

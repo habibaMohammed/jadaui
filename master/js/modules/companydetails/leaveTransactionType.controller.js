@@ -24,6 +24,7 @@
 
 
 $scope.types=leaveTTypeService.query();
+console.log($scope.types);
 
 
 

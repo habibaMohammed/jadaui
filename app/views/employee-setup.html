@@ -538,8 +538,8 @@
                   <label class="col-lg-3 ">Bank Code
                    </label>
                   <div class="col-lg-9">
-                    <select  class="form-control" name="bank_code" ng-model="empMaster.bankCode" ng-options="bank.bankCode as bank.bankCode for bank in bankcodes " ng-change="updateBankCodes(empMaster.bankCode)">
-    <option value="" disabled selected >Bank Codes</option>
+                    <select  class="form-control" name="bank_code" ng-model="empMaster.bankCode" ng-options="bank.bankCode as bank.bankCode for bank in bankcodes | unique:'bankCode' " ng-change="updateBankCodes(empMaster.bankCode)">
+    <option value="" disabled selected > Select Bank Code</option>
 
  
   </select>
@@ -552,8 +552,8 @@
                   <label class="col-lg-3 ">Bank Name
                    </label>
                   <div class="col-lg-9">
-                         <select  class="form-control" name="bankName" ng-model="empMaster.bankName" ng-options="bank.bankName as bank.bankName for bank in  bankBranchName" >
-    <option value="" disabled selected >Bank Codes</option>
+                         <select  class="form-control" name="bankName" ng-model="empMaster.bankName" ng-options="bank.bankName as bank.bankName for bank in  bankBranchName | unique:'bankName'" >
+    <option value="" disabled selected >Select Bank Name</option>
 
  
   </select>
@@ -585,7 +585,7 @@
                    " /> -->
 
                          <select  class="form-control" name="bankBranch" ng-model="empMaster.bankBranch" ng-options="bank.branchName as bank.branchName for bank in bankBranchName" >
-    <option value="" disabled selected >Bank Codes</option>
+    <option value="" disabled selected > Select Bank Branch</option>
 
  
   </select>

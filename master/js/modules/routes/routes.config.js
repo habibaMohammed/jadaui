@@ -910,7 +910,8 @@
               url: '/bulktransactions',
               title: 'Bulk transaction item input',
                 templateUrl: helper.basepath('bulk-input.html'),
-                    resolve: helper.resolveFor('angularFileUpload', 'filestyle')
+                    resolve: helper.resolveFor('angularFileUpload', 'filestyle'),
+                    resolve: helper.resolveFor('ui.grid')
              
           })
 
