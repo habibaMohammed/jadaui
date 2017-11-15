@@ -536,20 +536,31 @@
                      
                 
 
- <div class="form-group">
-                  <label class="col-lg-3 ">Bank Name
-                   </label>
-                  <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="bank_name" ng-model="employee.bankName" placeholder="Bank Name
-                   " />
-                  </div>
-               </div>
-               <div class="form-group">
+
+                <div class="form-group">
                   <label class="col-lg-3 ">Bank Code
                    </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="bank_code"  ng-model="employee.bankCode" placeholder="Bank Code
-                   " />
+                    <select  class="form-control" name="bank_code" ng-model="employee.bankCode" ng-options="bank.bankCode as bank.bankCode for bank in bankcodes | unique:'bankCode' " ng-change="updateBankCodes(employee.bankCode)">
+    <option value="" disabled selected > Select Bank Code</option>
+
+ 
+  </select>
+               
+                     <!-- <input class="form-control" type="text"  name="bank_code"  ng-model="empMaster.bankCode" placeholder="Bank Code
+                   " /> -->
+                  </div>
+               </div>
+
+                    <div class="form-group">
+                  <label class="col-lg-3 ">Bank Name
+                   </label>
+                  <div class="col-lg-9">
+                         <select  class="form-control" name="bankName" ng-model="employee.bankName" ng-options="bank.bankName as bank.bankName for bank in  bankBranchName | unique:'bankName'" >
+    <option value="" disabled selected >Select Bank Name</option>
+
+ 
+  </select>
                   </div>
                </div>
 
@@ -570,16 +581,22 @@
                   </div>
                </div>
          
+   
+              
          <div class="form-group">
                   <label class="col-lg-3 "> Bank Branch Name
                    </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="branch_name" ng-model="employee.bankBranch" placeholder="Bank Branch Name
-                   " />
+                    <!--  <input class="form-control" type="text"  name="branch_name" ng-model="empMaster.bankBranch" placeholder="Bank Branch Name
+                   " /> -->
+
+                         <select  class="form-control" name="bankBranch" ng-model="employee.bankBranch" ng-options="bank.branchName as bank.branchName for bank in bankBranchName" >
+    <option value="" disabled selected > Select Bank Branch</option>
+
+ 
+  </select>
                   </div>
                </div>
-             
-              
                      
               
                </div>

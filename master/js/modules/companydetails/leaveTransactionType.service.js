@@ -1,14 +1,18 @@
 
 
+
+
 (function() {
     'use strict';
 
     angular
         .module('app.companydetails')
-        .factory('leaveTTypeService',  function($resource) {
-                // return $resource('https://jsonplaceholder.typicode.com/users/:user', {user: '@user'});
-        //return $resource('http://localhost:9418/jada/payroll/CreateEmployeeGroups/');
-     var data=$resource('https://jsonplaceholder.typicode.com/users/:user', {user: '@user'},
+        .factory('leaveTTypeService', leaveTTypeService);
+
+    leaveTTypeService.$inject = ['$resource','jadaApiUrl'];
+    function leaveTTypeService($resource,jadaApiUrl) {
+           //return $resource('http://localhost:9418/jada/payroll/CreateEmployeeGroups/');
+     var data=$resource(jadaApiUrl+'api/leaveTransactionType/:id', {id: '@id'},
     { 'get':    {method:'GET', isArray:false},
   'save':   {method:'POST'},
   'query':  {method:'GET', isArray:true},
@@ -17,5 +21,8 @@
   'delete': {method:'DELETE'} 
 });
      return data
-    });
+          
+       
+    }
+
 })();

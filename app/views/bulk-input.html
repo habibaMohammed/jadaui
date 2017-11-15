@@ -1,6 +1,36 @@
 <h3>Batch inputs 
 </h3>
-  
+<!-- <script type="text/javascript">
+    $(function() {
+        $('textarea[name=excel_data]').keyup(function() {
+            var data = $(this).val();
+            var rows = data.split("\n");
+            var table = $('<table />');    
+            for(var y in rows) {
+                var cells = rows[y].split("\t");
+                var row = $('<tr />');
+                for(var x in cells) {
+                    row.append('<td>'+cells[x]+'</td>');
+                }
+                table.append(row);
+            }
+            $('#excel_table').html(table);
+        });
+    });
+    </script> -->
+<!-- 
+        <textarea  class="form-control"   name="excel_data" /></textarea>
+    <div id="excel_table"> table here</div>
+   -->
+
+<!-- <div class="panel">
+   <div class="panel-body" ng-controller="BulkImportController">
+     <form><input type="file" class="file-chooser" id="files" name="files[]" /></form>
+  <div ui-grid="gridOptions" ui-grid-importer class="grid" ui-grid-edit ui-grid-row-edit></div>
+
+   </div>
+ </div> -->
+
 <div class="panel">
    <div class="panel-body" ng-controller="EmpBulkTransController">
       <div class="clearfix">
@@ -12,7 +42,12 @@
       <em class="fa fa-download fa-fw "></em>Download the csv format</a>
       </div>
 
-     
+
+  <div >
+      <form><input type="file" class="file-chooser" id="files" name="files[]" /></form>
+      <div ui-grid="gridOptions" ui-grid-importer class="grid" ui-grid-edit ui-grid-row-edit></div>
+    </div>
+ 
  <script type="text/ng-template" id="EmpBulkTransaction.html">
               <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Upload</h4></div>
  <div class="modal-body">
@@ -86,7 +121,7 @@
                
             </div>
          </div>
-      </div> 
+
   
       <div class="clearfix">
          <button class="btn btn-info pull-left mr" type="button">Edit</button>
@@ -105,5 +140,3 @@
 
 
 
-       
-   </div>

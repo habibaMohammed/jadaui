@@ -121,14 +121,14 @@ COL D - G</td>
                   <td>(K)</td>
                   <td>(L)</td>
                </tr>
-               <tr>
-                  <td>January</td>
-                  <td>50000.00_</td>
-                  <td>0.00_</td>
-                  <td >0.00_</td>
-                  <td >50000.00_</td>
-                  <td>15000.00_</td>
-                  <td>2700.00_</td>
+               <tr  ng-repeat="p9a in p9as.p9aReportDataList">
+                  <td>{{p9a.month}}</td>
+                  <td>{{p9a.basicPay}}</td>
+                  <td>{{p9a.nonCashBenefits}}</td>
+                  <td >p9a.housingNetValue</td>
+                  <td >{{p9a.totalGrossPay}}</td>
+                  <td>{{p9a.definedContributionRetirementScheme}}</td>
+                  <td>{{p9a.definedContributionRetirementScheme}}</td>
                   <td >20000.00_</td>
                   <td>0.00_</td>
                   <td>200.00_</td>

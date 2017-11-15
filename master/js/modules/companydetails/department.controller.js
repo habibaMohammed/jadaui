@@ -179,7 +179,7 @@ department.$remove().then(function () {
               // vm.auth=true;
             }
              $rootScope.$emit("CallLoadDepartment", {});
-        
+   
                 // if ($scope.deptform) $scope.deptform.$setPristine();
 
 
@@ -188,9 +188,11 @@ department.$remove().then(function () {
             function() {
                $scope.SuccessMsg=false;
                  $scope.errorMsg = 'Server Request Error';
-                });
+                }).finally(function(){     $scope.dept = "";
+      $scope.deptform.$setPristine();
+        });
       
-          };
+          }
 
     //         $scope.reset = function() {
     //   $scope.dept = {};

@@ -7,9 +7,9 @@
    <div class="col-lg-8">
       <form class="form-inline">
   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-    <div class="input-group-addon">Period</div>
+    <div class="input-group-addon">year</div>
   
-         <select name="period" class="slider slider-lg form-control" ng-model="user.period" ng-options="period.id as period.period for period in periods" >
+         <select name="period" class="slider slider-lg form-control" ng-model="user.period" ng-options="period.id as period.year for period in periods" >
         <option value="" disabled selected>Periods</option>
   </select>
   </div>
@@ -54,12 +54,12 @@
                 </tr>
                 <tr>
                   <td>Employer's Name </td>
-                  <td>XYZ LIMITED</td>
+                  <td>{{ptens.employer.employerName}}</td>
                   <td colspan="3"></td>
                 </tr>
                 <tr>
                   <td>Employer's P.I.N. </td>
-                  <td>P051393868P </td>
+                  <td>{{ptens.employer.pinNumber}} </td>
                   <td colspan="3"></td>
                 </tr>
                 <tr>
@@ -82,27 +82,15 @@
                   <th>(KES)</th>
                   <th></th>
                </tr>
-               <tr>
-                  <td>2002</td>
-                  <td>Iphone 6s - 128Gb</td>
-                  <td>5</td>
-                  <td>$ 500</td>
-                  <td>$ 2500</td>
+               <tr ng-repeat="pten in ptens.p10ReportDataList">
+                  <td>{{pten.month}}</td>
+                  <td>{{pten.payeTax}}</td>
+                  <td>{{pten.auditTax}}</td>
+                  <td>{{pten.fringeBenefitTax}}</td>
+                  <td>{{pten.datePaid}}</td>
                </tr>
-               <tr>
-                  <td>3010</td>
-                  <td>Ipad 11z - 512Gb</td>
-                  <td>1</td>
-                  <td>$ 650</td>
-                  <td>$ 650</td>
-               </tr>
-               <tr>
-                  <td>3009</td>
-                  <td>iMac ProRetina 17</td>
-                  <td>6</td>
-                  <td>$ 1100</td>
-                  <td>$ 6600</td>
-               </tr>
+              
+           
 
                <tr>
                   <td colspan="5" height="30"></td>

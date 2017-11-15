@@ -11,8 +11,8 @@
         .module('app.bootstrapui')
         .controller('LeaveController', LeaveController);
 
-   LeaveController.$inject = ['$scope','$rootScope', '$uibModal','leaveService','$stateParams', '$state'];
-    function LeaveController($scope, $rootScope, $uibModal, leaveService,$stateParams, $state) {
+   LeaveController.$inject = ['$scope','$rootScope', '$uibModal','leaveService','GetleaveTypeService','$stateParams', '$state'];
+    function LeaveController($scope, $rootScope, $uibModal, leaveService,GetleaveTypeService,$stateParams, $state) {
         var vm = this;
 
         activate();
@@ -21,14 +21,15 @@
 
         function activate() {
 
+ var SuccessMsg;
+ var errorMsg;
+
+$scope.leaves=GetleaveTypeService.query();
 
 
-$scope.leaves=leaveService.query();
-
-
-
+console.log($scope.leaves);
    $scope.loadLeaveTypes = function () {
-       $scope.leaves=leaveService.query();
+       $scope.leaves=GetleaveTypeService.query();
 
    }
 
@@ -110,7 +111,7 @@ $scope.show = function(leaveType) {
            $scope.leave.$save().then(function(data){
 
              var response=angular.fromJson(data);
-            console.log(response.Message);
+            console.log($scope.leave);
             // $scope.authMsg=response.Message;
             if(response.Status=="1"){
                      $scope.errorMsg=false;
@@ -145,9 +146,24 @@ $scope.show = function(leaveType) {
 
         }
 
-             ModalInstanceCtrl.$inject = ['$scope', '$rootScope','$uibModalInstance','leaveService','leaveType'];
-          function ModalInstanceCtrl($scope, $rootScope,$uibModalInstance, leaveService,leaveType) {
-          $scope.leave=leaveType;
+             ModalInstanceCtrl.$inject = ['$scope','$http', '$rootScope','$uibModalInstance','GetleaveTypeService','leaveService','leaveType','jadaApiUrl','$resource'];
+          function ModalInstanceCtrl($scope, $http,$rootScope,$uibModalInstance, GetleaveTypeService,leaveService,leaveType,jadaApiUrl,$resource) {
+ var id=leaveType.id;
+          $scope.leave=GetleaveTypeService.get({id:1});
+           // $http.get(jadaApiUrl+'api/leavetype/'+1).success(function(data) {
+           //    $scope.leave= data;
+
+           //  });
+
+
+           // var postingsResource = $resource(jadaApiUrl+'api/leavetype/update/:id', 
+           //                                     {id: 1}, 
+           //                                   { 'update': { method:'PUT' }});
+          console.log(id);
+          console.log($scope.leave);
+
+            
+
             $scope.ok = function () {
               $uibModalInstance.close('closed');
             };
@@ -156,13 +172,16 @@ $scope.show = function(leaveType) {
               $uibModalInstance.dismiss('cancel');
             };
             
-              
+              var leaveUpdated=GetleaveTypeService.get({id:1});
 
                $scope.UpdateLeaveTypes=function(leave){
- 
-               leave.$update().then(function(){
-                   $rootScope.$emit("CallLoadLeaveTypes", {});
-                     });
+           leaveService.update({id: 1}, $scope.leave);
+            $rootScope.$emit("CallLoadLeaveTypes", {});
+
+           // leave.$update().then(function(){
+           //         // $rootScope.$emit("CallLoadEmployeeCategory", {});
+           //  });
+
                 };
 
           }

@@ -5,8 +5,8 @@
         .module('app.reports')
         .controller('P10cController', P10cController);
 
-    P10cController.$inject = ['$scope','$http','$resource', 'LeaveReportService','jadaApiUrl'];
-    function P10cController($scope,$http,$resource,LeaveReportService,jadaApiUrl) {
+    P10cController.$inject = ['$scope','$http','$resource', 'P10cService','jadaApiUrl'];
+    function P10cController($scope,$http,$resource,P10cService,jadaApiUrl) {
         var vm = this;
 
         activate();
@@ -16,7 +16,8 @@
         function activate() {
 
 
-        $scope.leaves=LeaveReportService.query();
+        $scope.ptencs=P10cService.get({year:2017});
+        console.log($scope.ptencs);
 
           
               $http.get(jadaApiUrl+'api/period').success(function(data) {

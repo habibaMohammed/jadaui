@@ -6,9 +6,9 @@
    <div class="col-lg-8">
       <form class="form-inline">
   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-    <div class="input-group-addon">Period</div>
+    <div class="input-group-addon">year</div>
   
-         <select name="period" class="slider slider-lg form-control" ng-model="user.period" ng-options="period.id as period.period for period in periods" >
+         <select name="period" class="slider slider-lg form-control" ng-model="user.period" ng-options="period.id as period.year for period in periods" >
         <option value="" disabled selected>Periods</option>
   </select>
   </div>
@@ -48,11 +48,11 @@
                  <tr>
                  
                  
-                  <td colspan="2">EMPLOYER'S NAME. </td>
-                  <td colspan="2"> XYZ LIMITED </td>
-                 <td colspan="3"></td>
+                  <td >EMPLOYER'S NAME. </td>
+                  <td colspan="2">{{ptenbs.employer.employerName}}</td>
+                 <td colspan="2"></td>
                  <td >EMPLOYER'S PIN </td>
-                  <td colspan="2">P051393868P</td>
+                  <td colspan="2">{{ptenbs.employer.pinNumber}}</td>
                 </tr>
       
                
@@ -69,7 +69,7 @@
                
                 
                 <tr>
-                  <th colspan="2">EMPLOYEE'S NAME</th>
+                  <th colspan="2" style="width: 15%">EMPLOYEE'S NAME</th>
                   <th>OPENING LOAN BALANCE AT 1ST JANUARY</th>
                   <th>ADDITIONAL LOAN</th>
                   <th>DATE LOAN ADVANCED</th>
@@ -80,15 +80,15 @@
                   
                  
                </tr>
-               <tr>
-                  <td colspan="2">Esther Namalome Amani</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>150</td>
-                  <td>45</td>
+               <tr ng-repeat="ptenb in ptenbs.p10BReportDataList">
+                  <td colspan="2"  style="width: 20%">{{ptenb.employeeName}}</td>
+                  <td>{{ptenb.openingLoanBalanceAt1stJan}}</td>
+                  <td>{{ptenb.additionalLoan}}</td>
+                  <td>{{ptenb.dateLoanAdvanced}}</td>
+                  <td>{{ptenb.employersInterestRate}}</td>
+                  <td>{{ptenb.loanBalanceAsAt31stDec}}</td>
+                  <td>{{ptenb.taxableFringeBenefitValuePerYear}}</td>
+                  <td>{{ptenb.fringeBenefitTaxPaid}}</td>
                   
                </tr>
                <tr>
@@ -97,8 +97,8 @@
                 <tr>
                   <td colspan="7"></td>
                   
-                  <td>150</td>
-                  <td>45</td>
+               <td>{{getTotal('taxableFringeBenefitValuePerYear')}}</td>
+                  <td>{{getTotal('fringeBenefitTaxPaid')}}</td>
                   
                  
                </tr>

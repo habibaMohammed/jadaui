@@ -6,9 +6,9 @@
    <div class="col-lg-8">
       <form class="form-inline">
   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-    <div class="input-group-addon">Period</div>
+    <div class="input-group-addon">Year</div>
   
-         <select name="period" class="slider slider-lg form-control" ng-model="user.period" ng-options="period.id as period.period for period in periods" >
+         <select name="period" class="slider slider-lg form-control" ng-model="user.period" ng-options="period.year as period.year for period in periods  | unique:'year'" >
         <option value="" disabled selected>Periods</option>
   </select>
   </div>
@@ -56,7 +56,7 @@
                 <tr>
                  <td></td>
                   <td colspan="2">EMPLOYER'S PIN </td>
-                  <td colspan="2">P051393868P</td>
+                  <td colspan="2">{{ptends.employer.pinNumber}}</td>
                    
                   
                 </tr>
@@ -64,7 +64,7 @@
                  
                   <td></td>
                   <td colspan="2">EMPLOYER'S NAME. </td>
-                  <td colspan="2"> XYZ LIMITED </td>
+                  <td colspan="2"> {{ptends.employer.employerName}} </td>
                  
                 </tr>
                 <!-- <tr>
@@ -85,23 +85,15 @@
                   
                  
                </tr>
-               <tr>
-                  <td>A123456789U</td>
-                  <td colspan="2">Esther Namalome  Amani</td>
+               <tr ng-repeat="ptend in ptends.p10DReportDataList">
+                  <td>{{ptend.employeePin}}</td>
+                  <td colspan="2">{{ptend.employeeName}}</td>
                  
-                  <td>150000</td>
-                  <td>24367.2</td>
+                  <td>{{ptend.totalEmoluments}}</td>
+                  <td>{{ptend.totalPayeDeducted}}</td>
                   
                </tr>
-               <tr>
-                  <td>A456789123W</td>
-                  <td colspan="2">Andrew Gacheru Njenga</td>
-                
-                  <td>150000</td>
-                  <td>24367.2</td>
-                  
-                 
-               </tr>
+             
             
 
                <tr>
