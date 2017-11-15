@@ -3,10 +3,10 @@
 
     angular
         .module('app.transactions')
-        .factory('LeaveProcessingService', LeaveProcessingService);
+        .factory('LeaveApprovalService', LeaveApprovalService);
 
-    LeaveProcessingService.$inject = ['$resource','jadaApiUrl'];
-    function LeaveProcessingService($resource,jadaApiUrl) {
+    LeaveApprovalService.$inject = ['$resource','jadaApiUrl'];
+    function LeaveApprovalService($resource,jadaApiUrl) {
      var data=$resource(jadaApiUrl+'leaveProcessing/:id', {id: '@id'},
     { 'get':    {method:'GET', isArray:false},
   'save':   {method:'POST'},

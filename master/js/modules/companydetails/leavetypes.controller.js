@@ -11,8 +11,8 @@
         .module('app.bootstrapui')
         .controller('LeaveController', LeaveController);
 
-   LeaveController.$inject = ['$scope','$rootScope', '$uibModal','leaveService','GetleaveTypeService','$stateParams', '$state'];
-    function LeaveController($scope, $rootScope, $uibModal, leaveService,GetleaveTypeService,$stateParams, $state) {
+   LeaveController.$inject = ['$scope','$rootScope', '$uibModal','leaveService','$stateParams', '$state'];
+    function LeaveController($scope, $rootScope, $uibModal, leaveService,$stateParams, $state) {
         var vm = this;
 
         activate();
@@ -24,12 +24,12 @@
  var SuccessMsg;
  var errorMsg;
 
-$scope.leaves=GetleaveTypeService.query();
+$scope.leaves=leaveService.query();
 
 
 console.log($scope.leaves);
    $scope.loadLeaveTypes = function () {
-       $scope.leaves=GetleaveTypeService.query();
+       $scope.leaves=leaveService.query();
 
    }
 
@@ -146,10 +146,10 @@ $scope.show = function(leaveType) {
 
         }
 
-             ModalInstanceCtrl.$inject = ['$scope','$http', '$rootScope','$uibModalInstance','GetleaveTypeService','leaveService','leaveType','jadaApiUrl','$resource'];
-          function ModalInstanceCtrl($scope, $http,$rootScope,$uibModalInstance, GetleaveTypeService,leaveService,leaveType,jadaApiUrl,$resource) {
+             ModalInstanceCtrl.$inject = ['$scope','$http', '$rootScope','$uibModalInstance','leaveService','leaveType','jadaApiUrl','$resource'];
+          function ModalInstanceCtrl($scope, $http,$rootScope,$uibModalInstance,leaveService,leaveType,jadaApiUrl,$resource) {
  var id=leaveType.id;
-          $scope.leave=GetleaveTypeService.get({id:1});
+          $scope.leave=leaveService.get({id:id});
            // $http.get(jadaApiUrl+'api/leavetype/'+1).success(function(data) {
            //    $scope.leave= data;
 
@@ -172,15 +172,31 @@ $scope.show = function(leaveType) {
               $uibModalInstance.dismiss('cancel');
             };
             
-              var leaveUpdated=GetleaveTypeService.get({id:1});
+              // var leaveUpdated=GetleaveTypeService.get({id:1});
 
                $scope.UpdateLeaveTypes=function(leave){
-           leaveService.update({id: 1}, $scope.leave);
-            $rootScope.$emit("CallLoadLeaveTypes", {});
+           // leaveService.update({id: 1}, $scope.leave);
+           //  $rootScope.$emit("CallLoadLeaveTypes", {});
 
-           // leave.$update().then(function(){
-           //         // $rootScope.$emit("CallLoadEmployeeCategory", {});
-           //  });
+           leave.$update().then(function(data){
+                     var response=angular.fromJson(data);
+            console.log($scope.leave);
+            // $scope.authMsg=response.Message;
+            if(response.Status=="1"){
+                     $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+                     $scope.leave=leaveService.get({id:id});
+            }else{
+           
+                  $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+          
+            }
+             $rootScope.$emit("CallLoadLeaveTypes", {});
+            }, function() {
+                $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
 
                 };
 

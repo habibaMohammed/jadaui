@@ -77,6 +77,10 @@
                       <button class="btn btn-warning btn-sm mr" type="reset">Cancel</button>
                   </div>
                </div>
+
+
+                      <div class="text-center text-success" margin-top="md" ng-show="SuccessMsg">{{SuccessMsg}}</div>
+             <div class="text-center text-danger"  margin-top="md" ng-show="errorMsg">{{errorMsg}}</div>
             </form>
 <!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">OK</button></div>
          </script>
@@ -102,13 +106,13 @@
                   <label class="col-lg-3 control-label">Transaction Type
 </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="trans_type" ng-model="type.type" placeholder="Enter Transaction Type"/>
+                     <input class="form-control" type="text"  name="trans_type" ng-model="type.code" placeholder="Enter Transaction Type"/>
                   </div>
                </div>
                <div class="form-group">
                   <label class="col-lg-3 control-label">Trasaction Description</label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" name="trans_desc" ng-model="type.username"  placeholder="Enter Trasaction Description"/>
+                     <input class="form-control" type="text" name="trans_desc" ng-model="type.description"  placeholder="Enter Trasaction Description"/>
                   </div>
                </div>
             
@@ -122,6 +126,10 @@
                       <button class="btn btn-warning btn-sm" type="reset">Reset</button>
                   </div>
                </div>
+
+
+                      <div class="text-center text-success" margin-top="md" ng-show="SuccessMsg">{{SuccessMsg}}</div>
+             <div class="text-center text-danger"  margin-top="md" ng-show="errorMsg">{{errorMsg}}</div>
             </form>
 <!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
          </script>

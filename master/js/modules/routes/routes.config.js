@@ -674,6 +674,11 @@
               title: 'payroll-details',
               templateUrl: helper.basepath('leave-setup.html')
           })
+              .state('app.leave-approve', {
+              url: '/leave_approve',
+              title: 'Leave approval',
+              templateUrl: helper.basepath('leave-approve.html')
+          })
 
               .state('app.Leave-transaction', {
               url: '/Leave-transaction',
