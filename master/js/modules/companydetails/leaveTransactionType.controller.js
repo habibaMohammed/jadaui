@@ -21,6 +21,8 @@
 
         function activate() {
 
+ var SuccessMsg;
+ var errorMsg;
 
 
 $scope.types=leaveTTypeService.query();
@@ -148,7 +150,11 @@ $scope.show = function(transaction) {
 
              ModalInstanceCtrl.$inject = ['$scope', '$rootScope','$uibModalInstance','leaveTTypeService','transaction'];
           function ModalInstanceCtrl($scope, $rootScope,$uibModalInstance, leaveTTypeService,transaction) {
-          $scope.type=transaction;
+
+             var id=transaction.id;
+            $scope.type=leaveTTypeService.get({id:id});
+          // $scope.type=transaction;
+          console.log(id);
             $scope.ok = function () {
               $uibModalInstance.close('closed');
             };

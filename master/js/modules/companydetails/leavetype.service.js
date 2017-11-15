@@ -29,7 +29,7 @@
 
     leaveService.$inject = ['$resource','jadaApiUrl'];
     function leaveService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/leavetype/update/:id', {id: '@id'},
+     var data=$resource(jadaApiUrl+'api/leavetype/:id', {id: '@id'},
     { 'get':    {method:'GET', isArray:false},
   'save':   {method:'POST'},
   'query':  {method:'GET', isArray:true},
