@@ -10,8 +10,8 @@
         .module('app.transactions')
         .controller('LeaveApprovalController', LeaveApprovalController);
 
-    LeaveApprovalController.$inject = ['$scope','$http', '$rootScope','$uibModal','employeePostingService','GetemployeeService', '$state','$resource','jadaApiUrl'];
-    function LeaveApprovalController($scope,$http, $rootScope, $uibModal, employeePostingService,GetemployeeService, $state,$resource,jadaApiUrl) {
+    LeaveApprovalController.$inject = ['$scope','$http', '$rootScope','$uibModal', '$state','$resource','jadaApiUrl'];
+    function LeaveApprovalController($scope,$http, $rootScope, $uibModal, $state,$resource,jadaApiUrl) {
         var vm = this;
 
         activate();
@@ -52,7 +52,7 @@
  
 
 
- $scope.transactions=employeePostingService.query();
+ // $scope.transactions=employeePostingService.query();
 
 
 
@@ -73,78 +73,57 @@
 
 
 
-    $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
+//     $http.get(jadaApiUrl+'api/period').success(function(data) {
+//               $scope.periods = data;
 
-            });
+//             });
 
-$http.get(jadaApiUrl+'api/department').success(function(data) {
-              $scope.departments = data;
+// $http.get(jadaApiUrl+'api/department').success(function(data) {
+//               $scope.departments = data;
 
-            });
+//             });
 
-$http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
+// $http.get(jadaApiUrl+'api/employee').success(function(data) {
+//               $scope.employees = data;
           
-            });
+//             });
 
 
-   $http.get(jadaApiUrl+'api/payrollcode').success(function(data) {
-               $scope.pcodes = data;
+//    $http.get(jadaApiUrl+'api/payrollcode').success(function(data) {
+//                $scope.pcodes = data;
          
 
-            });
-
-$scope.codeChange=function(id){
-              
-              for(var r=0;r<$scope.pcodes.length;r++){
-
-                if(id==$scope.pcodes[r].id){
-                  $scope.description=$scope.pcodes[r].description;
-                }
-
-              }
-
-            }
-
- // $scope.departments = [];
- //          $scope.loaddepts = function() {
- //            return  $scope.departments.length ? null : $http.get('http://localhost:56135/api/department').success(function(data) {
- //              $scope.departments = data;
- //            });
- //          };
-
-
-// $scope.loaddepts();
+//             });
 
 
 
 
-        $scope.delete= function (transaction) {
-                  transaction.$remove().then(function () {
-                   $scope.loadTransactions ();
-            });
-            }
+
+        // $scope.delete= function (transaction) {
+        //           transaction.$remove().then(function () {
+        //            $scope.loadTransactions ();
+        //     });
+        //     }
           
-          $scope.open = function (size) {
+          // $scope.open = function (size) {
 
-            var modalInstance = $uibModal.open({
-              templateUrl: 'addTransactions.html',
-              controller: ModalOpenFormulaInstanceCtrl,
-              size: size
-            });
-
-
+          //   var modalInstance = $uibModal.open({
+          //     templateUrl: 'addTransactions.html',
+          //     controller: ModalOpenFormulaInstanceCtrl,
+          //     size: size
+          //   });
 
 
 
-            var state = $('#modal-state');
-            modalInstance.result.then(function () {
-              state.text('Modal dismissed with OK status');
-            }, function () {
-              state.text('Modal dismissed with Cancel status');
-            });
-          };
+
+
+          //   var state = $('#modal-state');
+          //   modalInstance.result.then(function () {
+          //     state.text('Modal dismissed with OK status');
+          //   }, function () {
+          //     state.text('Modal dismissed with Cancel status');
+          //   });
+          // };
 
 
 
@@ -173,8 +152,8 @@ $scope.show = function(trans) {
           // Please note that $uibModalInstance represents a modal window (instance) dependency.
           // It is not the same as the $uibModal service used above.
 
-          ModalOpenFormulaInstanceCtrl.$inject = ['$scope', '$http','$rootScope','$uibModalInstance','employeePostingService','jadaApiUrl'];
-          function ModalOpenFormulaInstanceCtrl($scope, $http,$rootScope,$uibModalInstance, employeePostingService,jadaApiUrl) {
+          ModalOpenFormulaInstanceCtrl.$inject = ['$scope', '$http','$rootScope','$uibModalInstance','jadaApiUrl'];
+          function ModalOpenFormulaInstanceCtrl($scope, $http,$rootScope,$uibModalInstance,jadaApiUrl) {
           
             $scope.ok = function () {
               $uibModalInstance.close('closed');
@@ -183,7 +162,7 @@ $scope.show = function(trans) {
             $scope.cancel = function () {
               $uibModalInstance.dismiss('cancel');
             };
-            $scope.transaction=new employeePostingService();
+            // $scope.transaction=new employeePostingService();
              $scope.submitTransaction=function() {
           $scope.transaction.$save().then(function(data){
              var response=angular.fromJson(data);

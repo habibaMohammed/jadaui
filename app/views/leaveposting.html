@@ -12,14 +12,25 @@
    <div class="panel-body">
    <div class="col-lg-10">
    
-<form class="form-horizontal" ng-submit="submitLeaveApplication()">
+<form class="form-horizontal">
+
+  <div class="form-group">
+                  <label class="col-lg-3">Period
+</label>
+                  <div class="col-lg-9">
+                    <!--  <input class="form-control" type="text"  name="empNumber"  ng-model="leavepost.employeeNumber" placeholder="Number"/> -->
+                      <select class="form-control" name="empNumber" ng-model="leavepost.period" ng-options="period.id as period.period for period in periods">
+    <option value="" disabled selected>Periods</option>
+  </select>
+                  </div>
+               </div>
 
 <div class="form-group">
                   <label class="col-lg-3">Employee Number
 </label>
                   <div class="col-lg-9">
                     <!--  <input class="form-control" type="text"  name="empNumber"  ng-model="leavepost.employeeNumber" placeholder="Number"/> -->
-                      <select class="form-control" name="empNumber" ng-model="leavepost.employeeNumber" ng-options="employee.employeeNumber as employee.employeeNumber for employee in employees" ng-change="employeeChange(leavepost.employeeNumber)">
+                      <select class="form-control" name="empNumber" ng-model="leavepost.employee" ng-options="employee.id as employee.employeeNumber+'-'+ employee.firstName+' '+employee.lastName for employee in employees" ng-change="employeeChange(leavepost.employee)">
     <option value="" disabled selected>All Employees</option>
   </select>
                   </div>
@@ -38,22 +49,36 @@
 </label>
                   <div class="col-lg-9">
                      <input class="form-control" type="text"  name="empDept" ng-model="department" placeholder="Department" disabled=""/>
+                    
                   </div>
                </div>
 
+
+<!-- 
+<div class="form-group">
+        <div class="col-lg-9">
+                    
+                      <input class="form-control" type="hidden"  name="empDept" ng-model="leavepost.approvalComment" placeholder="Department" />
+                       
+                  </div>
+               </div>
+               <div class="form-group">
+         <div class="col-lg-9">
+                   
+                       <input class="form-control" type="hidden"  name="empDept" ng-value="false" ng-model="leavepost.isApproved" placeholder="Department"/>
+                  </div>
+               </div> -->
                 
                 <div class="form-group">
                         <label class="col-sm-3 ">Leave Type</label>
                         <div class="col-lg-5">
                        
-                    <select class="form-control " name="leaveType"  ng-model="leavepost.leaveType">
-                              <option value="">Select Leave Type</option>
-                              <option value="1">Annual</option>
-                              <option value="2">Sick</option>
-                              <option value="3">Exam</option>
-                              <option value="4">Study</option>
+                  
 
-                           </select>
+                                <select class="form-control" name="empNumber" ng-model="leavepost.leaveType" ng-options="leave.id as leave.description for leave in leavetypes">
+    <option value="" disabled selected>Select Leave Type</option>
+  </select>
+            
                            </div>
 
                       <label class="col-lg-2 ">Leave Balance:  
@@ -66,13 +91,38 @@
                            <small class="text-muted">type='number'</small>
                         </div> -->
                   </div>
-                           
-                                
-              
-                 
- <div class="form-group" >
-                 
 
+
+
+<div class="form-group">
+                  <label class="col-lg-3">Leave Transaction Type
+</label>
+                  <div class="col-lg-9">
+                    <!--  <input class="form-control" type="text"  name="empNumber"  ng-model="leavepost.employeeNumber" placeholder="Number"/> -->
+                      <select class="form-control" name="empNumber" ng-model="leavepost.leaveTransactionType" ng-options="leaveTtype.id as leaveTtype.description for leaveTtype in leavetransaction">
+    <option value="" disabled selected>Select Leave Transaction Type</option>
+  </select>
+                  </div>
+               </div>
+                           
+          <div class="form-group" >
+                 <label class="col-lg-3">  Date 
+                   </label>
+                   <div class="col-lg-9" ng-controller="DatepickerDemoCtrl as dpick">
+                      <p class="input-group">
+                              <input class="form-control" type="text" name="ex_date" uib-datepicker-popup="{{dpick.format}}" ng-model="leavepost.date"  is-open="dpick.opened" min-date="dpick.minDate" max-date="'2019-12-22'" uib-datepicker-options="dpick.dateOptions"
+                              date-disabled="dpick.disabled(date, mode)" close-text="Close" />
+                              <span class="input-group-btn">
+                                 <button class="btn btn-default" type="button" ng-click="dpick.open($event)">
+                                    <em class="fa fa-calendar"></em>
+                                 </button>
+                              </span>
+                           </p>
+                           
+                  </div>                       
+              </div>
+                 
+          <div class="form-group" >
                  <label class="col-lg-3">   Start Date 
                    </label>
                    <div class="col-lg-3" ng-controller="DatepickerDemoCtrl as dpick">
@@ -113,7 +163,7 @@
 </label>
                   <div class="col-lg-9">  
 
-                     <input class="form-control" type="text"  name="empNumber"  ng-model="duration" placeholder="days" disabled="" />
+                     <input class="form-control" type="text"  name="empNumber"  ng-model="leavepost.duration" placeholder="days" />
                     
                   </div>
                </div>      
@@ -161,7 +211,7 @@
                   <div class="form-group">
   <label class="col-lg-3 ">Comment:</label>
    <div class="col-lg-9">
-  <textarea class="form-control" name="leaveComment" ng-model="leavepost.comment" id="comment"></textarea>
+  <textarea class="form-control" name="leaveComment" ng-model="leavepost.applicationComment" id="comment"></textarea>
   </div>
 </div> 
                    
@@ -176,10 +226,13 @@
               
                <div class="form-group">
                   <div class="col-lg-offset-3 col-lg-9">
-                     <button class="btn btn-info btn-sm" type="submit">Send for Approval</button>
+                     <button class="btn btn-info btn-sm" ng-click="submitLeaveApplication()">Send for Approval</button>
                       <button class="btn btn-warning btn-sm" type="reset">Reset</button>
                   </div>
                </div>
+
+              <div class="text-center text-success" margin-top="md" ng-show="SuccessMsg">{{SuccessMsg}}</div>
+             <div class="text-center text-danger"  margin-top="md" ng-show="errorMsg">{{errorMsg}}</div>
             </form>
             </div>
        

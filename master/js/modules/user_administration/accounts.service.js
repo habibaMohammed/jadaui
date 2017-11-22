@@ -1,13 +1,18 @@
+
+
+
+
+
 (function() {
     'use strict';
 
     angular
-        .module('app.transactions')
-        .factory('LeaveProcessingService', LeaveProcessingService);
+        .module('app.useradministration')
+        .factory('UserAccountService', UserAccountService);
 
-    LeaveProcessingService.$inject = ['$resource','jadaApiUrl'];
-    function LeaveProcessingService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/leaveprocessing/:id', {id: '@id'},
+    UserAccountService.$inject = ['$resource','jadaApiUrl'];
+    function UserAccountService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/userAccounts/:id', {id: '@id'},
     { 'get':    {method:'GET', isArray:false},
   'save':   {method:'POST'},
   'query':  {method:'GET', isArray:true},

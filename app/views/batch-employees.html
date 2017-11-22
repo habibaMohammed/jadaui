@@ -2,36 +2,42 @@
 </h3>
   
 <div class="panel">
-   <div class="panel-body" ng-controller="EmpBulkTransController">
+   <div class="panel-body" ng-controller="EmployeeBatchPostingController">
       <div class="clearfix">
 
  <button class="btn btn-primary pull-left mr" type="button" ng-click="open()">
-      <em class="fa fa-plus-circle fa-fw "></em>Import Employees Data</button> &nbsp; &nbsp; 
-<a href="server/jm.csv" class="btn btn-primary pull-left mr" type="button"> 
+   <!--    <em class="fa fa-plus-circle fa-fw "></em>Import Employees Data</button> &nbsp; &nbsp;  -->
+<a href="server/employeeData.csv" class="btn btn-primary pull-left mr" type="button"> 
 
       <em class="fa fa-download fa-fw "></em>Download the csv format</a>
       </div>
 
-     
- <script type="text/ng-template" id="EmpBulkTransaction.html">
-              <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Upload</h4></div>
- <div class="modal-body">
-
-    <form class="form-horizontal" ng-submit="submitCostCentre()">
-
-   <div class="col-lg-9">
-      
-    <input class="form-control" filestyle="" type="file" data-button-text="Browse" data-class-button="btn btn-default" data-classinput="form-control inline" nv-file-select="" uploader="form.uploader" />
-  
-                </div> 
-<br/>
-<br/>
-<br/>
-     <div class="clearfix">
+  <br/>
+  <br/>
+  <br/>
+<form class="form-horizontal">
+<div class="form-group">
+   <div class="col-lg-6">
+ <input type="file" class="form-control" data-file-reader-directive="fileContent" accept=".csv" data-button-text="Browse" data-class-button="btn btn-default" data-classinput="form-control inline" nv-file-select="" uploader="form.uploader"/>
+</div>
+</div>
+  <div class="clearfix">
        
-     <button class="btn btn-info btn-s" type="button" >
+     <button class="btn btn-info btn-s" type="button" ng-click="uploadFile()" >
                      <span class="icon-cloud-upload mr"></span>Upload</button>
-                  <button class="btn btn-warning btn-s" type="button">
+                  <button class="btn btn-warning btn-s" type="reset" ng-click="cancel()">
                      <span class="icon-close mr"></span>Cancel</button>
 
+
+                         <button class="btn btn-info btn-s"  ng-click="save()">
+                     <span class="icon-save mr"></span>Save</button>
+
       </div>
+
+               <div class="text-center text-success" margin-top="md" ng-show="SuccessMsg">{{SuccessMsg}}</div>
+             <div class="text-center text-danger"  margin-top="md" ng-show="errorMsg">{{errorMsg}}</div>
+         <!--     {{fileData}} -->
+</form>
+     
+</div>
+</div>

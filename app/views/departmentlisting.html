@@ -61,7 +61,7 @@
       <script type="text/ng-template" id="newDepartment.html">
         <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Add Department</h4></div><div class="modal-body"><!-- START panel-->
 
-          <form class="form-horizontal"   name="deptform" novalidate="" ng-controller="DeptController" >
+          <form class="form-horizontal"   name="deptform" novalidate=""  ng-controller="DeptController" >
 
            <div class="form-group">
             <label class="col-lg-3 control-label">Code</label>
@@ -86,9 +86,9 @@
 
        <div class="form-group">
         <div class="col-lg-offset-3 col-lg-9">
-         <button class="btn btn-info btn-sm" ng-disabled="deptform.$invalid" ng-click="submitdept();"  >Save and New</button>
+         <button class="btn btn-info btn-sm" ng-disabled="deptform.$invalid" ng-click="submitdept()"   >Save and New</button>
             <button class="btn btn-info btn-sm" ng-click="submitdeptClose()" >Save and Close</button>
-           <button class="btn btn-warning btn-sm"  type="reset">Reset</button>
+           <button class="btn btn-warning btn-sm" >Reset</button>
        </div>
      </div>
 
