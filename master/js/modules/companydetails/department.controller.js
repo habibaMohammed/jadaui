@@ -147,6 +147,7 @@ department.$remove().then(function () {
           ModalOpenDeptInstanceCtrl.$inject = ['$scope','$rootScope', '$uibModalInstance','DeptService'];
           function ModalOpenDeptInstanceCtrl($scope, $rootScope,$uibModalInstance, DeptService) {
           
+          $scope.deptform = {};
             $scope.ok = function () {
               $uibModalInstance.close('closed');
             };
@@ -169,8 +170,7 @@ department.$remove().then(function () {
                      $scope.errorMsg=false;
 
                     $scope.SuccessMsg =response.Message;
-
-           
+       
 
             }else{
            
@@ -180,24 +180,25 @@ department.$remove().then(function () {
             }
              $rootScope.$emit("CallLoadDepartment", {});
    
-                // if ($scope.deptform) $scope.deptform.$setPristine();
-
+           
 
            },
    
             function() {
                $scope.SuccessMsg=false;
                  $scope.errorMsg = 'Server Request Error';
-                }).finally(function(){     $scope.dept = "";
-      $scope.deptform.$setPristine();
+                }).finally(function(){     
+               //    $scope.dept = "";
+               // $scope.deptform.$setPristine();
         });
       
           }
 
-    //         $scope.reset = function() {
-    //   $scope.dept = {};
-    //   $scope.deptform.$setPristine();
-    // }
+    //       $scope.initFunc = function(){
+    //     $scope.dept = " ";
+    //     $scope.deptform.$pristine = true;
+    //     $scope.deptform.$setPristine();
+    // };
 
           $scope.submitdeptClose=function() {
            $scope.dept.$save().then(function(){

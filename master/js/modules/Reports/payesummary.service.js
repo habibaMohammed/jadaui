@@ -2,12 +2,12 @@
     'use strict';
 
     angular
-        .module('app.transactions')
-        .factory('LeaveProcessingService', LeaveProcessingService);
+        .module('app.reports')
+        .factory('PayeSummaryService', PayeSummaryService);
 
-    LeaveProcessingService.$inject = ['$resource','jadaApiUrl'];
-    function LeaveProcessingService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/leaveprocessing/:id', {id: '@id'},
+    PayeSummaryService.$inject = ['$resource','jadaApiUrl'];
+    function PayeSummaryService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/payesummary/:periodId', {periodId: '@periodId'},
     { 'get':    {method:'GET', isArray:false},
   'save':   {method:'POST'},
   'query':  {method:'GET', isArray:true},

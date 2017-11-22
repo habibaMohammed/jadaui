@@ -1,508 +1,61 @@
-<div class="panel">
-   <div class="panel-body">
-     <div id="wizard" class="form_wizard wizard_horizontal">
-            <!-- START wizard steps indicator-->
+<div class="row">
+   <div class="col-md-12">
+      <!-- START panel-->
+      <div class="panel panel-default">
+         <div class="panel-heading">
+          <!--   <h3 class="panel-title">Earnings</h3> -->
+         </div>
+         <div class="panel-body">
+         <div class="row" ng-controller="ModalController as  mod">
+         <div class="form-group " >
+                  <label class="col-lg-2 control-label">Pay Slips
+                   </label>
+                  <div class="col-lg-2">
+                   
+                    <a class="btn btn-primary"  ui-sref="app.payslip-preview" ui-sref-active="active">View</a>
+                  </div>
+                  </div>
 
-             <!--  <div class="row">
-               <li class="col-md-4 " ng-class="{'active':wizard.active(1)}" ng-click="wizard.go(1)">
-                
-                  <h4>Select Employee</h4>
-                 
-               </li>
-               <li class="col-md-4" ng-class="{'active':wizard.active(2)}" ng-click="wizard.go(2)">
-                  <h4>Preview Payroll</h4>
-                 
-               </li>
-               <li class="col-md-4" ng-class="{'active':wizard.active(3)}" ng-click="wizard.go(3)">
-                  <h4>Aprrove Payroll</h4>
-                <small class="text-muted"></small> 
-               </li>
-               
-            </div> -->
-            <!-- END wizard steps indicator-->
+               </div>
+             <br/>
+                <div class="row" ng-controller="ModalController as  mod">
+         <div class="form-group " >
+                  <label class="col-lg-2 control-label">Company Totals
+                   </label>
+                  <div class="col-lg-2">
+                    <a class="btn btn-primary"  ui-sref="app.ctotals-review" ui-sref-active="active">View</a>
+                  </div>
+                  </div>
 
-
-<ul class='  nav nav-wizard '>
-  
-  <li class="col-md-4"  ng-class="{'active':wizard.active(1)}" ><a ng-click="wizard.go(1)">
-                           
-                                             Select Employee
-                                             
-                                          
-                         </a></li>
-
-  <li class="col-md-4"  ui-sref-active="active">><a   ui-sref="app.payroll-preview" >
-                           
-                                            Preview
-                                             
-                                          
-                         </a></li>
-
-  <li class="col-md-4" ng-class="{'active':wizard.active(3)}" ><a  ng-click="wizard.go(3)">
+               </div>
+               <br/>
+                <div class="row" ng-controller="ModalController as  mymod">
+      <div class="form-group">
+                  <label class="col-lg-2 control-label">Company Summary
+                   </label>
+                  <div class="col-lg-2">
+                     <a class="btn btn-primary"  ui-sref="app.csummary-review" ui-sref-active="active">View</a>
+                  </div>
+               </div>
                             
-                                            Approve
-                                             
-                                         
-                          </a></li>
-
-</ul>
-      </div>
-   <div class="col-md-10">
-      <!-- <button class="pull-right btn btn-default btn-sm" type="button">Copy this invoice</button> -->
-     <!--   -->
-      <hr/>
-      <div class="row mb-lg">
-         <div class="col-lg-4 col-xs-6 br pv">
-            <div class="row">
-               
-               <div class="col-md-10">
-                <div class="clearfix">
-               <p class="pull-left">Employee No.</p>
-               <p class="pull-right mr">00004879</p>
-            </div>
-            <div class="clearfix">
-               <p class="pull-left">Employee Name</p>
-               <p class="pull-right mr">John Doe</p>
-            </div>
-            <div class="clearfix">
-               <p class="pull-left">Employee PIN</p>
-               <p class="pull-right mr">00004879</p>
-            </div>
-                  </div>
-            </div>
-         </div>
-         <div class="col-lg-4 col-xs-6 br pv">
-            <div class="row">
-               
-               <div class="col-md-10">
-                 <div class="clearfix">
-               <p class="pull-left">Pay From
-.</p>
-               <p class="pull-right mr">Timecon Kenya</p>
-            </div>
-            <div class="clearfix">
-               <p class="pull-left">Pay period </p>
-               <p class="pull-right mr">25/08/2014</p>
-            </div>
-            <div class="clearfix">
-               <p class="pull-left">Net Pay
-</p>
-               <p class="pull-right mr">77000</p>
-            </div></div>
-            </div>
-         </div>
-         <div class="clearfix hidden-md hidden-lg">
-            <hr/>
-         </div>
-         <div class="col-lg-4 col-xs-12 pv">
-         <div class="col-md-10">
-            <div class="clearfix">
-               <p class="pull-left">Payment Mode</p>
-               <p class="pull-right mr">EFT</p>
-            </div>
-            <div class="clearfix">
-               <p class="pull-left">Bank
-</p>
-               <p class="pull-right mr">KCB</p>
-            </div>
-            <div class="clearfix">
-               <p class="pull-left">Account Number</p>
-               <p class="pull-right mr">828282899</p>
-            </div>
-            </div>
-         </div>
-      </div>
-      <div class="table-responsive table-bordered mb-lg">
-         <table class="table">
-                 <thead>
-               <tr>
-                  <th>Code</th>
-                  <th>Description</th>
-                  <th>Amount</th>
-                  
-               </tr>
-            </thead>
-            <h3>Earnings
-  
-</h3>
-     
-            <tbody>
-               <tr>
-                  <td>100</td>
-                  <td>Basic Salaray</td>
-                  <td>50000</td>
-                  
-               </tr>
-               <tr>
-                  <td>102</td>
-                  <td>House Allowance</td>
-                  <td>1000</td>
-                 
-               </tr>
-               <tr>
-                  <td>103</td>
-                  <td>Telephone Benefit</td>
-                  <td>2000</td>
-                  
-               </tr>
-               
-            </tbody>
-         </table>
-      </div>
-      <!-- START table-responsive-->
-            <div class="table-responsive table-bordered mb-lg">
             
-               <table class="table">
-               <h4>Tax Calculations</h4>
-                  <thead>
-                     <tr>
-                       
-                        <th>Code</th>
-                        <th>Descriptions
-                        </th>
-                        <th>Amount</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-                       
-                        <td>505</td>
-                        <td>Defined Contribution</td>
-                        <td>2700
-</td>
-                     </tr>
-                     <tr>
-                        
-                        <td>795</td>
-                        <td>Total Benefits</td>
-                        <td>10000
-
-</td>
-                     </tr>
-
-                     <tr>
-                        
-                        <td>510
-</td>
-                        <td>Taxable pay
-</td>
-                        <td>500</td>
-                     </tr>
-                     <tr>
-                       
-                        <td>520
-
-</td>
-                        <td>Personal relief
-
-</td>
-                        <td>1280
-</td>
-                     </tr>
-                  </tbody>
-               </table>
-            </div>
-            <!-- END table-responsive-->
-
-
-
- <div class="table-responsive table-bordered mb-lg">
-        
-               <table class="table ">
-                   <h4>Deductions  
-</h4>
-                  <thead>
-                     <tr>
-                    
-                        <th>Code</th>
-                        <th>Descriptions
-                        </th>
-                        <th>Amount</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-                  
-                        <td>505</td>
-                        <td>Defined Contribution</td>
-                        <td>2700
-</td>
-                     </tr>
-                     <tr>
-                      
-                        <td>795</td>
-                        <td>Total Benefits</td>
-                        <td>10000
-
-</td>
-                     </tr>
-
-                     <tr>
-                       
-                        <td>510
-</td>
-                        <td>Taxable pay
-</td>
-                        <td>500</td>
-                     </tr>
-                     <tr>
-                       
-                        <td>520
-
-</td>
-                        <td>Personal relief
-
-</td>
-                        <td>1280
-</td>
-                     </tr>
-                  </tbody>
-               </table>
-            </div>
-
-
-
-
-      <!-- <hr class="hidden-print" /> -->
-      <div class="clearfix">
-         <button class="btn btn-info pull-left mr" type="button">Edit</button>
-        <!--  <button class="btn btn-default pull-left" type="button" onclick="window.print();">Print</button> -->
-         <button class="btn btn-success pull-right" type="button">Send for approval</button>
-      </div>
-   </div>
-
-
- <div class="col-md-10">
-      <!-- <button class="pull-right btn btn-default btn-sm" type="button">Copy this invoice</button> -->
-     <!--   -->
-      <hr/>
-      <div class="row mb-lg">
-         <div class="col-lg-4 col-xs-6 br pv">
-            <div class="row">
-               
-               <div class="col-md-10">
-                <div class="clearfix">
-               <p class="pull-left">Employee No.</p>
-               <p class="pull-right mr">00004879</p>
-            </div>
-            <div class="clearfix">
-               <p class="pull-left">Employee Name</p>
-               <p class="pull-right mr">John Doe</p>
-            </div>
-            <div class="clearfix">
-               <p class="pull-left">Employee PIN</p>
-               <p class="pull-right mr">00004879</p>
-            </div>
-                  </div>
-            </div>
-         </div>
-         <div class="col-lg-4 col-xs-6 br pv">
-            <div class="row">
-               
-               <div class="col-md-10">
-                 <div class="clearfix">
-               <p class="pull-left">Pay From
-.</p>
-               <p class="pull-right mr">Timecon Kenya</p>
-            </div>
-            <div class="clearfix">
-               <p class="pull-left">Pay period </p>
-               <p class="pull-right mr">25/08/2014</p>
-            </div>
-            <div class="clearfix">
-               <p class="pull-left">Net Pay
-</p>
-               <p class="pull-right mr">77000</p>
-            </div></div>
-            </div>
-         </div>
-         <div class="clearfix hidden-md hidden-lg">
-            <hr/>
-         </div>
-         <div class="col-lg-4 col-xs-12 pv">
-         <div class="col-md-10">
-            <div class="clearfix">
-               <p class="pull-left">Payment Mode</p>
-               <p class="pull-right mr">EFT</p>
-            </div>
-            <div class="clearfix">
-               <p class="pull-left">Bank
-</p>
-               <p class="pull-right mr">KCB</p>
-            </div>
-            <div class="clearfix">
-               <p class="pull-left">Account Number</p>
-               <p class="pull-right mr">828282899</p>
-            </div>
-            </div>
-         </div>
-      </div>
-      <div class="table-responsive table-bordered mb-lg">
-         <table class="table">
-                 <thead>
-               <tr>
-                  <th>Code</th>
-                  <th>Description</th>
-                  <th>Amount</th>
-                  
-               </tr>
-            </thead>
-            <h3>Earnings
-  
-</h3>
      
-            <tbody>
-               <tr>
-                  <td>100</td>
-                  <td>Basic Salaray</td>
-                  <td>50000</td>
-                  
-               </tr>
-               <tr>
-                  <td>102</td>
-                  <td>House Allowance</td>
-                  <td>1000</td>
-                 
-               </tr>
-               <tr>
-                  <td>103</td>
-                  <td>Telephone Benefit</td>
-                  <td>2000</td>
-                  
-               </tr>
+   </div>
+         
+
+
+              
+               <br/>
                
-            </tbody>
-         </table>
-      </div>
-      <!-- START table-responsive-->
-            <div class="table-responsive table-bordered mb-lg">
-            
-               <table class="table">
-               <h4>Tax Calculations</h4>
-                  <thead>
-                     <tr>
-                       
-                        <th>Code</th>
-                        <th>Descriptions
-                        </th>
-                        <th>Amount</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-                       
-                        <td>505</td>
-                        <td>Defined Contribution</td>
-                        <td>2700
-</td>
-                     </tr>
-                     <tr>
-                        
-                        <td>795</td>
-                        <td>Total Benefits</td>
-                        <td>10000
-
-</td>
-                     </tr>
-
-                     <tr>
-                        
-                        <td>510
-</td>
-                        <td>Taxable pay
-</td>
-                        <td>500</td>
-                     </tr>
-                     <tr>
-                       
-                        <td>520
-
-</td>
-                        <td>Personal relief
-
-</td>
-                        <td>1280
-</td>
-                     </tr>
-                  </tbody>
-               </table>
-            </div>
-            <!-- END table-responsive-->
-
-
-
- <div class="table-responsive table-bordered mb-lg">
-        
-               <table class="table ">
-                   <h4>Deductions  
-</h4>
-                  <thead>
-                     <tr>
-                    
-                        <th>Code</th>
-                        <th>Descriptions
-                        </th>
-                        <th>Amount</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-                  
-                        <td>505</td>
-                        <td>Defined Contribution</td>
-                        <td>2700
-</td>
-                     </tr>
-                     <tr>
-                      
-                        <td>795</td>
-                        <td>Total Benefits</td>
-                        <td>10000
-
-</td>
-                     </tr>
-
-                     <tr>
-                       
-                        <td>510
-</td>
-                        <td>Taxable pay
-</td>
-                        <td>500</td>
-                     </tr>
-                     <tr>
-                       
-                        <td>520
-
-</td>
-                        <td>Personal relief
-
-</td>
-                        <td>1280
-</td>
-                     </tr>
-                  </tbody>
-               </table>
-            </div>
-
-
-
-
-      <!-- <hr class="hidden-print" /> -->
-      <div class="clearfix">
-         <button class="btn btn-info pull-left mr" type="button">Edit</button>
+            <br/>
+           
+          
         <!--  <button class="btn btn-default pull-left" type="button" onclick="window.print();">Print</button> -->
-         <button class="btn btn-success pull-right" type="button">Send for approval</button>
+         <button class="btn btn-success pull-left mr" type="button">send for approval</button>
+
+          <button class="btn btn-info pull-left mr" type="button">Back to processing</button>
       </div>
+         </div>
+      </div>
+      <!-- END panel-->
    </div>
-
-
-
-
-
-
-
-
-   
-   </div>
-</div>

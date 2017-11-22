@@ -751,10 +751,17 @@
               templateUrl: helper.basepath('processpayroll.html'),
                resolve: helper.resolveFor('xeditable')
           })
-           .state('app.process', {
+           .state('app.payslip-preview', {
               url: '/processing',
               title: 'payroll process',
-              templateUrl: helper.basepath('payrollprocessing.html'),
+              templateUrl: helper.basepath('payslip-preview.html'),
+              resolve: helper.resolveFor('xeditable')
+          })
+
+           .state('app.payslip-approve', {
+              url: '/payslip-approve',
+              title: 'approving Payslip',
+              templateUrl: helper.basepath('payslip-approve.html'),
               resolve: helper.resolveFor('xeditable')
           })
 
@@ -844,6 +851,20 @@
              
           })
 
+             .state('app.company-total-approve', {
+              url: '/company-total-approve',
+              title: 'approving Payslip',
+              templateUrl: helper.basepath('company-total-approve.html')
+        
+          })
+
+             .state('app.company-summary-approve', {
+              url: '/company-summary-approve',
+              title: 'approving Payslip',
+              templateUrl: helper.basepath('company-summary-approve.html')
+        
+          })
+
 
             .state('app.paye', {
               url: '/paye',
@@ -916,7 +937,17 @@
               title: 'Bulk transaction item input',
                 templateUrl: helper.basepath('bulk-input.html'),
                     resolve: helper.resolveFor('angularFileUpload', 'filestyle'),
-                    resolve: helper.resolveFor('ui.grid')
+                    resolve: helper.resolveFor('ui.grid'),
+
+                      resolve : {
+                ngAnimate : ['$$animateJs','$ocLazyLoad', function ($$animateJs, $ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        'vendor/angular-ui-grid/ui-grid.min.css',
+                        'vendor/angular-ui-grid/ui-grid.min.js'
+                    ])
+                }]
+            }
+
              
           })
 
@@ -1076,6 +1107,35 @@
               url: '/adminsettings',
               title: 'user settings',
                 templateUrl: helper.basepath('user-settings.html'),
+                    resolve: helper.resolveFor('datatables'),
+                 
+             
+          })
+
+
+  .state('app.accounts', {
+              url: '/accounts',
+              title: 'accounts',
+                templateUrl: helper.basepath('accounts.html')
+                  
+                 
+             
+          })
+
+    .state('app.user-rights', {
+              url: '/rights',
+              title: 'accounts',
+                templateUrl: helper.basepath('user-rights.html'),
+                    resolve: helper.resolveFor('datatables'),
+                 
+             
+          })
+
+
+    .state('app.user-groups', {
+              url: '/user-groups',
+              title: 'accounts',
+                templateUrl: helper.basepath('user-groups.html'),
                     resolve: helper.resolveFor('datatables'),
                  
              

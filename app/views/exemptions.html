@@ -4,11 +4,13 @@
 </h3>
 
     <div class="panel panel-default" ng-controller="ExemptionsController">
-     <div class="panel-heading"><div class=" clearfix buttons">
+     <div class="panel-heading">
+      <div class=" clearfix buttons">
                        <button class="btn btn-info pull-right mr" type="button" ng-click="open()">Add New</button>  
                                                       
                      
-                    </div></div>
+                    </div>
+                  </div>
      <div class="panel-body"  >
       <div class="table-responsive">
        <table class="table table-striped" >
@@ -16,6 +18,7 @@
           <tr>
            <th> Code</th>
            <th>Description</th>
+             <th>Employee</th>
        
                <th>Action</th>
          </tr>
@@ -24,6 +27,7 @@
         <tr ng-repeat="employee in exemptemployees">
         
           <td>{{employee.payrollCode}}</td>
+          <td>{{employee.description }}</td>
           <td>{{employee.employeeName }}</td>
           
 

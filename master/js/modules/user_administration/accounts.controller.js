@@ -3,10 +3,10 @@
 
     angular
         .module('app.useradministration')
-        .controller('UserAdminController', UserAdminController);
+        .controller('AccountsController', AccountsController);
 
-    UserAdminController.$inject = ['$scope','$rootScope', '$http', '$stateParams', '$state', '$uibModal', '$log', 'userAdminService'];
-        function UserAdminController($scope, $rootScope, $http, $stateParams, $state, $uibModal, $log,userAdminService) {
+    AccountsController.$inject = ['$scope','$rootScope', '$http', '$stateParams', '$state', '$uibModal', '$log', 'UserAccountService'];
+        function AccountsController($scope, $rootScope, $http, $stateParams, $state, $uibModal, $log,UserAccountService) {
         var vm = this;
 
         activate();
@@ -18,16 +18,16 @@
 
  var SuccessMsg;
  var errorMsg;
-  $scope.users=userAdminService.query();
+  $scope.users=UserAccountService.query();
 console.log($scope.users);
 
- $scope.loadUsers = function () {
+ $scope.loadUserAcconts = function () {
      
 $scope.users=userAdminService.query();
 
 }
- $rootScope.$on("CallLoadUsers", function(){
-           $scope.loadUsers();
+ $rootScope.$on("CallLoadUserAcconts", function(){
+           $scope.loadUserAcconts();
         });
 
 
@@ -38,9 +38,9 @@ $scope.users=userAdminService.query();
 
 
 
-  $scope.delete= function (user) {
-user.$remove().then(function () {
-$scope.loadUsers();
+  $scope.delete= function (account) {
+account.$remove().then(function () {
+$scope.loadUserAcconts();
 });
 }
 
@@ -50,8 +50,8 @@ $scope.loadUsers();
    $scope.open = function (size) {
 
             var modalInstance = $uibModal.open({
-              templateUrl: 'NewUser.html',
-              controller: ModalOpenUserInstanceCtrl,
+              templateUrl: 'NewUserAccount.html',
+              controller: ModalOpenAccountsInstanceCtrl,
               size: size
             });
 
@@ -69,14 +69,14 @@ $scope.loadUsers();
 
 
 
- $scope.show = function(user) {
+ $scope.show = function(account) {
 
       var modalInstance = $uibModal.open({
-        templateUrl: 'EditUser.html',
+        templateUrl: 'EditUserAccount.html',
         controller: ModalInstanceCtrl,
         resolve: {
-           user: function () {
-             return user;
+           account: function () {
+             return account;
            }
          }        
 
@@ -98,8 +98,8 @@ $scope.loadUsers();
           // Please note that $uibModalInstance represents a modal window (instance) dependency.
           // It is not the same as the $uibModal service used above.
 
-             ModalOpenUserInstanceCtrl.$inject = ['$scope', '$rootScope', '$http','$uibModalInstance','userAdminService'];
-          function ModalOpenUserInstanceCtrl($scope,$rootScope, $http, $uibModalInstance, userAdminService) {
+             ModalOpenAccountsInstanceCtrl.$inject = ['$scope', '$rootScope', '$http','$uibModalInstance','UserAccountService'];
+          function ModalOpenAccountsInstanceCtrl($scope,$rootScope, $http, $uibModalInstance, UserAccountService) {
 
 
             $scope.ok = function () {
@@ -112,9 +112,9 @@ $scope.loadUsers();
 
 
               $scope.user=new userAdminService();
-             $scope.submitUser=function() {
+             $scope.submitUserAccount=function() {
               console.log();
-          $scope.user.$save().then(function(data){
+          $scope.account.$save().then(function(data){
               var response=angular.fromJson(data);
           
             if(response.Status=="1"){
@@ -127,7 +127,7 @@ $scope.loadUsers();
            
             }
            
-                $rootScope.$emit("CallLoadUsers", {});
+                $rootScope.$emit("CallLoadUserAcconts", {});
           },
 
            function() {
@@ -138,10 +138,10 @@ $scope.loadUsers();
           };
 
 
-             $scope.submitUserClose=function() {
+             $scope.submitUserAccountClose=function() {
           $scope.user.$save().then(function(){
             
-                $rootScope.$emit("CallLoadUsers", {});
+                $rootScope.$emit("CallLoadUserAcconts", {});
                 $scope.ok();
           },
           
@@ -157,8 +157,8 @@ $scope.loadUsers();
   
 
           
-  ModalInstanceCtrl.$inject = ['$scope', '$rootScope', '$http','$uibModalInstance','userAdminService','user'];
-          function ModalInstanceCtrl($scope,$rootScope, $http, $uibModalInstance, userAdminService,user) {
+  ModalInstanceCtrl.$inject = ['$scope', '$rootScope', '$http','$uibModalInstance','UserAccountService','user'];
+          function ModalInstanceCtrl($scope,$rootScope, $http, $uibModalInstance, UserAccountService,user) {
             // $scope.currentgroup=user;
     var id=user.id;
     console.log(id);
@@ -176,7 +176,7 @@ $scope.loadUsers();
          
 
 
-                $scope.updateUser=function(user){
+                $scope.updateUserAccount=function(user){
             user.$update().then(function(data){
                    var response=angular.fromJson(data);
             console.log($scope.leave);
@@ -191,7 +191,7 @@ $scope.loadUsers();
                    $scope.errorMsg=response.Message;
           
             }
-             $rootScope.$emit("CallLoadUsers", {});
+             $rootScope.$emit("CallLoadUserAcconts", {});
             }, function() {
                 $scope.SuccessMsg=false;
                  $scope.errorMsg = 'Server Request Error';

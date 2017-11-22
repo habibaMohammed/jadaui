@@ -1,15 +1,14 @@
-
-
 (function() {
     'use strict';
 
     angular
         .module('app.useradministration')
-        .factory('UserGroupService', UserGroupService);
+        .factory('userRightsService', userRightsService);
 
-    UserGroupService.$inject = ['$resource','jadaApiUrl'];
-    function UserGroupService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/task/:id', {id: '@id'},
+    userRightsService.$inject = ['$resource','jadaApiUrl'];
+    function userRightsService($resource,jadaApiUrl) {
+     // var data=$resource(jadaApiUrl+'api/user/:id', {id: '@id'},
+          var data=$resource('https://jsonplaceholder.typicode.com/users/:user', {user: '@user'},
     { 'get':    {method:'GET', isArray:false},
   'save':   {method:'POST'},
   'query':  {method:'GET', isArray:true},

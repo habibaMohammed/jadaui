@@ -18,8 +18,17 @@
 
 
 
- var SuccessMsg;
- var errorMsg;
+ // var SuccessMsg;
+ // var errorMsg;
+ // var leavepost;
+ // var isApproved;
+ // var applicationComment;
+ //  $scope.leavepost.isApproved=false;
+ //  $scope.leavepost.applicationComment=' ';
+
+
+ $scope.leavetypeprocess=LeaveProcessingService.query();
+ console.log( $scope.leavetypeprocess);
 
 
 $http.get(jadaApiUrl+'api/employee').success(function(data) {
@@ -27,12 +36,29 @@ $http.get(jadaApiUrl+'api/employee').success(function(data) {
           
             });
 
+$http.get(jadaApiUrl+'api/leavetype').success(function(data) {
+              $scope.leavetypes = data;
+              console.log($scope.leavetypes);
+          
+            });
+
+$http.get(jadaApiUrl+'api/leavePostingtype').success(function(data) {
+              $scope.leavetransaction = data;
+              console.log($scope.leavetypes);
+          
+            });
+
+
+    $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
 
 $scope.employeeChange=function(id){
               
               for(var r=0;r<$scope.employees.length;r++){
 
-                if(id==$scope.employees[r].employeeNumber){
+                if(id==$scope.employees[r].id){
                   $scope.department=$scope.employees[r].department;
                   $scope.employeeName=$scope.employees[r].firstName +' '+ $scope.employees[r].lastName;
                 }
@@ -66,6 +92,9 @@ $scope.dayDiff = function(firstDate, secondDate){
 
    $scope.leavepost=new LeaveProcessingService();
              $scope.submitLeaveApplication=function() {
+   //             $scope.leavepost = {isApproved:false};
+   // $scope.leavepost = {approvalComment:" "};
+              console.log('submitted');
           $scope.leavepost.$save().then(function(data){
              var response=angular.fromJson(data);
           
@@ -79,7 +108,7 @@ $scope.dayDiff = function(firstDate, secondDate){
            
             }
          
-
+console.log( $scope.leavepost);
           }, 
           function() {
              $scope.SuccessMsg=false;

@@ -1,0 +1,180 @@
+<div class=" companydetails"><div class="panel panel-default" ng-controller="UserGroupController">
+         <div class="panel-heading">
+     
+ <div class="clearfix">
+     
+    <button class="btn btn-info pull-right mr" ng-click="open()">
+        Add New
+               </button>
+        
+        
+      </div>
+          
+        
+      </div>
+         <div class="panel-body" >
+
+         <div class="table-responsive">
+         <table class="table table-striped" datatable="ng">
+                 <thead>
+               <tr>
+                  
+                  <th>user</th>
+                 
+                  <th>Group</th>
+                   <th>email Address</th>
+                    <th>User 
+                    Name</th>
+                  <th>password</th>
+               </tr>
+            </thead>
+                <tbody>
+             <tr  ng-repeat="usergroup in usergroups">
+                    <td> {{usergroup.username}}</td>
+                        <td> {{usergroup.name}}</td>
+           
+                <td>{{usergroup.id}}</td>
+
+                
+
+                  <td> <div class="clearfix">
+        
+     <button class="btn btn-sm btn-info  mr" type="button" ng-click="show(usergroup)"><em class="fa fa-pencil fa-fw mr"></em></button>
+
+     <button class="btn btn-sm btn-danger  mr" type="button" ng-click="delete(usergroup)"><em class="fa fa-trash fa-fw mr"></em></button>
+       
+      
+     
+ 
+      </div></td>
+                  
+                  
+                
+               </tr>
+              
+               
+               
+            </tbody>
+         </table>
+
+          
+      </div>
+      
+          
+         
+         </div>
+         </div>
+      </div>
+
+<script type="text/ng-template" id="newUserGroup.html">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Add User Groups</h4></div><div class="modal-body"><!-- START panel-->
+
+ <form class="form-horizontal" ng-controller="UserGroupController">
+
+           <div class="form-group">
+                  <label class="col-lg-3 control-label">User</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="user" ng-model="usergroup.user"  placeholder="Enter user"/>
+                  </div>
+               </div>
+                 <div class="form-group">
+                  <label class="col-lg-3 control-label">Group</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="group" ng-model="usergroup.group"  placeholder="Enter group "/>
+                  </div>
+               </div>
+               
+                 <div class="form-group">
+                  <label class="col-lg-3 control-label">Email Address</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="email" name="trans_desc" ng-model="usergroup.emailAddress"  placeholder="Enter Email Address"/>
+                  </div>
+               </div>
+               
+             <div class="form-group">
+                  <label class="col-lg-3 control-label">Username</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="trans_desc" ng-model="usergroup.username"  placeholder="Enter username"/>
+                  </div>
+               </div>
+
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Password</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="password" name="Password" ng-model="usergroup.password"  placeholder="password"/>
+                  </div>
+               </div>
+
+            
+
+
+        
+
+              
+         
+              
+               <div class="form-group">
+                  <div class="col-lg-offset-3 col-lg-9">
+                     <button class="btn btn-info btn-sm" ng-click="submitUserGroup()">Save and New</button>
+                       <button class="btn btn-info btn-sm" ng-click="submitUserGroupClose()">Save and Close</button>
+                      <button class="btn btn-warning btn-sm" type="reset">Reset</button>
+                  </div>
+               </div>
+            </form>
+<!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
+         </script>
+
+
+
+
+<script type="text/ng-template" id="EditUserGroup.html">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Edit User Group</h4></div><div class="modal-body"><!-- START panel-->
+
+ <form class="form-horizontal" ng-controller="UserGroupController">
+                     <div class="form-group">
+                  <label class="col-lg-3 control-label">User</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="user" ng-model="usergroup.user"  placeholder="Enter user"/>
+                  </div>
+               </div>
+                 <div class="form-group">
+                  <label class="col-lg-3 control-label">Group</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="group" ng-model="usergroup.group"  placeholder="Enter group "/>
+                  </div>
+               </div>
+               
+                 <div class="form-group">
+                  <label class="col-lg-3 control-label">Email Address</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="email" name="trans_desc" ng-model="usergroup.emailAddress"  placeholder="Enter Email Address"/>
+                  </div>
+               </div>
+               
+             <div class="form-group">
+                  <label class="col-lg-3 control-label">Username</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="trans_desc" ng-model="usergroup.username"  placeholder="Enter username"/>
+                  </div>
+               </div>
+
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Password</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="password" name="Password" ng-model="usergroup.password"  placeholder="password"/>
+                  </div>
+               </div>
+
+              
+         
+              
+               <div class="form-group">
+                  <div class="col-lg-offset-3 col-lg-9">
+                     <button class="btn btn-info btn-sm" ng-click="updateUserGroup(usergroup)">Update</button>
+              
+                      <button class="btn btn-warning btn-sm" type="reset">Reset</button>
+                  </div>
+               </div>
+            </form>
+<!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
+         </script>

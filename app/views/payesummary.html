@@ -4,7 +4,7 @@
 <!-- Zero Configuration-->
 
 <!-- ngRepeat + ngResource-->
-<div class="page"  ng-controller="BankFilesController">
+<div class="page"  ng-controller="payeSummaryController">
 <div class="row" >
    
 
@@ -91,14 +91,15 @@
                </tr>
             </thead>
             <tbody>
-               <tr ng-repeat="bankfile in bankfiles.employeeBankFileReportList">
-                <td>{{bankfile.employeeNumber}}</td>
-                  <td>{{bankfile.employeeName}}</td>
-                 <td>{{bankfile.bankCode}}</td>
-                  <td>{{bankfile.branchCode}}</td>
-                  <td>{{bankfile.accountNumber}}</td>
-                  <td>{{bankfile.amount}}</td>
-                  <td>{{bankfile.channel}}</td>
+               <tr ng-repeat="psummary in psummaries">
+                <td>{{psummary.employeeNumber}}</td>
+                  <td>{{psummary.employeeName}}</td>
+                 <td>{{psummary.employeePin}}</td>
+          
+                  <td>{{psummary.taxablePay}}</td>
+                  <td>{{psummary.taxCharged}}</td>
+                   <td>{{psummary.relief}}</td>
+                  <td>{{psummary.paye}}</td>
                
                   
                </tr>
