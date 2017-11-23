@@ -1,18 +1,15 @@
 
-
-
-
-
 (function() {
     'use strict';
 
     angular
         .module('app.useradministration')
-        .factory('UserAccountService', UserAccountService);
+        .factory('NotificationService', NotificationService);
 
-    UserAccountService.$inject = ['$resource','jadaApiUrl'];
-    function UserAccountService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/account/:id', {id: '@id'},
+    NotificationService.$inject = ['$resource','jadaApiUrl'];
+    function NotificationService($resource,jadaApiUrl) {
+     // var data=$resource(jadaApiUrl+'api/account/:id', {id: '@id'},
+        var data=$resource('https://jsonplaceholder.typicode.com/users/:user', {user: '@user'},
     { 'get':    {method:'GET', isArray:false},
   'save':   {method:'POST'},
   'query':  {method:'GET', isArray:true},

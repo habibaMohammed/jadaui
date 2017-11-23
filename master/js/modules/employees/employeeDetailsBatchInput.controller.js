@@ -22,7 +22,7 @@
 
 $scope.fileDataObj = [];
 
-            $scope.fileData ={ };
+            // $scope.fileData ={ };
     
     $scope.uploadFile = function() {
       if ($scope.fileContent) {
@@ -45,29 +45,48 @@ var jdata= JSON.stringify($scope.fileData);
             };
 
 
-          var mdata  ={"name ":"Jane Doe","employeeNumber":"123","idNumber":"345678","passportNumber":"","countryOfIssue":"","expiryDate":"","dateOfBirth":"","maritalStatus":"single","gender":"female","dependency":"2","nextOfKin":"John","relationshipWithKin":"father","nextOfKinPhoneNumber":"","disability":"no","natureOfDisability":"","phoneNumber":"728445521","emailAddress":"janedoe@gmail.com","physicalAddress":"Thome","postalAddress":"108","postalCode":"10007","pinNumber":"111222","nhifNumber":"2222","nssfNumber":"5555","helbNumber":"5555","employmentDate":"21/11/2017","paypoint":"nakuru","paymode":"bank","bankcode":"1111","bankName":"KCB","bankAccountNumber":"298978","bankAccountName":"Jane Doe","bankBranchName":"Nakuru","department":"D001","costCenter":"C001","employeeCategory":"2","employeeGroup":"3","position":"intern"}
- $scope.save = function () {
-var list=$scope.fileData;
-    $http.post(jadaApiUrl+'api/employeesingleposting/', {mdata}).success(
-      function(data){
-        vdata.success=true;
-        $scope.response = data
-        console.log(data);
-      })
-
-
-// for(var r=0;r<list.length;r++){
-//   var vdata =list[r];
-//   console.log(vdata);
-//   // var postingdata = new PayrollBatchPostingService(vdata);
-//     $http.post(jadaApiUrl+'api/employeesingleposting/', {vdata}).success(
+//           var mdata  ={"name ":"Jane Doe","employeeNumber":"123","idNumber":"345678","passportNumber":"","countryOfIssue":"","expiryDate":"","dateOfBirth":"","maritalStatus":"single","gender":"female","dependency":"2","nextOfKin":"John","relationshipWithKin":"father","nextOfKinPhoneNumber":"","disability":"no","natureOfDisability":"","phoneNumber":"728445521","emailAddress":"janedoe@gmail.com","physicalAddress":"Thome","postalAddress":"108","postalCode":"10007","pinNumber":"111222","nhifNumber":"2222","nssfNumber":"5555","helbNumber":"5555","employmentDate":"21/11/2017","paypoint":"nakuru","paymode":"bank","bankcode":"1111","bankName":"KCB","bankAccountNumber":"298978","bankAccountName":"Jane Doe","bankBranchName":"Nakuru","department":"D001","costCenter":"C001","employeeCategory":"2","employeeGroup":"3","position":"intern"}
+//  $scope.save = function () {
+// var list=$scope.fileData;
+//     $http.post(jadaApiUrl+'api/employeesingleposting/', {mdata}).success(
 //       function(data){
 //         vdata.success=true;
 //         $scope.response = data
 //         console.log(data);
 //       })
 
-// }
+
+
+
+// // for(var r=0;r<list.length;r++){
+// //   var vdata =list[r];
+// //   console.log(vdata);
+// //   // var postingdata = new PayrollBatchPostingService(vdata);
+// //     $http.post(jadaApiUrl+'api/employeesingleposting/', {vdata}).success(
+// //       function(data){
+// //         vdata.success=true;
+// //         $scope.response = data
+// //         console.log(data);
+// //       })
+
+// // }
+
+//   }
+
+       $scope.save = function () {
+var list=$scope.fileData;
+for(var r=0;r<list.length;r++){
+  var vdata =list[r];
+  console.log(vdata);
+  // var postingdata = new PayrollBatchPostingService(vdata);
+    $http.post('http://localhost:56135/api/employeesingleposting/', {vdata}).success(
+      function(data){
+        $scope.fileData[r].success=true;
+        $scope.response = data
+        console.log(data);
+      })
+
+}
 
   }
 

@@ -243,10 +243,10 @@
             </div>
             <div class="form-group has-feedback">
                <label class="text-muted">Password</label>
-               <input class="form-control" id="id-password" type="password" name="account_password" ng-model="reg.account.password" ng-pattern="/^[a-zA-Z0-9]{8,50}$/" required="" />
+               <input class="form-control" id="id-password" type="password" name="account_password" ng-model="reg.account.password"  required="" />
                <!-- <span class="fa fa-lock form-control-feedback text-muted"></span> -->
                <span class="text-danger" ng-show="formStep3.account_password.$dirty &amp;&amp; formStep3.account_password.$error.required">This field is required</span>
-               <span class="text-danger" ng-show="formStep3.account_password.$dirty &amp;&amp; formStep3.account_password.$error.pattern">Input should match 'a-zA-Z0-9' and min 8 characters</span>
+        <!--        <span class="text-danger" ng-show="formStep3.account_password.$dirty &amp;&amp; formStep3.account_password.$error.pattern">Input should match 'a-zA-Z0-9' and min 8 characters</span> -->
             </div>
             <div class="form-group has-feedback">
                <label class="text-muted">Retype Password</label>
