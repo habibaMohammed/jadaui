@@ -18,12 +18,12 @@
 
  var SuccessMsg;
  var errorMsg;
-  $scope.users=UserAccountService.query();
-console.log($scope.users);
+  $scope.accounts=UserAccountService.query();
+console.log( $scope.accounts);
 
  $scope.loadUserAcconts = function () {
      
-$scope.users=userAdminService.query();
+ $scope.accounts=UserAccountService.query();
 
 }
  $rootScope.$on("CallLoadUserAcconts", function(){
@@ -35,7 +35,24 @@ $scope.users=userAdminService.query();
 
 //$scope.oneuser=CompanyInfoService.get({user:1}); //Obtain the Post from backend. Search by Id
 
+  $scope.chequeInfo = [
+    {chqNo: 1, custName : 'Bikash', status : 'active'},
+    {chqNo: 2, custName : 'Bikash', status : 'active'},
+    {chqNo: 3, custName : 'Bikash', status : 'active'},
+    {chqNo: 4, custName : 'Bikash', status : 'active'},
+    {chqNo: 5, custName : 'Bikash', status : 'cancelled'}
+  ];
 
+ 
+  $scope.onChqChange = function(code) {
+    $scope.accounts.code = code;
+    angular.forEach(  $scope.accounts, function() {
+      if(code) {
+        alert('This code already exists');
+         $scope.chqNo='';
+      }
+    });
+ };
 
 
   $scope.delete= function (account) {
@@ -50,7 +67,7 @@ $scope.loadUserAcconts();
    $scope.open = function (size) {
 
             var modalInstance = $uibModal.open({
-              templateUrl: 'NewUserAccount.html',
+              templateUrl: 'newUserAccount.html',
               controller: ModalOpenAccountsInstanceCtrl,
               size: size
             });
@@ -111,9 +128,9 @@ $scope.loadUserAcconts();
             };
 
 
-              $scope.user=new userAdminService();
+              $scope.account=new UserAccountService();
              $scope.submitUserAccount=function() {
-              console.log();
+              console.log('hellow');
           $scope.account.$save().then(function(data){
               var response=angular.fromJson(data);
           
@@ -157,13 +174,14 @@ $scope.loadUserAcconts();
   
 
           
-  ModalInstanceCtrl.$inject = ['$scope', '$rootScope', '$http','$uibModalInstance','UserAccountService','user'];
-          function ModalInstanceCtrl($scope,$rootScope, $http, $uibModalInstance, UserAccountService,user) {
+  ModalInstanceCtrl.$inject = ['$scope', '$rootScope', '$http','$uibModalInstance','UserAccountService','account'];
+          function ModalInstanceCtrl($scope,$rootScope, $http, $uibModalInstance, UserAccountService,account) {
             // $scope.currentgroup=user;
-    var id=user.id;
+    var id=account.id;
     console.log(id);
 
-            $scope.user=userAdminService.get({id:id});
+            $scope.account=UserAccountService.get({id:id});
+            console.log ($scope.account);
 
             $scope.ok = function () {
               $uibModalInstance.close('closed');
@@ -176,15 +194,15 @@ $scope.loadUserAcconts();
          
 
 
-                $scope.updateUserAccount=function(user){
-            user.$update().then(function(data){
+                $scope.updateUserAccount=function(account){
+            account.$update().then(function(data){
                    var response=angular.fromJson(data);
             console.log($scope.leave);
             // $scope.authMsg=response.Message;
             if(response.Status=="1"){
                      $scope.errorMsg=false;
                     $scope.SuccessMsg =response.Message;
-                     $scope.user=userAdminService.get({ID:id});
+                     $scope.user=UserAccountService.get({id:id});
             }else{
            
                   $scope.SuccessMsg=false;

@@ -15,7 +15,7 @@
          <div class="panel-body" >
 
          <div class="table-responsive">
-         <table class="table table-striped" datatable="ng">
+         <table class="table table-striped">
                  <thead>
                <tr>
                   
@@ -28,8 +28,8 @@
             </thead>
                 <tbody>
              <tr  ng-repeat="account in accounts">
-                    <td> {{account.username}}</td>
-                        <td> {{account.name}}</td>
+                    <td> {{account.code}}</td>
+                        <td> {{account.description}}</td>
            
               
 
@@ -69,16 +69,19 @@
 
  <form class="form-horizontal" ng-controller="AccountsController">
 
+         <label>Enter cheque number:</label>
+    <input type="text" ng-model="account.code" ng-change="onChqChange(account.code)"/>
+
                  <div class="form-group">
                   <label class="col-lg-3 control-label">Code</label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" name="trans_desc" ng-model="accounts.code"  placeholder="Enter group Code"/>
+                     <input class="form-control" type="text" name="trans_desc" ng-model="account.code"  placeholder="Enter group Code"/>
                   </div>
                </div>
                  <div class="form-group">
                   <label class="col-lg-3 control-label">Description</label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" name="trans_desc" ng-model="accounts.description"  placeholder="Enter group Description"/>
+                     <input class="form-control" type="text" name="trans_desc" ng-model="account.description"  placeholder="Enter group Description"/>
                   </div>
                </div>
                
@@ -100,6 +103,9 @@
                       <button class="btn btn-warning btn-sm" type="reset">Reset</button>
                   </div>
                </div>
+
+                    <div class="text-center text-success" margin-top="md" ng-show="SuccessMsg">{{SuccessMsg}}</div>
+             <div class="text-center text-danger"  margin-top="md" ng-show="errorMsg">{{errorMsg}}</div>
             </form>
 <!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
          </script>
@@ -107,12 +113,18 @@
 
 
 
-<script type="text/ng-template" id="EditUserGroup.html">
-            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">New User</h4></div><div class="modal-body"><!-- START panel-->
+<script type="text/ng-template" id="EditUserAccount.html">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Edit Group</h4></div><div class="modal-body"><!-- START panel-->
 
  <form class="form-horizontal" ng-controller="AccountsController">
                   
-
+  
+            <div class="form-group">
+            
+                  <div class="col-lg-9">
+                     <input class="form-control" type="hidden" name="trans_desc" ng-model="account.id"  placeholder="Enter group Code"/>
+                  </div>
+               </div>
 
             <div class="form-group">
                   <label class="col-lg-3 control-label">Code</label>
@@ -141,6 +153,9 @@
                       <button class="btn btn-warning btn-sm" type="reset">Reset</button>
                   </div>
                </div>
+
+                      <div class="text-center text-success" margin-top="md" ng-show="SuccessMsg">{{SuccessMsg}}</div>
+             <div class="text-center text-danger"  margin-top="md" ng-show="errorMsg">{{errorMsg}}</div>
             </form>
 <!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
          </script>

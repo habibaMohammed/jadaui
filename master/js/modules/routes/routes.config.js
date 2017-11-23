@@ -993,7 +993,7 @@
          .state('app.Payfrequency', {
               url: '/Payfrequency',
               title: 'Payfrequency',
-                templateUrl: helper.basepath('payrollcodes-listings.html')
+                templateUrl: helper.basepath('payfrequency.html')
            
              
           })
@@ -1116,7 +1116,8 @@
   .state('app.accounts', {
               url: '/accounts',
               title: 'accounts',
-                templateUrl: helper.basepath('accounts.html')
+                templateUrl: helper.basepath('accounts.html'),
+                 resolve: helper.resolveFor('datatables'),
                   
                  
              

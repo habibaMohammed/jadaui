@@ -55,9 +55,22 @@ for(var r=0;r<list.length;r++){
   // var postingdata = new PayrollBatchPostingService(vdata);
     $http.post(jadaApiUrl+'api/payrollsingleposting/', {vdata}).success(
       function(data){
-        vdata.success=true;
-        $scope.response = data
-        console.log(data);
+
+            var response=angular.fromJson(data);
+          
+            if(response.Status=="1"){
+              $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+                    console.log()
+            }else{
+           
+               $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+           
+            }
+        // $scope.fileData[r].success=true;
+        // $scope.response = data
+        // console.log(data);
       })
 
 }

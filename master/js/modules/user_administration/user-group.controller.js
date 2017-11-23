@@ -20,14 +20,8 @@
 
  $scope.usergroups=UserGroupService.query();
 
+console.log( $scope.usergroups);
 
- // var id=$stateParams.Id;
-
- //           console.log( id);
- //            if(id!=null){
- //           $scope.currentworkflow=WorkflowService.get({id:id});
- //          }
-           
 
  $scope.loadUserGroups = function () {
      
@@ -41,7 +35,6 @@
 
 
 
-//$scope.oneuser=CompanyInfoService.get({user:1}); //Obtain the Post from backend. Search by Id
 
 
 
@@ -171,16 +164,12 @@ $scope.loadUserGroups();
 
   ModalInstanceCtrl.$inject = ['$scope', '$rootScope', '$http','$uibModalInstance','UserGroupService','usergroup'];
           function ModalInstanceCtrl($scope,$rootScope, $http, $uibModalInstance, UserGroupService,usergroup) {
-            $scope.currentgroup=usergroup;
-    //       if (x) {
-    //     $scope.oneUser = { id : x};
-    //    // $scope.oneUser = { name : x};
+       
+ var id=usergroup.id;
+    console.log(id);
 
-
-    // } else 
-    // {
-    //     $scope.thing = { name: null };
-    // }
+            $scope.usergroup=UserGroupService.get({id:id});
+            console.log ($scope.usergroup);
 
             $scope.ok = function () {
               $uibModalInstance.close('closed');
@@ -193,10 +182,36 @@ $scope.loadUserGroups();
          
 
 
-                $scope.updateUserGroup=function(currentgroup){
-             currentgroup.$update().then(function(){
-                 $rootScope.$emit("CallLoadUserGroups", {});
-            });
+            //     $scope.updateUserGroup=function(currentgroup){
+            //  currentgroup.$update().then(function(){
+            //      $rootScope.$emit("CallLoadUserGroups", {});
+            // });
+          
+            //   };
+
+
+
+                $scope.updateUserGroup=function(usergroup){
+            usergroup.$update().then(function(data){
+                   var response=angular.fromJson(data);
+            console.log($scope.leave);
+            // $scope.authMsg=response.Message;
+            if(response.Status=="1"){
+                     $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+                     $scope.user=UserGroupService.get({id:id});
+            }else{
+           
+                  $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+          
+            }
+             $rootScope.$emit("CallLoadUserGroupss", {});
+            }, function() {
+                $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                }
+            );
           
               };
           }

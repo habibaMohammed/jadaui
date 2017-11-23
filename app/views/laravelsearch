@@ -1,9 +1,0 @@
-$search = '%'.$_POST['name'].'%';
-
-$users = DB::table('MyTable')
-         ->where('id', 'LIKE', $search)
-         ->orwhere('firstname', 'LIKE', $search)
-         ->orwhere('lastname', 'LIKE', $search)
-         ->orwhere('email', 'LIKE', $search)
-         ->orwhere('address', 'LIKE', $search);
-         ->get();

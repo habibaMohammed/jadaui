@@ -67,13 +67,8 @@
          <div class="form-group">
           <label class="col-lg-3 control-label">Descriptions</label>
           <div class="col-lg-9">
-           <select class="form-control" name="pay_frequency"  ng-model="pfrequency.description">
-                              <option value="">Nothing</option>
-                              <option value="Monthly">Monthly</option>
-                              <option value="Weekly">Weekly</option>
-                              <option value="Biweekly">Biweekly</option>
-                              
-                           </select>
+                    <input class="form-control" type="text" name="pay_frequency" ng-model="pfrequency.description" placeholder="Enter Description"/>
+ 
     
          </div>
        </div>
@@ -92,6 +87,7 @@
      </div>
                       <div class="text-center text-success" margin-top="md" ng-show="SuccessMsg">{{SuccessMsg}}</div>
              <div class="text-center text-danger"  margin-top="md" ng-show="errorMsg">{{errorMsg}}</div>
+             {{pfrequency|json}}
    </form>
    <!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
  </script>
