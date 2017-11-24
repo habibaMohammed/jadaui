@@ -20,7 +20,7 @@
 
  $scope.usergroups=UserGroupService.query();
 
-console.log( $scope.usergroups);
+console.log($scope.usergroups);
 
 
  $scope.loadUserGroups = function () {
@@ -166,7 +166,7 @@ $scope.loadUserGroups();
           function ModalInstanceCtrl($scope,$rootScope, $http, $uibModalInstance, UserGroupService,usergroup) {
        
  var id=usergroup.id;
-    console.log(id);
+    console.log('id'+id);
 
             $scope.usergroup=UserGroupService.get({id:id});
             console.log ($scope.usergroup);

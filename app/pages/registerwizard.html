@@ -153,13 +153,31 @@
               <!--  <span class="text-danger" ng-show="formStep2.account_physical_address.$dirty &amp;&amp; formStep2.account_physical_address.$error.required">This field is required</span> -->
              <!--   <span class="text-danger" ng-show="reg.registerForm.reg.account_physical_address.$dirty &amp;&amp; reg.registerForm.account_physical_address.$error.pattern">This field must be a valid email address</span> -->
             </div>
-             <div class="form-group has-feedback">
+
+            <div class="form-group has-feedback">
+                        <label class="col-sm-3 ">Country</label>
+                        <div class="col-lg-9">
+                    <select class="form-control" name="account_country"  ng-model="reg.account.country" required="">
+                              <option value="">Select Country</option>
+                              <option value="1">Kenya</option>
+                              
+                             
+                           </select>
+                           <span class="text-danger" ng-show="formStep2.account_country.$dirty &amp;&amp;formStep2.account_country.$error.required">This field is required</span></span>
+                     
+                        <!-- <div class="col-sm-4">
+                           <small class="text-muted">type='number'</small>
+                        </div> -->
+                  </div>
+                           
+                     </div>
+           <!--   <div class="form-group has-feedback">
                <label class="text-muted"> Country</label>
                <input class="form-control" type="text" name="account_country" placeholder="Enter Country" ng-model="reg.account.country" required="" />
-              <!--  <span class="fa fa-envelope form-control-feedback text-muted"></span> -->
+          
                <span class="text-danger" ng-show="formStep2.account_country.$dirty &amp;&amp;formStep2.account_country.$error.required">This field is required</span>
-               <!-- <span class="text-danger" ng-show="formStep2.account_country.$dirty &amp;&amp; formStep2.account_country.$error.pattern">This field must be a valid email address</span> -->
-            </div>
+          
+            </div> -->
                  <div class="form-group has-feedback">
                <label class="text-muted"> Website</label>
                <input class="form-control" type="text" name="account_website" placeholder="Enter Website url"  ng-model="reg.account.website" />
