@@ -25,15 +25,17 @@
                    <th>email Address</th>
                     <th>User 
                     Name</th>
-                  <th>password</th>
+        <th> Action</th>
                </tr>
             </thead>
                 <tbody>
              <tr  ng-repeat="usergroup in usergroups">
-                    <td> {{usergroup.username}}</td>
-                        <td> {{usergroup.name}}</td>
-           
-                <td>{{usergroup.id}}</td>
+                    <td> {{usergroup.user}}</td>
+                        <td> {{usergroup.account}}</td>
+                         <td> {{usergroup.emailAddress}}</td>
+                 <td> {{usergroup.userName}}</td>
+                    <td> {{usergroup.id}}</td>
+               
 
                 
 
@@ -80,7 +82,7 @@
                  <div class="form-group">
                   <label class="col-lg-3 control-label">Group</label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" name="group" ng-model="usergroup.group"  placeholder="Enter group "/>
+                     <input class="form-control" type="text" name="group" ng-model="usergroup.account"  placeholder="Enter group "/>
                   </div>
                </div>
                
@@ -94,7 +96,7 @@
              <div class="form-group">
                   <label class="col-lg-3 control-label">Username</label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" name="trans_desc" ng-model="usergroup.username"  placeholder="Enter username"/>
+                     <input class="form-control" type="text" name="trans_desc" ng-model="usergroup.userName"  placeholder="Enter username"/>
                   </div>
                </div>
 
@@ -123,6 +125,7 @@
 
                    <div class="text-center text-success" margin-top="md" ng-show="SuccessMsg">{{SuccessMsg}}</div>
              <div class="text-center text-danger"  margin-top="md" ng-show="errorMsg">{{errorMsg}}</div>
+        
             </form>
 <!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
          </script>
@@ -134,6 +137,13 @@
             <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Edit User Group</h4></div><div class="modal-body"><!-- START panel-->
 
  <form class="form-horizontal" ng-controller="UserGroupController">
+
+   <div class="form-group">
+               
+                  <div class="col-lg-9">
+                     <input class="form-control" type="hidden" name="user" ng-model="usergroup.id"  placeholder="Enter user"/>
+                  </div>
+               </div>
                      <div class="form-group">
                   <label class="col-lg-3 control-label">User</label>
                   <div class="col-lg-9">
@@ -143,7 +153,7 @@
                  <div class="form-group">
                   <label class="col-lg-3 control-label">Group</label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" name="group" ng-model="usergroup.group"  placeholder="Enter group "/>
+                     <input class="form-control" type="text" name="group" ng-model="usergroup.account"  placeholder="Enter group "/>
                   </div>
                </div>
                
@@ -157,7 +167,7 @@
              <div class="form-group">
                   <label class="col-lg-3 control-label">Username</label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" name="trans_desc" ng-model="usergroup.username"  placeholder="Enter username"/>
+                     <input class="form-control" type="text" name="trans_desc" ng-model="usergroup.userName"  placeholder="Enter username"/>
                   </div>
                </div>
 

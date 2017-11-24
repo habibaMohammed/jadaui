@@ -32,7 +32,7 @@ $scope.fileDataObj = [];
          $scope.fileData =  $.parseJSON($scope.fileDataObj);
 
 var jdata= JSON.stringify($scope.fileData);
-        console.log( $scope.fileData);
+        console.log( $scope.fileData.name);
       }
     }
 
@@ -81,7 +81,6 @@ for(var r=0;r<list.length;r++){
   // var postingdata = new PayrollBatchPostingService(vdata);
     $http.post('http://localhost:56135/api/employeesingleposting/', {vdata}).success(
       function(data){
-        $scope.fileData[r].success=true;
         $scope.response = data
         console.log(data);
       })
