@@ -22,7 +22,7 @@
 
 $scope.fileDataObj = [];
 
-            // $scope.fileData ={ };
+            $scope.fileData ={ };
     
     $scope.uploadFile = function() {
       if ($scope.fileContent) {
@@ -32,10 +32,9 @@ $scope.fileDataObj = [];
          $scope.fileData =  $.parseJSON($scope.fileDataObj);
 
 var jdata= JSON.stringify($scope.fileData);
-        console.log( $scope.fileData.name);
+        console.log( $scope.fileData);
       }
     }
-
 
 
 
@@ -73,16 +72,30 @@ var jdata= JSON.stringify($scope.fileData);
 
 //   }
 
-       $scope.save = function () {
+ $scope.save = function () {
 var list=$scope.fileData;
 for(var r=0;r<list.length;r++){
   var vdata =list[r];
   console.log(vdata);
   // var postingdata = new PayrollBatchPostingService(vdata);
-    $http.post('http://localhost:56135/api/employeesingleposting/', {vdata}).success(
+    $http.post('http://localhost:56135/api/payrollsingleposting/', {vdata}).success(
       function(data){
-        $scope.response = data
-        console.log(data);
+
+            var response=angular.fromJson(data);
+          
+            if(response.Status=="1"){
+              $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+                    console.log()
+            }else{
+           
+               $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+           
+            }
+        // $scope.fileData[r].success=true;
+        // $scope.response = data
+        // console.log(data);
       })
 
 }

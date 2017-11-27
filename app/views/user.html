@@ -17,11 +17,13 @@
          <table class="table table-striped" datatable="ng">
                  <thead>
                <tr>
+                  <th>First Name</th>
+                   <th>Last Name</th>
                   <th> Email Address</th>
               
                   <th> Phone Number</th>
                   
-                   <th>Group</th>
+                 
 
                    <th>Active</th>
                      <th>Action</th>
@@ -30,11 +32,13 @@
             </thead>
                 <tbody>
               <tr ng-repeat="user in users">
+                   <td>{{ user.firstName }}</td>
+                      <td>{{ user.lastName }}</td>
                 <td>{{ user.emailAddress }}</td>
             
                   <td>{{ user.phoneNumber}}</td>
-                  <td>{{ user.account }}</td>
-                  <td>{{ user.active }}</td>
+          
+                  <td>{{ user.isActive }}</td>
                   <td>  <div class="buttons" >
                 <button class="btn btn-sm btn-info" ng-click="show(user)"  title="Edit">
                   <em class="fa fa-pencil"></em>
@@ -64,6 +68,20 @@
             <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">New User</h4></div><div class="modal-body"><!-- START panel-->
 
  <form class="form-horizontal" ng-controller="UserAdminController">
+
+    <div class="form-group">
+                  <label class="col-lg-3 control-label">First Name</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="group" ng-model="user.firstName"  placeholder="Enter First Name"/>
+                  </div>
+               </div>
+
+                   <div class="form-group">
+                  <label class="col-lg-3 control-label">Last Name</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="group" ng-model="user.lastName"  placeholder="Enter Last Name"/>
+                  </div>
+               </div>
                 <div class="form-group">
                   <label class="col-lg-3 control-label">Email Address
 </label>
@@ -83,25 +101,20 @@
                      <input class="form-control" type="text" name="phone" ng-model="user.phoneNumber" placeholder="Enter Phone Number"/>
                   </div>
                </div>
-                <div class="form-group">
-                  <label class="col-lg-3 control-label">Group</label>
-                  <div class="col-lg-9">
-                     <input class="form-control" type="text" name="group" ng-model="user.account"  placeholder="Enter group"/>
-                  </div>
-               </div>
+              
           
                  <div class="form-group">
  <label class="col-lg-3 control-label">Active</label>
    <div class="col-lg-9">
             <div class="radio c-radio">
                 <label>
-                    <input type="radio" name="f_country" ng-value="true" ng-model="user.active">
+                    <input type="radio" name="f_country" ng-value="true" ng-model="user.isActive">
                    <span class="fa fa-circle"></span> Yes
                 </label>
             </div>
             <div class="radio c-radio">
                 <label>
-                    <input type="radio" name="f_custom" ng-value="false" ng-model="user.active">
+                    <input type="radio" name="f_custom" ng-value="false" ng-model="user.isActive">
                     <span class="fa fa-circle"></span>No
                 </label>
             </div>
@@ -117,6 +130,9 @@
                       <button class="btn btn-warning btn-sm" type="submit">Reset</button>
                   </div>
                </div>
+
+                    <div class="text-center text-success" margin-top="md" ng-show="SuccessMsg">{{SuccessMsg}}</div>
+             <div class="text-center text-danger"  margin-top="md" ng-show="errorMsg">{{errorMsg}}</div>
             </form>
 <!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
          </script>
@@ -133,13 +149,18 @@
                      <input class="form-control" type="hidden"  name="id"  ng-model="user.id" placeholder="Enter Email"/>
                   </div>
                </div>
-                 <!--  <div class="form-group">
-                  <label class="col-lg-3 control-label">Email Address
-</label>
+               <div class="form-group">
+                  <label class="col-lg-3 control-label">First Name</label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="email"  name="email"  ng-model="user.emailAddress" placeholder="Enter Email"/>
+                     <input class="form-control" type="text" name="group" ng-model="user.firstName"  placeholder="Enter First Name"/>
                   </div>
-               </div> -->
+               </div>
+
+                   <div class="form-group">
+                  <label class="col-lg-3 control-label">Last Name</label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text" name="group" ng-model="user.lastName"  placeholder="Enter Last Name"/>
+                  </div>
                 <div class="form-group">
                   <label class="col-lg-3 control-label"> Email Address</label>
                   <div class="col-lg-9">
@@ -152,25 +173,25 @@
                      <input class="form-control" type="text" name="phone" ng-model="user.phoneNumber" placeholder="Enter Phone Number"/>
                   </div>
                </div>
-                <div class="form-group">
+            <!--     <div class="form-group">
                   <label class="col-lg-3 control-label">Group</label>
                   <div class="col-lg-9">
                      <input class="form-control" type="text" name="group" ng-model="user.account"  placeholder="Enter group"/>
                   </div>
-               </div>
+               </div> -->
           
                  <div class="form-group">
  <label class="col-lg-3 control-label">Active</label>
    <div class="col-lg-9">
             <div class="radio c-radio">
                 <label>
-                    <input type="radio" name="f_country" ng-value="true" ng-model="user.active">
+                    <input type="radio" name="f_country" ng-value="true" ng-model="user.isActive">
                    <span class="fa fa-circle"></span> Yes
                 </label>
             </div>
             <div class="radio c-radio">
                 <label>
-                    <input type="radio" name="f_custom" ng-value="false" ng-model="user.active">
+                    <input type="radio" name="f_custom" ng-value="false" ng-model="user.isActive">
                     <span class="fa fa-circle"></span>No
                 </label>
             </div>
@@ -185,6 +206,9 @@
                       <button class="btn btn-warning btn-sm" type="submit">Cancel</button>
                   </div>
                </div>
+
+                    <div class="text-center text-success" margin-top="md" ng-show="SuccessMsg">{{SuccessMsg}}</div>
+             <div class="text-center text-danger"  margin-top="md" ng-show="errorMsg">{{errorMsg}}</div>
             </form>
 <!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
          </script>

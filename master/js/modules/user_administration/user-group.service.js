@@ -9,7 +9,7 @@
 
     UserGroupService.$inject = ['$resource','jadaApiUrl'];
     function UserGroupService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/useraccount/:id', {id: '@id'},
+     var data=$resource(jadaApiUrl+'api/useraccount/:ID', {ID: '@ID'},
     { 'get':    {method:'GET', isArray:false},
   'save':   {method:'POST'},
   'query':  {method:'GET', isArray:true},

@@ -5,8 +5,8 @@
         .module('app.useradministration')
         .controller('UserGroupController', UserGroupController);
 
-    UserGroupController.$inject = ['$scope','$rootScope', '$http', '$stateParams', '$state', '$uibModal', '$log', 'UserGroupService'];
-        function UserGroupController($scope, $rootScope, $http, $stateParams, $state, $uibModal, $log, UserGroupService) {
+    UserGroupController.$inject = ['$scope','$rootScope', '$http', '$stateParams', '$state', '$uibModal', '$log', 'UserGroupService','jadaApiUrl'];
+        function UserGroupController($scope, $rootScope, $http, $stateParams, $state, $uibModal, $log, UserGroupService,jadaApiUrl) {
         var vm = this;
 
         activate();
@@ -33,6 +33,17 @@ console.log($scope.usergroups);
         });
 
 
+
+              $http.get(jadaApiUrl+'api/account').success(function(data) {
+              $scope.accounts = data;
+
+            });
+
+
+              $http.get(jadaApiUrl+'api/user').success(function(data) {
+              $scope.users = data;
+
+            });
 
 
 
@@ -165,10 +176,10 @@ $scope.loadUserGroups();
   ModalInstanceCtrl.$inject = ['$scope', '$rootScope', '$http','$uibModalInstance','UserGroupService','usergroup'];
           function ModalInstanceCtrl($scope,$rootScope, $http, $uibModalInstance, UserGroupService,usergroup) {
        
- var id=usergroup.id;
+ var id=usergroup.ID;
     console.log('id'+id);
 
-            $scope.usergroup=UserGroupService.get({id:id});
+            $scope.usergroup=UserGroupService.get({ID:id});
             console.log ($scope.usergroup);
 
             $scope.ok = function () {
