@@ -34,7 +34,7 @@
                         <td> {{usergroup.account}}</td>
                          <td> {{usergroup.emailAddress}}</td>
                  <td> {{usergroup.userName}}</td>
-                    <td> {{usergroup.id}}</td>
+
                
 
                 
@@ -72,26 +72,42 @@
             <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Add User Groups</h4></div><div class="modal-body"><!-- START panel-->
 
  <form class="form-horizontal" ng-controller="UserGroupController">
+          
 
+              <div class="form-group">
+            
+                  <div class="col-lg-9">
+                     <input class="form-control" type="hidden" name="user" ng-model="usergroup.ID"  placeholder="Enter user"/>
+                  </div>
+               </div>
            <div class="form-group">
                   <label class="col-lg-3 control-label">User</label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" name="user" ng-model="usergroup.user"  placeholder="Enter user"/>
+                    <!--  <input class="form-control" type="text" name="user" ng-model="usergroup.user"  placeholder="Enter user"/> -->
+
+                     <select class="form-control" name="user" ng-model="usergroup.user" ng-options="user.id as user.emailAddress for user in users" >
+    <option value="" disabled selected>Select User</option>
+  </select>
                   </div>
                </div>
                  <div class="form-group">
                   <label class="col-lg-3 control-label">Group</label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" name="group" ng-model="usergroup.account"  placeholder="Enter group "/>
+                   <!--   <input class="form-control" type="text" name="group" ng-model="usergroup.account"  placeholder="Enter group "/> -->
+
+
+                     <select class="form-control" name="user" ng-model="usergroup.account" ng-options="account.id as account.description for account in accounts" >
+    <option value="" disabled selected>Select Group</option>
+  </select>
                   </div>
                </div>
                
-                 <div class="form-group">
+                <!--  <div class="form-group">
                   <label class="col-lg-3 control-label">Email Address</label>
                   <div class="col-lg-9">
                      <input class="form-control" type="email" name="trans_desc" ng-model="usergroup.emailAddress"  placeholder="Enter Email Address"/>
                   </div>
-               </div>
+               </div> -->
                
              <div class="form-group">
                   <label class="col-lg-3 control-label">Username</label>
@@ -141,28 +157,37 @@
    <div class="form-group">
                
                   <div class="col-lg-9">
-                     <input class="form-control" type="hidden" name="user" ng-model="usergroup.id"  placeholder="Enter user"/>
+                     <input class="form-control" type="hidden" name="user" ng-model="usergroup.ID"  placeholder="Enter user"/>
                   </div>
                </div>
-                     <div class="form-group">
+                        <div class="form-group">
                   <label class="col-lg-3 control-label">User</label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" name="user" ng-model="usergroup.user"  placeholder="Enter user"/>
+                    <!--  <input class="form-control" type="text" name="user" ng-model="usergroup.user"  placeholder="Enter user"/> -->
+
+                     <select class="form-control" name="user" ng-model="usergroup.user" ng-options="user.id as user.emailAddress for user in users" >
+    <option value="" disabled selected>Select User</option>
+  </select>
                   </div>
                </div>
                  <div class="form-group">
                   <label class="col-lg-3 control-label">Group</label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" name="group" ng-model="usergroup.account"  placeholder="Enter group "/>
+                   <!--   <input class="form-control" type="text" name="group" ng-model="usergroup.account"  placeholder="Enter group "/> -->
+
+
+                     <select class="form-control" name="user" ng-model="usergroup.account" ng-options="account.id as account.description for account in accounts" >
+    <option value="" disabled selected>Select Group</option>
+  </select>
                   </div>
                </div>
                
-                 <div class="form-group">
+                 <!-- <div class="form-group">
                   <label class="col-lg-3 control-label">Email Address</label>
                   <div class="col-lg-9">
                      <input class="form-control" type="email" name="trans_desc" ng-model="usergroup.emailAddress"  placeholder="Enter Email Address"/>
                   </div>
-               </div>
+               </div> -->
                
              <div class="form-group">
                   <label class="col-lg-3 control-label">Username</label>

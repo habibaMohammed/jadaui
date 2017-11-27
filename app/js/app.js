@@ -81,12 +81,6 @@
     'use strict';
 
     angular
-        .module('app.companydetails', []);
-})();
-(function() {
-    'use strict';
-
-    angular
         .module('app.core', [
             'ngRoute',
             'ngAnimate',
@@ -108,13 +102,19 @@
     'use strict';
 
     angular
-        .module('app.elements', []);
+        .module('app.companydetails', []);
 })();
 (function() {
     'use strict';
 
     angular
         .module('app.dashboard', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.elements', []);
 })();
 (function() {
     'use strict';
@@ -138,13 +138,13 @@
     'use strict';
 
     angular
-        .module('app.icons', []);
+        .module('app.forms', []);
 })();
 (function() {
     'use strict';
 
     angular
-        .module('app.forms', []);
+        .module('app.icons', []);
 })();
 (function() {
     'use strict';
@@ -174,13 +174,13 @@
     'use strict';
 
     angular
-        .module('app.maps', []);
+        .module('app.maintenance', ['ui.bootstrap']);
 })();
 (function() {
     'use strict';
 
     angular
-        .module('app.maintenance', ['ui.bootstrap']);
+        .module('app.maps', []);
 })();
 (function() {
     'use strict';
@@ -224,27 +224,7 @@
     'use strict';
 
     angular
-        .module('app.routes', [
-            'app.lazyload'
-        ]);
-})();
-(function() {
-    'use strict';
-
-    angular
         .module('app.reports', []);
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.tables', []);
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.sidebar', []);
 })();
 (function() {
     'use strict';
@@ -256,13 +236,33 @@
     'use strict';
 
     angular
-        .module('app.translate', []);
+        .module('app.routes', [
+            'app.lazyload'
+        ]);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.sidebar', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.tables', []);
 })();
 (function() {
     'use strict';
 
     angular
         .module('app.transactions', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.translate', []);
 })();
 (function() {
     'use strict';
@@ -3122,6 +3122,172 @@ $scope.loadPeriods();
 
 })();
 
+(function() {
+    'use strict';
+
+    angular
+        .module('app.core')
+        .config(coreConfig);
+
+    coreConfig.$inject = ['$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$animateProvider'];
+    function coreConfig($controllerProvider, $compileProvider, $filterProvider, $provide, $animateProvider){
+
+      var core = angular.module('app.core');
+      // registering components after bootstrap
+      core.controller = $controllerProvider.register;
+      core.directive  = $compileProvider.directive;
+      core.filter     = $filterProvider.register;
+      core.factory    = $provide.factory;
+      core.service    = $provide.service;
+      core.constant   = $provide.constant;
+      core.value      = $provide.value;
+
+
+      // Disables animation on items with class .ng-no-animation
+      $animateProvider.classNameFilter(/^((?!(ng-no-animation)).)*$/);
+
+      // Improve performance disabling debugging features
+      // $compileProvider.debugInfoEnabled(false);
+
+    }
+
+
+})();
+    
+
+
+/**=========================================================
+ * Module: constants.js
+ * Define constants to inject across the application
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.core')
+        .constant('APP_MEDIAQUERY', {
+          'desktopLG':             1200,
+          'desktop':                992,
+          'tablet':                 768,
+          'mobile':                 480
+        })
+      ;
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.core')
+        .run(appRun);
+
+    appRun.$inject = ['$http','$rootScope', '$state', '$stateParams', '$window', '$templateCache', 'Colors','$location', '$localStorage'];
+
+    function appRun($http,$rootScope, $state, $stateParams, $window, $templateCache, Colors , $location, $localStorage) {
+
+if ($localStorage.currentUser) {
+            $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
+        }
+
+
+        // Hook into ocLazyLoad to setup AngularGrid before inject into the app
+        // See "Creating the AngularJS Module" at
+        // https://www.ag-grid.com/best-angularjs-data-grid/index.php
+        var offevent = $rootScope.$on('ocLazyLoad.fileLoaded', function(e, file) {
+            if (file.indexOf('ag-grid.js') > -1) {
+                agGrid.initialiseAgGridWithAngular1(angular);
+                offevent();
+            }
+        });
+
+        // Set reference to access them from any scope
+        $rootScope.$state = $state;
+        $rootScope.$stateParams = $stateParams;
+        $rootScope.$storage = $window.localStorage;
+
+        // Uncomment this to disable template cache
+        /*$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+            if (typeof(toState) !== 'undefined'){
+              $templateCache.remove(toState.templateUrl);
+            }
+        });*/
+   $rootScope.$on('$locationChangeStart', function (event, next, current) {
+            var publicPages = ['/page/login'];
+            var restrictedPage = publicPages.indexOf($location.path()) === -1;
+            if (restrictedPage && !$localStorage.currentUser) {
+                $location.path('/page/login');
+                 
+            }
+        });
+
+
+
+// routerApp.run(function ($rootScope, $state, AuthService) {
+//     $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+//         if (toState.authenticate && !AuthService.IsAuthenticated()) {
+//             alert("Not Authenticated");
+//             // User isn’t authenticated
+//             $state.transitionTo("login");
+//             event.preventDefault(); 
+//         }
+//     });
+// });
+
+        // Allows to use branding color with interpolation
+        // {{ colorByName('primary') }}
+        $rootScope.colorByName = Colors.byName;
+
+        // cancel click event easily
+        $rootScope.cancel = function($event) {
+            $event.stopPropagation();
+        };
+
+        // Hooks Example
+        // -----------------------------------
+
+        // Hook not found
+        $rootScope.$on('$stateNotFound',
+            function(event, unfoundState /*, fromState, fromParams*/ ) {
+                console.log(unfoundState.to); // "lazy.state"
+                console.log(unfoundState.toParams); // {a:1, b:2}
+                console.log(unfoundState.options); // {inherit:false} + default options
+            });
+        // Hook error
+        $rootScope.$on('$stateChangeError',
+            function(event, toState, toParams, fromState, fromParams, error) {
+                console.log(error);
+            });
+        // Hook success
+        $rootScope.$on('$stateChangeSuccess',
+            function( /*event, toState, toParams, fromState, fromParams*/ ) {
+                // display new view from top
+                $window.scrollTo(0, 0);
+                // Save the route title
+                $rootScope.currTitle = $state.current.title;
+            });
+
+        // Load a title dynamically
+        $rootScope.currTitle = $state.current.title;
+        $rootScope.pageTitle = function() {
+            var title = $rootScope.app.name + ' - ' + ($rootScope.currTitle || $rootScope.app.description);
+            document.title = title;
+            return title;
+        };
+
+    }
+
+})();
+
+
+
+// routerApp.service('AuthService', function () {
+//     this._isAuthenticated = false;
+//     this._isAccessToken = '';
+//     this.IsAuthenticated = function () {
+//         return this._isAuthenticated;
+//     }
+// });
 /**=========================================================
  * Module: modals.js
  * Provides a simple way to implement bootstrap modals from templates
@@ -5262,168 +5428,353 @@ for(var r=0;r<accountRights.length;r++){
     'use strict';
 
     angular
-        .module('app.core')
-        .config(coreConfig);
+        .module('app.dashboard')
+        .controller('DashboardController', DashboardController);
 
-    coreConfig.$inject = ['$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$animateProvider'];
-    function coreConfig($controllerProvider, $compileProvider, $filterProvider, $provide, $animateProvider){
+    DashboardController.$inject = ['$scope', 'ChartData', '$timeout','$localStorage'];
+    function DashboardController($scope, ChartData, $timeout,$localStorage) {
+        var vm = this;
 
-      var core = angular.module('app.core');
-      // registering components after bootstrap
-      core.controller = $controllerProvider.register;
-      core.directive  = $compileProvider.directive;
-      core.filter     = $filterProvider.register;
-      core.factory    = $provide.factory;
-      core.service    = $provide.service;
-      core.constant   = $provide.constant;
-      core.value      = $provide.value;
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          // SPLINE
+          // ----------------------------------- 
+          vm.splineData = ChartData.load('server/chart/spline.json');
+          vm.splineOptions = {
+              series: {
+                  lines: {
+                      show: false
+                  },
+                  points: {
+                      show: true,
+                      radius: 4
+                  },
+                  splines: {
+                      show: true,
+                      tension: 0.4,
+                      lineWidth: 1,
+                      fill: 0.5
+                  }
+              },
+              grid: {
+                  borderColor: '#eee',
+                  borderWidth: 1,
+                  hoverable: true,
+                  backgroundColor: '#fcfcfc'
+              },
+              tooltip: true,
+              tooltipOpts: {
+                  content: function (label, x, y) { return x + ' : ' + y; }
+              },
+              xaxis: {
+                  tickColor: '#fcfcfc',
+                  mode: 'categories'
+              },
+              yaxis: {
+                  min: 0,
+                  max: 150, // optional: use it for a clear represetation
+                  tickColor: '#eee',
+                  position: ($scope.app.layout.isRTL ? 'right' : 'left'),
+                  tickFormatter: function (v) {
+                      return v/* + ' visitors'*/;
+                  }
+              },
+              shadowSize: 0
+          };
 
 
-      // Disables animation on items with class .ng-no-animation
-      $animateProvider.classNameFilter(/^((?!(ng-no-animation)).)*$/);
+          // PANEL REFRESH EVENTS
+          // ----------------------------------- 
 
-      // Improve performance disabling debugging features
-      // $compileProvider.debugInfoEnabled(false);
+          $scope.$on('panel-refresh', function(event, id) {
+            
+            console.log('Simulating chart refresh during 3s on #'+id);
 
-    }
+            // Instead of timeout you can request a chart data
+            $timeout(function(){
+              
+              // directive listen for to remove the spinner 
+              // after we end up to perform own operations
+              $scope.$broadcast('removeSpinner', id);
+              
+              console.log('Refreshed #' + id);
+
+            }, 3000);
+
+          });
 
 
-})();
-    
+          // PANEL DISMISS EVENTS
+          // ----------------------------------- 
 
+          // Before remove panel
+          $scope.$on('panel-remove', function(event, id, deferred){
+            
+            console.log('Panel #' + id + ' removing');
+            
+            // Here is obligatory to call the resolve() if we pretend to remove the panel finally
+            // Not calling resolve() will NOT remove the panel
+            // It's up to your app to decide if panel should be removed or not
+            deferred.resolve();
+          
+          });
 
-/**=========================================================
- * Module: constants.js
- * Define constants to inject across the application
- =========================================================*/
+          // Panel removed ( only if above was resolved() )
+          $scope.$on('panel-removed', function(event, id){
 
-(function() {
-    'use strict';
+            console.log('Panel #' + id + ' removed');
 
-    angular
-        .module('app.core')
-        .constant('APP_MEDIAQUERY', {
-          'desktopLG':             1200,
-          'desktop':                992,
-          'tablet':                 768,
-          'mobile':                 480
-        })
-      ;
+          });
 
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.core')
-        .run(appRun);
-
-    appRun.$inject = ['$http','$rootScope', '$state', '$stateParams', '$window', '$templateCache', 'Colors','$location', '$localStorage'];
-
-    function appRun($http,$rootScope, $state, $stateParams, $window, $templateCache, Colors , $location, $localStorage) {
-
-if ($localStorage.currentUser) {
-            $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
         }
+        
 
+        // $scope.Logout=function() {
+        //     // remove user from local storage and clear http auth header
+        //     delete $localStorage.currentUser;
+        //     $http.defaults.headers.common.Authorization = '';
+        //     aler("logging out")
+        // }
+    }
+})();
+(function() {
+    'use strict';
 
-        // Hook into ocLazyLoad to setup AngularGrid before inject into the app
-        // See "Creating the AngularJS Module" at
-        // https://www.ag-grid.com/best-angularjs-data-grid/index.php
-        var offevent = $rootScope.$on('ocLazyLoad.fileLoaded', function(e, file) {
-            if (file.indexOf('ag-grid.js') > -1) {
-                agGrid.initialiseAgGridWithAngular1(angular);
-                offevent();
-            }
-        });
+    angular
+        .module('app.reports')
+        .factory('DashboardService', DashboardService);
 
-        // Set reference to access them from any scope
-        $rootScope.$state = $state;
-        $rootScope.$stateParams = $stateParams;
-        $rootScope.$storage = $window.localStorage;
-
-        // Uncomment this to disable template cache
-        /*$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-            if (typeof(toState) !== 'undefined'){
-              $templateCache.remove(toState.templateUrl);
-            }
-        });*/
-   $rootScope.$on('$locationChangeStart', function (event, next, current) {
-            var publicPages = ['/page/login'];
-            var restrictedPage = publicPages.indexOf($location.path()) === -1;
-            if (restrictedPage && !$localStorage.currentUser) {
-                $location.path('/page/login');
-                 
-            }
-        });
-
-
-
-// routerApp.run(function ($rootScope, $state, AuthService) {
-//     $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-//         if (toState.authenticate && !AuthService.IsAuthenticated()) {
-//             alert("Not Authenticated");
-//             // User isn’t authenticated
-//             $state.transitionTo("login");
-//             event.preventDefault(); 
-//         }
-//     });
-// });
-
-        // Allows to use branding color with interpolation
-        // {{ colorByName('primary') }}
-        $rootScope.colorByName = Colors.byName;
-
-        // cancel click event easily
-        $rootScope.cancel = function($event) {
-            $event.stopPropagation();
-        };
-
-        // Hooks Example
-        // -----------------------------------
-
-        // Hook not found
-        $rootScope.$on('$stateNotFound',
-            function(event, unfoundState /*, fromState, fromParams*/ ) {
-                console.log(unfoundState.to); // "lazy.state"
-                console.log(unfoundState.toParams); // {a:1, b:2}
-                console.log(unfoundState.options); // {inherit:false} + default options
-            });
-        // Hook error
-        $rootScope.$on('$stateChangeError',
-            function(event, toState, toParams, fromState, fromParams, error) {
-                console.log(error);
-            });
-        // Hook success
-        $rootScope.$on('$stateChangeSuccess',
-            function( /*event, toState, toParams, fromState, fromParams*/ ) {
-                // display new view from top
-                $window.scrollTo(0, 0);
-                // Save the route title
-                $rootScope.currTitle = $state.current.title;
-            });
-
-        // Load a title dynamically
-        $rootScope.currTitle = $state.current.title;
-        $rootScope.pageTitle = function() {
-            var title = $rootScope.app.name + ' - ' + ($rootScope.currTitle || $rootScope.app.description);
-            document.title = title;
-            return title;
-        };
-
+    DashboardService.$inject = ['$resource','jadaApiUrl'];
+    function DashboardService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/dashboard/',
+    { 'get':{method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
     }
 
 })();
 
+(function() {
+    'use strict';
+
+    angular
+        .module('app.dashboard')
+        .controller('DashboardV2Controller', DashboardV2Controller);
+
+    DashboardV2Controller.$inject = ['$rootScope', '$scope', '$state'];
+    function DashboardV2Controller($rootScope, $scope, $state) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          // Change layout mode
+          if( $state.includes('app-h') ) {
+            // Setup layout horizontal for demo
+            $rootScope.app.layout.horizontal = true;
+            $scope.$on('$destroy', function(){
+                $rootScope.app.layout.horizontal = false;
+            });
+          }
+          else {
+            if(!$rootScope.app.layout.isCollapsedText)
+                $rootScope.app.layout.isCollapsed = true;
+          }
+
+          // BAR STACKED
+          // -----------------------------------
+          vm.barStackedOptions = {
+              series: {
+                  stack: true,
+                  bars: {
+                      align: 'center',
+                      lineWidth: 0,
+                      show: true,
+                      barWidth: 0.6,
+                      fill: 0.9
+                  }
+              },
+              grid: {
+                  borderColor: '#eee',
+                  borderWidth: 1,
+                  hoverable: true,
+                  backgroundColor: '#fcfcfc'
+              },
+              tooltip: true,
+              tooltipOpts: {
+                  content: function (label, x, y) { return x + ' : ' + y; }
+              },
+              xaxis: {
+                  tickColor: '#fcfcfc',
+                  mode: 'categories'
+              },
+              yaxis: {
+                  min: 0,
+                  max: 200, // optional: use it for a clear represetation
+                  position: ($rootScope.app.layout.isRTL ? 'right' : 'left'),
+                  tickColor: '#eee'
+              },
+              shadowSize: 0
+          };
+
+          // SPLINE
+          // -----------------------------------
+
+          vm.splineOptions = {
+              series: {
+                  lines: {
+                      show: false
+                  },
+                  points: {
+                      show: true,
+                      radius: 4
+                  },
+                  splines: {
+                      show: true,
+                      tension: 0.4,
+                      lineWidth: 1,
+                      fill: 0.5
+                  }
+              },
+              grid: {
+                  borderColor: '#eee',
+                  borderWidth: 1,
+                  hoverable: true,
+                  backgroundColor: '#fcfcfc'
+              },
+              tooltip: true,
+              tooltipOpts: {
+                  content: function (label, x, y) { return x + ' : ' + y; }
+              },
+              xaxis: {
+                  tickColor: '#fcfcfc',
+                  mode: 'categories'
+              },
+              yaxis: {
+                  min: 0,
+                  max: 150, // optional: use it for a clear represetation
+                  tickColor: '#eee',
+                  position: ($rootScope.app.layout.isRTL ? 'right' : 'left'),
+                  tickFormatter: function (v) {
+                      return v/* + ' visitors'*/;
+                  }
+              },
+              shadowSize: 0
+          };
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.dashboard')
+        .controller('DashboardV3Controller', DashboardV3Controller);
+
+    DashboardV3Controller.$inject = ['$rootScope'];
+    function DashboardV3Controller($rootScope) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          // SPLINE
+          // ----------------------------------- 
+
+          vm.splineOptions = {
+              series: {
+                  lines: {
+                      show: false
+                  },
+                  points: {
+                      show: true,
+                      radius: 4
+                  },
+                  splines: {
+                      show: true,
+                      tension: 0.4,
+                      lineWidth: 1,
+                      fill: 0.5
+                  }
+              },
+              grid: {
+                  borderColor: '#eee',
+                  borderWidth: 1,
+                  hoverable: true,
+                  backgroundColor: '#fcfcfc'
+              },
+              tooltip: true,
+              tooltipOpts: {
+                  content: function (label, x, y) { return x + ' : ' + y; }
+              },
+              xaxis: {
+                  tickColor: '#fcfcfc',
+                  mode: 'categories'
+              },
+              yaxis: {
+                  min: 0,
+                  max: 150, // optional: use it for a clear represetation
+                  tickColor: '#eee',
+                  position: ($rootScope.app.layout.isRTL ? 'right' : 'left'),
+                  tickFormatter: function (v) {
+                      return v/* + ' visitors'*/;
+                  }
+              },
+              shadowSize: 0
+          };
 
 
-// routerApp.service('AuthService', function () {
-//     this._isAuthenticated = false;
-//     this._isAccessToken = '';
-//     this.IsAuthenticated = function () {
-//         return this._isAuthenticated;
-//     }
-// });
+          vm.seriesData = {
+            'CA': 11100,   // Canada
+            'DE': 2510,    // Germany
+            'FR': 3710,    // France
+            'AU': 5710,    // Australia
+            'GB': 8310,    // Great Britain
+            'RU': 9310,    // Russia
+            'BR': 6610,    // Brazil
+            'IN': 7810,    // India
+            'CN': 4310,    // China
+            'US': 839,     // USA
+            'SA': 410      // Saudi Arabia
+          };
+          
+          vm.markersData = [
+            { latLng:[41.90, 12.45],  name:'Vatican City'          },
+            { latLng:[43.73, 7.41],   name:'Monaco'                },
+            { latLng:[-0.52, 166.93], name:'Nauru'                 },
+            { latLng:[-8.51, 179.21], name:'Tuvalu'                },
+            { latLng:[7.11,171.06],   name:'Marshall Islands'      },
+            { latLng:[17.3,-62.73],   name:'Saint Kitts and Nevis' },
+            { latLng:[3.2,73.22],     name:'Maldives'              },
+            { latLng:[35.88,14.5],    name:'Malta'                 },
+            { latLng:[41.0,-71.06],   name:'New England'           },
+            { latLng:[12.05,-61.75],  name:'Grenada'               },
+            { latLng:[13.16,-59.55],  name:'Barbados'              },
+            { latLng:[17.11,-61.85],  name:'Antigua and Barbuda'   },
+            { latLng:[-4.61,55.45],   name:'Seychelles'            },
+            { latLng:[7.35,134.46],   name:'Palau'                 },
+            { latLng:[42.5,1.51],     name:'Andorra'               }
+          ];
+        }
+    }
+})();
 
 (function() {
     'use strict';
@@ -6409,333 +6760,6 @@ if ($localStorage.currentUser) {
     }
 })();
 
-(function() {
-    'use strict';
-
-    angular
-        .module('app.dashboard')
-        .controller('DashboardController', DashboardController);
-
-    DashboardController.$inject = ['$scope', 'ChartData', '$timeout','$localStorage'];
-    function DashboardController($scope, ChartData, $timeout,$localStorage) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          // SPLINE
-          // ----------------------------------- 
-          vm.splineData = ChartData.load('server/chart/spline.json');
-          vm.splineOptions = {
-              series: {
-                  lines: {
-                      show: false
-                  },
-                  points: {
-                      show: true,
-                      radius: 4
-                  },
-                  splines: {
-                      show: true,
-                      tension: 0.4,
-                      lineWidth: 1,
-                      fill: 0.5
-                  }
-              },
-              grid: {
-                  borderColor: '#eee',
-                  borderWidth: 1,
-                  hoverable: true,
-                  backgroundColor: '#fcfcfc'
-              },
-              tooltip: true,
-              tooltipOpts: {
-                  content: function (label, x, y) { return x + ' : ' + y; }
-              },
-              xaxis: {
-                  tickColor: '#fcfcfc',
-                  mode: 'categories'
-              },
-              yaxis: {
-                  min: 0,
-                  max: 150, // optional: use it for a clear represetation
-                  tickColor: '#eee',
-                  position: ($scope.app.layout.isRTL ? 'right' : 'left'),
-                  tickFormatter: function (v) {
-                      return v/* + ' visitors'*/;
-                  }
-              },
-              shadowSize: 0
-          };
-
-
-          // PANEL REFRESH EVENTS
-          // ----------------------------------- 
-
-          $scope.$on('panel-refresh', function(event, id) {
-            
-            console.log('Simulating chart refresh during 3s on #'+id);
-
-            // Instead of timeout you can request a chart data
-            $timeout(function(){
-              
-              // directive listen for to remove the spinner 
-              // after we end up to perform own operations
-              $scope.$broadcast('removeSpinner', id);
-              
-              console.log('Refreshed #' + id);
-
-            }, 3000);
-
-          });
-
-
-          // PANEL DISMISS EVENTS
-          // ----------------------------------- 
-
-          // Before remove panel
-          $scope.$on('panel-remove', function(event, id, deferred){
-            
-            console.log('Panel #' + id + ' removing');
-            
-            // Here is obligatory to call the resolve() if we pretend to remove the panel finally
-            // Not calling resolve() will NOT remove the panel
-            // It's up to your app to decide if panel should be removed or not
-            deferred.resolve();
-          
-          });
-
-          // Panel removed ( only if above was resolved() )
-          $scope.$on('panel-removed', function(event, id){
-
-            console.log('Panel #' + id + ' removed');
-
-          });
-
-        }
-        
-
-        $scope.Logout=function() {
-            // remove user from local storage and clear http auth header
-            delete $localStorage.currentUser;
-            $http.defaults.headers.common.Authorization = '';
-            aler("logging out")
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.dashboard')
-        .controller('DashboardV2Controller', DashboardV2Controller);
-
-    DashboardV2Controller.$inject = ['$rootScope', '$scope', '$state'];
-    function DashboardV2Controller($rootScope, $scope, $state) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          // Change layout mode
-          if( $state.includes('app-h') ) {
-            // Setup layout horizontal for demo
-            $rootScope.app.layout.horizontal = true;
-            $scope.$on('$destroy', function(){
-                $rootScope.app.layout.horizontal = false;
-            });
-          }
-          else {
-            if(!$rootScope.app.layout.isCollapsedText)
-                $rootScope.app.layout.isCollapsed = true;
-          }
-
-          // BAR STACKED
-          // -----------------------------------
-          vm.barStackedOptions = {
-              series: {
-                  stack: true,
-                  bars: {
-                      align: 'center',
-                      lineWidth: 0,
-                      show: true,
-                      barWidth: 0.6,
-                      fill: 0.9
-                  }
-              },
-              grid: {
-                  borderColor: '#eee',
-                  borderWidth: 1,
-                  hoverable: true,
-                  backgroundColor: '#fcfcfc'
-              },
-              tooltip: true,
-              tooltipOpts: {
-                  content: function (label, x, y) { return x + ' : ' + y; }
-              },
-              xaxis: {
-                  tickColor: '#fcfcfc',
-                  mode: 'categories'
-              },
-              yaxis: {
-                  min: 0,
-                  max: 200, // optional: use it for a clear represetation
-                  position: ($rootScope.app.layout.isRTL ? 'right' : 'left'),
-                  tickColor: '#eee'
-              },
-              shadowSize: 0
-          };
-
-          // SPLINE
-          // -----------------------------------
-
-          vm.splineOptions = {
-              series: {
-                  lines: {
-                      show: false
-                  },
-                  points: {
-                      show: true,
-                      radius: 4
-                  },
-                  splines: {
-                      show: true,
-                      tension: 0.4,
-                      lineWidth: 1,
-                      fill: 0.5
-                  }
-              },
-              grid: {
-                  borderColor: '#eee',
-                  borderWidth: 1,
-                  hoverable: true,
-                  backgroundColor: '#fcfcfc'
-              },
-              tooltip: true,
-              tooltipOpts: {
-                  content: function (label, x, y) { return x + ' : ' + y; }
-              },
-              xaxis: {
-                  tickColor: '#fcfcfc',
-                  mode: 'categories'
-              },
-              yaxis: {
-                  min: 0,
-                  max: 150, // optional: use it for a clear represetation
-                  tickColor: '#eee',
-                  position: ($rootScope.app.layout.isRTL ? 'right' : 'left'),
-                  tickFormatter: function (v) {
-                      return v/* + ' visitors'*/;
-                  }
-              },
-              shadowSize: 0
-          };
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.dashboard')
-        .controller('DashboardV3Controller', DashboardV3Controller);
-
-    DashboardV3Controller.$inject = ['$rootScope'];
-    function DashboardV3Controller($rootScope) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          // SPLINE
-          // ----------------------------------- 
-
-          vm.splineOptions = {
-              series: {
-                  lines: {
-                      show: false
-                  },
-                  points: {
-                      show: true,
-                      radius: 4
-                  },
-                  splines: {
-                      show: true,
-                      tension: 0.4,
-                      lineWidth: 1,
-                      fill: 0.5
-                  }
-              },
-              grid: {
-                  borderColor: '#eee',
-                  borderWidth: 1,
-                  hoverable: true,
-                  backgroundColor: '#fcfcfc'
-              },
-              tooltip: true,
-              tooltipOpts: {
-                  content: function (label, x, y) { return x + ' : ' + y; }
-              },
-              xaxis: {
-                  tickColor: '#fcfcfc',
-                  mode: 'categories'
-              },
-              yaxis: {
-                  min: 0,
-                  max: 150, // optional: use it for a clear represetation
-                  tickColor: '#eee',
-                  position: ($rootScope.app.layout.isRTL ? 'right' : 'left'),
-                  tickFormatter: function (v) {
-                      return v/* + ' visitors'*/;
-                  }
-              },
-              shadowSize: 0
-          };
-
-
-          vm.seriesData = {
-            'CA': 11100,   // Canada
-            'DE': 2510,    // Germany
-            'FR': 3710,    // France
-            'AU': 5710,    // Australia
-            'GB': 8310,    // Great Britain
-            'RU': 9310,    // Russia
-            'BR': 6610,    // Brazil
-            'IN': 7810,    // India
-            'CN': 4310,    // China
-            'US': 839,     // USA
-            'SA': 410      // Saudi Arabia
-          };
-          
-          vm.markersData = [
-            { latLng:[41.90, 12.45],  name:'Vatican City'          },
-            { latLng:[43.73, 7.41],   name:'Monaco'                },
-            { latLng:[-0.52, 166.93], name:'Nauru'                 },
-            { latLng:[-8.51, 179.21], name:'Tuvalu'                },
-            { latLng:[7.11,171.06],   name:'Marshall Islands'      },
-            { latLng:[17.3,-62.73],   name:'Saint Kitts and Nevis' },
-            { latLng:[3.2,73.22],     name:'Maldives'              },
-            { latLng:[35.88,14.5],    name:'Malta'                 },
-            { latLng:[41.0,-71.06],   name:'New England'           },
-            { latLng:[12.05,-61.75],  name:'Grenada'               },
-            { latLng:[13.16,-59.55],  name:'Barbados'              },
-            { latLng:[17.11,-61.85],  name:'Antigua and Barbuda'   },
-            { latLng:[-4.61,55.45],   name:'Seychelles'            },
-            { latLng:[7.35,134.46],   name:'Palau'                 },
-            { latLng:[42.5,1.51],     name:'Andorra'               }
-          ];
-        }
-    }
-})();
 /**=========================================================
  * Module: modals.js
  * Provides a simple way to implement bootstrap modals from templates
@@ -6970,7 +6994,7 @@ EmployeesDetailsController.$inject = ['$stateParams', '$state','$http','$scope',
 
 $scope.fileDataObj = [];
 
-            // $scope.fileData ={ };
+            $scope.fileData ={ };
     
     $scope.uploadFile = function() {
       if ($scope.fileContent) {
@@ -6980,10 +7004,9 @@ $scope.fileDataObj = [];
          $scope.fileData =  $.parseJSON($scope.fileDataObj);
 
 var jdata= JSON.stringify($scope.fileData);
-        console.log( $scope.fileData.name);
+        console.log( $scope.fileData);
       }
     }
-
 
 
 
@@ -7021,16 +7044,30 @@ var jdata= JSON.stringify($scope.fileData);
 
 //   }
 
-       $scope.save = function () {
+ $scope.save = function () {
 var list=$scope.fileData;
 for(var r=0;r<list.length;r++){
   var vdata =list[r];
   console.log(vdata);
   // var postingdata = new PayrollBatchPostingService(vdata);
-    $http.post('http://localhost:56135/api/employeesingleposting/', {vdata}).success(
+    $http.post('http://localhost:56135/api/payrollsingleposting/', {vdata}).success(
       function(data){
-        $scope.response = data
-        console.log(data);
+
+            var response=angular.fromJson(data);
+          
+            if(response.Status=="1"){
+              $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+                    console.log()
+            }else{
+           
+               $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+           
+            }
+        // $scope.fileData[r].success=true;
+        // $scope.response = data
+        // console.log(data);
       })
 
 }
@@ -8223,39 +8260,6 @@ $scope.searchEmp=function(userId) {
 
 })();
 
-/**=========================================================
- * Module: skycons.js
- * Include any animated weather icon from Skycons
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.icons')
-        .directive('skycon', skycon);
-
-    function skycon () {
-
-        var directive = {
-            link: link,
-            restrict: 'A'
-        };
-        return directive;
-
-        function link(scope, element, attrs) {
-          var skycons = new Skycons({'color': (attrs.color || 'white')});
-
-          element.html('<canvas width="' + attrs.width + '" height="' + attrs.height + '"></canvas>');
-
-          skycons.add(element.children()[0], attrs.skycon);
-
-          skycons.play();
-        }
-    }
-
-})();
-
 (function() {
     'use strict';
 
@@ -9255,6 +9259,39 @@ $scope.searchEmp=function(userId) {
     }
 })();
 
+/**=========================================================
+ * Module: skycons.js
+ * Include any animated weather icon from Skycons
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.icons')
+        .directive('skycon', skycon);
+
+    function skycon () {
+
+        var directive = {
+            link: link,
+            restrict: 'A'
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+          var skycons = new Skycons({'color': (attrs.color || 'white')});
+
+          element.html('<canvas width="' + attrs.width + '" height="' + attrs.height + '"></canvas>');
+
+          skycons.add(element.children()[0], attrs.skycon);
+
+          skycons.play();
+        }
+    }
+
+})();
+
 (function() {
     'use strict';
 
@@ -9656,346 +9693,6 @@ $scope.searchEmp=function(userId) {
           mails.get($stateParams.mid).then(function(mail){
             vm.mail = mail;
           });
-        }
-    }
-})();
-
-/**=========================================================
- * Module: modals.js
- * Provides a simple way to implement bootstrap modals from templates
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.maps')
-        .controller('ModalGmapController', ModalGmapController);
-
-    ModalGmapController.$inject = ['$uibModal'];
-    function ModalGmapController($uibModal) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          vm.open = function (size) {
-
-            //var modalInstance =
-            $uibModal.open({
-              templateUrl: '/myModalContent.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-
-            
-          };
-
-
-
-          // Please note that $uibModalInstance represents a modal window (instance) dependency.
-          // It is not the same as the $uibModal service used above.
-
-          ModalInstanceCtrl.$inject = ['$scope', '$uibModalInstance', '$timeout'];
-          function ModalInstanceCtrl($scope, $uibModalInstance, $timeout) {
-
-            $uibModalInstance.opened.then(function () {
-              var position = new google.maps.LatLng(33.790807, -117.835734);
-
-              $scope.mapOptionsModal = {
-                zoom: 14,
-                center: position,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-              };
-
-              // we use timeout to wait maps to be ready before add a markers
-              $timeout(function(){
-                // 1. Add a marker at the position it was initialized
-                new google.maps.Marker({
-                  map: $scope.myMapModal,
-                  position: position
-                });
-                // 2. Trigger a resize so the map is redrawed
-                google.maps.event.trigger($scope.myMapModal, 'resize');
-                // 3. Move to the center if it is misaligned
-                $scope.myMapModal.panTo(position);
-              });
-
-            });
-
-            $scope.ok = function () {
-              $uibModalInstance.close('closed');
-            };
-
-            $scope.cancel = function () {
-              $uibModalInstance.dismiss('cancel');
-            };
-
-          }
-
-        }
-    }
-
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.maps')
-        .controller('GMapController', GMapController);
-
-    GMapController.$inject = ['$timeout'];
-    function GMapController($timeout) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          var position = [
-              new google.maps.LatLng(33.790807, -117.835734),
-              new google.maps.LatLng(33.790807, -117.835734),
-              new google.maps.LatLng(33.790807, -117.835734),
-              new google.maps.LatLng(33.790807, -117.835734),
-              new google.maps.LatLng(33.787453, -117.835858)
-            ];
-          
-          vm.addMarker = addMarker;
-          // we use timeout to wait maps to be ready before add a markers
-          $timeout(function(){
-            addMarker(vm.myMap1, position[0]);
-            addMarker(vm.myMap2, position[1]);
-            addMarker(vm.myMap3, position[2]);
-            addMarker(vm.myMap5, position[3]);
-          });
-
-          vm.mapOptions1 = {
-            zoom: 14,
-            center: position[0],
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            scrollwheel: false
-          };
-
-          vm.mapOptions2 = {
-            zoom: 19,
-            center: position[1],
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          };
-
-          vm.mapOptions3 = {
-            zoom: 14,
-            center: position[2],
-            mapTypeId: google.maps.MapTypeId.SATELLITE
-          };
-
-          vm.mapOptions4 = {
-            zoom: 14,
-            center: position[3],
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          };
-
-          // for multiple markers
-          $timeout(function(){
-            addMarker(vm.myMap4, position[3]);
-            addMarker(vm.myMap4, position[4]);
-          });
-
-          // custom map style
-          var MapStyles = [{'featureType':'water','stylers':[{'visibility':'on'},{'color':'#bdd1f9'}]},{'featureType':'all','elementType':'labels.text.fill','stylers':[{'color':'#334165'}]},{featureType:'landscape',stylers:[{color:'#e9ebf1'}]},{featureType:'road.highway',elementType:'geometry',stylers:[{color:'#c5c6c6'}]},{featureType:'road.arterial',elementType:'geometry',stylers:[{color:'#fff'}]},{featureType:'road.local',elementType:'geometry',stylers:[{color:'#fff'}]},{featureType:'transit',elementType:'geometry',stylers:[{color:'#d8dbe0'}]},{featureType:'poi',elementType:'geometry',stylers:[{color:'#cfd5e0'}]},{featureType:'administrative',stylers:[{visibility:'on'},{lightness:33}]},{featureType:'poi.park',elementType:'labels',stylers:[{visibility:'on'},{lightness:20}]},{featureType:'road',stylers:[{color:'#d8dbe0',lightness:20}]}];
-          vm.mapOptions5 = {
-            zoom: 14,
-            center: position[3],
-            styles: MapStyles,
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            scrollwheel: false
-          };
-
-          ///////////////
-          
-          function addMarker(map, position) {
-            return new google.maps.Marker({
-              map: map,
-              position: position
-            });
-          }
-
-        }
-    }
-})();
-
-/**=========================================================
- * Module: vector-map.js.js
- * Init jQuery Vector Map plugin
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.maps')
-        .directive('vectorMap', vectorMap);
-
-    vectorMap.$inject = ['VectorMap'];
-    function vectorMap (VectorMap) {
-        var directive = {
-            link: link,
-            restrict: 'EA',
-            scope: {
-              seriesData: '=',
-              markersData: '='
-            }
-        };
-        return directive;
-
-        function link(scope, element, attrs) {
-          
-          var defaultColors = {
-              markerColor:  '#23b7e5',      // the marker points
-              bgColor:      'transparent',      // the background
-              scaleColors:  ['#878c9a'],    // the color of the region in the serie
-              regionFill:   '#bbbec6'       // the base region color
-          };
-
-          var mapHeight   = attrs.height || '300',
-              options     = {
-                markerColor:  attrs.markerColor  || defaultColors.markerColor,
-                bgColor:      attrs.bgColor      || defaultColors.bgColor,
-                scale:        attrs.scale        || 1,
-                scaleColors:  attrs.scaleColors  || defaultColors.scaleColors,
-                regionFill:   attrs.regionFill   || defaultColors.regionFill,
-                mapName:      attrs.mapName      || 'world_mill_en'
-              };
-          
-          element.css('height', mapHeight);
-          
-          VectorMap.init( element , options, scope.seriesData, scope.markersData);
-        }
-    }
-
-})();
-
-/**=========================================================
- * Module: vector-map.js
- * Services to initialize vector map plugin
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.maps')
-        .service('VectorMap', VectorMap);
-
-    function VectorMap() {
-        this.init = init;
-
-        ////////////////
-
-        function init($element, opts, series, markers) {
-          $element.vectorMap({
-            map:             opts.mapName,
-            backgroundColor: opts.bgColor,
-            zoomMin:         1,
-            zoomMax:         8,
-            zoomOnScroll:    false,
-            regionStyle: {
-              initial: {
-                'fill':           opts.regionFill,
-                'fill-opacity':   1,
-                'stroke':         'none',
-                'stroke-width':   1.5,
-                'stroke-opacity': 1
-              },
-              hover: {
-                'fill-opacity': 0.8
-              },
-              selected: {
-                fill: 'blue'
-              },
-              selectedHover: {
-              }
-            },
-            focusOn:{ x:0.4, y:0.6, scale: opts.scale},
-            markerStyle: {
-              initial: {
-                fill: opts.markerColor,
-                stroke: opts.markerColor
-              }
-            },
-            onRegionLabelShow: function(e, el, code) {
-              if ( series && series[code] )
-                el.html(el.html() + ': ' + series[code] + ' visitors');
-            },
-            markers: markers,
-            series: {
-                regions: [{
-                    values: series,
-                    scale: opts.scaleColors,
-                    normalizeFunction: 'polynomial'
-                }]
-            },
-          });
-        }
-    }
-})();
-
-/**=========================================================
- * Module: vmaps,js
- * jVector Maps support
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.maps')
-        .controller('VectorMapController', VectorMapController);
-
-    function VectorMapController() {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          vm.seriesData = {
-            'CA': 11100,   // Canada
-            'DE': 2510,    // Germany
-            'FR': 3710,    // France
-            'AU': 5710,    // Australia
-            'GB': 8310,    // Great Britain
-            'RU': 9310,    // Russia
-            'BR': 6610,    // Brazil
-            'IN': 7810,    // India
-            'CN': 4310,    // China
-            'US': 839,     // USA
-            'SA': 410      // Saudi Arabia
-          };
-          
-          vm.markersData = [
-            { latLng:[41.90, 12.45],  name:'Vatican City'          },
-            { latLng:[43.73, 7.41],   name:'Monaco'                },
-            { latLng:[-0.52, 166.93], name:'Nauru'                 },
-            { latLng:[-8.51, 179.21], name:'Tuvalu'                },
-            { latLng:[7.11,171.06],   name:'Marshall Islands'      },
-            { latLng:[17.3,-62.73],   name:'Saint Kitts and Nevis' },
-            { latLng:[3.2,73.22],     name:'Maldives'              },
-            { latLng:[35.88,14.5],    name:'Malta'                 },
-            { latLng:[41.0,-71.06],   name:'New England'           },
-            { latLng:[12.05,-61.75],  name:'Grenada'               },
-            { latLng:[13.16,-59.55],  name:'Barbados'              },
-            { latLng:[17.11,-61.85],  name:'Antigua and Barbuda'   },
-            { latLng:[-4.61,55.45],   name:'Seychelles'            },
-            { latLng:[7.35,134.46],   name:'Palau'                 },
-            { latLng:[42.5,1.51],     name:'Andorra'               }
-          ];
         }
     }
 })();
@@ -10945,6 +10642,346 @@ $scope.banks=bankcodeService.query();
     }
 
 })();
+/**=========================================================
+ * Module: modals.js
+ * Provides a simple way to implement bootstrap modals from templates
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.maps')
+        .controller('ModalGmapController', ModalGmapController);
+
+    ModalGmapController.$inject = ['$uibModal'];
+    function ModalGmapController($uibModal) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          vm.open = function (size) {
+
+            //var modalInstance =
+            $uibModal.open({
+              templateUrl: '/myModalContent.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+
+            
+          };
+
+
+
+          // Please note that $uibModalInstance represents a modal window (instance) dependency.
+          // It is not the same as the $uibModal service used above.
+
+          ModalInstanceCtrl.$inject = ['$scope', '$uibModalInstance', '$timeout'];
+          function ModalInstanceCtrl($scope, $uibModalInstance, $timeout) {
+
+            $uibModalInstance.opened.then(function () {
+              var position = new google.maps.LatLng(33.790807, -117.835734);
+
+              $scope.mapOptionsModal = {
+                zoom: 14,
+                center: position,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+              };
+
+              // we use timeout to wait maps to be ready before add a markers
+              $timeout(function(){
+                // 1. Add a marker at the position it was initialized
+                new google.maps.Marker({
+                  map: $scope.myMapModal,
+                  position: position
+                });
+                // 2. Trigger a resize so the map is redrawed
+                google.maps.event.trigger($scope.myMapModal, 'resize');
+                // 3. Move to the center if it is misaligned
+                $scope.myMapModal.panTo(position);
+              });
+
+            });
+
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+
+          }
+
+        }
+    }
+
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.maps')
+        .controller('GMapController', GMapController);
+
+    GMapController.$inject = ['$timeout'];
+    function GMapController($timeout) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          var position = [
+              new google.maps.LatLng(33.790807, -117.835734),
+              new google.maps.LatLng(33.790807, -117.835734),
+              new google.maps.LatLng(33.790807, -117.835734),
+              new google.maps.LatLng(33.790807, -117.835734),
+              new google.maps.LatLng(33.787453, -117.835858)
+            ];
+          
+          vm.addMarker = addMarker;
+          // we use timeout to wait maps to be ready before add a markers
+          $timeout(function(){
+            addMarker(vm.myMap1, position[0]);
+            addMarker(vm.myMap2, position[1]);
+            addMarker(vm.myMap3, position[2]);
+            addMarker(vm.myMap5, position[3]);
+          });
+
+          vm.mapOptions1 = {
+            zoom: 14,
+            center: position[0],
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            scrollwheel: false
+          };
+
+          vm.mapOptions2 = {
+            zoom: 19,
+            center: position[1],
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+
+          vm.mapOptions3 = {
+            zoom: 14,
+            center: position[2],
+            mapTypeId: google.maps.MapTypeId.SATELLITE
+          };
+
+          vm.mapOptions4 = {
+            zoom: 14,
+            center: position[3],
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+
+          // for multiple markers
+          $timeout(function(){
+            addMarker(vm.myMap4, position[3]);
+            addMarker(vm.myMap4, position[4]);
+          });
+
+          // custom map style
+          var MapStyles = [{'featureType':'water','stylers':[{'visibility':'on'},{'color':'#bdd1f9'}]},{'featureType':'all','elementType':'labels.text.fill','stylers':[{'color':'#334165'}]},{featureType:'landscape',stylers:[{color:'#e9ebf1'}]},{featureType:'road.highway',elementType:'geometry',stylers:[{color:'#c5c6c6'}]},{featureType:'road.arterial',elementType:'geometry',stylers:[{color:'#fff'}]},{featureType:'road.local',elementType:'geometry',stylers:[{color:'#fff'}]},{featureType:'transit',elementType:'geometry',stylers:[{color:'#d8dbe0'}]},{featureType:'poi',elementType:'geometry',stylers:[{color:'#cfd5e0'}]},{featureType:'administrative',stylers:[{visibility:'on'},{lightness:33}]},{featureType:'poi.park',elementType:'labels',stylers:[{visibility:'on'},{lightness:20}]},{featureType:'road',stylers:[{color:'#d8dbe0',lightness:20}]}];
+          vm.mapOptions5 = {
+            zoom: 14,
+            center: position[3],
+            styles: MapStyles,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            scrollwheel: false
+          };
+
+          ///////////////
+          
+          function addMarker(map, position) {
+            return new google.maps.Marker({
+              map: map,
+              position: position
+            });
+          }
+
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: vector-map.js.js
+ * Init jQuery Vector Map plugin
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.maps')
+        .directive('vectorMap', vectorMap);
+
+    vectorMap.$inject = ['VectorMap'];
+    function vectorMap (VectorMap) {
+        var directive = {
+            link: link,
+            restrict: 'EA',
+            scope: {
+              seriesData: '=',
+              markersData: '='
+            }
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+          
+          var defaultColors = {
+              markerColor:  '#23b7e5',      // the marker points
+              bgColor:      'transparent',      // the background
+              scaleColors:  ['#878c9a'],    // the color of the region in the serie
+              regionFill:   '#bbbec6'       // the base region color
+          };
+
+          var mapHeight   = attrs.height || '300',
+              options     = {
+                markerColor:  attrs.markerColor  || defaultColors.markerColor,
+                bgColor:      attrs.bgColor      || defaultColors.bgColor,
+                scale:        attrs.scale        || 1,
+                scaleColors:  attrs.scaleColors  || defaultColors.scaleColors,
+                regionFill:   attrs.regionFill   || defaultColors.regionFill,
+                mapName:      attrs.mapName      || 'world_mill_en'
+              };
+          
+          element.css('height', mapHeight);
+          
+          VectorMap.init( element , options, scope.seriesData, scope.markersData);
+        }
+    }
+
+})();
+
+/**=========================================================
+ * Module: vector-map.js
+ * Services to initialize vector map plugin
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.maps')
+        .service('VectorMap', VectorMap);
+
+    function VectorMap() {
+        this.init = init;
+
+        ////////////////
+
+        function init($element, opts, series, markers) {
+          $element.vectorMap({
+            map:             opts.mapName,
+            backgroundColor: opts.bgColor,
+            zoomMin:         1,
+            zoomMax:         8,
+            zoomOnScroll:    false,
+            regionStyle: {
+              initial: {
+                'fill':           opts.regionFill,
+                'fill-opacity':   1,
+                'stroke':         'none',
+                'stroke-width':   1.5,
+                'stroke-opacity': 1
+              },
+              hover: {
+                'fill-opacity': 0.8
+              },
+              selected: {
+                fill: 'blue'
+              },
+              selectedHover: {
+              }
+            },
+            focusOn:{ x:0.4, y:0.6, scale: opts.scale},
+            markerStyle: {
+              initial: {
+                fill: opts.markerColor,
+                stroke: opts.markerColor
+              }
+            },
+            onRegionLabelShow: function(e, el, code) {
+              if ( series && series[code] )
+                el.html(el.html() + ': ' + series[code] + ' visitors');
+            },
+            markers: markers,
+            series: {
+                regions: [{
+                    values: series,
+                    scale: opts.scaleColors,
+                    normalizeFunction: 'polynomial'
+                }]
+            },
+          });
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: vmaps,js
+ * jVector Maps support
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.maps')
+        .controller('VectorMapController', VectorMapController);
+
+    function VectorMapController() {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          vm.seriesData = {
+            'CA': 11100,   // Canada
+            'DE': 2510,    // Germany
+            'FR': 3710,    // France
+            'AU': 5710,    // Australia
+            'GB': 8310,    // Great Britain
+            'RU': 9310,    // Russia
+            'BR': 6610,    // Brazil
+            'IN': 7810,    // India
+            'CN': 4310,    // China
+            'US': 839,     // USA
+            'SA': 410      // Saudi Arabia
+          };
+          
+          vm.markersData = [
+            { latLng:[41.90, 12.45],  name:'Vatican City'          },
+            { latLng:[43.73, 7.41],   name:'Monaco'                },
+            { latLng:[-0.52, 166.93], name:'Nauru'                 },
+            { latLng:[-8.51, 179.21], name:'Tuvalu'                },
+            { latLng:[7.11,171.06],   name:'Marshall Islands'      },
+            { latLng:[17.3,-62.73],   name:'Saint Kitts and Nevis' },
+            { latLng:[3.2,73.22],     name:'Maldives'              },
+            { latLng:[35.88,14.5],    name:'Malta'                 },
+            { latLng:[41.0,-71.06],   name:'New England'           },
+            { latLng:[12.05,-61.75],  name:'Grenada'               },
+            { latLng:[13.16,-59.55],  name:'Barbados'              },
+            { latLng:[17.11,-61.85],  name:'Antigua and Barbuda'   },
+            { latLng:[-4.61,55.45],   name:'Seychelles'            },
+            { latLng:[7.35,134.46],   name:'Palau'                 },
+            { latLng:[42.5,1.51],     name:'Andorra'               }
+          ];
+        }
+    }
+})();
+
 /**=========================================================
  * Module: navbar-search.js
  * Navbar search toggler * Auto dismiss on ESC key
@@ -13027,6 +13064,1409 @@ group.$remove().then(function () {
     }
 
 })();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('BankfileService', BankfileService);
+
+    BankfileService.$inject = ['$resource','jadaApiUrl'];
+    function BankfileService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/bankfilereport/:periodId', {periodId: '@periodId'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('BankFilesController', BankFilesController);
+
+    BankFilesController.$inject = ['$scope','$http','$resource', 'BankfileService','jadaApiUrl'];
+    function BankFilesController($scope,$http,$resource,BankfileService,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+       var currentPeriod=1;
+        $scope.bankfiles=BankfileService.get({periodId:currentPeriod});
+
+          
+                     $scope.getByperiod=function(period){
+        
+         $scope.bankfiles=BankfileService.get({periodId:period});
+
+          }
+
+
+
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+              $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('CompanySumarryController', CompanySumarryController);
+
+    CompanySumarryController.$inject = ['$scope','$http','$resource', 'CompanySummaryService','jadaApiUrl'];
+    function CompanySumarryController($scope,$http, $resource,CompanySummaryService,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.companysumaries=CompanySummaryService.get({periodId:1});
+        console.log( $scope.companysumaries);
+
+          
+
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+                        
+$scope.printDiv = function (div) {
+    console.log('hellow print');
+  var docHead = document.head.outerHTML;
+  var printContents = document.getElementById(div).outerHTML;
+  var winAttr = "location=yes, statusbar=no, menubar=no, titlebar=no, toolbar=no,dependent=no, width=865, height=600, resizable=yes, screenX=200, screenY=200, personalbar=no, scrollbars=yes";
+
+  var newWin = window.open("", "_blank", winAttr);
+  var writeDoc = newWin.document;
+  writeDoc.open();
+  writeDoc.write('<!doctype html><html>' + docHead + '<body onLoad="window.print()">' + printContents + '</body></html>');
+  writeDoc.close();
+  newWin.focus();
+}
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('CompanySummaryService', CompanySummaryService);
+
+    CompanySummaryService.$inject = ['$resource','jadaApiUrl'];
+    function CompanySummaryService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/CompanySummary/:periodId', {periodId: '@periodId'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('CompanyTotalsController', CompanyTotalsController);
+
+    CompanyTotalsController.$inject = ['$scope','$http','$resource', 'CompanyTotalsService','jadaApiUrl','Excel','$timeout'];
+    function CompanyTotalsController($scope,$http,$resource,CompanyTotalsService,jadaApiUrl,Excel,$timeout) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+       var period=1;
+        $scope.companytotals=CompanyTotalsService.get({periodId:1});
+
+          $scope.getByperiod=function(period){
+        
+            $scope.companytotals=CompanyTotalsService.get({periodId:period});
+
+          }
+
+          $scope.greaterThan = function(prop, val){
+    return function(item){
+      return item[prop] > val;
+    }
+}
+
+
+    
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+
+          
+$scope.printDiv = function (div) {
+    console.log('hellow print');
+  var docHead = document.head.outerHTML;
+  var printContents = document.getElementById(div).outerHTML;
+  var winAttr = "location=yes, statusbar=no, menubar=no, titlebar=no, toolbar=no,dependent=no, width=865, height=600, resizable=yes, screenX=200, screenY=200, personalbar=no, scrollbars=yes";
+
+  var newWin = window.open("", "_blank", winAttr);
+  var writeDoc = newWin.document;
+  writeDoc.open();
+  writeDoc.write('<!doctype html><html>' + docHead + '<body onLoad="window.print()">' + printContents + '</body></html>');
+  writeDoc.close();
+  newWin.focus();
+}
+
+
+
+ $scope.exportToExcel=function(tableId){ // ex: '#my-table'
+            var exportHref=Excel.tableToExcel(tableId,'WireWorkbenchDataExport');
+            $timeout(function(){location.href=exportHref;},100); // trigger download
+        }
+
+
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('CompanyTotalsService', CompanyTotalsService);
+
+    CompanyTotalsService.$inject = ['$resource','jadaApiUrl'];
+    function CompanyTotalsService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/CompanyTotalsReport/:periodId', {periodId: '@periodId'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('EvolutionController', EvolutionController);
+
+    EvolutionController.$inject = ['$scope','$resource', 'CompanySummaryService'];
+    function EvolutionController($scope,$resource,CompanySummaryService) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.companysumaries=CompanySummaryService.query();
+
+          
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('Excel', Excel);
+
+    Excel.$inject = ['$window'];
+    function Excel($window) {
+    var uri='data:application/vnd.ms-excel;base64,',
+            template='<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
+            base64=function(s){return $window.btoa(unescape(encodeURIComponent(s)));},
+            format=function(s,c){return s.replace(/{(\w+)}/g,function(m,p){return c[p];})};
+        return {
+            tableToExcel:function(tableId,worksheetName){
+                var table=$(tableId),
+                    ctx={worksheet:worksheetName,table:table.html()},
+                    href=uri+base64(format(template,ctx));
+                return href;
+            }
+        };   
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('HelbController', HelbController);
+
+    HelbController.$inject = ['$scope','$http','$resource', 'HelbService','jadaApiUrl'];
+    function HelbController($scope,$http,$resource,HelbService,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.helbs=HelbService.get({periodId:1});
+        console.log($scope.helbs);
+
+          
+                     $scope.getByperiod=function(period){
+        
+        $scope.helbs=HelbService.get({periodId:period});
+
+          }
+
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+              $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('HelbService', HelbService);
+
+    HelbService.$inject = ['$resource','jadaApiUrl'];
+    function HelbService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/helbreport/:periodId', {periodId: '@periodId'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('LeaveReportService', LeaveReportService);
+
+    LeaveReportService.$inject = ['$resource','jadaApiUrl'];
+    function LeaveReportService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/leavereport/:periodId', {periodId: '@periodId'},
+    { 'get':{method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('LeaveReportController', LeaveReportController);
+
+    LeaveReportController.$inject = ['$scope','$http','$resource', 'LeaveReportService','jadaApiUrl'];
+    function LeaveReportController($scope,$http,$resource,LeaveReportService,jadaApiUrl) {
+        var vm = this;
+
+        // activate();
+
+        ////////////////
+
+        function activate() {
+
+var currentPeriod=1;
+        $scope.leaves=LeaveReportService.get({periodId:currentPeriod});
+          console.log($scope.leaves);
+        // console.log($scope.leaves.leaveTypeReportList.employeeLeaveReportList);
+          
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+// var currentPeriod=1;
+//   $scope.leaves=LeaveReportService.get({periodId:currentPeriod});
+//   console.log($scope.leaves);
+
+          
+$http.get(jadaApiUrl+'api/leavetype').success(function(data) {
+              $scope.leavetypes = data;
+              console.log($scope.leavetypes);
+          
+            });
+
+              $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+
+
+              $scope.show=function(id){
+                for(var r=0;r<$scope.leaves.length;r++){
+
+                  console.log("leave : "+r);
+                  console.log($scope.leaves[r]);
+
+                }
+  
+              }
+
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('NhifController', NhifController);
+
+    NhifController.$inject = ['$scope','$http','$resource', 'NhifService1','jadaApiUrl'];
+    function NhifController($scope,$http,$resource,NhifService1,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.nhifs=NhifService1.get({periodId:1});
+        
+console.log( $scope.nhifs);
+          
+
+          $scope.getByperiod=function(period){
+        
+            $scope.nhifs=NhifService.get({periodId:period});
+
+          }
+
+            
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+              $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('NhifService1', NhifService1);
+
+    NhifService1.$inject = ['$resource','jadaApiUrl'];
+    function NhifService1($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/nhifreport/:periodId', {periodId: '@periodId'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('NssfController', NssfController);
+
+    NssfController.$inject = ['$scope','$http','$resource', 'NssfService','jadaApiUrl'];
+    function NssfController($scope,$http,$resource,NssfService,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+        $scope.nssfs=NssfService.get({periodId:1});
+console.log( $scope.nssfs);
+          
+            
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+              $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('NssfService', NssfService);
+
+    NssfService.$inject = ['$resource','jadaApiUrl'];
+    function NssfService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/nssfreport/:periodId', {periodId: '@periodId'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('P10Controller', P10Controller);
+
+    P10Controller.$inject = ['$scope','$http','$resource', 'P10Service','jadaApiUrl'];
+    function P10Controller($scope,$http,$resource,P10Service,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.ptens=P10Service.get({year:2017});
+        console.log($scope.ptens);
+
+          
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+              $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('P10Service', P10Service);
+
+    P10Service.$inject = ['$resource','jadaApiUrl'];
+    function P10Service($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/p10report/:year', {year: '@year'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('P10aController', P10aController);
+
+    P10aController.$inject = ['$scope','$http','$resource', 'LeaveReportService','jadaApiUrl'];
+    function P10aController($scope,$http,$resource,LeaveReportService,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.leaves=LeaveReportService.query();
+
+          
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+              $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('P10aService', P10aService);
+
+    P10aService.$inject = ['$resource','jadaApiUrl'];
+    function P10aService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/p10areport/:periodId', {periodId: '@periodId'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('P10bController', P10bController);
+
+    P10bController.$inject = ['$scope','$http','$resource', 'P10bService','jadaApiUrl'];
+    function P10bController($scope,$http,$resource,P10bService,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.ptenbs=P10bService.get({year:2017});
+        console.log($scope.ptenbs);
+
+          
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+              $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+
+
+        }
+
+
+          $scope.getTotal = function(type) {
+        var total = 0;
+        angular.forEach($scope.ptenbs, function(el) {
+            total += el[type];
+        });
+        return total;
+    };
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('P10bService', P10bService);
+
+    P10bService.$inject = ['$resource','jadaApiUrl'];
+    function P10bService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/p10breport/:year', {year: '@year'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('P10cController', P10cController);
+
+    P10cController.$inject = ['$scope','$http','$resource', 'P10cService','jadaApiUrl'];
+    function P10cController($scope,$http,$resource,P10cService,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.ptencs=P10cService.get({year:2017});
+        console.log($scope.ptencs);
+
+          
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+              $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('P10cService', P10cService);
+
+    P10cService.$inject = ['$resource','jadaApiUrl'];
+    function P10cService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/p10creport/:year', {year: '@year'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('P10dController', P10dController);
+
+    P10dController.$inject = ['$scope','$http','$resource', 'P10dService','jadaApiUrl'];
+    function P10dController($scope,$http,$resource,P10dService,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.ptends=P10dService.get({year:2017});
+        console.log( $scope.ptends);
+
+          
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+              $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('P10dService', P10dService);
+
+    P10dService.$inject = ['$resource','jadaApiUrl'];
+    function P10dService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/p10dreport/:year', {year: '@year'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('P9aController', P9aController);
+
+    P9aController.$inject = ['$scope','$http','$resource', 'P9aService','jadaApiUrl'];
+    function P9aController($scope,$http,$resource,P9aService,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        // $scope.p9as=P9aService.get({ year: 2017});
+  
+
+console.log( $scope.p9as);
+
+ var year=2017;
+          
+              $http.get(jadaApiUrl+'api/p9areport/'+year).success(function(data) {
+              $scope.p9as = data;
+                    console.log( $scope.p9as);
+
+            });
+          
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+              $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('P9aService', P9aService);
+
+    P9aService.$inject = ['$resource','jadaApiUrl'];
+    function P9aService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/p9areport/:year', {year: '@year'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('P9bController', P9bController);
+
+    P9bController.$inject = ['$scope','$http','$resource', 'LeaveReportService','jadaApiUrl'];
+    function P9bController($scope,$http,$resource,LeaveReportService,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.leaves=LeaveReportService.query();
+
+          
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+              $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('P9aService', P9aService);
+
+    P9aService.$inject = ['$resource','jadaApiUrl'];
+    function P9aService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/p9areport/:periodId', {periodId: '@periodId'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('PartnerJournalController', PartnerJournalController);
+
+    PartnerJournalController.$inject = ['$scope','$resource', 'CompanySummaryService'];
+    function PartnerJournalController($scope,$resource,CompanySummaryService) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.companysumaries=CompanySummaryService.query();
+
+          
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('PayeController', PayeController);
+
+    PayeController.$inject = ['$scope','$http','$resource' ,'jadaApiUrl','PayeService'];
+    function PayeController($scope,$http,$resource,jadaApiUrl,PayeService) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+       var currentPeriod=1;
+        $scope.payes=PayeService.get({periodId:1});
+        console.log($scope.payes);
+
+        // 
+
+
+    
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+              $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('PayeService', PayeService);
+
+    PayeService.$inject = ['$resource','jadaApiUrl'];
+    function PayeService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/payereport/:periodId', {periodId: '@periodId'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('payeSummaryController', payeSummaryController);
+
+    payeSummaryController.$inject = ['$scope','$http','$resource', 'PayeSummaryService','jadaApiUrl'];
+    function payeSummaryController($scope,$http,$resource,PayeSummaryService,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+var currentperiod=1;
+          // $scope.psummaries=PayeSummaryService.get({periodId:currentperiod});
+
+           $http.get(jadaApiUrl+'api/payesummary/'+currentperiod).success(function(data) {
+               $scope.psummaries = data;
+                   console.log(  $scope.psummaries);
+
+            });
+
+      
+
+             $scope.getByperiod=function(period){
+        
+       $http.get(jadaApiUrl+'api/payesummary/'+period).success(function(data) {
+               $scope.psummaries = data;
+
+            });
+
+          }
+              $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+              $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('PayeSummaryService', PayeSummaryService);
+
+    PayeSummaryService.$inject = ['$resource','jadaApiUrl'];
+    function PayeSummaryService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/payesummary/:periodId', {periodId: '@periodId'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('PayslipController', PayslipController);
+
+    PayslipController.$inject = ['$scope','$http','$resource', 'PayslipService','jadaApiUrl'];
+    function PayslipController($scope,$http,$resource,PayslipService,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        // vm.persons=PayslipService.get({id:1});
+        // console.log(vm.persons);
+var id=1;
+          
+
+$http.get(jadaApiUrl+'api/payslipreport/'+id).success(function(data) {
+              $scope.persons = data;
+              console.log($scope.persons);
+
+            });
+
+
+
+
+  $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+     $http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('PayslipService', PayslipService);
+
+    PayslipService.$inject = ['$resource','jadaApiUrl'];
+    function PayslipService($resource,jadaApiUrl) {
+     var data=$resource('http://localhost:56135/api/payslipreport/:id', {id: '@id'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .controller('SchedulerController', SchedulerController);
+
+    SchedulerController.$inject = ['$scope','$resource', 'CompanySummaryService'];
+    function SchedulerController($scope,$resource,CompanySummaryService) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+        $scope.companysumaries=CompanySummaryService.query();
+
+          
+
+        }
+    }
+})();
+angular.module('app.reports').filter('unique', function () {
+
+  return function (items, filterOn) {
+
+    if (filterOn === false) {
+      return items;
+    }
+
+    if ((filterOn || angular.isUndefined(filterOn)) && angular.isArray(items)) {
+      var hashCheck = {}, newItems = [];
+
+      var extractValueToCompare = function (item) {
+        if (angular.isObject(item) && angular.isString(filterOn)) {
+          return item[filterOn];
+        } else {
+          return item;
+        }
+      };
+
+      angular.forEach(items, function (item) {
+        var valueToCheck, isDuplicate = false;
+
+        for (var i = 0; i < newItems.length; i++) {
+          if (angular.equals(extractValueToCompare(newItems[i]), extractValueToCompare(item))) {
+            isDuplicate = true;
+            break;
+          }
+        }
+        if (!isDuplicate) {
+          newItems.push(item);
+        }
+
+      });
+      items = newItems;
+    }
+    return items;
+  };
+});
+(function() {
+    'use strict';
+
+    angular
+        .module('app.settings')
+        .run(settingsRun);
+
+    settingsRun.$inject = ['$rootScope', '$localStorage'];
+
+    function settingsRun($rootScope, $localStorage){
+
+
+      // User Settings
+      // -----------------------------------
+      $rootScope.user = {
+        name:     'John',
+        job:      'ng-developer',
+        picture:  'app/img/user/02.jpg'
+      };
+
+      // Hides/show user avatar on sidebar from any element
+      $rootScope.toggleUserBlock = function(){
+        $rootScope.$broadcast('toggleUserBlock');
+      };
+
+      // Global Settings
+      // -----------------------------------
+      $rootScope.app = {
+        name: 'Jada',
+        description: 'Jada Payroll',
+        year: ((new Date()).getFullYear()),
+        layout: {
+          isFixed: true,
+          isCollapsed: false,
+          isBoxed: false,
+          isRTL: false,
+          horizontal: false,
+          isFloat: false,
+          asideHover: false,
+          theme: null,
+          asideScrollbar: false,
+          isCollapsedText: false
+        },
+        useFullLayout: false,
+        hiddenFooter: false,
+        offsidebarOpen: false,
+        asideToggled: false,
+        viewAnimation: 'ng-fadeInUp'
+      };
+
+      // Setup the layout mode
+      $rootScope.app.layout.horizontal = ( $rootScope.$stateParams.layout === 'app-h') ;
+
+      // Restore layout settings
+      if( angular.isDefined($localStorage.layout) )
+        $rootScope.app.layout = $localStorage.layout;
+      else
+        $localStorage.layout = $rootScope.app.layout;
+
+      $rootScope.$watch('app.layout', function () {
+        $localStorage.layout = $rootScope.app.layout;
+      }, true);
+
+      // Close submenu when sidebar change from collapsed to normal
+      $rootScope.$watch('app.layout.isCollapsed', function(newValue) {
+        if( newValue === false )
+          $rootScope.$broadcast('closeSidebarMenu');
+      });
+
+    }
+       function Logout() {
+            // remove user from local storage and clear http auth header
+            delete $localStorage.currentUser;
+            $http.defaults.headers.common.Authorization = '';
+        }
+
+})();
+
 /**=========================================================
  * Module: helpers.js
  * Provides helper functions for routes definition
@@ -14335,449 +15775,335 @@ group.$remove().then(function () {
 })();
 
 
+/**=========================================================
+ * Module: sidebar-menu.js
+ * Handle sidebar collapsible elements
+ =========================================================*/
+
 (function() {
     'use strict';
 
     angular
-        .module('app.reports')
-        .factory('BankfileService', BankfileService);
+        .module('app.sidebar')
+        .controller('SidebarController', SidebarController);
 
-    BankfileService.$inject = ['$resource','jadaApiUrl'];
-    function BankfileService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/bankfilereport/:periodId', {periodId: '@periodId'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('BankFilesController', BankFilesController);
-
-    BankFilesController.$inject = ['$scope','$http','$resource', 'BankfileService','jadaApiUrl'];
-    function BankFilesController($scope,$http,$resource,BankfileService,jadaApiUrl) {
-        var vm = this;
+    SidebarController.$inject = ['$rootScope', '$scope', '$state', 'SidebarLoader', 'Utils'];
+    function SidebarController($rootScope, $scope, $state, SidebarLoader,  Utils) {
 
         activate();
 
         ////////////////
 
         function activate() {
-
-       var currentPeriod=1;
-        $scope.bankfiles=BankfileService.get({periodId:currentPeriod});
-
-          
-                     $scope.getByperiod=function(period){
-        
-         $scope.bankfiles=BankfileService.get({periodId:period});
-
-          }
-
-
-
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-
-              $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
-
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('CompanySumarryController', CompanySumarryController);
-
-    CompanySumarryController.$inject = ['$scope','$http','$resource', 'CompanySummaryService','jadaApiUrl'];
-    function CompanySumarryController($scope,$http, $resource,CompanySummaryService,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.companysumaries=CompanySummaryService.get({periodId:1});
-        console.log( $scope.companysumaries);
-
-          
-
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-                        
-$scope.printDiv = function (div) {
-    console.log('hellow print');
-  var docHead = document.head.outerHTML;
-  var printContents = document.getElementById(div).outerHTML;
-  var winAttr = "location=yes, statusbar=no, menubar=no, titlebar=no, toolbar=no,dependent=no, width=865, height=600, resizable=yes, screenX=200, screenY=200, personalbar=no, scrollbars=yes";
-
-  var newWin = window.open("", "_blank", winAttr);
-  var writeDoc = newWin.document;
-  writeDoc.open();
-  writeDoc.write('<!doctype html><html>' + docHead + '<body onLoad="window.print()">' + printContents + '</body></html>');
-  writeDoc.close();
-  newWin.focus();
-}
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('CompanySummaryService', CompanySummaryService);
-
-    CompanySummaryService.$inject = ['$resource','jadaApiUrl'];
-    function CompanySummaryService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/CompanySummary/:periodId', {periodId: '@periodId'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('CompanyTotalsController', CompanyTotalsController);
-
-    CompanyTotalsController.$inject = ['$scope','$http','$resource', 'CompanyTotalsService','jadaApiUrl','Excel','$timeout'];
-    function CompanyTotalsController($scope,$http,$resource,CompanyTotalsService,jadaApiUrl,Excel,$timeout) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-       var period=1;
-        $scope.companytotals=CompanyTotalsService.get({periodId:1});
-
-          $scope.getByperiod=function(period){
-        
-            $scope.companytotals=CompanyTotalsService.get({periodId:period});
-
-          }
-
-          $scope.greaterThan = function(prop, val){
-    return function(item){
-      return item[prop] > val;
-    }
-}
-
-
-    
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-
-
-          
-$scope.printDiv = function (div) {
-    console.log('hellow print');
-  var docHead = document.head.outerHTML;
-  var printContents = document.getElementById(div).outerHTML;
-  var winAttr = "location=yes, statusbar=no, menubar=no, titlebar=no, toolbar=no,dependent=no, width=865, height=600, resizable=yes, screenX=200, screenY=200, personalbar=no, scrollbars=yes";
-
-  var newWin = window.open("", "_blank", winAttr);
-  var writeDoc = newWin.document;
-  writeDoc.open();
-  writeDoc.write('<!doctype html><html>' + docHead + '<body onLoad="window.print()">' + printContents + '</body></html>');
-  writeDoc.close();
-  newWin.focus();
-}
-
-
-
- $scope.exportToExcel=function(tableId){ // ex: '#my-table'
-            var exportHref=Excel.tableToExcel(tableId,'WireWorkbenchDataExport');
-            $timeout(function(){location.href=exportHref;},100); // trigger download
-        }
-
-
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('CompanyTotalsService', CompanyTotalsService);
-
-    CompanyTotalsService.$inject = ['$resource','jadaApiUrl'];
-    function CompanyTotalsService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/CompanyTotalsReport/:periodId', {periodId: '@periodId'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('EvolutionController', EvolutionController);
-
-    EvolutionController.$inject = ['$scope','$resource', 'CompanySummaryService'];
-    function EvolutionController($scope,$resource,CompanySummaryService) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.companysumaries=CompanySummaryService.query();
-
-          
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('Excel', Excel);
-
-    Excel.$inject = ['$window'];
-    function Excel($window) {
-    var uri='data:application/vnd.ms-excel;base64,',
-            template='<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
-            base64=function(s){return $window.btoa(unescape(encodeURIComponent(s)));},
-            format=function(s,c){return s.replace(/{(\w+)}/g,function(m,p){return c[p];})};
-        return {
-            tableToExcel:function(tableId,worksheetName){
-                var table=$(tableId),
-                    ctx={worksheet:worksheetName,table:table.html()},
-                    href=uri+base64(format(template,ctx));
-                return href;
+          var collapseList = [];
+
+          // demo: when switch from collapse to hover, close all items
+          var watchOff1 = $rootScope.$watch('app.layout.asideHover', function(oldVal, newVal){
+            if ( newVal === false && oldVal === true) {
+              closeAllBut(-1);
             }
-        };   
+          });
+
+
+          // Load menu from json file
+          // -----------------------------------
+
+          SidebarLoader.getMenu(sidebarReady);
+
+          function sidebarReady(items) {
+            $scope.menuItems = items;
+          }
+
+          // Handle sidebar and collapse items
+          // ----------------------------------
+
+          $scope.getMenuItemPropClasses = function(item) {
+            return (item.heading ? 'nav-heading' : '') +
+                   (isActive(item) ? ' active' : '') ;
+          };
+
+          $scope.addCollapse = function($index, item) {
+            collapseList[$index] = $rootScope.app.layout.asideHover ? true : !isActive(item);
+          };
+
+          $scope.isCollapse = function($index) {
+            return (collapseList[$index]);
+          };
+
+          $scope.toggleCollapse = function($index, isParentItem) {
+
+            // collapsed sidebar doesn't toggle drodopwn
+            if( Utils.isSidebarCollapsed() || $rootScope.app.layout.asideHover ) return true;
+
+            // make sure the item index exists
+            if( angular.isDefined( collapseList[$index] ) ) {
+              if ( ! $scope.lastEventFromChild ) {
+                collapseList[$index] = !collapseList[$index];
+                closeAllBut($index);
+              }
+            }
+            else if ( isParentItem ) {
+              closeAllBut(-1);
+            }
+
+            $scope.lastEventFromChild = isChild($index);
+
+            return true;
+
+          };
+
+          // Controller helpers
+          // -----------------------------------
+
+            // Check item and children active state
+            function isActive(item) {
+
+              if(!item) return;
+
+              if( !item.sref || item.sref === '#') {
+                var foundActive = false;
+                angular.forEach(item.submenu, function(value) {
+                  if(isActive(value)) foundActive = true;
+                });
+                return foundActive;
+              }
+              else
+                return $state.is(item.sref) || $state.includes(item.sref);
+            }
+
+            function closeAllBut(index) {
+              index += '';
+              for(var i in collapseList) {
+                if(index < 0 || index.indexOf(i) < 0)
+                  collapseList[i] = true;
+              }
+            }
+
+            function isChild($index) {
+              /*jshint -W018*/
+              return (typeof $index === 'string') && !($index.indexOf('-') < 0);
+            }
+
+            $scope.$on('$destroy', function() {
+                watchOff1();
+            });
+
+        } // activate
     }
 
 })();
+
+/**=========================================================
+ * Module: sidebar.js
+ * Wraps the sidebar and handles collapsed state
+ =========================================================*/
+
 (function() {
     'use strict';
 
     angular
-        .module('app.reports')
-        .controller('HelbController', HelbController);
+        .module('app.sidebar')
+        .directive('sidebar', sidebar);
 
-    HelbController.$inject = ['$scope','$http','$resource', 'HelbService','jadaApiUrl'];
-    function HelbController($scope,$http,$resource,HelbService,jadaApiUrl) {
-        var vm = this;
+    sidebar.$inject = ['$rootScope', '$timeout', '$window', 'Utils'];
+    function sidebar ($rootScope, $timeout, $window, Utils) {
+        var $win = angular.element($window);
+        var directive = {
+            // bindToController: true,
+            // controller: Controller,
+            // controllerAs: 'vm',
+            link: link,
+            restrict: 'EA',
+            template: '<nav class="sidebar" ng-transclude></nav>',
+            transclude: true,
+            replace: true
+            // scope: {}
+        };
+        return directive;
 
-        activate();
+        function link(scope, element, attrs) {
 
-        ////////////////
+          var currentState = $rootScope.$state.current.name;
+          var $sidebar = element;
 
-        function activate() {
+          var eventName = Utils.isTouch() ? 'click' : 'mouseenter' ;
+          var subNav = $();
 
+          $sidebar.on( eventName, '.nav > li', function() {
 
-        $scope.helbs=HelbService.get({periodId:1});
-        console.log($scope.helbs);
+            if( Utils.isSidebarCollapsed() || $rootScope.app.layout.asideHover ) {
 
-          
-                     $scope.getByperiod=function(period){
-        
-        $scope.helbs=HelbService.get({periodId:period});
+              subNav.trigger('mouseleave');
+              subNav = toggleMenuItem( $(this), $sidebar);
+
+              // Used to detect click and touch events outside the sidebar
+              sidebarAddBackdrop();
+
+            }
+
+          });
+
+          var eventOff1 = scope.$on('closeSidebarMenu', function() {
+            removeFloatingNav();
+          });
+
+          // Normalize state when resize to mobile
+          $win.on('resize.sidebar', function() {
+            if( ! Utils.isMobile() )
+          	asideToggleOff();
+          });
+
+          // Adjustment on route changes
+          var eventOff2 = $rootScope.$on('$stateChangeStart', function(event, toState) {
+            currentState = toState.name;
+            // Hide sidebar automatically on mobile
+            asideToggleOff();
+
+            $rootScope.$broadcast('closeSidebarMenu');
+          });
+
+      	  // Autoclose when click outside the sidebar
+          if ( angular.isDefined(attrs.sidebarAnyclickClose) ) {
+
+            var wrapper = $('.wrapper');
+            var sbclickEvent = 'click.sidebar';
+
+            var watchOff1 = $rootScope.$watch('app.asideToggled', watchExternalClicks);
 
           }
 
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
+          //////
 
-            });
-
-
-              $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('HelbService', HelbService);
-
-    HelbService.$inject = ['$resource','jadaApiUrl'];
-    function HelbService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/helbreport/:periodId', {periodId: '@periodId'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('LeaveReportService', LeaveReportService);
-
-    LeaveReportService.$inject = ['$resource','jadaApiUrl'];
-    function LeaveReportService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/CompanySummary/:periodId', {periodId: '@periodId'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('LeaveReportController', LeaveReportController);
-
-    LeaveReportController.$inject = ['$scope','$http','$resource', 'LeaveReportService','jadaApiUrl'];
-    function LeaveReportController($scope,$http,$resource,LeaveReportService,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.leaves=LeaveReportService.query();
-
-          
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-
-              $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
-
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('NhifController', NhifController);
-
-    NhifController.$inject = ['$scope','$http','$resource', 'NhifService1','jadaApiUrl'];
-    function NhifController($scope,$http,$resource,NhifService1,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.nhifs=NhifService1.get({periodId:1});
-        
-console.log( $scope.nhifs);
-          
-
-          $scope.getByperiod=function(period){
-        
-            $scope.nhifs=NhifService.get({periodId:period});
-
+          function watchExternalClicks(newVal) {
+            // if sidebar becomes visible
+            if ( newVal === true ) {
+              $timeout(function(){ // render after current digest cycle
+                wrapper.on(sbclickEvent, function(e){
+                  // if not child of sidebar
+                  if( ! $(e.target).parents('.aside').length ) {
+                    asideToggleOff();
+                  }
+                });
+              });
+            }
+            else {
+              // dettach event
+              wrapper.off(sbclickEvent);
+            }
           }
 
+          function asideToggleOff() {
+            $rootScope.app.asideToggled = false;
+            if(!scope.$$phase) scope.$apply(); // anti-pattern but sometimes necessary
+      	  }
+
+          scope.$on('$destroy', function() {
+            // detach scope events
+            eventOff1();
+            eventOff2();
+            watchOff1();
+            // detach dom events
+            $sidebar.off(eventName);
+            $win.off('resize.sidebar');
+            wrapper.off(sbclickEvent);
+          });
+
+        }
+
+        ///////
+
+        function sidebarAddBackdrop() {
+          var $backdrop = $('<div/>', { 'class': 'dropdown-backdrop'} );
+          $backdrop.insertAfter('.aside-inner').on('click mouseenter', function () {
+            removeFloatingNav();
+          });
+        }
+
+        // Open the collapse sidebar submenu items when on touch devices
+        // - desktop only opens on hover
+        function toggleTouchItem($element){
+          $element
+            .siblings('li')
+            .removeClass('open')
+            .end()
+            .toggleClass('open');
+        }
+
+        // Handles hover to open items under collapsed menu
+        // -----------------------------------
+        function toggleMenuItem($listItem, $sidebar) {
+
+          removeFloatingNav();
+
+          var ul = $listItem.children('ul');
+
+          if( !ul.length ) return $();
+          if( $listItem.hasClass('open') ) {
+            toggleTouchItem($listItem);
+            return $();
+          }
+
+          var $aside = $('.aside');
+          var $asideInner = $('.aside-inner'); // for top offset calculation
+          // float aside uses extra padding on aside
+          var mar = parseInt( $asideInner.css('padding-top'), 0) + parseInt( $aside.css('padding-top'), 0);
+          var subNav = ul.clone().appendTo( $aside );
+
+          toggleTouchItem($listItem);
+
+          var itemTop = ($listItem.position().top + mar) - $sidebar.scrollTop();
+          var vwHeight = $win.height();
+
+          subNav
+            .addClass('nav-floating')
+            .css({
+              position: $rootScope.app.layout.isFixed ? 'fixed' : 'absolute',
+              top:      itemTop,
+              bottom:   (subNav.outerHeight(true) + itemTop > vwHeight) ? 0 : 'auto'
+            });
+
+          subNav.on('mouseleave', function() {
+            toggleTouchItem($listItem);
+            subNav.remove();
+          });
+
+          return subNav;
+        }
+
+        function removeFloatingNav() {
+          $('.dropdown-backdrop').remove();
+          $('.sidebar-subnav.nav-floating').remove();
+          $('.sidebar li.open').removeClass('open');
+        }
+    }
+
+
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.sidebar')
+        .service('SidebarLoader', SidebarLoader);
+
+    SidebarLoader.$inject = ['$http'];
+    function SidebarLoader($http) {
+        this.getMenu = getMenu;
+
+        ////////////////
+
+        function getMenu(onReady, onError) {
+          var menuJson = 'server/sidebar-menu.json',
+              menuURL  = menuJson + '?v=' + (new Date().getTime()); // jumps cache
             
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
+          onError = onError || function() { alert('Failure loading menu'); };
 
-            });
-
-
-              $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
+          $http
+            .get(menuURL)
+            .success(onReady)
+            .error(onError);
         }
     }
 })();
@@ -14785,35 +16111,11 @@ console.log( $scope.nhifs);
     'use strict';
 
     angular
-        .module('app.reports')
-        .factory('NhifService1', NhifService1);
+        .module('app.sidebar')
+        .controller('UserBlockController', UserBlockController);
 
-    NhifService1.$inject = ['$resource','jadaApiUrl'];
-    function NhifService1($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/nhifreport/:periodId', {periodId: '@periodId'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('NssfController', NssfController);
-
-    NssfController.$inject = ['$scope','$http','$resource', 'NssfService','jadaApiUrl'];
-    function NssfController($scope,$http,$resource,NssfService,jadaApiUrl) {
-        var vm = this;
+    UserBlockController.$inject = ['$scope'];
+    function UserBlockController($scope) {
 
         activate();
 
@@ -14821,823 +16123,19 @@ console.log( $scope.nhifs);
 
         function activate() {
 
-        $scope.nssfs=NssfService.get({periodId:1});
-console.log( $scope.nssfs);
-          
-            
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
+          $scope.userBlockVisible = true;
 
-            });
+          var detach = $scope.$on('toggleUserBlock', function(/*event, args*/) {
 
+            $scope.userBlockVisible = ! $scope.userBlockVisible;
 
-              $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
+          });
 
+          $scope.$on('$destroy', detach);
         }
     }
 })();
-(function() {
-    'use strict';
 
-    angular
-        .module('app.reports')
-        .factory('NssfService', NssfService);
-
-    NssfService.$inject = ['$resource','jadaApiUrl'];
-    function NssfService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/nssfreport/:periodId', {periodId: '@periodId'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('P10Controller', P10Controller);
-
-    P10Controller.$inject = ['$scope','$http','$resource', 'P10Service','jadaApiUrl'];
-    function P10Controller($scope,$http,$resource,P10Service,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.ptens=P10Service.get({year:2017});
-        console.log($scope.ptens);
-
-          
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-
-              $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
-
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('P10Service', P10Service);
-
-    P10Service.$inject = ['$resource','jadaApiUrl'];
-    function P10Service($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/p10report/:year', {year: '@year'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('P10aController', P10aController);
-
-    P10aController.$inject = ['$scope','$http','$resource', 'LeaveReportService','jadaApiUrl'];
-    function P10aController($scope,$http,$resource,LeaveReportService,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.leaves=LeaveReportService.query();
-
-          
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-
-              $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
-
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('P10aService', P10aService);
-
-    P10aService.$inject = ['$resource','jadaApiUrl'];
-    function P10aService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/p10areport/:periodId', {periodId: '@periodId'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('P10bController', P10bController);
-
-    P10bController.$inject = ['$scope','$http','$resource', 'P10bService','jadaApiUrl'];
-    function P10bController($scope,$http,$resource,P10bService,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.ptenbs=P10bService.get({year:2017});
-        console.log($scope.ptenbs);
-
-          
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-
-              $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
-
-
-        }
-
-
-          $scope.getTotal = function(type) {
-        var total = 0;
-        angular.forEach($scope.ptenbs, function(el) {
-            total += el[type];
-        });
-        return total;
-    };
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('P10bService', P10bService);
-
-    P10bService.$inject = ['$resource','jadaApiUrl'];
-    function P10bService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/p10breport/:year', {year: '@year'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('P10cController', P10cController);
-
-    P10cController.$inject = ['$scope','$http','$resource', 'P10cService','jadaApiUrl'];
-    function P10cController($scope,$http,$resource,P10cService,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.ptencs=P10cService.get({year:2017});
-        console.log($scope.ptencs);
-
-          
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-
-              $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
-
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('P10cService', P10cService);
-
-    P10cService.$inject = ['$resource','jadaApiUrl'];
-    function P10cService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/p10creport/:year', {year: '@year'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('P10dController', P10dController);
-
-    P10dController.$inject = ['$scope','$http','$resource', 'P10dService','jadaApiUrl'];
-    function P10dController($scope,$http,$resource,P10dService,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.ptends=P10dService.get({year:2017});
-        console.log( $scope.ptends);
-
-          
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-
-              $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
-
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('P10dService', P10dService);
-
-    P10dService.$inject = ['$resource','jadaApiUrl'];
-    function P10dService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/p10dreport/:year', {year: '@year'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('P9aController', P9aController);
-
-    P9aController.$inject = ['$scope','$http','$resource', 'P9aService','jadaApiUrl'];
-    function P9aController($scope,$http,$resource,P9aService,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        // $scope.p9as=P9aService.get({ year: 2017});
-  
-
-console.log( $scope.p9as);
-
- var year=2017;
-          
-              $http.get(jadaApiUrl+'api/p9areport/'+year).success(function(data) {
-              $scope.p9as = data;
-                    console.log( $scope.p9as);
-
-            });
-          
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-
-              $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
-
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('P9aService', P9aService);
-
-    P9aService.$inject = ['$resource','jadaApiUrl'];
-    function P9aService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/p9areport/:year', {year: '@year'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('P9bController', P9bController);
-
-    P9bController.$inject = ['$scope','$http','$resource', 'LeaveReportService','jadaApiUrl'];
-    function P9bController($scope,$http,$resource,LeaveReportService,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.leaves=LeaveReportService.query();
-
-          
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-
-              $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
-
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('P9aService', P9aService);
-
-    P9aService.$inject = ['$resource','jadaApiUrl'];
-    function P9aService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/p9areport/:periodId', {periodId: '@periodId'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('PartnerJournalController', PartnerJournalController);
-
-    PartnerJournalController.$inject = ['$scope','$resource', 'CompanySummaryService'];
-    function PartnerJournalController($scope,$resource,CompanySummaryService) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.companysumaries=CompanySummaryService.query();
-
-          
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('PayeController', PayeController);
-
-    PayeController.$inject = ['$scope','$http','$resource' ,'jadaApiUrl','PayeService'];
-    function PayeController($scope,$http,$resource,jadaApiUrl,PayeService) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-       var currentPeriod=1;
-        $scope.payes=PayeService.get({periodId:1});
-        console.log($scope.payes);
-
-        // 
-
-
-    
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-
-              $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
-
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('PayeService', PayeService);
-
-    PayeService.$inject = ['$resource','jadaApiUrl'];
-    function PayeService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/payereport/:periodId', {periodId: '@periodId'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('payeSummaryController', payeSummaryController);
-
-    payeSummaryController.$inject = ['$scope','$http','$resource', 'PayeSummaryService','jadaApiUrl'];
-    function payeSummaryController($scope,$http,$resource,PayeSummaryService,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-var currentperiod=1;
-          // $scope.psummaries=PayeSummaryService.get({periodId:currentperiod});
-
-           $http.get(jadaApiUrl+'api/payesummary/'+currentperiod).success(function(data) {
-               $scope.psummaries = data;
-                   console.log(  $scope.psummaries);
-
-            });
-
-      
-
-             $scope.getByperiod=function(period){
-        
-       $http.get(jadaApiUrl+'api/payesummary/'+period).success(function(data) {
-               $scope.psummaries = data;
-
-            });
-
-          }
-              $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-
-              $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
-
-
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('PayeSummaryService', PayeSummaryService);
-
-    PayeSummaryService.$inject = ['$resource','jadaApiUrl'];
-    function PayeSummaryService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/payesummary/:periodId', {periodId: '@periodId'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('PayslipController', PayslipController);
-
-    PayslipController.$inject = ['$scope','$http','$resource', 'PayslipService','jadaApiUrl'];
-    function PayslipController($scope,$http,$resource,PayslipService,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        // vm.persons=PayslipService.get({id:1});
-        // console.log(vm.persons);
-var id=1;
-          
-
-$http.get(jadaApiUrl+'api/payslipreport/'+id).success(function(data) {
-              $scope.persons = data;
-              console.log($scope.persons);
-
-            });
-
-
-
-
-  $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-
-     $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('PayslipService', PayslipService);
-
-    PayslipService.$inject = ['$resource','jadaApiUrl'];
-    function PayslipService($resource,jadaApiUrl) {
-     var data=$resource('http://localhost:56135/api/payslipreport/:id', {id: '@id'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .controller('SchedulerController', SchedulerController);
-
-    SchedulerController.$inject = ['$scope','$resource', 'CompanySummaryService'];
-    function SchedulerController($scope,$resource,CompanySummaryService) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-        $scope.companysumaries=CompanySummaryService.query();
-
-          
-
-        }
-    }
-})();
-angular.module('app.reports').filter('unique', function () {
-
-  return function (items, filterOn) {
-
-    if (filterOn === false) {
-      return items;
-    }
-
-    if ((filterOn || angular.isUndefined(filterOn)) && angular.isArray(items)) {
-      var hashCheck = {}, newItems = [];
-
-      var extractValueToCompare = function (item) {
-        if (angular.isObject(item) && angular.isString(filterOn)) {
-          return item[filterOn];
-        } else {
-          return item;
-        }
-      };
-
-      angular.forEach(items, function (item) {
-        var valueToCheck, isDuplicate = false;
-
-        for (var i = 0; i < newItems.length; i++) {
-          if (angular.equals(extractValueToCompare(newItems[i]), extractValueToCompare(item))) {
-            isDuplicate = true;
-            break;
-          }
-        }
-        if (!isDuplicate) {
-          newItems.push(item);
-        }
-
-      });
-      items = newItems;
-    }
-    return items;
-  };
-});
 /**=========================================================
  * Module: angular-grid.js
  * Example for Angular Grid
@@ -16660,509 +17158,6 @@ angular.module('app.reports').filter('unique', function () {
             });
 
         }
-    }
-})();
-/**=========================================================
- * Module: sidebar-menu.js
- * Handle sidebar collapsible elements
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.sidebar')
-        .controller('SidebarController', SidebarController);
-
-    SidebarController.$inject = ['$rootScope', '$scope', '$state', 'SidebarLoader', 'Utils'];
-    function SidebarController($rootScope, $scope, $state, SidebarLoader,  Utils) {
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          var collapseList = [];
-
-          // demo: when switch from collapse to hover, close all items
-          var watchOff1 = $rootScope.$watch('app.layout.asideHover', function(oldVal, newVal){
-            if ( newVal === false && oldVal === true) {
-              closeAllBut(-1);
-            }
-          });
-
-
-          // Load menu from json file
-          // -----------------------------------
-
-          SidebarLoader.getMenu(sidebarReady);
-
-          function sidebarReady(items) {
-            $scope.menuItems = items;
-          }
-
-          // Handle sidebar and collapse items
-          // ----------------------------------
-
-          $scope.getMenuItemPropClasses = function(item) {
-            return (item.heading ? 'nav-heading' : '') +
-                   (isActive(item) ? ' active' : '') ;
-          };
-
-          $scope.addCollapse = function($index, item) {
-            collapseList[$index] = $rootScope.app.layout.asideHover ? true : !isActive(item);
-          };
-
-          $scope.isCollapse = function($index) {
-            return (collapseList[$index]);
-          };
-
-          $scope.toggleCollapse = function($index, isParentItem) {
-
-            // collapsed sidebar doesn't toggle drodopwn
-            if( Utils.isSidebarCollapsed() || $rootScope.app.layout.asideHover ) return true;
-
-            // make sure the item index exists
-            if( angular.isDefined( collapseList[$index] ) ) {
-              if ( ! $scope.lastEventFromChild ) {
-                collapseList[$index] = !collapseList[$index];
-                closeAllBut($index);
-              }
-            }
-            else if ( isParentItem ) {
-              closeAllBut(-1);
-            }
-
-            $scope.lastEventFromChild = isChild($index);
-
-            return true;
-
-          };
-
-          // Controller helpers
-          // -----------------------------------
-
-            // Check item and children active state
-            function isActive(item) {
-
-              if(!item) return;
-
-              if( !item.sref || item.sref === '#') {
-                var foundActive = false;
-                angular.forEach(item.submenu, function(value) {
-                  if(isActive(value)) foundActive = true;
-                });
-                return foundActive;
-              }
-              else
-                return $state.is(item.sref) || $state.includes(item.sref);
-            }
-
-            function closeAllBut(index) {
-              index += '';
-              for(var i in collapseList) {
-                if(index < 0 || index.indexOf(i) < 0)
-                  collapseList[i] = true;
-              }
-            }
-
-            function isChild($index) {
-              /*jshint -W018*/
-              return (typeof $index === 'string') && !($index.indexOf('-') < 0);
-            }
-
-            $scope.$on('$destroy', function() {
-                watchOff1();
-            });
-
-        } // activate
-    }
-
-})();
-
-/**=========================================================
- * Module: sidebar.js
- * Wraps the sidebar and handles collapsed state
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.sidebar')
-        .directive('sidebar', sidebar);
-
-    sidebar.$inject = ['$rootScope', '$timeout', '$window', 'Utils'];
-    function sidebar ($rootScope, $timeout, $window, Utils) {
-        var $win = angular.element($window);
-        var directive = {
-            // bindToController: true,
-            // controller: Controller,
-            // controllerAs: 'vm',
-            link: link,
-            restrict: 'EA',
-            template: '<nav class="sidebar" ng-transclude></nav>',
-            transclude: true,
-            replace: true
-            // scope: {}
-        };
-        return directive;
-
-        function link(scope, element, attrs) {
-
-          var currentState = $rootScope.$state.current.name;
-          var $sidebar = element;
-
-          var eventName = Utils.isTouch() ? 'click' : 'mouseenter' ;
-          var subNav = $();
-
-          $sidebar.on( eventName, '.nav > li', function() {
-
-            if( Utils.isSidebarCollapsed() || $rootScope.app.layout.asideHover ) {
-
-              subNav.trigger('mouseleave');
-              subNav = toggleMenuItem( $(this), $sidebar);
-
-              // Used to detect click and touch events outside the sidebar
-              sidebarAddBackdrop();
-
-            }
-
-          });
-
-          var eventOff1 = scope.$on('closeSidebarMenu', function() {
-            removeFloatingNav();
-          });
-
-          // Normalize state when resize to mobile
-          $win.on('resize.sidebar', function() {
-            if( ! Utils.isMobile() )
-          	asideToggleOff();
-          });
-
-          // Adjustment on route changes
-          var eventOff2 = $rootScope.$on('$stateChangeStart', function(event, toState) {
-            currentState = toState.name;
-            // Hide sidebar automatically on mobile
-            asideToggleOff();
-
-            $rootScope.$broadcast('closeSidebarMenu');
-          });
-
-      	  // Autoclose when click outside the sidebar
-          if ( angular.isDefined(attrs.sidebarAnyclickClose) ) {
-
-            var wrapper = $('.wrapper');
-            var sbclickEvent = 'click.sidebar';
-
-            var watchOff1 = $rootScope.$watch('app.asideToggled', watchExternalClicks);
-
-          }
-
-          //////
-
-          function watchExternalClicks(newVal) {
-            // if sidebar becomes visible
-            if ( newVal === true ) {
-              $timeout(function(){ // render after current digest cycle
-                wrapper.on(sbclickEvent, function(e){
-                  // if not child of sidebar
-                  if( ! $(e.target).parents('.aside').length ) {
-                    asideToggleOff();
-                  }
-                });
-              });
-            }
-            else {
-              // dettach event
-              wrapper.off(sbclickEvent);
-            }
-          }
-
-          function asideToggleOff() {
-            $rootScope.app.asideToggled = false;
-            if(!scope.$$phase) scope.$apply(); // anti-pattern but sometimes necessary
-      	  }
-
-          scope.$on('$destroy', function() {
-            // detach scope events
-            eventOff1();
-            eventOff2();
-            watchOff1();
-            // detach dom events
-            $sidebar.off(eventName);
-            $win.off('resize.sidebar');
-            wrapper.off(sbclickEvent);
-          });
-
-        }
-
-        ///////
-
-        function sidebarAddBackdrop() {
-          var $backdrop = $('<div/>', { 'class': 'dropdown-backdrop'} );
-          $backdrop.insertAfter('.aside-inner').on('click mouseenter', function () {
-            removeFloatingNav();
-          });
-        }
-
-        // Open the collapse sidebar submenu items when on touch devices
-        // - desktop only opens on hover
-        function toggleTouchItem($element){
-          $element
-            .siblings('li')
-            .removeClass('open')
-            .end()
-            .toggleClass('open');
-        }
-
-        // Handles hover to open items under collapsed menu
-        // -----------------------------------
-        function toggleMenuItem($listItem, $sidebar) {
-
-          removeFloatingNav();
-
-          var ul = $listItem.children('ul');
-
-          if( !ul.length ) return $();
-          if( $listItem.hasClass('open') ) {
-            toggleTouchItem($listItem);
-            return $();
-          }
-
-          var $aside = $('.aside');
-          var $asideInner = $('.aside-inner'); // for top offset calculation
-          // float aside uses extra padding on aside
-          var mar = parseInt( $asideInner.css('padding-top'), 0) + parseInt( $aside.css('padding-top'), 0);
-          var subNav = ul.clone().appendTo( $aside );
-
-          toggleTouchItem($listItem);
-
-          var itemTop = ($listItem.position().top + mar) - $sidebar.scrollTop();
-          var vwHeight = $win.height();
-
-          subNav
-            .addClass('nav-floating')
-            .css({
-              position: $rootScope.app.layout.isFixed ? 'fixed' : 'absolute',
-              top:      itemTop,
-              bottom:   (subNav.outerHeight(true) + itemTop > vwHeight) ? 0 : 'auto'
-            });
-
-          subNav.on('mouseleave', function() {
-            toggleTouchItem($listItem);
-            subNav.remove();
-          });
-
-          return subNav;
-        }
-
-        function removeFloatingNav() {
-          $('.dropdown-backdrop').remove();
-          $('.sidebar-subnav.nav-floating').remove();
-          $('.sidebar li.open').removeClass('open');
-        }
-    }
-
-
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.sidebar')
-        .service('SidebarLoader', SidebarLoader);
-
-    SidebarLoader.$inject = ['$http'];
-    function SidebarLoader($http) {
-        this.getMenu = getMenu;
-
-        ////////////////
-
-        function getMenu(onReady, onError) {
-          var menuJson = 'server/sidebar-menu.json',
-              menuURL  = menuJson + '?v=' + (new Date().getTime()); // jumps cache
-            
-          onError = onError || function() { alert('Failure loading menu'); };
-
-          $http
-            .get(menuURL)
-            .success(onReady)
-            .error(onError);
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.sidebar')
-        .controller('UserBlockController', UserBlockController);
-
-    UserBlockController.$inject = ['$scope'];
-    function UserBlockController($scope) {
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          $scope.userBlockVisible = true;
-
-          var detach = $scope.$on('toggleUserBlock', function(/*event, args*/) {
-
-            $scope.userBlockVisible = ! $scope.userBlockVisible;
-
-          });
-
-          $scope.$on('$destroy', detach);
-        }
-    }
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.settings')
-        .run(settingsRun);
-
-    settingsRun.$inject = ['$rootScope', '$localStorage'];
-
-    function settingsRun($rootScope, $localStorage){
-
-
-      // User Settings
-      // -----------------------------------
-      $rootScope.user = {
-        name:     'John',
-        job:      'ng-developer',
-        picture:  'app/img/user/02.jpg'
-      };
-
-      // Hides/show user avatar on sidebar from any element
-      $rootScope.toggleUserBlock = function(){
-        $rootScope.$broadcast('toggleUserBlock');
-      };
-
-      // Global Settings
-      // -----------------------------------
-      $rootScope.app = {
-        name: 'Jada',
-        description: 'Jada Payroll',
-        year: ((new Date()).getFullYear()),
-        layout: {
-          isFixed: true,
-          isCollapsed: false,
-          isBoxed: false,
-          isRTL: false,
-          horizontal: false,
-          isFloat: false,
-          asideHover: false,
-          theme: null,
-          asideScrollbar: false,
-          isCollapsedText: false
-        },
-        useFullLayout: false,
-        hiddenFooter: false,
-        offsidebarOpen: false,
-        asideToggled: false,
-        viewAnimation: 'ng-fadeInUp'
-      };
-
-      // Setup the layout mode
-      $rootScope.app.layout.horizontal = ( $rootScope.$stateParams.layout === 'app-h') ;
-
-      // Restore layout settings
-      if( angular.isDefined($localStorage.layout) )
-        $rootScope.app.layout = $localStorage.layout;
-      else
-        $localStorage.layout = $rootScope.app.layout;
-
-      $rootScope.$watch('app.layout', function () {
-        $localStorage.layout = $rootScope.app.layout;
-      }, true);
-
-      // Close submenu when sidebar change from collapsed to normal
-      $rootScope.$watch('app.layout.isCollapsed', function(newValue) {
-        if( newValue === false )
-          $rootScope.$broadcast('closeSidebarMenu');
-      });
-
-    }
-       function Logout() {
-            // remove user from local storage and clear http auth header
-            delete $localStorage.currentUser;
-            $http.defaults.headers.common.Authorization = '';
-        }
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.translate')
-        .config(translateConfig)
-        ;
-    translateConfig.$inject = ['$translateProvider'];
-    function translateConfig($translateProvider){
-
-      $translateProvider.useStaticFilesLoader({
-          prefix : 'app/i18n/',
-          suffix : '.json'
-      });
-
-      $translateProvider.preferredLanguage('en');
-      $translateProvider.useLocalStorage();
-      $translateProvider.usePostCompiling(true);
-      $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
-
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.translate')
-        .run(translateRun)
-        ;
-    translateRun.$inject = ['$rootScope', '$translate'];
-    
-    function translateRun($rootScope, $translate){
-
-      // Internationalization
-      // ----------------------
-
-      $rootScope.language = {
-        // Handles language dropdown
-        listIsOpen: false,
-        // list of available languages
-        available: {
-          'en':       'English',
-          'es_AR':    'Español'
-        },
-        // display always the current ui language
-        init: function () {
-          var proposedLanguage = $translate.proposedLanguage() || $translate.use();
-          var preferredLanguage = $translate.preferredLanguage(); // we know we have set a preferred one in app.config
-          $rootScope.language.selected = $rootScope.language.available[ (proposedLanguage || preferredLanguage) ];
-        },
-        set: function (localeId) {
-          // Set the new idiom
-          $translate.use(localeId);
-          // save a reference for the current language
-          $rootScope.language.selected = $rootScope.language.available[localeId];
-          // finally toggle dropdown
-          $rootScope.language.listIsOpen = ! $rootScope.language.listIsOpen;
-        }
-      };
-
-      $rootScope.language.init();
-
     }
 })();
 // (function() {
@@ -18459,6 +18454,70 @@ $scope.clickBtn = function() {
     'use strict';
 
     angular
+        .module('app.translate')
+        .config(translateConfig)
+        ;
+    translateConfig.$inject = ['$translateProvider'];
+    function translateConfig($translateProvider){
+
+      $translateProvider.useStaticFilesLoader({
+          prefix : 'app/i18n/',
+          suffix : '.json'
+      });
+
+      $translateProvider.preferredLanguage('en');
+      $translateProvider.useLocalStorage();
+      $translateProvider.usePostCompiling(true);
+      $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
+
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.translate')
+        .run(translateRun)
+        ;
+    translateRun.$inject = ['$rootScope', '$translate'];
+    
+    function translateRun($rootScope, $translate){
+
+      // Internationalization
+      // ----------------------
+
+      $rootScope.language = {
+        // Handles language dropdown
+        listIsOpen: false,
+        // list of available languages
+        available: {
+          'en':       'English',
+          'es_AR':    'Español'
+        },
+        // display always the current ui language
+        init: function () {
+          var proposedLanguage = $translate.proposedLanguage() || $translate.use();
+          var preferredLanguage = $translate.preferredLanguage(); // we know we have set a preferred one in app.config
+          $rootScope.language.selected = $rootScope.language.available[ (proposedLanguage || preferredLanguage) ];
+        },
+        set: function (localeId) {
+          // Set the new idiom
+          $translate.use(localeId);
+          // save a reference for the current language
+          $rootScope.language.selected = $rootScope.language.available[localeId];
+          // finally toggle dropdown
+          $rootScope.language.listIsOpen = ! $rootScope.language.listIsOpen;
+        }
+      };
+
+      $rootScope.language.init();
+
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
         .module('app.useradministration')
         .controller('AccountsController', AccountsController);
 
@@ -19275,8 +19334,8 @@ $scope.loadUsers();
         .module('app.useradministration')
         .controller('UserGroupController', UserGroupController);
 
-    UserGroupController.$inject = ['$scope','$rootScope', '$http', '$stateParams', '$state', '$uibModal', '$log', 'UserGroupService'];
-        function UserGroupController($scope, $rootScope, $http, $stateParams, $state, $uibModal, $log, UserGroupService) {
+    UserGroupController.$inject = ['$scope','$rootScope', '$http', '$stateParams', '$state', '$uibModal', '$log', 'UserGroupService','jadaApiUrl'];
+        function UserGroupController($scope, $rootScope, $http, $stateParams, $state, $uibModal, $log, UserGroupService,jadaApiUrl) {
         var vm = this;
 
         activate();
@@ -19303,6 +19362,17 @@ console.log($scope.usergroups);
         });
 
 
+
+              $http.get(jadaApiUrl+'api/account').success(function(data) {
+              $scope.accounts = data;
+
+            });
+
+
+              $http.get(jadaApiUrl+'api/user').success(function(data) {
+              $scope.users = data;
+
+            });
 
 
 
@@ -19435,10 +19505,10 @@ $scope.loadUserGroups();
   ModalInstanceCtrl.$inject = ['$scope', '$rootScope', '$http','$uibModalInstance','UserGroupService','usergroup'];
           function ModalInstanceCtrl($scope,$rootScope, $http, $uibModalInstance, UserGroupService,usergroup) {
        
- var id=usergroup.id;
+ var id=usergroup.ID;
     console.log('id'+id);
 
-            $scope.usergroup=UserGroupService.get({id:id});
+            $scope.usergroup=UserGroupService.get({ID:id});
             console.log ($scope.usergroup);
 
             $scope.ok = function () {
@@ -19500,7 +19570,7 @@ $scope.loadUserGroups();
 
     UserGroupService.$inject = ['$resource','jadaApiUrl'];
     function UserGroupService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/useraccount/:id', {id: '@id'},
+     var data=$resource(jadaApiUrl+'api/useraccount/:ID', {ID: '@ID'},
     { 'get':    {method:'GET', isArray:false},
   'save':   {method:'POST'},
   'query':  {method:'GET', isArray:true},
