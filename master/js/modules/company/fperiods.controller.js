@@ -126,12 +126,7 @@ $scope.loadPeriods();
           };
 
 
-
-
-    
-
-
-  $scope.show = function(period) {
+$scope.show = function(period) {
       // $scope.x = x;
       var modalInstance = $uibModal.open({
         templateUrl: 'editFperiods.html',
@@ -144,6 +139,34 @@ $scope.loadPeriods();
         // scope : $scope
       });
     };
+    
+
+
+
+    
+
+
+  $scope.addFinancialYear = function(size) {
+     
+            var modalInstance = $uibModal.open({
+              templateUrl: 'newFYear.html',
+              controller: ModalOpenFYearInstanceCtrl,
+              size: size
+            });
+
+
+
+
+
+            var state = $('#modal-state');
+            modalInstance.result.then(function () {
+              state.text('Modal dismissed with OK status');
+            }, function () {
+              state.text('Modal dismissed with Cancel status');
+            });
+    };
+
+
 
 
 
@@ -219,6 +242,55 @@ $scope.loadPeriods();
             });
           
               };
+          }
+
+
+                  ModalOpenFYearInstanceCtrl.$inject = ['$scope','$rootScope', '$uibModalInstance','financialPeriodService'];
+          function ModalOpenFYearInstanceCtrl($scope,$rootScope, $uibModalInstance, financialPeriodService) {
+          
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+            $scope.year=new financialPeriodService();
+             $scope.submitYear=function() {
+          $scope.year.$save().then(function(data){
+            var response=angular.fromJson(data);
+          
+            if(response.Status=="1"){
+                    $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+            }else{
+                   
+                   $scope.SuccessMsg=false;
+               
+                   $scope.errorMsg=response.Message;
+              // vm.auth=true;
+            }
+              $rootScope.$emit("CallLoadPeriods", {}); 
+          }, 
+          function() {
+                 $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+    
+          };
+
+          //     $scope.submitClosePeriod=function() {
+          // $scope.period.$save().then(function(){
+            
+          //     $rootScope.$emit("CallLoadPeriods", {}); 
+          //        $scope.ok();
+          // }, 
+          // function() {
+          //        $scope.SuccessMsg=false;
+          //        $scope.errorMsg = 'Server Request Error';
+          //       });
+    
+          // };
+         
           }
         }
     }

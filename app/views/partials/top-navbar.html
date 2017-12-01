@@ -89,7 +89,7 @@
                   <div class="list-group">
                      <!-- list item-->
                  
-                     <a class="list-group-item" ui-sref="app.leave-approve">
+                     <a class="list-group-item" ui-sref="app.leave-approve" ng-controller="LeaveApprovalController" ng-hide="leavenotification() == 0">
                         <div class="media-box">
                            <div class="pull-left">
                               <em class="fa fa-bell-o fa-2x text-info"></em>
@@ -98,7 +98,10 @@
                               <p class="m0">Leave Notifications</p>
                               <p class="m0 text-muted">
                                  
-                                 <small>I new Leave approval</small>
+                                   <span class="label label-info" >
+{{leavenotification()}} leave notification
+</span>
+         
                               </p>
                            </div>
                         </div>

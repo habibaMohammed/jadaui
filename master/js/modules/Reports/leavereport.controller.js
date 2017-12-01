@@ -9,7 +9,7 @@
     function LeaveReportController($scope,$http,$resource,LeaveReportService,jadaApiUrl) {
         var vm = this;
 
-        // activate();
+        activate();
 
         ////////////////
 
@@ -19,20 +19,31 @@ var currentPeriod=1;
         $scope.leaves=LeaveReportService.get({periodId:currentPeriod});
           console.log($scope.leaves);
         // console.log($scope.leaves.leaveTypeReportList.employeeLeaveReportList);
-          
+
+         // $scope.leaveReports=$scope.leaves.leaveTypeReportList;
+         // console.log("leaves");
+
+         //  console.log($scope.leaves.leaveTypeReportList[]);
               $http.get(jadaApiUrl+'api/period').success(function(data) {
               $scope.periods = data;
 
             });
 
-// var currentPeriod=1;
-//   $scope.leaves=LeaveReportService.get({periodId:currentPeriod});
-//   console.log($scope.leaves);
+
 
           
 $http.get(jadaApiUrl+'api/leavetype').success(function(data) {
               $scope.leavetypes = data;
               console.log($scope.leavetypes);
+
+                //               for(var r=0;r<$scope.leaves.leaveTypeReportList.length;r++){
+                //                 console.log($scope.leavetypes[0]);
+                //   if($scope.leavetypes[0].id==$scope.leaves.leaveTypeReportList[r].leaveType.id){
+                    
+                //     console.log($scope.leaves.leaveTypeReportList[r]);
+                //     $scope.leaveReport=$scope.leaves.leaveTypeReportList[0].employeeLeaveReportList;
+                //   }
+                // }
           
             });
 
@@ -43,13 +54,17 @@ $http.get(jadaApiUrl+'api/leavetype').success(function(data) {
 
 
               $scope.show=function(id){
-                for(var r=0;r<$scope.leaves.length;r++){
+                console.log($scope.leaves.leaveTypeReportList.length);
+                for(var r=0;r<$scope.leaves.leaveTypeReportList.length;r++){
+                  if(id==$scope.leaves.leaveTypeReportList[r].leaveType.id){
 
-                  console.log("leave : "+r);
-                  console.log($scope.leaves[r]);
-
+                    console.log($scope.leaves.leaveTypeReportList[r]);
+                    $scope.leaveReport=$scope.leaves.leaveTypeReportList[0].employeeLeaveReportList;
+                  }
+                  
                 }
-  
+                
+  // $scope.currentleaveType='Exam'+id;
               }
 
 

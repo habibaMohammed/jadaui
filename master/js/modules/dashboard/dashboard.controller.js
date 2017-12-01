@@ -5,8 +5,8 @@
         .module('app.dashboard')
         .controller('DashboardController', DashboardController);
 
-    DashboardController.$inject = ['$scope', 'ChartData', '$timeout','$localStorage'];
-    function DashboardController($scope, ChartData, $timeout,$localStorage) {
+    DashboardController.$inject = ['$scope', 'ChartData', '$timeout','$localStorage','DashboardService'];
+    function DashboardController($scope, ChartData, $timeout,$localStorage,DashboardService) {
         var vm = this;
 
         activate();
@@ -14,6 +14,10 @@
         ////////////////
 
         function activate() {
+
+
+          $scope.dashboard=DashboardService.get();
+          console.log($scope.dashboard)
 
           // SPLINE
           // ----------------------------------- 

@@ -10,8 +10,8 @@
         .module('app.bootstrapui')
         .controller('EmployeeBatchPostingController', EmployeeBatchPostingController);
 
-    EmployeeBatchPostingController.$inject = ['$scope', '$http','$uibModal','EmployeeBatchPostingService','$stateParams', '$state','readFileData','jadaApiUrl'];
-    function EmployeeBatchPostingController($scope,$http, $uibModal, EmployeeBatchPostingService,$stateParams, $state,readFileData,jadaApiUrl) {
+    EmployeeBatchPostingController.$inject = ['$scope', '$http','$uibModal','PayrollBatchPostingService','$stateParams', '$state','readFileEmployeeData','jadaApiUrl'];
+    function EmployeeBatchPostingController($scope,$http, $uibModal, PayrollBatchPostingService,$stateParams, $state,readFileEmployeeData,jadaApiUrl) {
         var vm = this;
 
         activate();
@@ -20,13 +20,17 @@
 
         function activate() {
 
+              var SuccessMsg;
+            var errorMsg;
+
+
 $scope.fileDataObj = [];
 
             $scope.fileData ={ };
     
     $scope.uploadFile = function() {
       if ($scope.fileContent) {
-        $scope.fileDataObj = readFileData.processData($scope.fileContent);
+        $scope.fileDataObj = readFileEmployeeData.processData($scope.fileContent);
       
         // $scope.fileData = JSON.stringify($scope.fileDataObj);
          $scope.fileData =  $.parseJSON($scope.fileDataObj);
@@ -73,40 +77,67 @@ var jdata= JSON.stringify($scope.fileData);
 //   }
 
  $scope.save = function () {
+
 var list=$scope.fileData;
 for(var r=0;r<list.length;r++){
   var vdata =list[r];
-  console.log(vdata);
-  // var postingdata = new PayrollBatchPostingService(vdata);
-    $http.post('http://localhost:56135/api/payrollsingleposting/', {vdata}).success(
-      function(data){
+var postingdata = new PayrollBatchPostingService(vdata);
 
-            var response=angular.fromJson(data);
+postingdata.$save().then(function(data){
+                var response=angular.fromJson(data);
           
             if(response.Status=="1"){
-              $scope.errorMsg=false;
+                   $scope.errorMsg=false;
                     $scope.SuccessMsg =response.Message;
-                    console.log()
             }else{
            
-               $scope.SuccessMsg=false;
+                    $scope.SuccessMsg=false;
                    $scope.errorMsg=response.Message;
-           
+    
             }
-        // $scope.fileData[r].success=true;
-        // $scope.response = data
-        // console.log(data);
-      })
+           
 
+              },
+               function() {
+                $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
 }
+  
 
-  }
+// }
+// var vdata=$scope.fileData;
+// var data={"period":"1","employee_number":"P0001","payroll_code":"D040","amount":"2000"};
+// var vdata={"name":"Jane Doe","employeeNumber":"123"};
+
+
+
+    // $http.post('http://localhost:56135/api/employeesingleposting/', {vdata}).success(
+    //   function(data){
+
+    //         var response=angular.fromJson(data);
+          
+    //         if(response.Status=="1"){
+    //           $scope.errorMsg=false;
+    //                 $scope.SuccessMsg =response.Message;
+    //                 console.log()
+    //         }else{
+           
+    //            $scope.SuccessMsg=false;
+    //                $scope.errorMsg=response.Message;
+           
+    //         }
+    //     // $scope.fileData[r].success=true;
+    //     // $scope.response = data
+    //     // console.log(data);
+    //   })
 
 
 
 
         }
     }
+  }
 
 })();
 

@@ -3,13 +3,13 @@
 
     angular
         .module('app.transactions')
-        .factory('LeaveApprovalService', LeaveApprovalService);
+        .factory('PayrollApprovalService', PayrollApprovalService);
 
-    LeaveApprovalService.$inject = ['$resource','jadaApiUrl'];
-    function LeaveApprovalService($resource,jadaApiUrl) {
+    PayrollApprovalService.$inject = ['$resource','jadaApiUrl'];
+    function PayrollApprovalService($resource,jadaApiUrl) {
 
         // var data=$resource('https://jsonplaceholder.typicode.com/users/:user', {user: '@user'},
-     var data=$resource(jadaApiUrl+'api/pendingleaveprocessing/:id',{id: '@id'}, 
+     var data=$resource(jadaApiUrl+'api/payrolltransactionapproval/:periodId',{periodId: '@periodId'}, 
     { 'get':    {method:'GET', isArray:false},
   'save':   {method:'POST'},
   'query':  {method:'GET', isArray:true},

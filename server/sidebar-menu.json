@@ -59,7 +59,8 @@
 
 
       {"text": "Pay Frequency ","sref": "app.Payfrequency"},
-         {"text": "Pay Points ","sref": "app.paypointslistings"},
+         {"text": "Pay Mode","sref": "app.paymode"},
+          {"text": "Pay Points ","sref": "app.paypointslistings"},
              {"text": "Employee Details", "sref": "app.listings"},
    
        {"text": "Bank Setup", "sref": "app.bankcodes"}

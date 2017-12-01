@@ -1,17 +1,18 @@
 
 <!-- START widgets box-->
-<div class="row">
+<div class="row" ng-controller="DashboardController">
 
    <div class="col-lg-3 col-sm-6">
       <!-- START widget-->
       <div class="panel widget bg-primary">
          <div class="row row-table">
             <div class="col-xs-4 text-center bg-primary-dark pv-lg">
-               <em class="icon-people fa-3x"></em>
+              <em class="icon-clock fa-3x"></em>
             </div>
             <div class="col-xs-8 pv-lg">
-               <div class="h2 mt0">3</div>
-               <div class="text-uppercase">On Leave</div>
+
+               <div class="h3 mt0">{{dashboard.currentPeriod.month}} {{dashboard.currentPeriod.year}}</div>
+               <div class="text-uppercase">Period</div>
             </div>
          </div>
       </div>
@@ -24,7 +25,7 @@
                <em class="icon-people fa-3x"></em>
             </div>
             <div class="col-xs-8 pv-lg">
-               <div class="h2 mt0">700
+               <div class="h2 mt0">{{dashboard.noOfEmployees}} 
                  
                </div>
                <div class="text-uppercase">Head Count</div>

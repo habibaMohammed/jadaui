@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" ng-controller="PayrollApprovalController">
    <div class="col-md-12">
       <!-- START panel-->
       <div class="panel panel-default">
@@ -6,7 +6,7 @@
           <!--   <h3 class="panel-title">Earnings</h3> -->
          </div>
          <div class="panel-body">
-         <div class="row" ng-controller="ModalController as  mod">
+         <div class="row">
          <div class="form-group " >
                   <label class="col-lg-2 control-label">Pay Slips
                    </label>
@@ -18,7 +18,7 @@
 
                </div>
              <br/>
-                <div class="row" ng-controller="ModalController as  mod">
+                <div class="row" >
          <div class="form-group " >
                   <label class="col-lg-2 control-label">Company Totals
                    </label>
@@ -29,7 +29,7 @@
 
                </div>
                <br/>
-                <div class="row" ng-controller="ModalController as  mymod">
+                <div class="row">
       <div class="form-group">
                   <label class="col-lg-2 control-label">Company Summary
                    </label>
@@ -51,11 +51,62 @@
            
           
         <!--  <button class="btn btn-default pull-left" type="button" onclick="window.print();">Print</button> -->
-         <button class="btn btn-success pull-left mr" type="button">send for approval</button>
+         <button class="btn btn-success pull-left mr" type="button"  ng-class="currentclass" ng-click="sendforApproval()">send for approval</button>
 
           <button class="btn btn-info pull-left mr" type="button">Back to processing</button>
       </div>
          </div>
       </div>
       <!-- END panel-->
+   </div>
+
+
+   <div class="panel-body" ng-controller="ToasterDemoCtrl as toast">
+      <toaster-container toaster-options="{'position-class': 'toast-bottom-right', 'close-button':true}"></toaster-container>
+      <div class="row">
+         <div class="col-sm-6">
+            <div class="form-group">
+               <label>Title</label>
+               <input class="form-control" type="text" placeholder="Enter a title..." ng-model="toast.toaster.title" />
+            </div>
+            <div class="form-group">
+               <label>Message</label>
+               <textarea class="form-control" placeholder="Enter a message" rows="5" ng-model="toast.toaster.text"></textarea>
+            </div>
+         </div>
+         <div class="col-sm-6">
+            <div class="row">
+               <div class="col-md-6">
+                  <!-- icon-classes: .toast-error,.toast-info,.toast-wait,.toast-success,.toast-warning-->
+                  <label>Toast Type</label>
+                  <div class="radio c-radio">
+                     <label>
+                        <input type="radio" name="toasts" ng-model="toast.toaster.type" value="success" />
+                        <span class="fa fa-circle"></span>Success</label>
+                  </div>
+                  <div class="radio c-radio">
+                     <label>
+                        <input type="radio" name="toasts" ng-model="toast.toaster.type" value="info" />
+                        <span class="fa fa-circle"></span>Info</label>
+                  </div>
+                  <div class="radio c-radio">
+                     <label>
+                        <input type="radio" name="toasts" ng-model="toast.toaster.type" value="wait" />
+                        <span class="fa fa-circle"></span>Wait</label>
+                  </div>
+                  <div class="radio c-radio">
+                     <label>
+                        <input type="radio" name="toasts" ng-model="toast.toaster.type" value="warning" />
+                        <span class="fa fa-circle"></span>Warning</label>
+                  </div>
+                  <div class="radio c-radio">
+                     <label>
+                        <input type="radio" name="toasts" ng-model="toast.toaster.type" value="error" />
+                        <span class="fa fa-circle"></span>Error</label>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <button class="btn btn-info" ng-click="toast.pop()">Show a Toaster</button>
    </div>

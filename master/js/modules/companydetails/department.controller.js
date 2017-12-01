@@ -24,6 +24,7 @@
 
  var SuccessMsg;
  var errorMsg;
+  
 
 $scope.departments=DeptService.query();
 
@@ -170,6 +171,7 @@ department.$remove().then(function () {
                      $scope.errorMsg=false;
 
                     $scope.SuccessMsg =response.Message;
+                 $scope.deptform.markAsPristine();
        
 
             }else{
@@ -187,6 +189,7 @@ department.$remove().then(function () {
             function() {
                $scope.SuccessMsg=false;
                  $scope.errorMsg = 'Server Request Error';
+
                 }).finally(function(){     
                //    $scope.dept = "";
                // $scope.deptform.$setPristine();
