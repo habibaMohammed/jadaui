@@ -78,36 +78,20 @@
             <tbody >
                <tr  ng-repeat="leaveReportData in leaveReport">
                   <td >{{leaveReportData.employeeNumber}}</td>
-                  <td >ABC</td>
-                  <td >4.25</td>
-                   <td >1.75</td>
-                   <td >1.00</td>
-                      <td >5.00</td>
+                  <td >{{leaveReportData.employeeName}}</td>
+                  <td >{{leaveReportData.broughtForward}}</td>
+                   <td >{{leaveReportData.accrued}}</td>
+             
+                  <td >{{leaveReportData.taken}}</td>
+                  <td >{{leaveReportData.carriedForward}}</td>
+
                   
                  
                 
                </tr>
 
-                 <tr>
-                  <td >P002</td>
-                  <td >JKL</td>
-                  <td >4.25</td>
-                   <td >1.75</td>
-                   <td >1.00</td>
-                      <td >5.00</td>
-                  
-                 
-                
-               </tr>
-                 <tr>
-                  <td >P003</td>
-                  <td >XYZ</td>
-                  <td >4.25</td>
-                   <td >1.75</td>
-                   <td >1.00</td>
-                      <td >5.00</td>
-                  </tr>
-
+           
+             
                    <tr>
                   <td ></td>
                   <td class="boldTotal">Total </td>

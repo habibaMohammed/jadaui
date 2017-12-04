@@ -179,7 +179,7 @@ $scope.loadUsers();
                 $scope.updateUser=function(user){
             user.$update().then(function(data){
                    var response=angular.fromJson(data);
-            console.log($scope.leave);
+         
             // $scope.authMsg=response.Message;
             if(response.Status=="1"){
                      $scope.errorMsg=false;

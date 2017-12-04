@@ -1022,6 +1022,14 @@
              
           })
 
+
+           .state('app.paymode', {
+              url: '/paymode',
+              title: 'pay mode',
+                templateUrl: helper.basepath('paymode.html'),
+              
+             
+          })
           .state('app.employeeinfo', {
               url: '/employee/:Employee',
               title: 'Employee details',

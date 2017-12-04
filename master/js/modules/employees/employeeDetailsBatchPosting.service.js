@@ -9,14 +9,10 @@
 
     PayrollBatchPostingService.$inject = ['$resource','jadaApiUrl'];
     function PayrollBatchPostingService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/payrollbatchposting', 
+     var data=$resource(jadaApiUrl+'api/employeesingleposting', 
     {
   'save':   {
-    method:'POST',  isArray:true,  transformRequest: function(data){
-                        console.log('Data in transform request is');
-                        console.log(data);
-                        return angular.toJson(data); // this will go in the body request
-                    }
+    method:'POST'
 },
 
 });

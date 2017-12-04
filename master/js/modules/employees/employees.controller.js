@@ -150,6 +150,44 @@ $scope.updateBankCodes=function(id){
   
 }
 
+
+
+$scope.populateBankName=function(id){
+    $scope.bankName=[];
+
+
+  for(var r=0;r<$scope.bankcodes.length;r++){
+    if($scope.bankcodes[r].bankBranchCode==id){
+      $scope.empMaster.bankName=$scope.bankcodes[r].bankName;
+
+     
+    }
+
+    console.log("///////////////////////////////////");
+ console.log(   $scope.empMaster.bankName);
+  }
+
+  
+}
+
+
+
+
+$scope.updateBankName=function(id){
+    $scope.bankName=[];
+
+
+  for(var r=0;r<$scope.bankcodes.length;r++){
+    if($scope.bankcodes[r].bankBranchCode==id){
+      $scope.employee.bankName=$scope.bankcodes[r].bankName;
+
+     
+    }
+  }
+
+  
+}
+
 $http.get(jadaApiUrl+'api/paypoint').success(function(data) {
               $scope.points = data;
 
