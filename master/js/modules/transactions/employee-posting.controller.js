@@ -28,14 +28,17 @@
          $scope.searchEmployee=function(user) {
 
           if(user.period!=null && user.period!=""){
+            $rootScope.employeePostedId = user.userId;
+            $rootScope.PayrollPostedId =user.period;
                   var employeeId=user.userId;
           var periodId=user.period;
+          
           console.log("period - "+periodId+" employee - "+employeeId);
           $http.get(jadaApiUrl+'api/payrollpostingReport/'+employeeId+'/'+periodId).success(function(data) {
               $scope.oneUser = data;
 
               $scope.transactions=data.payrollCodeReportList;
-              console.log(  $scope.transactions);
+              console.log(  $scope.oneUser);
 
 
             });
@@ -59,9 +62,22 @@
 
 
   $scope.loadTransactions = function () {
-   
+ 
+        
+                  var employeeId=$rootScope.employeePostedId;
+          var periodId=$rootScope.PayrollPostedId;
+          console.log("period - "+periodId+" employee - "+employeeId);
+          $http.get(jadaApiUrl+'api/payrollpostingReport/'+employeeId+'/'+periodId).success(function(data) {
+              $scope.oneUser = data;
 
-              $scope.transactions=  $scope.oneUser.payrollCodeReportList;}
+              $scope.transactions=data.payrollCodeReportList;
+              console.log(  $scope.transactions);
+
+
+            });
+
+
+ }
 
  $rootScope.$on("CallLoadTransactions", function(){
            $scope.loadTransactions ();
