@@ -33,8 +33,46 @@
           $scope.pop = function() {
             toaster.pop($scope.toaster.type, $scope.toaster.title, $scope.toaster.text);
           };
-$scope.currentclass='danger';
-    $scope.buttonText="process";
+
+
+var currentperiod=1;
+    $scope.payrollpending=PayrollApprovalService.get({periodId:currentperiod});
+    // console.log($scope.payrollpending);
+  //   var x =JSON.stringify($scope.payrollpending);
+  // console.log(X.status);
+    // console.log(JSON.stringify($scope.payrollpending));
+
+
+
+ $scope.pendingpayroll = function () {
+var count = 0;
+angular.forEach($scope.payrollpending, function (item) {
+if (item.status==0) { count++ }
+});
+return count;
+console.log('///////////');
+console.log(count);
+}
+
+
+ $scope.payrollaproved = function () {
+
+var count;
+  for(var r=0;r<$scope.payrollpending.length;r++){
+    if($scope.payrollpending[r].status==1){
+   count++;
+
+     
+    }
+    return count;
+
+    console.log("///////////////////////////////////");
+ console.log(count);
+  }
+
+
+}
+
 
  $scope.sendforApproval= function () {
    var currentperiod=1;

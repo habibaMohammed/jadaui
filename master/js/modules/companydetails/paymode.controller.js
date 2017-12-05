@@ -41,7 +41,7 @@ $scope.paymodes=PayModeService.query();
           
 
   $scope.delete= function (paymode) {
-point.$remove().then(function () {
+paymode.$remove().then(function () {
   $scope.loadPaymodes();
 // $scope.plist.splice($scope.plist.indexOf(code), 1);
 });
@@ -107,10 +107,10 @@ point.$remove().then(function () {
             $scope.cancel = function () {
               $uibModalInstance.dismiss('cancel');
             };
-            $scope.ppoint=new PayModeService();
+            $scope.paymode=new PayModeService();
             
              $scope.submitPayMode=function() {
-           $scope.ppoint.$save().then(function(data){
+           $scope.paymode.$save().then(function(data){
           var response=angular.fromJson(data);
           
             if(response.Status=="1"){
@@ -133,7 +133,7 @@ point.$remove().then(function () {
           };
 
            $scope.ClosePayMode=function() {
-         $scope.ppoint.$save().then(function(data){
+         $scope.paymode.$save().then(function(data){
          
           $rootScope.$emit("CallLoadPaymodes", {});
           $scope.ok();

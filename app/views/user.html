@@ -66,20 +66,25 @@
 
       <script type="text/ng-template" id="NewUser.html">
             <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">New User</h4></div><div class="modal-body"><!-- START panel-->
+              <div class="userform" ng-controller="UserAdminController">
 
- <form class="form-horizontal" ng-controller="UserAdminController">
+ <form class="form-horizontal"  name="userform" novalidate="" >
 
     <div class="form-group">
                   <label class="col-lg-3 control-label">First Name</label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" name="group" ng-model="user.firstName"  placeholder="Enter First Name"/>
+                     <input class="form-control" type="text" name="fname" ng-model="user.firstName"  placeholder="Enter First Name" required="" />
                   </div>
+
+
+                    <span class="text-danger" ng-show="userform.$submitted &amp;&amp; userform.fname.$invalid">This field is required</span>
+               <!-- <span class="text-danger" ng-show="userform.firstName.$dirty &amp;&amp; userform.firstName.$error.pattern">This field is invalid:No special characters allowed here</span> -->
                </div>
 
                    <div class="form-group">
                   <label class="col-lg-3 control-label">Last Name</label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" name="group" ng-model="user.lastName"  placeholder="Enter Last Name"/>
+                     <input class="form-control" type="text" name="group" ng-model="user.lastName"  placeholder="Enter Last Name" required="" />
                   </div>
                </div>
                 <div class="form-group">
@@ -125,7 +130,7 @@
               
                <div class="form-group">
                   <div class="col-lg-offset-3 col-lg-9">
-                     <button class="btn btn-info btn-sm" ng-click="submitUser()">Save and New</button>
+                     <button class="btn btn-info btn-sm" ng-disabled="userform.$invalid" ng-click="submitUser()">Save and New</button>
                             <button class="btn btn-info btn-sm" ng-click="submitUserClose()">Save and Close</button>
                       <button class="btn btn-warning btn-sm" type="submit">Reset</button>
                   </div>
@@ -134,6 +139,7 @@
                     <div class="text-center text-success" margin-top="md" ng-show="SuccessMsg">{{SuccessMsg}}</div>
              <div class="text-center text-danger"  margin-top="md" ng-show="errorMsg">{{errorMsg}}</div>
             </form>
+          </div>
 <!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
          </script>
 

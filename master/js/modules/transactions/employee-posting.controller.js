@@ -33,8 +33,10 @@
           console.log("period - "+periodId+" employee - "+employeeId);
           $http.get(jadaApiUrl+'api/payrollpostingReport/'+employeeId+'/'+periodId).success(function(data) {
               $scope.oneUser = data;
-              console.log($scope.oneUser
-);
+
+              $scope.transactions=data.payrollCodeReportList;
+              console.log(  $scope.transactions);
+
 
             });
 
@@ -52,15 +54,14 @@
  
 
 
- $scope.transactions=employeePostingService.query();
+ // $scope.transactions=employeePostingService.query();
 
 
 
   $scope.loadTransactions = function () {
    
- $scope.transactions=employeePostingService.query();
 
-   }
+              $scope.transactions=  $scope.oneUser.payrollCodeReportList;}
 
  $rootScope.$on("CallLoadTransactions", function(){
            $scope.loadTransactions ();
@@ -118,11 +119,13 @@ $scope.codeChange=function(id){
 // $scope.loaddepts();
 
 
-
+ 
 
         $scope.delete= function (transaction) {
-                  transaction.$remove().then(function () {
-                   $scope.loadTransactions ();
+             var deletetransaction= new employeePostingService(transaction);
+                  deletetransaction.$delete().then(function () {
+                   $scope.loadTransactions();
+                   console.log('edited')
             });
             }
           
@@ -228,7 +231,11 @@ $scope.show = function(trans) {
 
              ModalInstanceCtrl.$inject = ['$scope', '$http', '$rootScope','$uibModalInstance','employeePostingService','trans','jadaApiUrl'];
           function ModalInstanceCtrl($scope,$http, $rootScope,$uibModalInstance, employeePostingService,trans,jadaApiUrl) {
-          $scope.transaction=trans;
+          // $scope.transaction=trans;
+          var id=trans.id;
+          console.log(id);
+          
+                $scope.transaction=trans;
             $scope.ok = function () {
               $uibModalInstance.close('closed');
             };
@@ -237,9 +244,10 @@ $scope.show = function(trans) {
               $uibModalInstance.dismiss('cancel');
             };
             
-
+       $scope.transaction= employeePostingService.get({id:id});
            $scope.updateTransaction=function(transaction){
-             transaction.$update().then(function(){
+      
+            transaction.$update().then(function(){
                    $rootScope.$emit("CallLoadTransactions", {});
             });
           

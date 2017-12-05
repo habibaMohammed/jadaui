@@ -92,6 +92,7 @@ $scope.show = function(EditCompany) {
           ModalInstanceCtrl.$inject = ['$scope', '$rootScope','$uibModalInstance','companyService','EditCompany'];
           function ModalInstanceCtrl($scope, $rootScope,$uibModalInstance, companyService,EditCompany) {
           $scope.company=EditCompany;
+          console.log(EditCompany);
             $scope.ok = function () {
               $uibModalInstance.close('closed');
             };

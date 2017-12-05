@@ -125,6 +125,13 @@ $http.get(jadaApiUrl+'api/employeecategory').success(function(data) {
 
             });
 
+
+$http.get(jadaApiUrl+'api/paymode').success(function(data) {
+              $scope.paymodes = data;
+              console.log($scope.paymodes);
+
+            });
+
 $http.get(jadaApiUrl+'api/bankbranchcode').success(function(data) {
               $scope.bankcodes = data;
               console.log($scope.bankcodes)
