@@ -52,6 +52,40 @@
                <br/>
                
             <br/>
+
+<!--      <span class="label label-info" ng-hide="pendingpayroll() == 0">
+{{pendingpayroll()}}
+</span> -->
+
+   <span class="label label-info">
+{{payrollaproved()}}
+</span>
+
+             <div class="table-responsive">
+         <table class="table table-striped">
+                 <thead>
+               <tr>
+                  <th>Period </th>
+                   <th>status</th>
+                
+               </tr>
+            </thead>
+                <tbody>
+              <tr>
+                   <td>{{ payrollpending.id }}</td>
+                      <td>{{ payrollpending.status }}</td>
+            
+            
+                  
+               </tr>
+              
+            
+               
+            </tbody>
+         </table>
+
+          
+      </div>
            
           
         <!--  <button class="btn btn-default pull-left" type="button" onclick="window.print();">Print</button> -->

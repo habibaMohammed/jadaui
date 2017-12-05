@@ -70,7 +70,7 @@
 
       </tr>
       <div>
-      <tr  ng-repeat="transaction in oneUser.payrollCodeReportList">
+      <tr  ng-repeat="transaction in transactions">
          <td>
             {{transaction.code}}    </td> 
              <td> {{transaction.description}}    </td> 
@@ -81,12 +81,11 @@
          <td style="white-space: nowrap">
             <!-- form-->
            
-           
-            <div class="buttons" >
-               <button class="btn btn-sm btn-info" ng-click="show(transaction)"   title="Edit">
+         <div class="buttons" >
+                <button class="btn btn-sm btn-info" ng-click="show(transaction)"  title="Edit">
                   <em class="fa fa-pencil"></em>
                </button>
-               <button class="btn btn-sm btn-danger"  title="Delete">
+               <button class="btn btn-sm btn-danger" ng-click="delete(transaction)"  title="Delete">
                   <em class="fa fa-trash"></em>
                </button>
             </div>
@@ -261,7 +260,7 @@
                      
               <div class="form-group">
                   <div class="col-lg-offset-3 col-lg-9">
-                  <button class="btn btn-sm btn-primary mr"  ng-click=updateTransaction(transaction) >Update</button>
+                  <button class="btn btn-sm btn-primary mr" ng-click="updateTransaction(transaction)">Update</button>
                     <button class="btn btn-sm btn-warning mr" type="reset" >Cancel</button>
                    </div>
                </div>

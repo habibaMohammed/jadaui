@@ -9,7 +9,7 @@
     PayModeService.$inject = ['$resource','jadaApiUrl'];
     function PayModeService($resource,jadaApiUrl) {
            //return $resource('http://localhost:9418/jada/payroll/CreateEmployeeGroups/');
-     var data=$resource(jadaApiUrl+'api/paypoint/:id', {id: '@id'},
+     var data=$resource(jadaApiUrl+'api/paymode/:id', {id: '@id'},
     { 'get':    {method:'GET', isArray:false},
   'save':   {method:'POST'},
   'query':  {method:'GET', isArray:true},

@@ -90,6 +90,14 @@
 
 
               <div class="form-group">
+                 
+                  <div class="col-lg-9">
+                     <input class="form-control" type="hidden" name="id" ng-model="company.ID" placeholder="Company name" />
+                  </div>
+               </div> 
+
+
+              <div class="form-group">
                   <label class="col-lg-3 control-label">Company Name</label>
                   <div class="col-lg-9">
                      <input class="form-control" type="text" name="cname" ng-model="company.companyName" placeholder="Company name" />
@@ -155,7 +163,7 @@
                
                       <div class="text-center text-success" margin-top="md" ng-show="SuccessMsg">{{SuccessMsg}}</div>
              <div class="text-center text-danger"  margin-top="md" ng-show="errorMsg">{{errorMsg}}</div>
-
+{{company|json}}
        
                
             </form>

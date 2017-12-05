@@ -13,8 +13,8 @@
         .module('app.bootstrapui')
         .controller('FinancialYearController', FinancialYearController);
 
-    FinancialYearController.$inject = ['$scope','$http', '$rootScope','$uibModal','financialYearService','$stateParams', '$state','jadaApiUrl'];
-    function FinancialYearController($scope,$http, $rootScope, $uibModal, financialYearService,$stateParams, $state,jadaApiUrl) {
+    FinancialYearController.$inject = ['$scope','$http', '$rootScope','$uibModal','financialYearService','financialPeriodService','$stateParams', '$state','jadaApiUrl'];
+    function FinancialYearController($scope,$http, $rootScope, $uibModal, financialYearService,financialPeriodService,$stateParams, $state,jadaApiUrl) {
         var vm = this;
 
         activate();
@@ -26,6 +26,18 @@
  var SuccessMsg;
  var errorMsg;
 
+$scope.periods=financialPeriodService.query();
+
+
+
+   $scope.loadPeriods = function () {
+   $scope.periods=financialPeriodService.query();
+
+   }
+
+ $rootScope.$on("CallLoadPeriods", function(){
+           $scope.loadPeriods();
+        });
 
 
   $scope.newFinancialyear= function () {
@@ -33,7 +45,8 @@
     $scope.currentclass='whirl ringed';
     $scope.buttonprocess=true;
       $http.post(jadaApiUrl+'api/financialyear').success(function(){
-    
+
+    $rootScope.$emit("CallLoadPeriods", {});
  $scope.buttonText="Adding";
                   },function(err){
             $scope.buttonText="failed";
@@ -43,18 +56,6 @@
             });
             };
 
-$scope.periods=financialYearService.query();
-
-
-
-   $scope.loadPeriods = function () {
-   $scope.periods=financialYearService.query();
-
-   }
-
- $rootScope.$on("CallLoadPeriods", function(){
-           $scope.loadPeriods();
-        });
 
 
 $scope.months = [];

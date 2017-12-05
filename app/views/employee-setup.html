@@ -520,15 +520,12 @@
 <div class="form-group">
                         <label class="col-sm-3 ">Pay Mode</label>
                         <div class="col-lg-9">
-                    <select class="form-control" name="pay_mode"  ng-model="empMaster.payMode" required="">
-                              <option value="">Select Pay Mode</option>
-                              <option value="1">Option 1</option>
-                              <option value="2">Option 2</option>
-                              <option value="3">Option 3</option>
-                              <option value="4">Option 4</option>
-                             
-                           </select>
-                            <span class="text-danger" ng-show="formStep4.$submitted &amp;&amp; formStep4.pay_mode.$invalid">This field is required  ></span>
+                       <select  class="form-control" name="payMode" ng-model="empMaster.payMode" ng-options="paymode.id as paymode.description for paymode in paymodes" required="">
+    <option value="" disabled selected >Select Pay Mode</option>
+
+ 
+  </select>
+                            <span class="text-danger" ng-show="formStep4.$submitted &amp;&amp; formStep4.payMode.$invalid">This field is required  ></span>
                      
                         <!-- <div class="col-sm-4">
                            <small class="text-muted">type='number'</small>
