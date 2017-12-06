@@ -27,11 +27,11 @@
 
          $scope.searchEmployee=function(user) {
 
-          if(user.period!=null && user.period!=""){
-            $rootScope.employeePostedId = user.userId;
-            $rootScope.PayrollPostedId =user.period;
-                  var employeeId=user.userId;
-          var periodId=user.period;
+          if(user.periodId!=null && user.periodId!=""){
+            $rootScope.employeePostedId = user.employeeId;
+            $rootScope.periodPostedId =user.periodId;
+                  var employeeId=user.employeeId;
+          var periodId=user.periodId;
           
           console.log("period - "+periodId+" employee - "+employeeId);
           $http.get(jadaApiUrl+'api/payrollpostingReport/'+employeeId+'/'+periodId).success(function(data) {
@@ -54,7 +54,16 @@
 
 
 
- 
+
+// $scope.populateeTransactionData=function(){
+   
+//   $scope.posting.periodId=  $rootScope.PayrollPostedId;
+//   console.log('yyyy');
+//  console.log($scope.posting.periodId);
+
+
+// }
+
 
 
  // $scope.transactions=employeePostingService.query();
@@ -65,7 +74,7 @@
  
         
                   var employeeId=$rootScope.employeePostedId;
-          var periodId=$rootScope.PayrollPostedId;
+          var periodId=$rootScope.periodPostedId;
           console.log("period - "+periodId+" employee - "+employeeId);
           $http.get(jadaApiUrl+'api/payrollpostingReport/'+employeeId+'/'+periodId).success(function(data) {
               $scope.oneUser = data;
@@ -124,6 +133,26 @@ $scope.codeChange=function(id){
 
             }
 
+
+
+$scope.populateeTransactionData=function(id){
+    $scope.posting=[];
+
+
+  for(var r=0;r< $scope.periods.length;r++){
+    if( $scope.periods[r].id==id){
+      $scope.periodId=$scope.periods[r].id;
+
+     
+    }
+
+    console.log("///////////////////////////////////");
+ console.log(   $scope.periodId);
+  }
+
+  
+}
+
  // $scope.departments = [];
  //          $scope.loaddepts = function() {
  //            return  $scope.departments.length ? null : $http.get('http://localhost:56135/api/department').success(function(data) {
@@ -145,12 +174,16 @@ $scope.codeChange=function(id){
             });
             }
           
-          $scope.open = function (size) {
+          $scope.open = function (employeeinfo) {
 
             var modalInstance = $uibModal.open({
               templateUrl: 'addTransactions.html',
               controller: ModalOpenFormulaInstanceCtrl,
-              size: size
+              resolve: {
+           employeeinfo: function () {
+             return employeeinfo;
+           }
+         }
             });
 
 
@@ -192,9 +225,18 @@ $scope.show = function(trans) {
           // Please note that $uibModalInstance represents a modal window (instance) dependency.
           // It is not the same as the $uibModal service used above.
 
-          ModalOpenFormulaInstanceCtrl.$inject = ['$scope', '$http','$rootScope','$uibModalInstance','employeePostingService','jadaApiUrl'];
-          function ModalOpenFormulaInstanceCtrl($scope, $http,$rootScope,$uibModalInstance, employeePostingService,jadaApiUrl) {
-          
+          ModalOpenFormulaInstanceCtrl.$inject = ['$scope', '$http','$rootScope','$uibModalInstance','employeePostingService','jadaApiUrl','employeeinfo'];
+          function ModalOpenFormulaInstanceCtrl($scope, $http,$rootScope,$uibModalInstance, employeePostingService,jadaApiUrl,employeeinfo) {
+// $scope.transuser={};
+// $scope.transuser=new employeePostingService();
+         $scope.transactionposting=employeeinfo;
+         // $scope.transuser.periodId=employeeinfo.periodId;
+
+      //    $scope.transaction.periodId=employeeinfo.period;
+      //            $scope.Message= $scope.transaction.periodId;  
+      // // $scope.transaction.employeeId=employeeinfo.employeeId;
+          // console.log('//');
+          // console.log($scope.transuser.periodId);
             $scope.ok = function () {
               $uibModalInstance.close('closed');
             };
@@ -202,14 +244,20 @@ $scope.show = function(trans) {
             $scope.cancel = function () {
               $uibModalInstance.dismiss('cancel');
             };
-            $scope.transaction=new employeePostingService();
-             $scope.submitTransaction=function() {
-          $scope.transaction.$save().then(function(data){
+
+            
+             $scope.submitTransaction=function(transactionposting) {
+      var usertransactionposting=new employeePostingService(transactionposting);
+
+          usertransactionposting.$save().then(function(data){
              var response=angular.fromJson(data);
           
             if(response.Status=="1"){
               $scope.errorMsg=false;
                     $scope.SuccessMsg =response.Message;
+              
+                     $scope.transactionposting.payrollCodeId=' ';
+                     $scope.transactionposting.amount=' ';
             }else{
            
                $scope.SuccessMsg=false;
@@ -227,8 +275,9 @@ $scope.show = function(trans) {
           };
 
 
-            $scope.saveCloseTransaction=function() {
-          $scope.transaction.$save().then(function(){
+            $scope.saveCloseTransaction=function(transactionposting) {
+                 var usertransactionposting=new employeePostingService(transactionposting);
+         usertransactionposting.$save().then(function(){
             $rootScope.$emit("CallLoadTransactions", {});
             $scope.ok();
 
@@ -250,6 +299,7 @@ $scope.show = function(trans) {
           // $scope.transaction=trans;
           var id=trans.id;
           console.log(id);
+
           
                 $scope.transaction=trans;
             $scope.ok = function () {

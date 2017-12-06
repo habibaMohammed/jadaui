@@ -14,17 +14,17 @@
   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
     <div class="input-group-addon">Period</div>
   
-         <select name="period" class="slider slider-lg form-control" ng-model="user.period" ng-options="period.id as period.period for period in periods" >
+         <select name="period" class="slider slider-lg form-control" ng-model="transactionposting.periodId" ng-options="period.id as period.period for period in periods" >
         <option value="" disabled selected>Periods</option>
   </select>
   </div>
   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
     <div class="input-group-addon">Employee Number</div>
-    <select name="employeeNumber" class="slider slider-lg form-control" ng-model="user.userId" ng-options="employee.id as employee.employeeNumber for employee in employees" >
+    <select name="employeeNumber" class="slider slider-lg form-control" ng-model="transactionposting.employeeId" ng-options="employee.id as employee.employeeNumber for employee in employees" >
         <option value="" disabled selected>Employees</option>
   </select>
   </div>
-  <button  ng-click="searchEmployee(user)"   class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+  <button  ng-click="searchEmployee(transactionposting)"   class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
 </form>
   
 
@@ -33,6 +33,8 @@
 
 
 </div>
+
+{{transactionposting.period}}
 <br/>
           <!-- START panel-->
 
@@ -72,7 +74,7 @@
       <div>
       <tr  ng-repeat="transaction in transactions">
          <td>
-            {{transaction.code}}    </td> 
+                {{transaction.code}}    </td> 
              <td> {{transaction.description}}    </td> 
              <td>    {{transaction.amount}}
             
@@ -94,19 +96,22 @@
    </div>
    </table>
    <br/>
-   <button class="btn btn-primary" ng-click="open()" >Add New</button>
+   <button class="btn btn-primary" ng-click="open(transactionposting)" >Add New </button>
 
 <script type="text/ng-template" id="addTransactions.html">
             <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Transaction posting</h4></div><div class="modal-body">
+
   <form class="form-horizontal"  ng-controller="EmployeePostingController">
+
       <div class="form-group">
                   <label class="col-lg-3 control-label"> Period
 
                  </label>
                   <div class="col-lg-9">
 
-                      <select name="period" class="slider slider-lg form-control" ng-model="transaction.periodId" ng-options="period.id as period.period for period in periods" >
+                      <select name="period" class="slider slider-lg form-control" ng-model=" transactionposting.periodId" ng-options="period.id as period.period for period in periods" disabled="">
         <option value="" disabled selected>Periods</option>
+    }
   </select>
           
                   </div>
@@ -123,7 +128,7 @@
 
 " /> -->
 
-  <select name="employee" class="slider slider-lg form-control" ng-model="transaction.employeeId" ng-options="employee.id as employee.employeeNumber for employee in employees" >
+  <select name="employee" class="slider slider-lg form-control" ng-model="transactionposting.employeeId" ng-options="employee.id as employee.employeeNumber for employee in employees" disabled="">
         <option value="" disabled selected>Employees</option>
   </select>
                   </div>
@@ -133,7 +138,7 @@
 
                  </label>
                   <div class="col-lg-9">
-                    <select class="form-control" name="payrollcode" ng-model="transaction.payrollCodeId"  ng-options="code.id as code.description for code in pcodes" ng-change="codeChange(transaction.payrollCodeId)">
+                    <select class="form-control" name="payrollcode" ng-model="transactionposting.payrollCodeId"  ng-options="code.id as code.description for code in pcodes" ng-change="codeChange(transactionposting.payrollCodeId)">
     <option value="" disabled selected>All Codes</option>
   </select>
           <!--            <input class="form-control" type="text" ng-model="transaction.payrollCodeId" name="element_code
@@ -155,7 +160,7 @@
                   <label class="col-lg-3 control-label">Amount
                    </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  ng-model="transaction.amount" placeholder="Group code
+                     <input class="form-control" type="text"  ng-model="transactionposting.amount" placeholder="Group code
                    " />
                   </div>
                </div>
@@ -170,8 +175,8 @@
                      
               <div class="form-group">
                   <div class="col-lg-offset-3 col-lg-9">
-                  <button class="btn btn-sm btn-info" ng-click="submitTransaction()" >Save and New</button>
-                   <button class="btn btn-sm btn-info" ng-click="saveCloseTransaction()" >Save and close</button>
+                  <button class="btn btn-sm btn-info" ng-click="submitTransaction(transactionposting)" >Save and New</button>
+                   <button class="btn btn-sm btn-info" ng-click="saveCloseTransaction(transactionposting)" >Save and close</button>
                     <button class="btn btn-sm btn-warning"  type="reset" >Reset</button>
                    </div>
                </div>
@@ -204,7 +209,7 @@
 
                  </label>
                   <div class="col-lg-9">
-         <select name="period" class="slider slider-lg form-control" ng-model="transaction.periodId" ng-options="period.id as period.period for period in periods" >
+         <select name="period" class="slider slider-lg form-control" ng-model="transaction.periodId" ng-options="period.id as period.period for period in periods" disabled="" >
         <option value="" disabled selected>Periods</option>
   </select>
           
@@ -216,7 +221,7 @@
 
                  </label>
                   <div class="col-lg-9">
-         <select name="employee" class="slider slider-lg form-control" ng-model="transaction.employeeId" ng-options="employee.id as employee.employeeNumber for employee in employees" >
+         <select name="employee" class="slider slider-lg form-control" ng-model="transaction.employeeId" ng-options="employee.id as employee.employeeNumber for employee in employees" disabled="">
         <option value="" disabled selected>Employees</option>
   </select>         </div>
                </div>
