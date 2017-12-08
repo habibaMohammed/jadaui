@@ -7,8 +7,8 @@
         .module('app.reports')
         .controller('PayslipController', PayslipController);
 
-    PayslipController.$inject = ['$scope','$http','$resource', 'PayslipService','jadaApiUrl'];
-    function PayslipController($scope,$http,$resource,PayslipService,jadaApiUrl) {
+    PayslipController.$inject = ['$scope','$http','$resource', 'PayslipService','jadaApiUrl','CurrentPeriod'];
+    function PayslipController($scope,$http,$resource,PayslipService,jadaApiUrl,CurrentPeriod) {
         var vm = this;
 
         activate();
@@ -17,10 +17,11 @@
 
         function activate() {
 
-
-        // vm.persons=PayslipService.get({id:1});
-        // console.log(vm.persons);
-var id=1;
+var name=CurrentPeriod.getCurrentPeriod();
+console.log('name');
+console.log(name);
+var currentperiod=2;
+var id=currentperiod;
           
 
 $http.get(jadaApiUrl+'api/payslipreport/'+id).success(function(data) {
@@ -29,6 +30,31 @@ $http.get(jadaApiUrl+'api/payslipreport/'+id).success(function(data) {
 
             });
 
+$scope.searchpayslipByperiod=function(id){
+  $http.get(jadaApiUrl+'api/payslipreport/'+id).success(function(data) {
+              $scope.persons = data;
+                 console.log('////');
+              console.log($scope.persons);
+
+            });
+}
+
+         $scope.searchPayslip=function(user) {
+
+          if(user.period!=null && user.period!=""){
+    
+           var employeeId=user.employeeId;
+     
+          $http.get(jadaApiUrl+'api/payrollpostingReport/'+employeeId+'/'+periodId).success(function(data) {
+                $scope.persons= data;
+
+
+            });
+
+          }
+          
+
+         };
 
 
 

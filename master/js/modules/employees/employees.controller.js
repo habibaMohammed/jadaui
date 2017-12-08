@@ -108,7 +108,8 @@ $http.get(jadaApiUrl+'api/department').success(function(data) {
               $scope.departments = data;
 
             });
-
+console.log('ddd')
+console.log($scope.departments);
 
 $http.get(jadaApiUrl+'api/costcenter').success(function(data) {
               $scope.centers = data;
@@ -234,10 +235,23 @@ $http.get(jadaApiUrl+'api/paypoint').success(function(data) {
 
                
             $scope.updateEmpMaster=function(employee){
-             employee.$update().then(function(){
+             employee.$update().then(function(data){
+                 var response=angular.fromJson(data);
+          
+            if(response.Status=="1"){
+                   $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+                      $scope.employee=EmployeeService.get({id:id}); 
+            }else{
+           
+                    $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+    
+            }
                      $scope.loadEmployees();
             },
               function() {
+               $scope.SuccessMsg=false;
                  $scope.errorMsg = 'Server Request Error';
                 });
           

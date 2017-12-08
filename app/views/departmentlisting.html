@@ -67,9 +67,11 @@
             <label class="col-lg-3 control-label">Code</label>
             <div class="col-lg-9">
              <input class="form-control" type="text" name="deptcode" ng-model="dept.code"  placeholder="Department code"
-        ng-pattern="/^[\w,]+$/" required="" />
+        ng-pattern="/^[\w,]+$/" required="" ng-blur="checkDepartment(dept.code)" />
                  <span class="text-danger" ng-show="deptform.deptcode.$dirty &amp;&amp; deptform.deptcode.$error.required">This field is required</span>
                <span class="text-danger" ng-show="deptform.deptcode.$dirty &amp;&amp; deptform.deptcode.$error.pattern">This field is invalid:No special characters allowed here</span>
+
+             <span class="text-center text-danger"  margin-top="md" ng-show="errorMessage">{{errorMessage}}</span>
            </div>
          </div>
          <div class="form-group">
