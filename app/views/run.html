@@ -47,9 +47,9 @@
                <div class="col-md-10">
              
            
-            <div class="clearfix">
+            <div class="clearfix" ng-controller="DashboardController">
                <p class="pull-left mr"><b>Pay period</b> </p>
-               <p class="pull-left mr">May 2017</p>
+               <p class="pull-left mr">{{dashboard.currentPeriod.month}} {{dashboard.currentPeriod.year}}</p>
               
             </div>
           

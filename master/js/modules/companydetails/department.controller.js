@@ -52,26 +52,34 @@ for(var r=0;r<accountRights.length;r++){
 
    }
 
+   console.log($scope.departments);
+
  $rootScope.$on("CallLoadDepartment", function(){
            $scope.loadDepartments();
         });
 
 
-//  $scope.updatedept=function(id){
-
-//   $scope.buttonText="Updating. . ."; //Once clicked change button text
-//   DeptService.update({ID: id}, $scope.department);
-// // $scope.oneuser.$update(function(){
-// //   console.log('Saving user: ' +$scope.oneuser.name);
-// // $state.go('app.userinfo'); //Once updated go to state `admin.postViewAll`
-// // });
 
 
+
+
+$scope.checkDepartment=function(id) {
+
+  for(var r=0;r<$scope.departments.length;r++){
+    if($scope.departments[r].code==id){
+      
+   $scope.errorMessage="This code already exists";
   
+   $scope.dept.code.$dirty = true;
 
-//    $scope.dept= new DeptService();
-//   $scope.submitdept = function() {
-         
+    }
+
+    console.log("///////////////////////////////////");
+
+    console.log($scope.departments[r].code);
+  }
+
+ };
 
             
 //              $scope.dept.$save().then(function(newDepartment) {
