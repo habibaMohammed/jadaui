@@ -8,22 +8,38 @@
     CurrentPeriod.$inject = ['$http','$resource','jadaApiUrl'];
     function CurrentPeriod($http,$resource,jadaApiUrl) {
 
-       return {
-        getCurrentPeriod: function () {
-            return $http.get(jadaApiUrl+'api/currentperiod/').then(function (response) {
-               return response.data;
+       
+        var Current=  $http.get(jadaApiUrl+'api/currentperiod');
 
- console.log('here');
-               console.log(response.data);
-            });
-        }
-      }
+  return Current;
 
       
-          
-  //          return {
-  //     name : 'anonymous'
-  // };
+ 
     }
 
 })();
+
+
+// (function() {
+//     'use strict';
+
+//     angular
+//         .module('app.company')
+//         .factory('CurrentPeriod', CurrentPeriod);
+
+//     CurrentPeriod.$inject = ['$resource','jadaApiUrl'];
+//     function CurrentPeriod($resource,jadaApiUrl) {
+//      var data=$resource(jadaApiUrl+'api/currentperiod/:id', {id: '@id'},
+//   { 'get':    {method:'GET', isArray:false},
+//   'save':   {method:'POST'},
+//   'query':  {method:'GET', isArray:true},
+//   'update': { method:'PUT' },
+//   'remove': {method:'DELETE'},
+//   'delete': {method:'DELETE'} 
+// });
+//      return data
+          
+       
+//     }
+
+// })();
