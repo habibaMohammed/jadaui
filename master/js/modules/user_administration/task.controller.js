@@ -121,7 +121,7 @@ $scope.loadTasks();
 
 
               $scope.task=new TaskService();
-             $scope.submitTask=function() {
+             $scope.submitTask=function(taskform) {
           $scope.task.$save().then(function(data){
             var response=angular.fromJson(data);
           
@@ -136,6 +136,7 @@ $scope.loadTasks();
             }
            
                 $rootScope.$emit("CallLoadTasks", {});
+                  $scope.taskReset(taskform);
           },
            function() {
              $scope.SuccessMsg=false;
@@ -143,7 +144,11 @@ $scope.loadTasks();
                 });
         
           };
-
+  $scope.taskReset=function(taskform){
+             $scope.taskform={};
+            $scope.task="";
+            taskform.$setPristine();
+            };
            $scope.closeTask=function() {
           $scope.task.$save().then(function(){
            

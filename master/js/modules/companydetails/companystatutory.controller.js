@@ -128,6 +128,12 @@
           }
 
 
+          $scope.resetstatutory = function(statutory){
+             $scope.statutoryform={};
+            $scope.statutory = " ";
+            statutory.$setPristine();
+            };
+
 
           ModalInstanceCtrl.$inject = ['$scope','$rootScope', '$uibModalInstance','CompanyInfoService','statutory'];
           function ModalInstanceCtrl($scope,$rootScope, $uibModalInstance, CompanyInfoService,statutory) {

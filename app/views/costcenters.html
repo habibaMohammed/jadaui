@@ -89,8 +89,8 @@
 
  <div class="form-group">
   <div class="col-lg-offset-3 col-lg-9">
-   <button class="btn btn-info btn-sm" ng-click="submitCostCentre()">Save and New</button>
-    <button class="btn btn-info btn-sm" ng-click="submitCostCentreClose()">Save and Close</button>
+   <button class="btn btn-info btn-sm" ng-disabled="costcentre.$invalid" ng-click="submitCostCentre(costcentre)">Save and New</button>
+    <button class="btn btn-info btn-sm" ng-disabled="costcentre.$invalid" ng-click="submitCostCentreClose()">Save and Close</button>
      <button class="btn btn-warning btn-sm" type="reset">Reset</button>
  </div>
 </div>
@@ -103,26 +103,31 @@
 </script>
 <script type="text/ng-template" id="EditCostCenter.html">
   <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Edit Cost Centres</h4></div><div class="modal-body"><!-- START panel-->
-
-    <form class="form-horizontal"  ng-controller="CostCenterController" >
+<div  ng-controller="CostCenterController">
+    <form class="form-horizontal" name="costcentre" novalidate=""  >
 
      <div class="form-group">
  
       <div class="col-lg-9">
-       <input class="form-control" type="hidden" name="cost_code" ng-model="center.id" placeholder="Cost Centre code"/>
+       <input class="form-control" type="hidden" name="cost_code" ng-model="center.id"  placeholder="Cost Centre code"/>
      </div>
    </div>
 
       <div class="form-group">
       <label class="col-lg-3 control-label">Code</label>
       <div class="col-lg-9">
-       <input class="form-control" type="text" name="cost_code" ng-model="center.code" placeholder="Cost Centre code"/>
+       <input class="form-control" type="text" name="cost_code" ng-model="center.code" ng-pattern="/^[\w,]+$/" required="" placeholder="Cost Centre code"/>
+
+          <span class="text-danger" ng-show="costcentre.cost_code.$dirty &amp;&amp; costcentre.cost_code.$error.required">This field is required</span>
+               <span class="text-danger" ng-show="costcentre.cost_code.$dirty &amp;&amp; costcentre.cost_code.$error.pattern">No special characters allowed</span>
      </div>
    </div>
    <div class="form-group">
     <label class="col-lg-3 control-label">Descriptions</label>
     <div class="col-lg-9">
-     <input class="form-control" type="text" name="cost_description" ng-model="center.description" placeholder="eg. the name of the Cost Centre"/>
+     <input class="form-control" type="text" name="cost_description" ng-model="center.description" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/" required="" placeholder="eg. the name of the Cost Centre"/>
+      <span class="text-danger" ng-show="costcentre.cost_description.$dirty &amp;&amp; costcentre.cost_description.$error.required">This field is required</span>
+               <span class="text-danger" ng-show="costcentre.cost_description.$dirty &amp;&amp; costcentre.cost_description.$error.pattern"> No special characters allowed </span>
    </div>
  </div>
 
@@ -131,12 +136,13 @@
 
  <div class="form-group">
   <div class="col-lg-offset-3 col-lg-9">
-   <button class="btn btn-info btn-sm mr"  ng-click="updateCostCenter(center)">Update</button>
+   <button class="btn btn-info btn-sm mr"  ng-disabled="costcentre.$invalid" ng-click="updateCostCenter(center)">Update</button>
     <button class="btn btn-warning btn-sm "  type="reset">Reset</button>
 
  </div>
 </div>
 </form>
+</div>
 </div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
 </script>
 

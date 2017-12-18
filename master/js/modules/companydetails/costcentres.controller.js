@@ -109,7 +109,7 @@ $scope.show = function(center) {
             };
             
                $scope.costcenter=new CostCentreService();
-           $scope.submitCostCentre=function() {
+           $scope.submitCostCentre=function(costcentre) {
            $scope.costcenter.$save().then(function(data){
              var response=angular.fromJson(data);
           
@@ -123,14 +123,24 @@ $scope.show = function(center) {
               // vm.auth=true;
             }
              $rootScope.$emit("CallLoadCenters", {});
+                $scope.costcenterreset(costcentre);
 
            },
+
+
             function() {
                  $scope.SuccessMsg=false;
                  $scope.errorMsg = 'Server Request Error';
                 });
+
       
           }
+
+            $scope.costcenterreset = function(costcentre){
+             $scope.costcentre={};
+            $scope.costcenter = " ";
+            costcentre.$setPristine();
+            };
 
            $scope.submitCostCentreClose=function() {
            $scope.costcenter.$save().then(function(){

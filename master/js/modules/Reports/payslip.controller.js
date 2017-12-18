@@ -18,52 +18,31 @@
         function activate() {
 
 $scope.getp=function(){
-    
-var id =$http.get(jadaApiUrl+'api/currentperiod').success(function(data) {
-                $scope.result= data;
 
-                id=$scope.result.id;
-             
-                console.log("current period - "+$rootScope.currentperiod);
-               
-
+return $http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
+            
+         
+          return data.data.id;
+      
   
             });
-return id;
+
+
 
 
 }
 
-var cid=$scope.getp();
-
-  // console.log('curr6');
-                console.log(cid);
-// var cid = CurrentPeriod.name;
-// var name1=cid;
-
-console.log(  $scope.result);
 
 
-        // var currentperiod=12;
-        // var id=currentperiod;
+var curr=$scope.getp().then(function(data){
+ var curr=data.id;
+  console.log();
 
-        //   if(id!=null){
-        //    $scope.employee=EmployeeService.get({id:id}); 
-        //    var dob=$scope.employee.dateOfBirth;
-        //    console.log("date of birth : "+dob);
-    
-        //   }
+});
 
-// var currentperiodp=12;
-// var id=currentperiodp;
-// $http.get(jadaApiUrl+'api/payslipreport/'+id).success(function(data) {
-//               $scope.persons = data;
-//               console.log($scope.persons);
-//               $scope.message="hellow";
-
-//             });
-
-
+var response=angular.fromJson(curr);
+console.log('curr');
+console.log(curr);
 
 $scope.searchpayslipByperiod=function(id){
              
@@ -76,8 +55,8 @@ $scope.searchpayslipByperiod=function(id){
    $http.get(jadaApiUrl+'api/payslipreport/'+id).success(function(data) {
             $scope.persons = data;
               $scope.message='helllo period';
-                 console.log('helllo period');
-              console.log($scope.persons);
+              //    console.log('helllo period');
+              // console.log($scope.persons);
              
 
             });
@@ -87,8 +66,7 @@ $scope.searchpayslipByperiod=function(id){
 }
 
 $scope.searchpayslipByperiod(12);
- console.log('///humu');
-console.log($rootScope.pid);
+
 
 
          $scope.searchPayslip=function(user) {
@@ -102,8 +80,8 @@ console.log($rootScope.pid);
                 $scope.persons= data;
 
                  $scope.message="hellow period";
-      console.log('////hapa');
-              console.log($scope.persons);
+      // console.log('////hapa');
+      //         console.log($scope.persons);
 
 
             });
