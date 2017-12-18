@@ -27,7 +27,7 @@
             </thead>
             <tbody >
                <tr  ng-repeat="workflow in workflows">
-                    <td> {{workflow.status}}</td>
+                    <td> {{workflow.processId}}</td>
                         <td> {{workflow.status}}</td>
            
                 <td>{{workflow.userId}}</td>
@@ -77,19 +77,24 @@
      <script type="text/ng-template" id="newWorkflow.html">
             <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">New workflow</h4></div><div class="modal-body"><!-- START panel-->
 
- <form class="form-horizontal" ng-controller="WorkflowController">
+ <form class="form-horizontal" name="workflowform" novalidate="" ng-controller="WorkflowController">
     <div class="form-group">
                   <label class="col-lg-3">Task Name
 </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="trans_type" ng-model="workflow.transactionId" placeholder="Task Name"/>
+                     <input class="form-control" type="text"  name="taskname" ng-model="workflow.transactionId" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true" placeholder="Task Name"/>
+
+                     <span class="text-danger" ng-show="workflowform.taskname.$dirty &amp;&amp; workflowform.taskname.$error.required">This field is required</span>
+               <span class="text-danger" ng-show="workflowform.taskname.$dirty &amp;&amp; workflowform.taskname.$error.pattern"> No special characters allowed </span>
                   </div>
                </div>
                 <div class="form-group">
                   <label class="col-lg-3">Priority
 </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="trans_type" ng-model="workflow.processId" placeholder="Enter Priority #"/>
+                     <input class="form-control" type="text"  name="Priority" ng-model="workflow.processId" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true" placeholder="Enter Priority #"/>
+                       <span class="text-danger" ng-show="workflowform.Priority.$dirty &amp;&amp; workflowform.Priority.$error.required">This field is required</span>
+               <span class="text-danger" ng-show="workflowform.Priority.$dirty &amp;&amp; workflowform.taskname.$Priority.pattern"> No special characters allowed </span>
                   </div>
                </div>
               
@@ -97,30 +102,26 @@
                   <label class="col-lg-3">Process Name
             </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="trans_type" ng-model="workflow.status" placeholder="Enter Process Name"/>
+                     <input class="form-control" type="text"  name="process" ng-model="workflow.status" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true" placeholder="Enter Process Name"/>
+                      <span class="text-danger" ng-show="workflowform.process.$dirty &amp;&amp; workflowform.process.$error.required">This field is required</span>
+               <span class="text-danger" ng-show="workflowform.process.$dirty &amp;&amp; workflowform.process.$error.pattern"> No special characters allowed </span>
                   </div>
                </div>
 
     
 
-           <div class="form-group">
-                        <label class="col-sm-3 ">User</label>
-                        <div class="col-lg-9">
-                    <select class="form-control" name="pay_mode"  ng-model="workflow.userId">
-                              <option value="">Nothing</option>
-                              <option value="1">User 1</option>
-                              <option value="2">User 2</option>
-                              <option value="3">User 3</option>
-                              <option value="4">User 4</option>
-                           </select>
-                          
-                     
-                        <!-- <div class="col-sm-4">
-                           <small class="text-muted">type='number'</small>
-                        </div> -->
+           
+
+                     <div class="form-group">
+                  <label class="col-lg-3 control-label">User</label>
+                  <div class="col-lg-9">
+                    <!--  <input class="form-control" type="text" name="user" ng-model="usergroup.user"  placeholder="Enter user"/> -->
+
+                     <select class="form-control" name="user" ng-model="workflow.userId" ng-options="user.id as user.emailAddress for user in users" ng-required="true">
+    <option value="" disabled selected>Select User</option>
+  </select>   <span class="text-danger" ng-show="workflowform.user.$dirty &amp;&amp; workflowform.user.$error.required">This field is required</span>
                   </div>
-                           
-                     </div>
+               </div>
            
            
               
@@ -129,8 +130,8 @@
               
                <div class="form-group">
                   <div class="col-lg-offset-3 col-lg-9">
-                     <button class="btn btn-info btn-sm mr"  ng-click="submitWorkflow()">Save and New</button>
-                     <button class="btn btn-info btn-sm mr"  ng-click="closeWorkflow()">Save and Close</button>
+                     <button class="btn btn-info btn-sm mr" ng-disabled="workflowform.$invalid"  ng-click="submitWorkflow(workflowform)">Save and New</button>
+                     <button class="btn btn-info btn-sm mr" ng-disabled="workflowform.$invalid"  ng-click="closeWorkflow()">Save and Close</button>
                       <button class="btn btn-warning btn-sm mr" type="reset">Reset</button>
                   </div>
                </div>
@@ -143,26 +144,32 @@
 <script type="text/ng-template" id="Editworkflow.html">
             <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Edit workflow</h4></div><div class="modal-body"><!-- START panel-->
 
- <form class="form-horizontal"  ng-controller="WorkflowController">
+ <form class="form-horizontal" name="workflowform" novalidate="" ng-controller="WorkflowController">
    <div class="form-group">
-                  <label class="col-lg-3">Task Id
-</label>
+          
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="trans_type" ng-model="currentworkflow.id" placeholder="Task Name"/>
+                     <input class="form-control" type="hidden"  name="trans_type" ng-model="currentworkflow.id" placeholder="Task Name"/>
+
+
                   </div>
                </div>
                 <div class="form-group">
                   <label class="col-lg-3">Task Name
 </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="trans_type" ng-model="currentworkflow.transactionId" placeholder="Task Name"/>
+                     <input class="form-control" type="text"  name="taskname" ng-model="currentworkflow.transactionId" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true" placeholder="Task Name"/>
+                       <span class="text-danger" ng-show="workflowform.taskname.$dirty &amp;&amp; workflowform.taskname.$error.required">This field is required</span>
+               <span class="text-danger" ng-show="workflowform.taskname.$dirty &amp;&amp; workflowform.taskname.$error.pattern"> No special characters allowed </span>
                   </div>
                </div>
                 <div class="form-group">
                   <label class="col-lg-3">Priority
 </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="trans_type" ng-model="currentworkflow.processId" placeholder="Enter Priority #"/>
+                     <input class="form-control" type="text"  name="Priority" ng-model="currentworkflow.processId" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true" placeholder="Enter Priority #"/>
+
+                      <span class="text-danger" ng-show="workflowform.Priority.$dirty &amp;&amp; workflowform.Priority.$error.required">This field is required</span>
+               <span class="text-danger" ng-show="workflowform.Priority.$dirty &amp;&amp; workflowform.taskname.$Priority.pattern"> No special characters allowed </span>
                   </div>
                </div>
               
@@ -170,35 +177,29 @@
                   <label class="col-lg-3">Process Name
             </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="trans_type" ng-model="currentworkflow.status" placeholder="Enter Process Name"/>
+                     <input class="form-control" type="text"  name="process" ng-model="currentworkflow.status" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true" placeholder="Enter Process Name"/>
+
+                           <span class="text-danger" ng-show="workflowform.process.$dirty &amp;&amp; workflowform.process.$error.required">This field is required</span>
+               <span class="text-danger" ng-show="workflowform.process.$dirty &amp;&amp; workflowform.process.$error.pattern"> No special characters allowed </span>
                   </div>
                </div>
 
     
+  <div class="form-group">
+                  <label class="col-lg-3 control-label">User</label>
+                  <div class="col-lg-9">
+                    <!--  <input class="form-control" type="text" name="user" ng-model="usergroup.user"  placeholder="Enter user"/> -->
 
-           <div class="form-group">
-                        <label class="col-sm-3 ">User</label>
-                        <div class="col-lg-9">
-                    <select class="form-control" name="pay_mode"  ng-model="currentworkflow.userId">
-                              <option value="">Nothing</option>
-                              <option value="1">User 1</option>
-                              <option value="2">User 2</option>
-                              <option value="3">User 3</option>
-                              <option value="4">User 4</option>
-                           </select>
-                          
-                     
-                        <!-- <div class="col-sm-4">
-                           <small class="text-muted">type='number'</small>
-                        </div> -->
+                     <select class="form-control" name="user" ng-model="currentworkflow.userId" ng-options="user.id as user.emailAddress for user in users" ng-required="true">
+    <option value="" disabled selected>Select User</option>
+  </select>   <span class="text-danger" ng-show="workflowform.user.$dirty &amp;&amp; workflowform.user.$error.required">This field is required</span>
                   </div>
-                           
-                     </div>
+               </div>
            
               
                <div class="form-group">
                   <div class="col-lg-offset-3 col-lg-9">
-                     <button class="btn btn-info btn-sm mr" ng-click=updateWorkflow(currentworkflow)>Update</button>
+                     <button class="btn btn-info btn-sm mr" ng-disabled="workflowform.$invalid" ng-click=updateWorkflow(currentworkflow)>Update</button>
                       <button class="btn btn-warning btn-sm mr" type="reset">Reset</button>
                   </div>
                </div>

@@ -57,15 +57,15 @@
 
          </div>
              <div class="buttons col-lg-6">
-                       <button class="btn btn-sm btn-info mr" title="Edit" ng-click="open()">
+                      <!--  <button class="btn btn-sm btn-info mr" title="Edit" ng-click="open()">
                         Add New
-                     </button>
+                     </button> -->
                      <button class="btn btn-sm btn-info" title="Edit" ng-click="show(company)">
-                        <em class="fa fa-pencil"></em>
+                       Edit
                      </button>
-                     <button class="btn btn-sm btn-danger"  title="Delete" ng-click="delete(company)">
+                  <!--    <button class="btn btn-sm btn-danger"  title="Delete" ng-click="delete(company)">
                         <em class="fa fa-trash"></em>
-                     </button>
+                     </button> -->
                   </div>
         
        
@@ -79,8 +79,8 @@
                 <script type="text/ng-template" id="CompInfoContent.html">
                   <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Company information</h4>
                   </div>
-                  <div class="modal-body"><!-- START panel-->
-                    <form class="form-horizontal"  ng-controller="CompanyInfoController">
+                  <div class="modal-body" ng-controller="CompanyInfoController"><!-- START panel-->
+                    <form class="form-horizontal" name="statutoryform" novalidate  >
                      <!--  <div class="form-group">
                         <label class="col-lg-3 control-label">PIN Number </label>
                         <div class="col-lg-9">
@@ -91,26 +91,41 @@
                       <div class="form-group">
                       <label class="col-lg-3 control-label">Company id </label>
                       <div class="col-lg-9">
-                       <input class="form-control" type="text" name="nssf_number" ng-model="statutory.companyId" placeholder="NSSF number"/>
+                       <input class="form-control" type="text" name="nssf_number" ng-model="statutory.companyId"  ng-required="true"
+                        placeholder="NSSF number"/>
+
+           
                      </div>
                    </div>
+
                      <div class="form-group">
                       <label class="col-lg-3 control-label">NSSF Number</label>
                       <div class="col-lg-9">
-                       <input class="form-control" type="text" name="nssf_number" ng-model="statutory.nssf" placeholder="NSSF number"/>
-                     </div>
+                       <input class="form-control" type="text" name="nssf_number" ng-model="statutory.nssf" ng-required="true"
+                            ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/" placeholder="NSSF number"/>
+                               <span class="text-danger" ng-show="statutoryform.nssf_number.$dirty &amp;&amp; statutoryform.nssf_number.$error.required">This field is required</span>
+               <span class="text-danger" ng-if="statutoryform.nssf_number.$dirty &amp;&amp; statutoryform.nssf_number.$error.pattern">This field is invalid:No special characters allowed here</span>
+                     
+                   </div>
                    </div>
                    <div class="form-group">
                     <label class="col-lg-3 control-label">NHIF Number</label>
                     <div class="col-lg-9">
-                     <input class="form-control" type="text" name="pay_points"  ng-model="statutory.nhif" placeholder="NHIF Number"/>
+                     <input class="form-control" type="text" name="nhif_number"  ng-model="statutory.nhif" 
+        ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/" placeholder="NHIF Number"/>
+
+             <span class="text-danger" ng-show="statutoryform.nhif_number.$dirty &amp;&amp; statutoryform.nhif_number.$error.required">This field is required</span>
+               <span class="text-danger" ng-if="statutoryform.nhif_number.$dirty &amp;&amp; statutoryform.nhif_number.$error.pattern">This field is invalid:No special characters allowed here</span>
                    </div>
                  </div>
 
                  <div class="form-group">
                   <label class="col-lg-3 control-label">HELB Number</label>
                   <div class="col-lg-9">
-                   <input class="form-control" type="text" name="pay_points"  ng-model="statutory.helb" placeholder="HELB Number"/>
+                   <input class="form-control" type="text" name="helb"  ng-model="statutory.helb" ng-required="true"
+     ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/" placeholder="HELB Number"/>
+          <span class="text-danger" ng-show="statutoryform.helb.$dirty &amp;&amp; statutoryform.helb.$error.required">This field is required</span>
+               <span class="text-danger" ng-if="statutoryform.helb.$dirty &amp;&amp; statutoryform.helb.$error.pattern">No special characters allowed here</span>
                  </div>
                </div>
    
@@ -120,15 +135,18 @@
 
                 </label>
                 <div class="col-lg-9">
-                 <input class="form-control" type="text" name="work_days"  ng-model="statutory.workDays" placeholder="Work days"/>
+                 <input class="form-control" type="text" name="work_days"  ng-model="statutory.workDays" ng-required="true"
+       ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/" placeholder="Work days"/>
+            <span class="text-danger" ng-show="statutoryform.work_days.$dirty &amp;&amp; statutoryform.work_days.$error.required">This field is required</span>
+               <span class="text-danger" ng-if="statutoryform.work_days.$dirty &amp;&amp; statutoryform.work_days.$error.pattern">No special characters allowed here</span>
                </div>
              </div>
 
 
              <div class="form-group">
               <div class="col-lg-offset-3 col-lg-9">
-                <button class="btn btn-sm btn-info mr"  ng-click="submitStatutory()"  >Save</button>
-                <button class="btn btn-sm btn-warning mr"  ng-click="submitStatutory()"  >Reset</button>
+                <button class="btn btn-sm btn-info mr" ng-disabled="statutoryform.$invalid" ng-click="submitStatutory(statutory)"  >Save</button>
+                <button class="btn btn-sm btn-warning mr"  type="reset" >Reset</button>
               </div>
             </div>
 
@@ -141,8 +159,8 @@
 
         <script type="text/ng-template" id="CompInfoedit.html">
          <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Edit Statutory information</h4></div>
-      <div class="modal-body"><!-- START panel-->
-          <form class="form-horizontal"    ng-controller="CompanyInfoController"">
+      <div class="modal-body"   ng-controller="CompanyInfoController"><!-- START panel-->
+          <form class="form-horizontal" name="statutoryform" novalidate >
             <div class="form-group">
            
               <div class="col-lg-9">
@@ -158,61 +176,46 @@
            <div class="form-group">
             <label class="col-lg-3 control-label">NSSF Number</label>
             <div class="col-lg-9">
-             <input class="form-control" type="text" name="nssf_number" ng-model="company.nssf" placeholder="NSSF number"/>
+             <input class="form-control" type="text" name="nssf_number" ng-model="company.nssf" ng-required="true"
+                            ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/" placeholder="NSSF number"/>
+                              <span class="text-danger" ng-show="statutoryform.nssf_number.$dirty &amp;&amp; statutoryform.nssf_number.$error.required">This field is required</span>
+               <span class="text-danger" ng-if="statutoryform.nssf_number.$dirty &amp;&amp; statutoryform.nssf_number.$error.pattern">This field is invalid:No special characters allowed </span>
+                     
            </div>
          </div>
          <div class="form-group">
           <label class="col-lg-3 control-label">NHIF Number</label>
           <div class="col-lg-9">
-           <input class="form-control" type="text" name="pay_points"  ng-model="company.nhif" placeholder="NHIF Number"/>
+           <input class="form-control" type="text" name="nhif_number"  ng-model="company.nhif" ng-required="true"
+                            ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/" placeholder="NHIF Number"/>
+                            <span class="text-danger" ng-show="statutoryform.nhif_number.$dirty &amp;&amp; statutoryform.nhif_number.$error.required">This field is required</span>
+               <span class="text-danger" ng-if="statutoryform.nhif_number.$dirty &amp;&amp; statutoryform.nhif_number.$error.pattern">This field is invalid:No special characters allowed </span>
          </div>
        </div>
 
        <div class="form-group">
         <label class="col-lg-3 control-label">HELB Number</label>
         <div class="col-lg-9">
-         <input class="form-control" type="text" name="pay_points"  ng-model="company.helb" placeholder="HELB Number"/>
+         <input class="form-control" type="text" name="helb"  ng-model="company.helb"    ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  placeholder="HELB Number"/>
+         <span class="text-danger" ng-if="statutoryform.helb.$dirty &amp;&amp; statutoryform.helb.$error.pattern">This field is invalid:No special characters allowed </span>
        </div>
      </div>
-    <!--  <div class="form-group">
-      <label class="col-sm-3 control-label">Pay Frequency</label>
-      <div class="col-lg-9">
-        <div class="checkbox c-checkbox needsclick">
-          <label class="needsclick">
-           <input class="needsclick" type="checkbox" required="" name="monthly"  ng-model="Company.monthly"/>
-           <span class="fa fa-check"></span>Monthly</label>
-         </div>
-         <span class="text-danger" ng-show="form.validateInput('checkbox', 'required')">This field is required</span>
 
-         <div class="checkbox c-checkbox needsclick">
-          <label class="needsclick">
-           <input class="needsclick" type="checkbox"  name="weekly" ng-model="Company.weekly" disabled="" />
-           <span class="fa fa-check"></span>Weekly</label>
-         </div>
- 
-         <div class="checkbox c-checkbox needsclick">
-          <label class="needsclick">
-           <input class="needsclick" type="checkbox"  name="fortnight" ng-model="Company.fortnight" disabled="" />
-           <span class="fa fa-check"></span>Fortnight</label>
-         </div>
-       
-       </div>
-
-     </div> -->
      <div class="form-group">
       <label class="col-lg-3 control-label">Work days 
 
 
       </label>
       <div class="col-lg-9">
-       <input class="form-control" type="text" name="work_days"  ng-model="company.workDays" placeholder="Work days"/>
+       <input class="form-control" type="text" name="work_days"  ng-model="company.workDays"   ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  placeholder="Work days"/>
+       <span class="text-danger" ng-if="statutoryform.work_days.$dirty &amp;&amp; statutoryform.work_days.$error.pattern">This field is invalid:No special characters allowed </span>
      </div>
    </div>
 
 
     <div class="form-group">
       <div class="col-lg-offset-3 col-lg-9">
-       <button class="btn btn-info btn-sm" ng-click="updateStatutory(company)">Update</button>
+       <button class="btn btn-info btn-sm" ng-disabled="statutoryform.$invalid" ng-click="updateStatutory(company)">Update</button>
           <button class="btn btn-warning btn-sm" type="reset">Reset</button>
      </div>
    </div>

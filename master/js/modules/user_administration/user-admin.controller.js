@@ -19,7 +19,7 @@
  var SuccessMsg;
  var errorMsg;
   $scope.users=userAdminService.query();
-console.log($scope.users);
+
 
  $scope.loadUsers = function () {
      
@@ -112,7 +112,7 @@ $scope.loadUsers();
 
 
               $scope.user=new userAdminService();
-             $scope.submitUser=function() {
+             $scope.submitUser=function(userform) {
               console.log();
           $scope.user.$save().then(function(data){
               var response=angular.fromJson(data);
@@ -128,6 +128,7 @@ $scope.loadUsers();
             }
            
                 $rootScope.$emit("CallLoadUsers", {});
+                $scope.userReset(userform);
           },
 
            function() {
@@ -136,7 +137,11 @@ $scope.loadUsers();
                 });
         
           };
-
+$scope.userReset = function(userform){
+             $scope.userform={};
+            $scope.user="";
+            userform.$setPristine();
+            };
 
              $scope.submitUserClose=function() {
           $scope.user.$save().then(function(){

@@ -69,7 +69,7 @@
     'use strict';
 
     angular
-        .module('app.company', [ ]);
+        .module('app.companydetails', []);
 })();
 (function() {
     'use strict';
@@ -81,7 +81,7 @@
     'use strict';
 
     angular
-        .module('app.companydetails', []);
+        .module('app.company', [ ]);
 })();
 (function() {
     'use strict';
@@ -114,6 +114,12 @@
     'use strict';
 
     angular
+        .module('app.employees', ['ui.bootstrap']);
+})();
+(function() {
+    'use strict';
+
+    angular
         .module('app.elements', []);
 })();
 (function() {
@@ -126,19 +132,7 @@
     'use strict';
 
     angular
-        .module('app.employees', ['ui.bootstrap']);
-})();
-(function() {
-    'use strict';
-
-    angular
         .module('app.flatdoc', []);
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.icons', []);
 })();
 (function() {
     'use strict';
@@ -150,7 +144,7 @@
     'use strict';
 
     angular
-        .module('app.loadingbar', []);
+        .module('app.icons', []);
 })();
 (function() {
     'use strict';
@@ -163,6 +157,12 @@
 
     angular
         .module('app.locale', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.loadingbar', []);
 })();
 (function() {
     'use strict';
@@ -198,19 +198,13 @@
     'use strict';
 
     angular
-        .module('app.panels', []);
-})();
-(function() {
-    'use strict';
-
-    angular
         .module('app.pages', []);
 })();
 (function() {
     'use strict';
 
     angular
-        .module('app.payrollcodes', [ ]);
+        .module('app.panels', []);
 })();
 (function() {
     'use strict';
@@ -224,13 +218,13 @@
     'use strict';
 
     angular
-        .module('app.reports', []);
+        .module('app.payrollcodes', [ ]);
 })();
 (function() {
     'use strict';
 
     angular
-        .module('app.settings', []);
+        .module('app.reports', []);
 })();
 (function() {
     'use strict';
@@ -244,13 +238,19 @@
     'use strict';
 
     angular
-        .module('app.sidebar', []);
+        .module('app.settings', []);
 })();
 (function() {
     'use strict';
 
     angular
         .module('app.tables', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.sidebar', []);
 })();
 (function() {
     'use strict';
@@ -2658,826 +2658,6 @@ angular.module('app.bootstrapui').controller('YearpickerCtrl', ["$scope", functi
 })();
 
 
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.bootstrapui')
-        .controller('CompanyRegController', CompanyRegController);
-
-    CompanyRegController.$inject = ['$http','$scope', '$rootScope','$uibModal','companyService','$stateParams', '$state','$localStorage'];
-    function CompanyRegController($http,$scope, $rootScope,$uibModal, companyService,$stateParams, $state,$localStorage) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-
- var SuccessMsg;
- var errorMsg;
-
-
- $scope.company=companyService.get({ID:1});
-
-console.log( $scope.company);
-
-
-
-  $scope.loadCompany = function () {
-   
- $scope.company=companyService.get({ID:1});
-   }
-
- $rootScope.$on("CallLoadCompany", function(){
-           $scope.loadCompany ();
-        });
-
-          
-          vm.open = function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'CompInfoContent.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-
-
-
-
-
-            var state = $('#modal-state');
-            modalInstance.result.then(function () {
-              state.text('Modal dismissed with OK status');
-            }, function () {
-              state.text('Modal dismissed with Cancel status');
-            });
-          };
-
-
-
-
-
-$scope.show = function(EditCompany) {
-      // $scope.x = x;
-      var modalInstance = $uibModal.open({
-        templateUrl: 'GeneralCompanyEdit.html',
-        controller: ModalInstanceCtrl,
-        resolve: {
-           EditCompany: function () {
-             return EditCompany;
-           }
-         }        
-        // scope : $scope
-      });
-    };
-    
-    
-
-
-
-          
- 
-
-
-          // Please note that $uibModalInstance represents a modal window (instance) dependency.
-          // It is not the same as the $uibModal service used above.
-
-          ModalInstanceCtrl.$inject = ['$scope', '$rootScope','$uibModalInstance','companyService','EditCompany'];
-          function ModalInstanceCtrl($scope, $rootScope,$uibModalInstance, companyService,EditCompany) {
-          $scope.company=EditCompany;
-          console.log(EditCompany);
-            $scope.ok = function () {
-              $uibModalInstance.close('closed');
-            };
-
-            $scope.cancel = function () {
-              $uibModalInstance.dismiss('cancel');
-            };
-          //   $scope.Company=new companyService();
-          //    $scope.submitCompinfo=function() {
-          // $scope.Company.$save();
-          // console.log('Saving user: ' +$scope.Company.pin_number);
-          // };
-
-
-  
-           $scope.EditGenCompany=function(company){
-             company.$update().then(function(data){
-              var response=angular.fromJson(data);
-          
-            if(response.Status=="1"){
-                  $scope.errorMsg=false;
-                    $scope.SuccessMsg =response.Message;
-            }else{
-           
-                   $scope.SuccessMsg=false;
-                   $scope.errorMsg=response.Message;
-              // vm.auth=true;
-            }
-                   $rootScope.$emit("CallLoadCompany", {});
-            },
-             function() {
-                 $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
-          
-              };
-         
-          }
-        }
-    }
-
-})();
-
-
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.company')
-        .factory('companyService', companyService);
-
-    companyService.$inject = ['$resource','jadaApiUrl'];
-    function companyService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/company/:ID', {ID: '@ID'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('angle')
-        .factory('CurrentPeriod', CurrentPeriod);
-
-    CurrentPeriod.$inject = ['$http','$resource','jadaApiUrl'];
-    function CurrentPeriod($http,$resource,jadaApiUrl) {
-
-       
-        var Current=  $http.get(jadaApiUrl+'api/currentperiod');
-
-  return Current;
-
-      
- 
-    }
-
-})();
-
-
-// (function() {
-//     'use strict';
-
-//     angular
-//         .module('app.company')
-//         .factory('CurrentPeriod', CurrentPeriod);
-
-//     CurrentPeriod.$inject = ['$resource','jadaApiUrl'];
-//     function CurrentPeriod($resource,jadaApiUrl) {
-//      var data=$resource(jadaApiUrl+'api/currentperiod/:id', {id: '@id'},
-//   { 'get':    {method:'GET', isArray:false},
-//   'save':   {method:'POST'},
-//   'query':  {method:'GET', isArray:true},
-//   'update': { method:'PUT' },
-//   'remove': {method:'DELETE'},
-//   'delete': {method:'DELETE'} 
-// });
-//      return data
-          
-       
-//     }
-
-// })();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.company')
-        .factory('financialYearService', financialYearService);
-
-    financialYearService.$inject = ['$resource','jadaApiUrl'];
-    function financialYearService($resource,jadaApiUrl) {
-           // var data=$resource(jadaApiUrl+'api/financialyear/:id', {id: '@id'},
-     var data=$resource(jadaApiUrl+'api/financialyear/',
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  // 'update': { method:'PUT' },
-  // 'remove': {method:'DELETE'},
-  // 'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.company')
-        .factory('financialPeriodService', financialPeriodService);
-
-    financialPeriodService.$inject = ['$resource','jadaApiUrl'];
-    function financialPeriodService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/period/:id', {id: '@id'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-
-
-
-
-/**=========================================================
- * Module: modals.js
- * Provides a simple way to implement bootstrap modals from templates
- =========================================================*/
-(function() {
-    'use strict';
-
-    angular
-        .module('app.bootstrapui')
-        .controller('FinancialYearController', FinancialYearController);
-
-    FinancialYearController.$inject = ['$scope','$http', '$rootScope','$uibModal','financialYearService','financialPeriodService','$stateParams', '$state','jadaApiUrl'];
-    function FinancialYearController($scope,$http, $rootScope, $uibModal, financialYearService,financialPeriodService,$stateParams, $state,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
- var SuccessMsg;
- var errorMsg;
-
-$scope.periods=financialPeriodService.query();
-
-
-
-   $scope.loadPeriods = function () {
-   $scope.periods=financialPeriodService.query();
-
-   }
-
- $rootScope.$on("CallLoadPeriods", function(){
-           $scope.loadPeriods();
-        });
-
-
-  $scope.newFinancialyear= function () {
-    // $scope.buttonText="processing";
-    $scope.currentclass='whirl ringed';
-    $scope.buttonprocess=true;
-      $http.post(jadaApiUrl+'api/financialyear').success(function(){
-
-    $rootScope.$emit("CallLoadPeriods", {});
- $scope.buttonText="Adding";
-                  },function(err){
-            $scope.buttonText="failed";
-            }).finally(function(){
-              $scope.currentclass='process';
-            $scope.buttonText="process";
-            });
-            };
-
-
-
-$scope.months = [];
-$scope.selectedMonth = {};
-
-$scope.loadMonths = function() {
-  if ($scope.months.length == 0) {
-    $scope.months = [{
-      id:1,
-      name: 'JANUARY'
-    }, {
-      id:2,
-      name: 'FEBRUAY'
-    }, {
-      id:3,
-      name: 'MARCH'
-    },
-     {
-      id:4,
-      name: 'APRIL'
-    },
-     {
-      id:5,
-      name: 'MAY'
-    },
-     {
-      id:6,
-      name: 'JUNE'
-    },
-     {
-      id:7,
-      name: 'JULY'
-    },
-     {
-      id:8,
-      name: 'AUGUST'
-    },
-     {
-      id:9,
-      name: 'SEPTEMBER'
-    },
-     {
-      id:10,
-      name: 'OCTOBER'
-    },
-     {
-      id:11,
-      name: 'NOVEMBER'
-    },
-     {
-      id:12,
-      name: 'DECEMBER'
-    }];
-  }
-}
-
-
-
-
-  $scope.delete= function (period) {
-period.$remove().then(function () {
-$scope.loadPeriods();
-});
-}
-
-
-
-          
-  
-
-
-    
-
-
-  $scope.addFinancialYear = function(size) {
-     
-            var modalInstance = $uibModal.open({
-              templateUrl: 'newFYear.html',
-              controller: ModalOpenFYearInstanceCtrl,
-              size: size
-            });
-
-
-
-
-
-            var state = $('#modal-state');
-            modalInstance.result.then(function () {
-              state.text('Modal dismissed with OK status');
-            }, function () {
-              state.text('Modal dismissed with Cancel status');
-            });
-    };
-
-
-
-
-
- 
-
-
-          ModalOpenFYearInstanceCtrl.$inject = ['$scope','$rootScope', '$uibModalInstance','financialYearService'];
-          function ModalOpenFYearInstanceCtrl($scope,$rootScope, $uibModalInstance, financialYearService) {
-          
-            $scope.ok = function () {
-              $uibModalInstance.close('closed');
-            };
-            $scope.cancel = function () {
-              $uibModalInstance.dismiss('cancel');
-            };
-            $scope.financialyear=new financialYearService();
-             $scope.submitYear=function() {
-          $scope.financialyear.$save().then(function(data){
-            var response=angular.fromJson(data);
-          
-            if(response.Status=="1"){
-                    $scope.errorMsg=false;
-                    $scope.SuccessMsg =response.Message;
-            }else{
-                   
-                   $scope.SuccessMsg=false;
-               
-                   $scope.errorMsg=response.Message;
-              // vm.auth=true;
-            }
-              $rootScope.$emit("CallLoadPeriods", {}); 
-          }, 
-          function() {
-                 $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
-    
-          };
-
-          //     $scope.submitClosePeriod=function() {
-          // $scope.period.$save().then(function(){
-            
-          //     $rootScope.$emit("CallLoadPeriods", {}); 
-          //        $scope.ok();
-          // }, 
-          // function() {
-          //        $scope.SuccessMsg=false;
-          //        $scope.errorMsg = 'Server Request Error';
-          //       });
-    
-          // };
-         
-          }
-        }
-    }
-
-})();
-
-
-
-
-/**=========================================================
- * Module: modals.js
- * Provides a simple way to implement bootstrap modals from templates
- =========================================================*/
-(function() {
-    'use strict';
-
-    angular
-        .module('app.bootstrapui')
-        .controller('FinancialPeriodsController', FinancialPeriodsController);
-
-    FinancialPeriodsController.$inject = ['$scope', '$rootScope','$uibModal','financialPeriodService','$stateParams', '$state'];
-    function FinancialPeriodsController($scope, $rootScope, $uibModal, financialPeriodService,$stateParams, $state) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
- var SuccessMsg;
- var errorMsg;
-
-$scope.periods=financialPeriodService.query();
-
-
-
-   $scope.loadPeriods = function () {
-   $scope.periods=financialPeriodService.query();
-
-   }
-
- $rootScope.$on("CallLoadPeriods", function(){
-           $scope.loadPeriods();
-        });
-
-
-$scope.months = [];
-$scope.selectedMonth = {};
-
-$scope.loadMonths = function() {
-  if ($scope.months.length == 0) {
-    $scope.months = [{
-      id:1,
-      name: 'JANUARY'
-    }, {
-      id:2,
-      name: 'FEBRUAY'
-    }, {
-      id:3,
-      name: 'MARCH'
-    },
-     {
-      id:4,
-      name: 'APRIL'
-    },
-     {
-      id:5,
-      name: 'MAY'
-    },
-     {
-      id:6,
-      name: 'JUNE'
-    },
-     {
-      id:7,
-      name: 'JULY'
-    },
-     {
-      id:8,
-      name: 'AUGUST'
-    },
-     {
-      id:9,
-      name: 'SEPTEMBER'
-    },
-     {
-      id:10,
-      name: 'OCTOBER'
-    },
-     {
-      id:11,
-      name: 'NOVEMBER'
-    },
-     {
-      id:12,
-      name: 'DECEMBER'
-    }];
-  }
-}
-
-
-
-
-  $scope.delete= function (period) {
-period.$remove().then(function () {
-$scope.loadPeriods();
-});
-}
-
-
-
-          
-          $scope.open = function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'newFperiods.html',
-              controller: ModalOpenFperiodsInstanceCtrl,
-              size: size
-            });
-
-
-
-
-
-            var state = $('#modal-state');
-            modalInstance.result.then(function () {
-              state.text('Modal dismissed with OK status');
-            }, function () {
-              state.text('Modal dismissed with Cancel status');
-            });
-          };
-
-
-$scope.show = function(period) {
-      // $scope.x = x;
-      var modalInstance = $uibModal.open({
-        templateUrl: 'editFperiods.html',
-        controller: ModalInstanceCtrl,
-        resolve: {
-           period: function () {
-             return period;
-           }
-         }        
-        // scope : $scope
-      });
-    };
-    
-
-
-
-    
-
-
-  $scope.addFinancialYear = function(size) {
-     
-            var modalInstance = $uibModal.open({
-              templateUrl: 'newFYear.html',
-              controller: ModalOpenFYearInstanceCtrl,
-              size: size
-            });
-
-
-
-
-
-            var state = $('#modal-state');
-            modalInstance.result.then(function () {
-              state.text('Modal dismissed with OK status');
-            }, function () {
-              state.text('Modal dismissed with Cancel status');
-            });
-    };
-
-
-
-
-
- 
-
-
-          // Please note that $uibModalInstance represents a modal window (instance) dependency.
-          // It is not the same as the $uibModal service used above.
-
-          ModalOpenFperiodsInstanceCtrl.$inject = ['$scope','$rootScope', '$uibModalInstance','financialPeriodService'];
-          function ModalOpenFperiodsInstanceCtrl($scope,$rootScope, $uibModalInstance, financialPeriodService) {
-          
-            $scope.ok = function () {
-              $uibModalInstance.close('closed');
-            };
-            $scope.cancel = function () {
-              $uibModalInstance.dismiss('cancel');
-            };
-            $scope.period=new financialPeriodService();
-             $scope.submitPeriod=function() {
-          $scope.period.$save().then(function(data){
-            var response=angular.fromJson(data);
-          
-            if(response.Status=="1"){
-                    $scope.errorMsg=false;
-                    $scope.SuccessMsg =response.Message;
-            }else{
-                   
-                   $scope.SuccessMsg=false;
-               
-                   $scope.errorMsg=response.Message;
-              // vm.auth=true;
-            }
-              $rootScope.$emit("CallLoadPeriods", {}); 
-          }, 
-          function() {
-                 $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
-    
-          };
-
-              $scope.submitClosePeriod=function() {
-          $scope.period.$save().then(function(){
-            
-              $rootScope.$emit("CallLoadPeriods", {}); 
-                 $scope.ok();
-          }, 
-          function() {
-                 $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
-    
-          };
-         
-          }
-
-
-          ModalInstanceCtrl.$inject = ['$scope', '$rootScope','$uibModalInstance','financialPeriodService','period'];
-          function ModalInstanceCtrl($scope, $rootScope,$uibModalInstance, financialPeriodService,period) {
-          $scope.period=period;
-            $scope.ok = function () {
-              $uibModalInstance.close('closed');
-            };
-
-            $scope.cancel = function () {
-              $uibModalInstance.dismiss('cancel');
-            };
-         
-                $scope.updatePeriods=function(period){
-             period.$update().then(function(){
-                   $rootScope.$emit("CallLoadPeriods", {});
-            });
-          
-              };
-          }
-
-
-                  ModalOpenFYearInstanceCtrl.$inject = ['$scope','$rootScope', '$uibModalInstance','financialPeriodService'];
-          function ModalOpenFYearInstanceCtrl($scope,$rootScope, $uibModalInstance, financialPeriodService) {
-          
-            $scope.ok = function () {
-              $uibModalInstance.close('closed');
-            };
-            $scope.cancel = function () {
-              $uibModalInstance.dismiss('cancel');
-            };
-            $scope.year=new financialPeriodService();
-             $scope.submitYear=function() {
-          $scope.year.$save().then(function(data){
-            var response=angular.fromJson(data);
-          
-            if(response.Status=="1"){
-                    $scope.errorMsg=false;
-                    $scope.SuccessMsg =response.Message;
-            }else{
-                   
-                   $scope.SuccessMsg=false;
-               
-                   $scope.errorMsg=response.Message;
-              // vm.auth=true;
-            }
-              $rootScope.$emit("CallLoadPeriods", {}); 
-          }, 
-          function() {
-                 $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
-    
-          };
-
-          //     $scope.submitClosePeriod=function() {
-          // $scope.period.$save().then(function(){
-            
-          //     $rootScope.$emit("CallLoadPeriods", {}); 
-          //        $scope.ok();
-          // }, 
-          // function() {
-          //        $scope.SuccessMsg=false;
-          //        $scope.errorMsg = 'Server Request Error';
-          //       });
-    
-          // };
-         
-          }
-        }
-    }
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.colors')
-        .constant('APP_COLORS', {
-          'primary':                '#5d9cec',
-          'success':                '#27c24c',
-          'info':                   '#23b7e5',
-          'warning':                '#ff902b',
-          'danger':                 '#f05050',
-          'inverse':                '#131e26',
-          'green':                  '#37bc9b',
-          'pink':                   '#f532e5',
-          'purple':                 '#7266ba',
-          'dark':                   '#3a3f51',
-          'yellow':                 '#fad732',
-          'gray-darker':            '#232735',
-          'gray-dark':              '#3a3f51',
-          'gray':                   '#dde6e9',
-          'gray-light':             '#e4eaec',
-          'gray-lighter':           '#edf1f2'
-        })
-        ;
-})();
-/**=========================================================
- * Module: colors.js
- * Services to retrieve global colors
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.colors')
-        .service('Colors', Colors);
-
-    Colors.$inject = ['APP_COLORS'];
-    function Colors(APP_COLORS) {
-        this.byName = byName;
-
-        ////////////////
-
-        function byName(name) {
-          return (APP_COLORS[name] || '#fff');
-        }
-    }
-
-})();
-
-
 (function() {
     'use strict';
 
@@ -3631,6 +2811,12 @@ $scope.show = function(period) {
          
           }
 
+
+          $scope.resetstatutory = function(statutory){
+             $scope.statutoryform={};
+            $scope.statutory = " ";
+            statutory.$setPristine();
+            };
 
 
           ModalInstanceCtrl.$inject = ['$scope','$rootScope', '$uibModalInstance','CompanyInfoService','statutory'];
@@ -3794,7 +2980,7 @@ $scope.show = function(center) {
             };
             
                $scope.costcenter=new CostCentreService();
-           $scope.submitCostCentre=function() {
+           $scope.submitCostCentre=function(costcentre) {
            $scope.costcenter.$save().then(function(data){
              var response=angular.fromJson(data);
           
@@ -3808,14 +2994,24 @@ $scope.show = function(center) {
               // vm.auth=true;
             }
              $rootScope.$emit("CallLoadCenters", {});
+                $scope.costcenterreset(costcentre);
 
            },
+
+
             function() {
                  $scope.SuccessMsg=false;
                  $scope.errorMsg = 'Server Request Error';
                 });
+
       
           }
+
+            $scope.costcenterreset = function(costcentre){
+             $scope.costcentre={};
+            $scope.costcenter = " ";
+            costcentre.$setPristine();
+            };
 
            $scope.submitCostCentreClose=function() {
            $scope.costcenter.$save().then(function(){
@@ -4073,7 +3269,7 @@ department.$remove().then(function () {
           ModalOpenDeptInstanceCtrl.$inject = ['$scope','$rootScope', '$uibModalInstance','DeptService'];
           function ModalOpenDeptInstanceCtrl($scope, $rootScope,$uibModalInstance, DeptService) {
           
-          $scope.deptform = {};
+          $scope.dept={};
             $scope.ok = function () {
               $uibModalInstance.close('closed');
             };
@@ -4084,7 +3280,7 @@ department.$remove().then(function () {
 
              
             $scope.dept=new DeptService();
-           $scope.submitdept=function() {
+           $scope.submitdept=function(deptform) {
 
 
            $scope.dept.$save().then(function(data){
@@ -4096,8 +3292,8 @@ department.$remove().then(function () {
                      $scope.errorMsg=false;
 
                     $scope.SuccessMsg =response.Message;
-                 $scope.deptform.markAsPristine();
-       
+        
+      
 
             }else{
            
@@ -4106,8 +3302,9 @@ department.$remove().then(function () {
               // vm.auth=true;
             }
              $rootScope.$emit("CallLoadDepartment", {});
+            
    
-           
+               $scope.resets(deptform);
 
            },
    
@@ -4119,14 +3316,24 @@ department.$remove().then(function () {
                //    $scope.dept = "";
                // $scope.deptform.$setPristine();
         });
+               
       
           }
 
-    //       $scope.initFunc = function(){
-    //     $scope.dept = " ";
-    //     $scope.deptform.$pristine = true;
-    //     $scope.deptform.$setPristine();
-    // };
+          $scope.resets = function(deptform){
+             $scope.deptform={};
+            $scope.dept = " ";
+            deptform.$setPristine();
+            };
+
+    $scope.resetsUpdate = function(deptform){
+             $scope.deptform={};
+       
+
+  
+       
+        deptform.$setPristine();
+    };
 
           $scope.submitdeptClose=function() {
            $scope.dept.$save().then(function(){
@@ -4162,7 +3369,8 @@ department.$remove().then(function () {
              department.$update().then(function(){
                    $rootScope.$emit("CallLoadDepartment", {});
             });
-          
+        
+             
               };
           
          
@@ -5857,6 +5065,826 @@ for(var r=0;r<accountRights.length;r++){
     'use strict';
 
     angular
+        .module('app.colors')
+        .constant('APP_COLORS', {
+          'primary':                '#5d9cec',
+          'success':                '#27c24c',
+          'info':                   '#23b7e5',
+          'warning':                '#ff902b',
+          'danger':                 '#f05050',
+          'inverse':                '#131e26',
+          'green':                  '#37bc9b',
+          'pink':                   '#f532e5',
+          'purple':                 '#7266ba',
+          'dark':                   '#3a3f51',
+          'yellow':                 '#fad732',
+          'gray-darker':            '#232735',
+          'gray-dark':              '#3a3f51',
+          'gray':                   '#dde6e9',
+          'gray-light':             '#e4eaec',
+          'gray-lighter':           '#edf1f2'
+        })
+        ;
+})();
+/**=========================================================
+ * Module: colors.js
+ * Services to retrieve global colors
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.colors')
+        .service('Colors', Colors);
+
+    Colors.$inject = ['APP_COLORS'];
+    function Colors(APP_COLORS) {
+        this.byName = byName;
+
+        ////////////////
+
+        function byName(name) {
+          return (APP_COLORS[name] || '#fff');
+        }
+    }
+
+})();
+
+
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.bootstrapui')
+        .controller('CompanyRegController', CompanyRegController);
+
+    CompanyRegController.$inject = ['$http','$scope', '$rootScope','$uibModal','companyService','$stateParams', '$state','$localStorage'];
+    function CompanyRegController($http,$scope, $rootScope,$uibModal, companyService,$stateParams, $state,$localStorage) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+
+ var SuccessMsg;
+ var errorMsg;
+
+
+ $scope.company=companyService.get({ID:1});
+
+console.log( $scope.company);
+
+
+
+  $scope.loadCompany = function () {
+   
+ $scope.company=companyService.get({ID:1});
+   }
+
+ $rootScope.$on("CallLoadCompany", function(){
+           $scope.loadCompany ();
+        });
+
+          
+          vm.open = function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'CompInfoContent.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+
+
+
+
+
+            var state = $('#modal-state');
+            modalInstance.result.then(function () {
+              state.text('Modal dismissed with OK status');
+            }, function () {
+              state.text('Modal dismissed with Cancel status');
+            });
+          };
+
+
+
+
+
+$scope.show = function(EditCompany) {
+      // $scope.x = x;
+      var modalInstance = $uibModal.open({
+        templateUrl: 'GeneralCompanyEdit.html',
+        controller: ModalInstanceCtrl,
+        resolve: {
+           EditCompany: function () {
+             return EditCompany;
+           }
+         }        
+        // scope : $scope
+      });
+    };
+    
+    
+
+
+
+          
+ 
+
+
+          // Please note that $uibModalInstance represents a modal window (instance) dependency.
+          // It is not the same as the $uibModal service used above.
+
+          ModalInstanceCtrl.$inject = ['$scope', '$rootScope','$uibModalInstance','companyService','EditCompany'];
+          function ModalInstanceCtrl($scope, $rootScope,$uibModalInstance, companyService,EditCompany) {
+          $scope.company=EditCompany;
+          console.log(EditCompany);
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+          //   $scope.Company=new companyService();
+          //    $scope.submitCompinfo=function() {
+          // $scope.Company.$save();
+          // console.log('Saving user: ' +$scope.Company.pin_number);
+          // };
+
+
+  
+           $scope.EditGenCompany=function(company){
+             company.$update().then(function(data){
+              var response=angular.fromJson(data);
+          
+            if(response.Status=="1"){
+                  $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+            }else{
+           
+                   $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+              // vm.auth=true;
+            }
+                   $rootScope.$emit("CallLoadCompany", {});
+            },
+             function() {
+                 $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+          
+              };
+         
+          }
+        }
+    }
+
+})();
+
+
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.company')
+        .factory('companyService', companyService);
+
+    companyService.$inject = ['$resource','jadaApiUrl'];
+    function companyService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/company/:ID', {ID: '@ID'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+// (function() {
+//     'use strict';
+
+//     angular
+//         .module('angle')
+//         .factory('CurrentPeriod', CurrentPeriod);
+
+//     CurrentPeriod.$inject = ['$http','$resource','jadaApiUrl'];
+//     function CurrentPeriod($http,$resource,jadaApiUrl) {
+
+       
+//         var Current=  $http.get(jadaApiUrl+'api/currentperiod');
+
+//   return Current;
+
+      
+ 
+//     }
+
+// })();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.company')
+        .factory('CurrentPeriod', CurrentPeriod);
+
+    CurrentPeriod.$inject = ['$resource','jadaApiUrl'];
+    function CurrentPeriod($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/currentperiod/:id', {id: '@id'},
+  { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.company')
+        .factory('financialYearService', financialYearService);
+
+    financialYearService.$inject = ['$resource','jadaApiUrl'];
+    function financialYearService($resource,jadaApiUrl) {
+           // var data=$resource(jadaApiUrl+'api/financialyear/:id', {id: '@id'},
+     var data=$resource(jadaApiUrl+'api/financialyear/',
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  // 'update': { method:'PUT' },
+  // 'remove': {method:'DELETE'},
+  // 'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.company')
+        .factory('financialPeriodService', financialPeriodService);
+
+    financialPeriodService.$inject = ['$resource','jadaApiUrl'];
+    function financialPeriodService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/period/:id', {id: '@id'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+
+
+
+
+/**=========================================================
+ * Module: modals.js
+ * Provides a simple way to implement bootstrap modals from templates
+ =========================================================*/
+(function() {
+    'use strict';
+
+    angular
+        .module('app.bootstrapui')
+        .controller('FinancialYearController', FinancialYearController);
+
+    FinancialYearController.$inject = ['$scope','$http', '$rootScope','$uibModal','financialYearService','financialPeriodService','$stateParams', '$state','jadaApiUrl'];
+    function FinancialYearController($scope,$http, $rootScope, $uibModal, financialYearService,financialPeriodService,$stateParams, $state,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+ var SuccessMsg;
+ var errorMsg;
+
+$scope.periods=financialPeriodService.query();
+
+
+
+   $scope.loadPeriods = function () {
+   $scope.periods=financialPeriodService.query();
+
+   }
+
+ $rootScope.$on("CallLoadPeriods", function(){
+           $scope.loadPeriods();
+        });
+
+
+  $scope.newFinancialyear= function () {
+    // $scope.buttonText="processing";
+    $scope.currentclass='whirl ringed';
+    $scope.buttonprocess=true;
+      $http.post(jadaApiUrl+'api/financialyear').success(function(){
+
+    $rootScope.$emit("CallLoadPeriods", {});
+ $scope.buttonText="Adding";
+                  },function(err){
+            $scope.buttonText="failed";
+            }).finally(function(){
+              $scope.currentclass='process';
+            $scope.buttonText="process";
+            });
+            };
+
+
+
+$scope.months = [];
+$scope.selectedMonth = {};
+
+$scope.loadMonths = function() {
+  if ($scope.months.length == 0) {
+    $scope.months = [{
+      id:1,
+      name: 'JANUARY'
+    }, {
+      id:2,
+      name: 'FEBRUAY'
+    }, {
+      id:3,
+      name: 'MARCH'
+    },
+     {
+      id:4,
+      name: 'APRIL'
+    },
+     {
+      id:5,
+      name: 'MAY'
+    },
+     {
+      id:6,
+      name: 'JUNE'
+    },
+     {
+      id:7,
+      name: 'JULY'
+    },
+     {
+      id:8,
+      name: 'AUGUST'
+    },
+     {
+      id:9,
+      name: 'SEPTEMBER'
+    },
+     {
+      id:10,
+      name: 'OCTOBER'
+    },
+     {
+      id:11,
+      name: 'NOVEMBER'
+    },
+     {
+      id:12,
+      name: 'DECEMBER'
+    }];
+  }
+}
+
+
+
+
+  $scope.delete= function (period) {
+period.$remove().then(function () {
+$scope.loadPeriods();
+});
+}
+
+
+
+          
+  
+
+
+    
+
+
+  $scope.addFinancialYear = function(size) {
+     
+            var modalInstance = $uibModal.open({
+              templateUrl: 'newFYear.html',
+              controller: ModalOpenFYearInstanceCtrl,
+              size: size
+            });
+
+
+
+
+
+            var state = $('#modal-state');
+            modalInstance.result.then(function () {
+              state.text('Modal dismissed with OK status');
+            }, function () {
+              state.text('Modal dismissed with Cancel status');
+            });
+    };
+
+
+
+
+
+ 
+
+
+          ModalOpenFYearInstanceCtrl.$inject = ['$scope','$rootScope', '$uibModalInstance','financialYearService'];
+          function ModalOpenFYearInstanceCtrl($scope,$rootScope, $uibModalInstance, financialYearService) {
+          
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+            $scope.financialyear=new financialYearService();
+             $scope.submitYear=function() {
+          $scope.financialyear.$save().then(function(data){
+            var response=angular.fromJson(data);
+          
+            if(response.Status=="1"){
+                    $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+            }else{
+                   
+                   $scope.SuccessMsg=false;
+               
+                   $scope.errorMsg=response.Message;
+              // vm.auth=true;
+            }
+              $rootScope.$emit("CallLoadPeriods", {}); 
+          }, 
+          function() {
+                 $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+    
+          };
+
+          //     $scope.submitClosePeriod=function() {
+          // $scope.period.$save().then(function(){
+            
+          //     $rootScope.$emit("CallLoadPeriods", {}); 
+          //        $scope.ok();
+          // }, 
+          // function() {
+          //        $scope.SuccessMsg=false;
+          //        $scope.errorMsg = 'Server Request Error';
+          //       });
+    
+          // };
+         
+          }
+        }
+    }
+
+})();
+
+
+
+
+/**=========================================================
+ * Module: modals.js
+ * Provides a simple way to implement bootstrap modals from templates
+ =========================================================*/
+(function() {
+    'use strict';
+
+    angular
+        .module('app.bootstrapui')
+        .controller('FinancialPeriodsController', FinancialPeriodsController);
+
+    FinancialPeriodsController.$inject = ['$scope', '$rootScope','$uibModal','financialPeriodService','$stateParams', '$state'];
+    function FinancialPeriodsController($scope, $rootScope, $uibModal, financialPeriodService,$stateParams, $state) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+ var SuccessMsg;
+ var errorMsg;
+
+$scope.periods=financialPeriodService.query();
+
+
+
+   $scope.loadPeriods = function () {
+   $scope.periods=financialPeriodService.query();
+
+   }
+
+ $rootScope.$on("CallLoadPeriods", function(){
+           $scope.loadPeriods();
+        });
+
+
+$scope.months = [];
+$scope.selectedMonth = {};
+
+$scope.loadMonths = function() {
+  if ($scope.months.length == 0) {
+    $scope.months = [{
+      id:1,
+      name: 'JANUARY'
+    }, {
+      id:2,
+      name: 'FEBRUAY'
+    }, {
+      id:3,
+      name: 'MARCH'
+    },
+     {
+      id:4,
+      name: 'APRIL'
+    },
+     {
+      id:5,
+      name: 'MAY'
+    },
+     {
+      id:6,
+      name: 'JUNE'
+    },
+     {
+      id:7,
+      name: 'JULY'
+    },
+     {
+      id:8,
+      name: 'AUGUST'
+    },
+     {
+      id:9,
+      name: 'SEPTEMBER'
+    },
+     {
+      id:10,
+      name: 'OCTOBER'
+    },
+     {
+      id:11,
+      name: 'NOVEMBER'
+    },
+     {
+      id:12,
+      name: 'DECEMBER'
+    }];
+  }
+}
+
+
+
+
+  $scope.delete= function (period) {
+period.$remove().then(function () {
+$scope.loadPeriods();
+});
+}
+
+
+
+          
+          $scope.open = function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'newFperiods.html',
+              controller: ModalOpenFperiodsInstanceCtrl,
+              size: size
+            });
+
+
+
+
+
+            var state = $('#modal-state');
+            modalInstance.result.then(function () {
+              state.text('Modal dismissed with OK status');
+            }, function () {
+              state.text('Modal dismissed with Cancel status');
+            });
+          };
+
+
+$scope.show = function(period) {
+      // $scope.x = x;
+      var modalInstance = $uibModal.open({
+        templateUrl: 'editFperiods.html',
+        controller: ModalInstanceCtrl,
+        resolve: {
+           period: function () {
+             return period;
+           }
+         }        
+        // scope : $scope
+      });
+    };
+    
+
+
+
+    
+
+
+  $scope.addFinancialYear = function(size) {
+     
+            var modalInstance = $uibModal.open({
+              templateUrl: 'newFYear.html',
+              controller: ModalOpenFYearInstanceCtrl,
+              size: size
+            });
+
+
+
+
+
+            var state = $('#modal-state');
+            modalInstance.result.then(function () {
+              state.text('Modal dismissed with OK status');
+            }, function () {
+              state.text('Modal dismissed with Cancel status');
+            });
+    };
+
+
+
+
+
+ 
+
+
+          // Please note that $uibModalInstance represents a modal window (instance) dependency.
+          // It is not the same as the $uibModal service used above.
+
+          ModalOpenFperiodsInstanceCtrl.$inject = ['$scope','$rootScope', '$uibModalInstance','financialPeriodService'];
+          function ModalOpenFperiodsInstanceCtrl($scope,$rootScope, $uibModalInstance, financialPeriodService) {
+          
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+            $scope.period=new financialPeriodService();
+             $scope.submitPeriod=function() {
+          $scope.period.$save().then(function(data){
+            var response=angular.fromJson(data);
+          
+            if(response.Status=="1"){
+                    $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+            }else{
+                   
+                   $scope.SuccessMsg=false;
+               
+                   $scope.errorMsg=response.Message;
+              // vm.auth=true;
+            }
+              $rootScope.$emit("CallLoadPeriods", {}); 
+          }, 
+          function() {
+                 $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+    
+          };
+
+              $scope.submitClosePeriod=function() {
+          $scope.period.$save().then(function(){
+            
+              $rootScope.$emit("CallLoadPeriods", {}); 
+                 $scope.ok();
+          }, 
+          function() {
+                 $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+    
+          };
+         
+          }
+
+
+          ModalInstanceCtrl.$inject = ['$scope', '$rootScope','$uibModalInstance','financialPeriodService','period'];
+          function ModalInstanceCtrl($scope, $rootScope,$uibModalInstance, financialPeriodService,period) {
+          $scope.period=period;
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+         
+                $scope.updatePeriods=function(period){
+             period.$update().then(function(){
+                   $rootScope.$emit("CallLoadPeriods", {});
+            });
+          
+              };
+          }
+
+
+                  ModalOpenFYearInstanceCtrl.$inject = ['$scope','$rootScope', '$uibModalInstance','financialPeriodService'];
+          function ModalOpenFYearInstanceCtrl($scope,$rootScope, $uibModalInstance, financialPeriodService) {
+          
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+            $scope.year=new financialPeriodService();
+             $scope.submitYear=function() {
+          $scope.year.$save().then(function(data){
+            var response=angular.fromJson(data);
+          
+            if(response.Status=="1"){
+                    $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+            }else{
+                   
+                   $scope.SuccessMsg=false;
+               
+                   $scope.errorMsg=response.Message;
+              // vm.auth=true;
+            }
+              $rootScope.$emit("CallLoadPeriods", {}); 
+          }, 
+          function() {
+                 $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+    
+          };
+
+          //     $scope.submitClosePeriod=function() {
+          // $scope.period.$save().then(function(){
+            
+          //     $rootScope.$emit("CallLoadPeriods", {}); 
+          //        $scope.ok();
+          // }, 
+          // function() {
+          //        $scope.SuccessMsg=false;
+          //        $scope.errorMsg = 'Server Request Error';
+          //       });
+    
+          // };
+         
+          }
+        }
+    }
+
+})();
+
+(function() {
+    'use strict';
+
+    angular
         .module('app.core')
         .config(coreConfig);
 
@@ -6372,6 +6400,1054 @@ if ($localStorage.currentUser) {
         }
     }
 })();
+/**=========================================================
+ * Module: modals.js
+ * Provides a simple way to implement bootstrap modals from templates
+ =========================================================*/
+(function() {
+    'use strict';
+
+    angular
+        .module('app.employees')
+        .controller('CreateEmplController', CreateEmplController);
+
+    CreateEmplController.$inject = ['$uibModal'];
+    function CreateEmplController($uibModal) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          vm.open = function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: '/myModalContent.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+
+
+
+
+            var state = $('#modal-state');
+            modalInstance.result.then(function () {
+              state.text('Modal dismissed with OK status');
+            }, function () {
+              state.text('Modal dismissed with Cancel status');
+            });
+          };
+
+
+
+   vm.show= function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'ModalContent.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+
+
+
+
+            var state = $('#modal-state');
+            modalInstance.result.then(function () {
+              state.text('Modal dismissed with OK status');
+            }, function () {
+              state.text('Modal dismissed with Cancel status');
+            });
+          };
+
+
+ vm.showStatutory= function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'StatutoryModalContent.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+
+
+
+
+            var state = $('#modal-state');
+            modalInstance.result.then(function () {
+              state.text('Modal dismissed with OK status');
+            }, function () {
+              state.text('Modal dismissed with Cancel status');
+            });
+          };
+
+          vm.showloans= function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'loansModalContent.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+          };
+
+           vm.showpension= function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'PensionModalContent.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+          };
+
+        vm.display= function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'template.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+          };
+
+
+          vm.add= function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'add.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+          };
+
+           vm.more= function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'mytemplate.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+          };
+
+
+           vm.info= function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'myContent.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+          };
+
+
+          // Please note that $uibModalInstance represents a modal window (instance) dependency.
+          // It is not the same as the $uibModal service used above.
+
+          ModalInstanceCtrl.$inject = ['$scope', '$uibModalInstance'];
+          function ModalInstanceCtrl($scope, $uibModalInstance) {
+          
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+
+              $scope.submitEmpMaster = function() {
+                console.log($scope.description);
+        
+        // UserService.save($scope.empMaster);
+  };
+          }
+        }
+    }
+
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.bootstrapui')
+        .controller('EmployeesDetailsController', EmployeesDetailsController);
+
+EmployeesDetailsController.$inject = ['$stateParams', '$state','$http','$scope', '$uibModal','EmployeeService'];
+    function EmployeesDetailsController($stateParams, $state,$http,$scope, $uibModal, EmployeeService) {
+      
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+ 
+           var empid=$stateParams.Employee;
+
+           console.log( empid);
+            if(empid!=null){
+           $scope.currentemployee=EmployeeService.get({id:empid});
+          }
+           
+         
+          
+
+
+     
+
+
+
+
+  
+
+
+ 
+
+
+        }
+    }
+
+})();
+
+
+/**=========================================================
+ * Module: modals.js
+ * Provides a simple way to implement bootstrap modals from templates
+ =========================================================*/
+(function() {
+    'use strict';
+
+    angular
+        .module('app.bootstrapui')
+        .controller('EmployeeBatchPostingController', EmployeeBatchPostingController);
+
+    EmployeeBatchPostingController.$inject = ['$scope', '$http','$uibModal','PayrollBatchPostingService','$stateParams', '$state','readFileEmployeeData','jadaApiUrl'];
+    function EmployeeBatchPostingController($scope,$http, $uibModal, PayrollBatchPostingService,$stateParams, $state,readFileEmployeeData,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+              var SuccessMsg;
+            var errorMsg;
+
+
+$scope.fileDataObj = [];
+
+            $scope.fileData ={ };
+    
+    $scope.uploadFile = function() {
+      if ($scope.fileContent) {
+        $scope.fileDataObj = readFileEmployeeData.processData($scope.fileContent);
+      
+        // $scope.fileData = JSON.stringify($scope.fileDataObj);
+         $scope.fileData =  $.parseJSON($scope.fileDataObj);
+
+var jdata= JSON.stringify($scope.fileData);
+        console.log( $scope.fileData);
+      }
+    }
+
+
+
+            $scope.cancel = function () {
+           
+            $scope.fileData =' ';
+            };
+
+
+//           var mdata  ={"name ":"Jane Doe","employeeNumber":"123","idNumber":"345678","passportNumber":"","countryOfIssue":"","expiryDate":"","dateOfBirth":"","maritalStatus":"single","gender":"female","dependency":"2","nextOfKin":"John","relationshipWithKin":"father","nextOfKinPhoneNumber":"","disability":"no","natureOfDisability":"","phoneNumber":"728445521","emailAddress":"janedoe@gmail.com","physicalAddress":"Thome","postalAddress":"108","postalCode":"10007","pinNumber":"111222","nhifNumber":"2222","nssfNumber":"5555","helbNumber":"5555","employmentDate":"21/11/2017","paypoint":"nakuru","paymode":"bank","bankcode":"1111","bankName":"KCB","bankAccountNumber":"298978","bankAccountName":"Jane Doe","bankBranchName":"Nakuru","department":"D001","costCenter":"C001","employeeCategory":"2","employeeGroup":"3","position":"intern"}
+//  $scope.save = function () {
+// var list=$scope.fileData;
+//     $http.post(jadaApiUrl+'api/employeesingleposting/', {mdata}).success(
+//       function(data){
+//         vdata.success=true;
+//         $scope.response = data
+//         console.log(data);
+//       })
+
+
+
+
+// // for(var r=0;r<list.length;r++){
+// //   var vdata =list[r];
+// //   console.log(vdata);
+// //   // var postingdata = new PayrollBatchPostingService(vdata);
+// //     $http.post(jadaApiUrl+'api/employeesingleposting/', {vdata}).success(
+// //       function(data){
+// //         vdata.success=true;
+// //         $scope.response = data
+// //         console.log(data);
+// //       })
+
+// // }
+
+//   }
+
+ $scope.save = function () {
+
+var list=$scope.fileData;
+for(var r=0;r<list.length;r++){
+  var vdata =list[r];
+var postingdata = new PayrollBatchPostingService(vdata);
+
+postingdata.$save().then(function(data){
+                var response=angular.fromJson(data);
+          
+            if(response.Status=="1"){
+                   $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+            }else{
+           
+                    $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+    
+            }
+           
+
+              },
+               function() {
+                $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+}
+  
+
+// }
+// var vdata=$scope.fileData;
+// var data={"period":"1","employee_number":"P0001","payroll_code":"D040","amount":"2000"};
+// var vdata={"name":"Jane Doe","employeeNumber":"123"};
+
+
+
+    // $http.post('http://localhost:56135/api/employeesingleposting/', {vdata}).success(
+    //   function(data){
+
+    //         var response=angular.fromJson(data);
+          
+    //         if(response.Status=="1"){
+    //           $scope.errorMsg=false;
+    //                 $scope.SuccessMsg =response.Message;
+    //                 console.log()
+    //         }else{
+           
+    //            $scope.SuccessMsg=false;
+    //                $scope.errorMsg=response.Message;
+           
+    //         }
+    //     // $scope.fileData[r].success=true;
+    //     // $scope.response = data
+    //     // console.log(data);
+    //   })
+
+
+
+
+        }
+    }
+  }
+
+})();
+
+
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.transactions')
+        .factory('PayrollBatchPostingService', PayrollBatchPostingService);
+
+    PayrollBatchPostingService.$inject = ['$resource','jadaApiUrl'];
+    function PayrollBatchPostingService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/employeesingleposting', 
+    {
+  'save':   {
+    method:'POST'
+},
+
+});
+     return data
+          
+       
+    }
+
+})();
+
+
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.employees')
+        .controller('EmployeesController', EmployeesController);
+
+EmployeesController.$inject = ['$stateParams', '$rootScope','$state','$http','$scope', '$uibModal','EmployeeService','jadaApiUrl'];
+    function EmployeesController($stateParams, $rootScope,$state,$http,$scope, $uibModal, EmployeeService,jadaApiUrl) {
+      
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+$scope.date= new Date();
+
+
+  
+  $scope.testDate = new Date($scope.date.getFullYear() - 10, $scope.date.getMonth(), 1);
+
+  $scope.dateOptions = {
+    formatYear: 'yy',
+    maxDate: new Date(2020, 5, 22),
+    minDate: new Date(2000, 1, 1),
+    startingDay: 1
+  };
+
+  $scope.open = function() {
+    $scope.popup.opened = true;
+  };
+
+  $scope.popup = {
+    opened: false
+  };
+
+       //       $scope.today = function() {
+       //       $scope.dt = new Date();
+       //    };
+       //    $scope.today();
+
+       // $scope.clear = function () {
+       //     $scope.dt = null;
+       //    };
+
+       //    // Disable weekend selection
+       //   $scope.disabled = function(date, mode) {
+       //      return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+       //    };
+
+       //   $scope.toggleMin = function() {
+       //     $scope.minDate =  $scope.minDate ? null : new Date();
+       //    };
+       //    $scope.toggleMin();
+
+       // $scope.open = function($event) {
+       //      $event.preventDefault();
+       //      $event.stopPropagation();
+
+       //  $scope.opened = true;
+       //    };
+
+       //  $scope.dateOptions = {
+       //      formatYear: 'yy',
+       //      startingDay: 1
+       //    };
+
+       //   $scope.initDate = new Date('2019-10-20');
+       //  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+       //  $scope.format =  $scope.formats[0];
+        
+           var SuccessMsg;
+            var errorMsg;
+
+           
+          
+        $scope.employees=EmployeeService.query();
+
+
+           var id = $stateParams.EmployeeId;
+      
+          if(id!=null){
+           $scope.employee=EmployeeService.get({id:id}); 
+           var dob=$scope.employee.dateOfBirth;
+           console.log("date of birth : "+dob);
+    
+          }
+
+
+  $scope.loadEmployees = function () {
+          $scope.employees=EmployeeService.query();
+        
+
+   }
+
+ $rootScope.$on("CallLoadEmployees", function(){
+           $scope.loadEmployees();
+        });
+
+
+$http.get(jadaApiUrl+'api/department').success(function(data) {
+              $scope.departments = data;
+
+            });
+console.log('ddd')
+console.log($scope.departments);
+
+$http.get(jadaApiUrl+'api/costcenter').success(function(data) {
+              $scope.centers = data;
+
+            });
+
+$http.get(jadaApiUrl+'api/employeegroup').success(function(data) {
+              $scope.groups = data;
+
+            });
+
+$http.get(jadaApiUrl+'api/employeecategory').success(function(data) {
+              $scope.categories = data;
+
+            });
+
+
+$http.get(jadaApiUrl+'api/paymode').success(function(data) {
+              $scope.paymodes = data;
+              console.log($scope.paymodes);
+
+            });
+
+$http.get(jadaApiUrl+'api/bankbranchcode').success(function(data) {
+              $scope.bankcodes = data;
+              console.log($scope.bankcodes)
+
+            });
+
+
+
+$scope.updateBankCodes=function(id){
+  
+  $scope.bankBranchName=[];
+  for(var r=0;r<$scope.bankcodes.length;r++){
+    if($scope.bankcodes[r].bankCode==id){
+      $scope.bankBranchName.push($scope.bankcodes[r]);
+      console.log($scope.bankcodes[r]);
+    }
+
+    console.log("///////////////////////////////////");
+
+    console.log($scope.bankBranchName);
+  }
+
+  
+}
+
+
+
+$scope.populateBankName=function(id){
+    $scope.bankName=[];
+
+
+  for(var r=0;r<$scope.bankcodes.length;r++){
+    if($scope.bankcodes[r].bankBranchCode==id){
+      $scope.empMaster.bankName=$scope.bankcodes[r].bankName;
+
+     
+    }
+
+    console.log("///////////////////////////////////");
+ console.log(   $scope.empMaster.bankName);
+  }
+
+  
+}
+
+
+
+
+$scope.updateBankName=function(id){
+    $scope.bankName=[];
+
+
+  for(var r=0;r<$scope.bankcodes.length;r++){
+    if($scope.bankcodes[r].bankBranchCode==id){
+      $scope.employee.bankName=$scope.bankcodes[r].bankName;
+
+     
+    }
+  }
+
+  
+}
+
+$http.get(jadaApiUrl+'api/paypoint').success(function(data) {
+              $scope.points = data;
+
+            });
+
+       $scope.empMaster= new EmployeeService();
+            $scope.submitEmpMaster = function() {
+              $scope.empMaster.$save().then(function(data){
+                var response=angular.fromJson(data);
+          
+            if(response.Status=="1"){
+                   $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+            }else{
+           
+                    $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+    
+            }
+                  $scope.loadEmployees();
+
+              },
+               function() {
+                $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+             
+        };
+
+         $scope.delete= function (employee) {
+            employee.$remove().then(function () {
+             $scope.loadEmployees();
+
+            });
+            }
+
+
+               
+            $scope.updateEmpMaster=function(employee){
+             employee.$update().then(function(data){
+                 var response=angular.fromJson(data);
+          
+            if(response.Status=="1"){
+                   $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+                      $scope.employee=EmployeeService.get({id:id}); 
+            }else{
+           
+                    $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+    
+            }
+                     $scope.loadEmployees();
+            },
+              function() {
+               $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+          
+              };
+        
+
+
+       $scope.departments = [];
+       $scope.selectDepartments= function() {
+           $rootScope.$emit("CallLoadDepartment", {});
+          };
+
+
+   
+
+
+ 
+
+
+        }
+    }
+
+})();
+
+
+
+   // $(function() {
+   //   $("#datepicker").datepicker();
+   // });
+
+
+
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.employees')
+        .factory('EmployeeService', EmployeeService);
+
+    EmployeeService.$inject = ['$resource','jadaApiUrl'];
+    function EmployeeService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/employee/:id', {id: '@id'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.employees')
+     .directive('employeeFileReaderDirective', function() {
+ return {
+        restrict: "A",
+        scope: {
+            employeeFileReaderDirective: "=",
+        },
+        link: function(scope, element) {
+            $(element).on('change', function(changeEvent) {
+                var files = changeEvent.target.files;
+                if (files.length) {
+                    var r = new FileReader();
+                    r.onload = function(e) {
+                        var contents = e.target.result;
+                        scope.$apply(function() {
+                            scope.employeeFileReaderDirective = contents;
+                        });
+                    };
+                    r.readAsText(files[0]);
+                }
+            });
+        }
+    };
+});
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.employees')
+        .factory('readFileEmployeeData', readFileEmployeeData);
+
+    // PayrollProcessingService.$inject = ['$resource','jadaApiUrl'];
+    function readFileEmployeeData() {
+ return {
+        processData: function(csv) {
+            var lines=csv.split(/\r\n|\n/);
+
+  var result = [];
+
+  var headers=lines[0].split(",");
+
+  for(var i=1;i<lines.length;i++){
+
+    var obj = {};
+    var currentline=lines[i].split(",");
+
+    for(var j=0;j<headers.length;j++){
+      obj[headers[j]] = currentline[j];
+    }
+
+    result.push(obj);
+
+  }
+  
+  //return result; //JavaScript object
+  return JSON.stringify(result); //JSON
+        }
+    };
+          
+       
+    }
+
+})();
+ (function() {
+    'use strict';
+
+    angular
+        .module('app.employees')
+        .filter('unique', function() { 
+                
+        return function(input, key) {
+        var unique = {};
+        var uniqueList = [];
+        for(var i = 0; i < input.length; i++){
+            if(typeof unique[input[i][key]] == "undefined"){
+                unique[input[i][key]] = "";
+                uniqueList.push(input[i]);
+            }
+        }
+        return uniqueList;
+    };
+});
+
+
+
+
+         
+   
+})();
+
+
+
+
+// (function() {
+//     'use strict';
+
+//     angular
+//         .module('app.employees')
+//         .controller('ModalInstanceCtrl',['$scope', '$uibModalInstance', 'items',  function($scope, $uibModalInstance, items) { 
+                
+//       $scope.items = items;
+//   $scope.editable = items[0];
+
+//   $scope.ok = function() {
+//     $modalInstance.close($scope.editable);
+//   };
+
+//   $scope.cancel = function() {
+//     $modalInstance.dismiss(false);
+//   };
+         
+//     }]);
+// })();
+
+
+
+
+// angle.filter('unique', function() {
+//     return function(input, key) {
+//         var unique = {};
+//         var uniqueList = [];
+//         for(var i = 0; i < input.length; i++){
+//             if(typeof unique[input[i][key]] == "undefined"){
+//                 unique[input[i][key]] = "";
+//                 uniqueList.push(input[i]);
+//             }
+//         }
+//         return uniqueList;
+//     };
+// });
+
+
+
+// (function() {
+//     'use strict';
+
+//     angular
+//         .module('app.employees')
+//         .filter('unique', unique);
+
+
+//     function unique() {
+//    return function(input, key) {
+//         var unique = {};
+//         var uniqueList = [];
+//         for(var i = 0; i < input.length; i++){
+//             if(typeof unique[input[i][key]] == "undefined"){
+//                 unique[input[i][key]] = "";
+//                 uniqueList.push(input[i]);
+//             }
+//         }
+//         return uniqueList;
+//     };   
+       
+//     }
+
+// })();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.employees')
+        .controller('UpdateDemoCtrl', ["$scope", "$http", "$uibModal", "$log", "UserService", function($scope, $http, $uibModal, $log, UserService) { 
+                
+         $scope.data = {
+    name: '',
+    serial: ''
+  };
+  $scope.didSelect = false;
+  $scope.items = [{
+    name: '1',
+    serial: '1s'
+  }, {
+    name: '2',
+    serial: '2s'
+  }, {
+    name: '3',
+    serial: '3s'
+  }];
+  
+  $scope.open = function() {
+
+    var modalInstance = $uibModal.open({
+      templateUrl: 'myModalContent.html',
+      controller: 'ModalInstanceCtrl',
+      resolve: {
+        items: function() {
+          return $scope.items;
+        }
+      }
+    });
+
+    modalInstance.result.then(function(selectedItem) {
+      $scope.selected = selectedItem;
+
+
+    console.log(selectedItem);
+ if(selectedItem) {
+         $scope.data.name = $scope.selected.name;
+      $scope.data.serial = $scope.selected.serial;
+      $scope.didSelect = true;
+ }
+
+
+    }, function(result) {
+      $log.info('Modal dismissed at: ' + new Date());
+      $scope.didSelect = false;
+    });
+  };
+}]);
+
+
+
+
+         
+   
+})();
+
+
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.employees')
+        .controller('ModalInstanceCtrl',['$scope', '$uibModalInstance', 'items',  function($scope, $uibModalInstance, items) { 
+                
+      $scope.items = items;
+  $scope.editable = items[0];
+
+  $scope.ok = function() {
+    $modalInstance.close($scope.editable);
+  };
+
+  $scope.cancel = function() {
+    $modalInstance.dismiss(false);
+  };
+         
+    }]);
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.employees')
+        .controller('UserInfo', ["$scope", "$http", "$uibModal", "$log", "UserService", function($scope, $http, $uibModal, $log, UserService) { 
+                
+         // var usersdata= $http.get('https://jsonplaceholder.typicode.com/users');
+         // usersdata.then(function(result){
+         //   $scope.users=result.data;
+         // })
+         $scope.users=UserService.query();
+
+         $scope.setDataForUsers=function(userId) {
+          $scope.oneUser=UserService.get({user:userId});
+
+         };
+
+$scope.searchEmp=function(userId) {
+   $scope.oneUser=UserService.get({user:userId});
+ 
+ };
+
+          $scope.open = function (size) {
+
+    var modalInstance = $uibModal.open({
+      templateUrl: 'myModalContent.html',
+      controller: 'ModalInstanceCtrl',
+      size: size,
+      resolve: {
+        users: function () {
+          return $scope.users;
+        },
+        user: function(){
+          return size;
+        }
+      }
+    });
+
+  };
+
+
+
+
+
+          $scope.show = function (size) {
+
+    var modalInstance = $uibModal.open({  
+      templateUrl: 'ModalContent.html',
+      controller: 'ModalInstanceCtrl',
+      size: size
+    
+    });
+
+  };
+         
+    }]);
+})();
+
+
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.employees')
+        .controller('ModalInstanceCtrl',['$scope', '$uibModalInstance', 'users', 'user', function($scope, $uibModalInstance, users, user) { 
+                
+         console.log(user);
+  $scope.user = user;
+  
+  $scope.users = users;
+  $scope.selected = {
+   user: $scope.users[0]
+  };
+
+  $scope.ok = function () {
+    $uibModalInstance.close($scope.selected.user);
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+         
+    }]);
+})();
+
+// (function() {
+//     'use strict';
+
+//     angular
+//         .module('app.employees')
+//         .controller('UserInfo', function($scope, $http, UserService) { 
+                
+//          // var usersdata= $http.get('https://jsonplaceholder.typicode.com/users');
+//          // usersdata.then(function(result){
+//          //  $scope.users=result.data;
+//          // })
+//          $scope.users=UserService.query();
+
+//          $scope.setDataForUsers=function(userId) {
+//            $scope.oneUser=UserService.get({user:userId});
+
+//          };
+         
+//     });
+// })();
 
 (function() {
     'use strict';
@@ -7904,1054 +8980,6 @@ if ($localStorage.currentUser) {
 })();
 
 /**=========================================================
- * Module: modals.js
- * Provides a simple way to implement bootstrap modals from templates
- =========================================================*/
-(function() {
-    'use strict';
-
-    angular
-        .module('app.employees')
-        .controller('CreateEmplController', CreateEmplController);
-
-    CreateEmplController.$inject = ['$uibModal'];
-    function CreateEmplController($uibModal) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          vm.open = function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: '/myModalContent.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-
-
-
-
-            var state = $('#modal-state');
-            modalInstance.result.then(function () {
-              state.text('Modal dismissed with OK status');
-            }, function () {
-              state.text('Modal dismissed with Cancel status');
-            });
-          };
-
-
-
-   vm.show= function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'ModalContent.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-
-
-
-
-            var state = $('#modal-state');
-            modalInstance.result.then(function () {
-              state.text('Modal dismissed with OK status');
-            }, function () {
-              state.text('Modal dismissed with Cancel status');
-            });
-          };
-
-
- vm.showStatutory= function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'StatutoryModalContent.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-
-
-
-
-            var state = $('#modal-state');
-            modalInstance.result.then(function () {
-              state.text('Modal dismissed with OK status');
-            }, function () {
-              state.text('Modal dismissed with Cancel status');
-            });
-          };
-
-          vm.showloans= function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'loansModalContent.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-          };
-
-           vm.showpension= function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'PensionModalContent.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-          };
-
-        vm.display= function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'template.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-          };
-
-
-          vm.add= function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'add.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-          };
-
-           vm.more= function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'mytemplate.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-          };
-
-
-           vm.info= function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'myContent.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-          };
-
-
-          // Please note that $uibModalInstance represents a modal window (instance) dependency.
-          // It is not the same as the $uibModal service used above.
-
-          ModalInstanceCtrl.$inject = ['$scope', '$uibModalInstance'];
-          function ModalInstanceCtrl($scope, $uibModalInstance) {
-          
-            $scope.ok = function () {
-              $uibModalInstance.close('closed');
-            };
-
-            $scope.cancel = function () {
-              $uibModalInstance.dismiss('cancel');
-            };
-
-              $scope.submitEmpMaster = function() {
-                console.log($scope.description);
-        
-        // UserService.save($scope.empMaster);
-  };
-          }
-        }
-    }
-
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.bootstrapui')
-        .controller('EmployeesDetailsController', EmployeesDetailsController);
-
-EmployeesDetailsController.$inject = ['$stateParams', '$state','$http','$scope', '$uibModal','EmployeeService'];
-    function EmployeesDetailsController($stateParams, $state,$http,$scope, $uibModal, EmployeeService) {
-      
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
- 
-           var empid=$stateParams.Employee;
-
-           console.log( empid);
-            if(empid!=null){
-           $scope.currentemployee=EmployeeService.get({id:empid});
-          }
-           
-         
-          
-
-
-     
-
-
-
-
-  
-
-
- 
-
-
-        }
-    }
-
-})();
-
-
-/**=========================================================
- * Module: modals.js
- * Provides a simple way to implement bootstrap modals from templates
- =========================================================*/
-(function() {
-    'use strict';
-
-    angular
-        .module('app.bootstrapui')
-        .controller('EmployeeBatchPostingController', EmployeeBatchPostingController);
-
-    EmployeeBatchPostingController.$inject = ['$scope', '$http','$uibModal','PayrollBatchPostingService','$stateParams', '$state','readFileEmployeeData','jadaApiUrl'];
-    function EmployeeBatchPostingController($scope,$http, $uibModal, PayrollBatchPostingService,$stateParams, $state,readFileEmployeeData,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-              var SuccessMsg;
-            var errorMsg;
-
-
-$scope.fileDataObj = [];
-
-            $scope.fileData ={ };
-    
-    $scope.uploadFile = function() {
-      if ($scope.fileContent) {
-        $scope.fileDataObj = readFileEmployeeData.processData($scope.fileContent);
-      
-        // $scope.fileData = JSON.stringify($scope.fileDataObj);
-         $scope.fileData =  $.parseJSON($scope.fileDataObj);
-
-var jdata= JSON.stringify($scope.fileData);
-        console.log( $scope.fileData);
-      }
-    }
-
-
-
-            $scope.cancel = function () {
-           
-            $scope.fileData =' ';
-            };
-
-
-//           var mdata  ={"name ":"Jane Doe","employeeNumber":"123","idNumber":"345678","passportNumber":"","countryOfIssue":"","expiryDate":"","dateOfBirth":"","maritalStatus":"single","gender":"female","dependency":"2","nextOfKin":"John","relationshipWithKin":"father","nextOfKinPhoneNumber":"","disability":"no","natureOfDisability":"","phoneNumber":"728445521","emailAddress":"janedoe@gmail.com","physicalAddress":"Thome","postalAddress":"108","postalCode":"10007","pinNumber":"111222","nhifNumber":"2222","nssfNumber":"5555","helbNumber":"5555","employmentDate":"21/11/2017","paypoint":"nakuru","paymode":"bank","bankcode":"1111","bankName":"KCB","bankAccountNumber":"298978","bankAccountName":"Jane Doe","bankBranchName":"Nakuru","department":"D001","costCenter":"C001","employeeCategory":"2","employeeGroup":"3","position":"intern"}
-//  $scope.save = function () {
-// var list=$scope.fileData;
-//     $http.post(jadaApiUrl+'api/employeesingleposting/', {mdata}).success(
-//       function(data){
-//         vdata.success=true;
-//         $scope.response = data
-//         console.log(data);
-//       })
-
-
-
-
-// // for(var r=0;r<list.length;r++){
-// //   var vdata =list[r];
-// //   console.log(vdata);
-// //   // var postingdata = new PayrollBatchPostingService(vdata);
-// //     $http.post(jadaApiUrl+'api/employeesingleposting/', {vdata}).success(
-// //       function(data){
-// //         vdata.success=true;
-// //         $scope.response = data
-// //         console.log(data);
-// //       })
-
-// // }
-
-//   }
-
- $scope.save = function () {
-
-var list=$scope.fileData;
-for(var r=0;r<list.length;r++){
-  var vdata =list[r];
-var postingdata = new PayrollBatchPostingService(vdata);
-
-postingdata.$save().then(function(data){
-                var response=angular.fromJson(data);
-          
-            if(response.Status=="1"){
-                   $scope.errorMsg=false;
-                    $scope.SuccessMsg =response.Message;
-            }else{
-           
-                    $scope.SuccessMsg=false;
-                   $scope.errorMsg=response.Message;
-    
-            }
-           
-
-              },
-               function() {
-                $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
-}
-  
-
-// }
-// var vdata=$scope.fileData;
-// var data={"period":"1","employee_number":"P0001","payroll_code":"D040","amount":"2000"};
-// var vdata={"name":"Jane Doe","employeeNumber":"123"};
-
-
-
-    // $http.post('http://localhost:56135/api/employeesingleposting/', {vdata}).success(
-    //   function(data){
-
-    //         var response=angular.fromJson(data);
-          
-    //         if(response.Status=="1"){
-    //           $scope.errorMsg=false;
-    //                 $scope.SuccessMsg =response.Message;
-    //                 console.log()
-    //         }else{
-           
-    //            $scope.SuccessMsg=false;
-    //                $scope.errorMsg=response.Message;
-           
-    //         }
-    //     // $scope.fileData[r].success=true;
-    //     // $scope.response = data
-    //     // console.log(data);
-    //   })
-
-
-
-
-        }
-    }
-  }
-
-})();
-
-
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.transactions')
-        .factory('PayrollBatchPostingService', PayrollBatchPostingService);
-
-    PayrollBatchPostingService.$inject = ['$resource','jadaApiUrl'];
-    function PayrollBatchPostingService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/employeesingleposting', 
-    {
-  'save':   {
-    method:'POST'
-},
-
-});
-     return data
-          
-       
-    }
-
-})();
-
-
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.employees')
-        .controller('EmployeesController', EmployeesController);
-
-EmployeesController.$inject = ['$stateParams', '$rootScope','$state','$http','$scope', '$uibModal','EmployeeService','jadaApiUrl'];
-    function EmployeesController($stateParams, $rootScope,$state,$http,$scope, $uibModal, EmployeeService,jadaApiUrl) {
-      
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-$scope.date= new Date();
-
-
-  
-  $scope.testDate = new Date($scope.date.getFullYear() - 10, $scope.date.getMonth(), 1);
-
-  $scope.dateOptions = {
-    formatYear: 'yy',
-    maxDate: new Date(2020, 5, 22),
-    minDate: new Date(2000, 1, 1),
-    startingDay: 1
-  };
-
-  $scope.open = function() {
-    $scope.popup.opened = true;
-  };
-
-  $scope.popup = {
-    opened: false
-  };
-
-       //       $scope.today = function() {
-       //       $scope.dt = new Date();
-       //    };
-       //    $scope.today();
-
-       // $scope.clear = function () {
-       //     $scope.dt = null;
-       //    };
-
-       //    // Disable weekend selection
-       //   $scope.disabled = function(date, mode) {
-       //      return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-       //    };
-
-       //   $scope.toggleMin = function() {
-       //     $scope.minDate =  $scope.minDate ? null : new Date();
-       //    };
-       //    $scope.toggleMin();
-
-       // $scope.open = function($event) {
-       //      $event.preventDefault();
-       //      $event.stopPropagation();
-
-       //  $scope.opened = true;
-       //    };
-
-       //  $scope.dateOptions = {
-       //      formatYear: 'yy',
-       //      startingDay: 1
-       //    };
-
-       //   $scope.initDate = new Date('2019-10-20');
-       //  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-       //  $scope.format =  $scope.formats[0];
-        
-           var SuccessMsg;
-            var errorMsg;
-
-           
-          
-        $scope.employees=EmployeeService.query();
-
-
-           var id = $stateParams.EmployeeId;
-      
-          if(id!=null){
-           $scope.employee=EmployeeService.get({id:id}); 
-           var dob=$scope.employee.dateOfBirth;
-           console.log("date of birth : "+dob);
-    
-          }
-
-
-  $scope.loadEmployees = function () {
-          $scope.employees=EmployeeService.query();
-        
-
-   }
-
- $rootScope.$on("CallLoadEmployees", function(){
-           $scope.loadEmployees();
-        });
-
-
-$http.get(jadaApiUrl+'api/department').success(function(data) {
-              $scope.departments = data;
-
-            });
-console.log('ddd')
-console.log($scope.departments);
-
-$http.get(jadaApiUrl+'api/costcenter').success(function(data) {
-              $scope.centers = data;
-
-            });
-
-$http.get(jadaApiUrl+'api/employeegroup').success(function(data) {
-              $scope.groups = data;
-
-            });
-
-$http.get(jadaApiUrl+'api/employeecategory').success(function(data) {
-              $scope.categories = data;
-
-            });
-
-
-$http.get(jadaApiUrl+'api/paymode').success(function(data) {
-              $scope.paymodes = data;
-              console.log($scope.paymodes);
-
-            });
-
-$http.get(jadaApiUrl+'api/bankbranchcode').success(function(data) {
-              $scope.bankcodes = data;
-              console.log($scope.bankcodes)
-
-            });
-
-
-
-$scope.updateBankCodes=function(id){
-  
-  $scope.bankBranchName=[];
-  for(var r=0;r<$scope.bankcodes.length;r++){
-    if($scope.bankcodes[r].bankCode==id){
-      $scope.bankBranchName.push($scope.bankcodes[r]);
-      console.log($scope.bankcodes[r]);
-    }
-
-    console.log("///////////////////////////////////");
-
-    console.log($scope.bankBranchName);
-  }
-
-  
-}
-
-
-
-$scope.populateBankName=function(id){
-    $scope.bankName=[];
-
-
-  for(var r=0;r<$scope.bankcodes.length;r++){
-    if($scope.bankcodes[r].bankBranchCode==id){
-      $scope.empMaster.bankName=$scope.bankcodes[r].bankName;
-
-     
-    }
-
-    console.log("///////////////////////////////////");
- console.log(   $scope.empMaster.bankName);
-  }
-
-  
-}
-
-
-
-
-$scope.updateBankName=function(id){
-    $scope.bankName=[];
-
-
-  for(var r=0;r<$scope.bankcodes.length;r++){
-    if($scope.bankcodes[r].bankBranchCode==id){
-      $scope.employee.bankName=$scope.bankcodes[r].bankName;
-
-     
-    }
-  }
-
-  
-}
-
-$http.get(jadaApiUrl+'api/paypoint').success(function(data) {
-              $scope.points = data;
-
-            });
-
-       $scope.empMaster= new EmployeeService();
-            $scope.submitEmpMaster = function() {
-              $scope.empMaster.$save().then(function(data){
-                var response=angular.fromJson(data);
-          
-            if(response.Status=="1"){
-                   $scope.errorMsg=false;
-                    $scope.SuccessMsg =response.Message;
-            }else{
-           
-                    $scope.SuccessMsg=false;
-                   $scope.errorMsg=response.Message;
-    
-            }
-                  $scope.loadEmployees();
-
-              },
-               function() {
-                $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
-             
-        };
-
-         $scope.delete= function (employee) {
-            employee.$remove().then(function () {
-             $scope.loadEmployees();
-
-            });
-            }
-
-
-               
-            $scope.updateEmpMaster=function(employee){
-             employee.$update().then(function(data){
-                 var response=angular.fromJson(data);
-          
-            if(response.Status=="1"){
-                   $scope.errorMsg=false;
-                    $scope.SuccessMsg =response.Message;
-                      $scope.employee=EmployeeService.get({id:id}); 
-            }else{
-           
-                    $scope.SuccessMsg=false;
-                   $scope.errorMsg=response.Message;
-    
-            }
-                     $scope.loadEmployees();
-            },
-              function() {
-               $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
-          
-              };
-        
-
-
-       $scope.departments = [];
-       $scope.selectDepartments= function() {
-           $rootScope.$emit("CallLoadDepartment", {});
-          };
-
-
-   
-
-
- 
-
-
-        }
-    }
-
-})();
-
-
-
-   // $(function() {
-   //   $("#datepicker").datepicker();
-   // });
-
-
-
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.employees')
-        .factory('EmployeeService', EmployeeService);
-
-    EmployeeService.$inject = ['$resource','jadaApiUrl'];
-    function EmployeeService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/employee/:id', {id: '@id'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.employees')
-     .directive('employeeFileReaderDirective', function() {
- return {
-        restrict: "A",
-        scope: {
-            employeeFileReaderDirective: "=",
-        },
-        link: function(scope, element) {
-            $(element).on('change', function(changeEvent) {
-                var files = changeEvent.target.files;
-                if (files.length) {
-                    var r = new FileReader();
-                    r.onload = function(e) {
-                        var contents = e.target.result;
-                        scope.$apply(function() {
-                            scope.employeeFileReaderDirective = contents;
-                        });
-                    };
-                    r.readAsText(files[0]);
-                }
-            });
-        }
-    };
-});
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.employees')
-        .factory('readFileEmployeeData', readFileEmployeeData);
-
-    // PayrollProcessingService.$inject = ['$resource','jadaApiUrl'];
-    function readFileEmployeeData() {
- return {
-        processData: function(csv) {
-            var lines=csv.split(/\r\n|\n/);
-
-  var result = [];
-
-  var headers=lines[0].split(",");
-
-  for(var i=1;i<lines.length;i++){
-
-    var obj = {};
-    var currentline=lines[i].split(",");
-
-    for(var j=0;j<headers.length;j++){
-      obj[headers[j]] = currentline[j];
-    }
-
-    result.push(obj);
-
-  }
-  
-  //return result; //JavaScript object
-  return JSON.stringify(result); //JSON
-        }
-    };
-          
-       
-    }
-
-})();
- (function() {
-    'use strict';
-
-    angular
-        .module('app.employees')
-        .filter('unique', function() { 
-                
-        return function(input, key) {
-        var unique = {};
-        var uniqueList = [];
-        for(var i = 0; i < input.length; i++){
-            if(typeof unique[input[i][key]] == "undefined"){
-                unique[input[i][key]] = "";
-                uniqueList.push(input[i]);
-            }
-        }
-        return uniqueList;
-    };
-});
-
-
-
-
-         
-   
-})();
-
-
-
-
-// (function() {
-//     'use strict';
-
-//     angular
-//         .module('app.employees')
-//         .controller('ModalInstanceCtrl',['$scope', '$uibModalInstance', 'items',  function($scope, $uibModalInstance, items) { 
-                
-//       $scope.items = items;
-//   $scope.editable = items[0];
-
-//   $scope.ok = function() {
-//     $modalInstance.close($scope.editable);
-//   };
-
-//   $scope.cancel = function() {
-//     $modalInstance.dismiss(false);
-//   };
-         
-//     }]);
-// })();
-
-
-
-
-// angle.filter('unique', function() {
-//     return function(input, key) {
-//         var unique = {};
-//         var uniqueList = [];
-//         for(var i = 0; i < input.length; i++){
-//             if(typeof unique[input[i][key]] == "undefined"){
-//                 unique[input[i][key]] = "";
-//                 uniqueList.push(input[i]);
-//             }
-//         }
-//         return uniqueList;
-//     };
-// });
-
-
-
-// (function() {
-//     'use strict';
-
-//     angular
-//         .module('app.employees')
-//         .filter('unique', unique);
-
-
-//     function unique() {
-//    return function(input, key) {
-//         var unique = {};
-//         var uniqueList = [];
-//         for(var i = 0; i < input.length; i++){
-//             if(typeof unique[input[i][key]] == "undefined"){
-//                 unique[input[i][key]] = "";
-//                 uniqueList.push(input[i]);
-//             }
-//         }
-//         return uniqueList;
-//     };   
-       
-//     }
-
-// })();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.employees')
-        .controller('UpdateDemoCtrl', ["$scope", "$http", "$uibModal", "$log", "UserService", function($scope, $http, $uibModal, $log, UserService) { 
-                
-         $scope.data = {
-    name: '',
-    serial: ''
-  };
-  $scope.didSelect = false;
-  $scope.items = [{
-    name: '1',
-    serial: '1s'
-  }, {
-    name: '2',
-    serial: '2s'
-  }, {
-    name: '3',
-    serial: '3s'
-  }];
-  
-  $scope.open = function() {
-
-    var modalInstance = $uibModal.open({
-      templateUrl: 'myModalContent.html',
-      controller: 'ModalInstanceCtrl',
-      resolve: {
-        items: function() {
-          return $scope.items;
-        }
-      }
-    });
-
-    modalInstance.result.then(function(selectedItem) {
-      $scope.selected = selectedItem;
-
-
-    console.log(selectedItem);
- if(selectedItem) {
-         $scope.data.name = $scope.selected.name;
-      $scope.data.serial = $scope.selected.serial;
-      $scope.didSelect = true;
- }
-
-
-    }, function(result) {
-      $log.info('Modal dismissed at: ' + new Date());
-      $scope.didSelect = false;
-    });
-  };
-}]);
-
-
-
-
-         
-   
-})();
-
-
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.employees')
-        .controller('ModalInstanceCtrl',['$scope', '$uibModalInstance', 'items',  function($scope, $uibModalInstance, items) { 
-                
-      $scope.items = items;
-  $scope.editable = items[0];
-
-  $scope.ok = function() {
-    $modalInstance.close($scope.editable);
-  };
-
-  $scope.cancel = function() {
-    $modalInstance.dismiss(false);
-  };
-         
-    }]);
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.employees')
-        .controller('UserInfo', ["$scope", "$http", "$uibModal", "$log", "UserService", function($scope, $http, $uibModal, $log, UserService) { 
-                
-         // var usersdata= $http.get('https://jsonplaceholder.typicode.com/users');
-         // usersdata.then(function(result){
-         //   $scope.users=result.data;
-         // })
-         $scope.users=UserService.query();
-
-         $scope.setDataForUsers=function(userId) {
-          $scope.oneUser=UserService.get({user:userId});
-
-         };
-
-$scope.searchEmp=function(userId) {
-   $scope.oneUser=UserService.get({user:userId});
- 
- };
-
-          $scope.open = function (size) {
-
-    var modalInstance = $uibModal.open({
-      templateUrl: 'myModalContent.html',
-      controller: 'ModalInstanceCtrl',
-      size: size,
-      resolve: {
-        users: function () {
-          return $scope.users;
-        },
-        user: function(){
-          return size;
-        }
-      }
-    });
-
-  };
-
-
-
-
-
-          $scope.show = function (size) {
-
-    var modalInstance = $uibModal.open({  
-      templateUrl: 'ModalContent.html',
-      controller: 'ModalInstanceCtrl',
-      size: size
-    
-    });
-
-  };
-         
-    }]);
-})();
-
-
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.employees')
-        .controller('ModalInstanceCtrl',['$scope', '$uibModalInstance', 'users', 'user', function($scope, $uibModalInstance, users, user) { 
-                
-         console.log(user);
-  $scope.user = user;
-  
-  $scope.users = users;
-  $scope.selected = {
-   user: $scope.users[0]
-  };
-
-  $scope.ok = function () {
-    $uibModalInstance.close($scope.selected.user);
-  };
-
-  $scope.cancel = function () {
-    $uibModalInstance.dismiss('cancel');
-  };
-         
-    }]);
-})();
-
-// (function() {
-//     'use strict';
-
-//     angular
-//         .module('app.employees')
-//         .controller('UserInfo', function($scope, $http, UserService) { 
-                
-//          // var usersdata= $http.get('https://jsonplaceholder.typicode.com/users');
-//          // usersdata.then(function(result){
-//          //  $scope.users=result.data;
-//          // })
-//          $scope.users=UserService.query();
-
-//          $scope.setDataForUsers=function(userId) {
-//            $scope.oneUser=UserService.get({user:userId});
-
-//          };
-         
-//     });
-// })();
-/**=========================================================
  * Module: flatdoc.js
  * Creates the flatdoc markup and initializes the plugin
  =========================================================*/
@@ -9007,39 +9035,6 @@ $scope.searchEmp=function(userId) {
                 $doc.off('flatdoc:ready');
             });
 
-        }
-    }
-
-})();
-
-/**=========================================================
- * Module: skycons.js
- * Include any animated weather icon from Skycons
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.icons')
-        .directive('skycon', skycon);
-
-    function skycon () {
-
-        var directive = {
-            link: link,
-            restrict: 'A'
-        };
-        return directive;
-
-        function link(scope, element, attrs) {
-          var skycons = new Skycons({'color': (attrs.color || 'white')});
-
-          element.html('<canvas width="' + attrs.width + '" height="' + attrs.height + '"></canvas>');
-
-          skycons.add(element.children()[0], attrs.skycon);
-
-          skycons.play();
         }
     }
 
@@ -10044,50 +10039,39 @@ $scope.searchEmp=function(userId) {
     }
 })();
 
+/**=========================================================
+ * Module: skycons.js
+ * Include any animated weather icon from Skycons
+ =========================================================*/
+
 (function() {
     'use strict';
 
     angular
-        .module('app.loadingbar')
-        .config(loadingbarConfig)
-        ;
-    loadingbarConfig.$inject = ['cfpLoadingBarProvider'];
-    function loadingbarConfig(cfpLoadingBarProvider){
-      cfpLoadingBarProvider.includeBar = true;
-      cfpLoadingBarProvider.includeSpinner = false;
-      cfpLoadingBarProvider.latencyThreshold = 500;
-      cfpLoadingBarProvider.parentSelector = '.wrapper > section';
-    }
-})();
-(function() {
-    'use strict';
+        .module('app.icons')
+        .directive('skycon', skycon);
 
-    angular
-        .module('app.loadingbar')
-        .run(loadingbarRun)
-        ;
-    loadingbarRun.$inject = ['$rootScope', '$timeout', 'cfpLoadingBar'];
-    function loadingbarRun($rootScope, $timeout, cfpLoadingBar){
+    function skycon () {
 
-      // Loading bar transition
-      // ----------------------------------- 
-      var thBar;
-      $rootScope.$on('$stateChangeStart', function() {
-          if($('.wrapper > section').length) // check if bar container exists
-            thBar = $timeout(function() {
-              cfpLoadingBar.start();
-            }, 0); // sets a latency Threshold
-      });
-      $rootScope.$on('$stateChangeSuccess', function(event) {
-          event.targetScope.$watch('$viewContentLoaded', function () {
-            $timeout.cancel(thBar);
-            cfpLoadingBar.complete();
-          });
-      });
+        var directive = {
+            link: link,
+            restrict: 'A'
+        };
+        return directive;
 
+        function link(scope, element, attrs) {
+          var skycons = new Skycons({'color': (attrs.color || 'white')});
+
+          element.html('<canvas width="' + attrs.width + '" height="' + attrs.height + '"></canvas>');
+
+          skycons.add(element.children()[0], attrs.skycon);
+
+          skycons.play();
+        }
     }
 
 })();
+
 (function() {
     'use strict';
 
@@ -10311,6 +10295,50 @@ $scope.searchEmp=function(userId) {
     }
 })();
 
+(function() {
+    'use strict';
+
+    angular
+        .module('app.loadingbar')
+        .config(loadingbarConfig)
+        ;
+    loadingbarConfig.$inject = ['cfpLoadingBarProvider'];
+    function loadingbarConfig(cfpLoadingBarProvider){
+      cfpLoadingBarProvider.includeBar = true;
+      cfpLoadingBarProvider.includeSpinner = false;
+      cfpLoadingBarProvider.latencyThreshold = 500;
+      cfpLoadingBarProvider.parentSelector = '.wrapper > section';
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.loadingbar')
+        .run(loadingbarRun)
+        ;
+    loadingbarRun.$inject = ['$rootScope', '$timeout', 'cfpLoadingBar'];
+    function loadingbarRun($rootScope, $timeout, cfpLoadingBar){
+
+      // Loading bar transition
+      // ----------------------------------- 
+      var thBar;
+      $rootScope.$on('$stateChangeStart', function() {
+          if($('.wrapper > section').length) // check if bar container exists
+            thBar = $timeout(function() {
+              cfpLoadingBar.start();
+            }, 0); // sets a latency Threshold
+      });
+      $rootScope.$on('$stateChangeSuccess', function(event) {
+          event.targetScope.$watch('$viewContentLoaded', function () {
+            $timeout.cancel(thBar);
+            cfpLoadingBar.complete();
+          });
+      });
+
+    }
+
+})();
 /**=========================================================
  * Module: demo-pagination.js
  * Provides a simple demo for pagination
@@ -12075,488 +12103,6 @@ $scope.banks=bankcodeService.query();
     return notify;
 }(jQuery));
 
-/**=========================================================
- * Collapse panels * [panel-collapse]
- =========================================================*/
-(function() {
-    'use strict';
-
-    angular
-        .module('app.panels')
-        .directive('panelCollapse', panelCollapse);
-
-    function panelCollapse () {
-        var directive = {
-            controller: Controller,
-            restrict: 'A',
-            scope: false
-        };
-        return directive;
-    }
-
-    Controller.$inject = ['$scope', '$element', '$timeout', '$localStorage'];
-    function Controller ($scope, $element, $timeout, $localStorage) {
-      var storageKeyName = 'panelState';
-
-      // Prepare the panel to be collapsible
-      var $elem   = $($element),
-          parent  = $elem.closest('.panel'), // find the first parent panel
-          panelId = parent.attr('id');
-
-      // Load the saved state if exists
-      var currentState = loadPanelState( panelId );
-      if ( typeof currentState !== 'undefined') {
-        $timeout(function(){
-            $scope[panelId] = currentState; },
-          10);
-      }
-
-      // bind events to switch icons
-      $element.bind('click', function(e) {
-        e.preventDefault();
-        savePanelState( panelId, !$scope[panelId] );
-
-      });
-  
-      // Controller helpers
-      function savePanelState(id, state) {
-        if(!id) return false;
-        var data = angular.fromJson($localStorage[storageKeyName]);
-        if(!data) { data = {}; }
-        data[id] = state;
-        $localStorage[storageKeyName] = angular.toJson(data);
-      }
-      function loadPanelState(id) {
-        if(!id) return false;
-        var data = angular.fromJson($localStorage[storageKeyName]);
-        if(data) {
-          return data[id];
-        }
-      }
-    }
-
-})();
-
-/**=========================================================
- * Dismiss panels * [panel-dismiss]
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.panels')
-        .directive('panelDismiss', panelDismiss);
-
-    function panelDismiss () {
-
-        var directive = {
-            controller: Controller,
-            restrict: 'A'
-        };
-        return directive;
-
-    }
-
-    Controller.$inject = ['$scope', '$element', '$q', 'Utils'];
-    function Controller ($scope, $element, $q, Utils) {
-      var removeEvent   = 'panel-remove',
-          removedEvent  = 'panel-removed';
-
-      $element.on('click', function (e) {
-        e.preventDefault();
-
-        // find the first parent panel
-        var parent = $(this).closest('.panel');
-
-        removeElement();
-
-        function removeElement() {
-          var deferred = $q.defer();
-          var promise = deferred.promise;
-          
-          // Communicate event destroying panel
-          $scope.$emit(removeEvent, parent.attr('id'), deferred);
-          promise.then(destroyMiddleware);
-        }
-
-        // Run the animation before destroy the panel
-        function destroyMiddleware() {
-          if(Utils.support.animation) {
-            parent.animo({animation: 'bounceOut'}, destroyPanel);
-          }
-          else destroyPanel();
-        }
-
-        function destroyPanel() {
-
-          var col = parent.parent();
-          parent.remove();
-          // remove the parent if it is a row and is empty and not a sortable (portlet)
-          col
-            .filter(function() {
-            var el = $(this);
-            return (el.is('[class*="col-"]:not(.sortable)') && el.children('*').length === 0);
-          }).remove();
-
-          // Communicate event destroyed panel
-          $scope.$emit(removedEvent, parent.attr('id'));
-
-        }
-
-      });
-    }
-})();
-
-
-
-/**=========================================================
- * Refresh panels
- * [panel-refresh] * [data-spinner="standard"]
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.panels')
-        .directive('panelRefresh', panelRefresh);
-
-    function panelRefresh () {
-        var directive = {
-            controller: Controller,
-            restrict: 'A',
-            scope: false
-        };
-        return directive;
-
-    }
-
-    Controller.$inject = ['$scope', '$element'];
-    function Controller ($scope, $element) {
-      var refreshEvent   = 'panel-refresh',
-          whirlClass     = 'whirl',
-          defaultSpinner = 'standard';
-
-      // catch clicks to toggle panel refresh
-      $element.on('click', function (e) {
-        e.preventDefault();
-
-        var $this   = $(this),
-            panel   = $this.parents('.panel').eq(0),
-            spinner = $this.data('spinner') || defaultSpinner
-            ;
-
-        // start showing the spinner
-        panel.addClass(whirlClass + ' ' + spinner);
-
-        // Emit event when refresh clicked
-        $scope.$emit(refreshEvent, panel.attr('id'));
-
-      });
-
-      // listen to remove spinner
-      $scope.$on('removeSpinner', removeSpinner);
-
-      // method to clear the spinner when done
-      function removeSpinner (ev, id) {
-        if (!id) return;
-        var newid = id.charAt(0) === '#' ? id : ('#'+id);
-        angular
-          .element(newid)
-          .removeClass(whirlClass);
-      }
-    }
-})();
-
-
-
-/**=========================================================
- * Module panel-tools.js
- * Directive tools to control panels.
- * Allows collapse, refresh and dismiss (remove)
- * Saves panel state in browser storage
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.panels')
-        .directive('paneltool', paneltool);
-
-    paneltool.$inject = ['$compile', '$timeout'];
-    function paneltool ($compile, $timeout) {
-        var directive = {
-            link: link,
-            restrict: 'E',
-            scope: false
-        };
-        return directive;
-
-        function link(scope, element, attrs) {
-
-          var templates = {
-            /* jshint multistr: true */
-            collapse:'<a href="#" panel-collapse="" uib-tooltip="Collapse Panel" ng-click="{{panelId}} = !{{panelId}}"> \
-                        <em ng-show="{{panelId}}" class="fa fa-plus ng-no-animation"></em> \
-                        <em ng-show="!{{panelId}}" class="fa fa-minus ng-no-animation"></em> \
-                      </a>',
-            dismiss: '<a href="#" panel-dismiss="" uib-tooltip="Close Panel">\
-                       <em class="fa fa-times"></em>\
-                     </a>',
-            refresh: '<a href="#" panel-refresh="" data-spinner="{{spinner}}" uib-tooltip="Refresh Panel">\
-                       <em class="fa fa-refresh"></em>\
-                     </a>'
-          };
-
-          var tools = scope.panelTools || attrs;
-
-          $timeout(function() {
-            element.html(getTemplate(element, tools )).show();
-            $compile(element.contents())(scope);
-
-            element.addClass('pull-right');
-          });
-
-          function getTemplate( elem, attrs ){
-            var temp = '';
-            attrs = attrs || {};
-            if(attrs.toolCollapse)
-              temp += templates.collapse.replace(/{{panelId}}/g, (elem.parent().parent().attr('id')) );
-            if(attrs.toolDismiss)
-              temp += templates.dismiss;
-            if(attrs.toolRefresh)
-              temp += templates.refresh.replace(/{{spinner}}/g, attrs.toolRefresh);
-            return temp;
-          }
-        }// link
-    }
-
-})();
-
-/**=========================================================
- * Module: demo-panels.js
- * Provides a simple demo for panel actions
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.panels')
-        .controller('PanelsCtrl', PanelsCtrl);
-
-    PanelsCtrl.$inject = ['$scope', '$timeout'];
-    function PanelsCtrl($scope, $timeout) {
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          // PANEL COLLAPSE EVENTS
-          // ----------------------------------- 
-
-          // We can use panel id name for the boolean flag to [un]collapse the panel
-          $scope.$watch('panelDemo1',function(newVal){
-              
-              console.log('panelDemo1 collapsed: ' + newVal);
-
-          });
-
-
-          // PANEL DISMISS EVENTS
-          // ----------------------------------- 
-
-          // Before remove panel
-          $scope.$on('panel-remove', function(event, id, deferred){
-            
-            console.log('Panel #' + id + ' removing');
-            
-            // Here is obligatory to call the resolve() if we pretend to remove the panel finally
-            // Not calling resolve() will NOT remove the panel
-            // It's up to your app to decide if panel should be removed or not
-            deferred.resolve();
-          
-          });
-
-          // Panel removed ( only if above was resolved() )
-          $scope.$on('panel-removed', function(event, id){
-
-            console.log('Panel #' + id + ' removed');
-
-          });
-
-
-          // PANEL REFRESH EVENTS
-          // ----------------------------------- 
-
-          $scope.$on('panel-refresh', function(event, id) {
-            var secs = 3;
-            
-            console.log('Refreshing during ' + secs +'s #'+id);
-
-            $timeout(function(){
-              // directive listen for to remove the spinner 
-              // after we end up to perform own operations
-              $scope.$broadcast('removeSpinner', id);
-              
-              console.log('Refreshed #' + id);
-
-            }, 3000);
-
-          });
-
-          // PANELS VIA NG-REPEAT
-          // ----------------------------------- 
-
-          $scope.panels = [
-            {
-              id: 'panelRepeat1',
-              title: 'Panel Title 1',
-              body: 'Nulla eget lorem leo, sit amet elementum lorem. '
-            },
-            {
-              id: 'panelRepeat2',
-              title: 'Panel Title 2',
-              body: 'Nulla eget lorem leo, sit amet elementum lorem. '
-            },
-            {
-              id: 'panelRepeat3',
-              title: 'Panel Title 3',
-              body: 'Nulla eget lorem leo, sit amet elementum lorem. '
-            }
-          ];
-        }
-
-    } //PanelsCtrl
-
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.panels')
-        .controller('DraggablePanelController', DraggablePanelController);
-
-    DraggablePanelController.$inject = ['$timeout', '$localStorage'];
-
-    function DraggablePanelController($timeout, $localStorage) {
-        var vm = this;
-        var storageKeyName = 'portletState';
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-            vm.panels = [
-                [{
-                    id: 'panelPortlet1',
-                    type: 'default',
-                    heading: 'Panel heading',
-                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
-                    footer: 'Panale footer'
-                }, {
-                    id: 'panelPortlet2',
-                    type: 'primary',
-                    heading: 'Panel heading',
-                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
-                    footer: 'Panale footer'
-                }, {
-                    id: 'panelPortlet3',
-                    type: 'success',
-                    heading: 'Panel heading',
-                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
-                    footer: 'Panale footer'
-                }],
-                [{
-                    id: 'panelPortlet4',
-                    type: 'info',
-                    heading: 'Panel heading',
-                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
-                    footer: 'Panale footer'
-                }, {
-                    id: 'panelPortlet5',
-                    type: 'warning',
-                    heading: 'Panel heading',
-                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
-                    footer: 'Panale footer'
-                }, {
-                    id: 'panelPortlet6',
-                    type: 'danger',
-                    heading: 'Panel heading',
-                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
-                    footer: 'Panale footer'
-                }],
-                [{
-                    id: 'panelPortlet7',
-                    type: 'inverse',
-                    heading: 'Panel heading',
-                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
-                    footer: 'Panale footer'
-                }, {
-                    id: 'panelPortlet8',
-                    type: 'purple',
-                    heading: 'Panel heading',
-                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
-                    footer: 'Panale footer'
-                }, {
-                    id: 'panelPortlet9',
-                    type: 'green',
-                    heading: 'Panel heading',
-                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
-                    footer: 'Panale footer'
-                }]
-            ];
-
-            vm.panelList1 = vm.panels[0];
-            vm.panelList2 = vm.panels[1];
-            vm.panelList3 = vm.panels[2];
-
-            // https://github.com/angular-ui/ui-sortable
-            vm.sortablePortletOptions = {
-                connectWith: '.portlet-connect',
-                handle: '.panel-heading',
-                opacity: 0.7,
-                placeholder: 'portlet box-placeholder',
-                cancel: '.portlet-cancel',
-                forcePlaceholderSize: true,
-                iframeFix: false,
-                tolerance: 'pointer',
-                helper: 'original',
-                revert: 200,
-                forceHelperSize: true,
-                update: savePortletOrder,
-                create: loadPortletOrder
-            };
-
-            function savePortletOrder(event) {
-                $timeout(function() {
-                    $localStorage[storageKeyName] = angular.toJson(vm.panels);
-                });
-            }
-
-            function loadPortletOrder(event) {
-                var data = angular.fromJson($localStorage[storageKeyName]);
-                if (data) {
-                    $timeout(function() {
-                        vm.panels = data;
-                        vm.panelList1 = vm.panels[0];
-                        vm.panelList2 = vm.panels[1];
-                        vm.panelList3 = vm.panels[2];
-                    });
-                }
-            }
-
-        }
-    }
-})();
 // /**=========================================================
 //  * Module: access-login.js
 //  * Demo for login api
@@ -13045,6 +12591,581 @@ $scope.buttonText="Login";
     
           
        
+    }
+
+})();
+/**=========================================================
+ * Collapse panels * [panel-collapse]
+ =========================================================*/
+(function() {
+    'use strict';
+
+    angular
+        .module('app.panels')
+        .directive('panelCollapse', panelCollapse);
+
+    function panelCollapse () {
+        var directive = {
+            controller: Controller,
+            restrict: 'A',
+            scope: false
+        };
+        return directive;
+    }
+
+    Controller.$inject = ['$scope', '$element', '$timeout', '$localStorage'];
+    function Controller ($scope, $element, $timeout, $localStorage) {
+      var storageKeyName = 'panelState';
+
+      // Prepare the panel to be collapsible
+      var $elem   = $($element),
+          parent  = $elem.closest('.panel'), // find the first parent panel
+          panelId = parent.attr('id');
+
+      // Load the saved state if exists
+      var currentState = loadPanelState( panelId );
+      if ( typeof currentState !== 'undefined') {
+        $timeout(function(){
+            $scope[panelId] = currentState; },
+          10);
+      }
+
+      // bind events to switch icons
+      $element.bind('click', function(e) {
+        e.preventDefault();
+        savePanelState( panelId, !$scope[panelId] );
+
+      });
+  
+      // Controller helpers
+      function savePanelState(id, state) {
+        if(!id) return false;
+        var data = angular.fromJson($localStorage[storageKeyName]);
+        if(!data) { data = {}; }
+        data[id] = state;
+        $localStorage[storageKeyName] = angular.toJson(data);
+      }
+      function loadPanelState(id) {
+        if(!id) return false;
+        var data = angular.fromJson($localStorage[storageKeyName]);
+        if(data) {
+          return data[id];
+        }
+      }
+    }
+
+})();
+
+/**=========================================================
+ * Dismiss panels * [panel-dismiss]
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.panels')
+        .directive('panelDismiss', panelDismiss);
+
+    function panelDismiss () {
+
+        var directive = {
+            controller: Controller,
+            restrict: 'A'
+        };
+        return directive;
+
+    }
+
+    Controller.$inject = ['$scope', '$element', '$q', 'Utils'];
+    function Controller ($scope, $element, $q, Utils) {
+      var removeEvent   = 'panel-remove',
+          removedEvent  = 'panel-removed';
+
+      $element.on('click', function (e) {
+        e.preventDefault();
+
+        // find the first parent panel
+        var parent = $(this).closest('.panel');
+
+        removeElement();
+
+        function removeElement() {
+          var deferred = $q.defer();
+          var promise = deferred.promise;
+          
+          // Communicate event destroying panel
+          $scope.$emit(removeEvent, parent.attr('id'), deferred);
+          promise.then(destroyMiddleware);
+        }
+
+        // Run the animation before destroy the panel
+        function destroyMiddleware() {
+          if(Utils.support.animation) {
+            parent.animo({animation: 'bounceOut'}, destroyPanel);
+          }
+          else destroyPanel();
+        }
+
+        function destroyPanel() {
+
+          var col = parent.parent();
+          parent.remove();
+          // remove the parent if it is a row and is empty and not a sortable (portlet)
+          col
+            .filter(function() {
+            var el = $(this);
+            return (el.is('[class*="col-"]:not(.sortable)') && el.children('*').length === 0);
+          }).remove();
+
+          // Communicate event destroyed panel
+          $scope.$emit(removedEvent, parent.attr('id'));
+
+        }
+
+      });
+    }
+})();
+
+
+
+/**=========================================================
+ * Refresh panels
+ * [panel-refresh] * [data-spinner="standard"]
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.panels')
+        .directive('panelRefresh', panelRefresh);
+
+    function panelRefresh () {
+        var directive = {
+            controller: Controller,
+            restrict: 'A',
+            scope: false
+        };
+        return directive;
+
+    }
+
+    Controller.$inject = ['$scope', '$element'];
+    function Controller ($scope, $element) {
+      var refreshEvent   = 'panel-refresh',
+          whirlClass     = 'whirl',
+          defaultSpinner = 'standard';
+
+      // catch clicks to toggle panel refresh
+      $element.on('click', function (e) {
+        e.preventDefault();
+
+        var $this   = $(this),
+            panel   = $this.parents('.panel').eq(0),
+            spinner = $this.data('spinner') || defaultSpinner
+            ;
+
+        // start showing the spinner
+        panel.addClass(whirlClass + ' ' + spinner);
+
+        // Emit event when refresh clicked
+        $scope.$emit(refreshEvent, panel.attr('id'));
+
+      });
+
+      // listen to remove spinner
+      $scope.$on('removeSpinner', removeSpinner);
+
+      // method to clear the spinner when done
+      function removeSpinner (ev, id) {
+        if (!id) return;
+        var newid = id.charAt(0) === '#' ? id : ('#'+id);
+        angular
+          .element(newid)
+          .removeClass(whirlClass);
+      }
+    }
+})();
+
+
+
+/**=========================================================
+ * Module panel-tools.js
+ * Directive tools to control panels.
+ * Allows collapse, refresh and dismiss (remove)
+ * Saves panel state in browser storage
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.panels')
+        .directive('paneltool', paneltool);
+
+    paneltool.$inject = ['$compile', '$timeout'];
+    function paneltool ($compile, $timeout) {
+        var directive = {
+            link: link,
+            restrict: 'E',
+            scope: false
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+
+          var templates = {
+            /* jshint multistr: true */
+            collapse:'<a href="#" panel-collapse="" uib-tooltip="Collapse Panel" ng-click="{{panelId}} = !{{panelId}}"> \
+                        <em ng-show="{{panelId}}" class="fa fa-plus ng-no-animation"></em> \
+                        <em ng-show="!{{panelId}}" class="fa fa-minus ng-no-animation"></em> \
+                      </a>',
+            dismiss: '<a href="#" panel-dismiss="" uib-tooltip="Close Panel">\
+                       <em class="fa fa-times"></em>\
+                     </a>',
+            refresh: '<a href="#" panel-refresh="" data-spinner="{{spinner}}" uib-tooltip="Refresh Panel">\
+                       <em class="fa fa-refresh"></em>\
+                     </a>'
+          };
+
+          var tools = scope.panelTools || attrs;
+
+          $timeout(function() {
+            element.html(getTemplate(element, tools )).show();
+            $compile(element.contents())(scope);
+
+            element.addClass('pull-right');
+          });
+
+          function getTemplate( elem, attrs ){
+            var temp = '';
+            attrs = attrs || {};
+            if(attrs.toolCollapse)
+              temp += templates.collapse.replace(/{{panelId}}/g, (elem.parent().parent().attr('id')) );
+            if(attrs.toolDismiss)
+              temp += templates.dismiss;
+            if(attrs.toolRefresh)
+              temp += templates.refresh.replace(/{{spinner}}/g, attrs.toolRefresh);
+            return temp;
+          }
+        }// link
+    }
+
+})();
+
+/**=========================================================
+ * Module: demo-panels.js
+ * Provides a simple demo for panel actions
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.panels')
+        .controller('PanelsCtrl', PanelsCtrl);
+
+    PanelsCtrl.$inject = ['$scope', '$timeout'];
+    function PanelsCtrl($scope, $timeout) {
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          // PANEL COLLAPSE EVENTS
+          // ----------------------------------- 
+
+          // We can use panel id name for the boolean flag to [un]collapse the panel
+          $scope.$watch('panelDemo1',function(newVal){
+              
+              console.log('panelDemo1 collapsed: ' + newVal);
+
+          });
+
+
+          // PANEL DISMISS EVENTS
+          // ----------------------------------- 
+
+          // Before remove panel
+          $scope.$on('panel-remove', function(event, id, deferred){
+            
+            console.log('Panel #' + id + ' removing');
+            
+            // Here is obligatory to call the resolve() if we pretend to remove the panel finally
+            // Not calling resolve() will NOT remove the panel
+            // It's up to your app to decide if panel should be removed or not
+            deferred.resolve();
+          
+          });
+
+          // Panel removed ( only if above was resolved() )
+          $scope.$on('panel-removed', function(event, id){
+
+            console.log('Panel #' + id + ' removed');
+
+          });
+
+
+          // PANEL REFRESH EVENTS
+          // ----------------------------------- 
+
+          $scope.$on('panel-refresh', function(event, id) {
+            var secs = 3;
+            
+            console.log('Refreshing during ' + secs +'s #'+id);
+
+            $timeout(function(){
+              // directive listen for to remove the spinner 
+              // after we end up to perform own operations
+              $scope.$broadcast('removeSpinner', id);
+              
+              console.log('Refreshed #' + id);
+
+            }, 3000);
+
+          });
+
+          // PANELS VIA NG-REPEAT
+          // ----------------------------------- 
+
+          $scope.panels = [
+            {
+              id: 'panelRepeat1',
+              title: 'Panel Title 1',
+              body: 'Nulla eget lorem leo, sit amet elementum lorem. '
+            },
+            {
+              id: 'panelRepeat2',
+              title: 'Panel Title 2',
+              body: 'Nulla eget lorem leo, sit amet elementum lorem. '
+            },
+            {
+              id: 'panelRepeat3',
+              title: 'Panel Title 3',
+              body: 'Nulla eget lorem leo, sit amet elementum lorem. '
+            }
+          ];
+        }
+
+    } //PanelsCtrl
+
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.panels')
+        .controller('DraggablePanelController', DraggablePanelController);
+
+    DraggablePanelController.$inject = ['$timeout', '$localStorage'];
+
+    function DraggablePanelController($timeout, $localStorage) {
+        var vm = this;
+        var storageKeyName = 'portletState';
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+            vm.panels = [
+                [{
+                    id: 'panelPortlet1',
+                    type: 'default',
+                    heading: 'Panel heading',
+                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
+                    footer: 'Panale footer'
+                }, {
+                    id: 'panelPortlet2',
+                    type: 'primary',
+                    heading: 'Panel heading',
+                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
+                    footer: 'Panale footer'
+                }, {
+                    id: 'panelPortlet3',
+                    type: 'success',
+                    heading: 'Panel heading',
+                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
+                    footer: 'Panale footer'
+                }],
+                [{
+                    id: 'panelPortlet4',
+                    type: 'info',
+                    heading: 'Panel heading',
+                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
+                    footer: 'Panale footer'
+                }, {
+                    id: 'panelPortlet5',
+                    type: 'warning',
+                    heading: 'Panel heading',
+                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
+                    footer: 'Panale footer'
+                }, {
+                    id: 'panelPortlet6',
+                    type: 'danger',
+                    heading: 'Panel heading',
+                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
+                    footer: 'Panale footer'
+                }],
+                [{
+                    id: 'panelPortlet7',
+                    type: 'inverse',
+                    heading: 'Panel heading',
+                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
+                    footer: 'Panale footer'
+                }, {
+                    id: 'panelPortlet8',
+                    type: 'purple',
+                    heading: 'Panel heading',
+                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
+                    footer: 'Panale footer'
+                }, {
+                    id: 'panelPortlet9',
+                    type: 'green',
+                    heading: 'Panel heading',
+                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
+                    footer: 'Panale footer'
+                }]
+            ];
+
+            vm.panelList1 = vm.panels[0];
+            vm.panelList2 = vm.panels[1];
+            vm.panelList3 = vm.panels[2];
+
+            // https://github.com/angular-ui/ui-sortable
+            vm.sortablePortletOptions = {
+                connectWith: '.portlet-connect',
+                handle: '.panel-heading',
+                opacity: 0.7,
+                placeholder: 'portlet box-placeholder',
+                cancel: '.portlet-cancel',
+                forcePlaceholderSize: true,
+                iframeFix: false,
+                tolerance: 'pointer',
+                helper: 'original',
+                revert: 200,
+                forceHelperSize: true,
+                update: savePortletOrder,
+                create: loadPortletOrder
+            };
+
+            function savePortletOrder(event) {
+                $timeout(function() {
+                    $localStorage[storageKeyName] = angular.toJson(vm.panels);
+                });
+            }
+
+            function loadPortletOrder(event) {
+                var data = angular.fromJson($localStorage[storageKeyName]);
+                if (data) {
+                    $timeout(function() {
+                        vm.panels = data;
+                        vm.panelList1 = vm.panels[0];
+                        vm.panelList2 = vm.panels[1];
+                        vm.panelList3 = vm.panels[2];
+                    });
+                }
+            }
+
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.preloader')
+        .directive('preloader', preloader);
+
+    preloader.$inject = ['$animate', '$timeout', '$q'];
+    function preloader ($animate, $timeout, $q) {
+
+        var directive = {
+            restrict: 'EAC',
+            template: 
+              '<div class="preloader-progress">' +
+                  '<div class="preloader-progress-bar" ' +
+                       'ng-style="{width: loadCounter + \'%\'}"></div>' +
+              '</div>'
+            ,
+            link: link
+        };
+        return directive;
+
+        ///////
+
+        function link(scope, el) {
+
+          scope.loadCounter = 0;
+
+          var counter  = 0,
+              timeout;
+
+          // disables scrollbar
+          angular.element('body').css('overflow', 'hidden');
+          // ensure class is present for styling
+          el.addClass('preloader');
+
+          appReady().then(endCounter);
+
+          timeout = $timeout(startCounter);
+
+          ///////
+
+          function startCounter() {
+
+            var remaining = 100 - counter;
+            counter = counter + (0.015 * Math.pow(1 - Math.sqrt(remaining), 2));
+
+            scope.loadCounter = parseInt(counter, 10);
+
+            timeout = $timeout(startCounter, 20);
+          }
+
+          function endCounter() {
+
+            $timeout.cancel(timeout);
+
+            scope.loadCounter = 100;
+
+            $timeout(function(){
+              // animate preloader hiding
+              $animate.addClass(el, 'preloader-hidden');
+              // retore scrollbar
+              angular.element('body').css('overflow', '');
+            }, 300);
+          }
+
+          function appReady() {
+            var deferred = $q.defer();
+            var viewsLoaded = 0;
+            // if this doesn't sync with the real app ready
+            // a custom event must be used instead
+            var off = scope.$on('$viewContentLoaded', function () {
+              viewsLoaded ++;
+              // we know there are at least two views to be loaded 
+              // before the app is ready (1-index.html 2-app*.html)
+              if ( viewsLoaded === 2) {
+                // with resolve this fires only once
+                $timeout(function(){
+                  deferred.resolve();
+                }, 3000);
+
+                off();
+              }
+
+            });
+
+            return deferred.promise;
+          }
+
+        } //link
     }
 
 })();
@@ -13727,99 +13848,6 @@ group.$remove().then(function () {
     'use strict';
 
     angular
-        .module('app.preloader')
-        .directive('preloader', preloader);
-
-    preloader.$inject = ['$animate', '$timeout', '$q'];
-    function preloader ($animate, $timeout, $q) {
-
-        var directive = {
-            restrict: 'EAC',
-            template: 
-              '<div class="preloader-progress">' +
-                  '<div class="preloader-progress-bar" ' +
-                       'ng-style="{width: loadCounter + \'%\'}"></div>' +
-              '</div>'
-            ,
-            link: link
-        };
-        return directive;
-
-        ///////
-
-        function link(scope, el) {
-
-          scope.loadCounter = 0;
-
-          var counter  = 0,
-              timeout;
-
-          // disables scrollbar
-          angular.element('body').css('overflow', 'hidden');
-          // ensure class is present for styling
-          el.addClass('preloader');
-
-          appReady().then(endCounter);
-
-          timeout = $timeout(startCounter);
-
-          ///////
-
-          function startCounter() {
-
-            var remaining = 100 - counter;
-            counter = counter + (0.015 * Math.pow(1 - Math.sqrt(remaining), 2));
-
-            scope.loadCounter = parseInt(counter, 10);
-
-            timeout = $timeout(startCounter, 20);
-          }
-
-          function endCounter() {
-
-            $timeout.cancel(timeout);
-
-            scope.loadCounter = 100;
-
-            $timeout(function(){
-              // animate preloader hiding
-              $animate.addClass(el, 'preloader-hidden');
-              // retore scrollbar
-              angular.element('body').css('overflow', '');
-            }, 300);
-          }
-
-          function appReady() {
-            var deferred = $q.defer();
-            var viewsLoaded = 0;
-            // if this doesn't sync with the real app ready
-            // a custom event must be used instead
-            var off = scope.$on('$viewContentLoaded', function () {
-              viewsLoaded ++;
-              // we know there are at least two views to be loaded 
-              // before the app is ready (1-index.html 2-app*.html)
-              if ( viewsLoaded === 2) {
-                // with resolve this fires only once
-                $timeout(function(){
-                  deferred.resolve();
-                }, 3000);
-
-                off();
-              }
-
-            });
-
-            return deferred.promise;
-          }
-
-        } //link
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
         .module('app.reports')
         .factory('BankfileService', BankfileService);
 
@@ -13901,9 +13929,21 @@ group.$remove().then(function () {
         function activate() {
 
 
-        $scope.companysumaries=CompanySummaryService.get({periodId:1});
+        $scope.companysumaries=CompanySummaryService.get({periodId:12});
         console.log( $scope.companysumaries);
 
+
+
+
+$scope.searchCsummaryByperiod=function(id){
+             
+ if(id!=null && id!=""){
+
+
+    $scope.companysumaries=CompanySummaryService.get({periodId:id});
+ }
+  
+}
           
 
               $http.get(jadaApiUrl+'api/period').success(function(data) {
@@ -14998,52 +15038,31 @@ var currentperiod=1;
         function activate() {
 
 $scope.getp=function(){
-    
-var id =$http.get(jadaApiUrl+'api/currentperiod').success(function(data) {
-                $scope.result= data;
 
-                id=$scope.result.id;
-             
-                console.log("current period - "+$rootScope.currentperiod);
-               
-
+return $http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
+            
+         
+          return data.data.id;
+      
   
             });
-return id;
+
+
 
 
 }
 
-var cid=$scope.getp();
-
-  // console.log('curr6');
-                console.log(cid);
-// var cid = CurrentPeriod.name;
-// var name1=cid;
-
-console.log(  $scope.result);
 
 
-        // var currentperiod=12;
-        // var id=currentperiod;
+var curr=$scope.getp().then(function(data){
+ var curr=data.id;
+  console.log();
 
-        //   if(id!=null){
-        //    $scope.employee=EmployeeService.get({id:id}); 
-        //    var dob=$scope.employee.dateOfBirth;
-        //    console.log("date of birth : "+dob);
-    
-        //   }
+});
 
-// var currentperiodp=12;
-// var id=currentperiodp;
-// $http.get(jadaApiUrl+'api/payslipreport/'+id).success(function(data) {
-//               $scope.persons = data;
-//               console.log($scope.persons);
-//               $scope.message="hellow";
-
-//             });
-
-
+var response=angular.fromJson(curr);
+console.log('curr');
+console.log(curr);
 
 $scope.searchpayslipByperiod=function(id){
              
@@ -15056,8 +15075,8 @@ $scope.searchpayslipByperiod=function(id){
    $http.get(jadaApiUrl+'api/payslipreport/'+id).success(function(data) {
             $scope.persons = data;
               $scope.message='helllo period';
-                 console.log('helllo period');
-              console.log($scope.persons);
+              //    console.log('helllo period');
+              // console.log($scope.persons);
              
 
             });
@@ -15067,8 +15086,7 @@ $scope.searchpayslipByperiod=function(id){
 }
 
 $scope.searchpayslipByperiod(12);
- console.log('///humu');
-console.log($rootScope.pid);
+
 
 
          $scope.searchPayslip=function(user) {
@@ -15082,8 +15100,8 @@ console.log($rootScope.pid);
                 $scope.persons= data;
 
                  $scope.message="hellow period";
-      console.log('////hapa');
-              console.log($scope.persons);
+      // console.log('////hapa');
+      //         console.log($scope.persons);
 
 
             });
@@ -15239,84 +15257,6 @@ angular.module('app.reports').filter('unique', function () {
     return items;
   };
 });
-(function() {
-    'use strict';
-
-    angular
-        .module('app.settings')
-        .run(settingsRun);
-
-    settingsRun.$inject = ['$rootScope', '$localStorage'];
-
-    function settingsRun($rootScope, $localStorage){
-
-
-      // User Settings
-      // -----------------------------------
-      $rootScope.user = {
-        name:     'John',
-        job:      'ng-developer',
-        picture:  'app/img/user/02.jpg'
-      };
-
-      // Hides/show user avatar on sidebar from any element
-      $rootScope.toggleUserBlock = function(){
-        $rootScope.$broadcast('toggleUserBlock');
-      };
-
-      // Global Settings
-      // -----------------------------------
-      $rootScope.app = {
-        name: 'Jada',
-        description: 'Jada Payroll',
-        year: ((new Date()).getFullYear()),
-        layout: {
-          isFixed: true,
-          isCollapsed: false,
-          isBoxed: false,
-          isRTL: false,
-          horizontal: false,
-          isFloat: false,
-          asideHover: false,
-          theme: null,
-          asideScrollbar: false,
-          isCollapsedText: false
-        },
-        useFullLayout: false,
-        hiddenFooter: false,
-        offsidebarOpen: false,
-        asideToggled: false,
-        viewAnimation: 'ng-fadeInUp'
-      };
-
-      // Setup the layout mode
-      $rootScope.app.layout.horizontal = ( $rootScope.$stateParams.layout === 'app-h') ;
-
-      // Restore layout settings
-      if( angular.isDefined($localStorage.layout) )
-        $rootScope.app.layout = $localStorage.layout;
-      else
-        $localStorage.layout = $rootScope.app.layout;
-
-      $rootScope.$watch('app.layout', function () {
-        $localStorage.layout = $rootScope.app.layout;
-      }, true);
-
-      // Close submenu when sidebar change from collapsed to normal
-      $rootScope.$watch('app.layout.isCollapsed', function(newValue) {
-        if( newValue === false )
-          $rootScope.$broadcast('closeSidebarMenu');
-      });
-
-    }
-       function Logout() {
-            // remove user from local storage and clear http auth header
-            delete $localStorage.currentUser;
-            $http.defaults.headers.common.Authorization = '';
-        }
-
-})();
-
 /**=========================================================
  * Module: helpers.js
  * Provides helper functions for routes definition
@@ -16633,365 +16573,82 @@ angular.module('app.reports').filter('unique', function () {
 })();
 
 
-/**=========================================================
- * Module: sidebar-menu.js
- * Handle sidebar collapsible elements
- =========================================================*/
-
 (function() {
     'use strict';
 
     angular
-        .module('app.sidebar')
-        .controller('SidebarController', SidebarController);
+        .module('app.settings')
+        .run(settingsRun);
 
-    SidebarController.$inject = ['$rootScope', '$scope', '$state', 'SidebarLoader', 'Utils'];
-    function SidebarController($rootScope, $scope, $state, SidebarLoader,  Utils) {
+    settingsRun.$inject = ['$rootScope', '$localStorage'];
 
-        activate();
-
-        ////////////////
-
-        function activate() {
-          var collapseList = [];
-
-          // demo: when switch from collapse to hover, close all items
-          var watchOff1 = $rootScope.$watch('app.layout.asideHover', function(oldVal, newVal){
-            if ( newVal === false && oldVal === true) {
-              closeAllBut(-1);
-            }
-          });
+    function settingsRun($rootScope, $localStorage){
 
 
-          // Load menu from json file
-          // -----------------------------------
+      // User Settings
+      // -----------------------------------
+      $rootScope.user = {
+        name:     'John',
+        job:      'ng-developer',
+        picture:  'app/img/user/02.jpg'
+      };
 
-          SidebarLoader.getMenu(sidebarReady);
+      // Hides/show user avatar on sidebar from any element
+      $rootScope.toggleUserBlock = function(){
+        $rootScope.$broadcast('toggleUserBlock');
+      };
 
-          function sidebarReady(items) {
-            $scope.menuItems = items;
-          }
+      // Global Settings
+      // -----------------------------------
+      $rootScope.app = {
+        name: 'Jada',
+        description: 'Jada Payroll',
+        year: ((new Date()).getFullYear()),
+        layout: {
+          isFixed: true,
+          isCollapsed: false,
+          isBoxed: false,
+          isRTL: false,
+          horizontal: false,
+          isFloat: false,
+          asideHover: false,
+          theme: null,
+          asideScrollbar: false,
+          isCollapsedText: false
+        },
+        useFullLayout: false,
+        hiddenFooter: false,
+        offsidebarOpen: false,
+        asideToggled: false,
+        viewAnimation: 'ng-fadeInUp'
+      };
 
-          // Handle sidebar and collapse items
-          // ----------------------------------
+      // Setup the layout mode
+      $rootScope.app.layout.horizontal = ( $rootScope.$stateParams.layout === 'app-h') ;
 
-          $scope.getMenuItemPropClasses = function(item) {
-            return (item.heading ? 'nav-heading' : '') +
-                   (isActive(item) ? ' active' : '') ;
-          };
+      // Restore layout settings
+      if( angular.isDefined($localStorage.layout) )
+        $rootScope.app.layout = $localStorage.layout;
+      else
+        $localStorage.layout = $rootScope.app.layout;
 
-          $scope.addCollapse = function($index, item) {
-            collapseList[$index] = $rootScope.app.layout.asideHover ? true : !isActive(item);
-          };
+      $rootScope.$watch('app.layout', function () {
+        $localStorage.layout = $rootScope.app.layout;
+      }, true);
 
-          $scope.isCollapse = function($index) {
-            return (collapseList[$index]);
-          };
+      // Close submenu when sidebar change from collapsed to normal
+      $rootScope.$watch('app.layout.isCollapsed', function(newValue) {
+        if( newValue === false )
+          $rootScope.$broadcast('closeSidebarMenu');
+      });
 
-          $scope.toggleCollapse = function($index, isParentItem) {
-
-            // collapsed sidebar doesn't toggle drodopwn
-            if( Utils.isSidebarCollapsed() || $rootScope.app.layout.asideHover ) return true;
-
-            // make sure the item index exists
-            if( angular.isDefined( collapseList[$index] ) ) {
-              if ( ! $scope.lastEventFromChild ) {
-                collapseList[$index] = !collapseList[$index];
-                closeAllBut($index);
-              }
-            }
-            else if ( isParentItem ) {
-              closeAllBut(-1);
-            }
-
-            $scope.lastEventFromChild = isChild($index);
-
-            return true;
-
-          };
-
-          // Controller helpers
-          // -----------------------------------
-
-            // Check item and children active state
-            function isActive(item) {
-
-              if(!item) return;
-
-              if( !item.sref || item.sref === '#') {
-                var foundActive = false;
-                angular.forEach(item.submenu, function(value) {
-                  if(isActive(value)) foundActive = true;
-                });
-                return foundActive;
-              }
-              else
-                return $state.is(item.sref) || $state.includes(item.sref);
-            }
-
-            function closeAllBut(index) {
-              index += '';
-              for(var i in collapseList) {
-                if(index < 0 || index.indexOf(i) < 0)
-                  collapseList[i] = true;
-              }
-            }
-
-            function isChild($index) {
-              /*jshint -W018*/
-              return (typeof $index === 'string') && !($index.indexOf('-') < 0);
-            }
-
-            $scope.$on('$destroy', function() {
-                watchOff1();
-            });
-
-        } // activate
     }
-
-})();
-
-/**=========================================================
- * Module: sidebar.js
- * Wraps the sidebar and handles collapsed state
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.sidebar')
-        .directive('sidebar', sidebar);
-
-    sidebar.$inject = ['$rootScope', '$timeout', '$window', 'Utils'];
-    function sidebar ($rootScope, $timeout, $window, Utils) {
-        var $win = angular.element($window);
-        var directive = {
-            // bindToController: true,
-            // controller: Controller,
-            // controllerAs: 'vm',
-            link: link,
-            restrict: 'EA',
-            template: '<nav class="sidebar" ng-transclude></nav>',
-            transclude: true,
-            replace: true
-            // scope: {}
-        };
-        return directive;
-
-        function link(scope, element, attrs) {
-
-          var currentState = $rootScope.$state.current.name;
-          var $sidebar = element;
-
-          var eventName = Utils.isTouch() ? 'click' : 'mouseenter' ;
-          var subNav = $();
-
-          $sidebar.on( eventName, '.nav > li', function() {
-
-            if( Utils.isSidebarCollapsed() || $rootScope.app.layout.asideHover ) {
-
-              subNav.trigger('mouseleave');
-              subNav = toggleMenuItem( $(this), $sidebar);
-
-              // Used to detect click and touch events outside the sidebar
-              sidebarAddBackdrop();
-
-            }
-
-          });
-
-          var eventOff1 = scope.$on('closeSidebarMenu', function() {
-            removeFloatingNav();
-          });
-
-          // Normalize state when resize to mobile
-          $win.on('resize.sidebar', function() {
-            if( ! Utils.isMobile() )
-          	asideToggleOff();
-          });
-
-          // Adjustment on route changes
-          var eventOff2 = $rootScope.$on('$stateChangeStart', function(event, toState) {
-            currentState = toState.name;
-            // Hide sidebar automatically on mobile
-            asideToggleOff();
-
-            $rootScope.$broadcast('closeSidebarMenu');
-          });
-
-      	  // Autoclose when click outside the sidebar
-          if ( angular.isDefined(attrs.sidebarAnyclickClose) ) {
-
-            var wrapper = $('.wrapper');
-            var sbclickEvent = 'click.sidebar';
-
-            var watchOff1 = $rootScope.$watch('app.asideToggled', watchExternalClicks);
-
-          }
-
-          //////
-
-          function watchExternalClicks(newVal) {
-            // if sidebar becomes visible
-            if ( newVal === true ) {
-              $timeout(function(){ // render after current digest cycle
-                wrapper.on(sbclickEvent, function(e){
-                  // if not child of sidebar
-                  if( ! $(e.target).parents('.aside').length ) {
-                    asideToggleOff();
-                  }
-                });
-              });
-            }
-            else {
-              // dettach event
-              wrapper.off(sbclickEvent);
-            }
-          }
-
-          function asideToggleOff() {
-            $rootScope.app.asideToggled = false;
-            if(!scope.$$phase) scope.$apply(); // anti-pattern but sometimes necessary
-      	  }
-
-          scope.$on('$destroy', function() {
-            // detach scope events
-            eventOff1();
-            eventOff2();
-            watchOff1();
-            // detach dom events
-            $sidebar.off(eventName);
-            $win.off('resize.sidebar');
-            wrapper.off(sbclickEvent);
-          });
-
+       function Logout() {
+            // remove user from local storage and clear http auth header
+            delete $localStorage.currentUser;
+            $http.defaults.headers.common.Authorization = '';
         }
 
-        ///////
-
-        function sidebarAddBackdrop() {
-          var $backdrop = $('<div/>', { 'class': 'dropdown-backdrop'} );
-          $backdrop.insertAfter('.aside-inner').on('click mouseenter', function () {
-            removeFloatingNav();
-          });
-        }
-
-        // Open the collapse sidebar submenu items when on touch devices
-        // - desktop only opens on hover
-        function toggleTouchItem($element){
-          $element
-            .siblings('li')
-            .removeClass('open')
-            .end()
-            .toggleClass('open');
-        }
-
-        // Handles hover to open items under collapsed menu
-        // -----------------------------------
-        function toggleMenuItem($listItem, $sidebar) {
-
-          removeFloatingNav();
-
-          var ul = $listItem.children('ul');
-
-          if( !ul.length ) return $();
-          if( $listItem.hasClass('open') ) {
-            toggleTouchItem($listItem);
-            return $();
-          }
-
-          var $aside = $('.aside');
-          var $asideInner = $('.aside-inner'); // for top offset calculation
-          // float aside uses extra padding on aside
-          var mar = parseInt( $asideInner.css('padding-top'), 0) + parseInt( $aside.css('padding-top'), 0);
-          var subNav = ul.clone().appendTo( $aside );
-
-          toggleTouchItem($listItem);
-
-          var itemTop = ($listItem.position().top + mar) - $sidebar.scrollTop();
-          var vwHeight = $win.height();
-
-          subNav
-            .addClass('nav-floating')
-            .css({
-              position: $rootScope.app.layout.isFixed ? 'fixed' : 'absolute',
-              top:      itemTop,
-              bottom:   (subNav.outerHeight(true) + itemTop > vwHeight) ? 0 : 'auto'
-            });
-
-          subNav.on('mouseleave', function() {
-            toggleTouchItem($listItem);
-            subNav.remove();
-          });
-
-          return subNav;
-        }
-
-        function removeFloatingNav() {
-          $('.dropdown-backdrop').remove();
-          $('.sidebar-subnav.nav-floating').remove();
-          $('.sidebar li.open').removeClass('open');
-        }
-    }
-
-
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.sidebar')
-        .service('SidebarLoader', SidebarLoader);
-
-    SidebarLoader.$inject = ['$http'];
-    function SidebarLoader($http) {
-        this.getMenu = getMenu;
-
-        ////////////////
-
-        function getMenu(onReady, onError) {
-          var menuJson = 'server/sidebar-menu.json',
-              menuURL  = menuJson + '?v=' + (new Date().getTime()); // jumps cache
-            
-          onError = onError || function() { alert('Failure loading menu'); };
-
-          $http
-            .get(menuURL)
-            .success(onReady)
-            .error(onError);
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.sidebar')
-        .controller('UserBlockController', UserBlockController);
-
-    UserBlockController.$inject = ['$scope'];
-    function UserBlockController($scope) {
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          $scope.userBlockVisible = true;
-
-          var detach = $scope.$on('toggleUserBlock', function(/*event, args*/) {
-
-            $scope.userBlockVisible = ! $scope.userBlockVisible;
-
-          });
-
-          $scope.$on('$destroy', detach);
-        }
-    }
 })();
 
 /**=========================================================
@@ -18018,6 +17675,367 @@ angular.module('app.reports').filter('unique', function () {
         }
     }
 })();
+/**=========================================================
+ * Module: sidebar-menu.js
+ * Handle sidebar collapsible elements
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.sidebar')
+        .controller('SidebarController', SidebarController);
+
+    SidebarController.$inject = ['$rootScope', '$scope', '$state', 'SidebarLoader', 'Utils'];
+    function SidebarController($rootScope, $scope, $state, SidebarLoader,  Utils) {
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          var collapseList = [];
+
+          // demo: when switch from collapse to hover, close all items
+          var watchOff1 = $rootScope.$watch('app.layout.asideHover', function(oldVal, newVal){
+            if ( newVal === false && oldVal === true) {
+              closeAllBut(-1);
+            }
+          });
+
+
+          // Load menu from json file
+          // -----------------------------------
+
+          SidebarLoader.getMenu(sidebarReady);
+
+          function sidebarReady(items) {
+            $scope.menuItems = items;
+          }
+
+          // Handle sidebar and collapse items
+          // ----------------------------------
+
+          $scope.getMenuItemPropClasses = function(item) {
+            return (item.heading ? 'nav-heading' : '') +
+                   (isActive(item) ? ' active' : '') ;
+          };
+
+          $scope.addCollapse = function($index, item) {
+            collapseList[$index] = $rootScope.app.layout.asideHover ? true : !isActive(item);
+          };
+
+          $scope.isCollapse = function($index) {
+            return (collapseList[$index]);
+          };
+
+          $scope.toggleCollapse = function($index, isParentItem) {
+
+            // collapsed sidebar doesn't toggle drodopwn
+            if( Utils.isSidebarCollapsed() || $rootScope.app.layout.asideHover ) return true;
+
+            // make sure the item index exists
+            if( angular.isDefined( collapseList[$index] ) ) {
+              if ( ! $scope.lastEventFromChild ) {
+                collapseList[$index] = !collapseList[$index];
+                closeAllBut($index);
+              }
+            }
+            else if ( isParentItem ) {
+              closeAllBut(-1);
+            }
+
+            $scope.lastEventFromChild = isChild($index);
+
+            return true;
+
+          };
+
+          // Controller helpers
+          // -----------------------------------
+
+            // Check item and children active state
+            function isActive(item) {
+
+              if(!item) return;
+
+              if( !item.sref || item.sref === '#') {
+                var foundActive = false;
+                angular.forEach(item.submenu, function(value) {
+                  if(isActive(value)) foundActive = true;
+                });
+                return foundActive;
+              }
+              else
+                return $state.is(item.sref) || $state.includes(item.sref);
+            }
+
+            function closeAllBut(index) {
+              index += '';
+              for(var i in collapseList) {
+                if(index < 0 || index.indexOf(i) < 0)
+                  collapseList[i] = true;
+              }
+            }
+
+            function isChild($index) {
+              /*jshint -W018*/
+              return (typeof $index === 'string') && !($index.indexOf('-') < 0);
+            }
+
+            $scope.$on('$destroy', function() {
+                watchOff1();
+            });
+
+        } // activate
+    }
+
+})();
+
+/**=========================================================
+ * Module: sidebar.js
+ * Wraps the sidebar and handles collapsed state
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.sidebar')
+        .directive('sidebar', sidebar);
+
+    sidebar.$inject = ['$rootScope', '$timeout', '$window', 'Utils'];
+    function sidebar ($rootScope, $timeout, $window, Utils) {
+        var $win = angular.element($window);
+        var directive = {
+            // bindToController: true,
+            // controller: Controller,
+            // controllerAs: 'vm',
+            link: link,
+            restrict: 'EA',
+            template: '<nav class="sidebar" ng-transclude></nav>',
+            transclude: true,
+            replace: true
+            // scope: {}
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+
+          var currentState = $rootScope.$state.current.name;
+          var $sidebar = element;
+
+          var eventName = Utils.isTouch() ? 'click' : 'mouseenter' ;
+          var subNav = $();
+
+          $sidebar.on( eventName, '.nav > li', function() {
+
+            if( Utils.isSidebarCollapsed() || $rootScope.app.layout.asideHover ) {
+
+              subNav.trigger('mouseleave');
+              subNav = toggleMenuItem( $(this), $sidebar);
+
+              // Used to detect click and touch events outside the sidebar
+              sidebarAddBackdrop();
+
+            }
+
+          });
+
+          var eventOff1 = scope.$on('closeSidebarMenu', function() {
+            removeFloatingNav();
+          });
+
+          // Normalize state when resize to mobile
+          $win.on('resize.sidebar', function() {
+            if( ! Utils.isMobile() )
+          	asideToggleOff();
+          });
+
+          // Adjustment on route changes
+          var eventOff2 = $rootScope.$on('$stateChangeStart', function(event, toState) {
+            currentState = toState.name;
+            // Hide sidebar automatically on mobile
+            asideToggleOff();
+
+            $rootScope.$broadcast('closeSidebarMenu');
+          });
+
+      	  // Autoclose when click outside the sidebar
+          if ( angular.isDefined(attrs.sidebarAnyclickClose) ) {
+
+            var wrapper = $('.wrapper');
+            var sbclickEvent = 'click.sidebar';
+
+            var watchOff1 = $rootScope.$watch('app.asideToggled', watchExternalClicks);
+
+          }
+
+          //////
+
+          function watchExternalClicks(newVal) {
+            // if sidebar becomes visible
+            if ( newVal === true ) {
+              $timeout(function(){ // render after current digest cycle
+                wrapper.on(sbclickEvent, function(e){
+                  // if not child of sidebar
+                  if( ! $(e.target).parents('.aside').length ) {
+                    asideToggleOff();
+                  }
+                });
+              });
+            }
+            else {
+              // dettach event
+              wrapper.off(sbclickEvent);
+            }
+          }
+
+          function asideToggleOff() {
+            $rootScope.app.asideToggled = false;
+            if(!scope.$$phase) scope.$apply(); // anti-pattern but sometimes necessary
+      	  }
+
+          scope.$on('$destroy', function() {
+            // detach scope events
+            eventOff1();
+            eventOff2();
+            watchOff1();
+            // detach dom events
+            $sidebar.off(eventName);
+            $win.off('resize.sidebar');
+            wrapper.off(sbclickEvent);
+          });
+
+        }
+
+        ///////
+
+        function sidebarAddBackdrop() {
+          var $backdrop = $('<div/>', { 'class': 'dropdown-backdrop'} );
+          $backdrop.insertAfter('.aside-inner').on('click mouseenter', function () {
+            removeFloatingNav();
+          });
+        }
+
+        // Open the collapse sidebar submenu items when on touch devices
+        // - desktop only opens on hover
+        function toggleTouchItem($element){
+          $element
+            .siblings('li')
+            .removeClass('open')
+            .end()
+            .toggleClass('open');
+        }
+
+        // Handles hover to open items under collapsed menu
+        // -----------------------------------
+        function toggleMenuItem($listItem, $sidebar) {
+
+          removeFloatingNav();
+
+          var ul = $listItem.children('ul');
+
+          if( !ul.length ) return $();
+          if( $listItem.hasClass('open') ) {
+            toggleTouchItem($listItem);
+            return $();
+          }
+
+          var $aside = $('.aside');
+          var $asideInner = $('.aside-inner'); // for top offset calculation
+          // float aside uses extra padding on aside
+          var mar = parseInt( $asideInner.css('padding-top'), 0) + parseInt( $aside.css('padding-top'), 0);
+          var subNav = ul.clone().appendTo( $aside );
+
+          toggleTouchItem($listItem);
+
+          var itemTop = ($listItem.position().top + mar) - $sidebar.scrollTop();
+          var vwHeight = $win.height();
+
+          subNav
+            .addClass('nav-floating')
+            .css({
+              position: $rootScope.app.layout.isFixed ? 'fixed' : 'absolute',
+              top:      itemTop,
+              bottom:   (subNav.outerHeight(true) + itemTop > vwHeight) ? 0 : 'auto'
+            });
+
+          subNav.on('mouseleave', function() {
+            toggleTouchItem($listItem);
+            subNav.remove();
+          });
+
+          return subNav;
+        }
+
+        function removeFloatingNav() {
+          $('.dropdown-backdrop').remove();
+          $('.sidebar-subnav.nav-floating').remove();
+          $('.sidebar li.open').removeClass('open');
+        }
+    }
+
+
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.sidebar')
+        .service('SidebarLoader', SidebarLoader);
+
+    SidebarLoader.$inject = ['$http'];
+    function SidebarLoader($http) {
+        this.getMenu = getMenu;
+
+        ////////////////
+
+        function getMenu(onReady, onError) {
+          var menuJson = 'server/sidebar-menu.json',
+              menuURL  = menuJson + '?v=' + (new Date().getTime()); // jumps cache
+            
+          onError = onError || function() { alert('Failure loading menu'); };
+
+          $http
+            .get(menuURL)
+            .success(onReady)
+            .error(onError);
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.sidebar')
+        .controller('UserBlockController', UserBlockController);
+
+    UserBlockController.$inject = ['$scope'];
+    function UserBlockController($scope) {
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          $scope.userBlockVisible = true;
+
+          var detach = $scope.$on('toggleUserBlock', function(/*event, args*/) {
+
+            $scope.userBlockVisible = ! $scope.userBlockVisible;
+
+          });
+
+          $scope.$on('$destroy', detach);
+        }
+    }
+})();
+
 // (function() {
 //     'use strict';
 
@@ -19720,7 +19738,7 @@ $scope.loadUserAcconts();
 
 
               $scope.account=new UserAccountService();
-             $scope.submitUserAccount=function() {
+             $scope.submitUserAccount=function(accountform) {
               console.log('hellow');
           $scope.account.$save().then(function(data){
               var response=angular.fromJson(data);
@@ -19736,6 +19754,7 @@ $scope.loadUserAcconts();
             }
            
                 $rootScope.$emit("CallLoadUserAcconts", {});
+                $scope.accountReset(accountform);
           },
 
            function() {
@@ -19744,10 +19763,14 @@ $scope.loadUserAcconts();
                 });
         
           };
-
+$scope.accountReset = function(accountform){
+             $scope.accountform={};
+            $scope.account="";
+            accountform.$setPristine();
+            };
 
              $scope.submitUserAccountClose=function() {
-          $scope.user.$save().then(function(){
+          $scope.account.$save().then(function(){
             
                 $rootScope.$emit("CallLoadUserAcconts", {});
                 $scope.ok();
@@ -20060,7 +20083,7 @@ $scope.loadTasks();
 
 
               $scope.task=new TaskService();
-             $scope.submitTask=function() {
+             $scope.submitTask=function(taskform) {
           $scope.task.$save().then(function(data){
             var response=angular.fromJson(data);
           
@@ -20075,6 +20098,7 @@ $scope.loadTasks();
             }
            
                 $rootScope.$emit("CallLoadTasks", {});
+                  $scope.taskReset(taskform);
           },
            function() {
              $scope.SuccessMsg=false;
@@ -20082,7 +20106,11 @@ $scope.loadTasks();
                 });
         
           };
-
+  $scope.taskReset=function(taskform){
+             $scope.taskform={};
+            $scope.task="";
+            taskform.$setPristine();
+            };
            $scope.closeTask=function() {
           $scope.task.$save().then(function(){
            
@@ -20172,7 +20200,7 @@ $scope.loadTasks();
  var SuccessMsg;
  var errorMsg;
   $scope.users=userAdminService.query();
-console.log($scope.users);
+
 
  $scope.loadUsers = function () {
      
@@ -20265,7 +20293,7 @@ $scope.loadUsers();
 
 
               $scope.user=new userAdminService();
-             $scope.submitUser=function() {
+             $scope.submitUser=function(userform) {
               console.log();
           $scope.user.$save().then(function(data){
               var response=angular.fromJson(data);
@@ -20281,6 +20309,7 @@ $scope.loadUsers();
             }
            
                 $rootScope.$emit("CallLoadUsers", {});
+                $scope.userReset(userform);
           },
 
            function() {
@@ -20289,7 +20318,11 @@ $scope.loadUsers();
                 });
         
           };
-
+$scope.userReset = function(userform){
+             $scope.userform={};
+            $scope.user="";
+            userform.$setPristine();
+            };
 
              $scope.submitUserClose=function() {
           $scope.user.$save().then(function(){
@@ -20534,7 +20567,7 @@ $scope.loadUserGroups();
 
 
               $scope.usergroup=new UserGroupService();
-             $scope.submitUserGroup=function() {
+             $scope.submitUserGroup=function(usergroupform) {
           $scope.usergroup.$save().then(function(data){
               var response=angular.fromJson(data);
           
@@ -20549,6 +20582,7 @@ $scope.loadUserGroups();
             }
            
                 $rootScope.$emit("CallLoadUserGroups", {});
+                $scope.usergroupReset(usergroupform);
           },
 
            function() {
@@ -20557,6 +20591,11 @@ $scope.loadUserGroups();
                 });
         
           };
+$scope.usergroupReset=function(usergroupform){
+             $scope.usergroupform={};
+            $scope.usergroup="";
+            usergroupform.$setPristine();
+            };
 
 
              $scope.submitUserGroupClose=function() {
@@ -20580,8 +20619,8 @@ $scope.loadUserGroups();
   ModalInstanceCtrl.$inject = ['$scope', '$rootScope', '$http','$uibModalInstance','UserGroupService','usergroup'];
           function ModalInstanceCtrl($scope,$rootScope, $http, $uibModalInstance, UserGroupService,usergroup) {
        
- var id=usergroup.ID;
-    console.log('id'+id);
+          var id=usergroup.ID;
+  
 
             $scope.usergroup=UserGroupService.get({ID:id});
             console.log ($scope.usergroup);
@@ -20896,8 +20935,8 @@ $scope.loadUserRights();
         .module('app.useradministration')
         .controller('WorkflowController', WorkflowController);
 
-    WorkflowController.$inject = ['$scope','$rootScope', '$http', '$stateParams', '$state', '$uibModal', '$log', 'WorkflowService'];
-        function WorkflowController($scope, $rootScope, $http, $stateParams, $state, $uibModal, $log, WorkflowService) {
+    WorkflowController.$inject = ['$scope','$rootScope', '$http', '$stateParams', '$state', '$uibModal', '$log', 'WorkflowService','jadaApiUrl'];
+        function WorkflowController($scope, $rootScope, $http, $stateParams, $state, $uibModal, $log, WorkflowService,jadaApiUrl) {
         var vm = this;
 
         activate();
@@ -20917,7 +20956,11 @@ $scope.loadUserRights();
  //            if(id!=null){
  //           $scope.currentworkflow=WorkflowService.get({id:id});
  //          }
-           
+         $http.get(jadaApiUrl+'api/user').success(function(data) {
+              $scope.users = data;
+
+            });
+    
 
  $scope.loadWorkflows = function () {
      
@@ -21016,7 +21059,7 @@ $scope.loadWorkflows();
 
 
               $scope.workflow=new WorkflowService();
-             $scope.submitWorkflow=function() {
+             $scope.submitWorkflow=function(workflowform) {
           $scope.workflow.$save().then(function(data){
             var response=angular.fromJson(data);
           
@@ -21031,6 +21074,7 @@ $scope.loadWorkflows();
             }
            
                 $rootScope.$emit("CallLoadWorkflows", {});
+                $scope.workflowReset(workflowform);
           },function() {
              $scope.SuccessMsg=false;
                  $scope.errorMsg = 'Server Request Error';
@@ -21038,6 +21082,11 @@ $scope.loadWorkflows();
         
           };
           
+           $scope.workflowReset=function(workflowform){
+             $scope.workflowform={};
+            $scope.workflow="";
+            workflowform.$setPristine();
+            };
 
             $scope.closeWorkflow=function() {
           $scope.workflow.$save().then(function(){

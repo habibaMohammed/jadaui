@@ -130,7 +130,7 @@ $scope.loadUserGroups();
 
 
               $scope.usergroup=new UserGroupService();
-             $scope.submitUserGroup=function() {
+             $scope.submitUserGroup=function(usergroupform) {
           $scope.usergroup.$save().then(function(data){
               var response=angular.fromJson(data);
           
@@ -145,6 +145,7 @@ $scope.loadUserGroups();
             }
            
                 $rootScope.$emit("CallLoadUserGroups", {});
+                $scope.usergroupReset(usergroupform);
           },
 
            function() {
@@ -153,6 +154,11 @@ $scope.loadUserGroups();
                 });
         
           };
+$scope.usergroupReset=function(usergroupform){
+             $scope.usergroupform={};
+            $scope.usergroup="";
+            usergroupform.$setPristine();
+            };
 
 
              $scope.submitUserGroupClose=function() {
@@ -176,8 +182,8 @@ $scope.loadUserGroups();
   ModalInstanceCtrl.$inject = ['$scope', '$rootScope', '$http','$uibModalInstance','UserGroupService','usergroup'];
           function ModalInstanceCtrl($scope,$rootScope, $http, $uibModalInstance, UserGroupService,usergroup) {
        
- var id=usergroup.ID;
-    console.log('id'+id);
+          var id=usergroup.ID;
+  
 
             $scope.usergroup=UserGroupService.get({ID:id});
             console.log ($scope.usergroup);

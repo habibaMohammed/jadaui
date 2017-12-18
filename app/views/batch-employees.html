@@ -36,25 +36,54 @@
 
                <div class="text-center text-success" margin-top="md" ng-show="SuccessMsg">{{SuccessMsg}}</div>
              <div class="text-center text-danger"  margin-top="md" ng-show="errorMsg">{{errorMsg}}</div>
-             {{fileData}}
+            <!--  {{fileData}} -->
 </form>
 
       <div class="table-responsive table-bordered mb-lg">
          <table class="table">
             <thead>
                <tr>
-                   <th>Name</th>
-                  <th>Employee Number</th>
-                  <th>Id Number</th>
-                  <th>Passport Number</th>
-                  <th>Country Of Issue</th>
+                <th>Name</th>
+                <th>Employee Number</th>
+                <th>Id Number</th>
+                <th>Passport Number</th>
+                <th>Country Of Issue</th>
+                <th>EXpiry Date</th>
+                 <th>Date of Birth</th>
                  <th>Marital Status</th>
                  <th>Gender</th>
-                 <th>Emai Address</th>
+                 <th>Dependency</th>
+                 <th>Next of Kin</th>
+                  <th>Relationship with next of Kin</th>
+                  <th>Next of Kin Phone Number</th>
+                  <th>  Disability</th>
+                  <th> Nature of Disability</th>
+                  <th> Phone Number</th>
+
+                   <th>Emai Address</th>
+                   <th>Physical Address</th>
+                   <th>Postal Address</th>
+                     <th>Postal Code</th>
                  <th>Pin Number</th>
+                 <th>NHIF Number</th>
+                 <th>NSSF Number</th>
+                 <th>helb Number</th>
+                 <th>Employement Date</th>
+                 <th>Pay Point</th>
+                 <th>Pay Mode</th>
+                  <th>Bank Code</th>
+                  <th>Bank Name</th>
+                    <th>Bank Account Number</th>
+                     <th>Bank Account Name</th>
+                     <th>Bank Branch Name</th>
+                       <th>Department</th>
+                         <th>Cost Center</th>
+                           <th>Employee Category</th>
+                           <th>Employee Group</th>
+                            <th>Position</th>
                </tr>
             </thead>
-                  
+                
                  
             <tbody>
               
@@ -62,12 +91,40 @@
                   <td>{{data.name}}</td>
                   <td>{{data.employeeNumber}}</td>
                   <td>{{data.idNumber}}</td>
-                    <td>{{data.passportNumber}}</td>
-                    <td>{{data.countryOfIssue}}</td>
-                 <td>{{data.maritalStatus}}</td>
-                 <td>{{data.gender}}</td>
-                 <td>{{data.emailAddress}}</td>
-                 <td>{{data.pinNumber}}</td>
+                  <td>{{data.passportNumber}}</td>
+                  <td>{{data.countryOfIssue}}</td>
+                  <td>{{data.expiryDate}}</td>
+                  <td>{{data.DateOfBirth}}</td>
+                  <td>{{data.maritalStatus}}</td>
+                  <td>{{data.gender}}</td>
+                  <td>{{data.dependency}}</td>
+                  <td>{{data.nextOfKin}}</td>
+                  <td>{{data.relationshipWithKin}}</td>
+                  <td>{{data.nextOfKinPhoneNumber}}</td>
+                   <td>{{data.disability}}</td>
+                   <td>{{data.natureOfDisability}}</td>
+                  <td>{{data.phoneNumber}}</td>
+                  <td>{{data.emailAddress}}</td>
+                  <td>{{data.physicalAddress}}</td>
+                   <td>{{data.postalAddress}}</td>
+                   <td>{{data.postalCode}}</td>
+                   <td>{{data.pinNumber}}</td>
+                   <td>{{data.nhifNumber}}</td>
+                   <td>{{data.nssfNumber}}</td>
+                    <td>{{data.helbNumber}}</td>
+                    <td>{{data.employmentDate}}</td>
+                    <td>{{data.paypoint}}</td>
+                     <td>{{data.paymode}}</td>
+                      <td>{{data.bankcode}}</td>
+                      <td>{{data.bankName}}</td>
+                      <td>{{data.bankAccountNumber}}</td>
+                        <td>{{data.bankAccountName}}</td>
+                         <td>{{data.bankBranchName}}</td>
+                          <td>{{data.department}}</td>
+                           <td>{{data.costCenter}}</td>
+                           <td>{{data.employeeCategory}}</td>
+                            <td>{{data.employeeGroup}}</td>
+                            <td>{{data.position}}</td>
                </tr>
          
                

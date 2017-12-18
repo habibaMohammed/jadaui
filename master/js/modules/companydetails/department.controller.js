@@ -156,7 +156,7 @@ department.$remove().then(function () {
           ModalOpenDeptInstanceCtrl.$inject = ['$scope','$rootScope', '$uibModalInstance','DeptService'];
           function ModalOpenDeptInstanceCtrl($scope, $rootScope,$uibModalInstance, DeptService) {
           
-          $scope.deptform = {};
+          $scope.dept={};
             $scope.ok = function () {
               $uibModalInstance.close('closed');
             };
@@ -167,7 +167,7 @@ department.$remove().then(function () {
 
              
             $scope.dept=new DeptService();
-           $scope.submitdept=function() {
+           $scope.submitdept=function(deptform) {
 
 
            $scope.dept.$save().then(function(data){
@@ -179,8 +179,8 @@ department.$remove().then(function () {
                      $scope.errorMsg=false;
 
                     $scope.SuccessMsg =response.Message;
-                 $scope.deptform.markAsPristine();
-       
+        
+      
 
             }else{
            
@@ -189,8 +189,9 @@ department.$remove().then(function () {
               // vm.auth=true;
             }
              $rootScope.$emit("CallLoadDepartment", {});
+            
    
-           
+               $scope.resets(deptform);
 
            },
    
@@ -202,14 +203,24 @@ department.$remove().then(function () {
                //    $scope.dept = "";
                // $scope.deptform.$setPristine();
         });
+               
       
           }
 
-    //       $scope.initFunc = function(){
-    //     $scope.dept = " ";
-    //     $scope.deptform.$pristine = true;
-    //     $scope.deptform.$setPristine();
-    // };
+          $scope.resets = function(deptform){
+             $scope.deptform={};
+            $scope.dept = " ";
+            deptform.$setPristine();
+            };
+
+    $scope.resetsUpdate = function(deptform){
+             $scope.deptform={};
+       
+
+  
+       
+        deptform.$setPristine();
+    };
 
           $scope.submitdeptClose=function() {
            $scope.dept.$save().then(function(){
@@ -245,7 +256,8 @@ department.$remove().then(function () {
              department.$update().then(function(){
                    $rootScope.$emit("CallLoadDepartment", {});
             });
-          
+        
+             
               };
           
          

@@ -61,14 +61,17 @@
               
 
           <script type="text/ng-template" id="newTask.html">
-            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">New Task</h4></div><div class="modal-body"><!-- START panel-->
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">New Task</h4></div>
+            <div class="modal-body" ng-controller="TasksController"><!-- START panel-->
 
- <form class="form-horizontal"  ng-controller="TasksController">
+ <form class="form-horizontal" name="taskform" novalidate=""  >
     <div class="form-group">
                   <label class="col-lg-3">Task Description
 </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="trans_type" ng-model="task.description" placeholder="Task Name"/>
+                     <input class="form-control" type="text"  name="task" ng-model="task.description" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true" placeholder="Task Name"/>
+                       <span class="text-danger" ng-show="taskform.task.$dirty &amp;&amp; taskform.task.$error.required">This field is required</span>
+               <span class="text-danger" ng-show="taskform.task.$dirty &amp;&amp; taskform.task.$error.pattern"> No special characters allowed </span>
                   </div>
                </div>
                
@@ -82,8 +85,8 @@
               
                <div class="form-group">
                   <div class="col-lg-offset-3 col-lg-9">
-                     <button class="btn btn-info btn-sm mr" ng-click="submitTask()">Save and New</button>
-                         <button class="btn btn-info btn-sm mr" ng-click="closeTask()">Save and Close</button>
+                     <button class="btn btn-info btn-sm mr" ng-disabled="taskform.$invalid" ng-click="submitTask(taskform)">Save and New</button>
+                         <button class="btn btn-info btn-sm mr" ng-disabled="taskform.$invalid" ng-click="closeTask()">Save and Close</button>
                       <button class="btn btn-warning btn-sm" type="reset">Reset</button>
                   </div>
                </div>
@@ -98,7 +101,7 @@
              <script type="text/ng-template" id="EditTask.html">
             <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Edit Task</h4></div><div class="modal-body"><!-- START panel-->
 
- <form class="form-horizontal" ng-controller="TasksController">
+ <form class="form-horizontal" name="taskform" novalidate="" ng-controller="TasksController">
   <div class="form-group">
                   
                   <div class="col-lg-9">
@@ -109,7 +112,10 @@
                   <label class="col-lg-3">Task Name
 </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="trans_type" ng-model="currenttask.description" placeholder="Task Name"/>
+                     <input class="form-control" type="text"  name="task" ng-model="currenttask.description" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true" placeholder="Task Name"/>
+
+                     <span class="text-danger" ng-show="taskform.task.$dirty &amp;&amp; taskform.task.$error.required">This field is required</span>
+               <span class="text-danger" ng-show="taskform.task.$dirty &amp;&amp; taskform.task.$error.pattern"> No special characters allowed </span>
                   </div>
                </div>
               
@@ -125,7 +131,7 @@
               
                <div class="form-group">
                   <div class="col-lg-offset-3 col-lg-9">
-                     <button class="btn btn-info btn-sm" ng-click=updateTask(currenttask) >Update</button>
+                     <button class="btn btn-info btn-sm" ng-disabled="taskform.$invalid" ng-click=updateTask(currenttask) >Update</button>
                       <button class="btn btn-warning btn-sm" type="reset">Reset</button>
                   </div>
                </div>

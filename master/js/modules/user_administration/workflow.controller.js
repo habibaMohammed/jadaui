@@ -5,8 +5,8 @@
         .module('app.useradministration')
         .controller('WorkflowController', WorkflowController);
 
-    WorkflowController.$inject = ['$scope','$rootScope', '$http', '$stateParams', '$state', '$uibModal', '$log', 'WorkflowService'];
-        function WorkflowController($scope, $rootScope, $http, $stateParams, $state, $uibModal, $log, WorkflowService) {
+    WorkflowController.$inject = ['$scope','$rootScope', '$http', '$stateParams', '$state', '$uibModal', '$log', 'WorkflowService','jadaApiUrl'];
+        function WorkflowController($scope, $rootScope, $http, $stateParams, $state, $uibModal, $log, WorkflowService,jadaApiUrl) {
         var vm = this;
 
         activate();
@@ -26,7 +26,11 @@
  //            if(id!=null){
  //           $scope.currentworkflow=WorkflowService.get({id:id});
  //          }
-           
+         $http.get(jadaApiUrl+'api/user').success(function(data) {
+              $scope.users = data;
+
+            });
+    
 
  $scope.loadWorkflows = function () {
      
@@ -125,7 +129,7 @@ $scope.loadWorkflows();
 
 
               $scope.workflow=new WorkflowService();
-             $scope.submitWorkflow=function() {
+             $scope.submitWorkflow=function(workflowform) {
           $scope.workflow.$save().then(function(data){
             var response=angular.fromJson(data);
           
@@ -140,6 +144,7 @@ $scope.loadWorkflows();
             }
            
                 $rootScope.$emit("CallLoadWorkflows", {});
+                $scope.workflowReset(workflowform);
           },function() {
              $scope.SuccessMsg=false;
                  $scope.errorMsg = 'Server Request Error';
@@ -147,6 +152,11 @@ $scope.loadWorkflows();
         
           };
           
+           $scope.workflowReset=function(workflowform){
+             $scope.workflowform={};
+            $scope.workflow="";
+            workflowform.$setPristine();
+            };
 
             $scope.closeWorkflow=function() {
           $scope.workflow.$save().then(function(){

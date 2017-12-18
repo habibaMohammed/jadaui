@@ -65,9 +65,10 @@
       </div>
 
 <script type="text/ng-template" id="newUserAccount.html">
-            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Add Group</h4></div><div class="modal-body"><!-- START panel-->
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Add Group</h4></div>
+            <div class="modal-body"><!-- START panel-->
 
- <form class="form-horizontal" ng-controller="AccountsController">
+ <form class="form-horizontal" name="accountform" novalidate=""   ng-controller="AccountsController">
 
     <!--      <label>Enter cheque number:</label>
     <input type="text" ng-model="account.code" ng-change="onChqChange(account.code)"/> -->
@@ -75,14 +76,19 @@
                  <div class="form-group">
                   <label class="col-lg-3 control-label">Code</label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" name="trans_desc" ng-model="account.code"  placeholder="Enter group Code"/>
+                     <input class="form-control" type="text" name="code" ng-model="account.code" ng-pattern="/^[\w,]+$/" required=""  placeholder="Enter group Code"/>
+                     <span class="text-danger" ng-show="accountform.code.$dirty &amp;&amp; accountform.code.$error.required">This field is required</span>
+               <span class="text-danger" ng-show="accountform.code.$dirty &amp;&amp; accountform.code.$error.pattern">No special characters allowed</span>
                   </div>
                </div>
                  <div class="form-group">
                   <label class="col-lg-3 control-label">Description</label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" name="trans_desc" ng-model="account.description"  placeholder="Enter group Description"/>
+                     <input class="form-control" type="text" name="desc" ng-model="account.description" placeholder="Enter First Name"  ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/" ng-required="true" placeholder="Enter group Description"/>
+                     <span class="text-danger" ng-show="accountform.desc.$dirty &amp;&amp; accountform.desc.$error.required">This field is required</span>
+                      <span class="text-danger" ng-show="accountform.desc.$dirty &amp;&amp; accountform.desc.$error.pattern">No special characters allowed</span>
                   </div>
+                    
                </div>
                
 
@@ -98,8 +104,8 @@
               
                <div class="form-group">
                   <div class="col-lg-offset-3 col-lg-9">
-                     <button class="btn btn-info btn-sm" ng-click="submitUserAccount()">Save and New</button>
-                       <button class="btn btn-info btn-sm" ng-click="submitUserAccountClose()">Save and Close</button>
+                     <button class="btn btn-info btn-sm" ng-disabled="accountform.$invalid" ng-click="submitUserAccount(accountform)">Save and New</button>
+                       <button class="btn btn-info btn-sm" ng-disabled="accountform.$invalid" ng-click="submitUserAccountClose()">Save and Close</button>
                       <button class="btn btn-warning btn-sm" type="reset">Reset</button>
                   </div>
                </div>

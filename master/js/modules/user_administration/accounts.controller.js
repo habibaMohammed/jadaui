@@ -129,7 +129,7 @@ $scope.loadUserAcconts();
 
 
               $scope.account=new UserAccountService();
-             $scope.submitUserAccount=function() {
+             $scope.submitUserAccount=function(accountform) {
               console.log('hellow');
           $scope.account.$save().then(function(data){
               var response=angular.fromJson(data);
@@ -145,6 +145,7 @@ $scope.loadUserAcconts();
             }
            
                 $rootScope.$emit("CallLoadUserAcconts", {});
+                $scope.accountReset(accountform);
           },
 
            function() {
@@ -153,10 +154,14 @@ $scope.loadUserAcconts();
                 });
         
           };
-
+$scope.accountReset = function(accountform){
+             $scope.accountform={};
+            $scope.account="";
+            accountform.$setPristine();
+            };
 
              $scope.submitUserAccountClose=function() {
-          $scope.user.$save().then(function(){
+          $scope.account.$save().then(function(){
             
                 $rootScope.$emit("CallLoadUserAcconts", {});
                 $scope.ok();
