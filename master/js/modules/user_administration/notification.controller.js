@@ -35,30 +35,6 @@ return count;
 
 
 
-
-
-
-
-
-
-// $scope.show = function(x) {
-//     $scope.x = x;
-//     var modalInstance = $uibModal.open({
-//       templateUrl: 'edit-user-setting.html',
-//       controller: ModalInstanceCtrl,
-//       scope : $scope
-//     });
-//   };
-
-           
-
-          // Please note that $uibModalInstance represents a modal window (instance) dependency.
-          // It is not the same as the $uibModal service used above.
-
-
-          
-
-
           
 
         }

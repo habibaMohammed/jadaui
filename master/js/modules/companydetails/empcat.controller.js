@@ -115,7 +115,7 @@ $scope.show = function(category) {
             };
             $scope.employeecategory=EmpcatService.query();
            $scope.category=new EmpcatService();
-             $scope.submitEmpCategoty=function() {
+             $scope.submitEmpCategoty=function(categoryform) {
             
             $scope.category.$save().then(function(data){
               var response=angular.fromJson(data);
@@ -124,6 +124,7 @@ $scope.show = function(category) {
             if(response.Status=="1"){
                     $scope.errorMsg=false;
                     $scope.SuccessMsg =response.Message;
+                     $scope.categoryReset(categoryform);
             }else{
            
                   $scope.SuccessMsg=false;
@@ -138,6 +139,13 @@ $scope.show = function(category) {
                 });
           
           };
+
+
+          $scope.categoryReset=function(categoryform){
+             $scope.categoryform={};
+            $scope.category="";
+            categoryform.$setPristine();
+            };
 
           $scope.EmpCategotyClose=function() {
             

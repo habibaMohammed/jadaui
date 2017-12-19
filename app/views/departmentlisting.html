@@ -69,7 +69,7 @@
              <input class="form-control" type="text" name="deptcode" ng-model="dept.code" ng-minlength="2" placeholder="Department code" ng-required="true"
         ng-pattern="/^[\w,]+$/" ng-change="checkDepartment(dept.code)" />
                  <span class="text-danger" ng-show="deptform.deptcode.$dirty &amp;&amp; deptform.deptcode.$error.required">This field is required</span>
-               <span class="text-danger" ng-if="deptform.deptcode.$dirty &amp;&amp; deptform.deptcode.$error.pattern">This field is invalid:No special characters allowed here</span>
+               <span class="text-danger" ng-if="deptform.deptcode.$dirty &amp;&amp; deptform.deptcode.$error.pattern">This field is invalid:No special characters allowed</span>
 
              <span class="text-center text-danger"  margin-top="md" ng-show="errorMessage">{{errorMessage}}</span>
            </div>
