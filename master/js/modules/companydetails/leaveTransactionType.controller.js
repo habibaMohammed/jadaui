@@ -109,7 +109,7 @@ $scope.show = function(transaction) {
             };
             
                $scope.type=new leaveTTypeService();
-           $scope.submitLeaveTType=function() {
+           $scope.submitLeaveTType=function(leavetransform) {
            $scope.type.$save().then(function(data){
 
             var response=angular.fromJson(data);
@@ -125,6 +125,7 @@ $scope.show = function(transaction) {
           
             }
              $rootScope.$emit("CallLoadLeaveTTypes", {});
+             $scope.leaveTransactionReset(leavetransform);
 
            },
            function() {
@@ -134,8 +135,17 @@ $scope.show = function(transaction) {
     
           }
 
-             $scope.closeLeaveTType=function() {
-           $scope.type.$save().then(function(){
+
+      
+          $scope.leaveTransactionReset=function(leavetransform){
+             $scope.leavetransform={};
+            $scope.type="";
+            leavetransform.$setPristine();
+            };
+
+             $scope.closeLeaveTType=function(type) {
+              var leavetranType= new  leaveTTypeService(type);
+           leavetranType.$save().then(function(){
              $rootScope.$emit("CallLoadLeaveTTypes", {});
                $scope.ok ();
 

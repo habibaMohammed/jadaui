@@ -58,26 +58,40 @@
 
 
       <script type="text/ng-template" id="addLeave.html">
-            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Add Leave</h4></div><div class="modal-body"><!-- START panel-->
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Add Leave</h4></div>
+            <div class="modal-body" ng-controller="LeaveController"><!-- START panel-->
 
- <form class="form-horizontal" ng-controller="LeaveController">
+ <form class="form-horizontal" name="leavetypesform" novalidate>
                 <div class="form-group">
                   <label class="col-lg-3 control-label">Type
 </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="leave_name"  ng-model="leave.code" placeholder="Leave Type"/>
+                     <input class="form-control" type="text"  name="leave_name"  ng-model="leave.code" ng-required="true"
+        ng-pattern="/^[\w,]+$/" placeholder="Leave Type"/>
+
+        <span class="text-danger" ng-show="leavetypesform.leave_name.$dirty &amp;&amp; leavetypesform.leave_name.$error.required">This field is required</span>
+               <span class="text-danger" ng-if="leavetypesform.leave_name.$dirty &amp;&amp; leavetypesform.leave_name.$error.pattern">This field is invalid:No special characters allowed </span>
                   </div>
                </div>
                <div class="form-group">
                   <label class="col-lg-3 control-label"> Description</label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" name="leave_desc" ng-model="leave.description" placeholder="eg. Annual"/>
+                     <input class="form-control" type="text" name="leave_desc" ng-model="leave.description" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true" placeholder="eg. Annual"/>
+                           <span class="text-danger" ng-show="leavetypesform.leave_desc.$dirty &amp;&amp; leavetypesform.leave_desc.$error.required">This field is required </span>
+               <span class="text-danger" ng-if="leavetypesform.leave_desc.$dirty &amp;&amp; leavetypesform.leave_desc.$error.pattern">This field is invalid:No special characters allowed </span>
+
                   </div>
                </div>
                 <div class="form-group">
                   <label class="col-lg-3 control-label">Entitlement</label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" name="l_entitlement" ng-model="leave.entitlement"  placeholder="eg 21 days"/>
+                     <input class="form-control" type="number" name="l_entitlement" ng-model="leave.entitlement"  ng-required="true" placeholder="eg 21 days"/>
+
+                          <span class="text-danger" ng-show="leavetypesform.l_entitlement.$dirty &amp;&amp; leavetypesform.l_entitlement.$error.required">This field is required
+                       </span>
+
+                        <span class="text-danger" ng-show="leavetypesform.l_entitlement.$dirty &amp;&amp; leavetypesform.l_entitlement.$error.number">This field must be a number
+                       </span>
                   </div>
                </div>
 
@@ -86,8 +100,8 @@
               
                <div class="form-group">
                   <div class="col-lg-offset-3 col-lg-9">
-                     <button class="btn btn-info btn-sm" ng-click="submitLeaveTypes()">Save and New</button>
-                       <button class="btn btn-info btn-sm" ng-click="closesubmitLeaveTypes()">Save and Close</button>
+                     <button class="btn btn-info btn-sm" ng-disabled="leavetypesform.$invalid" ng-click="submitLeaveTypes(leavetypesform)">Save and New</button>
+                       <button class="btn btn-info btn-sm" ng-disabled="leavetypesform.$invalid" ng-click="closesubmitLeaveTypes(leave)">Save and Close</button>
                         <button class="btn btn-warning btn-sm" type="reset">Reset</button>
                   </div>
                </div>
@@ -102,30 +116,40 @@
             <script type="text/ng-template" id="editLeave.html">
             <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Edit Leave</h4></div><div class="modal-body"><!-- START panel-->
 
- <form class="form-horizontal">
+ <form class="form-horizontal" name="leavetypesform" novalidate>
   <div class="form-group">
-                  <label class="col-lg-3 control-label">Id</label>
+                 
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="leave_name"  ng-model="leave.id" placeholder="Leave Type"/>
+                     <input class="form-control" type="hidden"  name="leave_name"  ng-model="leave.id" placeholder="Leave Type"/>
                   </div>
                </div>
                 <div class="form-group">
                   <label class="col-lg-3 control-label">Type
 </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="leave_name"  ng-model="leave.code" placeholder="Leave Type"/>
+                     <input class="form-control" type="text"  name="leave_name"  ng-model="leave.code" ng-required="true"
+        ng-pattern="/^[\w,]+$/" placeholder="Leave Type"/>
+
+        <span class="text-danger" ng-show="leavetypesform.leave_name.$dirty &amp;&amp; leavetypesform.leave_name.$error.required">This field is required</span>
+               <span class="text-danger" ng-if="leavetypesform.leave_name.$dirty &amp;&amp; leavetypesform.leave_name.$error.pattern">This field is invalid:No special characters allowed </span>
                   </div>
                </div>
                <div class="form-group">
                   <label class="col-lg-3 control-label"> Description</label>
                   <div class="col-lg-9">
                      <input class="form-control" type="text" name="leave_desc" ng-model="leave.description" placeholder="eg. Annual"/>
+                      <span class="text-danger" ng-show="leavetypesform.leave_desc.$dirty &amp;&amp; leavetypesform.leave_desc.$error.required">This field is required </span>
+               <span class="text-danger" ng-if="leavetypesform.leave_desc.$dirty &amp;&amp; leavetypesform.leave_desc.$error.pattern">This field is invalid:No special characters allowed </span>
+
                   </div>
                </div>
                 <div class="form-group">
                   <label class="col-lg-3 control-label">Entitlement</label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" name="l_entitlement" ng-model="leave.entitlement"  placeholder="eg 21 days"/>
+                     <input class="form-control" type="text" name="l_entitlement" ng-model="leave.entitlement" ng-required="true" placeholder="eg 21 days"/>
+
+                     <span class="text-danger" ng-show="leavetypesform.l_entitlement.$dirty &amp;&amp; leavetypesform.l_entitlement.$error.required">This field is required
+                       </span>
                   </div>
                </div>
 

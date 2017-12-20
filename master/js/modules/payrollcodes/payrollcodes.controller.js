@@ -118,7 +118,7 @@ code.$remove().then(function () {
               $uibModalInstance.dismiss('cancel');
             };
          $scope.payrollcodes=new PayrollCodesService();
-             $scope.submitPayrollCode=function() {
+             $scope.submitPayrollCode=function(payrollcodeform) {
           $scope.payrollcodes.$save().then(function(data){
              var response=angular.fromJson(data);
           
@@ -132,6 +132,8 @@ code.$remove().then(function () {
            
             }
              $rootScope.$emit("CallloadPlist", {});
+
+          $scope.pcodeReset(payrollcodeform);
           },
           function() {
              $scope.SuccessMsg=false;
@@ -141,8 +143,17 @@ code.$remove().then(function () {
         
           };
 
-              $scope.submitPayrollCodeClose=function() {
-          $scope.payrollcodes.$save().then(function(){
+
+          $scope.pcodeReset=function(payrollcodeform){
+             $scope.payrollcodeform={};
+            $scope.payrollcodes="";
+            payrollcodeform.$setPristine();
+            };
+
+              $scope.submitPayrollCodeClose=function(payrollcodes) {
+
+                var pcodes=new PayrollCodesService(payrollcodes)
+          pcodes.$save().then(function(){
              $rootScope.$emit("CallloadPlist", {});
              $scope.ok();
           },function() {

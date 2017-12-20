@@ -91,10 +91,8 @@ $scope.dayDiff = function(firstDate, secondDate){
 
 
    $scope.leavepost=new LeaveProcessingService();
-             $scope.submitLeaveApplication=function() {
-   //             $scope.leavepost = {isApproved:false};
-   // $scope.leavepost = {approvalComment:" "};
-              console.log('submitted');
+             $scope.submitLeaveApplication=function(leavepostform) {
+ 
           $scope.leavepost.$save().then(function(data){
              var response=angular.fromJson(data);
           
@@ -107,8 +105,8 @@ $scope.dayDiff = function(firstDate, secondDate){
                    $scope.errorMsg=response.Message;
            
             }
-         
-console.log( $scope.leavepost);
+          $scope.leavePostingReset(leavepostform);
+
           }, 
           function() {
              $scope.SuccessMsg=false;
@@ -118,7 +116,11 @@ console.log( $scope.leavepost);
           };
 
 
-
+  $scope.leavePostingReset=function(leavepostform){
+             $scope.leavepostform={};
+            $scope.leavepost="";
+            leavepostform.$setPristine();
+            };
 
 
       

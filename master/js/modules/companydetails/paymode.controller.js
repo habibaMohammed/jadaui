@@ -109,7 +109,7 @@ paymode.$remove().then(function () {
             };
             $scope.paymode=new PayModeService();
             
-             $scope.submitPayMode=function() {
+             $scope.submitPayMode=function(paymodeform) {
            $scope.paymode.$save().then(function(data){
           var response=angular.fromJson(data);
           
@@ -123,7 +123,7 @@ paymode.$remove().then(function () {
               // vm.auth=true;
             }
           $rootScope.$emit("CallLoadPaymodes", {});
-       
+         $scope.paymodeReset(paymodeform);
          },
           function() {
               $scope.SuccessMsg=false;
@@ -132,8 +132,18 @@ paymode.$remove().then(function () {
  
           };
 
-           $scope.ClosePayMode=function() {
-         $scope.paymode.$save().then(function(data){
+
+   
+          $scope.paymodeReset=function(paymodeform){
+
+             $scope.paymodeform={};
+            $scope.paymode="";
+            paymodeform.$setPristine();
+            };
+
+           $scope.ClosePayMode=function(paymode) {
+                var savepaymode=new PayModeService(paymode);
+         savepaymode.$save().then(function(data){
          
           $rootScope.$emit("CallLoadPaymodes", {});
           $scope.ok();

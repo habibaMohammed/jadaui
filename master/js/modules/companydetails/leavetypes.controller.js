@@ -107,7 +107,7 @@ $scope.show = function(leaveType) {
             };
             
                $scope.leave=new leaveService();
-           $scope.submitLeaveTypes=function() {
+           $scope.submitLeaveTypes=function(paypointform) {
            $scope.leave.$save().then(function(data){
 
              var response=angular.fromJson(data);
@@ -123,6 +123,7 @@ $scope.show = function(leaveType) {
           
             }
              $rootScope.$emit("CallLoadLeaveTypes", {});
+              $scope.leavetypeReset();
 
            },
            function() {
@@ -131,8 +132,15 @@ $scope.show = function(leaveType) {
                 });
     
           }
-             $scope.closesubmitLeaveTypes=function() {
-           $scope.leave.$save().then(function(){
+
+           $scope.leavetypeReset=function(paypointform){
+             $scope.paypointform={};
+            $scope.leave="";
+            paypointform.$setPristine();
+            };
+             $scope.closesubmitLeaveTypes=function(leave) {
+              var saveleave=new leaveService(leave);
+           saveleave.$save().then(function(){
              $rootScope.$emit("CallLoadLeaveTypes", {});
                $scope.ok();
 
