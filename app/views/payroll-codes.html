@@ -85,16 +85,20 @@
 
 
          <script type="text/ng-template" id="addPCodes.html">
-            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Add Payroll Code</h4></div><div class="modal-body">
-<form class="form-horizontal"    ng-controller="PayrollCodesController">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Add Payroll Code</h4></div>
+            <div class="modal-body"   ng-controller="PayrollCodesController">
+  <form class="form-horizontal"   name="payrollcodeform" novalidate  >
            <div class="form-group">
                   <label class="col-lg-3 control-label"> code
 
                  </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" ng-model="payrollcodes.code" name="element_code
-" placeholder="Enter Code
-" />
+             <input class="form-control" type="text" ng-model="payrollcodes.code" name="code" ng-required="true"
+        ng-pattern="/^[\w,]+$/"  placeholder="Enter Code" />
+
+  <span class="text-danger" ng-show="payrollcodeform.$submitted &amp;&amp; payrollcodeform.code.$error.required">This field is required</span>
+               <span class="text-danger" ng-if="payrollcodeform.code.$dirty &amp;&amp; payrollcodeform.code.$error.pattern">This field is invalid:No special characters allowed </span>
+
                   </div>
                </div>
                <div class="form-group">
@@ -102,10 +106,11 @@
 
                  </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  ng-model="payrollcodes.description" name="code_desc
-" placeholder="Enter Descriptions
+                     <input class="form-control" type="text"  ng-model="payrollcodes.description" name="code_desc"  ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true" placeholder="Enter Descriptions " />
 
-                   " />
+
+  <span class="text-danger" ng-show="payrollcodeform.$submitted &amp;&amp; payrollcodeform.code_desc.$error.required">This field is required</span>
+               <span class="text-danger" ng-if="payrollcodeform.code_desc.$dirty &amp;&amp; payrollcodeform.code_desc.$error.pattern">This field is invalid:No special characters allowed </span>
                   </div>
                </div>
 
@@ -118,11 +123,12 @@
                   <div class="col-lg-9">
                   
 
-                    <select  class="form-control" name="department"  ng-model="payrollcodes.payrollCodeGroupId" ng-options="group.id as group.description for group in pgroups">
+                    <select  class="form-control" name="payrollCodeGroup"  ng-model="payrollcodes.payrollCodeGroupId" ng-options="group.id as group.description for group in pgroups" ng-required="true">
                      <option value="" disabled selected>Payroll Codes Group</option>
 
                      
                      </select>
+                     <span class="text-danger" ng-show="payrollcodeform.$submitted &amp;&amp; payrollcodeform.payrollCodeGroup.$error.required">This field is required</span>
                   </div>
                </div>
 
@@ -134,16 +140,18 @@
    <div class="col-lg-9">
             <div class="radio c-radio">
                 <label>
-                    <input type="radio" name="itemstate" ng-value="true" ng-model="payrollcodes.isRecurrent">
+                    <input type="radio" name="itemstate" ng-value="true" ng-model="payrollcodes.isRecurrent" ng-required="true">
                    <span class="fa fa-circle"></span> Yes
                 </label>
             </div>
             <div class="radio c-radio">
                 <label>
-                    <input type="radio" name="itemstate" ng-value="false"  ng-model="payrollcodes.isRecurrent">
+                    <input type="radio" name="itemstate" ng-value="false"  ng-model="payrollcodes.isRecurrent" ng-required="true">
                     <span class="fa fa-circle"></span>No
                 </label>
             </div>
+
+            <span class="text-danger" ng-show="payrollcodeform.$submitted &amp;&amp; payrollcodeform.itemstate.$error.required">This field is required</span>
             </div>
         </div>
                
@@ -152,16 +160,17 @@
    <div class="col-lg-9">
             <div class="radio c-radio">
                 <label>
-                    <input type="radio" name="Formula" ng-value="true" ng-model="payrollcodes.isFormula">
+                    <input type="radio" name="Formula" ng-value="true" ng-model="payrollcodes.isFormula" ng-required="true">
                    <span class="fa fa-circle"></span> Yes
                 </label>
             </div>
             <div class="radio c-radio">
                 <label>
-                    <input type="radio" name="Formula" ng-value="false"  ng-model="payrollcodes.isFormula">
+                    <input type="radio" name="Formula" ng-value="false"  ng-model="payrollcodes.isFormula" ng-required="true">
                     <span class="fa fa-circle"></span>No
                 </label>
             </div>
+               <span class="text-danger" ng-show="payrollcodeform.$submitted &amp;&amp; payrollcodeform.Formula.$error.required">This field is required</span>
             </div>
         </div>
         <div class="form-group">
@@ -169,16 +178,17 @@
    <div class="col-lg-9">
             <div class="radio c-radio">
                 <label>
-                    <input type="radio" name="Taxable" ng-value="true" ng-model="payrollcodes.isTaxable">
+                    <input type="radio" name="Taxable" ng-value="true" ng-model="payrollcodes.isTaxable" ng-required="true">
                    <span class="fa fa-circle"></span> Yes
                 </label>
             </div>
             <div class="radio c-radio">
                 <label>
-                    <input type="radio" name="Taxable" ng-value="false" ng-model="payrollcodes.isTaxable">
+                    <input type="radio" name="Taxable" ng-value="false" ng-model="payrollcodes.isTaxable" ng-required="true">
                     <span class="fa fa-circle"></span>No
                 </label>
             </div>
+             <span class="text-danger" ng-show="payrollcodeform.$submitted &amp;&amp; payrollcodeform.Taxable.$error.required">This field is required</span>
             </div>
         </div>
                
@@ -186,8 +196,8 @@
                      
               <div class="form-group">
                   <div class="col-lg-offset-3 col-lg-9">
-                  <button class="btn btn-sm btn-primary mr"  ng-click="submitPayrollCode()" >Save and New</button>
-                   <button class="btn btn-sm btn-primary mr"  ng-click="submitPayrollCodeClose()" >Save and Close</button>
+                  <button class="btn btn-sm btn-primary mr"  ng-click="payrollcodeform.$valid && submitPayrollCode(payrollcodeform)" >Save and New</button>
+                   <button class="btn btn-sm btn-primary mr"  ng-click="payrollcodeform.$valid && submitPayrollCodeClose(payrollcodes)" >Save and Close</button>
                    <button class="btn btn-sm btn-warning mr"  type="reset">Reset</button>
                    </div>
                </div>
@@ -204,18 +214,17 @@
 
 
         <script type="text/ng-template" id="EditPCodes.html">
-            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Edit Payroll Code</h4></div><div class="modal-body">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Edit Payroll Code</h4></div>
+            <div class="modal-body" ng-controller="PayrollCodesController">
 
 
-            <form class="form-horizontal" ng-controller="PayrollCodesController">
+            <form class="form-horizontal" name="payrollcodeform" novalidate  >
                 <div class="form-group">
                
 
               
                   <div class="col-lg-9">
-                     <input class="form-control" type="hidden" ng-model="code.id" name="element_code
-" placeholder="Element code
-" />
+                     <input class="form-control" type="hidden" ng-model="code.id" name="element_code" placeholder="Element code" />
                   </div>
                </div>
            <div class="form-group">
@@ -223,9 +232,10 @@
 
                  </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" ng-model="code.code" name="element_code
-" placeholder="Enter Code
-" />
+                     <input class="form-control" type="text" ng-model="code.code" name="code" ng-required="true"
+        ng-pattern="/^[\w,]+$/" placeholder="Enter Code" />
+                      <span class="text-danger" ng-show="payrollcodeform.$submitted &amp;&amp; payrollcodeform.code.$error.required">This field is required</span>
+               <span class="text-danger" ng-if="payrollcodeform.code.$dirty &amp;&amp; payrollcodeform.code.$error.pattern">This field is invalid:No special characters allowed </span>
                   </div>
                </div>
                <div class="form-group">
@@ -233,10 +243,10 @@
 
                  </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  ng-model="code.description" name="code_description
-" placeholder="Enter Descriptions
+                     <input class="form-control" type="text"  ng-model="code.description" name="code_description" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true" placeholder="Enter Descriptions" />
 
-                   " />
+  <span class="text-danger" ng-show="payrollcodeform.$submitted &amp;&amp; payrollcodeform.code_description.$error.required">This field is required</span>
+               <span class="text-danger" ng-if="payrollcodeform.code_description.$dirty &amp;&amp; payrollcodeform.code_description.$error.pattern">This field is invalid:No special characters allowed </span>
                   </div>
                </div>
 
@@ -246,11 +256,12 @@
                   <div class="col-lg-9">
                   
 
-                    <select  class="form-control" name="payrollCodeGroup"  ng-model="code.payrollCodeGroupId" ng-options="group.id as group.description for group in pgroups">
+                    <select  class="form-control" name="group"  ng-model="code.payrollCodeGroupId" ng-options="group.id as group.description for group in pgroups"  ng-required="true">
                      <option value="" disabled selected>Payroll Codes Group</option>
 
                      
                      </select>
+                      <span class="text-danger" ng-show="payrollcodeform.$submitted &amp;&amp; payrollcodeform.group.$error.required">This field is required</span>
                   </div>
                </div>
 
@@ -262,16 +273,17 @@
    <div class="col-lg-9">
             <div class="radio c-radio">
                 <label>
-                    <input type="radio" name="itemstate" ng-value="true" ng-model="code.isRecurrent">
+                    <input type="radio" name="itemstate" ng-value="true" ng-model="code.isRecurrent" ng-required="true">
                    <span class="fa fa-circle"></span> Yes
                 </label>
             </div>
             <div class="radio c-radio">
                 <label>
-                    <input type="radio" name="itemstate"  ng-value="false" ng-model="code.isRecurrent">
+                    <input type="radio" name="itemstate"  ng-value="false" ng-model="code.isRecurrent" ng-required="true">
                     <span class="fa fa-circle"></span>No
                 </label>
             </div>
+              <span class="text-danger" ng-show="payrollcodeform.$submitted &amp;&amp; payrollcodeform.itemstate.$error.required">This field is required</span>
             </div>
         </div>
                
@@ -280,16 +292,17 @@
    <div class="col-lg-9">
             <div class="radio c-radio">
                 <label>
-                    <input type="radio" name="Formula"  ng-value="true" ng-model="code.isFormula">
+                    <input type="radio" name="Formula"  ng-value="true" ng-model="code.isFormula" ng-required="true">
                    <span class="fa fa-circle"></span> Yes
                 </label>
             </div>
             <div class="radio c-radio">
                 <label>
-                    <input type="radio" name="Formula"  ng-value="false" ng-model="code.isFormula">
+                    <input type="radio" name="Formula"  ng-value="false" ng-model="code.isFormula" ng-required="true">
                     <span class="fa fa-circle"></span>No
                 </label>
             </div>
+             <span class="text-danger" ng-show="payrollcodeform.$submitted &amp;&amp; payrollcodeform.Formula.$error.required">This field is required</span>
             </div>
         </div>
         <div class="form-group">
@@ -297,16 +310,17 @@
    <div class="col-lg-9">
             <div class="radio c-radio">
                 <label>
-                    <input type="radio" name="Taxable" ng-value="true" ng-model="code.isTaxable">
+                    <input type="radio" name="Taxable" ng-value="true" ng-model="code.isTaxable" ng-required="true">
                    <span class="fa fa-circle"></span> Yes
                 </label>
             </div>
             <div class="radio c-radio">
                 <label>
-                    <input type="radio" name="Taxable" ng-value="false" ng-model="code.taxable">
+                    <input type="radio" name="Taxable" ng-value="false" ng-model="code.isTaxable" ng-required="true">
                     <span class="fa fa-circle"></span>No
                 </label>
             </div>
+            <span class="text-danger" ng-show="payrollcodeform.$submitted &amp;&amp; payrollcodeform.Taxable.$error.required">This field is required</span>
             </div>
         </div>
                
@@ -314,7 +328,7 @@
                      
               <div class="form-group">
                   <div class="col-lg-offset-3 col-lg-9">
-                  <button class="btn btn-sm btn-primary mr"  ng-click="updatepayrollcodes(code)">Update</button>
+                  <button class="btn btn-sm btn-primary mr"  ng-click="payrollcodeform.$valid && updatepayrollcodes(code)">Update</button>
                   <button class="btn btn-sm btn-warning mr"  type="reset">Reset</button>
                    </div>
                </div>
@@ -328,115 +342,4 @@
   
 </div>
 
-
-
-      <!-- END panel-->
-
-
-<!-- START panel-->
-<!-- <div class="col-sm-8">
-<div class="container-fluid" ng-controller="FormValidationController as form">
-<div class="panel panel-default">
-   <div class="panel-heading"> <h3 class="panel-title">New payroll item</h3> </div>
-    <div class="panel-body">
-            <form class="form-validate form-horizontal" name="form.formValidate" ng-submit="form.submitForm()" novalidate="">
-              
-              <div class="form-group">
-                        <label class="col-sm-2 control-label">Group name</label>
-                        <div class="col-lg-10">
-                    <select class="form-control" name="group_name" required="" ng-model="select">
-                              <option value="">Nothing</option>
-                              <option value="1">Option 1</option>
-                              <option value="2">Option 2</option>
-                              <option value="3">Option 3</option>
-                              <option value="4">Option 4</option>
-                           </select>
-                           <span class="text-danger" ng-show="form.validateInput('group_name', 'required')">This field is required</span> -->
-                     
-                        <!-- <div class="col-sm-4">
-                           <small class="text-muted">type='number'</small>
-                        </div> -->
-                <!--   </div>
-                           
-                     </div>
-               <div class="form-group">
-                  <label class="col-lg-2 control-label">Group code
-                   </label>
-                  <div class="col-lg-10">
-                     <input class="form-control" type="text" placeholder="Group code
-                   " />
-                  </div>
-               </div>
-
-
-               <div class="form-group">
-                  <label class="col-lg-2 control-label">Element code
-
-                 </label>
-                  <div class="col-lg-10">
-                     <input class="form-control" type="text" name="element_code
-" placeholder="Element code
-" />
-                  </div>
-               </div>
-
-
-                <div class="form-group">
-                        <label class="col-sm-2 control-label">Item state </label>
-                        <div class="col-sm-6">
-                       
-                         
-                           
-                           <div class="radio c-radio">
-                              <label>
-                                 <input type="radio" required="" name="radio" value="recurrent" ng-model="radio" />
-                                 <span class="fa fa-circle"></span>Recurrent
-</label>
-                           </div>
-                           <div class="radio c-radio">
-                              <label>
-                                 <input type="radio" required="" name="radio" value="non_recurrent" ng-model="radio" />
-                                 <span class="fa fa-circle"></span>Non recurrent
-</label>
-                           </div>
-                           <span class="text-danger" ng-show="form.validateInput('radio', 'required')">This field is required</span>
-                        </div>
-                        <div class="col-sm-4"></div>
-                     </div>
-               <div class="form-group">
-                  <label class="col-lg-2 control-label">Descriptions
-
-                 </label>
-                  <div class="col-lg-10">
-                     <input class="form-control" type="text"  name="code_desc
-" placeholder="Descriptions
-
-                   " />
-                  </div>
-               </div>
-              
-                     
-              <div class="form-group">
-                  <div class="col-lg-offset-2 col-lg-10">
-                  <button class="btn btn-sm btn-default" type="submit">Submit</button>
-                   </div>
-               </div>
-            </form>
-         </div>
-</div>
-</div>
-</div> -->
-<!-- END panel-->
-
-
-
-
-<!-- <form ng-submit="submit()" ng-controller="ExampleController">
-  Enter text and hit enter:
-  <input type="text" ng-model="text" name="text" />
- 
-  <input type="submit" id="submit" value="Submit" />
-  <pre>list={{list}}</pre>
-</form>
- -->
 

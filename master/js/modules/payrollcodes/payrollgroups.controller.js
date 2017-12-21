@@ -105,7 +105,7 @@ group.$remove().then(function () {
 
 
            $scope.pgroup=new PayrollGroupService();
-             $scope.submitPayrollGroup=function() {
+             $scope.submitPayrollGroup=function(payrollgroupform) {
             
             $scope.pgroup.$save().then(function(data){
                  var response=angular.fromJson(data);
@@ -120,6 +120,7 @@ group.$remove().then(function () {
            
             }
                 $rootScope.$emit("CallLoadPayrollGroups", {});
+                  $scope.pgroupReset(payrollgroupform);
             },
             function() {
              $scope.SuccessMsg=false;
@@ -128,9 +129,17 @@ group.$remove().then(function () {
     
           };
 
-           $scope.ClosePayrollGroup=function() {
+
+            $scope.pgroupReset=function(payrollgroupform){
+             $scope.payrollgroupform={};
+            $scope.pgroup="";
+            payrollgroupform.$setPristine();
+            };
+
+           $scope.ClosePayrollGroup=function(pgroup) {
+            var savepgroup=new PayrollGroupService(pgroup);
             
-            $scope.pgroup.$save().then(function(){
+            savepgroup.$save().then(function(){
                 $rootScope.$emit("CallLoadPayrollGroups", {});
                 $scope.ok();
             },

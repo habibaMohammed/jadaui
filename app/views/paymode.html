@@ -54,20 +54,28 @@
 
 
       <script type="text/ng-template" id="addPayMode.html">
-        <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Add Pay Mode</h4></div><div class="modal-body"><!-- START panel-->
+        <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Add Pay Mode</h4></div>
+        <div class="modal-body" ng-controller="PayModeController"><!-- START panel-->
 
-         <form class="form-horizontal"  ng-controller="PayModeController" >
+         <form class="form-horizontal" name="paymodeform" novalidate  >
 
            <div class="form-group">
             <label class="col-lg-3 control-label">Code</label>
             <div class="col-lg-9">
-             <input class="form-control" type="text" name="ppoint_code" ng-model="paymode.code" placeholder="Enter Code"/>
+             <input class="form-control" type="text" name="code" ng-model="paymode.code" ng-required="true"
+        ng-pattern="/^[\w,]+$/"  placeholder="Enter Code"/>
+             <span class="text-danger" ng-show="paymodeform.code.$dirty &amp;&amp; paymodeform.code.$error.required">This field is required</span>
+               <span class="text-danger" ng-if="paymodeform.code.$dirty &amp;&amp; paymodeform.code.$error.pattern">This field is invalid:No special characters allowed </span>
            </div>
          </div>
          <div class="form-group">
           <label class="col-lg-3 control-label">Descriptions</label>
           <div class="col-lg-9">
-           <input class="form-control" type="text" name="ppoint_description" ng-model="paymode.description" placeholder="Enter Descriptions"/>
+           <input class="form-control" type="text" name="description" ng-model="paymode.description" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true"  placeholder="Enter Descriptions"/>
+
+              <span class="text-danger" ng-show="paymodeform.description.$dirty &amp;&amp; paymodeform.description.$error.required">This field is required
+         </span>
+               <span class="text-danger" ng-if="paymodeform.description.$dirty &amp;&amp; paymodeform.description.$error.pattern">This field is invalid:No special characters allowed </span>
          </div>
        </div>
 
@@ -76,8 +84,8 @@
 
        <div class="form-group">
         <div class="col-lg-offset-3 col-lg-9">
-         <button class="btn btn-info btn-sm" ng-click="submitPayMode()">Save and New</button>
-           <button class="btn btn-info btn-sm" ng-click="ClosePayMode()">Save and Close</button>
+         <button class="btn btn-info btn-sm" ng-disabled="paymodeform.$invalid" ng-click="submitPayMode(paymodeform)">Save and New</button>
+           <button class="btn btn-info btn-sm" ng-disabled="paymodeform.$invalid" ng-click="ClosePayMode(paymode)">Save and Close</button>
            <button class="btn btn-warning btn-sm" type="reset">Reset</button>
        </div>
      </div>
@@ -90,26 +98,35 @@
 
 
  <script type="text/ng-template" id="editPayMode.html">
-  <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Edit Pay Mode</h4></div><div class="modal-body"><!-- START panel-->
+  <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Edit Pay Mode</h4></div>
+  <div class="modal-body" ng-controller="PayModeController" ><!-- START panel-->
 
-   <form class="form-horizontal" ng-controller="PayModeController" >
+   <form class="form-horizontal" name="paymodeform" novalidate >
 
      <div class="form-group">
     
       <div class="col-lg-12">
-       <input class="form-control" type="hidden" name="ppoint_code" ng-model="paymode.id" />
+       <input class="form-control" type="hidden" name="id" ng-model="paymode.id" />
      </div>
    </div>
     <div class="form-group">
       <label class="col-lg-3 control-label">Code</label>
       <div class="col-lg-9">
-       <input class="form-control" type="text" name="ppoint_code" ng-model="paymode.code" placeholder="Pay Point code"/>
+       <input class="form-control" type="text" name="code" ng-model="paymode.code" ng-required="true"
+        ng-pattern="/^[\w,]+$/" placeholder="Pay Mode Code"/>
+
+         <span class="text-danger" ng-show="paymodeform.code.$dirty &amp;&amp; paymodeform.code.$error.required">This field is required</span>
+               <span class="text-danger" ng-if="paymodeform.code.$dirty &amp;&amp; paymodeform.code.$error.pattern">This field is invalid:No special characters allowed </span>
      </div>
    </div>
    <div class="form-group">
     <label class="col-lg-3 control-label">Descriptions</label>
     <div class="col-lg-9">
-     <input class="form-control" type="text" name="ppoint_description" ng-model="paymode.description" placeholder="Enter Pay Mode description"/>
+     <input class="form-control" type="text" name="description" ng-model="paymode.description" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true"  placeholder="Enter Pay Mode description"/>
+
+      <span class="text-danger" ng-show="paymodeform.description.$dirty &amp;&amp; paymodeform.description.$error.required">This field is required
+         </span>
+               <span class="text-danger" ng-if="paymodeform.description.$dirty &amp;&amp; paymodeform.description.$error.pattern">This field is invalid:No special characters allowed </span>
    </div>
  </div>
 
@@ -118,7 +135,7 @@
 
                    <div class="form-group">
                         <div class="col-lg-offset-3 col-lg-9">
-                         <button class="btn btn-info btn-sm" ng-click="updatePayMode(paymode)">Update</button>
+                         <button class="btn btn-info btn-sm" ng-disabled="paymodeform.$invalid" ng-click="updatePayMode(paymode)">Update</button>
                            <button class="btn btn-warning btn-sm" type="reset">Reset</button>
                        </div>
                      </div>

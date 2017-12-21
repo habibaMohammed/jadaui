@@ -54,20 +54,29 @@
 
 
       <script type="text/ng-template" id="AddPayFrequency.html">
-        <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Add Pay Frequency</h4></div><div class="modal-body"><!-- START panel-->
+        <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Add Pay Frequency</h4></div>
+        <div class="modal-body" ng-controller="PayFrequencyController" ><!-- START panel-->
 
-         <form class="form-horizontal" ng-controller="PayFrequencyController" >
+         <form class="form-horizontal"  name="payfrequencyform" novalidate>
 
            <div class="form-group">
             <label class="col-lg-3 control-label">Code</label>
             <div class="col-lg-9">
-             <input class="form-control" type="text" name="ppoint_code" ng-model="pfrequency.code" placeholder="Enter Code"/>
+             <input class="form-control" type="text" name="code" ng-model="pfrequency.code" ng-required="true"
+        ng-pattern="/^[\w,]+$/" placeholder="Enter Code"/>
+
+               <span class="text-danger" ng-show="payfrequencyform.code.$dirty &amp;&amp; payfrequencyform.code.$error.required">This field is required</span>
+               <span class="text-danger" ng-if="payfrequencyform.code.$dirty &amp;&amp; payfrequencyform.code.$error.pattern">This field is invalid:No special characters allowed </span>
            </div>
          </div>
          <div class="form-group">
           <label class="col-lg-3 control-label">Descriptions</label>
           <div class="col-lg-9">
-                    <input class="form-control" type="text" name="pay_frequency" ng-model="pfrequency.description" placeholder="Enter Description"/>
+                    <input class="form-control" type="text" name="description" ng-model="pfrequency.description"  ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true" placeholder="Enter Description"/>
+                    <span class="text-danger" ng-show="payfrequencyform.description.$dirty &amp;&amp; payfrequencyform.description.$error.required">This field is required
+         </span>
+               <span class="text-danger" ng-if="payfrequencyform.description.$dirty &amp;&amp; payfrequencyform.description.$error.pattern">This field is invalid:No special characters allowed </span>
+
  
     
          </div>
@@ -78,8 +87,8 @@
 
        <div class="form-group">
         <div class="col-lg-offset-3 col-lg-9">
-         <button class="btn btn-info btn-sm mr" ng-click="submitPFrequency()">Save And New</button>
-         <button class="btn btn-info btn-sm mr" ng-click="closePFrequency()">Save And Close</button>
+         <button class="btn btn-info btn-sm mr" ng-disabled="payfrequencyform.$invalid"  ng-click="submitPFrequency(payfrequencyform)">Save And New</button>
+         <button class="btn btn-info btn-sm mr"  ng-disabled="payfrequencyform.$invalid"  ng-click="closePFrequency()">Save And Close</button>
 
 
            <button class="btn btn-warning btn-sm" type="reset">Reset</button>
@@ -94,38 +103,39 @@
 
 
  <script type="text/ng-template" id="EditPayFrequency.html">
-  <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Edit Pay Frequency</h4></div><div class="modal-body"><!-- START panel-->
+  <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Edit Pay Frequency</h4></div>
+  <div class="modal-body" ng-controller="PayFrequencyController"><!-- START panel-->
 
-   <form class="form-horizontal" ng-controller="PayFrequencyController">
+   <form class="form-horizontal"  name="payfrequencyform" novalidate >
 
      <div class="form-group">
     
       <div class="col-lg-12">
-       <input class="form-control" type="hidden" name="ppoint_code" ng-model="frequency.id" />
+       <input class="form-control" type="hidden" name="id"  ng-model="frequency.id" />
      </div>
    </div>
     <div class="form-group">
       <label class="col-lg-3 control-label">Code</label>
       <div class="col-lg-9">
-       <input class="form-control" type="text" name="ppoint_code" ng-model="frequency.code" placeholder="Enter Code"/>
+       <input class="form-control" type="text" name="code" ng-model="frequency.code" ng-required="true"
+        ng-pattern="/^[\w,]+$/"  placeholder="Enter Code"/>
+       <span class="text-danger" ng-show="payfrequencyform.code.$dirty &amp;&amp; payfrequencyform.code.$error.required">This field is required</span>
+               <span class="text-danger" ng-if="payfrequencyform.code.$dirty &amp;&amp; payfrequencyform.code.$error.pattern">This field is invalid:No special characters allowed </span>
      </div>
    </div>
    <div class="form-group">
     <label class="col-lg-3 control-label">Descriptions</label>
-    <div class="col-lg-9">
+  
         <div class="col-lg-9">
-       <input class="form-control" type="text" name="frequency.description" ng-model="frequency.description" placeholder="Enter Code"/>
+       <input class="form-control" type="text" name="description" ng-model="frequency.description"  ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true"  placeholder="Enter Code"/>
+         <span class="text-danger" ng-show="payfrequencyform.description.$dirty &amp;&amp; payfrequencyform.description.$error.required">This field is required
+         </span>
+               <span class="text-danger" ng-if="payfrequencyform.description.$dirty &amp;&amp; payfrequencyform.description.$error.pattern">This field is invalid:No special characters allowed </span>
      </div>
 
-      <!--  <select class="form-control" name="pay_frequency"  ng-model="frequency.description">
-                              <option value="">Nothing</option>
-                              <option value="Monthly">Monthly</option>
-                              <option value="Weekly">Weekly</option>
-                              <option value="Biweekly">Biweekly</option>
-                              
-                           </select>
-     -->
-   </div>
+  
+  
+ 
  </div>
 
 
@@ -133,7 +143,7 @@
 
                    <div class="form-group">
                         <div class="col-lg-offset-3 col-lg-9">
-                         <button class="btn btn-info btn-sm mr" ng-click="updatePayFrequency(frequency)">Update</button>
+                         <button class="btn btn-info btn-sm mr" ng-disabled="payfrequencyform.$invalid"  ng-click="updatePayFrequency(frequency)">Update</button>
                            <button class="btn btn-warning btn-sm mr" type="reset">Reset</button>
                        </div>
                      </div>

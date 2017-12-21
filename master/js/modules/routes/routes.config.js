@@ -672,7 +672,7 @@
              .state('app.leave-setup', {
               url: '/leavesetup',
               title: 'payroll-details',
-              templateUrl: helper.basepath('leave-setup.html')
+              templateUrl: helper.basepath('leave-types.html')
           })
               .state('app.leave-approve', {
               url: '/leave_approve',
@@ -745,10 +745,10 @@
                 resolve: helper.resolveFor('datatables')
           })
 
-           .state('app.payroll-process', {
-              url: '/payroll_process',
+           .state('app.employee-posting', {
+              url: '/employee_posting',
               title: 'payroll process',
-              templateUrl: helper.basepath('processpayroll.html'),
+              templateUrl: helper.basepath('employeeposting.html'),
                resolve: helper.resolveFor('xeditable')
           })
            .state('app.payslip-preview', {
@@ -1178,7 +1178,7 @@
  .state('app.leave', {
               url: '/leaves',
               title: 'leaves',
-                templateUrl: helper.basepath('leave.html'),
+                templateUrl: helper.basepath('leavereport.html'),
                  
              
           })

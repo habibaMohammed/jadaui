@@ -109,7 +109,7 @@ point.$remove().then(function () {
             };
         
            $scope.pfrequency=new PayFrequencyService();
-             $scope.submitPFrequency=function() {
+             $scope.submitPFrequency=function(payfrequencyform) {
             
             $scope.pfrequency.$save().then(function(data){
                var response=angular.fromJson(data);
@@ -125,6 +125,7 @@ point.$remove().then(function () {
         
             }
                     $rootScope.$emit("CallLoadPayfrequencies", {});
+                    $scope.pfrequencyReset(payfrequencyform);
             }, 
              function() {
                 $scope.SuccessMsg=false;
@@ -132,6 +133,14 @@ point.$remove().then(function () {
                 });
 
           };
+
+
+
+          $scope.pfrequencyReset=function(payfrequencyform){
+             $scope.payfrequencyform={};
+            $scope.pfrequency="";
+            payfrequencyform.$setPristine();
+            };
 
            $scope.closePFrequency=function() {
             

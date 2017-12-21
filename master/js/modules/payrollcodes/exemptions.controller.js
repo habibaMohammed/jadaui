@@ -131,7 +131,7 @@ employee.$remove().then(function () {
               $uibModalInstance.dismiss('cancel');
             };
             $scope.exempt=new ExemptionsService();
-             $scope.submitExempt=function() {
+             $scope.submitExempt=function(exemptionform) {
           $scope.exempt.$save().then(function(data){
             var response=angular.fromJson(data);
           
@@ -146,6 +146,8 @@ employee.$remove().then(function () {
             }
            
                 $rootScope.$emit("CallExemptemployees", {});
+
+            $scope.exempReset(exemptionform);
           },
            function() {
              $scope.SuccessMsg=false;
@@ -154,6 +156,11 @@ employee.$remove().then(function () {
         
           };
           
+            $scope.exempReset=function(exemptionform){
+             $scope.exemptionform={};
+            $scope.exempt="";
+            exemptionform.$setPristine();
+            };
 
              $scope.CloseExempt=function() {
           $scope.exempt.$save().then(function(){

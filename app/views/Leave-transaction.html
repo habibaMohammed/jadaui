@@ -49,20 +49,27 @@
 
 
 <script type="text/ng-template" id="AddTType.html">
-            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Add Leave Transaction</h4></div><div class="modal-body"><!-- START panel-->
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Add Leave Transaction</h4></div>
+            <div class="modal-body"><!-- START panel-->
 
- <form class="form-horizontal">
+ <form class="form-horizontal" name="leavetransform" novalidate>
                 <div class="form-group">
                   <label class="col-lg-3 control-label">Transaction Type
 </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="trans_type" ng-model="type.code" placeholder="Enter Transaction Type"/>
+                     <input class="form-control" type="text"  name="trans_type" ng-model="type.code"  ng-required="true"
+        ng-pattern="/^[\w,]+$/"  placeholder="Enter Transaction Type"/>
+         <span class="text-danger" ng-show="leavetransform.trans_type.$dirty &amp;&amp; leavetransform.trans_type.$error.required">This field is required</span>
+               <span class="text-danger" ng-if="leavetransform.trans_type.$dirty &amp;&amp; leavetransform.trans_type.$error.pattern">This field is invalid:No special characters allowed </span>
                   </div>
                </div>
                <div class="form-group">
                   <label class="col-lg-3 control-label">Trasaction Description</label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" name="trans_desc" ng-model="type.description"  placeholder="Enter Trasaction Description"/>
+                     <input class="form-control" type="text" name="trans_desc" ng-model="type.description"  ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true" placeholder="Enter Trasaction Description"/>
+
+                      <span class="text-danger" ng-show="leavetransform.trans_desc.$dirty &amp;&amp; leavetransform.trans_desc.$error.required">This field is required</span>
+               <span class="text-danger" ng-if="leavetransform.trans_desc.$dirty &amp;&amp; leavetransform.trans_desc.$error.pattern">This field is invalid:No special characters allowed </span>
                   </div>
                </div>
             
@@ -72,8 +79,8 @@
               
                <div class="form-group">
                   <div class="col-lg-offset-3 col-lg-9">
-                     <button class="btn btn-info btn-sm mr" ng-click="submitLeaveTType()">Save and New</button>
-                      <button class="btn btn-info btn-sm mr" ng-click="closeLeaveTType()">Save and Close</button>
+                     <button class="btn btn-info btn-sm mr" ng-disabled="leavetransform.$invalid"  ng-click="submitLeaveTType(leavetransform)">Save and New</button>
+                      <button class="btn btn-info btn-sm mr" ng-disabled="leavetransform.$invalid" ng-click="closeLeaveTType(type)">Save and Close</button>
                       <button class="btn btn-warning btn-sm mr" type="reset">Cancel</button>
                   </div>
                </div>
@@ -93,7 +100,7 @@
 <script type="text/ng-template" id="editTType.html">
             <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Edit Leave Transaction Type</h4></div><div class="modal-body"><!-- START panel-->
 
- <form class="form-horizontal">
+ <form class="form-horizontal" name="leavetransform" novalidate>
 
 
   <div class="form-group">
@@ -102,17 +109,25 @@
                      <input class="form-control" type="hidden"  name="trans_type" ng-model="type.id" placeholder="Transaction Type"/>
                   </div>
                </div>
-                <div class="form-group">
+               
+
+               <div class="form-group">
                   <label class="col-lg-3 control-label">Transaction Type
 </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="trans_type" ng-model="type.code" placeholder="Enter Transaction Type"/>
+                     <input class="form-control" type="text"  name="trans_type" ng-model="type.code"  ng-required="true"
+        ng-pattern="/^[\w,]+$/"  placeholder="Enter Transaction Type"/>
+         <span class="text-danger" ng-show="leavetransform.trans_type.$dirty &amp;&amp; leavetransform.trans_type.$error.required">This field is required</span>
+               <span class="text-danger" ng-if="leavetransform.trans_type.$dirty &amp;&amp; leavetransform.trans_type.$error.pattern">This field is invalid:No special characters allowed </span>
                   </div>
                </div>
                <div class="form-group">
                   <label class="col-lg-3 control-label">Trasaction Description</label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text" name="trans_desc" ng-model="type.description"  placeholder="Enter Trasaction Description"/>
+                     <input class="form-control" type="text" name="trans_desc" ng-model="type.description"  ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true" placeholder="Enter Trasaction Description"/>
+
+                      <span class="text-danger" ng-show="leavetransform.trans_desc.$dirty &amp;&amp; leavetransform.trans_desc.$error.required">This field is required</span>
+               <span class="text-danger" ng-if="leavetransform.trans_desc.$dirty &amp;&amp; leavetransform.trans_desc.$error.pattern">This field is invalid:No special characters allowed </span>
                   </div>
                </div>
             
@@ -122,7 +137,7 @@
               
                <div class="form-group">
                   <div class="col-lg-offset-3 col-lg-9">
-                     <button class="btn btn-info btn-sm" ng-click="updateLeaveTType(type)">Update</button>
+                     <button class="btn btn-info btn-sm" ng-disabled="leavetransform.$invalid"  ng-click="updateLeaveTType(type)">Update</button>
                       <button class="btn btn-warning btn-sm" type="reset">Reset</button>
                   </div>
                </div>

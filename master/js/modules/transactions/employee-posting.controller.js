@@ -278,6 +278,8 @@ $scope.show = function(trans) {
             $scope.saveCloseTransaction=function(transactionposting) {
                  var usertransactionposting=new employeePostingService(transactionposting);
          usertransactionposting.$save().then(function(){
+          $scope.transactionposting.payrollCodeId=' ';
+                     $scope.transactionposting.amount=' ';
             $rootScope.$emit("CallLoadTransactions", {});
             $scope.ok();
 

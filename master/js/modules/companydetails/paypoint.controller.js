@@ -109,7 +109,7 @@ point.$remove().then(function () {
             };
             $scope.ppoint=new PaypointService();
             
-             $scope.submitPayPoint=function() {
+             $scope.submitPayPoint=function(paypointform) {
            $scope.ppoint.$save().then(function(data){
           var response=angular.fromJson(data);
           
@@ -123,6 +123,7 @@ point.$remove().then(function () {
               // vm.auth=true;
             }
           $rootScope.$emit("CallParentMethod", {});
+           $scope.ppointReset(paypointform);
        
          },
           function() {
@@ -132,8 +133,18 @@ point.$remove().then(function () {
  
           };
 
-           $scope.ClosePayPoint=function() {
-         $scope.ppoint.$save().then(function(data){
+
+      
+          $scope.ppointReset=function(leavetypesform){
+             $scope.leavetypesform={};
+            $scope.ppoint="";
+            leavetypesform.$setPristine();
+            };
+
+
+           $scope.ClosePayPoint=function(ppoint) {
+            var saveppoint= new PaypointService(ppoint);
+         saveppoint.$save().then(function(data){
          
           $rootScope.$emit("CallParentMethod", {});
           $scope.ok();

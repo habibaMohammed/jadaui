@@ -125,7 +125,7 @@
     "child": "fa fa-chevron-down",
    
     "submenu": [
-      {"text": " Employee Posting", "sref": "app.payroll-process"},
+      {"text": " Employee Posting", "sref": "app.employee-posting"},
        {"text": "Batch Posting", "sref": "app.bulktrans_input"},
       
        {"text": "Payroll Run ", "sref": "app.run"},
