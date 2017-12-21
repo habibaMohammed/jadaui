@@ -55,30 +55,36 @@
 
 
       <script type="text/ng-template" id="EmpCategoryContent.html">
-        <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Add new category</h4></div><div class="modal-body"><!-- START panel-->
-<form class="form-horizontal" ng-controller="EmpCatController" >
+        <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Add new category</h4></div>
+        <div class="modal-body" ng-controller="EmpCatController"><!-- START panel-->
+        <form class="form-horizontal" name="categoryform" novalidate  >
 
            <div class="form-group">
             <label class="col-lg-3 control-label">Code</label>
             <div class="col-lg-9">
-             <input class="form-control" type="text" name="code" ng-model="category.code" placeholder=" Enter Category code"/>
+             <input class="form-control" type="text" name="code" ng-model="category.code" ng-required="true"
+        ng-pattern="/^[\w,]+$/"  placeholder=" Enter Category code"/>
+         <span class="text-danger" ng-show="categoryform.code.$dirty &amp;&amp; categoryform.code.$error.required">This field is required</span>
+               <span class="text-danger" ng-if="categoryform.code.$dirty &amp;&amp; categoryform.code.$error.pattern">This field is invalid:No special characters allowed </span>
            </div>
          </div>
          <div class="form-group">
           <label class="col-lg-3 control-label">Descriptions</label>
           <div class="col-lg-9">
-           <input class="form-control" type="text" name="description" ng-model="category.description" placeholder=" Enter Descriptions"/>
+           <input class="form-control" type="text" name="description" ng-model="category.description" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true" placeholder=" Enter Descriptions"/>
+           <span class="text-danger" ng-show="categoryform.description.$dirty &amp;&amp; categoryform.description.$error.required">This field is required</span>
+               <span class="text-danger" ng-if="categoryform.description.$dirty &amp;&amp; categoryform.description.$error.pattern">This field is invalid:No special characters allowed </span>
          </div>
        </div>
        <div class="form-group">
         <label class="col-sm-3 control-label">Pay Frequency</label>
         <div class="col-lg-9">
 
-             <select  class="form-control" name="payFrequency" ng-model="category.payFrequency" ng-options="frequency.id as frequency.description for frequency in frequencies">
+             <select  class="form-control" name="payFrequency" ng-model="category.payFrequency" ng-options="frequency.id as frequency.description for frequency in frequencies" ng-required="true">
                  <option value="" disabled selected>Select Pay Frequency</option>
               </select>
             
-
+<span class="text-danger" ng-show="categoryform.payFrequency.$dirty &amp;&amp; categoryform.payFrequency.$error.required">This field is required</span>
 
                          </div>
 
@@ -88,8 +94,8 @@
 
                        <div class="form-group">
                         <div class="col-lg-offset-3 col-lg-9">
-                         <button class="btn btn-info btn-sm mr" ng-click="submitEmpCategoty()">Save and New</button>
-                         <button class="btn btn-info btn-sm mr" ng-click="EmpCategotyClose()">Save and Close</button>
+                         <button class="btn btn-info btn-sm mr" ng-disabled="categoryform.$invalid"  ng-click="submitEmpCategoty(categoryform)">Save and New</button>
+                         <button class="btn btn-info btn-sm mr" ng-disabled="categoryform.$invalid" ng-click="EmpCategotyClose()">Save and Close</button>
                          <button class="btn btn-warning btn-sm mr" type="reset">Reset</button>
                        </div>
                      </div>
@@ -101,9 +107,10 @@
 
 
  <script type="text/ng-template" id="EmpCategoryEdit.html">
-  <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Edit Employee Category</h4></div><div class="modal-body"><!-- START panel-->
+  <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Edit Employee Category</h4></div>
+  <div class="modal-body"  ng-controller="EmpCatController"> <!-- START panel-->
 
-  <form class="form-horizontal" ng-controller="EmpCatController" >
+  <form class="form-horizontal" name="categoryform" novalidate>
                       <div class="form-group">
                    
                       <div class="col-lg-12">
@@ -113,24 +120,30 @@
                      <div class="form-group">
                       <label class="col-lg-3 control-label">Code</label>
                       <div class="col-lg-9">
-                       <input class="form-control" type="text" name="cat_code" ng-model="cat.code" placeholder="Category code"/>
+                       <input class="form-control" type="text" name="cat_code" ng-model="cat.code"  ng-required="true"
+        ng-pattern="/^[\w,]+$/" placeholder="Category code"/>
+
+         <span class="text-danger" ng-show="categoryform.cat_code.$dirty &amp;&amp; categoryform.cat_code.$error.required">This field is required</span>
+               <span class="text-danger" ng-if="categoryform.cat_code.$dirty &amp;&amp; categoryform.cat_code.$error.pattern">This field is invalid:No special characters allowed </span>
                      </div>
                    </div>
                    <div class="form-group">
                     <label class="col-lg-3 control-label">Descriptions</label>
                     <div class="col-lg-9">
-                     <input class="form-control" type="text" name="cat_description" ng-model="cat.description" placeholder="Descriptions"/>
+                     <input class="form-control" type="text" name="cat_description" ng-model="cat.description" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true" placeholder="Descriptions"/>
+                         <span class="text-danger" ng-show="categoryform.cat_description.$dirty &amp;&amp; categoryform.cat_description.$error.required">This field is required</span>
+               <span class="text-danger" ng-if="categoryform.cat_description.$dirty &amp;&amp; categoryform.cat_description.$error.pattern">This field is invalid:No special characters allowed </span>
                    </div>
                  </div>
                  <div class="form-group">
         <label class="col-sm-3 control-label">Pay Frequency</label>
         <div class="col-lg-9">
 
-             <select  class="form-control" name="payFrequency" ng-model="cat.payFrequency" ng-options="frequency.id as frequency.description for frequency in frequencies">
+             <select  class="form-control" name="payFrequency" ng-model="cat.payFrequency" ng-options="frequency.id as frequency.description for frequency in frequencies" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true">
                  <option value="" disabled selected>Select Pay Frequency</option>
               </select>
             
-
+            <span class="text-danger" ng-show="categoryform.payFrequency.$dirty &amp;&amp; categoryform.payFrequency.$error.required">This field is required</span>
 
                          </div>
 
@@ -141,7 +154,7 @@
 
                        <div class="form-group">
                         <div class="col-lg-offset-3 col-lg-9">
-                         <button class="btn btn-info btn-sm mr" ng-click="updateEmpCategory(cat)">Update</button>
+                         <button class="btn btn-info btn-sm mr"    ng-disabled="categoryform.$invalid"  ng-click="updateEmpCategory(cat)">Update</button>
                            <button class="btn btn-warning btn-sm mr" type="reset">Reset</button>
                        </div>
                      </div>

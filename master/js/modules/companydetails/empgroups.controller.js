@@ -112,7 +112,7 @@
 
 
             $scope.groupone=new EmpGroupService();
-             $scope.submitGroup=function() {
+             $scope.submitGroup=function(groupform) {
     
            $scope.groupone.$save().then(function(data){
                var response=angular.fromJson(data);
@@ -128,6 +128,7 @@
           
             }
            $rootScope.$emit("CallLoadEmployeeGroups", {});
+            $scope.groupReset(groupform);
 
            }, function() {
                 $scope.SuccessMsg=false;
@@ -135,6 +136,14 @@
                 });
         
           };
+
+
+          $scope.groupReset=function(groupform){
+             $scope.groupform={};
+            $scope.groupone="";
+            groupform.$setPristine();
+            };
+
             $scope.closeGroup=function() {
     
            $scope.groupone.$save().then(function(){

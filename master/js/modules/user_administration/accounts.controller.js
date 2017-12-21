@@ -154,7 +154,7 @@ $scope.loadUserAcconts();
                 });
         
           };
-$scope.accountReset = function(accountform){
+$scope.accountReset=function(accountform){
              $scope.accountform={};
             $scope.account="";
             accountform.$setPristine();
