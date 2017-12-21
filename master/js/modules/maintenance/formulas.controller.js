@@ -110,7 +110,7 @@ $scope.show = function(formula) {
               $uibModalInstance.dismiss('cancel');
             };
             $scope.formula=new formulasService();
-             $scope.submitFormula=function() {
+             $scope.submitFormula=function(formulaform) {
           $scope.formula.$save().then(function(data){
             var response=angular.fromJson(data);
           
@@ -124,6 +124,7 @@ $scope.show = function(formula) {
            
             }
             $rootScope.$emit("CallLoadFormulas", {});
+              $scope.formulaReset(formulaform);
 
           },
            function() {
@@ -134,8 +135,14 @@ $scope.show = function(formula) {
           };
 
 
-              $scope.closeFormula=function() {
-          $scope.formula.$save().then(function(){
+  $scope.formulaReset=function(formulaform){
+             $scope.formulaform={};
+            $scope.formula="";
+            formulaform.$setPristine();
+            };
+              $scope.closeFormula=function(formulaform) {
+                var saveformula= new formulasService(formulaform);
+         saveformula.$save().then(function(){
             $rootScope.$emit("CallLoadFormulas", {});
             $scope.ok();
 
@@ -162,6 +169,7 @@ $scope.show = function(formula) {
             };
             
            $scope.updateFormula=function(furmula){
+
              furmula.$update().then(function(){
                    $rootScope.$emit("CallLoadFormulas", {});
             });

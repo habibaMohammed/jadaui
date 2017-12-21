@@ -745,10 +745,10 @@
                 resolve: helper.resolveFor('datatables')
           })
 
-           .state('app.payroll-process', {
-              url: '/payroll_process',
+           .state('app.employee-posting', {
+              url: '/employee_posting',
               title: 'payroll process',
-              templateUrl: helper.basepath('processpayroll.html'),
+              templateUrl: helper.basepath('employeeposting.html'),
                resolve: helper.resolveFor('xeditable')
           })
            .state('app.payslip-preview', {
