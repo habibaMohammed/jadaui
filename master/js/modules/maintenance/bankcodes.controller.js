@@ -104,9 +104,11 @@ $scope.banks=bankcodeService.query();
               $uibModalInstance.dismiss('cancel');
             };
            
-          $scope.bank=new bankcodeService();
-             $scope.submitBankClose=function() {
-          $scope.bank.$save().then(function(){
+         
+
+             $scope.submitBankClose=function(bank) {
+                 var savebanks=new bankcodeService(bank);
+          savebanks.$save().then(function(){
 
          
                $rootScope.$emit("CallLoadBanks", {});
@@ -119,9 +121,9 @@ $scope.banks=bankcodeService.query();
   
           };
 
+      $scope.bank=new bankcodeService();
 
-
-            $scope.submitBank=function() {
+            $scope.submitBank=function(bankform) {
           $scope.bank.$save().then(function(data){
                var response=angular.fromJson(data);
          
@@ -134,6 +136,7 @@ $scope.banks=bankcodeService.query();
               // vm.auth=true;
             }
              $rootScope.$emit("CallLoadBanks", {});
+              $scope.bankReset(bankform);
             
           },
           function() {
@@ -144,6 +147,12 @@ $scope.banks=bankcodeService.query();
           };
          
           }
+
+           $scope.bankReset=function(bankform){
+             $scope.bankform={};
+            $scope.bank="";
+            bankform.$setPristine();
+            };
 
 
            ModalInstanceCtrl.$inject = ['$scope', '$uibModalInstance','bankcodeService','bank'];
