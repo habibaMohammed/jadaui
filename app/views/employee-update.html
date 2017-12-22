@@ -180,7 +180,7 @@
   
 </div>
             
-               <div class="form-group">
+            <!--    <div class="form-group">
                   <label class="col-lg-2 ">  Date of Birth
                    </label>
 
@@ -200,9 +200,26 @@
                               </span>
                            </p>
                   </div>
+               </div> -->
+
+
+              <div class="form-group" ng-controller="DatepickerDemoCtrl as dpick">
+                  <label class="col-lg-2">  Date of Birth
+                   </label>
+                  <div class="col-lg-10">
+                    <p class="input-group"> 
+                              <input class="form-control" type="text" name="date_of_birth" uib-datepicker-popup="{{dpick.format}}" ng-model="employee.dateOfBirth" is-open="dpick.opened" min-date="dpick.minDate" uib-datepicker-options="dpick.dateOptions"
+                              date-disabled="dpick.disabled(date, mode)" close-text="Close" required="" />
+                              <span class="input-group-btn">
+                                 <button class="btn btn-default" type="button" ng-click="dpick.open($event)">
+                                    <em class="fa fa-calendar"></em>
+                                 </button>
+                              </span>
+
+                                 <span class="text-danger" ng-show="formStep4.$submitted &amp;&amp; formStep4.date_of_employment.$invalid">This field is required  ></span>
+                           </p>
+                  </div>
                </div>
-
-
                  
              <div class="form-group">
                   <label class="col-lg-2 "> Marital Status
