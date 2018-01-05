@@ -9,12 +9,12 @@
   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
     <div class="input-group-addon">Period</div>
   
-         <select name="period" class="slider slider-lg form-control" ng-model="user.period" ng-options="period.id as period.period for period in periods" >
+         <select name="period" class="slider slider-lg form-control" ng-model="user.period" ng-options="period.year as period.year for period in periods | unique:'year'" ng-change="showcurrentYear(user.period)">
         <option value="" disabled selected>Periods</option>
   </select>
   </div>
 
-  <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+ <button ng-click="getByperiod(user.period)" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
 </form>
   
 
@@ -44,7 +44,7 @@
                   <td colspan="5"><b>DOMESTIC TAXES DEPARTMENT</b></td>
                 </tr>
                 <tr>
-                  <td colspan="5">P.A.Y.E. EMPOLER'S CERTIFICATE YEAR 2015</td>
+                  <td colspan="5">P.A.Y.E. EMPOLER'S CERTIFICATE YEAR {{user.period}}</td>
                 </tr>
                 <tr>
                   <td colspan="5">(GOVERNMENT MINISTRIES AND NATIONAL ASSEMBLY)</td>

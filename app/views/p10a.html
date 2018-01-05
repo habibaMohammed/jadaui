@@ -8,12 +8,13 @@
   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
     <div class="input-group-addon">Period</div>
   
-         <select name="period" class="slider slider-lg form-control" ng-model="user.period" ng-options="period.id as period.period for period in periods" >
+         <select name="period" class="slider slider-lg form-control" ng-model="user.period" ng-options="period.id as period.year for period in periods | unique:'year' " 
+         ng-change="showcurrentYear(user.period)" >
         <option value="" disabled selected>Periods</option>
   </select>
   </div>
 
-  <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+   <button ng-click="getByperiod(user.period)" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
 </form>
   
 
@@ -49,17 +50,17 @@
                   <td colspan="5" class="text-center"><b>P.AY.E - SUPPORTING LIST FOR END OF YEAR CERTIFICATE</b></td>
                 </tr>
                 <tr>
-                  <td colspan="5">YEAR 2016</td>
+                  <td colspan="5">Year {{currentYear}}</td>
                 </tr>
                 <tr>
                   <td colspan="5" height="30"></td>
                 </tr>
                 <tr>
                   <td>Employer's Name </td>
-                  <td>XYZ LIMITED</td>
+                  <td>{{ptena.employer.employerName}}</td>
                   <td></td>
                   <td>Employer's P.I.N. </td>
-                  <td>P051393868P </td>
+                  <td>{{ptena.employer.pinNumber}}</td>
                 </tr>
                 <!-- <tr>
                   <td>Employer's P.I.N. </td>
@@ -87,23 +88,15 @@
                   
                  
                </tr>
-               <tr>
-                  <td>A123456789U</td>
-                  <td>Esther Namalome  Amani</td>
-                  <td>P001</td>
-                  <td>150000</td>
-                  <td>24367.2</td>
+               <tr ng-repeat="ptena in ptenas.p10AReportDataList">
+                  <td>{{ptena.employeePin}}</td>
+                  <td>{{ptena.employeeName}}</td>
+                  <td>{{ptena.ourRef}}</td>
+                  <td>{{ptena.totalEmoluments}}</td>
+                  <td>{{ptena.totalTaxDeducted}}</td>
                   
                </tr>
-               <tr>
-                  <td>A456789123W</td>
-                  <td>Andrew Gacheru Njenga</td>
-                  <td>P002</td>
-                  <td>150000</td>
-                  <td>24367.2</td>
-                  
-                 
-               </tr>
+            
             
 
                <tr>

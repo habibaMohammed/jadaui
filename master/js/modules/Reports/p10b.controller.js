@@ -31,16 +31,33 @@
           
             });
 
+     $scope.showcurrentYear=function(id){
+               console.log(id)
+                for(var r=0;r< $scope.periods.length;r++){
+                  if(id==$scope.periods[r].id){
 
-        }
+              
+                    $scope.currentYear=$scope.periods[r].year;
+                    console.log($scope.currentYear)
+                  }
+                  
+                }
+                
+              }
 
 
-          $scope.getTotal = function(type) {
+                 $scope.getTotal = function(type) {
         var total = 0;
         angular.forEach($scope.ptenbs, function(el) {
             total += el[type];
         });
         return total;
     };
+        }
+
+
+
+
+       
     }
 })();

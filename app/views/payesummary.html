@@ -14,7 +14,7 @@
   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
     <div class="input-group-addon">Period</div>
   
-         <select name="period" class="slider slider-lg form-control" ng-model="period" ng-options="period.id as period.period for period in periods" >
+         <select name="period" class="slider slider-lg form-control" ng-model="period" ng-options="period.id as period.period for period in periods" ng-change="showcurrentperiod(period)" >
         <option value="" disabled selected>Periods</option>
   </select>
   </div>
@@ -43,8 +43,8 @@
             
             <tbody >
                <tr>
-                  <td >Employer Name::</td>
-                  <td >XYZ LIMITED</td>
+                  <td >Employer Name:</td>
+                  <td >{{psummaries.employer.employerName}}</td>
               
                   
                </tr>
@@ -52,7 +52,7 @@
                  
                  
                   <td >Employer PIN</td>
-                  <td >020-2066527</td>
+                  <td >{{psummaries.employer.pinNumber}}</td>
 
                   
                </tr>
@@ -61,7 +61,7 @@
                  
                  
                   <td >Period:</td>
-                  <td >2066527</td>
+                  <td >{{currentMonth}}</td>
                 
                   
                </tr>
@@ -91,7 +91,7 @@
                </tr>
             </thead>
             <tbody>
-               <tr ng-repeat="psummary in psummaries">
+               <tr ng-repeat="psummary in psummaries.payeSummaryList">
                 <td>{{psummary.employeeNumber}}</td>
                   <td>{{psummary.employeeName}}</td>
                  <td>{{psummary.employeePin}}</td>
