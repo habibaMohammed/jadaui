@@ -8,12 +8,12 @@
   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
     <div class="input-group-addon">Period</div>
   
-         <select name="period" class="slider slider-lg form-control" ng-model="user.period" ng-options="period.id as period.period for period in periods" >
+         <select name="period" class="slider slider-lg form-control" ng-model="user.period" ng-options="period.id as period.period for period in periods" ng-change="showcurrentperiod(user.period)" >
         <option value="" disabled selected>Periods</option>
   </select>
   </div>
  
-  <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+  <button ng-click="getByperiod(user.period)" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
 </form>
   
 
@@ -21,9 +21,9 @@
    </div>
 
 
-</div>
 
-<div class="panel panel-default" ng-controller="NssfController">
+
+<div class="panel panel-default">
    <!-- <div class="panel-heading">
       <small>Company Totals</small>
    </div> -->
@@ -36,17 +36,18 @@
             </div>
             <div class="clearfix">
                <p class="pull-left mr"><strong>EMPLOYER NUMBER</strong></p>
-            <p class="pull-left mr">20456789</p>
+            <p class="pull-left mr">{{nssfs.employer.nssfNumber}}</p>
             </div>
            
             <div class="clearfix">
                <p class="pull-left mr"><strong>EMPLOYER NAME</strong></p>
-               <p class="pull-left mr">XYZ Limited P.O. BOX 20744-KNH 00200</p>
+               <p class="pull-left mr">{{nssfs.employer.employerName}}</p>
                
             </div>
              <div class="clearfix">
                <p class="pull-left mr"><strong>CONTRIBUTION PERIOD</strong></p>
-               <p class="pull-left mr">January 2017</p>
+               <p class="pull-left mr">{{currentMonth}}</p>
+              
                
             </div>
          </div>
@@ -107,6 +108,7 @@
          
       </div>
 
+      </div>
       </div>
       </div>
       </div>

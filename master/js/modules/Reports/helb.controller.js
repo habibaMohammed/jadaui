@@ -22,6 +22,7 @@
           
                      $scope.getByperiod=function(period){
         
+     console.log('hellow')
         $scope.helbs=HelbService.get({periodId:period});
 
           }
@@ -36,6 +37,21 @@
               $scope.employees = data;
           
             });
+
+
+              $scope.showcurrentperiod=function(id){
+               console.log(id)
+                for(var r=0;r< $scope.periods.length;r++){
+                  if(id==$scope.periods[r].id){
+
+              
+                    $scope.currentMonth=$scope.periods[r].month+' '+$scope.periods[r].year;
+                    console.log($scope.currentMonth)
+                  }
+                  
+                }
+                
+              }
 
         }
     }

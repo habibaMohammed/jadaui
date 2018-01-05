@@ -9,7 +9,7 @@
   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
     <div class="input-group-addon">Period</div>
   
-         <select name="period" class="slider slider-lg form-control" ng-model="period" ng-options="period.id as period.period for period in periods" >
+         <select name="period" class="slider slider-lg form-control" ng-model="period" ng-options="period.id as period.period for period in periods" ng-change="showcurrentperiod(period)" >
         <option value="" disabled selected>Periods</option>
   </select>
   </div>
@@ -34,17 +34,18 @@
         
             <div class="clearfix">
                <p class="pull-left mr"><strong>EMPLOYER CODE</strong></p>
-            <p class="pull-right mr"><strong>84578</strong></p>
+            <p class="pull-right mr"><strong>{{nhifs.employer.nhifNumber}} </strong></p>
             </div>
            
             <div class="clearfix">
                <p class="pull-left mr"><strong>EMPLOYER NAME</strong></p>
-               <p class="pull-right mr"><strong>XYZ Limited </strong></p>
+               <p class="pull-right mr"><strong>{{nhifs.employer.employerName}} </strong></p>
                
             </div>
+
              <div class="clearfix">
                <p class="pull-left mr"><strong>MONTH OF CONTRIBUTION</strong></p>
-               <p class="pull-right mr"><strong>2017-01</strong></p>
+               <p class="pull-right mr"><strong>{{currentMonth}}</strong></p>
                
             </div>
          </div>

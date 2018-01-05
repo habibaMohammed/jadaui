@@ -8,12 +8,12 @@
   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
     <div class="input-group-addon">year</div>
   
-         <select name="period" class="slider slider-lg form-control" ng-model="user.period" ng-options="period.id as period.year for period in periods" >
+         <select name="period" class="slider slider-lg form-control" ng-model="user.period" ng-options="period.year as period.year for period in periods | unique:'year'" ng-change="showcurrentYear(user.period)">
         <option value="" disabled selected>Periods</option>
   </select>
   </div>
 
-  <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+    <button ng-click="getByperiod(user.period)" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
 </form>
   
 
@@ -43,7 +43,7 @@
                   <td colspan="9" class="text-center">INCOME TAX DEPARTMENT</td>
                 </tr>
                 <tr>
-                  <td colspan="9" class="text-center">FRINGE BENEFIT TAX RETURN FOR THE YEAR 2014</td>
+                  <td colspan="9" class="text-center">FRINGE BENEFIT TAX RETURN FOR THE YEAR {{user.period}}</td>
                 </tr>
                  <tr>
                  

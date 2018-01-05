@@ -16,14 +16,14 @@
         function activate() {
 
 
-        $scope.nhifs=NhifService1.get({periodId:1});
+        $scope.nhifs=NhifService1.get({periodId:12});
         
 console.log( $scope.nhifs);
           
 
           $scope.getByperiod=function(period){
         
-            $scope.nhifs=NhifService.get({periodId:period});
+            $scope.nhifs=NhifService1.get({periodId:period});
 
           }
 
@@ -38,6 +38,22 @@ console.log( $scope.nhifs);
               $scope.employees = data;
           
             });
+
+
+
+              $scope.showcurrentperiod=function(id){
+               console.log(id)
+                for(var r=0;r< $scope.periods.length;r++){
+                  if(id==$scope.periods[r].id){
+
+              
+                    $scope.currentMonth=$scope.periods[r].month+' '+$scope.periods[r].year;
+                    console.log($scope.currentMonth)
+                  }
+                  
+                }
+                
+              }
         }
     }
 })();

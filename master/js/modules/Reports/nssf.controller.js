@@ -15,8 +15,8 @@
 
         function activate() {
 
-        $scope.nssfs=NssfService.get({periodId:1});
-console.log( $scope.nssfs);
+        $scope.nssfs=NssfService.get({periodId:12});
+           console.log( $scope.nssfs);
           
             
               $http.get(jadaApiUrl+'api/period').success(function(data) {
@@ -29,6 +29,31 @@ console.log( $scope.nssfs);
               $scope.employees = data;
           
             });
+
+
+  $scope.getByperiod=function(period){
+        
+               $scope.nssfs=NssfService.get({periodId:period});
+
+          }
+
+
+              $scope.showcurrentperiod=function(id){
+               console.log(id)
+                for(var r=0;r< $scope.periods.length;r++){
+                  if(id==$scope.periods[r].id){
+
+              
+                    $scope.currentMonth=$scope.periods[r].month+' '+$scope.periods[r].year;
+                    console.log($scope.currentMonth)
+                  }
+                  
+                }
+                
+
+
+  // $scope.currentleaveType='Exam'+id;
+              }
 
         }
     }
