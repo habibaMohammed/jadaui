@@ -182,7 +182,7 @@
             <div class="clearfix">
          <button class="btn btn-info pull-left mr" type="button">Pdf</button>
          <button class="btn btn-default pull-left mr" type="button" ng-click="printDiv('printable');">Print</button>
-         <button class="btn btn-success pull-left mr" type="button">CSV</button>
+         <button class="btn btn-success pull-left mr"  ng-click="exportToExcel('#tableToExport')" type="button">EXCEL</button>
       </div>
 
       </div>
@@ -193,12 +193,12 @@
 <!--   <button ng-click="printDiv('printable');">Print Div</button> -->
 
 
-<!-- 
+
     <h1>Export to Excel</h1>
     <button class="btn btn-link" ng-click="exportToExcel('#tableToExport')">
       <span class="glyphicon glyphicon-share"></span>
  Export to Excel
-    </button> -->
+    </button>
     </div>
 
  

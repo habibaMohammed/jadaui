@@ -17,35 +17,39 @@
 
 var currentPeriod=1;
         $scope.leaves=LeaveReportService.get({periodId:currentPeriod});
-          console.log($scope.leaves);
-        // console.log($scope.leaves.leaveTypeReportList.employeeLeaveReportList);
-
-         // $scope.leaveReports=$scope.leaves.leaveTypeReportList;
-         // console.log("leaves");
-
-         //  console.log($scope.leaves.leaveTypeReportList[]);
+        console.log('herehh');
+         
+       
               $http.get(jadaApiUrl+'api/period').success(function(data) {
               $scope.periods = data;
 
             });
 
 
+              $http.get(jadaApiUrl+'api/leavereport/'+currentPeriod).success(function(data) {
+              $scope.leavedefault = data;
+              console.log( $scope.leavedefault.leaveTypeReportList  )
+
+            });
 
           
 $http.get(jadaApiUrl+'api/leavetype').success(function(data) {
               $scope.leavetypes = data;
-              console.log($scope.leavetypes);
+              
+              console.log($scope.leavetypes[0].id);
 
-                //               for(var r=0;r<$scope.leaves.leaveTypeReportList.length;r++){
-                //                 console.log($scope.leavetypes[0]);
-                //   if($scope.leavetypes[0].id==$scope.leaves.leaveTypeReportList[r].leaveType.id){
-                    
-                //     console.log($scope.leaves.leaveTypeReportList[r]);
-                //     $scope.leaveReport=$scope.leaves.leaveTypeReportList[0].employeeLeaveReportList;
-                //   }
-                // }
+                  
           
             });
+
+            // for(var r=0;r<$scope.leaves.leaveTypeReportList.length;r++){
+            //                     console.log($scope.leavetypes[0]);
+            //       if($scope.leavetypes[0].id==$scope.leaves.leaveTypeReportList[r].leaveType.id){
+                    
+            //         console.log($scope.leaves.leaveTypeReportList[r]);
+            //         $scope.leaveReport=$scope.leaves.leaveTypeReportList[0].employeeLeaveReportList;
+            //       }
+            //     }
 
               $http.get(jadaApiUrl+'api/employee').success(function(data) {
               $scope.employees = data;
@@ -66,6 +70,7 @@ $http.get(jadaApiUrl+'api/leavetype').success(function(data) {
                 
   // $scope.currentleaveType='Exam'+id;
               }
+
 
 
         }
