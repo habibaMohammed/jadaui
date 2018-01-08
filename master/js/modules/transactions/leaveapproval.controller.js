@@ -61,7 +61,13 @@ $scope.pendingleaves=LeaveApprovalService.query();
 
 
 
+$scope.totalNotification=function(){
+  var total=$scope.leavenotification()+1;
+  return total;
+  console.log(here);
+  console.log(total);
 
+}
 
 
 $scope.show = function(leave) {

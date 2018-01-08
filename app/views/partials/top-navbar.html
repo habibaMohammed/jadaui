@@ -63,7 +63,7 @@
       </ul>
       <!-- END Left navbar-->
       <!-- START Right Navbar-->
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right"  ng-controller="LeaveApprovalController">
          <!-- Search icon-->
          <li>
             <a href="" search-open="search-open">
@@ -80,7 +80,7 @@
          <li class="dropdown dropdown-list" uib-dropdown="">
             <a uib-dropdown-toggle="">
                <em class="icon-bell"></em>
-               <div class="label label-danger">11</div>
+               <div class="label label-danger">{{totalNotification()}}</div>
             </a>
             <!-- START Dropdown menu-->
             <ul class="dropdown-menu animated flipInX">
@@ -89,7 +89,7 @@
                   <div class="list-group">
                      <!-- list item-->
                  
-                     <a class="list-group-item" ui-sref="app.leave-approve" ng-controller="LeaveApprovalController" ng-hide="leavenotification() == 0">
+                     <a class="list-group-item" ui-sref="app.leave-approve" ng-hide="leavenotification() == 0">
                         <div class="media-box">
                            <div class="pull-left">
                               <em class="fa fa-bell-o fa-2x text-info"></em>
@@ -121,19 +121,7 @@
                         </div>
                      </a>
                      <!-- list item-->
-                     <a class="list-group-item" href="">
-                        <div class="media-box">
-                           <div class="pull-left">
-                              <em class="fa fa-tasks fa-2x text-success"></em>
-                           </div>
-                           <div class="media-box-body clearfix">
-                              <p class="m0">Pending Tasks</p>
-                              <p class="m0 text-muted">
-                                 <small>11 pending task</small>
-                              </p>
-                           </div>
-                        </div>
-                     </a>
+                    
                      <!-- last list item-->
                      <a class="list-group-item" href="">
                         <small translate="topbar.notification.MORE">More notifications</small>
