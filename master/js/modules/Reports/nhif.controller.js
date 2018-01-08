@@ -54,6 +54,12 @@ console.log( $scope.nhifs);
                 }
                 
               }
+
+
+               $scope.exportToExcel=function(tableId){ // ex: '#my-table'
+            var exportHref=Excel.tableToExcel(tableId,'WireWorkbenchDataExport');
+            $timeout(function(){location.href=exportHref;},100); // trigger download
+        }
         }
     }
 })();

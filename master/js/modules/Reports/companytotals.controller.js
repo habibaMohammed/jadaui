@@ -58,8 +58,10 @@ $scope.printDiv = function (div) {
 
  $scope.exportToExcel=function(tableId){ // ex: '#my-table'
             var exportHref=Excel.tableToExcel(tableId,'WireWorkbenchDataExport');
-            $timeout(function(){location.href=exportHref;},100); // trigger download
+            $timeout(function(){location.href=exportHref;
+            },100); // trigger download
         }
+
 
 
 

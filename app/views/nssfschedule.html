@@ -28,28 +28,36 @@
       <small>Company Totals</small>
    </div> -->
    <div class="panel-body">
+    <div id="tableToExport">
    <div class="row">
      <div class="col-lg-8 col-xs-12 pv">
-            <div class="clearfix">
-               <p class="pull-left"><strong>NSSF CONTRIBUTIONS</strong></p>
+
+        <table class="table table-bordered-white">
+            
+            <tbody >
+               <tr>
+                  <td >  <p class="pull-left"><strong>NSSF CONTRIBUTIONS</strong></p></td>
                
-            </div>
-            <div class="clearfix">
-               <p class="pull-left mr"><strong>EMPLOYER NUMBER</strong></p>
-            <p class="pull-left mr">{{nssfs.employer.nssfNumber}}</p>
-            </div>
+               
+                
+               </tr>
+
+               <tr>
+                  <td >  <p class="pull-left"><strong>EMPLOYER NUMBER</strong></p></td>
+                   <td>  <p class="pull-left"><strong>{{nssfs.employer.nssfNumber}}</strong></p></td>
+                 </tr>
+                
+               <tr>
+                  <td >  <p class="pull-left"><strong>EMPLOYER NAME</strong></p></td>
+                   <td>  <p class="pull-left"><strong>{{nssfs.employer.employerName}}</strong></p></td>
+                 </tr>
+                 <tr>
+                  <td >  <p class="pull-left"><strong>CONTRIBUTION PERIOD</strong></p></td>
+                   <td>  <p class="pull-left"><strong>{{currentMonth}}</strong></p></td>
+                 </tr>
+              </tbody>
+         </table>
            
-            <div class="clearfix">
-               <p class="pull-left mr"><strong>EMPLOYER NAME</strong></p>
-               <p class="pull-left mr">{{nssfs.employer.employerName}}</p>
-               
-            </div>
-             <div class="clearfix">
-               <p class="pull-left mr"><strong>CONTRIBUTION PERIOD</strong></p>
-               <p class="pull-left mr">{{currentMonth}}</p>
-              
-               
-            </div>
          </div>
          </div>
 <div class="row">
@@ -97,14 +105,12 @@
   
    <br/>
    
-
+</div>
     <br/>
     <div class="col-lg-8">
           <div class="clearfix">
-         <button class="btn btn-info pull-left mr" type="button">Print</button>
-        <!--  <button class="btn btn-default pull-left" type="button" onclick="window.print();">Print</button> -->
-         <button class="btn btn-info pull-left mr" type="button">Pdf</button>
-         <button class="btn btn-success pull-left mr" type="button">Mail</button>
+         <button class="btn btn-info pull-left mr" type="button"  ng-click="exportToExcel('#tableToExport')" >EXCEl</button>
+       
          
       </div>
 

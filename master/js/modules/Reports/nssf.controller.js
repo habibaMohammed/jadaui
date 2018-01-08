@@ -5,8 +5,8 @@
         .module('app.reports')
         .controller('NssfController', NssfController);
 
-    NssfController.$inject = ['$scope','$http','$resource', 'NssfService','jadaApiUrl'];
-    function NssfController($scope,$http,$resource,NssfService,jadaApiUrl) {
+    NssfController.$inject = ['$scope','$http','$resource', 'NssfService','Excel','jadaApiUrl','$timeout'];
+    function NssfController($scope,$http,$resource,NssfService,Excel,jadaApiUrl,$timeout) {
         var vm = this;
 
         activate();
@@ -54,6 +54,11 @@
 
   // $scope.currentleaveType='Exam'+id;
               }
+
+               $scope.exportToExcel=function(tableId){ // ex: '#my-table'
+            var exportHref=Excel.tableToExcel(tableId,'WireWorkbenchDataExport');
+            $timeout(function(){location.href=exportHref;},100); // trigger download
+        }
 
         }
     }
