@@ -47,9 +47,10 @@
                   
                </tr>
           
-                <tr>
-                  <td><strong>Totals</strong></td>
-                  <td colspan="3"><strong>{{companysumaries.companySummaryTotals.noOfEmployees}}
+                <tr >
+                  <td ng-repeat="totals in companysumaries.totalList track by $index"><strong>{{totals}}
+</strong></td>
+                  <!-- <td colspan="3"><strong>{{companysumaries.companySummaryTotals.noOfEmployees}}
 </strong></td>
                   <td> <strong>{{companysumaries.companySummaryTotals.totalBasicPay}}</strong></td>
                   <td><strong>{{companysumaries.companySummaryTotals.totalOtherearnings}}</strong></td>
@@ -70,7 +71,7 @@
 
                                
                    <td><strong>{{companysumaries.companySummaryTotals.totalPensionEMPL}}</strong></td>
-
+ -->
 
                </tr>
                
@@ -120,13 +121,12 @@
                      </tr>
                   </thead> -->
                   <tbody>
-                     <tr>
+                     <tr ng-repeat=" companySummarytotal in companysumaries.grandTotalList">
                         
-                        <td >Net Pay - Transfer</td>
-                        <td >2700
-</td>
+                        <td>{{companySummarytotal.name}}</td>
+                        <td >{{companySummarytotal.amount}}</td>
                      </tr>
-                     <tr>
+                  <!--    <tr>
                         
                         <td>PAYE</td>
                         <td>10000
@@ -205,7 +205,7 @@
 </td>
                         <td><strong>162 541</strong>
 </td>
-                     </tr>
+                     </tr> -->
                   </tbody>
                </table>
                <br/>

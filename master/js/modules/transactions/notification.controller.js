@@ -25,12 +25,17 @@
         
 
      
+
+     
 $scope.pendingleaves=LeaveApprovalService.query();
 console.log($scope.pendingleaves);
 
      
 
+var leavenotification=$scope.pendingleaves.length;
 
+console.log(leavenotification);
+ 
 
 
 
@@ -45,14 +50,30 @@ return count;
 
 
 }
+
+   $scope.loadPendingLeaves = function () {
+$scope.pendingleaves=LeaveApprovalService.query();
+
+   }
+
+ $rootScope.$on("CallLoadPendingLeaves", function(){
+           $scope.loadPendingLeaves();
+        });
+
+
+
+
 $scope.totalNotification=function(){
   var total=$scope.leavenotification()+1;
   return total;
-  console.log();
+  console.log(here);
   console.log(total);
 
 }
 
+
+
+    
 
 
 
