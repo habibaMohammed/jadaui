@@ -16,7 +16,7 @@
         function activate() {
 
 
-        $scope.helbs=HelbService.get({periodId:1});
+        $scope.helbs=HelbService.get({periodId:12});
         console.log($scope.helbs);
 
           

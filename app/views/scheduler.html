@@ -1,6 +1,6 @@
 <h3>Schedules</h3>
 
-
+<div ng-controller="SchedulerController">
 
     <div class="panel panel-default" id="panelDemo15">
          <div class="panel-heading"></div>
@@ -64,46 +64,36 @@
 
              
                </div></uib-tab>
-               <uib-tab heading="Periods">
-               	     <div class="panel-body">
-                  <div class="form-group">
-               <label class="col-sm-3 control-label">January 2017</label>
+               <uib-tab heading="Periods" >
+               	     <div class="panel-body" >
+                        <div class="periodList" style="max-height: 300">
+                  <div class="form-group" ng-repeat="period in periods">
+               <label class="col-sm-3 control-label">{{period.month}} {{period.year}}</label>
                <div class="col-sm-9">
                   <div class="checkbox c-checkbox needsclick">
                      <label class="needsclick">
-                        <input class="needsclick" type="checkbox" value="" />
+                        <input class="needsclick" type="checkbox" ng-model="name" ng-true-value=" {{period.id}} "  ng-change="selectedPeriod(name)"/>
                         <span class="fa fa-check"></span></label>
+
                   </div>
+                
                </div>
+
+ name here {{selectP}}
             </div>
 
-             <div class="form-group">
-               <label class="col-sm-3 control-label">February 2017 </label>
-               <div class="col-sm-9">
-                  <div class="checkbox c-checkbox needsclick">
-                     <label class="needsclick">
-                        <input class="needsclick" type="checkbox" value="" />
-                        <span class="fa fa-check"></span></label>
-                  </div>
-               </div>
-            </div>
-             <div class="form-group">
-               <label class="col-sm-3 control-label">February 2017 </label>
-               <div class="col-sm-9">
-                  <div class="checkbox c-checkbox needsclick">
-                     <label class="needsclick">
-                        <input class="needsclick" type="checkbox" value="" />
-                        <span class="fa fa-check"></span></label>
-                  </div>
-               </div>
-            </div>
             
+                  
+            
+            </div>
 
         
              
                </div>
+
                </uib-tab>
 
+ period :{{selectP}}
                  <!--   <uib-tab heading="Periods">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
                   aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat , sunt in culpa qui officia deserunt mollit anim id est laborum.</uib-tab> -->
             
@@ -736,7 +726,7 @@
                <div class="col-sm-9">
                   <div class="checkbox c-checkbox needsclick">
                      <label class="needsclick">
-                        <input class="needsclick" type="checkbox" value="" />
+                        <input class="needsclick" type="checkbox"   value="" />
                         <span class="fa fa-check"></span></label>
                   </div>
                </div>
@@ -772,6 +762,8 @@
  
                  </uib-tab>
 
+
+
 <!-- 
   <uib-tab heading="Tasks">
             
@@ -782,3 +774,16 @@
          </div>
       </div>
 
+ 
+         <div class="panel panel-default">
+         <div class="panel-heading">
+            <h3 class="panel-title">Report preview</h3>
+         </div>
+         <div class="panel-body">
+           
+          Period:{{periodname}}
+          
+         </div>
+      </div>
+
+</div>
