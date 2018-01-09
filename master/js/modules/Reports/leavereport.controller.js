@@ -35,13 +35,14 @@ var currentPeriod=1;
           
 $http.get(jadaApiUrl+'api/leavetype').success(function(data) {
               $scope.leavetypes = data;
+            
               
-              console.log($scope.leavetypes[0].id);
+       
 
                   
           
             });
-
+  
             // for(var r=0;r<$scope.leaves.leaveTypeReportList.length;r++){
             //                     console.log($scope.leavetypes[0]);
             //       if($scope.leavetypes[0].id==$scope.leaves.leaveTypeReportList[r].leaveType.id){
@@ -70,6 +71,10 @@ $http.get(jadaApiUrl+'api/leavetype').success(function(data) {
                 
   // $scope.currentleaveType='Exam'+id;
               }
+
+            
+
+           
 
 
 

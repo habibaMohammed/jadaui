@@ -5,8 +5,8 @@
         .module('app.reports')
         .controller('NhifController', NhifController);
 
-    NhifController.$inject = ['$scope','$http','$resource', 'NhifService1','jadaApiUrl'];
-    function NhifController($scope,$http,$resource,NhifService1,jadaApiUrl) {
+    NhifController.$inject = ['$scope','$http','$resource', 'NhifService1','Excel','jadaApiUrl','$timeout'];
+    function NhifController($scope,$http,$resource,NhifService1,Excel,jadaApiUrl,$timeout) {
         var vm = this;
 
         activate();
