@@ -16,7 +16,7 @@
         function activate() {
 
 
-        $scope.helbs=HelbService.get({periodId:1});
+        $scope.helbs=HelbService.get({periodId:12});
         console.log($scope.helbs);
 
           
@@ -36,6 +36,17 @@
               $http.get(jadaApiUrl+'api/employee').success(function(data) {
               $scope.employees = data;
           
+            });
+
+
+$http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
+            
+         
+          $scope.currentPeriod=data.data;
+          console.log($scope.currentPeriod.month);
+          $scope.currentMonth=$scope.currentPeriod.month+ ' '+$scope.currentPeriod.year;
+      
+  
             });
 
 

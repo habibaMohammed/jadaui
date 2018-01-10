@@ -29,6 +29,7 @@
       return item[prop] > val;
     }
 }
+console.log($scope.companytotals);
 
 
     

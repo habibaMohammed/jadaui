@@ -432,4 +432,8 @@ ul.nav-wizard.nav-wizard-backnav .active ~ li a:focus {
                  height: auto;
                  overflow: visible;  
                 }
-               }
+               
+  .periodList{
+    max-height: 300px !important;
+    overflow: scroll;
+  }

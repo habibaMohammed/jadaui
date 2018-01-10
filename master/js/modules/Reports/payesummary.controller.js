@@ -15,7 +15,7 @@
 
         function activate() {
 
-var currentperiod=1;
+var currentperiod=0;
           // $scope.psummaries=PayeSummaryService.get({periodId:currentperiod});
 
            $http.get(jadaApiUrl+'api/payesummary/'+currentperiod).success(function(data) {
@@ -44,6 +44,17 @@ var currentperiod=1;
               $scope.employees = data;
           
             });
+
+              $http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
+            
+         
+          $scope.currentPeriod=data.data;
+          console.log($scope.currentPeriod.month);
+          $scope.currentMonth=$scope.currentPeriod.month+ ' '+$scope.currentPeriod.year;
+      
+  
+            });
+
 
  $scope.showcurrentperiod=function(id){
                console.log(id)
