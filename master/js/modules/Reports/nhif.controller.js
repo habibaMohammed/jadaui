@@ -40,6 +40,17 @@ console.log( $scope.nhifs);
             });
 
 
+$http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
+            
+         
+          $scope.currentPeriod=data.data;
+          console.log($scope.currentPeriod.month);
+          $scope.currentMonth=$scope.currentPeriod.month+ ' '+$scope.currentPeriod.year;
+      
+  
+            });
+
+
 
               $scope.showcurrentperiod=function(id){
                console.log(id)

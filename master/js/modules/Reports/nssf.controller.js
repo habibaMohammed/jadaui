@@ -31,11 +31,25 @@
             });
 
 
+              $http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
+            
+         
+          $scope.currentPeriod=data.data;
+          console.log($scope.currentPeriod.month);
+          $scope.currentMonth=$scope.currentPeriod.month+ ' '+$scope.currentPeriod.year;
+      
+  
+            });
+
+
+
   $scope.getByperiod=function(period){
         
                $scope.nssfs=NssfService.get({periodId:period});
 
           }
+
+
 
 
               $scope.showcurrentperiod=function(id){
