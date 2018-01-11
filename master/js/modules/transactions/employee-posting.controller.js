@@ -53,6 +53,17 @@
 
 
 
+$http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
+            
+         $scope.postingtrans={};
+          $scope.currentPeriod=data.data;
+      
+          $scope.currentperiod=$scope.currentPeriod.period;
+      $scope.postingtrans.periodId=$scope.currentPeriod.id;
+      console.log($scope.postingtrans.periodId);
+  
+            });
+
 
 
 // $scope.populateeTransactionData=function(){

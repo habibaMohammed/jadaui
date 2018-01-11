@@ -8,7 +8,7 @@
   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
     <div class="input-group-addon">Period</div>
   
-         <select name="period" class="slider slider-lg form-control" ng-model="user.period" ng-options="period.id as period.period for period in periods" ng-change="showcurrentperiod(user.period)" >
+         <select name="period" class="slider slider-lg form-control" ng-model="user.period" ng-options="period.id as period.period for period in periods" ng-change="showcurrentperiod(user.period)" ng-click="getByperiod(user.period)" >
         <option value="" disabled selected>Periods</option>
   </select>
   </div>

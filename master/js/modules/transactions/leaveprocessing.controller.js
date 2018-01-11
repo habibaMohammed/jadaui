@@ -54,6 +54,20 @@ $http.get(jadaApiUrl+'api/leavePostingtype').success(function(data) {
 
             });
 
+
+
+
+$http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
+            
+         $scope.leavepost={};
+          $scope.currentPeriod=data.data;
+      
+          $scope.currentperiod=$scope.currentPeriod.period;
+      $scope.leavepost.period=$scope.currentPeriod.id;
+      console.log($scope.leavepost.period);
+  
+            });
+
 $scope.employeeChange=function(id){
               
               for(var r=0;r<$scope.employees.length;r++){

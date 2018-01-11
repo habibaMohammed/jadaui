@@ -14,17 +14,17 @@
   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
     <div class="input-group-addon">Period</div>
   
-         <select name="period" class="slider slider-lg form-control" ng-model="transactionposting.periodId" ng-options="period.id as period.period for period in periods" >
+         <select name="period" class="slider slider-lg form-control" ng-model="postingtrans.periodId" ng-options="period.id as period.period for period in periods" disabled="">
         <option value="" disabled selected>Periods</option>
   </select>
   </div>
   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
     <div class="input-group-addon">Employee Number</div>
-    <select name="employeeNumber" class="slider slider-lg form-control" ng-model="transactionposting.employeeId" ng-options="employee.id as employee.employeeNumber for employee in employees" >
+    <select name="employeeNumber" class="slider slider-lg form-control" ng-model="postingtrans.employeeId" ng-options="employee.id as employee.employeeNumber for employee in employees" >
         <option value="" disabled selected>Employees</option>
   </select>
   </div>
-  <button  ng-click="searchEmployee(transactionposting)"   class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+  <button  ng-click="searchEmployee(postingtrans)"   class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
 </form>
   
 
@@ -56,10 +56,10 @@
                <p class="pull-left">Employee Name</p>
                <p  class="pull-right mr">{{oneUser.employeeInfo.employeeName}}</p>
             </div>
-            <div class="clearfix">
+          <!--   <div class="clearfix">
                <p class="pull-left">Pay Period</p>
                <p class="pull-right mr">{{oneUser.employeeInfo.period}}</p>
-            </div>
+            </div> -->
          </div>
          <br/>
 <!--  <h4 class="page-header">Current details</h4> -->
@@ -96,7 +96,7 @@
    </div>
    </table>
    <br/>
-   <button class="btn btn-primary" ng-click="open(transactionposting)" >Add New </button>
+   <button class="btn btn-primary" ng-click="open(postingtrans)" >Add New </button>
 
 <script type="text/ng-template" id="addTransactions.html">
             <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Transaction posting</h4></div>
@@ -110,7 +110,7 @@
                  </label>
                   <div class="col-lg-9">
 
-                      <select name="period" class="slider slider-lg form-control" ng-model=" transactionposting.periodId" ng-options="period.id as period.period for period in periods" disabled="">
+                      <select name="period" class="slider slider-lg form-control" ng-model="transactionposting.periodId" ng-options="period.id as period.period for period in periods" disabled="">
         <option value="" disabled selected>Periods</option>
     }
   </select>
@@ -129,7 +129,7 @@
 
 " /> -->
 
-  <select name="employee" class="slider slider-lg form-control" ng-model="transactionposting.employeeId" ng-options="employee.id as employee.employeeNumber for employee in employees" disabled="">
+  <select name="employee" class="slider slider-lg form-control" ng-model="transactionposting.employeeId" ng-options="employee.id as employee.employeeNumber for employee in employees" disabled="" >
         <option value="" disabled selected>Employees</option>
   </select>
                   </div>
