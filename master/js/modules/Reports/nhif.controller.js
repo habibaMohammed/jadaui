@@ -15,8 +15,8 @@
 
         function activate() {
 
-
-        $scope.nhifs=NhifService1.get({periodId:12});
+var currentperiod=0;
+        $scope.nhifs=NhifService1.get({periodId:currentperiod});
         
 console.log( $scope.nhifs);
           

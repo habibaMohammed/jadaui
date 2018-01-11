@@ -19,7 +19,7 @@
 </label>
                   <div class="col-lg-9">
                     <!--  <input class="form-control" type="text"  name="empNumber"  ng-model="leavepost.employeeNumber" placeholder="Number"/> -->
-                      <select class="form-control" name="period" ng-model="leavepost.period" ng-options="period.id as period.period for period in periods" ng-required="true"> 
+                      <select class="form-control" name="period" ng-model="leavepost.period" ng-options="period.id as period.period for period in periods" ng-required="true" disabled=""> 
     <option value="" disabled selected>Periods</option>
   </select>
    <span class="text-danger" ng-show="leavepostform.$submitted &amp;&amp; leavepostform.period.$invalid">This field is required</span>

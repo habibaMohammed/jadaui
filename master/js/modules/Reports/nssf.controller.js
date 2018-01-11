@@ -15,7 +15,8 @@
 
         function activate() {
 
-        $scope.nssfs=NssfService.get({periodId:12});
+var currentperiod=0;
+        $scope.nssfs=NssfService.get({periodId:currentperiod});
            console.log( $scope.nssfs);
           
             
