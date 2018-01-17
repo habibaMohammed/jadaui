@@ -9,7 +9,7 @@
   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
     <div class="input-group-addon">Period</div>
   
-         <select name="period" class="slider slider-lg form-control" ng-model="user.period" ng-options="period.id as period.period for period in periods" >
+         <select name="period" class="slider slider-lg form-control" ng-model="user.period" ng-options="period.year as period.year for period in periods | unique:'year'" >
         <option value="" disabled selected>Periods</option>
   </select>
   </div>
@@ -33,15 +33,22 @@
            
               <tr >
                   <td colspan="15"> <div class=" text-center">
-                  <h4>KRA Logo</h4>
-                  <address></address>Basilisa 2145
-                  <br/>Mate, Cliff., 20145
-                  <br/>Moon</div>
+                   <h4><img class="img-responsive center-block" src="app/img/kralogo.jpg"  alt="App Logo" /></h4>
+                
+                </div>
             </td>
                  
                 
                </tr>
                
+                 <tr>
+                  <td colspan="15" class=" text-center"><h4>INCOME TAX DEPARTMENT</h4></td>
+                 
+               </tr>
+                 <tr>
+                  <td colspan="15" class=" text-center"><h4>TAX DEDUCTION CARD YEAR 2014</h4></td>
+                 
+               </tr>
                <tr>
                   <td colspan="15">P9B</td>
                  
@@ -348,61 +355,37 @@ COL D - G</td>
 
                   <td  colspan="3"> TOTAL CHARGEABLE PAY (COL H) Kshs </td>
                   <td  colspan="2">596100</td>
-                  <td  colspan="3"></td>
+               <!--    <td  colspan="3"></td>
                    <td  colspan="1"> (B) Attach </td>
-                  <td  colspan="6">(i) Photostat copy of interest certificate and statement of account from the Financial Institution.</td>
+                  <td  colspan="6">(i) Photostat copy of interest certificate and statement of account from the Financial Institution.</td> -->
                   
                </tr>
-               <tr>  
+           <!--     <tr>  
 
                   <td  colspan="8">  </td>
                    <td  colspan="1">  </td>
                   <td  colspan="6">(ii) The DECLARATION duly signed by the employee</td>
                   
-               </tr>
+               </tr> -->
                 <tr>  
 
                   <td  colspan="15"><b>IMPORTANT</b>  </td>
                    
                </tr>
                <tr>
-                  <td >Use P9A</td>
-                  <td colspan="7">(a) For all liable employees and where the director/employee received benefits in addition to cash emoluments.</td>
-                  <td colspan="7">NAMES OF FINANCIAL INSTITUTION ADVANCING MORTGAGE LOAN 
+                  <td >Use P9B</td>
+                  <td colspan="7">  (a) Where the director/employee receives Tax-Free Remuneration.</td>
+           <!--        <td colspan="7">NAMES OF FINANCIAL INSTITUTION ADVANCING MORTGAGE LOAN 
                      
-</td>
+</td> -->
                  
                </tr>
-               <tr>
-                  <td ></td>
-                  <td colspan="7"> (b) Where an employee is eligible to deduction on owner occupied interest.</td>
-                  
-               </tr>
-               <tr>
-                  <td >2. (a)</td>
-                  <td colspan="7"> Allowable interest in respect of any month must not exceed Kshs, 12,500/= or Kshs. 150,000 per year.</td>
-                  
-               </tr>
-                  <tr>
-                  <td colspan="15" height="30"></td>
-                  
-                  
-               </tr>
-                   <tr>
-                  <td colspan="8" ></td>
-                  <td colspan="3"> <b>L.R. NO. OF OWNER OCCUPIED PROPERTY:</b></td>
-                  <td colspan="4"> </td>
-                  
-               </tr>
-                <tr>
-                  <td colspan="15" height="30"></td>
-               </tr>
+            
               <tr>
-                  <td colspan="8" ></td>
-                  <td colspan="3"> <b>DATE OF OCCUPATION OF HOUSE:</b></td>
-                  <td colspan="4"> </td>
+                  <td height="30"  colspan="15"></td>
                   
                </tr>
+             
                <tr>
                   <td colspan="15"> <h4> INFORMATION REQUIRED FROM EMPLOYER AT END OF YEAR : 2014 </h4></td>
                  </tr>
