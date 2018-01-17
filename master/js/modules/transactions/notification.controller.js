@@ -10,8 +10,8 @@
         .module('app.transactions')
         .controller('NotificationController', NotificationController);
 
-    NotificationController.$inject = ['$scope','$http', '$rootScope','$state','$resource','jadaApiUrl','LeaveApprovalService'];
-    function NotificationController($scope,$http, $rootScope,  $state,$resource,jadaApiUrl,LeaveApprovalService) {
+    NotificationController.$inject = ['$scope','$http', '$rootScope','$state','$resource','jadaApiUrl','LeaveApprovalService','PayrollApprovalService'];
+    function NotificationController($scope,$http, $rootScope,  $state,$resource,jadaApiUrl,LeaveApprovalService,PayrollApprovalService) {
         var vm = this;
 
         activate();
@@ -34,14 +34,14 @@ console.log($scope.pendingleaves);
 
 var leavenotification=$scope.pendingleaves.length;
 
-console.log(leavenotification);
+console.log('leavenotification');
  
 
 
 
 
 
- $scope.leavenotification = function () {
+ $scope.leavenotification=function () {
 var count = 0;
 angular.forEach($scope.pendingleaves, function (item) {
 if (!item.isApproved) { count++ }
@@ -72,6 +72,38 @@ $scope.totalNotification=function(){
 }
 
 
+
+
+var currentperiod=12;
+    $scope.payrollpending=PayrollApprovalService.get({periodId:currentperiod});
+
+      var response=angular.fromJson($scope.payrollpending);
+      console.log(response.id)
+    // console.log($scope.payrollpending);
+  //   var x =JSON.stringify($scope.payrollpending);
+  // console.log(X.status);
+    // console.log(JSON.stringify($scope.payrollpending));
+
+
+  $http.get(jadaApiUrl+'api/payrolltransactionapproval/'+currentperiod).success(function(data) {
+              $scope.pendings = data;
+              $scope.astatus=data.status;
+             
+            });
+  
+
+
+ $scope.payrollpending = function () {
+var count = 0;
+angular.forEach( $scope.payrollpending, function (item) {
+if (!item.isApproved) { count++ }
+});
+return count;
+
+
+}
+
+ $scope.payrollpending();
 
     
 

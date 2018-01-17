@@ -21,13 +21,35 @@
 
 console.log( $scope.p9as);
 
- var year=2017;
+       var year=2017;
+
+       var employeeId=0;
           
-              $http.get(jadaApiUrl+'api/p9areport/'+year).success(function(data) {
+              $http.get(jadaApiUrl+'api/p9areport/'+year+'/'+employeeId).success(function(data) {
               $scope.p9as = data;
                     console.log( $scope.p9as);
 
             });
+
+
+                 $scope.searchP9a=function(user) {
+
+          if(user.year!=null && user.year!=""){
+           
+                  var employeeId=user.employeeId;
+          var year=user.year;
+          
+        $http.get(jadaApiUrl+'api/p9areport/'+year+'/'+employeeId).success(function(data) {
+              $scope.p9as = data;
+                    console.log( $scope.p9as);
+
+            });
+
+          }
+          
+  
+
+         };
           
               $http.get(jadaApiUrl+'api/period').success(function(data) {
               $scope.periods = data;

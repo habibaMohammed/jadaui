@@ -35,7 +35,7 @@
           };
 
 
-var currentperiod=1;
+var currentperiod=12;
     $scope.payrollpending=PayrollApprovalService.get({periodId:currentperiod});
 
       var response=angular.fromJson($scope.payrollpending);
@@ -48,49 +48,49 @@ var currentperiod=1;
 
   $http.get(jadaApiUrl+'api/payrolltransactionapproval/'+currentperiod).success(function(data) {
               $scope.pendings = data;
-              $scope.astatus=data.status;
+              
              
             });
   
            
 
- $scope.pendingpayroll=function () {
+//  $scope.pendingpayroll=function () {
 
-          var count;
+//           var count;
 
-return   $http.get(jadaApiUrl+'api/payrolltransactionapproval/'+currentperiod).success(function(data) {
+// return   $http.get(jadaApiUrl+'api/payrolltransactionapproval/'+currentperiod).success(function(data) {
         
-              $rootScope.astatus=data.status;
+//               $rootScope.astatus=data.status;
 
 
-    if( $scope.astatus==2){
-   count=2;
+//     if( $scope.astatus==2){
+//    count=2;
        
-           return count;
-    }
+//            return count;
+//     }
   
 
 
 
 
-// angular.forEach($scope.astatus, function (item) {
-// if (item.status==0) { count++ }
-// });
-// return count;
+// // angular.forEach($scope.astatus, function (item) {
+// // if (item.status==0) { count++ }
+// // });
+// // return count;
 
-// console.log(count);
+// // console.log(count);
              
-            });
+//             });
 
-    return count;
-// var count = 0;
-// angular.forEach($scope.payrollpending, function (item) {
-// if (item.status==0) { count++ }
-// });
-// return count;
+//     return count;
+// // var count = 0;
+// // angular.forEach($scope.payrollpending, function (item) {
+// // if (item.status==0) { count++ }
+// // });
+// // return count;
 
-// console.log(count);
-}
+// // console.log(count);
+// }
 
 
  $scope.payrollaproved = function () {
@@ -155,7 +155,7 @@ console.log(paryroll);
      $scope.buttonText="process";
 
  $scope.payrollApproval= function () {
-   var currentperiod=1;
+   var currentperiod=12;
   var  paryroll={periodId:currentperiod, status:"1"};
  
 console.log(paryroll);
@@ -192,7 +192,7 @@ console.log(paryroll);
 
 
   $scope.payrollReject= function () {
-   var currentperiod=1;
+   var currentperiod=12;
   var  paryroll={periodId:currentperiod, status:"2"};
  
 console.log(paryroll);
