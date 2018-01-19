@@ -1,13 +1,6 @@
 <h3>Company Details
    <small>General Company Details</small>
 </h3>
-
-
-      
-            
-
-           
-     
         <div class="panel panel-default">
             <div class="panel-heading">Company information</div>
                 <div class="panel-body" ng-controller=" CompanyRegController ">
@@ -66,9 +59,7 @@
             
   <div class="buttons"  >
                        <button class="btn btn-info pull-left mr" type="button" ng-click="show(Company)">Edit</button>
-                    <!--  <a class="btn btn-primary" title="edit"
-                          ui-sref="app.userinfo({UserId:user.id})">  <em class="fa fa-pencil"></em></a>
-                                                                           -->
+                  
                    
                     </div>
           
@@ -163,7 +154,7 @@
                
                       <div class="text-center text-success" margin-top="md" ng-show="SuccessMsg">{{SuccessMsg}}</div>
              <div class="text-center text-danger"  margin-top="md" ng-show="errorMsg">{{errorMsg}}</div>
-{{company|json}}
+
        
                
             </form>

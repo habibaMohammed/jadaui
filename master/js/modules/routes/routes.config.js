@@ -663,15 +663,15 @@
           })
 
 
-           .state('app.payroll-details', {
-              url: '/payroll-details',
+           .state('app.statutory-details', {
+              url: '/statutory-details',
               title: 'payroll-details',
-              templateUrl: helper.basepath('company-payroll-details.html')
+              templateUrl: helper.basepath('company-statutory.html')
           })
 
-             .state('app.leave-setup', {
-              url: '/leavesetup',
-              title: 'payroll-details',
+             .state('app.leave-types', {
+              url: '/leave-types',
+              title: 'leave-types',
               templateUrl: helper.basepath('leave-types.html')
           })
               .state('app.leave-approve', {
@@ -680,7 +680,7 @@
               templateUrl: helper.basepath('leave-approve.html')
           })
 
-              .state('app.Leave-transaction', {
+              .state('app.Leave-transaction-types', {
               url: '/Leave-transaction',
               title: 'Leave-transaction',
                 templateUrl: helper.basepath('Leave-transaction.html'),

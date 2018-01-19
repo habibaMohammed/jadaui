@@ -24,17 +24,3 @@
 
 })();
 
-// (function() {
-//     'use strict';
-
-//     angular
-//         .module('app.useradministration')
-//         .factory('userAdminService', userAdminService);
-
-//     userAdminService.$inject = ['$resource','jadaApiUrl'];
-//     function userAdminService($resource,jadaApiUrl) {
-          
-//         return $resource('https://jsonplaceholder.typicode.com/users/:user', {user: '@user'}); 
-//     }
-
-// })();

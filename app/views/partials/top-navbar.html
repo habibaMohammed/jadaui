@@ -63,7 +63,7 @@
       </ul>
       <!-- END Left navbar-->
       <!-- START Right Navbar-->
-      <ul class="nav navbar-nav navbar-right"  ng-controller="LeaveApprovalController">
+      <ul class="nav navbar-nav navbar-right"  ng-controller="jadaNotificationController">
          <!-- Search icon-->
          <li>
             <a href="" search-open="search-open">
@@ -99,7 +99,7 @@
                               <p class="m0 text-muted">
                                  
                                    <span class="label label-info" >
-{{leavenotification()}} leave notification
+                {{leavenotification()}} leave notification
 </span>
          
                               </p>
@@ -107,13 +107,46 @@
                         </div>
                      </a>
                      <!-- list item-->
-                     <a class="list-group-item" ui-sref="app.payroll-approve">
+                     <a class="list-group-item" ui-sref="app.payroll-approve" ng-hide="approvedpayroll() == 0">
                         <div class="media-box">
                            <div class="pull-left">
-                              <em class="fa fa-envelope fa-2x text-warning"></em>
+                              <em class="fa fa-bell-o fa-2x text-success"></em>
                            </div>
                            <div class="media-box-body clearfix">
-                              <p class="m0">Payroll approval</p>
+                              <p class="m0">Payroll approved</p>
+                              <p class="m0 text-muted">
+                                 <small>New payroll Approval notification</small>
+                              </p>
+                           </div>
+                        </div>
+                     </a>
+                     <!-- list item-->
+
+
+                      <!-- list item-->
+                     <a class="list-group-item" ui-sref="app.payroll-approve" ng-hide="rejectedpayroll() == 0">
+                        <div class="media-box">
+                           <div class="pull-left">
+                              <em class="fa fa-bell-o fa-2x text-danger"></em>
+                           </div>
+                           <div class="media-box-body clearfix">
+                              <p class="m0">Payroll Rejected</p>
+                              <p class="m0 text-muted">
+                                 <small>New payroll Approval notification</small>
+                              </p>
+                           </div>
+                        </div>
+                     </a>
+                     <!-- list item-->
+
+                      <!-- list item-->
+                     <a class="list-group-item" ui-sref="app.payroll-approve" ng-hide="pendingpayroll() == 0">
+                        <div class="media-box">
+                           <div class="pull-left">
+                              <em class="fa fa-bell-o fa-2x text-info"></em>
+                           </div>
+                           <div class="media-box-body clearfix">
+                              <p class="m0">Payroll pending</p>
                               <p class="m0 text-muted">
                                  <small>New payroll Approval notification</small>
                               </p>

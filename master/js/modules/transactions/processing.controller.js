@@ -1,6 +1,4 @@
 
-
-
 /**=========================================================
  * Module: modals.js
  * Provides a simple way to implement bootstrap modals from templates
@@ -54,18 +52,6 @@ $scope.clickBtn = function() {
     $scope.loading = false; // stop loading
   }, 2000);
 }
-
-
-
-
-
-
-
-
- 
-
-
-
 
 
       
