@@ -33,11 +33,6 @@ $scope.users=userAdminService.query();
 
 
 
-//$scope.oneuser=CompanyInfoService.get({user:1}); //Obtain the Post from backend. Search by Id
-
-
-
-
   $scope.delete= function (user) {
 user.$remove().then(function () {
 $scope.loadUsers();
@@ -84,14 +79,7 @@ $scope.loadUsers();
     };
 
 
-// $scope.show = function(x) {
-//     $scope.x = x;
-//     var modalInstance = $uibModal.open({
-//       templateUrl: 'edit-user-setting.html',
-//       controller: ModalInstanceCtrl,
-//       scope : $scope
-//     });
-//   };
+
 
            
 

@@ -20,15 +20,7 @@
                         <div class="clearfix">
                            <p class="pull-left bold">NHIF Number</p>
                            <p class="pull-right mr">{{company.nhif}}</p>
-                        </div>
-                    
-                    
-     
-
-
-     
-
-                 
+                        </div>  
              </div>
 
          </div>
@@ -57,15 +49,11 @@
 
          </div>
              <div class="buttons col-lg-6">
-                      <!--  <button class="btn btn-sm btn-info mr" title="Edit" ng-click="open()">
-                        Add New
-                     </button> -->
+                  
                      <button class="btn btn-sm btn-info" title="Edit" ng-click="show(company)">
                        Edit
                      </button>
-                  <!--    <button class="btn btn-sm btn-danger"  title="Delete" ng-click="delete(company)">
-                        <em class="fa fa-trash"></em>
-                     </button> -->
+                 
                   </div>
         
        
@@ -81,12 +69,7 @@
                   </div>
                   <div class="modal-body" ng-controller="CompanyInfoController"><!-- START panel-->
                     <form class="form-horizontal" name="statutoryform" novalidate  >
-                     <!--  <div class="form-group">
-                        <label class="col-lg-3 control-label">PIN Number </label>
-                        <div class="col-lg-9">
-                         <input class="form-control" type="text"  name="pin_number"  ng-model="statutory.pin_number" placeholder="PIN number"/>
-                       </div>
-                     </div> -->
+             
 
                       <div class="form-group">
                       <label class="col-lg-3 control-label">Company id </label>
@@ -167,12 +150,7 @@
                <input class="form-control" type="hidden"  name="id"  ng-model="company.companyId" />
              </div>
            </div>
-         <!--   <div class="form-group">
-            <label class="col-lg-3 control-label">NSSF Number</label>
-            <div class="col-lg-9">
-             <input class="form-control" type="text" name="nssf_number" ng-model="company.companyId" placeholder="NSSF number"/>
-           </div>
-         </div> -->
+         
            <div class="form-group">
             <label class="col-lg-3 control-label">NSSF Number</label>
             <div class="col-lg-9">

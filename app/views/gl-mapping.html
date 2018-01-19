@@ -1,12 +1,6 @@
 <h3>Gl mapping</h3>
 
-
-
-
-
-
-
- <div class="container-fluid" ng-controller="TablexEditableController as table">
+<div class="container-fluid" ng-controller="TablexEditableController as table">
  <div class="panel panel-default">
          <div class="panel-heading">Mapping Gl accounts and payroll codes</div>
          <div class="panel-body" ng-controller="ModalController as  mod">
@@ -133,94 +127,6 @@
 <!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">OK</button></div>
          </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- START panel-->
-<!-- <div class="col-sm-8">
-<div class="container-fluid" ng-controller="TablexEditableController as table">
-<div class="panel panel-default">
-   <div class="panel-heading"> <h3 class="panel-title">Gl mapping</h3> </div>
-    <div class="panel-body">
-          <div class="table-responsive">
-                    
-
-   <table class="table table-bordered table-hover bg-white">
-      <tr style="font-weight: bold">
-         <td>Gl Account</td>
-         <td>Description </td>
-         <td>Department Code</td>
-         <td>Cost Centre Code</td>
-         <td>Payroll Code</td>
-          <td>Edit</td>
-      </tr>
-      <tr ng-repeat="user in table.users">
-      <td>
-           
-           {{ user.glaccount }}
-         </td>
-        
-         <td>
-           
-           {{ user.desc }}
-         </td>
-         <td>
-           
-            <span editable-text="user.amount" e-name="amount" e-form="rowform"  e-required="">{{ user.amount || &apos;empty&apos; }}</span>
-            
-         </td>
-         <td>
-           
-            <span editable-text="user.amount" e-name="amount" e-form="rowform"  e-required="">{{ user.amount || &apos;empty&apos; }}</span>
-           
-         </td>
-         <td>
-            
-            <span editable-text="user.amount" e-name="amount" e-form="rowform"  e-required="">{{ user.amount || &apos;empty&apos; }}</span>
-           
-         </td>
-         <td style="white-space: nowrap">
-           
-            <form class="form-buttons form-inline" editable-form="" name="rowform" onbeforesave="table.saveUser($data, user.id)" ng-show="rowform.$visible" shown="table.inserted == user">
-               <button class="btn btn-sm btn-info" type="submit" ng-disabled="rowform.$waiting" title="Save">
-                  <em class="fa fa-save"></em>
-               </button>
-               <button class="btn btn-sm btn-default" type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" title="Cancel">
-                  <em class="fa fa-times"></em>
-               </button>
-            </form>
-            <div class="buttons" ng-show="!rowform.$visible">
-               <button class="btn btn-sm btn-info" ng-click="rowform.$show()" title="Edit">
-                  <em class="fa fa-pencil"></em>
-               </button>
-               <button class="btn btn-sm btn-danger" ng-click="table.removeUser($index)" title="Delete">
-                  <em class="fa fa-trash"></em>
-               </button>
-            </div>
-         </td>
-      </tr>
-   </table>
-   <button class="btn btn-default" ng-click="table.addUser()">Add</button>
-         </div>
-</div>
-</div> -->
 </div>
 <!-- END panel-->
 

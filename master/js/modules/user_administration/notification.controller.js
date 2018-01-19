@@ -19,7 +19,7 @@
  var SuccessMsg;
  var errorMsg;
   $scope.leavenotification=NotificationService.query();
-// console.log($scope.users);
+
 
 
 $scope.leavenotification = function () {
@@ -30,12 +30,7 @@ if (!notification.id) { count++ }
 return count;
 }
 
-//$scope.oneuser=CompanyInfoService.get({user:1}); //Obtain the Post from backend. Search by Id
 
-
-
-
-          
 
         }
     }

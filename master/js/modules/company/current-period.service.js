@@ -1,25 +1,3 @@
-// (function() {
-//     'use strict';
-
-//     angular
-//         .module('angle')
-//         .factory('CurrentPeriod', CurrentPeriod);
-
-//     CurrentPeriod.$inject = ['$http','$resource','jadaApiUrl'];
-//     function CurrentPeriod($http,$resource,jadaApiUrl) {
-
-       
-//         var Current=  $http.get(jadaApiUrl+'api/currentperiod');
-
-//   return Current;
-
-      
- 
-//     }
-
-// })();
-
-
 (function() {
     'use strict';
 

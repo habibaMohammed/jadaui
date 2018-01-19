@@ -24,7 +24,7 @@
      "submenu": [
        {  "text": "Company Details", "sref": "app.company" },
           {"text": "Financial Periods","sref": "app.financialperiods"},
-           {"text": "Statutory", "sref": "app.payroll-details"}, 
+           {"text": "Statutory", "sref": "app.statutory-details"}, 
 
          {"text": "Departments ","sref": "app.departmentlistings"},
          {"text": "Cost Centers ","sref": "app.costcenters"},
@@ -85,8 +85,8 @@
   
     "submenu": [
     
-       {"text": "Types ", "sref": "app.leave-setup"},
-         {"text": "Transaction Types ", "sref": "app.Leave-transaction"},
+       {"text": "Types ", "sref": "app.leave-types"},
+         {"text": "Transaction Types ", "sref": "app.Leave-transaction-types"},
            {"text": "Leave Processing", "sref": "app.leaveposting"}
       
   

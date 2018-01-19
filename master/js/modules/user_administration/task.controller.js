@@ -18,18 +18,8 @@
  var SuccessMsg;
  var errorMsg;
 
-          //  var id=$stateParams.Id;
-
-          //  console.log( id);
-          //   if(id!=null){
-          //  $scope.currentworkflow=TaskService.get({id:id});
-          // }
-           
          
  $scope.tasks=TaskService.query();
-
-
-
 
  $scope.loadTasks = function () {
      
@@ -84,9 +74,8 @@ $scope.loadTasks();
     
 
 
- $scope.show = function(task) {
-
-      var modalInstance = $uibModal.open({
+      $scope.show = function(task) {
+        var modalInstance = $uibModal.open({
         templateUrl: 'EditTask.html',
         controller: ModalInstanceCtrl,
         resolve: {

@@ -23,7 +23,7 @@
  var SuccessMsg;
  var errorMsg;
         
-        // $scope.currentemployee = $resource(jadaApiUrl + "api/employee/:id", { id: "@id" });
+     
 
          $scope.searchEmployee=function(user) {
 
@@ -36,55 +36,27 @@
           console.log("period - "+periodId+" employee - "+employeeId);
           $http.get(jadaApiUrl+'api/payrollpostingReport/'+employeeId+'/'+periodId).success(function(data) {
               $scope.oneUser = data;
-
-              $scope.transactions=data.payrollCodeReportList;
-              console.log(  $scope.oneUser);
-
-
-            });
+         $scope.transactions=data.payrollCodeReportList;
+             });
 
           }
-          
-          //   $scope.oneUser = employeePostingService.get({employeeId:userId, periodId:period});
-          // // $scope.oneUser=$scope.currentemployee.get({id:userId});
         
-
          };
 
 
 
 $http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
-            
-         $scope.postingtrans={};
+          $scope.postingtrans={};
           $scope.currentPeriod=data.data;
-      
-          $scope.currentperiod=$scope.currentPeriod.period;
+    $scope.currentperiod=$scope.currentPeriod.period;
       $scope.postingtrans.periodId=$scope.currentPeriod.id;
-      console.log($scope.postingtrans.periodId);
-  
-            });
+     });
 
 
 
-// $scope.populateeTransactionData=function(){
-   
-//   $scope.posting.periodId=  $rootScope.PayrollPostedId;
-//   console.log('yyyy');
-//  console.log($scope.posting.periodId);
 
-
-// }
-
-
-
- // $scope.transactions=employeePostingService.query();
-
-
-
-  $scope.loadTransactions = function () {
- 
-        
-                  var employeeId=$rootScope.employeePostedId;
+          $scope.loadTransactions = function () {
+          var employeeId=$rootScope.employeePostedId;
           var periodId=$rootScope.periodPostedId;
           console.log("period - "+periodId+" employee - "+employeeId);
           $http.get(jadaApiUrl+'api/payrollpostingReport/'+employeeId+'/'+periodId).success(function(data) {
@@ -95,19 +67,11 @@ $http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
 
 
             });
-
-
- }
+        }
 
  $rootScope.$on("CallLoadTransactions", function(){
            $scope.loadTransactions ();
         });
-
-
-
-
-  
-
 
 
     $http.get(jadaApiUrl+'api/period').success(function(data) {
@@ -132,10 +96,8 @@ $http.get(jadaApiUrl+'api/employee').success(function(data) {
 
             });
 
-$scope.codeChange=function(id){
-              
+         $scope.codeChange=function(id){
               for(var r=0;r<$scope.pcodes.length;r++){
-
                 if(id==$scope.pcodes[r].id){
                   $scope.description=$scope.pcodes[r].description;
                 }
@@ -148,34 +110,15 @@ $scope.codeChange=function(id){
 
 $scope.populateeTransactionData=function(id){
     $scope.posting=[];
-
-
-  for(var r=0;r< $scope.periods.length;r++){
+for(var r=0;r< $scope.periods.length;r++){
     if( $scope.periods[r].id==id){
-      $scope.periodId=$scope.periods[r].id;
-
-     
+      $scope.periodId=$scope.periods[r].id;  
     }
-
-    console.log("///////////////////////////////////");
- console.log(   $scope.periodId);
   }
 
   
 }
 
- // $scope.departments = [];
- //          $scope.loaddepts = function() {
- //            return  $scope.departments.length ? null : $http.get('http://localhost:56135/api/department').success(function(data) {
- //              $scope.departments = data;
- //            });
- //          };
-
-
-// $scope.loaddepts();
-
-
- 
 
         $scope.delete= function (transaction) {
              var deletetransaction= new employeePostingService(transaction);
@@ -238,16 +181,9 @@ $scope.show = function(trans) {
 
           ModalOpenFormulaInstanceCtrl.$inject = ['$scope', '$http','$rootScope','$uibModalInstance','employeePostingService','jadaApiUrl','employeeinfo'];
           function ModalOpenFormulaInstanceCtrl($scope, $http,$rootScope,$uibModalInstance, employeePostingService,jadaApiUrl,employeeinfo) {
-// $scope.transuser={};
-// $scope.transuser=new employeePostingService();
-         $scope.transactionposting=employeeinfo;
-         // $scope.transuser.periodId=employeeinfo.periodId;
 
-      //    $scope.transaction.periodId=employeeinfo.period;
-      //            $scope.Message= $scope.transaction.periodId;  
-      // // $scope.transaction.employeeId=employeeinfo.employeeId;
-          // console.log('//');
-          // console.log($scope.transuser.periodId);
+         $scope.transactionposting=employeeinfo;
+      
             $scope.ok = function () {
               $uibModalInstance.close('closed');
             };

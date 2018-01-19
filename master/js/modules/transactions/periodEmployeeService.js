@@ -21,14 +21,3 @@
     }
 
 })();
-
-
-
-// findRange:{ 
-//     url: '/RMAServerMav/webresources/com.pako.entity.rma/:id/:to', 
-//     method: 'GET', 
-//     params:{ 
-//         id:'@id', 
-//         to: '@to'
-//     }
-// }

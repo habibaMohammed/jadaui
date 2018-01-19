@@ -6,21 +6,18 @@
         .module('app.employees')
         .controller('UserInfo', function($scope, $http, $uibModal, $log, UserService) { 
                 
-         // var usersdata= $http.get('https://jsonplaceholder.typicode.com/users');
-         // usersdata.then(function(result){
-         //   $scope.users=result.data;
-         // })
+    
          $scope.users=UserService.query();
 
          $scope.setDataForUsers=function(userId) {
-          $scope.oneUser=UserService.get({user:userId});
+        $scope.oneUser=UserService.get({user:userId});
 
          };
 
-$scope.searchEmp=function(userId) {
-   $scope.oneUser=UserService.get({user:userId});
+      $scope.searchEmp=function(userId) {
+     $scope.oneUser=UserService.get({user:userId});
  
- };
+            };
 
           $scope.open = function (size) {
 
@@ -39,10 +36,6 @@ $scope.searchEmp=function(userId) {
     });
 
   };
-
-
-
-
 
           $scope.show = function (size) {
 
@@ -87,23 +80,3 @@ $scope.searchEmp=function(userId) {
     }]);
 })();
 
-// (function() {
-//     'use strict';
-
-//     angular
-//         .module('app.employees')
-//         .controller('UserInfo', function($scope, $http, UserService) { 
-                
-//          // var usersdata= $http.get('https://jsonplaceholder.typicode.com/users');
-//          // usersdata.then(function(result){
-//          //  $scope.users=result.data;
-//          // })
-//          $scope.users=UserService.query();
-
-//          $scope.setDataForUsers=function(userId) {
-//            $scope.oneUser=UserService.get({user:userId});
-
-//          };
-         
-//     });
-// })();

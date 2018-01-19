@@ -15,18 +15,6 @@
 
         function activate() {
 
-
-
-
- // var SuccessMsg;
- // var errorMsg;
- // var leavepost;
- // var isApproved;
- // var applicationComment;
- //  $scope.leavepost.isApproved=false;
- //  $scope.leavepost.applicationComment=' ';
-
-
  $scope.leavetypeprocess=LeaveProcessingService.query();
  console.log( $scope.leavetypeprocess);
 
@@ -88,12 +76,7 @@ $scope.dayDiff = function(firstDate, secondDate){
     console.log(diffDays);
 }
 
-  // $scope.dayDiff = function(firstDate,secondDate){
-  //     var date2 = new Date($scope.formatString(secondDate));
-  //     var date1 = new Date($scope.formatString(firstDate));
-  //     var timeDiff = Math.abs(date2.getTime() - date1.getTime());   
-  //     $scope.dayDifference = Math.ceil(timeDiff / (1000 * 3600 * 24));
-  //    }
+
 
        $scope.formatString = function(format) {
     var day   = parseInt(format.substring(0,2));

@@ -37,13 +37,14 @@
 
 var currentperiod=12;
     $scope.payrollpending=PayrollApprovalService.get({periodId:currentperiod});
+  console.log('///////')
+      console.log($scope.payrollpending)
+ 
 
-      var response=angular.fromJson($scope.payrollpending);
-      console.log(response.id)
-    // console.log($scope.payrollpending);
-  //   var x =JSON.stringify($scope.payrollpending);
-  // console.log(X.status);
-    // console.log(JSON.stringify($scope.payrollpending));
+
+       $scope.loadPendingpayroll=function () {
+      $scope.payrollpending=PayrollApprovalService.get({periodId:currentperiod});
+       }
 
 
   $http.get(jadaApiUrl+'api/payrolltransactionapproval/'+currentperiod).success(function(data) {
@@ -54,64 +55,11 @@ var currentperiod=12;
   
            
 
-//  $scope.pendingpayroll=function () {
-
-//           var count;
-
-// return   $http.get(jadaApiUrl+'api/payrolltransactionapproval/'+currentperiod).success(function(data) {
-        
-//               $rootScope.astatus=data.status;
-
-
-//     if( $scope.astatus==2){
-//    count=2;
-       
-//            return count;
-//     }
-  
-
-
-
-
-// // angular.forEach($scope.astatus, function (item) {
-// // if (item.status==0) { count++ }
-// // });
-// // return count;
-
-// // console.log(count);
-             
-//             });
-
-//     return count;
-// // var count = 0;
-// // angular.forEach($scope.payrollpending, function (item) {
-// // if (item.status==0) { count++ }
-// // });
-// // return count;
-
-// // console.log(count);
-// }
-
-
- $scope.payrollaproved = function () {
-var count = 0;
-
-angular.forEach($scope.payrollpending, function (value, prop, obj) {
-if (value==1) { count++ }
-});
-return count;
-
-
-}
-
-    console.log("///////////////////////////////////");
-var i=$scope.payrollaproved();
-console.log('hh'+i);
 
 
 
  $scope.sendforApproval= function () {
-   var currentperiod=1;
+   var currentperiod=12;
   var  paryroll={periodId:currentperiod, status:"0"};
  
 console.log(paryroll);
@@ -181,7 +129,7 @@ console.log(paryroll);
               // vm.auth=true;
             }
            
-
+  $scope.loadPendingpayroll();
             }, function() {
                $scope.currentclass='process';
                $scope.SuccessMsg=false;

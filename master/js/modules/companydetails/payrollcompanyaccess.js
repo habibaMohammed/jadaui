@@ -1,6 +1,4 @@
 
-
-
 /**=========================================================
  * Module: modals.js
  * Provides a simple way to implement bootstrap modals from templates

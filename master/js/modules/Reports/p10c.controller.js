@@ -1,4 +1,4 @@
-(function() {
+ (function() {
     'use strict';
 
     angular
@@ -32,7 +32,6 @@
             });
 
                    $scope.showcurrentYear=function(id){
-               console.log(id)
                 for(var r=0;r< $scope.periods.length;r++){
                   if(id==$scope.periods[r].id){
 
