@@ -26,10 +26,22 @@
             });
 
 
+
               $http.get(jadaApiUrl+'api/employee').success(function(data) {
               $scope.employees = data;
           
             });
+
+               $scope.getByperiod=function(report) {
+
+          if(report!=null && report!=""){
+           
+                 $scope.ptencs=P10cService.get({year:report});
+
+          }
+        
+         };
+
 
                    $scope.showcurrentYear=function(id){
                 for(var r=0;r< $scope.periods.length;r++){

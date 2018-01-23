@@ -30,10 +30,11 @@
 
  $http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
             
-         
+         $scope.currentp=data;
         $scope.current=data.data.id;
         console.log($scope.current);
-      
+        console.log('data');
+       console.log($scope.currentp);
   
             });
            
