@@ -22,44 +22,27 @@
 
         function activate() {
 
-   $scope.toaster = {
-              type:  'info',
-              title: 'Payroll Approval',
-              text:  'Payroll Approval waiting'
-          };
 
-
-     
-          $scope.pop = function() {
-            toaster.pop($scope.toaster.type, $scope.toaster.title, $scope.toaster.text);
-          };
-
-
-var currentperiod=12;
-    $scope.payrollpending=PayrollApprovalService.get({periodId:currentperiod});
-  console.log('///////')
-      console.log($scope.payrollpending)
  
 
 
-       $scope.loadPendingpayroll=function () {
-      $scope.payrollpending=PayrollApprovalService.get({periodId:currentperiod});
-       }
+     
 
-
-  $http.get(jadaApiUrl+'api/payrolltransactionapproval/'+currentperiod).success(function(data) {
-              $scope.pendings = data;
-              
-             
-            });
+ $http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
+            
+         
+        $scope.current=data.data.id;
+        console.log($scope.current);
+      
   
+            });
            
 
 
 
 
- $scope.sendforApproval= function () {
-   var currentperiod=12;
+ $scope.sendforApproval= function (current) {
+   var currentperiod=current;
   var  paryroll={periodId:currentperiod, status:"0"};
  
 console.log(paryroll);
@@ -84,7 +67,7 @@ console.log(paryroll);
 
               // vm.auth=true;
             } 
-            $scope.pop();
+           $state.reload()
 
             }, function() {
                $scope.currentclass='process';
@@ -102,8 +85,8 @@ console.log(paryroll);
 
      $scope.buttonText="process";
 
- $scope.payrollApproval= function () {
-   var currentperiod=12;
+ $scope.payrollApproval= function (current) {
+   var currentperiod=current;
   var  paryroll={periodId:currentperiod, status:"1"};
  
 console.log(paryroll);
@@ -129,7 +112,7 @@ console.log(paryroll);
               // vm.auth=true;
             }
            
-  $scope.loadPendingpayroll();
+$state.reload()
             }, function() {
                $scope.currentclass='process';
                $scope.SuccessMsg=false;
@@ -139,8 +122,8 @@ console.log(paryroll);
  }
 
 
-  $scope.payrollReject= function () {
-   var currentperiod=12;
+  $scope.payrollReject= function (current) {
+   var currentperiod=current;
   var  paryroll={periodId:currentperiod, status:"2"};
  
 console.log(paryroll);
@@ -165,7 +148,7 @@ console.log(paryroll);
 
               // vm.auth=true;
             }
-           
+           $state.reload()
 
             }, function() {
                $scope.rejectclass='process';
@@ -174,29 +157,13 @@ console.log(paryroll);
                 });
 
  }
- //    $scope.buttonprocess=true;
- //      $http.post(jadaApiUrl+'api/payrolltransaction').success(function(){
-    
- // $scope.buttonText="processing";
- //                  },function(err){
- //            $scope.buttonText="failed";
- //            }).finally(function(){
- //              $scope.currentclass='process';
- //            $scope.buttonText="process";
- //            });
-            
+ 
 
 
 
           
           
 
-$scope.clickBtn = function() {
-  $scope.loading = true; // start loading
-  $timeout(function() {
-    $scope.loading = false; // stop loading
-  }, 2000);
-}
 
 
 

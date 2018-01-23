@@ -23,34 +23,32 @@
        var SuccessMsg;
        var errorMsg;
 
+var currentperiod=12;
+    $scope.payrollpending=PayrollApprovalService.get({periodId:currentperiod});
            
+$scope.approvedResource = $resource(jadaApiUrl+'api/approvedpayrolltransaction');
+$scope.approve=$scope.approvedResource.get({});
+
+$scope.rejectedResource = $resource(jadaApiUrl+'api/rejectedpayrolltransaction');
+ $scope.rejectedgpayroll=$scope.rejectedResource.get({});
+
       $scope.pendingleaves=LeaveApprovalService.query();
-      console.log($scope.pendingleaves);
+    
 
            
 
-                 var currentperiod=12
-$http.get(jadaApiUrl+'api/approvedpayrolltransaction').success(function(data) {
-                    $scope.approvedgpayroll=data;
+// $http.get(jadaApiUrl+'api/approvedpayrolltransaction').success(function(data) {
+//                     $scope.approvedgpayroll=data;
                  
-                  });
+//                   });
 
-        $scope.loadapproved=function(){
-                           var currentperiod=12
-$http.get(jadaApiUrl+'api/approvedpayrolltransaction').success(function(data) {
-                    $scope.approvedgpayroll=data;
 
-                console.log($scope.approvedgpayroll);
-                 
-                  });
 
-        }
-$scope.loadapproved();
 
        $scope.approvedpayroll=function () {
       var count = 0;
 
-      angular.forEach($scope.approvedgpayroll, function(value, key) {
+      angular.forEach($scope.approve, function(value, key) {
         if(key=="status" &&value=="1"){
           count++
        console.log(key + ': ' + value);
@@ -64,48 +62,18 @@ $scope.loadapproved();
       }
 
 
- $scope.payrollApproval= function () {
-   var currentperiod=12;
-  var  paryroll={periodId:currentperiod, status:"1"};
- 
-console.log(paryroll);
-    $scope.currentclass='whirl ringed';
-
-      var payrollposting=new PayrollApprovalService(paryroll);
-        payrollposting.$update().then(function(data){
-               $scope.currentclass='process';
-              var response=angular.fromJson(data);
-            console.log(response.Message);
-            // $scope.authMsg=response.Message;
-            if(response.Status=="1"){
-                    $scope.errorMsg=false;
-                    $scope.SuccessMsg =response.Message;
-            }else{
-            $scope.currentclass='process';
-                  $scope.SuccessMsg=false;
-                   $scope.errorMsg=response.Message;
-
-              // vm.auth=true;
-            }
-           
-  $scope.loadapproved();
-            }, function() {
-               $scope.currentclass='process';
-               $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
-
- }
 
 
 
 
 
-      $http.get(jadaApiUrl+'api/rejectedpayrolltransaction').success(function(data) {
-                    $scope.rejectedgpayroll =data;
 
-                console.log($scope.rejectedgpayroll);
-                  });
+      // $http.get(jadaApiUrl+'api/rejectedpayrolltransaction').success(function(data) {
+      //               $scope.rejectedgpayroll =data;
+
+      //           console.log($scope.rejectedgpayroll);
+      //             });
+
 
 
 
@@ -127,47 +95,12 @@ console.log(paryroll);
 
 
 
-  $scope.payrollReject= function () {
-   var currentperiod=12;
-  var  paryroll={periodId:currentperiod, status:"2"};
- 
-console.log(paryroll);
-    $scope.rejectclass='whirl ringed';
 
-      var  payrollposting=new PayrollApprovalService(paryroll);
-  
-
-
-            payrollposting.$update().then(function(data){
-               $scope.rejectclass='process';
-              var response=angular.fromJson(data);
-            console.log(response.Message);
-            // $scope.authMsg=response.Message;
-            if(response.Status=="1"){
-                    $scope.errorMsg=false;
-                    $scope.SuccessMsg =response.Message;
-            }else{
-            $scope.rejectclass='process';
-                  $scope.SuccessMsg=false;
-                   $scope.errorMsg=response.Message;
-
-              // vm.auth=true;
-            }
-   
-
-            }, function() {
-               $scope.rejectclass='process';
-               $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
-
- }
 
 
                  $http.get(jadaApiUrl+'api/pendingpayrolltransaction').success(function(data) {
                     $scope.pendingpayrolldata=data;
-                   console.log('pending');
-                    console.log($scope.pendingpayroll)
+                 
                   });
 
 
@@ -177,7 +110,7 @@ console.log(paryroll);
       angular.forEach($scope.pendingpayrolldata, function(value, key) {
         if(key=="status" &&value=="0"){
           count++
-       console.log(key + ': ' + value);
+
         }
        
       }

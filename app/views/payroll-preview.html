@@ -49,9 +49,10 @@
                
             <br/>
            
+    <input class="form-control" type="hidden" name="id" ng-model="current" />
           
         <!--  <button class="btn btn-default pull-left" type="button" onclick="window.print();">Print</button> -->
-         <button class="btn btn-success pull-left mr" type="button"  ng-class="currentclass" ng-click="sendforApproval()">send for approval</button>
+         <button class="btn btn-success pull-left mr" type="button"  ng-class="currentclass" ng-click="sendforApproval(current)">send for approval</button>
 
           <button class="btn btn-info pull-left mr" type="button">Back to processing</button>
       </div>

@@ -15,9 +15,32 @@
 
         function activate() {
 
-
-        $scope.ptends=P10dService.get({year:2017});
+            var date = new Date();
+            var year = date.getFullYear();
+        $scope.ptends=P10dService.get({year:year});
         console.log( $scope.ptends);
+
+
+
+         $scope.getByperiod=function(report) {
+
+          if(report.year!=null && report.year!=""){
+           
+                  var year=report.year;
+                var quater=report.quater;
+          $http.get(jadaApiUrl+'api/p10dreport/'+year+'/'+quater).success(function(data) {
+                $scope.ptends = data;
+        
+             });
+
+          }
+        
+         };
+
+         
+     // $scope.getByperiod=function(year){
+     //     $scope.ptends=P10dService.get({year:year});
+     // }
 
           
               $http.get(jadaApiUrl+'api/period').success(function(data) {
