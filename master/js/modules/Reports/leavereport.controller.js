@@ -15,7 +15,7 @@
 
         function activate() {
 
-var currentPeriod=1;
+         var currentPeriod=1;
         $scope.leaves=LeaveReportService.get({periodId:currentPeriod});
         console.log('herehh');
          

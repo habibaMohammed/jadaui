@@ -23,8 +23,7 @@
        var SuccessMsg;
        var errorMsg;
 
-var currentperiod=12;
-    $scope.payrollpending=PayrollApprovalService.get({periodId:currentperiod});
+
            
 $scope.approvedResource = $resource(jadaApiUrl+'api/approvedpayrolltransaction');
 $scope.approve=$scope.approvedResource.get({});
