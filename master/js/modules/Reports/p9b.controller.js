@@ -16,7 +16,35 @@
         function activate() {
 
 
-        $scope.leaves=LeaveReportService.query();
+          var year=2017;
+
+       var employeeId=5;
+          
+              $http.get(jadaApiUrl+'api/p9breport/'+year+'/'+employeeId).success(function(data) {
+              $scope.p9bs = data;
+                    console.log( $scope.p9bs);
+
+            });
+
+
+        $scope.searchP9b=function(user) {
+
+          if(user.year!=null && user.year!=""){
+           
+                  var employeeId=user.employeeId;
+          var year=user.year;
+          
+        $http.get(jadaApiUrl+'api/p9breport/'+year+'/'+employeeId).success(function(data) {
+              $scope.p9bs = data;
+                    console.log( $scope.p9bs);
+
+            });
+
+          }
+          
+  
+
+         };
 
           
               $http.get(jadaApiUrl+'api/period').success(function(data) {

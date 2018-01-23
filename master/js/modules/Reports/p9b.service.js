@@ -3,11 +3,11 @@
 
     angular
         .module('app.reports')
-        .factory('P9aService', P9aService);
+        .factory('P9bService', P9bService);
 
-    P9aService.$inject = ['$resource','jadaApiUrl'];
-    function P9aService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/p9areport/:periodId', {periodId: '@periodId'},
+    P9bService.$inject = ['$resource','jadaApiUrl'];
+    function P9bService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/p9breport/:periodId', {periodId: '@periodId'},
     { 'get':    {method:'GET', isArray:false},
   'save':   {method:'POST'},
   'query':  {method:'GET', isArray:true},

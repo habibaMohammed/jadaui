@@ -16,7 +16,7 @@
         function activate() {
 
 
-        $scope.ptenas=P10aService.get({periodId:12});
+        $scope.ptenas=P10aService.get({periodId:2017});
 
           console.log($scope.ptenas);
               $http.get(jadaApiUrl+'api/period').success(function(data) {
