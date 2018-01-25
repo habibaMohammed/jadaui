@@ -34,9 +34,16 @@
           var periodId=user.periodId;
           
           console.log("period - "+periodId+" employee - "+employeeId);
-          $http.get(jadaApiUrl+'api/payrollpostingReport/'+employeeId+'/'+periodId).success(function(data) {
+          $http.get(jadaApiUrl+'api/payrollpostingReport/'+periodId+'/'+employeeId).success(function(data) {
               $scope.oneUser = data;
          $scope.transactions=data.payrollCodeReportList;
+              console.log($scope.transactions);
+             });
+
+           $http.get(jadaApiUrl+'api/payrolltransaction/'+periodId+'/'+employeeId).success(function(data) {
+         
+         $scope.alltransactions=data;
+         console.log($scope.alltransactions);
              });
 
           }
@@ -52,7 +59,6 @@ $http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
       $scope.postingtrans.periodId=$scope.currentPeriod.id;
       $scope.period_description=$scope.currentPeriod.month+ ' '+$scope.currentPeriod.year;
      });
-
 
 
 
@@ -86,7 +92,14 @@ $http.get(jadaApiUrl+'api/department').success(function(data) {
             });
 
 $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
+            // $scope.postingtrans={};
+              $scope.employees=data;
+              var empId=$scope.employees[0].id;
+              $scope.postingtrans.employeeId=empId;
+           console.log('hapa');
+             console.log($scope.employees[0].id);
+
+
           
             });
 
@@ -155,12 +168,12 @@ for(var r=0;r< $scope.periods.length;r++){
             });
           };
 
-             $scope.openTransaction = function (employeeinfo) {
+             $scope.openPayslip = function (employeeinfo) {
 
             var modalInstance = $uibModal.open({
-              templateUrl: 'viewTransactions.html',
+              templateUrl: 'viewPayslip.html',
               controller: ViewTransactionInstanceCtrl,
-              size:'lg',
+              // size:'lg',
               resolve: {
            employeeinfo: function () {
              return employeeinfo;
@@ -280,7 +293,7 @@ $scope.show = function(trans) {
           ViewTransactionInstanceCtrl.$inject = ['$scope', '$http','$rootScope','$uibModalInstance','employeePostingService','jadaApiUrl','employeeinfo'];
           function ViewTransactionInstanceCtrl($scope, $http,$rootScope,$uibModalInstance, employeePostingService,jadaApiUrl,employeeinfo) {
 
-         $scope.transactionposting=employeeinfo;
+    
       
             $scope.ok = function () {
               $uibModalInstance.close('closed');
@@ -290,52 +303,25 @@ $scope.show = function(trans) {
               $uibModalInstance.dismiss('cancel');
             };
 
-            
-             $scope.submitTransaction=function(transactionposting) {
-      var usertransactionposting=new employeePostingService(transactionposting);
+console.log(employeeinfo.periodId)
+console.log(employeeinfo.employeeId)
 
-          usertransactionposting.$save().then(function(data){
-             var response=angular.fromJson(data);
-          
-            if(response.Status=="1"){
-              $scope.errorMsg=false;
-                    $scope.SuccessMsg =response.Message;
-              
-                     $scope.transactionposting.payrollCodeId=' ';
-                     $scope.transactionposting.amount=' ';
-            }else{
-           
-               $scope.SuccessMsg=false;
-                   $scope.errorMsg=response.Message;
-           
-            }
-            $rootScope.$emit("CallLoadTransactions", {});
-
-          }, 
-          function() {
-             $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
+          if(employeeinfo.periodId!=null && employeeinfo.periodId!=""){
+    
+           var employeeId=employeeinfo.employeeId;
+           var period=employeeinfo.periodId;
      
-          };
+          $http.get(jadaApiUrl+'api/payslipreport//'+period+'/'+employeeId).success(function(data) {
+                $scope.persons= data;
+
+                 $scope.message="hellow period";
+      console.log('////hapa');
+              console.log($scope.persons);
 
 
-            $scope.saveCloseTransaction=function(transactionposting) {
-                 var usertransactionposting=new employeePostingService(transactionposting);
-         usertransactionposting.$save().then(function(){
-          $scope.transactionposting.payrollCodeId=' ';
-                     $scope.transactionposting.amount=' ';
-            $rootScope.$emit("CallLoadTransactions", {});
-            $scope.ok();
+            });
 
-          },
-           function() {
-             $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
-     
-          };
-
+          }
        
          
           }

@@ -63,13 +63,13 @@
     'use strict';
 
     angular
-        .module('app.colors', []);
+        .module('app.charts', []);
 })();
 (function() {
     'use strict';
 
     angular
-        .module('app.charts', []);
+        .module('app.colors', []);
 })();
 (function() {
     'use strict';
@@ -81,7 +81,7 @@
     'use strict';
 
     angular
-        .module('app.companydetails', []);
+        .module('app.dashboard', []);
 })();
 (function() {
     'use strict';
@@ -108,25 +108,13 @@
     'use strict';
 
     angular
+        .module('app.companydetails', []);
+})();
+(function() {
+    'use strict';
+
+    angular
         .module('app.elements', []);
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.extras', []);
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.dashboard', []);
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.flatdoc', []);
 })();
 (function() {
     'use strict';
@@ -138,13 +126,7 @@
     'use strict';
 
     angular
-        .module('app.forms', []);
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.lazyload', []);
+        .module('app.extras', []);
 })();
 (function() {
     'use strict';
@@ -156,13 +138,31 @@
     'use strict';
 
     angular
+        .module('app.flatdoc', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.forms', []);
+})();
+(function() {
+    'use strict';
+
+    angular
         .module('app.loadingbar', []);
 })();
 (function() {
     'use strict';
 
     angular
-        .module('app.maintenance', ['ui.bootstrap']);
+        .module('app.lazyload', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.locale', []);
 })();
 (function() {
     'use strict';
@@ -174,7 +174,7 @@
     'use strict';
 
     angular
-        .module('app.locale', []);
+        .module('app.maintenance', ['ui.bootstrap']);
 })();
 (function() {
     'use strict';
@@ -198,12 +198,6 @@
     'use strict';
 
     angular
-        .module('app.payrollcodes', [ ]);
-})();
-(function() {
-    'use strict';
-
-    angular
         .module('app.pages', []);
 })();
 (function() {
@@ -211,6 +205,12 @@
 
     angular
         .module('app.panels', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.payrollcodes', [ ]);
 })();
 (function() {
     'use strict';
@@ -230,12 +230,6 @@
     'use strict';
 
     angular
-        .module('app.settings', []);
-})();
-(function() {
-    'use strict';
-
-    angular
         .module('app.routes', [
             'app.lazyload'
         ]);
@@ -244,7 +238,7 @@
     'use strict';
 
     angular
-        .module('app.transactions', []);
+        .module('app.settings', []);
 })();
 (function() {
     'use strict';
@@ -263,6 +257,12 @@
 
     angular
         .module('app.translate', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.transactions', []);
 })();
 (function() {
     'use strict';
@@ -995,56 +995,6 @@ angular.module('app.bootstrapui').controller('YearpickerCtrl', ["$scope", functi
     opened: false
   };
 }]);
-(function() {
-    'use strict';
-
-    angular
-        .module('app.colors')
-        .constant('APP_COLORS', {
-          'primary':                '#5d9cec',
-          'success':                '#27c24c',
-          'info':                   '#23b7e5',
-          'warning':                '#ff902b',
-          'danger':                 '#f05050',
-          'inverse':                '#131e26',
-          'green':                  '#37bc9b',
-          'pink':                   '#f532e5',
-          'purple':                 '#7266ba',
-          'dark':                   '#3a3f51',
-          'yellow':                 '#fad732',
-          'gray-darker':            '#232735',
-          'gray-dark':              '#3a3f51',
-          'gray':                   '#dde6e9',
-          'gray-light':             '#e4eaec',
-          'gray-lighter':           '#edf1f2'
-        })
-        ;
-})();
-/**=========================================================
- * Module: colors.js
- * Services to retrieve global colors
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.colors')
-        .service('Colors', Colors);
-
-    Colors.$inject = ['APP_COLORS'];
-    function Colors(APP_COLORS) {
-        this.byName = byName;
-
-        ////////////////
-
-        function byName(name) {
-          return (APP_COLORS[name] || '#fff');
-        }
-    }
-
-})();
-
 /**=========================================================
  * Module: chartist.js
  =========================================================*/
@@ -2707,6 +2657,56 @@ angular.module('app.bootstrapui').controller('YearpickerCtrl', ["$scope", functi
 
 })();
 
+(function() {
+    'use strict';
+
+    angular
+        .module('app.colors')
+        .constant('APP_COLORS', {
+          'primary':                '#5d9cec',
+          'success':                '#27c24c',
+          'info':                   '#23b7e5',
+          'warning':                '#ff902b',
+          'danger':                 '#f05050',
+          'inverse':                '#131e26',
+          'green':                  '#37bc9b',
+          'pink':                   '#f532e5',
+          'purple':                 '#7266ba',
+          'dark':                   '#3a3f51',
+          'yellow':                 '#fad732',
+          'gray-darker':            '#232735',
+          'gray-dark':              '#3a3f51',
+          'gray':                   '#dde6e9',
+          'gray-light':             '#e4eaec',
+          'gray-lighter':           '#edf1f2'
+        })
+        ;
+})();
+/**=========================================================
+ * Module: colors.js
+ * Services to retrieve global colors
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.colors')
+        .service('Colors', Colors);
+
+    Colors.$inject = ['APP_COLORS'];
+    function Colors(APP_COLORS) {
+        this.byName = byName;
+
+        ////////////////
+
+        function byName(name) {
+          return (APP_COLORS[name] || '#fff');
+        }
+    }
+
+})();
+
 
 
 
@@ -3450,6 +3450,525 @@ $scope.show = function(period) {
 
 })();
 
+(function() {
+    'use strict';
+
+    angular
+        .module('app.dashboard')
+        .controller('DashboardController', DashboardController);
+
+    DashboardController.$inject = ['$scope', 'ChartData', '$timeout','$localStorage','DashboardService'];
+    function DashboardController($scope, ChartData, $timeout,$localStorage,DashboardService) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+          $scope.dashboard=DashboardService.get();
+          console.log($scope.dashboard)
+
+          // SPLINE
+          // ----------------------------------- 
+          vm.splineData = ChartData.load('server/chart/spline.json');
+          vm.splineOptions = {
+              series: {
+                  lines: {
+                      show: false
+                  },
+                  points: {
+                      show: true,
+                      radius: 4
+                  },
+                  splines: {
+                      show: true,
+                      tension: 0.4,
+                      lineWidth: 1,
+                      fill: 0.5
+                  }
+              },
+              grid: {
+                  borderColor: '#eee',
+                  borderWidth: 1,
+                  hoverable: true,
+                  backgroundColor: '#fcfcfc'
+              },
+              tooltip: true,
+              tooltipOpts: {
+                  content: function (label, x, y) { return x + ' : ' + y; }
+              },
+              xaxis: {
+                  tickColor: '#fcfcfc',
+                  mode: 'categories'
+              },
+              yaxis: {
+                  min: 0,
+                  max: 150, // optional: use it for a clear represetation
+                  tickColor: '#eee',
+                  position: ($scope.app.layout.isRTL ? 'right' : 'left'),
+                  tickFormatter: function (v) {
+                      return v/* + ' visitors'*/;
+                  }
+              },
+              shadowSize: 0
+          };
+
+
+          // PANEL REFRESH EVENTS
+          // ----------------------------------- 
+
+          $scope.$on('panel-refresh', function(event, id) {
+            
+            console.log('Simulating chart refresh during 3s on #'+id);
+
+            // Instead of timeout you can request a chart data
+            $timeout(function(){
+              
+              // directive listen for to remove the spinner 
+              // after we end up to perform own operations
+              $scope.$broadcast('removeSpinner', id);
+              
+              console.log('Refreshed #' + id);
+
+            }, 3000);
+
+          });
+
+
+          // PANEL DISMISS EVENTS
+          // ----------------------------------- 
+
+          // Before remove panel
+          $scope.$on('panel-remove', function(event, id, deferred){
+            
+            console.log('Panel #' + id + ' removing');
+            
+            // Here is obligatory to call the resolve() if we pretend to remove the panel finally
+            // Not calling resolve() will NOT remove the panel
+            // It's up to your app to decide if panel should be removed or not
+            deferred.resolve();
+          
+          });
+
+          // Panel removed ( only if above was resolved() )
+          $scope.$on('panel-removed', function(event, id){
+
+            console.log('Panel #' + id + ' removed');
+
+          });
+
+        }
+        
+
+        // $scope.Logout=function() {
+        //     // remove user from local storage and clear http auth header
+        //     delete $localStorage.currentUser;
+        //     $http.defaults.headers.common.Authorization = '';
+        //     aler("logging out")
+        // }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.reports')
+        .factory('DashboardService', DashboardService);
+
+    DashboardService.$inject = ['$resource','jadaApiUrl'];
+    function DashboardService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/dashboard/',
+    { 'get':{method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:false}
+
+});
+     return data
+          
+       
+    }
+
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.dashboard')
+        .controller('DashboardV2Controller', DashboardV2Controller);
+
+    DashboardV2Controller.$inject = ['$rootScope', '$scope', '$state'];
+    function DashboardV2Controller($rootScope, $scope, $state) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          // Change layout mode
+          if( $state.includes('app-h') ) {
+            // Setup layout horizontal for demo
+            $rootScope.app.layout.horizontal = true;
+            $scope.$on('$destroy', function(){
+                $rootScope.app.layout.horizontal = false;
+            });
+          }
+          else {
+            if(!$rootScope.app.layout.isCollapsedText)
+                $rootScope.app.layout.isCollapsed = true;
+          }
+
+          // BAR STACKED
+          // -----------------------------------
+          vm.barStackedOptions = {
+              series: {
+                  stack: true,
+                  bars: {
+                      align: 'center',
+                      lineWidth: 0,
+                      show: true,
+                      barWidth: 0.6,
+                      fill: 0.9
+                  }
+              },
+              grid: {
+                  borderColor: '#eee',
+                  borderWidth: 1,
+                  hoverable: true,
+                  backgroundColor: '#fcfcfc'
+              },
+              tooltip: true,
+              tooltipOpts: {
+                  content: function (label, x, y) { return x + ' : ' + y; }
+              },
+              xaxis: {
+                  tickColor: '#fcfcfc',
+                  mode: 'categories'
+              },
+              yaxis: {
+                  min: 0,
+                  max: 200, // optional: use it for a clear represetation
+                  position: ($rootScope.app.layout.isRTL ? 'right' : 'left'),
+                  tickColor: '#eee'
+              },
+              shadowSize: 0
+          };
+
+          // SPLINE
+          // -----------------------------------
+
+          vm.splineOptions = {
+              series: {
+                  lines: {
+                      show: false
+                  },
+                  points: {
+                      show: true,
+                      radius: 4
+                  },
+                  splines: {
+                      show: true,
+                      tension: 0.4,
+                      lineWidth: 1,
+                      fill: 0.5
+                  }
+              },
+              grid: {
+                  borderColor: '#eee',
+                  borderWidth: 1,
+                  hoverable: true,
+                  backgroundColor: '#fcfcfc'
+              },
+              tooltip: true,
+              tooltipOpts: {
+                  content: function (label, x, y) { return x + ' : ' + y; }
+              },
+              xaxis: {
+                  tickColor: '#fcfcfc',
+                  mode: 'categories'
+              },
+              yaxis: {
+                  min: 0,
+                  max: 150, // optional: use it for a clear represetation
+                  tickColor: '#eee',
+                  position: ($rootScope.app.layout.isRTL ? 'right' : 'left'),
+                  tickFormatter: function (v) {
+                      return v/* + ' visitors'*/;
+                  }
+              },
+              shadowSize: 0
+          };
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.dashboard')
+        .controller('DashboardV3Controller', DashboardV3Controller);
+
+    DashboardV3Controller.$inject = ['$rootScope'];
+    function DashboardV3Controller($rootScope) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          // SPLINE
+          // ----------------------------------- 
+
+          vm.splineOptions = {
+              series: {
+                  lines: {
+                      show: false
+                  },
+                  points: {
+                      show: true,
+                      radius: 4
+                  },
+                  splines: {
+                      show: true,
+                      tension: 0.4,
+                      lineWidth: 1,
+                      fill: 0.5
+                  }
+              },
+              grid: {
+                  borderColor: '#eee',
+                  borderWidth: 1,
+                  hoverable: true,
+                  backgroundColor: '#fcfcfc'
+              },
+              tooltip: true,
+              tooltipOpts: {
+                  content: function (label, x, y) { return x + ' : ' + y; }
+              },
+              xaxis: {
+                  tickColor: '#fcfcfc',
+                  mode: 'categories'
+              },
+              yaxis: {
+                  min: 0,
+                  max: 150, // optional: use it for a clear represetation
+                  tickColor: '#eee',
+                  position: ($rootScope.app.layout.isRTL ? 'right' : 'left'),
+                  tickFormatter: function (v) {
+                      return v/* + ' visitors'*/;
+                  }
+              },
+              shadowSize: 0
+          };
+
+
+          vm.seriesData = {
+            'CA': 11100,   // Canada
+            'DE': 2510,    // Germany
+            'FR': 3710,    // France
+            'AU': 5710,    // Australia
+            'GB': 8310,    // Great Britain
+            'RU': 9310,    // Russia
+            'BR': 6610,    // Brazil
+            'IN': 7810,    // India
+            'CN': 4310,    // China
+            'US': 839,     // USA
+            'SA': 410      // Saudi Arabia
+          };
+          
+          vm.markersData = [
+            { latLng:[41.90, 12.45],  name:'Vatican City'          },
+            { latLng:[43.73, 7.41],   name:'Monaco'                },
+            { latLng:[-0.52, 166.93], name:'Nauru'                 },
+            { latLng:[-8.51, 179.21], name:'Tuvalu'                },
+            { latLng:[7.11,171.06],   name:'Marshall Islands'      },
+            { latLng:[17.3,-62.73],   name:'Saint Kitts and Nevis' },
+            { latLng:[3.2,73.22],     name:'Maldives'              },
+            { latLng:[35.88,14.5],    name:'Malta'                 },
+            { latLng:[41.0,-71.06],   name:'New England'           },
+            { latLng:[12.05,-61.75],  name:'Grenada'               },
+            { latLng:[13.16,-59.55],  name:'Barbados'              },
+            { latLng:[17.11,-61.85],  name:'Antigua and Barbuda'   },
+            { latLng:[-4.61,55.45],   name:'Seychelles'            },
+            { latLng:[7.35,134.46],   name:'Palau'                 },
+            { latLng:[42.5,1.51],     name:'Andorra'               }
+          ];
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.core')
+        .config(coreConfig);
+
+    coreConfig.$inject = ['$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$animateProvider'];
+    function coreConfig($controllerProvider, $compileProvider, $filterProvider, $provide, $animateProvider){
+
+      var core = angular.module('app.core');
+      // registering components after bootstrap
+      core.controller = $controllerProvider.register;
+      core.directive  = $compileProvider.directive;
+      core.filter     = $filterProvider.register;
+      core.factory    = $provide.factory;
+      core.service    = $provide.service;
+      core.constant   = $provide.constant;
+      core.value      = $provide.value;
+
+
+      // Disables animation on items with class .ng-no-animation
+      $animateProvider.classNameFilter(/^((?!(ng-no-animation)).)*$/);
+
+      // Improve performance disabling debugging features
+      // $compileProvider.debugInfoEnabled(false);
+
+    }
+
+
+})();
+    
+
+
+/**=========================================================
+ * Module: constants.js
+ * Define constants to inject across the application
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.core')
+        .constant('APP_MEDIAQUERY', {
+          'desktopLG':             1200,
+          'desktop':                992,
+          'tablet':                 768,
+          'mobile':                 480
+        })
+      ;
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.core')
+        .run(appRun);
+
+    appRun.$inject = ['$http','$rootScope', '$state', '$stateParams', '$window', '$templateCache', 'Colors','$location', '$localStorage'];
+
+    function appRun($http,$rootScope, $state, $stateParams, $window, $templateCache, Colors , $location, $localStorage) {
+
+if ($localStorage.currentUser) {
+            $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
+        }
+
+
+        // Hook into ocLazyLoad to setup AngularGrid before inject into the app
+        // See "Creating the AngularJS Module" at
+        // https://www.ag-grid.com/best-angularjs-data-grid/index.php
+        var offevent = $rootScope.$on('ocLazyLoad.fileLoaded', function(e, file) {
+            if (file.indexOf('ag-grid.js') > -1) {
+                agGrid.initialiseAgGridWithAngular1(angular);
+                offevent();
+            }
+        });
+
+        // Set reference to access them from any scope
+        $rootScope.$state = $state;
+        $rootScope.$stateParams = $stateParams;
+        $rootScope.$storage = $window.localStorage;
+
+        // Uncomment this to disable template cache
+        /*$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+            if (typeof(toState) !== 'undefined'){
+              $templateCache.remove(toState.templateUrl);
+            }
+        });*/
+   $rootScope.$on('$locationChangeStart', function (event, next, current) {
+            var publicPages = ['/page/login'];
+            var restrictedPage = publicPages.indexOf($location.path()) === -1;
+            if (restrictedPage && !$localStorage.currentUser) {
+                $location.path('/page/login');
+                 
+            }
+        });
+
+
+
+// routerApp.run(function ($rootScope, $state, AuthService) {
+//     $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+//         if (toState.authenticate && !AuthService.IsAuthenticated()) {
+//             alert("Not Authenticated");
+//             // User isn’t authenticated
+//             $state.transitionTo("login");
+//             event.preventDefault(); 
+//         }
+//     });
+// });
+
+        // Allows to use branding color with interpolation
+        // {{ colorByName('primary') }}
+        $rootScope.colorByName = Colors.byName;
+
+        // cancel click event easily
+        $rootScope.cancel = function($event) {
+            $event.stopPropagation();
+        };
+
+        // Hooks Example
+        // -----------------------------------
+
+        // Hook not found
+        $rootScope.$on('$stateNotFound',
+            function(event, unfoundState /*, fromState, fromParams*/ ) {
+                console.log(unfoundState.to); // "lazy.state"
+                console.log(unfoundState.toParams); // {a:1, b:2}
+                console.log(unfoundState.options); // {inherit:false} + default options
+            });
+        // Hook error
+        $rootScope.$on('$stateChangeError',
+            function(event, toState, toParams, fromState, fromParams, error) {
+                console.log(error);
+            });
+        // Hook success
+        $rootScope.$on('$stateChangeSuccess',
+            function( /*event, toState, toParams, fromState, fromParams*/ ) {
+                // display new view from top
+                $window.scrollTo(0, 0);
+                // Save the route title
+                $rootScope.currTitle = $state.current.title;
+            });
+
+        // Load a title dynamically
+        $rootScope.currTitle = $state.current.title;
+        $rootScope.pageTitle = function() {
+            var title = $rootScope.app.name + ' - ' + ($rootScope.currTitle || $rootScope.app.description);
+            document.title = title;
+            return title;
+        };
+
+    }
+
+})();
+
+
+
+// routerApp.service('AuthService', function () {
+//     this._isAuthenticated = false;
+//     this._isAccessToken = '';
+//     this.IsAuthenticated = function () {
+//         return this._isAuthenticated;
+//     }
+// });
 
 (function() {
     'use strict';
@@ -5779,172 +6298,6 @@ for(var r=0;r<accountRights.length;r++){
 
 })();
 
-(function() {
-    'use strict';
-
-    angular
-        .module('app.core')
-        .config(coreConfig);
-
-    coreConfig.$inject = ['$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$animateProvider'];
-    function coreConfig($controllerProvider, $compileProvider, $filterProvider, $provide, $animateProvider){
-
-      var core = angular.module('app.core');
-      // registering components after bootstrap
-      core.controller = $controllerProvider.register;
-      core.directive  = $compileProvider.directive;
-      core.filter     = $filterProvider.register;
-      core.factory    = $provide.factory;
-      core.service    = $provide.service;
-      core.constant   = $provide.constant;
-      core.value      = $provide.value;
-
-
-      // Disables animation on items with class .ng-no-animation
-      $animateProvider.classNameFilter(/^((?!(ng-no-animation)).)*$/);
-
-      // Improve performance disabling debugging features
-      // $compileProvider.debugInfoEnabled(false);
-
-    }
-
-
-})();
-    
-
-
-/**=========================================================
- * Module: constants.js
- * Define constants to inject across the application
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.core')
-        .constant('APP_MEDIAQUERY', {
-          'desktopLG':             1200,
-          'desktop':                992,
-          'tablet':                 768,
-          'mobile':                 480
-        })
-      ;
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.core')
-        .run(appRun);
-
-    appRun.$inject = ['$http','$rootScope', '$state', '$stateParams', '$window', '$templateCache', 'Colors','$location', '$localStorage'];
-
-    function appRun($http,$rootScope, $state, $stateParams, $window, $templateCache, Colors , $location, $localStorage) {
-
-if ($localStorage.currentUser) {
-            $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
-        }
-
-
-        // Hook into ocLazyLoad to setup AngularGrid before inject into the app
-        // See "Creating the AngularJS Module" at
-        // https://www.ag-grid.com/best-angularjs-data-grid/index.php
-        var offevent = $rootScope.$on('ocLazyLoad.fileLoaded', function(e, file) {
-            if (file.indexOf('ag-grid.js') > -1) {
-                agGrid.initialiseAgGridWithAngular1(angular);
-                offevent();
-            }
-        });
-
-        // Set reference to access them from any scope
-        $rootScope.$state = $state;
-        $rootScope.$stateParams = $stateParams;
-        $rootScope.$storage = $window.localStorage;
-
-        // Uncomment this to disable template cache
-        /*$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-            if (typeof(toState) !== 'undefined'){
-              $templateCache.remove(toState.templateUrl);
-            }
-        });*/
-   $rootScope.$on('$locationChangeStart', function (event, next, current) {
-            var publicPages = ['/page/login'];
-            var restrictedPage = publicPages.indexOf($location.path()) === -1;
-            if (restrictedPage && !$localStorage.currentUser) {
-                $location.path('/page/login');
-                 
-            }
-        });
-
-
-
-// routerApp.run(function ($rootScope, $state, AuthService) {
-//     $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-//         if (toState.authenticate && !AuthService.IsAuthenticated()) {
-//             alert("Not Authenticated");
-//             // User isn’t authenticated
-//             $state.transitionTo("login");
-//             event.preventDefault(); 
-//         }
-//     });
-// });
-
-        // Allows to use branding color with interpolation
-        // {{ colorByName('primary') }}
-        $rootScope.colorByName = Colors.byName;
-
-        // cancel click event easily
-        $rootScope.cancel = function($event) {
-            $event.stopPropagation();
-        };
-
-        // Hooks Example
-        // -----------------------------------
-
-        // Hook not found
-        $rootScope.$on('$stateNotFound',
-            function(event, unfoundState /*, fromState, fromParams*/ ) {
-                console.log(unfoundState.to); // "lazy.state"
-                console.log(unfoundState.toParams); // {a:1, b:2}
-                console.log(unfoundState.options); // {inherit:false} + default options
-            });
-        // Hook error
-        $rootScope.$on('$stateChangeError',
-            function(event, toState, toParams, fromState, fromParams, error) {
-                console.log(error);
-            });
-        // Hook success
-        $rootScope.$on('$stateChangeSuccess',
-            function( /*event, toState, toParams, fromState, fromParams*/ ) {
-                // display new view from top
-                $window.scrollTo(0, 0);
-                // Save the route title
-                $rootScope.currTitle = $state.current.title;
-            });
-
-        // Load a title dynamically
-        $rootScope.currTitle = $state.current.title;
-        $rootScope.pageTitle = function() {
-            var title = $rootScope.app.name + ' - ' + ($rootScope.currTitle || $rootScope.app.description);
-            document.title = title;
-            return title;
-        };
-
-    }
-
-})();
-
-
-
-// routerApp.service('AuthService', function () {
-//     this._isAuthenticated = false;
-//     this._isAccessToken = '';
-//     this.IsAuthenticated = function () {
-//         return this._isAuthenticated;
-//     }
-// });
 
 (function() {
     'use strict';
@@ -6930,966 +7283,6 @@ if ($localStorage.currentUser) {
     }
 })();
 
-/**=========================================================
- * Module: article.js
- =========================================================*/
-(function() {
-    'use strict';
-
-    angular
-        .module('app.extras')
-        .controller('ArticleController', ArticleController);
-
-    function ArticleController() {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          vm.htmlContent = 'Article content...';
-
-          vm.postDemo = {};
-          vm.postDemo.tags = ['coding', 'less'];
-          vm.availableTags = ['coding', 'less', 'sass', 'angularjs', 'node', 'expressJS'];
-          vm.postDemo.categories = ['JAVASCRIPT','WEB'];
-          vm.availableCategories = ['JAVASCRIPT','WEB', 'BOOTSTRAP', 'SERVER', 'HTML5', 'CSS'];
-
-          vm.reviewers = [
-            { name: 'Adam',      email: 'adam@email.com',      age: 10 },
-            { name: 'Amalie',    email: 'amalie@email.com',    age: 12 },
-            { name: 'Wladimir',  email: 'wladimir@email.com',  age: 30 },
-            { name: 'Samantha',  email: 'samantha@email.com',  age: 31 },
-            { name: 'Estefanía', email: 'estefanía@email.com', age: 16 },
-            { name: 'Natasha',   email: 'natasha@email.com',   age: 54 },
-            { name: 'Nicole',    email: 'nicole@email.com',    age: 43 },
-            { name: 'Adrian',    email: 'adrian@email.com',    age: 21 }
-          ];
-
-
-          vm.alerts = [
-            { type: 'info', msg: 'There is an autosaved version of this article that is more recent than the version below. <a href="#" class="text-white">Restore</a>' }
-          ];
-
-          vm.closeAlert = function(index) {
-            vm.alerts.splice(index, 1);
-          };
-        }
-    }
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.extras')
-        .controller('CalendarController', CalendarController);
-
-    CalendarController.$inject = ['$scope', '$compile', 'uiCalendarConfig'];
-    function CalendarController($scope, $compile, uiCalendarConfig) {
-        var vm = this;
-        vm.title = 'CalendarController';
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-            var date = new Date();
-            var d = date.getDate();
-            var m = date.getMonth();
-            var y = date.getFullYear();
-
-            $scope.changeTo = 'Hungarian';
-            /* event source that pulls from google.com */
-            $scope.eventSource = {
-                url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
-                className: 'gcal-event', // an option!
-                currentTimezone: 'America/Chicago' // an option!
-            };
-            /* event source that contains custom events on the scope */
-            $scope.events = [{
-                title: 'All Day Event',
-                start: new Date(y, m, 1),
-                backgroundColor: '#f56954', //red
-                borderColor: '#f56954' //red
-            }, {
-                title: 'Long Event',
-                start: new Date(y, m, d - 5),
-                end: new Date(y, m, d - 2),
-                backgroundColor: '#f39c12', //yellow
-                borderColor: '#f39c12' //yellow
-            }, {
-                id: 999,
-                title: 'Repeating Event',
-                start: new Date(y, m, d + 4, 16, 0),
-                allDay: false,
-                backgroundColor: '#00c0ef', //Info (aqua)
-                borderColor: '#00c0ef' //Info (aqua)
-            }, {
-                title: 'Birthday Party',
-                start: new Date(y, m, d + 1, 19, 0),
-                end: new Date(y, m, d + 1, 22, 30),
-                allDay: false,
-                backgroundColor: '#00a65a', //Success (green)
-                borderColor: '#00a65a' //Success (green)
-            }, {
-                title: 'Click for Google',
-                start: new Date(y, m, 28),
-                end: new Date(y, m, 29),
-                url: 'http://google.com/',
-                backgroundColor: '#2f80e7', //Primary (light-blue)
-                borderColor: '#2f80e7' //Primary (light-blue)
-            }];
-            /* event source that calls a function on every view switch */
-            $scope.eventsF = function(start, end, timezone, callback) {
-                var s = new Date(start).getTime() / 1000;
-                var e = new Date(end).getTime() / 1000;
-                var m = new Date(start).getMonth();
-                var events = [{
-                    title: 'Feed Me ' + m,
-                    start: s + (50000),
-                    end: s + (100000),
-                    allDay: false,
-                    className: ['customFeed']
-                }];
-                callback(events);
-            };
-
-            $scope.calEventsExt = {
-                color: '#f00',
-                textColor: 'white',
-                events: [{
-                    type: 'party',
-                    title: 'Lunch',
-                    start: new Date(y, m, d, 12, 0),
-                    end: new Date(y, m, d, 14, 0),
-                    allDay: false,
-                    backgroundColor: '#9289ca', //pink
-                    borderColor: '#9289ca' //pink
-                }, {
-                    type: 'party',
-                    title: 'Lunch 2',
-                    start: new Date(y, m, d, 12, 0),
-                    end: new Date(y, m, d, 14, 0),
-                    allDay: false,
-                    backgroundColor: '#9289ca', //pink
-                    borderColor: '#9289ca' //pink
-                }, {
-                    type: 'party',
-                    title: 'Click for Google',
-                    start: new Date(y, m, 28),
-                    end: new Date(y, m, 29),
-                    url: 'http://google.com/',
-                    backgroundColor: '#9289ca', //pink
-                    borderColor: '#9289ca' //pink
-
-                }]
-            };
-            /* alert on eventClick */
-            $scope.alertOnEventClick = function(date, jsEvent, view) {
-                $scope.alertMessage = (date.title + ' was clicked ');
-            };
-            /* alert on Drop */
-            $scope.alertOnDrop = function(event, delta, revertFunc, jsEvent, ui, view) {
-                $scope.alertMessage = ('Event Droped');// to make dayDelta ' + delta);
-            };
-            /* alert on Resize */
-            $scope.alertOnResize = function(event, delta, revertFunc, jsEvent, ui, view) {
-                $scope.alertMessage = ('Event Resized'); // to make dayDelta ' + delta);
-            };
-            /* add and removes an event source of choice */
-            $scope.addRemoveEventSource = function(sources, source) {
-                var canAdd = 0;
-                angular.forEach(sources, function(value, key) {
-                    if (sources[key] === source) {
-                        sources.splice(key, 1);
-                        canAdd = 1;
-                    }
-                });
-                if (canAdd === 0) {
-                    sources.push(source);
-                }
-            };
-            /* add custom event*/
-            $scope.addEvent = function() {
-                $scope.events.push({
-                    title: 'Open Sesame',
-                    start: new Date(y, m, 28),
-                    end: new Date(y, m, 29),
-                    className: ['openSesame']
-                });
-            };
-            /* remove event */
-            $scope.remove = function(index) {
-                $scope.events.splice(index, 1);
-            };
-            /* Change View */
-            $scope.changeView = function(view, calendar) {
-                uiCalendarConfig.calendars[calendar].fullCalendar('changeView', view);
-            };
-            /* Change View */
-            $scope.renderCalender = function(calendar) {
-                if (uiCalendarConfig.calendars[calendar]) {
-                    uiCalendarConfig.calendars[calendar].fullCalendar('render');
-                }
-            };
-            /* Render Tooltip */
-            $scope.eventRender = function(event, element, view) {
-                element.attr({
-                    'tooltip': event.title,
-                    'tooltip-append-to-body': true
-                });
-                $compile(element)($scope);
-            };
-            /* config object */
-            $scope.uiConfig = {
-                calendar: {
-                    height: 450,
-                    editable: true,
-                    header: {
-                        left: 'prev,next today',
-                        center: 'title',
-                        right: 'month,agendaWeek,agendaDay'
-                    },
-                    buttonIcons: { // note the space at the beginning
-                        prev: ' fa fa-caret-left',
-                        next: ' fa fa-caret-right'
-                    },
-                    buttonText: {
-                        today: 'today',
-                        month: 'month',
-                        week: 'week',
-                        day: 'day'
-                    },
-                    eventClick: $scope.alertOnEventClick,
-                    eventDrop: $scope.alertOnDrop,
-                    eventResize: $scope.alertOnResize,
-                    eventRender: $scope.eventRender
-                }
-            };
-
-            $scope.changeLang = function() {
-                if ($scope.changeTo === 'Hungarian') {
-                    $scope.uiConfig.calendar.dayNames = ["Vasárnap", "Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek", "Szombat"];
-                    $scope.uiConfig.calendar.dayNamesShort = ["Vas", "Hét", "Kedd", "Sze", "Csüt", "Pén", "Szo"];
-                    $scope.changeTo = 'English';
-                } else {
-                    $scope.uiConfig.calendar.dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-                    $scope.uiConfig.calendar.dayNamesShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-                    $scope.changeTo = 'Hungarian';
-                }
-            };
-            /* event sources array*/
-            // $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
-            $scope.eventSources = [$scope.calEventsExt, $scope.eventsF, $scope.events];
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.extras')
-        .service('LoadTreeService', LoadTreeService);
-
-    LoadTreeService.$inject = ['$resource'];
-    function LoadTreeService($resource) {
-        // Loads the list of files to populate the treeview
-        return $resource('server/editor/filetree.json');
-    }
-
-})();
-/**=========================================================
- * Module: code-editor.js
- * Codemirror code editor controller
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.extras')
-        .controller('CodeEditorController', CodeEditorController);
-
-    CodeEditorController.$inject = ['$rootScope', '$scope', '$http', '$ocLazyLoad', 'filetree'];
-    function CodeEditorController($rootScope, $scope, $http, $ocLazyLoad, filetree) {
-        var vm = this;
-
-        layout();
-        activate();
-
-        ////////////////
-        /*jshint -W106*/
-        function layout() {
-          // Setup the layout mode 
-          $rootScope.app.useFullLayout = true;
-          $rootScope.app.hiddenFooter = true;
-          $rootScope.app.layout.isCollapsed = true;
-          
-          // Restore layout for demo
-          $scope.$on('$destroy', function(){
-              $rootScope.app.useFullLayout = false;
-              $rootScope.app.hiddenFooter = false;
-          });
-
-        }
-
-        function activate() {
-
-          // Set the tree data into the scope
-          vm.filetree_data = filetree;
-
-          // Available themes
-          vm.editorThemes = ['3024-day','3024-night','ambiance-mobile','ambiance','base16-dark','base16-light','blackboard','cobalt','eclipse','elegant','erlang-dark','lesser-dark','mbo','mdn-like','midnight','monokai','neat','neo','night','paraiso-dark','paraiso-light','pastel-on-dark','rubyblue','solarized','the-matrix','tomorrow-night-eighties','twilight','vibrant-ink','xq-dark','xq-light'];
-
-          vm.editorOpts = {
-            mode: 'javascript',
-            lineNumbers: true,
-            matchBrackets: true,
-            theme: 'mbo',
-            viewportMargin: Infinity
-          };
-
-          vm.refreshEditor = 0;
-
-          // Load dinamically the stylesheet for the selected theme
-          // You can use ozLazyLoad to load also the mode js based 
-          // on the file extension that is loaded (see handle_filetree)
-          vm.loadTheme = function() {
-            var BASE = 'vendor/codemirror/theme/';
-            $ocLazyLoad.load(BASE + vm.editorOpts.theme + '.css');
-            vm.refreshEditor = !vm.refreshEditor;
-          };
-          // load default theme
-          vm.loadTheme(vm.editorOpts.theme);
-          // Add some initial text
-          vm.code = '// Open a file from the left menu \n' +
-                        '// It will be requested to the server and loaded into the editor\n' +
-                        '// Also try adding a New File from the toolbar\n';
-
-
-          // Tree
-
-          var selectedBranch;
-          vm.handle_filetree = function(branch) {
-            
-            selectedBranch = branch;
-
-            var basePath = 'server/editor/';
-            var isFolder = !!branch.children.length;
-
-            console.log('You selected: ' + branch.label + ' - isFolder? ' + isFolder);
-
-            if ( ! isFolder ) {
-
-              $http
-                .get( basePath + branch.path )
-                .success(function(response){
-                  
-                  console.log('Loaded.. ' + branch.path);
-                  // set the new code into the editor
-                  vm.code = response;
-                  
-                  vm.editorOpts.mode = detectMode(branch.path);
-                  console.log( 'Mode is: ' + vm.editorOpts.mode);
-
-                });
-            }
-          };
-
-          function detectMode(file) {
-            var ext = file.split('.');
-            ext = ext ? ext[ext.length - 1] : '';
-            switch (ext) {
-              case 'html':  return 'htmlmixed';
-              case 'css':   return 'css';
-              default:      return 'javascript';
-            }
-          }
-
-          var tree;
-          tree = vm.filetree = {};
-
-          // Adds a new branch to the tree
-          vm.new_filetree = function() {
-            var b;
-            b = tree.get_selected_branch();
-
-            // if we select a leaf -> select the parent folder
-            if ( b && b.children.length === 0 ) {
-              b = tree.get_parent_branch(b);
-            }
-            
-            return tree.add_branch(b, {
-              'label': 'another.html',
-              'path': 'source/another.html'
-            });
-          };
-        }
-    }
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.extras')
-        .controller('TodoController', TodoController);
-
-    TodoController.$inject = ['$filter'];
-    function TodoController($filter) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-           vm.items = [
-            {
-              todo: {title: 'Meeting with Mark at 7am.', description: 'Pellentesque convallis mauris eu elit imperdiet quis eleifend quam aliquet. '},
-              complete: true
-            },
-            {
-              todo: {title: 'Call Sonya. Talk about the new project.', description: ''},
-              complete: false
-            },
-            {
-              todo: {title: 'Find a new place for vacations', description: ''},
-              complete: false
-            }
-            ];
-          
-          vm.editingTodo = false;
-          vm.todo = {};
-
-          vm.addTodo = function() {
-            
-            if( vm.todo.title === '' ) return;
-            if( !vm.todo.description ) vm.todo.description = '';
-            
-            if( vm.editingTodo ) {
-              vm.todo = {};
-              vm.editingTodo = false;
-            }
-            else {
-              vm.items.push({todo: angular.copy(vm.todo), complete: false});
-              vm.todo.title = '';
-              vm.todo.description = '';
-            }
-          };
-          
-          vm.editTodo = function(index, $event) {
-            $event.preventDefault();
-            $event.stopPropagation();
-            vm.todo = vm.items[index].todo;
-            vm.editingTodo = true;
-          };
-
-          vm.removeTodo = function(index/*, $event*/) {
-            vm.items.splice(index, 1);
-          };
-          
-          vm.clearAll = function() {
-            vm.items = [];
-          };
-
-          vm.totalCompleted = function() {
-            return $filter('filter')(vm.items, function(item){
-              return item.complete;
-            }).length;
-          };
-
-          vm.totalPending = function() {
-            return $filter('filter')(vm.items, function(item){
-              return !item.complete;
-            }).length;
-          };
-
-        }
-    }
-})();
-
-/**=========================================================
- * Module: word-cloud.js
- * Controller for jqCloud
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.extras')
-        .controller('WordCloudController', WordCloudController);
-
-    function WordCloudController() {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          vm.words = [
-              {
-                text: 'Lorem',
-                weight: 13
-                //link: 'http://themicon.co'
-              }, {
-                text: 'Ipsum',
-                weight: 10.5
-              }, {
-                text: 'Dolor',
-                weight: 9.4
-              }, {
-                text: 'Sit',
-                weight: 8
-              }, {
-                text: 'Amet',
-                weight: 6.2
-              }, {
-                text: 'Consectetur',
-                weight: 5
-              }, {
-                text: 'Adipiscing',
-                weight: 5
-              }, {
-                text: 'Sit',
-                weight: 8
-              }, {
-                text: 'Amet',
-                weight: 6.2
-              }, {
-                text: 'Consectetur',
-                weight: 5
-              }, {
-                text: 'Adipiscing',
-                weight: 5
-              }
-          ];
-        }
-    }
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.dashboard')
-        .controller('DashboardController', DashboardController);
-
-    DashboardController.$inject = ['$scope', 'ChartData', '$timeout','$localStorage','DashboardService'];
-    function DashboardController($scope, ChartData, $timeout,$localStorage,DashboardService) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-          $scope.dashboard=DashboardService.get();
-          console.log($scope.dashboard)
-
-          // SPLINE
-          // ----------------------------------- 
-          vm.splineData = ChartData.load('server/chart/spline.json');
-          vm.splineOptions = {
-              series: {
-                  lines: {
-                      show: false
-                  },
-                  points: {
-                      show: true,
-                      radius: 4
-                  },
-                  splines: {
-                      show: true,
-                      tension: 0.4,
-                      lineWidth: 1,
-                      fill: 0.5
-                  }
-              },
-              grid: {
-                  borderColor: '#eee',
-                  borderWidth: 1,
-                  hoverable: true,
-                  backgroundColor: '#fcfcfc'
-              },
-              tooltip: true,
-              tooltipOpts: {
-                  content: function (label, x, y) { return x + ' : ' + y; }
-              },
-              xaxis: {
-                  tickColor: '#fcfcfc',
-                  mode: 'categories'
-              },
-              yaxis: {
-                  min: 0,
-                  max: 150, // optional: use it for a clear represetation
-                  tickColor: '#eee',
-                  position: ($scope.app.layout.isRTL ? 'right' : 'left'),
-                  tickFormatter: function (v) {
-                      return v/* + ' visitors'*/;
-                  }
-              },
-              shadowSize: 0
-          };
-
-
-          // PANEL REFRESH EVENTS
-          // ----------------------------------- 
-
-          $scope.$on('panel-refresh', function(event, id) {
-            
-            console.log('Simulating chart refresh during 3s on #'+id);
-
-            // Instead of timeout you can request a chart data
-            $timeout(function(){
-              
-              // directive listen for to remove the spinner 
-              // after we end up to perform own operations
-              $scope.$broadcast('removeSpinner', id);
-              
-              console.log('Refreshed #' + id);
-
-            }, 3000);
-
-          });
-
-
-          // PANEL DISMISS EVENTS
-          // ----------------------------------- 
-
-          // Before remove panel
-          $scope.$on('panel-remove', function(event, id, deferred){
-            
-            console.log('Panel #' + id + ' removing');
-            
-            // Here is obligatory to call the resolve() if we pretend to remove the panel finally
-            // Not calling resolve() will NOT remove the panel
-            // It's up to your app to decide if panel should be removed or not
-            deferred.resolve();
-          
-          });
-
-          // Panel removed ( only if above was resolved() )
-          $scope.$on('panel-removed', function(event, id){
-
-            console.log('Panel #' + id + ' removed');
-
-          });
-
-        }
-        
-
-        // $scope.Logout=function() {
-        //     // remove user from local storage and clear http auth header
-        //     delete $localStorage.currentUser;
-        //     $http.defaults.headers.common.Authorization = '';
-        //     aler("logging out")
-        // }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.reports')
-        .factory('DashboardService', DashboardService);
-
-    DashboardService.$inject = ['$resource','jadaApiUrl'];
-    function DashboardService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/dashboard/',
-    { 'get':{method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:false}
-
-});
-     return data
-          
-       
-    }
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.dashboard')
-        .controller('DashboardV2Controller', DashboardV2Controller);
-
-    DashboardV2Controller.$inject = ['$rootScope', '$scope', '$state'];
-    function DashboardV2Controller($rootScope, $scope, $state) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          // Change layout mode
-          if( $state.includes('app-h') ) {
-            // Setup layout horizontal for demo
-            $rootScope.app.layout.horizontal = true;
-            $scope.$on('$destroy', function(){
-                $rootScope.app.layout.horizontal = false;
-            });
-          }
-          else {
-            if(!$rootScope.app.layout.isCollapsedText)
-                $rootScope.app.layout.isCollapsed = true;
-          }
-
-          // BAR STACKED
-          // -----------------------------------
-          vm.barStackedOptions = {
-              series: {
-                  stack: true,
-                  bars: {
-                      align: 'center',
-                      lineWidth: 0,
-                      show: true,
-                      barWidth: 0.6,
-                      fill: 0.9
-                  }
-              },
-              grid: {
-                  borderColor: '#eee',
-                  borderWidth: 1,
-                  hoverable: true,
-                  backgroundColor: '#fcfcfc'
-              },
-              tooltip: true,
-              tooltipOpts: {
-                  content: function (label, x, y) { return x + ' : ' + y; }
-              },
-              xaxis: {
-                  tickColor: '#fcfcfc',
-                  mode: 'categories'
-              },
-              yaxis: {
-                  min: 0,
-                  max: 200, // optional: use it for a clear represetation
-                  position: ($rootScope.app.layout.isRTL ? 'right' : 'left'),
-                  tickColor: '#eee'
-              },
-              shadowSize: 0
-          };
-
-          // SPLINE
-          // -----------------------------------
-
-          vm.splineOptions = {
-              series: {
-                  lines: {
-                      show: false
-                  },
-                  points: {
-                      show: true,
-                      radius: 4
-                  },
-                  splines: {
-                      show: true,
-                      tension: 0.4,
-                      lineWidth: 1,
-                      fill: 0.5
-                  }
-              },
-              grid: {
-                  borderColor: '#eee',
-                  borderWidth: 1,
-                  hoverable: true,
-                  backgroundColor: '#fcfcfc'
-              },
-              tooltip: true,
-              tooltipOpts: {
-                  content: function (label, x, y) { return x + ' : ' + y; }
-              },
-              xaxis: {
-                  tickColor: '#fcfcfc',
-                  mode: 'categories'
-              },
-              yaxis: {
-                  min: 0,
-                  max: 150, // optional: use it for a clear represetation
-                  tickColor: '#eee',
-                  position: ($rootScope.app.layout.isRTL ? 'right' : 'left'),
-                  tickFormatter: function (v) {
-                      return v/* + ' visitors'*/;
-                  }
-              },
-              shadowSize: 0
-          };
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.dashboard')
-        .controller('DashboardV3Controller', DashboardV3Controller);
-
-    DashboardV3Controller.$inject = ['$rootScope'];
-    function DashboardV3Controller($rootScope) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          // SPLINE
-          // ----------------------------------- 
-
-          vm.splineOptions = {
-              series: {
-                  lines: {
-                      show: false
-                  },
-                  points: {
-                      show: true,
-                      radius: 4
-                  },
-                  splines: {
-                      show: true,
-                      tension: 0.4,
-                      lineWidth: 1,
-                      fill: 0.5
-                  }
-              },
-              grid: {
-                  borderColor: '#eee',
-                  borderWidth: 1,
-                  hoverable: true,
-                  backgroundColor: '#fcfcfc'
-              },
-              tooltip: true,
-              tooltipOpts: {
-                  content: function (label, x, y) { return x + ' : ' + y; }
-              },
-              xaxis: {
-                  tickColor: '#fcfcfc',
-                  mode: 'categories'
-              },
-              yaxis: {
-                  min: 0,
-                  max: 150, // optional: use it for a clear represetation
-                  tickColor: '#eee',
-                  position: ($rootScope.app.layout.isRTL ? 'right' : 'left'),
-                  tickFormatter: function (v) {
-                      return v/* + ' visitors'*/;
-                  }
-              },
-              shadowSize: 0
-          };
-
-
-          vm.seriesData = {
-            'CA': 11100,   // Canada
-            'DE': 2510,    // Germany
-            'FR': 3710,    // France
-            'AU': 5710,    // Australia
-            'GB': 8310,    // Great Britain
-            'RU': 9310,    // Russia
-            'BR': 6610,    // Brazil
-            'IN': 7810,    // India
-            'CN': 4310,    // China
-            'US': 839,     // USA
-            'SA': 410      // Saudi Arabia
-          };
-          
-          vm.markersData = [
-            { latLng:[41.90, 12.45],  name:'Vatican City'          },
-            { latLng:[43.73, 7.41],   name:'Monaco'                },
-            { latLng:[-0.52, 166.93], name:'Nauru'                 },
-            { latLng:[-8.51, 179.21], name:'Tuvalu'                },
-            { latLng:[7.11,171.06],   name:'Marshall Islands'      },
-            { latLng:[17.3,-62.73],   name:'Saint Kitts and Nevis' },
-            { latLng:[3.2,73.22],     name:'Maldives'              },
-            { latLng:[35.88,14.5],    name:'Malta'                 },
-            { latLng:[41.0,-71.06],   name:'New England'           },
-            { latLng:[12.05,-61.75],  name:'Grenada'               },
-            { latLng:[13.16,-59.55],  name:'Barbados'              },
-            { latLng:[17.11,-61.85],  name:'Antigua and Barbuda'   },
-            { latLng:[-4.61,55.45],   name:'Seychelles'            },
-            { latLng:[7.35,134.46],   name:'Palau'                 },
-            { latLng:[42.5,1.51],     name:'Andorra'               }
-          ];
-        }
-    }
-})();
-/**=========================================================
- * Module: flatdoc.js
- * Creates the flatdoc markup and initializes the plugin
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.flatdoc')
-        .directive('flatdoc', flatdoc);
-
-    function flatdoc() {
-
-        var directive = {
-            template: '<div role="flatdoc"><div role="flatdoc-menu"></div><div role="flatdoc-content"></div></div>',
-            link: link,
-            restrict: 'EA'
-        };
-        return directive;
-
-        function link(scope, element, attrs) {
-
-            Flatdoc.run({
-                fetcher: Flatdoc.file(attrs.src)
-            });
-
-            var $root = $('html, body');
-            var menuLinks;
-
-            var $doc = $(document).on('flatdoc:ready', function() {
-
-                var docMenu = $('[role="flatdoc-menu"]');
-
-                menuLinks = docMenu.find('a').on('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    var $this = $(this);
-
-                    docMenu.find('a.active').removeClass('active');
-                    $this.addClass('active');
-
-                    $root.animate({
-                        scrollTop: $(this.getAttribute('href')).offset().top - ($('.topnavbar').height() + 10)
-                    }, 800);
-                });
-
-            });
-
-            // dettach all events
-            scope.$on('$destroy', function() {
-                menuLinks && menuLinks.off();
-                $doc.off('flatdoc:ready');
-            });
-
-        }
-    }
-
-})();
-
   /**=========================================================
    * Module: modals.js
    * Provides a simple way to implement bootstrap modals from templates
@@ -8758,6 +8151,646 @@ if ($localStorage.currentUser) {
     }]);
 })();
 
+
+/**=========================================================
+ * Module: article.js
+ =========================================================*/
+(function() {
+    'use strict';
+
+    angular
+        .module('app.extras')
+        .controller('ArticleController', ArticleController);
+
+    function ArticleController() {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          vm.htmlContent = 'Article content...';
+
+          vm.postDemo = {};
+          vm.postDemo.tags = ['coding', 'less'];
+          vm.availableTags = ['coding', 'less', 'sass', 'angularjs', 'node', 'expressJS'];
+          vm.postDemo.categories = ['JAVASCRIPT','WEB'];
+          vm.availableCategories = ['JAVASCRIPT','WEB', 'BOOTSTRAP', 'SERVER', 'HTML5', 'CSS'];
+
+          vm.reviewers = [
+            { name: 'Adam',      email: 'adam@email.com',      age: 10 },
+            { name: 'Amalie',    email: 'amalie@email.com',    age: 12 },
+            { name: 'Wladimir',  email: 'wladimir@email.com',  age: 30 },
+            { name: 'Samantha',  email: 'samantha@email.com',  age: 31 },
+            { name: 'Estefanía', email: 'estefanía@email.com', age: 16 },
+            { name: 'Natasha',   email: 'natasha@email.com',   age: 54 },
+            { name: 'Nicole',    email: 'nicole@email.com',    age: 43 },
+            { name: 'Adrian',    email: 'adrian@email.com',    age: 21 }
+          ];
+
+
+          vm.alerts = [
+            { type: 'info', msg: 'There is an autosaved version of this article that is more recent than the version below. <a href="#" class="text-white">Restore</a>' }
+          ];
+
+          vm.closeAlert = function(index) {
+            vm.alerts.splice(index, 1);
+          };
+        }
+    }
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.extras')
+        .controller('CalendarController', CalendarController);
+
+    CalendarController.$inject = ['$scope', '$compile', 'uiCalendarConfig'];
+    function CalendarController($scope, $compile, uiCalendarConfig) {
+        var vm = this;
+        vm.title = 'CalendarController';
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+            var date = new Date();
+            var d = date.getDate();
+            var m = date.getMonth();
+            var y = date.getFullYear();
+
+            $scope.changeTo = 'Hungarian';
+            /* event source that pulls from google.com */
+            $scope.eventSource = {
+                url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
+                className: 'gcal-event', // an option!
+                currentTimezone: 'America/Chicago' // an option!
+            };
+            /* event source that contains custom events on the scope */
+            $scope.events = [{
+                title: 'All Day Event',
+                start: new Date(y, m, 1),
+                backgroundColor: '#f56954', //red
+                borderColor: '#f56954' //red
+            }, {
+                title: 'Long Event',
+                start: new Date(y, m, d - 5),
+                end: new Date(y, m, d - 2),
+                backgroundColor: '#f39c12', //yellow
+                borderColor: '#f39c12' //yellow
+            }, {
+                id: 999,
+                title: 'Repeating Event',
+                start: new Date(y, m, d + 4, 16, 0),
+                allDay: false,
+                backgroundColor: '#00c0ef', //Info (aqua)
+                borderColor: '#00c0ef' //Info (aqua)
+            }, {
+                title: 'Birthday Party',
+                start: new Date(y, m, d + 1, 19, 0),
+                end: new Date(y, m, d + 1, 22, 30),
+                allDay: false,
+                backgroundColor: '#00a65a', //Success (green)
+                borderColor: '#00a65a' //Success (green)
+            }, {
+                title: 'Click for Google',
+                start: new Date(y, m, 28),
+                end: new Date(y, m, 29),
+                url: 'http://google.com/',
+                backgroundColor: '#2f80e7', //Primary (light-blue)
+                borderColor: '#2f80e7' //Primary (light-blue)
+            }];
+            /* event source that calls a function on every view switch */
+            $scope.eventsF = function(start, end, timezone, callback) {
+                var s = new Date(start).getTime() / 1000;
+                var e = new Date(end).getTime() / 1000;
+                var m = new Date(start).getMonth();
+                var events = [{
+                    title: 'Feed Me ' + m,
+                    start: s + (50000),
+                    end: s + (100000),
+                    allDay: false,
+                    className: ['customFeed']
+                }];
+                callback(events);
+            };
+
+            $scope.calEventsExt = {
+                color: '#f00',
+                textColor: 'white',
+                events: [{
+                    type: 'party',
+                    title: 'Lunch',
+                    start: new Date(y, m, d, 12, 0),
+                    end: new Date(y, m, d, 14, 0),
+                    allDay: false,
+                    backgroundColor: '#9289ca', //pink
+                    borderColor: '#9289ca' //pink
+                }, {
+                    type: 'party',
+                    title: 'Lunch 2',
+                    start: new Date(y, m, d, 12, 0),
+                    end: new Date(y, m, d, 14, 0),
+                    allDay: false,
+                    backgroundColor: '#9289ca', //pink
+                    borderColor: '#9289ca' //pink
+                }, {
+                    type: 'party',
+                    title: 'Click for Google',
+                    start: new Date(y, m, 28),
+                    end: new Date(y, m, 29),
+                    url: 'http://google.com/',
+                    backgroundColor: '#9289ca', //pink
+                    borderColor: '#9289ca' //pink
+
+                }]
+            };
+            /* alert on eventClick */
+            $scope.alertOnEventClick = function(date, jsEvent, view) {
+                $scope.alertMessage = (date.title + ' was clicked ');
+            };
+            /* alert on Drop */
+            $scope.alertOnDrop = function(event, delta, revertFunc, jsEvent, ui, view) {
+                $scope.alertMessage = ('Event Droped');// to make dayDelta ' + delta);
+            };
+            /* alert on Resize */
+            $scope.alertOnResize = function(event, delta, revertFunc, jsEvent, ui, view) {
+                $scope.alertMessage = ('Event Resized'); // to make dayDelta ' + delta);
+            };
+            /* add and removes an event source of choice */
+            $scope.addRemoveEventSource = function(sources, source) {
+                var canAdd = 0;
+                angular.forEach(sources, function(value, key) {
+                    if (sources[key] === source) {
+                        sources.splice(key, 1);
+                        canAdd = 1;
+                    }
+                });
+                if (canAdd === 0) {
+                    sources.push(source);
+                }
+            };
+            /* add custom event*/
+            $scope.addEvent = function() {
+                $scope.events.push({
+                    title: 'Open Sesame',
+                    start: new Date(y, m, 28),
+                    end: new Date(y, m, 29),
+                    className: ['openSesame']
+                });
+            };
+            /* remove event */
+            $scope.remove = function(index) {
+                $scope.events.splice(index, 1);
+            };
+            /* Change View */
+            $scope.changeView = function(view, calendar) {
+                uiCalendarConfig.calendars[calendar].fullCalendar('changeView', view);
+            };
+            /* Change View */
+            $scope.renderCalender = function(calendar) {
+                if (uiCalendarConfig.calendars[calendar]) {
+                    uiCalendarConfig.calendars[calendar].fullCalendar('render');
+                }
+            };
+            /* Render Tooltip */
+            $scope.eventRender = function(event, element, view) {
+                element.attr({
+                    'tooltip': event.title,
+                    'tooltip-append-to-body': true
+                });
+                $compile(element)($scope);
+            };
+            /* config object */
+            $scope.uiConfig = {
+                calendar: {
+                    height: 450,
+                    editable: true,
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,agendaWeek,agendaDay'
+                    },
+                    buttonIcons: { // note the space at the beginning
+                        prev: ' fa fa-caret-left',
+                        next: ' fa fa-caret-right'
+                    },
+                    buttonText: {
+                        today: 'today',
+                        month: 'month',
+                        week: 'week',
+                        day: 'day'
+                    },
+                    eventClick: $scope.alertOnEventClick,
+                    eventDrop: $scope.alertOnDrop,
+                    eventResize: $scope.alertOnResize,
+                    eventRender: $scope.eventRender
+                }
+            };
+
+            $scope.changeLang = function() {
+                if ($scope.changeTo === 'Hungarian') {
+                    $scope.uiConfig.calendar.dayNames = ["Vasárnap", "Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek", "Szombat"];
+                    $scope.uiConfig.calendar.dayNamesShort = ["Vas", "Hét", "Kedd", "Sze", "Csüt", "Pén", "Szo"];
+                    $scope.changeTo = 'English';
+                } else {
+                    $scope.uiConfig.calendar.dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                    $scope.uiConfig.calendar.dayNamesShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+                    $scope.changeTo = 'Hungarian';
+                }
+            };
+            /* event sources array*/
+            // $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
+            $scope.eventSources = [$scope.calEventsExt, $scope.eventsF, $scope.events];
+        }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.extras')
+        .service('LoadTreeService', LoadTreeService);
+
+    LoadTreeService.$inject = ['$resource'];
+    function LoadTreeService($resource) {
+        // Loads the list of files to populate the treeview
+        return $resource('server/editor/filetree.json');
+    }
+
+})();
+/**=========================================================
+ * Module: code-editor.js
+ * Codemirror code editor controller
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.extras')
+        .controller('CodeEditorController', CodeEditorController);
+
+    CodeEditorController.$inject = ['$rootScope', '$scope', '$http', '$ocLazyLoad', 'filetree'];
+    function CodeEditorController($rootScope, $scope, $http, $ocLazyLoad, filetree) {
+        var vm = this;
+
+        layout();
+        activate();
+
+        ////////////////
+        /*jshint -W106*/
+        function layout() {
+          // Setup the layout mode 
+          $rootScope.app.useFullLayout = true;
+          $rootScope.app.hiddenFooter = true;
+          $rootScope.app.layout.isCollapsed = true;
+          
+          // Restore layout for demo
+          $scope.$on('$destroy', function(){
+              $rootScope.app.useFullLayout = false;
+              $rootScope.app.hiddenFooter = false;
+          });
+
+        }
+
+        function activate() {
+
+          // Set the tree data into the scope
+          vm.filetree_data = filetree;
+
+          // Available themes
+          vm.editorThemes = ['3024-day','3024-night','ambiance-mobile','ambiance','base16-dark','base16-light','blackboard','cobalt','eclipse','elegant','erlang-dark','lesser-dark','mbo','mdn-like','midnight','monokai','neat','neo','night','paraiso-dark','paraiso-light','pastel-on-dark','rubyblue','solarized','the-matrix','tomorrow-night-eighties','twilight','vibrant-ink','xq-dark','xq-light'];
+
+          vm.editorOpts = {
+            mode: 'javascript',
+            lineNumbers: true,
+            matchBrackets: true,
+            theme: 'mbo',
+            viewportMargin: Infinity
+          };
+
+          vm.refreshEditor = 0;
+
+          // Load dinamically the stylesheet for the selected theme
+          // You can use ozLazyLoad to load also the mode js based 
+          // on the file extension that is loaded (see handle_filetree)
+          vm.loadTheme = function() {
+            var BASE = 'vendor/codemirror/theme/';
+            $ocLazyLoad.load(BASE + vm.editorOpts.theme + '.css');
+            vm.refreshEditor = !vm.refreshEditor;
+          };
+          // load default theme
+          vm.loadTheme(vm.editorOpts.theme);
+          // Add some initial text
+          vm.code = '// Open a file from the left menu \n' +
+                        '// It will be requested to the server and loaded into the editor\n' +
+                        '// Also try adding a New File from the toolbar\n';
+
+
+          // Tree
+
+          var selectedBranch;
+          vm.handle_filetree = function(branch) {
+            
+            selectedBranch = branch;
+
+            var basePath = 'server/editor/';
+            var isFolder = !!branch.children.length;
+
+            console.log('You selected: ' + branch.label + ' - isFolder? ' + isFolder);
+
+            if ( ! isFolder ) {
+
+              $http
+                .get( basePath + branch.path )
+                .success(function(response){
+                  
+                  console.log('Loaded.. ' + branch.path);
+                  // set the new code into the editor
+                  vm.code = response;
+                  
+                  vm.editorOpts.mode = detectMode(branch.path);
+                  console.log( 'Mode is: ' + vm.editorOpts.mode);
+
+                });
+            }
+          };
+
+          function detectMode(file) {
+            var ext = file.split('.');
+            ext = ext ? ext[ext.length - 1] : '';
+            switch (ext) {
+              case 'html':  return 'htmlmixed';
+              case 'css':   return 'css';
+              default:      return 'javascript';
+            }
+          }
+
+          var tree;
+          tree = vm.filetree = {};
+
+          // Adds a new branch to the tree
+          vm.new_filetree = function() {
+            var b;
+            b = tree.get_selected_branch();
+
+            // if we select a leaf -> select the parent folder
+            if ( b && b.children.length === 0 ) {
+              b = tree.get_parent_branch(b);
+            }
+            
+            return tree.add_branch(b, {
+              'label': 'another.html',
+              'path': 'source/another.html'
+            });
+          };
+        }
+    }
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.extras')
+        .controller('TodoController', TodoController);
+
+    TodoController.$inject = ['$filter'];
+    function TodoController($filter) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+           vm.items = [
+            {
+              todo: {title: 'Meeting with Mark at 7am.', description: 'Pellentesque convallis mauris eu elit imperdiet quis eleifend quam aliquet. '},
+              complete: true
+            },
+            {
+              todo: {title: 'Call Sonya. Talk about the new project.', description: ''},
+              complete: false
+            },
+            {
+              todo: {title: 'Find a new place for vacations', description: ''},
+              complete: false
+            }
+            ];
+          
+          vm.editingTodo = false;
+          vm.todo = {};
+
+          vm.addTodo = function() {
+            
+            if( vm.todo.title === '' ) return;
+            if( !vm.todo.description ) vm.todo.description = '';
+            
+            if( vm.editingTodo ) {
+              vm.todo = {};
+              vm.editingTodo = false;
+            }
+            else {
+              vm.items.push({todo: angular.copy(vm.todo), complete: false});
+              vm.todo.title = '';
+              vm.todo.description = '';
+            }
+          };
+          
+          vm.editTodo = function(index, $event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            vm.todo = vm.items[index].todo;
+            vm.editingTodo = true;
+          };
+
+          vm.removeTodo = function(index/*, $event*/) {
+            vm.items.splice(index, 1);
+          };
+          
+          vm.clearAll = function() {
+            vm.items = [];
+          };
+
+          vm.totalCompleted = function() {
+            return $filter('filter')(vm.items, function(item){
+              return item.complete;
+            }).length;
+          };
+
+          vm.totalPending = function() {
+            return $filter('filter')(vm.items, function(item){
+              return !item.complete;
+            }).length;
+          };
+
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: word-cloud.js
+ * Controller for jqCloud
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.extras')
+        .controller('WordCloudController', WordCloudController);
+
+    function WordCloudController() {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          vm.words = [
+              {
+                text: 'Lorem',
+                weight: 13
+                //link: 'http://themicon.co'
+              }, {
+                text: 'Ipsum',
+                weight: 10.5
+              }, {
+                text: 'Dolor',
+                weight: 9.4
+              }, {
+                text: 'Sit',
+                weight: 8
+              }, {
+                text: 'Amet',
+                weight: 6.2
+              }, {
+                text: 'Consectetur',
+                weight: 5
+              }, {
+                text: 'Adipiscing',
+                weight: 5
+              }, {
+                text: 'Sit',
+                weight: 8
+              }, {
+                text: 'Amet',
+                weight: 6.2
+              }, {
+                text: 'Consectetur',
+                weight: 5
+              }, {
+                text: 'Adipiscing',
+                weight: 5
+              }
+          ];
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: skycons.js
+ * Include any animated weather icon from Skycons
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.icons')
+        .directive('skycon', skycon);
+
+    function skycon () {
+
+        var directive = {
+            link: link,
+            restrict: 'A'
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+          var skycons = new Skycons({'color': (attrs.color || 'white')});
+
+          element.html('<canvas width="' + attrs.width + '" height="' + attrs.height + '"></canvas>');
+
+          skycons.add(element.children()[0], attrs.skycon);
+
+          skycons.play();
+        }
+    }
+
+})();
+
+/**=========================================================
+ * Module: flatdoc.js
+ * Creates the flatdoc markup and initializes the plugin
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.flatdoc')
+        .directive('flatdoc', flatdoc);
+
+    function flatdoc() {
+
+        var directive = {
+            template: '<div role="flatdoc"><div role="flatdoc-menu"></div><div role="flatdoc-content"></div></div>',
+            link: link,
+            restrict: 'EA'
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+
+            Flatdoc.run({
+                fetcher: Flatdoc.file(attrs.src)
+            });
+
+            var $root = $('html, body');
+            var menuLinks;
+
+            var $doc = $(document).on('flatdoc:ready', function() {
+
+                var docMenu = $('[role="flatdoc-menu"]');
+
+                menuLinks = docMenu.find('a').on('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    var $this = $(this);
+
+                    docMenu.find('a.active').removeClass('active');
+                    $this.addClass('active');
+
+                    $root.animate({
+                        scrollTop: $(this.getAttribute('href')).offset().top - ($('.topnavbar').height() + 10)
+                    }, 800);
+                });
+
+            });
+
+            // dettach all events
+            scope.$on('$destroy', function() {
+                menuLinks && menuLinks.off();
+                $doc.off('flatdoc:ready');
+            });
+
+        }
+    }
+
+})();
 
 (function() {
     'use strict';
@@ -9762,6 +9795,50 @@ if ($localStorage.currentUser) {
     'use strict';
 
     angular
+        .module('app.loadingbar')
+        .config(loadingbarConfig)
+        ;
+    loadingbarConfig.$inject = ['cfpLoadingBarProvider'];
+    function loadingbarConfig(cfpLoadingBarProvider){
+      cfpLoadingBarProvider.includeBar = true;
+      cfpLoadingBarProvider.includeSpinner = false;
+      cfpLoadingBarProvider.latencyThreshold = 500;
+      cfpLoadingBarProvider.parentSelector = '.wrapper > section';
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.loadingbar')
+        .run(loadingbarRun)
+        ;
+    loadingbarRun.$inject = ['$rootScope', '$timeout', 'cfpLoadingBar'];
+    function loadingbarRun($rootScope, $timeout, cfpLoadingBar){
+
+      // Loading bar transition
+      // ----------------------------------- 
+      var thBar;
+      $rootScope.$on('$stateChangeStart', function() {
+          if($('.wrapper > section').length) // check if bar container exists
+            thBar = $timeout(function() {
+              cfpLoadingBar.start();
+            }, 0); // sets a latency Threshold
+      });
+      $rootScope.$on('$stateChangeSuccess', function(event) {
+          event.targetScope.$watch('$viewContentLoaded', function () {
+            $timeout.cancel(thBar);
+            cfpLoadingBar.complete();
+          });
+      });
+
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
         .module('app.lazyload')
         .config(lazyloadConfig);
 
@@ -9928,83 +10005,197 @@ if ($localStorage.currentUser) {
 
 })();
 
+(function() {
+    'use strict';
+
+    angular
+        .module('app.locale')
+        .config(localeConfig)
+        ;
+    localeConfig.$inject = ['tmhDynamicLocaleProvider'];
+    function localeConfig(tmhDynamicLocaleProvider){
+  
+      tmhDynamicLocaleProvider.localeLocationPattern('vendor/angular-i18n/angular-locale_{{locale}}.js');
+      // tmhDynamicLocaleProvider.useStorage('$cookieStore');
+
+    }
+})();
 /**=========================================================
- * Module: skycons.js
- * Include any animated weather icon from Skycons
+ * Module: locale.js
+ * Demo for locale settings
+ =========================================================*/
+(function() {
+    'use strict';
+
+    angular
+        .module('app.locale')
+        .controller('LocalizationController', LocalizationController);
+
+    LocalizationController.$inject = ['$rootScope', 'tmhDynamicLocale', '$locale'];
+    function LocalizationController($rootScope, tmhDynamicLocale, $locale) {
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          $rootScope.availableLocales = {
+            'en': 'English',
+            'es': 'Spanish',
+            'de': 'German',
+            'fr': 'French',
+            'ar': 'Arabic',
+            'ja': 'Japanese',
+            'ko': 'Korean',
+            'zh': 'Chinese'};
+          
+          $rootScope.model = {selectedLocale: 'en'};
+          
+          $rootScope.$locale = $locale;
+          
+          $rootScope.changeLocale = tmhDynamicLocale.set;
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: demo-pagination.js
+ * Provides a simple demo for pagination
  =========================================================*/
 
 (function() {
     'use strict';
 
     angular
-        .module('app.icons')
-        .directive('skycon', skycon);
+        .module('app.mailbox')
+        .controller('MailboxController', MailboxController);
 
-    function skycon () {
+    function MailboxController() {
+        var vm = this;
 
-        var directive = {
-            link: link,
-            restrict: 'A'
-        };
-        return directive;
+        activate();
 
-        function link(scope, element, attrs) {
-          var skycons = new Skycons({'color': (attrs.color || 'white')});
+        ////////////////
 
-          element.html('<canvas width="' + attrs.width + '" height="' + attrs.height + '"></canvas>');
+        function activate() {
+          vm.folders = [
+            {name: 'Inbox',   folder: 'inbox',   alert: 42, icon: 'fa-inbox' },
+            {name: 'Starred', folder: 'starred', alert: 10, icon: 'fa-star' },
+            {name: 'Sent',    folder: 'sent',    alert: 0,  icon: 'fa-paper-plane-o' },
+            {name: 'Draft',   folder: 'draft',   alert: 5,  icon: 'fa-edit' },
+            {name: 'Trash',   folder: 'trash',   alert: 0,  icon: 'fa-trash'}
+          ];
 
-          skycons.add(element.children()[0], attrs.skycon);
+          vm.labels = [
+            {name: 'Red',     color: 'danger'},
+            {name: 'Pink',    color: 'pink'},
+            {name: 'Blue',    color: 'info'},
+            {name: 'Yellow',  color: 'warning'}
+          ];
 
-          skycons.play();
+          vm.mail = {
+            cc: false,
+            bcc: false
+          };
+          // Mailbox editr initial content
+          vm.content = '<p>Type something..</p>';
         }
     }
-
 })();
 
 (function() {
     'use strict';
 
     angular
-        .module('app.loadingbar')
-        .config(loadingbarConfig)
-        ;
-    loadingbarConfig.$inject = ['cfpLoadingBarProvider'];
-    function loadingbarConfig(cfpLoadingBarProvider){
-      cfpLoadingBarProvider.includeBar = true;
-      cfpLoadingBarProvider.includeSpinner = false;
-      cfpLoadingBarProvider.latencyThreshold = 500;
-      cfpLoadingBarProvider.parentSelector = '.wrapper > section';
-    }
-})();
-(function() {
-    'use strict';
+        .module('app.mailbox')
+        .controller('MailFolderController', MailFolderController);
 
-    angular
-        .module('app.loadingbar')
-        .run(loadingbarRun)
-        ;
-    loadingbarRun.$inject = ['$rootScope', '$timeout', 'cfpLoadingBar'];
-    function loadingbarRun($rootScope, $timeout, cfpLoadingBar){
+    MailFolderController.$inject = ['mails', '$stateParams'];
+    function MailFolderController(mails, $stateParams) {
+        var vm = this;
 
-      // Loading bar transition
-      // ----------------------------------- 
-      var thBar;
-      $rootScope.$on('$stateChangeStart', function() {
-          if($('.wrapper > section').length) // check if bar container exists
-            thBar = $timeout(function() {
-              cfpLoadingBar.start();
-            }, 0); // sets a latency Threshold
-      });
-      $rootScope.$on('$stateChangeSuccess', function(event) {
-          event.targetScope.$watch('$viewContentLoaded', function () {
-            $timeout.cancel(thBar);
-            cfpLoadingBar.complete();
+        activate();
+
+        ////////////////
+
+        function activate() {
+          
+          vm.folder = {};
+          // no filter for inbox
+          vm.folder.folder = $stateParams.folder === 'inbox' ? '' : $stateParams.folder;
+
+          mails.all().then(function(mails){
+            vm.mails = mails;
           });
-      });
-
+        }
     }
-
 })();
+
+// A RESTful factory for retrieving mails from json file
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.mailbox')
+        .factory('mails', mails);
+
+    mails.$inject = ['$http'];
+    function mails($http) {
+        var service = {
+            all: all,
+            get: get
+        };
+        return service;
+
+        ////////////////
+        
+        function readMails() {
+          var path = 'server/mails.json';
+          return $http.get(path).then(function (resp) {
+            return resp.data.mails;
+          });
+        }
+
+        function all() {
+          return readMails();
+        }
+
+        function get(id) {
+          return readMails().then(function(mails){
+            for (var i = 0; i < mails.length; i++) {
+              if (+mails[i].id === +id) return mails[i];
+            }
+            return null;
+          });
+        }
+    }
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.mailbox')
+        .controller('MailViewController', MailViewController);
+
+    MailViewController.$inject = ['mails', '$stateParams'];
+    function MailViewController(mails, $stateParams) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          mails.get($stateParams.mid).then(function(mail){
+            vm.mail = mail;
+          });
+        }
+    }
+})();
+
 
   /**=========================================================
    * Module: modals.js
@@ -10605,197 +10796,6 @@ if ($localStorage.currentUser) {
       }
 
   })();
-/**=========================================================
- * Module: demo-pagination.js
- * Provides a simple demo for pagination
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.mailbox')
-        .controller('MailboxController', MailboxController);
-
-    function MailboxController() {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          vm.folders = [
-            {name: 'Inbox',   folder: 'inbox',   alert: 42, icon: 'fa-inbox' },
-            {name: 'Starred', folder: 'starred', alert: 10, icon: 'fa-star' },
-            {name: 'Sent',    folder: 'sent',    alert: 0,  icon: 'fa-paper-plane-o' },
-            {name: 'Draft',   folder: 'draft',   alert: 5,  icon: 'fa-edit' },
-            {name: 'Trash',   folder: 'trash',   alert: 0,  icon: 'fa-trash'}
-          ];
-
-          vm.labels = [
-            {name: 'Red',     color: 'danger'},
-            {name: 'Pink',    color: 'pink'},
-            {name: 'Blue',    color: 'info'},
-            {name: 'Yellow',  color: 'warning'}
-          ];
-
-          vm.mail = {
-            cc: false,
-            bcc: false
-          };
-          // Mailbox editr initial content
-          vm.content = '<p>Type something..</p>';
-        }
-    }
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.mailbox')
-        .controller('MailFolderController', MailFolderController);
-
-    MailFolderController.$inject = ['mails', '$stateParams'];
-    function MailFolderController(mails, $stateParams) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          
-          vm.folder = {};
-          // no filter for inbox
-          vm.folder.folder = $stateParams.folder === 'inbox' ? '' : $stateParams.folder;
-
-          mails.all().then(function(mails){
-            vm.mails = mails;
-          });
-        }
-    }
-})();
-
-// A RESTful factory for retrieving mails from json file
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.mailbox')
-        .factory('mails', mails);
-
-    mails.$inject = ['$http'];
-    function mails($http) {
-        var service = {
-            all: all,
-            get: get
-        };
-        return service;
-
-        ////////////////
-        
-        function readMails() {
-          var path = 'server/mails.json';
-          return $http.get(path).then(function (resp) {
-            return resp.data.mails;
-          });
-        }
-
-        function all() {
-          return readMails();
-        }
-
-        function get(id) {
-          return readMails().then(function(mails){
-            for (var i = 0; i < mails.length; i++) {
-              if (+mails[i].id === +id) return mails[i];
-            }
-            return null;
-          });
-        }
-    }
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.mailbox')
-        .controller('MailViewController', MailViewController);
-
-    MailViewController.$inject = ['mails', '$stateParams'];
-    function MailViewController(mails, $stateParams) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          mails.get($stateParams.mid).then(function(mail){
-            vm.mail = mail;
-          });
-        }
-    }
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.locale')
-        .config(localeConfig)
-        ;
-    localeConfig.$inject = ['tmhDynamicLocaleProvider'];
-    function localeConfig(tmhDynamicLocaleProvider){
-  
-      tmhDynamicLocaleProvider.localeLocationPattern('vendor/angular-i18n/angular-locale_{{locale}}.js');
-      // tmhDynamicLocaleProvider.useStorage('$cookieStore');
-
-    }
-})();
-/**=========================================================
- * Module: locale.js
- * Demo for locale settings
- =========================================================*/
-(function() {
-    'use strict';
-
-    angular
-        .module('app.locale')
-        .controller('LocalizationController', LocalizationController);
-
-    LocalizationController.$inject = ['$rootScope', 'tmhDynamicLocale', '$locale'];
-    function LocalizationController($rootScope, tmhDynamicLocale, $locale) {
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          $rootScope.availableLocales = {
-            'en': 'English',
-            'es': 'Spanish',
-            'de': 'German',
-            'fr': 'French',
-            'ar': 'Arabic',
-            'ja': 'Japanese',
-            'ko': 'Korean',
-            'zh': 'Chinese'};
-          
-          $rootScope.model = {selectedLocale: 'en'};
-          
-          $rootScope.$locale = $locale;
-          
-          $rootScope.changeLocale = tmhDynamicLocale.set;
-        }
-    }
-})();
-
 /**=========================================================
  * Module: modals.js
  * Provides a simple way to implement bootstrap modals from templates
@@ -11476,664 +11476,6 @@ if ($localStorage.currentUser) {
     
     return notify;
 }(jQuery));
-
-  /**=========================================================
-   * Module: modals.js
-   * Provides a simple way to implement bootstrap modals from templates
-   =========================================================*/
-  (function() {
-      'use strict';
-
-      angular
-          .module('app.bootstrapui')
-          .controller('ExemptionsController', ExemptionsController);
-
-      ExemptionsController.$inject = ['$scope','$http','$rootScope', '$uibModal','ExemptionsService','$stateParams', '$state','jadaApiUrl'];
-      function ExemptionsController($scope,$http,$rootScope, $uibModal, ExemptionsService,$stateParams, $state,jadaApiUrl) {
-          var vm = this;
-
-          activate();
-
-          ////////////////
-
-          function activate() {
-
-   var SuccessMsg;
-   var errorMsg;
-
-
-              $scope.exemptemployees=ExemptionsService.query();
-
-                $http.get(jadaApiUrl+'api/employee').success(function(data) {
-                $scope.employees = data;
-            
-              });
-
-
-   $scope.loadExemptemployees = function () {
-       
-   $scope.exemptemployees=ExemptionsService.query();
-     }
-
-   $rootScope.$on("CallExemptemployees", function(){
-             $scope.loadExemptemployees();
-          });
-
-
-  $http.get(jadaApiUrl+'api/payrollcode').success(function(data) {
-                 $scope.pcodes = data;
-           
-
-              });
-
-
-  $http.get(jadaApiUrl+'api/employee').success(function(data) {
-                $scope.employees = data;
-              });
-
-
-
-
-
-    $scope.delete= function (employee) {
-  employee.$remove().then(function () {
-   $scope.loadExemptemployees();
-  });
-  }
-
-           $scope.open = function (size) {
-
-              var modalInstance = $uibModal.open({
-                templateUrl: 'addExempt.html',
-                controller: ModalOpenInstanceCtrl,
-                size: size
-              });
-          var state = $('#modal-state');
-              modalInstance.result.then(function () {
-                state.text('Modal dismissed with OK status');
-              }, function () {
-                state.text('Modal dismissed with Cancel status');
-              });
-            };
-
-
-
-
-
-      
-
-
-           $scope.show = function(exemptEmployee) {
-
-                var modalInstance = $uibModal.open({
-                  templateUrl: 'EditExempt.html',
-                  controller: ModalInstanceCtrl,
-                  resolve: {
-                     exemptEmployee: function () {
-                       return exemptEmployee;
-                     }
-                   }        
-
-                });
-              };
-
-
-
-     
-   
-
-
-            // Please note that $uibModalInstance represents a modal window (instance) dependency.
-            // It is not the same as the $uibModal service used above.
-
-            ModalOpenInstanceCtrl.$inject = ['$scope','$http','$rootScope', '$uibModalInstance','ExemptionsService','jadaApiUrl'];
-            function ModalOpenInstanceCtrl($scope, $http,$rootScope,$uibModalInstance, ExemptionsService,jadaApiUrl) {
-            
-              $scope.ok = function () {
-                $uibModalInstance.close('closed');
-              };
-
-              $scope.cancel = function () {
-                $uibModalInstance.dismiss('cancel');
-              };
-              $scope.exempt=new ExemptionsService();
-               $scope.submitExempt=function(exemptionform) {
-            $scope.exempt.$save().then(function(data){
-              var response=angular.fromJson(data);
-            
-              if(response.Status=="1"){
-                $scope.errorMsg=false;
-                      $scope.SuccessMsg =response.Message;
-              }else{
-             
-                 $scope.SuccessMsg=false;
-                     $scope.errorMsg=response.Message;
-             
-              }
-             
-                  $rootScope.$emit("CallExemptemployees", {});
-
-              $scope.exempReset(exemptionform);
-            },
-             function() {
-               $scope.SuccessMsg=false;
-                   $scope.errorMsg = 'Server Request Error';
-                  });
-          
-            };
-            
-              $scope.exempReset=function(exemptionform){
-               $scope.exemptionform={};
-              $scope.exempt="";
-              exemptionform.$setPristine();
-              };
-
-               $scope.CloseExempt=function() {
-            $scope.exempt.$save().then(function(){
-             
-                  $rootScope.$emit("CallExemptemployees", {});
-                    $scope.ok();
-            }, function() {
-               $scope.SuccessMsg=false;
-                   $scope.errorMsg = 'Server Request Error';
-                  });
-          
-            };
-
-
-
-
-
-
-
-            }
-
-
-
-            ModalInstanceCtrl.$inject = ['$scope','$rootScope', '$http','$uibModalInstance','ExemptionsService','exemptEmployee','jadaApiUrl'];
-            function ModalInstanceCtrl($scope, $rootScope,$http,$uibModalInstance, ExemptionsService,exemptEmployee,jadaApiUrl) {
-            $scope.employee=exemptEmployee;
-              $scope.ok = function () {
-                $uibModalInstance.close('closed');
-              };
-
-              $scope.cancel = function () {
-                $uibModalInstance.dismiss('cancel');
-              };
-            
-
-             
-
-              
-                  $scope.updateExempt=function(employee){
-               employee.$update().then(function(){
-                   $rootScope.$emit("CallExemptemployees", {});
-              });
-            
-                };
-              
-
-
-           
-            }
-          }
-      }
-
-  })();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.payrollcodes')
-        .factory('ExemptionsService', ExemptionsService);
-
-    ExemptionsService.$inject = ['$resource','jadaApiUrl'];
-    function ExemptionsService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/exemption/:id', {id: '@id'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-
-
-
-  (function() {
-      'use strict';
-
-      angular
-          .module('app.bootstrapui')
-          .controller('PayrollCodesController', PayrollCodesController);
-
-      PayrollCodesController.$inject =['$scope','$http','$rootScope', '$uibModal','PayrollCodesService','$stateParams', '$state','jadaApiUrl'];
-      function PayrollCodesController($scope,$http,$rootScope, $uibModal, PayrollCodesService,$stateParams, $state,jadaApiUrl) {
-          var vm = this;
-
-          activate();
-
-          ////////////////
-
-          function activate() {
-
-   var SuccessMsg;
-   var errorMsg;
-
-  $scope.plist=PayrollCodesService.query();
-
-
-
-    $scope.loadPlist = function () {
-          $scope.plist=PayrollCodesService.query();
-     }
-
-   $rootScope.$on("CallloadPlist", function(){
-             $scope.loadPlist();
-          });
-    
-            
-            $http.get(jadaApiUrl+'api/payrollcodegroup').success(function(data) {
-                $scope.pgroups = data;
-              });
-
-    $scope.delete= function (code) {
-  code.$remove().then(function () {
-    $scope.loadPlist();
-  // $scope.plist.splice($scope.plist.indexOf(code), 1);
-  });
-  }
-
-
-            $scope.open = function (size) {
-
-              var modalInstance = $uibModal.open({
-                templateUrl: 'addPCodes.html',
-                controller: ModalOpenInstanceCtrl,
-                size: size
-              });
-
-
-
-
-
-              var state = $('#modal-state');
-              modalInstance.result.then(function () {
-                state.text('Modal dismissed with OK status');
-              }, function () {
-                state.text('Modal dismissed with Cancel status');
-              });
-            };
-
-
-
-
-    $scope.show = function(code) {
-        // $scope.x = x;
-        var modalInstance = $uibModal.open({
-          templateUrl: 'EditPCodes.html',
-          controller: ModalInstanceCtrl,
-          resolve: {
-             code: function () {
-               return code;
-             }
-           }        
-          // scope : $scope
-        });
-      };
-
-      
-
-
-
-   
-
-
-            // Please note that $uibModalInstance represents a modal window (instance) dependency.
-            // It is not the same as the $uibModal service used above.
-        
-
-         ModalOpenInstanceCtrl.$inject = ['$scope','$rootScope', '$uibModalInstance','PayrollCodesService'];
-            function ModalOpenInstanceCtrl($scope,$rootScope, $uibModalInstance, PayrollCodesService) {
-              
-              
-              $scope.ok = function () {
-                $uibModalInstance.close('closed');
-                
-              };
-
-              $scope.cancel = function () {
-                $uibModalInstance.dismiss('cancel');
-              };
-           $scope.payrollcodes=new PayrollCodesService();
-               $scope.submitPayrollCode=function(payrollcodeform) {
-            $scope.payrollcodes.$save().then(function(data){
-               var response=angular.fromJson(data);
-            
-              if(response.Status=="1"){
-                $scope.errorMsg=false;
-                      $scope.SuccessMsg =response.Message;
-              }else{
-             
-                 $scope.SuccessMsg=false;
-                     $scope.errorMsg=response.Message;
-             
-              }
-               $rootScope.$emit("CallloadPlist", {});
-
-            $scope.pcodeReset(payrollcodeform);
-            },
-            function() {
-               $scope.SuccessMsg=false;
-                   $scope.errorMsg = 'Server Request Error';
-                  });
-            
-          
-            };
-
-
-            $scope.pcodeReset=function(payrollcodeform){
-               $scope.payrollcodeform={};
-              $scope.payrollcodes="";
-              payrollcodeform.$setPristine();
-              };
-
-                $scope.submitPayrollCodeClose=function(payrollcodes) {
-
-                  var pcodes=new PayrollCodesService(payrollcodes)
-            pcodes.$save().then(function(){
-               $rootScope.$emit("CallloadPlist", {});
-               $scope.ok();
-            },function() {
-               $scope.SuccessMsg=false;
-                   $scope.errorMsg = 'Server Request Error';
-                  });
-            
-          
-            };
-                
-            // console.log('Saving paypoint: ' +$scope.ppoint.code);
-           // $scope.points.push(data);
-            
-           
-            }
-            ModalInstanceCtrl.$inject = ['$scope','$rootScope', '$uibModalInstance','PayrollCodesService','code'];
-            function ModalInstanceCtrl($scope,$rootScope, $uibModalInstance, PayrollCodesService,code) {
-              
-              $scope.code=code;
-             
-
-              $scope.ok = function () {
-                $uibModalInstance.close('closed');
-                
-              };
-
-              $scope.cancel = function () {
-                $uibModalInstance.dismiss('cancel');
-              };
-        $scope.updatepayrollcodes=function(code){
-   code.$update().then(function(){
-                     $rootScope.$emit("CallloadPlist", {});
-              });
-
-  };
-
-           
-            }
-          }
-      }
-
-  })();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.payrollcodes')
-        .factory('PayrollCodesService', PayrollCodesService);
-
-    PayrollCodesService.$inject = ['$resource','jadaApiUrl'];
-    function PayrollCodesService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/payrollcode/:id', {id: '@id'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-
-
-
-
-
-
-/**=========================================================
- * Module: modals.js
- * Provides a simple way to implement bootstrap modals from templates
- =========================================================*/
-(function() {
-    'use strict';
-
-    angular
-        .module('app.bootstrapui')
-        .controller('PayrollGroupController', PayrollGroupController);
-
-   PayrollGroupController.$inject = ['$scope','$rootScope', '$uibModal','PayrollGroupService','$stateParams', '$state'];
-    function PayrollGroupController($scope, $rootScope,$uibModal, PayrollGroupService,$stateParams, $state) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
- var SuccessMsg;
- var errorMsg;
-$scope.groups=PayrollGroupService.query();
-
-
- $scope.loadPayrollGroups = function () {
-        $scope.groups=PayrollGroupService.query();
-   }
-
- $rootScope.$on("CallLoadPayrollGroups", function(){
-           $scope.loadPayrollGroups();
-        });
-
-
-  
-  $scope.delete= function (group) {
-group.$remove().then(function () {
-   $scope.loadPayrollGroups();
-});
-}
-          
-          $scope.open = function (size) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'AddPgroups.html',
-              controller: ModalOpenGroupInstanceCtrl,
-              size: size
-            });
-
-
-
-
-
-            var state = $('#modal-state');
-            modalInstance.result.then(function () {
-              state.text('Modal dismissed with OK status');
-            }, function () {
-              state.text('Modal dismissed with Cancel status');
-            });
-          };
-
-
-
-
-
- $scope.show = function(codegroup) {
-      // $scope.x = x;
-      var modalInstance = $uibModal.open({
-        templateUrl: 'EditPgroups.html',
-        controller: ModalInstanceCtrl,
-        resolve: {
-           codegroup: function () {
-             return codegroup;
-           }
-         }        
-        // scope : $scope
-      });
-    };
-
-
-
-
-
- 
-
-
-          // Please note that $uibModalInstance represents a modal window (instance) dependency.
-          // It is not the same as the $uibModal service used above.
-
-          ModalOpenGroupInstanceCtrl.$inject = ['$scope','$rootScope', '$uibModalInstance','PayrollGroupService'];
-          function ModalOpenGroupInstanceCtrl($scope, $rootScope,$uibModalInstance, PayrollGroupService) {
-          
-            $scope.ok = function () {
-              $uibModalInstance.close('closed');
-            };
-
-            $scope.cancel = function () {
-              $uibModalInstance.dismiss('cancel');
-            };
-            
-
-
-           $scope.pgroup=new PayrollGroupService();
-             $scope.submitPayrollGroup=function(payrollgroupform) {
-            
-            $scope.pgroup.$save().then(function(data){
-                 var response=angular.fromJson(data);
-          
-            if(response.Status=="1"){
-              $scope.errorMsg=false;
-                    $scope.SuccessMsg =response.Message;
-            }else{
-           
-               $scope.SuccessMsg=false;
-                   $scope.errorMsg=response.Message;
-           
-            }
-                $rootScope.$emit("CallLoadPayrollGroups", {});
-                  $scope.pgroupReset(payrollgroupform);
-            },
-            function() {
-             $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
-    
-          };
-
-
-            $scope.pgroupReset=function(payrollgroupform){
-             $scope.payrollgroupform={};
-            $scope.pgroup="";
-            payrollgroupform.$setPristine();
-            };
-
-           $scope.ClosePayrollGroup=function(pgroup) {
-            var savepgroup=new PayrollGroupService(pgroup);
-            
-            savepgroup.$save().then(function(){
-                $rootScope.$emit("CallLoadPayrollGroups", {});
-                $scope.ok();
-            },
-                function() {
-             $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
-    
-          };
-         
-         
-          }
-
-
-
-          ModalInstanceCtrl.$inject = ['$scope','$rootScope', '$uibModalInstance','PayrollGroupService','codegroup'];
-          function ModalInstanceCtrl($scope, $rootScope,$uibModalInstance, PayrollGroupService,codegroup) {
-          $scope.group=codegroup;
-            $scope.ok = function () {
-              $uibModalInstance.close('closed');
-            };
-
-            $scope.cancel = function () {
-              $uibModalInstance.dismiss('cancel');
-            };
-            
-
-             $scope.updatePayrollGroup=function(group){
-             group.$update().then(function(){
-                   $rootScope.$emit("CallLoadPayrollGroups", {});
-            });
-          
-              };
-
-
-           
-          }
-        }
-    }
-
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.payrollcodes')
-        .factory('PayrollGroupService', PayrollGroupService);
-
-    PayrollGroupService.$inject = ['$resource','jadaApiUrl'];
-    function PayrollGroupService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/payrollcodegroup/:id', {id: '@id'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-
-
-
-
-
-
 
 // /**=========================================================
 //  * Module: access-login.js
@@ -13108,6 +12450,664 @@ $scope.buttonText="Login";
         }
     }
 })();
+  /**=========================================================
+   * Module: modals.js
+   * Provides a simple way to implement bootstrap modals from templates
+   =========================================================*/
+  (function() {
+      'use strict';
+
+      angular
+          .module('app.bootstrapui')
+          .controller('ExemptionsController', ExemptionsController);
+
+      ExemptionsController.$inject = ['$scope','$http','$rootScope', '$uibModal','ExemptionsService','$stateParams', '$state','jadaApiUrl'];
+      function ExemptionsController($scope,$http,$rootScope, $uibModal, ExemptionsService,$stateParams, $state,jadaApiUrl) {
+          var vm = this;
+
+          activate();
+
+          ////////////////
+
+          function activate() {
+
+   var SuccessMsg;
+   var errorMsg;
+
+
+              $scope.exemptemployees=ExemptionsService.query();
+
+                $http.get(jadaApiUrl+'api/employee').success(function(data) {
+                $scope.employees = data;
+            
+              });
+
+
+   $scope.loadExemptemployees = function () {
+       
+   $scope.exemptemployees=ExemptionsService.query();
+     }
+
+   $rootScope.$on("CallExemptemployees", function(){
+             $scope.loadExemptemployees();
+          });
+
+
+  $http.get(jadaApiUrl+'api/payrollcode').success(function(data) {
+                 $scope.pcodes = data;
+           
+
+              });
+
+
+  $http.get(jadaApiUrl+'api/employee').success(function(data) {
+                $scope.employees = data;
+              });
+
+
+
+
+
+    $scope.delete= function (employee) {
+  employee.$remove().then(function () {
+   $scope.loadExemptemployees();
+  });
+  }
+
+           $scope.open = function (size) {
+
+              var modalInstance = $uibModal.open({
+                templateUrl: 'addExempt.html',
+                controller: ModalOpenInstanceCtrl,
+                size: size
+              });
+          var state = $('#modal-state');
+              modalInstance.result.then(function () {
+                state.text('Modal dismissed with OK status');
+              }, function () {
+                state.text('Modal dismissed with Cancel status');
+              });
+            };
+
+
+
+
+
+      
+
+
+           $scope.show = function(exemptEmployee) {
+
+                var modalInstance = $uibModal.open({
+                  templateUrl: 'EditExempt.html',
+                  controller: ModalInstanceCtrl,
+                  resolve: {
+                     exemptEmployee: function () {
+                       return exemptEmployee;
+                     }
+                   }        
+
+                });
+              };
+
+
+
+     
+   
+
+
+            // Please note that $uibModalInstance represents a modal window (instance) dependency.
+            // It is not the same as the $uibModal service used above.
+
+            ModalOpenInstanceCtrl.$inject = ['$scope','$http','$rootScope', '$uibModalInstance','ExemptionsService','jadaApiUrl'];
+            function ModalOpenInstanceCtrl($scope, $http,$rootScope,$uibModalInstance, ExemptionsService,jadaApiUrl) {
+            
+              $scope.ok = function () {
+                $uibModalInstance.close('closed');
+              };
+
+              $scope.cancel = function () {
+                $uibModalInstance.dismiss('cancel');
+              };
+              $scope.exempt=new ExemptionsService();
+               $scope.submitExempt=function(exemptionform) {
+            $scope.exempt.$save().then(function(data){
+              var response=angular.fromJson(data);
+            
+              if(response.Status=="1"){
+                $scope.errorMsg=false;
+                      $scope.SuccessMsg =response.Message;
+              }else{
+             
+                 $scope.SuccessMsg=false;
+                     $scope.errorMsg=response.Message;
+             
+              }
+             
+                  $rootScope.$emit("CallExemptemployees", {});
+
+              $scope.exempReset(exemptionform);
+            },
+             function() {
+               $scope.SuccessMsg=false;
+                   $scope.errorMsg = 'Server Request Error';
+                  });
+          
+            };
+            
+              $scope.exempReset=function(exemptionform){
+               $scope.exemptionform={};
+              $scope.exempt="";
+              exemptionform.$setPristine();
+              };
+
+               $scope.CloseExempt=function() {
+            $scope.exempt.$save().then(function(){
+             
+                  $rootScope.$emit("CallExemptemployees", {});
+                    $scope.ok();
+            }, function() {
+               $scope.SuccessMsg=false;
+                   $scope.errorMsg = 'Server Request Error';
+                  });
+          
+            };
+
+
+
+
+
+
+
+            }
+
+
+
+            ModalInstanceCtrl.$inject = ['$scope','$rootScope', '$http','$uibModalInstance','ExemptionsService','exemptEmployee','jadaApiUrl'];
+            function ModalInstanceCtrl($scope, $rootScope,$http,$uibModalInstance, ExemptionsService,exemptEmployee,jadaApiUrl) {
+            $scope.employee=exemptEmployee;
+              $scope.ok = function () {
+                $uibModalInstance.close('closed');
+              };
+
+              $scope.cancel = function () {
+                $uibModalInstance.dismiss('cancel');
+              };
+            
+
+             
+
+              
+                  $scope.updateExempt=function(employee){
+               employee.$update().then(function(){
+                   $rootScope.$emit("CallExemptemployees", {});
+              });
+            
+                };
+              
+
+
+           
+            }
+          }
+      }
+
+  })();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.payrollcodes')
+        .factory('ExemptionsService', ExemptionsService);
+
+    ExemptionsService.$inject = ['$resource','jadaApiUrl'];
+    function ExemptionsService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/exemption/:id', {id: '@id'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+
+
+
+  (function() {
+      'use strict';
+
+      angular
+          .module('app.bootstrapui')
+          .controller('PayrollCodesController', PayrollCodesController);
+
+      PayrollCodesController.$inject =['$scope','$http','$rootScope', '$uibModal','PayrollCodesService','$stateParams', '$state','jadaApiUrl'];
+      function PayrollCodesController($scope,$http,$rootScope, $uibModal, PayrollCodesService,$stateParams, $state,jadaApiUrl) {
+          var vm = this;
+
+          activate();
+
+          ////////////////
+
+          function activate() {
+
+   var SuccessMsg;
+   var errorMsg;
+
+  $scope.plist=PayrollCodesService.query();
+
+
+
+    $scope.loadPlist = function () {
+          $scope.plist=PayrollCodesService.query();
+     }
+
+   $rootScope.$on("CallloadPlist", function(){
+             $scope.loadPlist();
+          });
+    
+            
+            $http.get(jadaApiUrl+'api/payrollcodegroup').success(function(data) {
+                $scope.pgroups = data;
+              });
+
+    $scope.delete= function (code) {
+  code.$remove().then(function () {
+    $scope.loadPlist();
+  // $scope.plist.splice($scope.plist.indexOf(code), 1);
+  });
+  }
+
+
+            $scope.open = function (size) {
+
+              var modalInstance = $uibModal.open({
+                templateUrl: 'addPCodes.html',
+                controller: ModalOpenInstanceCtrl,
+                size: size
+              });
+
+
+
+
+
+              var state = $('#modal-state');
+              modalInstance.result.then(function () {
+                state.text('Modal dismissed with OK status');
+              }, function () {
+                state.text('Modal dismissed with Cancel status');
+              });
+            };
+
+
+
+
+    $scope.show = function(code) {
+        // $scope.x = x;
+        var modalInstance = $uibModal.open({
+          templateUrl: 'EditPCodes.html',
+          controller: ModalInstanceCtrl,
+          resolve: {
+             code: function () {
+               return code;
+             }
+           }        
+          // scope : $scope
+        });
+      };
+
+      
+
+
+
+   
+
+
+            // Please note that $uibModalInstance represents a modal window (instance) dependency.
+            // It is not the same as the $uibModal service used above.
+        
+
+         ModalOpenInstanceCtrl.$inject = ['$scope','$rootScope', '$uibModalInstance','PayrollCodesService'];
+            function ModalOpenInstanceCtrl($scope,$rootScope, $uibModalInstance, PayrollCodesService) {
+              
+              
+              $scope.ok = function () {
+                $uibModalInstance.close('closed');
+                
+              };
+
+              $scope.cancel = function () {
+                $uibModalInstance.dismiss('cancel');
+              };
+           $scope.payrollcodes=new PayrollCodesService();
+               $scope.submitPayrollCode=function(payrollcodeform) {
+            $scope.payrollcodes.$save().then(function(data){
+               var response=angular.fromJson(data);
+            
+              if(response.Status=="1"){
+                $scope.errorMsg=false;
+                      $scope.SuccessMsg =response.Message;
+              }else{
+             
+                 $scope.SuccessMsg=false;
+                     $scope.errorMsg=response.Message;
+             
+              }
+               $rootScope.$emit("CallloadPlist", {});
+
+            $scope.pcodeReset(payrollcodeform);
+            },
+            function() {
+               $scope.SuccessMsg=false;
+                   $scope.errorMsg = 'Server Request Error';
+                  });
+            
+          
+            };
+
+
+            $scope.pcodeReset=function(payrollcodeform){
+               $scope.payrollcodeform={};
+              $scope.payrollcodes="";
+              payrollcodeform.$setPristine();
+              };
+
+                $scope.submitPayrollCodeClose=function(payrollcodes) {
+
+                  var pcodes=new PayrollCodesService(payrollcodes)
+            pcodes.$save().then(function(){
+               $rootScope.$emit("CallloadPlist", {});
+               $scope.ok();
+            },function() {
+               $scope.SuccessMsg=false;
+                   $scope.errorMsg = 'Server Request Error';
+                  });
+            
+          
+            };
+                
+            // console.log('Saving paypoint: ' +$scope.ppoint.code);
+           // $scope.points.push(data);
+            
+           
+            }
+            ModalInstanceCtrl.$inject = ['$scope','$rootScope', '$uibModalInstance','PayrollCodesService','code'];
+            function ModalInstanceCtrl($scope,$rootScope, $uibModalInstance, PayrollCodesService,code) {
+              
+              $scope.code=code;
+             
+
+              $scope.ok = function () {
+                $uibModalInstance.close('closed');
+                
+              };
+
+              $scope.cancel = function () {
+                $uibModalInstance.dismiss('cancel');
+              };
+        $scope.updatepayrollcodes=function(code){
+   code.$update().then(function(){
+                     $rootScope.$emit("CallloadPlist", {});
+              });
+
+  };
+
+           
+            }
+          }
+      }
+
+  })();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.payrollcodes')
+        .factory('PayrollCodesService', PayrollCodesService);
+
+    PayrollCodesService.$inject = ['$resource','jadaApiUrl'];
+    function PayrollCodesService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/payrollcode/:id', {id: '@id'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+
+
+
+
+
+
+/**=========================================================
+ * Module: modals.js
+ * Provides a simple way to implement bootstrap modals from templates
+ =========================================================*/
+(function() {
+    'use strict';
+
+    angular
+        .module('app.bootstrapui')
+        .controller('PayrollGroupController', PayrollGroupController);
+
+   PayrollGroupController.$inject = ['$scope','$rootScope', '$uibModal','PayrollGroupService','$stateParams', '$state'];
+    function PayrollGroupController($scope, $rootScope,$uibModal, PayrollGroupService,$stateParams, $state) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+ var SuccessMsg;
+ var errorMsg;
+$scope.groups=PayrollGroupService.query();
+
+
+ $scope.loadPayrollGroups = function () {
+        $scope.groups=PayrollGroupService.query();
+   }
+
+ $rootScope.$on("CallLoadPayrollGroups", function(){
+           $scope.loadPayrollGroups();
+        });
+
+
+  
+  $scope.delete= function (group) {
+group.$remove().then(function () {
+   $scope.loadPayrollGroups();
+});
+}
+          
+          $scope.open = function (size) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'AddPgroups.html',
+              controller: ModalOpenGroupInstanceCtrl,
+              size: size
+            });
+
+
+
+
+
+            var state = $('#modal-state');
+            modalInstance.result.then(function () {
+              state.text('Modal dismissed with OK status');
+            }, function () {
+              state.text('Modal dismissed with Cancel status');
+            });
+          };
+
+
+
+
+
+ $scope.show = function(codegroup) {
+      // $scope.x = x;
+      var modalInstance = $uibModal.open({
+        templateUrl: 'EditPgroups.html',
+        controller: ModalInstanceCtrl,
+        resolve: {
+           codegroup: function () {
+             return codegroup;
+           }
+         }        
+        // scope : $scope
+      });
+    };
+
+
+
+
+
+ 
+
+
+          // Please note that $uibModalInstance represents a modal window (instance) dependency.
+          // It is not the same as the $uibModal service used above.
+
+          ModalOpenGroupInstanceCtrl.$inject = ['$scope','$rootScope', '$uibModalInstance','PayrollGroupService'];
+          function ModalOpenGroupInstanceCtrl($scope, $rootScope,$uibModalInstance, PayrollGroupService) {
+          
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+            
+
+
+           $scope.pgroup=new PayrollGroupService();
+             $scope.submitPayrollGroup=function(payrollgroupform) {
+            
+            $scope.pgroup.$save().then(function(data){
+                 var response=angular.fromJson(data);
+          
+            if(response.Status=="1"){
+              $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+            }else{
+           
+               $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+           
+            }
+                $rootScope.$emit("CallLoadPayrollGroups", {});
+                  $scope.pgroupReset(payrollgroupform);
+            },
+            function() {
+             $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+    
+          };
+
+
+            $scope.pgroupReset=function(payrollgroupform){
+             $scope.payrollgroupform={};
+            $scope.pgroup="";
+            payrollgroupform.$setPristine();
+            };
+
+           $scope.ClosePayrollGroup=function(pgroup) {
+            var savepgroup=new PayrollGroupService(pgroup);
+            
+            savepgroup.$save().then(function(){
+                $rootScope.$emit("CallLoadPayrollGroups", {});
+                $scope.ok();
+            },
+                function() {
+             $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+    
+          };
+         
+         
+          }
+
+
+
+          ModalInstanceCtrl.$inject = ['$scope','$rootScope', '$uibModalInstance','PayrollGroupService','codegroup'];
+          function ModalInstanceCtrl($scope, $rootScope,$uibModalInstance, PayrollGroupService,codegroup) {
+          $scope.group=codegroup;
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+            
+
+             $scope.updatePayrollGroup=function(group){
+             group.$update().then(function(){
+                   $rootScope.$emit("CallLoadPayrollGroups", {});
+            });
+          
+              };
+
+
+           
+          }
+        }
+    }
+
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.payrollcodes')
+        .factory('PayrollGroupService', PayrollGroupService);
+
+    PayrollGroupService.$inject = ['$resource','jadaApiUrl'];
+    function PayrollGroupService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/payrollcodegroup/:id', {id: '@id'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+
+
+
+
+
+
+
 (function() {
     'use strict';
 
@@ -14982,84 +14982,6 @@ angular.module('app.reports').filter('unique', function () {
     return items;
   };
 });
-(function() {
-    'use strict';
-
-    angular
-        .module('app.settings')
-        .run(settingsRun);
-
-    settingsRun.$inject = ['$rootScope', '$localStorage'];
-
-    function settingsRun($rootScope, $localStorage){
-
-
-      // User Settings
-      // -----------------------------------
-      $rootScope.user = {
-        name:     'John',
-        job:      'ng-developer',
-        picture:  'app/img/user/02.jpg'
-      };
-
-      // Hides/show user avatar on sidebar from any element
-      $rootScope.toggleUserBlock = function(){
-        $rootScope.$broadcast('toggleUserBlock');
-      };
-
-      // Global Settings
-      // -----------------------------------
-      $rootScope.app = {
-        name: 'Jada',
-        description: 'Jada Payroll',
-        year: ((new Date()).getFullYear()),
-        layout: {
-          isFixed: true,
-          isCollapsed: false,
-          isBoxed: false,
-          isRTL: false,
-          horizontal: false,
-          isFloat: false,
-          asideHover: false,
-          theme: null,
-          asideScrollbar: false,
-          isCollapsedText: false
-        },
-        useFullLayout: false,
-        hiddenFooter: false,
-        offsidebarOpen: false,
-        asideToggled: false,
-        viewAnimation: 'ng-fadeInUp'
-      };
-
-      // Setup the layout mode
-      $rootScope.app.layout.horizontal = ( $rootScope.$stateParams.layout === 'app-h') ;
-
-      // Restore layout settings
-      if( angular.isDefined($localStorage.layout) )
-        $rootScope.app.layout = $localStorage.layout;
-      else
-        $localStorage.layout = $rootScope.app.layout;
-
-      $rootScope.$watch('app.layout', function () {
-        $localStorage.layout = $rootScope.app.layout;
-      }, true);
-
-      // Close submenu when sidebar change from collapsed to normal
-      $rootScope.$watch('app.layout.isCollapsed', function(newValue) {
-        if( newValue === false )
-          $rootScope.$broadcast('closeSidebarMenu');
-      });
-
-    }
-       function Logout() {
-            // remove user from local storage and clear http auth header
-            delete $localStorage.currentUser;
-            $http.defaults.headers.common.Authorization = '';
-        }
-
-})();
-
 /**=========================================================
  * Module: helpers.js
  * Provides helper functions for routes definition
@@ -16376,1561 +16298,84 @@ angular.module('app.reports').filter('unique', function () {
 })();
 
 
-// (function() {
-//     'use strict';
-
-//     angular
-//         .module('app.bootstrapui')
-//         .controller('BulkImportController', BulkImportController);
-
-//     BulkImportController.$inject = ['$scope', '$http', '$interval', '$q'];
-//     function BulkImportController($scope, $http, $interval, $q) { 
-
-  //      $scope.data = [];
-  // $scope.gridOptions = {
-  //   enableGridMenu: true,
-  //   importerDataAddCallback: function( grid, newObjects ) {
-  //     $scope.data = $scope.data.concat( newObjects );
-  //   },
-  //   onRegisterApi: function(gridApi){ 
-  //     $scope.gridApi = gridApi;
-  //     gridApi.rowEdit.on.saveRow($scope, $scope.saveRow);
-  //   },
-  //   data: 'data'
-  // };
-
-  // $scope.saveRow = function( rowEntity ) {
-  //   // create a fake promise - normally you'd use the promise returned by $http or $resource
-  //   var promise = $q.defer();
-  //   $scope.gridApi.rowEdit.setSavePromise( rowEntity, promise.promise );
-   
-  //   // fake a delay of 3 seconds whilst the save occurs, return error if gender is "male"
-  //   $interval( function() {
-  //     if (rowEntity.Gender === 'male' ){
-  //       promise.reject();
-  //     } else {
-  //       promise.resolve();
-  //     }
-  //   }, 3000, 1);
-  // };
-  
-  // var handleFileSelect = function( event ){
-  //   var target = event.srcElement || event.target;
-    
-  //   if (target && target.files && target.files.length === 1) {
-  //     var fileObject = target.files[0];
-  //     $scope.gridApi.importer.importFile( fileObject );
-  //     target.form.reset();
-  //   }
-  // };
-
-  // var fileChooser = document.querySelectorAll('.file-chooser');
-  
-  // if ( fileChooser.length !== 1 ){
-  //   console.log('Found > 1 or < 1 file choosers within the menu item, error, cannot continue');
-  // } else {
-  //   fileChooser[0].addEventListener('change', handleFileSelect, false);  // TODO: why the false on the end?  Google  
-  // }
-
-//     }
-
-// })();
-
-
-
 (function() {
     'use strict';
 
     angular
-        .module('app.transactions')
-        .factory('EmployeeBatchPostingService', EmployeeBatchPostingService);
-
-    EmployeeBatchPostingService.$inject = ['$resource','jadaApiUrl'];
-    function EmployeeBatchPostingService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/payrollbatchposting', 
-    {
-  'save':   {
-    method:'POST',  isArray:true,  transformRequest: function(data){
-                        console.log('Data in transform request is');
-                        console.log(data);
-                        return angular.toJson(data); // this will go in the body request
-                    }
-},
-
-});
-     return data
-          
-       
-    }
-
-})();
-
-
-
-
-
-
-/**=========================================================
- * Module: modals.js
- * Provides a simple way to implement bootstrap modals from templates
- =========================================================*/
-(function() {
-    'use strict';
-
-    angular
-        .module('app.transactions')
-        .controller('EmployeePostingController', EmployeePostingController);
-
-    EmployeePostingController.$inject = ['$scope','$http', '$rootScope','$uibModal','employeePostingService','GetemployeeService', '$state','$resource','jadaApiUrl'];
-    function EmployeePostingController($scope,$http, $rootScope, $uibModal, employeePostingService,GetemployeeService, $state,$resource,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
- var SuccessMsg;
- var errorMsg;
-        
-     
-
-         $scope.searchEmployee=function(user) {
-
-          if(user.periodId!=null && user.periodId!=""){
-            $rootScope.employeePostedId = user.employeeId;
-            $rootScope.periodPostedId =user.periodId;
-                  var employeeId=user.employeeId;
-          var periodId=user.periodId;
-          
-          console.log("period - "+periodId+" employee - "+employeeId);
-          $http.get(jadaApiUrl+'api/payrollpostingReport/'+employeeId+'/'+periodId).success(function(data) {
-              $scope.oneUser = data;
-         $scope.transactions=data.payrollCodeReportList;
-             });
-
-          }
-        
-         };
-
-
-
-$http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
-          $scope.postingtrans={};
-          $scope.currentPeriod=data.data;
-    $scope.currentperiod=$scope.currentPeriod.period;
-      $scope.postingtrans.periodId=$scope.currentPeriod.id;
-      $scope.period_description=$scope.currentPeriod.month+ ' '+$scope.currentPeriod.year;
-     });
-
-
-
-
-          $scope.loadTransactions = function () {
-          var employeeId=$rootScope.employeePostedId;
-          var periodId=$rootScope.periodPostedId;
-          console.log("period - "+periodId+" employee - "+employeeId);
-          $http.get(jadaApiUrl+'api/payrollpostingReport/'+employeeId+'/'+periodId).success(function(data) {
-              $scope.oneUser = data;
-
-              $scope.transactions=data.payrollCodeReportList;
-              console.log(  $scope.transactions);
-
-
-            });
-        }
-
- $rootScope.$on("CallLoadTransactions", function(){
-           $scope.loadTransactions ();
-        });
-
-
-    $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-$http.get(jadaApiUrl+'api/department').success(function(data) {
-              $scope.departments = data;
-
-            });
-
-$http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
-
-
-   $http.get(jadaApiUrl+'api/payrollcode').success(function(data) {
-               $scope.pcodes = data;
-         
-
-            });
-
-         $scope.codeChange=function(id){
-              for(var r=0;r<$scope.pcodes.length;r++){
-                if(id==$scope.pcodes[r].id){
-                  $scope.description=$scope.pcodes[r].description;
-                }
-
-              }
-
-            }
-
-
-
-$scope.populateeTransactionData=function(id){
-    $scope.posting=[];
-for(var r=0;r< $scope.periods.length;r++){
-    if( $scope.periods[r].id==id){
-      $scope.periodId=$scope.periods[r].id;  
-    }
-  }
-
-  
-}
-
-
-        $scope.delete= function (transaction) {
-             var deletetransaction= new employeePostingService(transaction);
-                  deletetransaction.$delete().then(function () {
-                   $scope.loadTransactions();
-                   console.log('edited')
-            });
-            }
-          
-          $scope.open = function (employeeinfo) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'addTransactions.html',
-              controller: ModalOpenFormulaInstanceCtrl,
-          
-              resolve: {
-           employeeinfo: function () {
-             return employeeinfo;
-           }
-         }
-
-            });
-
-
-
-
-
-            var state = $('#modal-state');
-            modalInstance.result.then(function () {
-              state.text('Modal dismissed with OK status');
-            }, function () {
-              state.text('Modal dismissed with Cancel status');
-            });
-          };
-
-             $scope.openTransaction = function (employeeinfo) {
-
-            var modalInstance = $uibModal.open({
-              templateUrl: 'viewTransactions.html',
-              controller: ViewTransactionInstanceCtrl,
-              size:'lg',
-              resolve: {
-           employeeinfo: function () {
-             return employeeinfo;
-           }
-         }
-
-            });
-
-
-
-
-
-            var state = $('#modal-state');
-            modalInstance.result.then(function () {
-              state.text('Modal dismissed with OK status');
-            }, function () {
-              state.text('Modal dismissed with Cancel status');
-            });
-          };
-
-
-
-
-
-
-$scope.show = function(trans) {
-      // $scope.x = x;
-      var modalInstance = $uibModal.open({
-        templateUrl: 'editTransaction.html',
-        controller: ModalInstanceCtrl,
-        resolve: {
-           trans: function () {
-             return trans;
-           }
-         }        
-        // scope : $scope
-      });
-    };
-    
-
-
-
- 
-
-
-          // Please note that $uibModalInstance represents a modal window (instance) dependency.
-          // It is not the same as the $uibModal service used above.
-
-          ModalOpenFormulaInstanceCtrl.$inject = ['$scope', '$http','$rootScope','$uibModalInstance','employeePostingService','jadaApiUrl','employeeinfo'];
-          function ModalOpenFormulaInstanceCtrl($scope, $http,$rootScope,$uibModalInstance, employeePostingService,jadaApiUrl,employeeinfo) {
-
-         $scope.transactionposting=employeeinfo;
-      
-            $scope.ok = function () {
-              $uibModalInstance.close('closed');
-            };
-
-            $scope.cancel = function () {
-              $uibModalInstance.dismiss('cancel');
-            };
-
-            
-             $scope.submitTransaction=function(transactionposting) {
-      var usertransactionposting=new employeePostingService(transactionposting);
-
-          usertransactionposting.$save().then(function(data){
-             var response=angular.fromJson(data);
-          
-            if(response.Status=="1"){
-              $scope.errorMsg=false;
-                    $scope.SuccessMsg =response.Message;
-              
-                     $scope.transactionposting.payrollCodeId=' ';
-                     $scope.transactionposting.amount=' ';
-            }else{
-           
-               $scope.SuccessMsg=false;
-                   $scope.errorMsg=response.Message;
-           
-            }
-            $rootScope.$emit("CallLoadTransactions", {});
-
-          }, 
-          function() {
-             $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
-     
-          };
-
-
-            $scope.saveCloseTransaction=function(transactionposting) {
-                 var usertransactionposting=new employeePostingService(transactionposting);
-         usertransactionposting.$save().then(function(){
-          $scope.transactionposting.payrollCodeId=' ';
-                     $scope.transactionposting.amount=' ';
-            $rootScope.$emit("CallLoadTransactions", {});
-            $scope.ok();
-
-          },
-           function() {
-             $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
-     
-          };
-
-       
-         
-          }
-
-
-
-              // Please note that $uibModalInstance represents a modal window (instance) dependency.
-          // It is not the same as the $uibModal service used above.
-
-          ViewTransactionInstanceCtrl.$inject = ['$scope', '$http','$rootScope','$uibModalInstance','employeePostingService','jadaApiUrl','employeeinfo'];
-          function ViewTransactionInstanceCtrl($scope, $http,$rootScope,$uibModalInstance, employeePostingService,jadaApiUrl,employeeinfo) {
-
-         $scope.transactionposting=employeeinfo;
-      
-            $scope.ok = function () {
-              $uibModalInstance.close('closed');
-            };
-
-            $scope.cancel = function () {
-              $uibModalInstance.dismiss('cancel');
-            };
-
-            
-             $scope.submitTransaction=function(transactionposting) {
-      var usertransactionposting=new employeePostingService(transactionposting);
-
-          usertransactionposting.$save().then(function(data){
-             var response=angular.fromJson(data);
-          
-            if(response.Status=="1"){
-              $scope.errorMsg=false;
-                    $scope.SuccessMsg =response.Message;
-              
-                     $scope.transactionposting.payrollCodeId=' ';
-                     $scope.transactionposting.amount=' ';
-            }else{
-           
-               $scope.SuccessMsg=false;
-                   $scope.errorMsg=response.Message;
-           
-            }
-            $rootScope.$emit("CallLoadTransactions", {});
-
-          }, 
-          function() {
-             $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
-     
-          };
-
-
-            $scope.saveCloseTransaction=function(transactionposting) {
-                 var usertransactionposting=new employeePostingService(transactionposting);
-         usertransactionposting.$save().then(function(){
-          $scope.transactionposting.payrollCodeId=' ';
-                     $scope.transactionposting.amount=' ';
-            $rootScope.$emit("CallLoadTransactions", {});
-            $scope.ok();
-
-          },
-           function() {
-             $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
-     
-          };
-
-       
-         
-          }
-            
-
-             ModalInstanceCtrl.$inject = ['$scope', '$http', '$rootScope','$uibModalInstance','employeePostingService','trans','jadaApiUrl'];
-          function ModalInstanceCtrl($scope,$http, $rootScope,$uibModalInstance, employeePostingService,trans,jadaApiUrl) {
-          // $scope.transaction=trans;
-          var id=trans.id;
-          console.log(id);
-
-          
-                $scope.transaction=trans;
-            $scope.ok = function () {
-              $uibModalInstance.close('closed');
-            };
-
-            $scope.cancel = function () {
-              $uibModalInstance.dismiss('cancel');
-            };
-            
-       $scope.transaction= employeePostingService.get({id:id});
-           $scope.updateTransaction=function(transaction){
-      
-            transaction.$update().then(function(){
-                   $rootScope.$emit("CallLoadTransactions", {});
-            });
-          
-              };
-
-
-         
-          }
-        }
-    }
-
-})();
-
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.transactions')
-        .factory('employeePostingService', employeePostingService);
-
-    employeePostingService.$inject = ['$resource','jadaApiUrl'];
-    function employeePostingService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/payrollposting/:id', {id: '@id'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-
-
-
-
-/**=========================================================
- * Module: modals.js
- * Provides a simple way to implement bootstrap modals from templates
- =========================================================*/
-(function() {
-    'use strict';
-
-    angular
-        .module('app.bootstrapui')
-        .controller('EmpBulkTransController', EmpBulkTransController);
-
-    EmpBulkTransController.$inject = ['$scope','$http', '$uibModal','PayrollBatchPostingService','$stateParams', '$state','readFileData','jadaApiUrl'];
-    function EmpBulkTransController($scope, $http,$uibModal, PayrollBatchPostingService,$stateParams, $state,readFileData,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-$scope.fileDataObj = [];
-
-            $scope.fileData ={ };
-    
-    $scope.uploadFile = function() {
-      if ($scope.fileContent) {
-        $scope.fileDataObj = readFileData.processData($scope.fileContent);
-      
-        // $scope.fileData = JSON.stringify($scope.fileDataObj);
-         $scope.fileData =  $.parseJSON($scope.fileDataObj);
-
-var jdata= JSON.stringify($scope.fileData);
-        console.log( $scope.fileData);
-      }
-    }
-
-
-
-            $scope.cancel = function () {
-           
-            $scope.fileData =' ';
-            };
-
-
-
- $scope.save = function () {
-var list=$scope.fileData;
-for(var r=0;r<list.length;r++){
-  var vdata =list[r];
-  console.log(vdata);
-  // var postingdata = new PayrollBatchPostingService(vdata);
-    $http.post(jadaApiUrl+'api/payrollsingleposting/', {vdata}).success(
-      function(data){
-
-            var response=angular.fromJson(data);
-          
-            if(response.Status=="1"){
-              $scope.errorMsg=false;
-                    $scope.SuccessMsg =response.Message;
-                    console.log()
-            }else{
-           
-               $scope.SuccessMsg=false;
-                   $scope.errorMsg=response.Message;
-           
-            }
-        // $scope.fileData[r].success=true;
-        // $scope.response = data
-        // console.log(data);
-      })
-
-}
-
-  }
-
-        }
-    }
-
-})();
-
-
-
-      /**=========================================================
-       * Module: modals.js
-       * Provides a simple way to implement bootstrap modals from templates
-       =========================================================*/
-      (function() {
-          'use strict';
-
-          angular
-              .module('app.transactions')
-              .controller('LeaveApprovalController', LeaveApprovalController);
-
-          LeaveApprovalController.$inject = ['$scope','$http', '$rootScope','$uibModal', '$state','$resource','jadaApiUrl','LeaveApprovalService','PayrollApprovalService'];
-          function LeaveApprovalController($scope,$http, $rootScope, $uibModal, $state,$resource,jadaApiUrl,LeaveApprovalService,PayrollApprovalService) {
-              var vm = this;
-
-              activate();
-
-              ////////////////
-
-              function activate() {
-
-       var SuccessMsg;
-       var errorMsg;
-
-           
-      $scope.pendingleaves=LeaveApprovalService.query();
-      console.log($scope.pendingleaves);
-
-           
-
-      var currentperiod=0
-
-                 $http.get(jadaApiUrl+'api/approvedpayrolltransaction').success(function(data) {
-                    $scope.approvedgpayroll=data;
-                 
-                  });
-
-
-       $scope.approvedpayroll=function () {
-      var count = 0;
-
-      angular.forEach($scope.approvedgpayroll, function(value, key) {
-        if(key=="status" &&value=="1"){
-          count++
-       console.log(key + ': ' + value);
-        }
-       
-      }
-      );
-      return count;
-
-
-      }
-
-
-
-
-
-      $http.get(jadaApiUrl+'api/rejectedpayrolltransaction').success(function(data) {
-                    $scope.rejectedgpayroll =data;
-
-                console.log($scope.rejectedgpayroll);
-                  });
-
-
-
-       $scope.rejectedpayroll=function () {
-      var count = 0;
-
-      angular.forEach($scope.rejectedgpayroll, function(value, key) {
-        if(key=="status" &&value=="2"){
-          count++
-       console.log(key + ': ' + value);
-        }
-       
-      }
-      );
-      return count;
-
-
-      }
-
-
-                 $http.get(jadaApiUrl+'api/pendingpayrolltransaction').success(function(data) {
-                    $scope.pendingpayrolldata=data;
-                   console.log('pending');
-                    console.log($scope.pendingpayroll)
-                  });
-
-
-       $scope.pendingpayroll=function () {
-      var count = 0;
-
-      angular.forEach($scope.pendingpayrolldata, function(value, key) {
-        if(key=="status" &&value=="0"){
-          count++
-       console.log(key + ': ' + value);
-        }
-       
-      }
-      );
-      return count;
-
-
-      }
-
-
-
-
-       $scope.loadPendingpayroll=function () {
-    
-                 $http.get(jadaApiUrl+'api/pendingpayrolltransaction').success(function(data) {
-                    $scope.pendingpayrolldata=data;
-                   console.log('pending');
-                    console.log($scope.pendingpayroll)
-                  });
-       }
-
-
-       $scope.leavenotification = function () {
-      var count = 0;
-      angular.forEach($scope.pendingleaves, function (item) {
-      if (!item.isApproved) { count++ }
-      });
-      return count;
-
-
-      }
-
-      
-
-         $scope.loadPendingLeaves = function () {
-      $scope.pendingleaves=LeaveApprovalService.query();
-
-         }
-
-       $rootScope.$on("CallLoadPendingLeaves", function(){
-                 $scope.loadPendingLeaves();
-              });
-
-
-
-
-      $scope.totalNotification=function(){
-        var total=$scope.leavenotification()+ $scope.pendingpayroll()+$scope.rejectedpayroll()+$scope.approvedpayroll();
-        return total;
-        console.log(here);
-        console.log(total);
-
-      }
-
-
-      $scope.show = function(leave) {
-            // $scope.x = x;
-            var modalInstance = $uibModal.open({
-              templateUrl: 'leaveapproval.html',
-              controller: ModalInstanceCtrl,
-              resolve: {
-                 leave: function () {
-                   return leave;
-                 }
-               }        
-              // scope : $scope
-            });
-          };
-          
-
-
-
-       
-
-
-
-                   ModalInstanceCtrl.$inject = ['$scope', '$http', '$rootScope','$uibModalInstance','LeaveApprovalService','leave','jadaApiUrl'];
-                function ModalInstanceCtrl($scope,$http, $rootScope,$uibModalInstance, LeaveApprovalService,leave,jadaApiUrl) {
-                $scope.leave=leave;
-                  $scope.ok = function () {
-                    $uibModalInstance.close('closed');
-                  };
-
-                  $scope.cancel = function () {
-                    $uibModalInstance.dismiss('cancel');
-                  };
-                  
-
-                 $scope.approveLeave=function(leave){
-                   leave.$update().then(function(){
-                         $rootScope.$emit("CallLoadPendingLeaves", {});
-                  });
-                
-                    };
-
-
-               
-                }
-              }
-          }
-
-      })();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.transactions')
-        .factory('LeaveApprovalService', LeaveApprovalService);
-
-    LeaveApprovalService.$inject = ['$resource','jadaApiUrl'];
-    function LeaveApprovalService($resource,jadaApiUrl) {
-
-        // var data=$resource('https://jsonplaceholder.typicode.com/users/:user', {user: '@user'},
-     var data=$resource(jadaApiUrl+'api/pendingleaveprocessing/:id',{id: '@id'}, 
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.transactions')
-        .controller('LeaveProcessController', LeaveProcessController);
-
-   LeaveProcessController.$inject = ['$scope','$http','$rootScope', '$uibModal','LeaveProcessingService','$stateParams', '$state','$timeout','jadaApiUrl'];
-    function LeaveProcessController($scope,$http, $rootScope,$uibModal, LeaveProcessingService,$stateParams, $state,$timeout,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
- $scope.leavetypeprocess=LeaveProcessingService.query();
- console.log( $scope.leavetypeprocess);
-
-
-$http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
-          
-            });
-
-$http.get(jadaApiUrl+'api/leavetype').success(function(data) {
-              $scope.leavetypes = data;
-              console.log($scope.leavetypes);
-          
-            });
-
-$http.get(jadaApiUrl+'api/leavePostingtype').success(function(data) {
-              $scope.leavetransaction = data;
-              console.log($scope.leavetypes);
-          
-            });
-
-
-    $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
-
-            });
-
-
-
-
-$http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
-            
-         $scope.leavepost={};
-          $scope.currentPeriod=data.data;
-      
-      $scope.leavepost.period=$scope.currentPeriod.id;
-      $scope.period_description=$scope.currentPeriod.month +' '+ $scope.currentPeriod.year; 
-      console.log($scope.currentPeriod);
-  
-            });
-
-$scope.employeeChange=function(id){
-              
-              for(var r=0;r<$scope.employees.length;r++){
-
-                if(id==$scope.employees[r].id){
-                  $scope.department=$scope.employees[r].department;
-                  $scope.employeeName=$scope.employees[r].firstName +' '+ $scope.employees[r].lastName;
-                }
-   console.log('fff'+$scope.department);
-              }
-
-            }
-
-$scope.dayDiff = function(firstDate, secondDate){
-    var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds    
-    var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
-    $scope.duration=diffDays;
-    console.log(diffDays);
-}
-
-
-
-       $scope.formatString = function(format) {
-    var day   = parseInt(format.substring(0,2));
-    var month  = parseInt(format.substring(3,5));
-    var year   = parseInt(format.substring(6,10));
-    var date = new Date(year, month-1, day);
-    return date;
-  }
-
-
-   $scope.leavepost=new LeaveProcessingService();
-             $scope.submitLeaveApplication=function(leavepostform) {
- 
-          $scope.leavepost.$save().then(function(data){
-             var response=angular.fromJson(data);
-          
-            if(response.Status=="1"){
-              $scope.errorMsg=false;
-                    $scope.SuccessMsg =response.Message;
-            }else{
-           
-               $scope.SuccessMsg=false;
-                   $scope.errorMsg=response.Message;
-           
-            }
-          $scope.leavePostingReset(leavepostform);
-
-          }, 
-          function() {
-             $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
-     
-          };
-
-
-  $scope.leavePostingReset=function(leavepostform){
-             $scope.leavepostform={};
-            $scope.leavepost="";
-            leavepostform.$setPristine();
-            };
-
-
-      
-        }
-    }
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.transactions')
-        .factory('LeaveProcessingService', LeaveProcessingService);
-
-    LeaveProcessingService.$inject = ['$resource','jadaApiUrl'];
-    function LeaveProcessingService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/leaveprocessing/:id', {id: '@id'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-
-      /**=========================================================
-       * Module: modals.js
-       * Provides a simple way to implement bootstrap modals from templates
-       =========================================================*/
-      (function() {
-          'use strict';
-
-          angular
-              .module('app.transactions')
-              .controller('jadaNotificationController', jadaNotificationController);
-
-          jadaNotificationController.$inject = ['$scope','$http', '$rootScope','$uibModal', '$state','$resource','jadaApiUrl','LeaveApprovalService','PayrollApprovalService'];
-          function jadaNotificationController($scope,$http, $rootScope, $uibModal, $state,$resource,jadaApiUrl,LeaveApprovalService,PayrollApprovalService) {
-              var vm = this;
-
-              activate();
-
-              ////////////////
-
-              function activate() {
-
-       var SuccessMsg;
-       var errorMsg;
-
-
-           
-$scope.approvedResource = $resource(jadaApiUrl+'api/approvedpayrolltransaction');
-$scope.approve=$scope.approvedResource.get({});
-
-$scope.rejectedResource = $resource(jadaApiUrl+'api/rejectedpayrolltransaction');
- $scope.rejectedgpayroll=$scope.rejectedResource.get({});
-
-      $scope.pendingleaves=LeaveApprovalService.query();
-    
-
-           
-
-// $http.get(jadaApiUrl+'api/approvedpayrolltransaction').success(function(data) {
-//                     $scope.approvedgpayroll=data;
-                 
-//                   });
-
-
-
-
-       $scope.approvedpayroll=function () {
-      var count = 0;
-
-      angular.forEach($scope.approve, function(value, key) {
-        if(key=="status" &&value=="1"){
-          count++
-       console.log(key + ': ' + value);
-        }
-       
-      }
-      );
-      return count;
-
-
-      }
-
-
-
-
-
-
-
-
-      // $http.get(jadaApiUrl+'api/rejectedpayrolltransaction').success(function(data) {
-      //               $scope.rejectedgpayroll =data;
-
-      //           console.log($scope.rejectedgpayroll);
-      //             });
-
-
-
-
-       $scope.rejectedpayroll=function () {
-      var count = 0;
-
-      angular.forEach($scope.rejectedgpayroll, function(value, key) {
-        if(key=="status" &&value=="2"){
-          count++
-       console.log(key + ': ' + value);
-        }
-       
-      }
-      );
-      return count;
-
-
-      }
-
-
-
-
-
-
-                 $http.get(jadaApiUrl+'api/pendingpayrolltransaction').success(function(data) {
-                    $scope.pendingpayrolldata=data;
-                 
-                  });
-
-
-       $scope.pendingpayroll=function () {
-      var count = 0;
-
-      angular.forEach($scope.pendingpayrolldata, function(value, key) {
-        if(key=="status" &&value=="0"){
-          count++
-
-        }
-       
-      }
-      );
-      return count;
-
-
-      }
-
-
-
-       $scope.leavenotification = function () {
-      var count = 0;
-      angular.forEach($scope.pendingleaves, function (item) {
-      if (!item.isApproved) { count++ }
-      });
-      return count;
-
-
-      }
-
-    
-
-         $scope.loadPendingLeaves = function () {
-      $scope.pendingleaves=LeaveApprovalService.query();
-
-         }
-
-       $rootScope.$on("CallLoadPendingLeaves", function(){
-                 $scope.loadPendingLeaves();
-              });
-
-
-
-
-      $scope.totalNotification=function(){
-        var total=$scope.leavenotification()+ $scope.pendingpayroll()+$scope.rejectedpayroll()+$scope.approvedpayroll();
-        return total;
-      
-
-      }
-              }
-          }
-
-      })();
-
-
-
-/**=========================================================
- * Module: modals.js
- * Provides a simple way to implement bootstrap modals from templates
- =========================================================*/
-(function() {
-    'use strict';
-
-    angular
-        .module('app.transactions')
-        .controller('PayrollApprovalController', PayrollApprovalController);
-
-   PayrollApprovalController.$inject = ['$scope','$http','$rootScope', '$uibModal','PayrollApprovalService','$stateParams', '$state','$timeout','jadaApiUrl','toaster'];
-    function PayrollApprovalController($scope,$http, $rootScope,$uibModal, PayrollApprovalService,$stateParams, $state,$timeout,jadaApiUrl,toaster) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
- 
-
-
-     
-
- $http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
-            
-         $scope.currentp=data;
-        $scope.current=data.data.id;
-        console.log($scope.current);
-        console.log('data');
-       console.log($scope.currentp);
-  
-            });
-           
-
-
-
-
- $scope.sendforApproval= function (current) {
-   var currentperiod=current;
-  var  paryroll={periodId:currentperiod, status:"0"};
- 
-console.log(paryroll);
-    $scope.currentclass='whirl ringed';
-
-      var  payrollposting=new PayrollApprovalService(paryroll);
-  
-
-
-            payrollposting.$save().then(function(data){
-               $scope.currentclass='process';
-              var response=angular.fromJson(data);
-            console.log(response.Message);
-            // $scope.authMsg=response.Message;
-            if(response.Status=="1"){
-                    $scope.errorMsg=false;
-                    $scope.SuccessMsg =response.Message;
-            }else{
-            $scope.currentclass='process';
-                  $scope.SuccessMsg=false;
-                   $scope.errorMsg=response.Message;
-
-              // vm.auth=true;
-            } 
-           $state.reload()
-
-            }, function() {
-               $scope.currentclass='process';
-               $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
-
- }
-
-
-
-
-
-
-
-     $scope.buttonText="process";
-
- $scope.payrollApproval= function (current) {
-   var currentperiod=current;
-  var  paryroll={periodId:currentperiod, status:"1"};
- 
-console.log(paryroll);
-    $scope.currentclass='whirl ringed';
-
-      var  payrollposting=new PayrollApprovalService(paryroll);
-  
-
-
-            payrollposting.$update().then(function(data){
-               $scope.currentclass='process';
-              var response=angular.fromJson(data);
-            console.log(response.Message);
-            // $scope.authMsg=response.Message;
-            if(response.Status=="1"){
-                    $scope.errorMsg=false;
-                    $scope.SuccessMsg =response.Message;
-            }else{
-            $scope.currentclass='process';
-                  $scope.SuccessMsg=false;
-                   $scope.errorMsg=response.Message;
-
-              // vm.auth=true;
-            }
-           
-$state.reload()
-            }, function() {
-               $scope.currentclass='process';
-               $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
-
- }
-
-
-  $scope.payrollReject= function (current) {
-   var currentperiod=current;
-  var  paryroll={periodId:currentperiod, status:"2"};
- 
-console.log(paryroll);
-    $scope.rejectclass='whirl ringed';
-
-      var  payrollposting=new PayrollApprovalService(paryroll);
-  
-
-
-            payrollposting.$update().then(function(data){
-               $scope.rejectclass='process';
-              var response=angular.fromJson(data);
-            console.log(response.Message);
-            // $scope.authMsg=response.Message;
-            if(response.Status=="1"){
-                    $scope.errorMsg=false;
-                    $scope.SuccessMsg =response.Message;
-            }else{
-            $scope.rejectclass='process';
-                  $scope.SuccessMsg=false;
-                   $scope.errorMsg=response.Message;
-
-              // vm.auth=true;
-            }
-           $state.reload()
-
-            }, function() {
-               $scope.rejectclass='process';
-               $scope.SuccessMsg=false;
-                 $scope.errorMsg = 'Server Request Error';
-                });
-
- }
- 
-
-
-
-          
-          
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-      
-        }
-    }
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.transactions')
-        .factory('PayrollApprovalService', PayrollApprovalService);
-
-    PayrollApprovalService.$inject = ['$resource','jadaApiUrl'];
-    function PayrollApprovalService($resource,jadaApiUrl) {
-
-        // var data=$resource('https://jsonplaceholder.typicode.com/users/:user', {user: '@user'},
-           // var data=$resource(jadaApiUrl+'api/payrolltransactionapproval/:periodId',{periodId: '@periodId'}, 
-     var data=$resource(jadaApiUrl+'api/payrolltransactionapproval/:periodId',{periodId: '@periodId'}, 
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.transactions')
-        .factory('GetemployeeService', GetemployeeService);
-
-    GetemployeeService.$inject = ['$resource','jadaApiUrl'];
-    function GetemployeeService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/payrollposting/:employeeId/:periodId',
-    { 'get':    {method:'GET',params:{ 
-        employeeId:'@employeeId', 
-        periodId: '@periodId'
-    },isArray:true}
-
-});
-     return data
-          
-       
-    }
-
-})();
-
-
-/**=========================================================
- * Module: modals.js
- * Provides a simple way to implement bootstrap modals from templates
- =========================================================*/
-(function() {
-    'use strict';
-
-    angular
-        .module('app.transactions')
-        .controller('PayrollProcessController', PayrollProcessController);
-
-   PayrollProcessController.$inject = ['$scope','$http','$rootScope', '$uibModal','PayrollProcessingService','$stateParams', '$state','$timeout','jadaApiUrl'];
-    function PayrollProcessController($scope,$http, $rootScope,$uibModal, PayrollProcessingService,$stateParams, $state,$timeout,jadaApiUrl) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-
-$scope.groups=PayrollProcessingService.query();
-
-$scope.currentclass='danger';
-    $scope.buttonText="Process";
-
- $scope.process= function () {
-    // $scope.buttonText="processing";
-    $scope.currentclass='whirl ringed';
-    $scope.buttonprocess=true;
-      $http.post(jadaApiUrl+'api/payrolltransaction').success(function(){
-    
- $scope.buttonText="Processing";
-                  },function(err){
-            $scope.buttonText="failed";
-            }).finally(function(){
-              $scope.currentclass='process';
-            $scope.buttonText="Process";
-            });
-            };
-
-
-
-          
-          
-
-$scope.clickBtn = function() {
-  $scope.loading = true; // start loading
-  $timeout(function() {
-    $scope.loading = false; // stop loading
-  }, 2000);
-}
-
-
-      
-        }
-    }
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.transactions')
-        .factory('PayrollProcessingService', PayrollProcessingService);
-
-    PayrollProcessingService.$inject = ['$resource','jadaApiUrl'];
-    function PayrollProcessingService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/payrollposting/:id', {id: '@id'},
-    { 'get':    {method:'GET', isArray:false},
-  'save':   {method:'POST'},
-  'query':  {method:'GET', isArray:true},
-  'update': { method:'PUT' },
-  'remove': {method:'DELETE'},
-  'delete': {method:'DELETE'} 
-});
-     return data
-          
-       
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.transactions')
-     .directive('fileReaderDirective', function() {
- return {
-        restrict: "A",
-        scope: {
-            fileReaderDirective: "=",
+        .module('app.settings')
+        .run(settingsRun);
+
+    settingsRun.$inject = ['$rootScope', '$localStorage'];
+
+    function settingsRun($rootScope, $localStorage){
+
+
+      // User Settings
+      // -----------------------------------
+      $rootScope.user = {
+        name:     'John',
+        job:      'ng-developer',
+        picture:  'app/img/user/02.jpg'
+      };
+
+      // Hides/show user avatar on sidebar from any element
+      $rootScope.toggleUserBlock = function(){
+        $rootScope.$broadcast('toggleUserBlock');
+      };
+
+      // Global Settings
+      // -----------------------------------
+      $rootScope.app = {
+        name: 'Jada',
+        description: 'Jada Payroll',
+        year: ((new Date()).getFullYear()),
+        layout: {
+          isFixed: true,
+          isCollapsed: false,
+          isBoxed: false,
+          isRTL: false,
+          horizontal: false,
+          isFloat: false,
+          asideHover: false,
+          theme: null,
+          asideScrollbar: false,
+          isCollapsedText: false
         },
-        link: function(scope, element) {
-            $(element).on('change', function(changeEvent) {
-                var files = changeEvent.target.files;
-                if (files.length) {
-                    var r = new FileReader();
-                    r.onload = function(e) {
-                        var contents = e.target.result;
-                        scope.$apply(function() {
-                            scope.fileReaderDirective = contents;
-                        });
-                    };
-                    r.readAsText(files[0]);
-                }
-            });
-        }
-    };
-});
+        useFullLayout: false,
+        hiddenFooter: false,
+        offsidebarOpen: false,
+        asideToggled: false,
+        viewAnimation: 'ng-fadeInUp'
+      };
 
-})();
-(function() {
-    'use strict';
+      // Setup the layout mode
+      $rootScope.app.layout.horizontal = ( $rootScope.$stateParams.layout === 'app-h') ;
 
-    angular
-        .module('app.transactions')
-        .factory('readFileData', readFileData);
+      // Restore layout settings
+      if( angular.isDefined($localStorage.layout) )
+        $rootScope.app.layout = $localStorage.layout;
+      else
+        $localStorage.layout = $rootScope.app.layout;
 
-    // PayrollProcessingService.$inject = ['$resource','jadaApiUrl'];
-    function readFileData() {
- return {
-        processData: function(csv) {
-            var lines=csv.split(/\r\n|\n/);
+      $rootScope.$watch('app.layout', function () {
+        $localStorage.layout = $rootScope.app.layout;
+      }, true);
 
-  var result = [];
+      // Close submenu when sidebar change from collapsed to normal
+      $rootScope.$watch('app.layout.isCollapsed', function(newValue) {
+        if( newValue === false )
+          $rootScope.$broadcast('closeSidebarMenu');
+      });
 
-  var headers=lines[0].split(",");
-
-  for(var i=1;i<lines.length;i++){
-
-    var obj = {};
-    var currentline=lines[i].split(",");
-
-    for(var j=0;j<headers.length;j++){
-      obj[headers[j]] = currentline[j];
     }
-
-    result.push(obj);
-
-  }
-  
-  //return result; //JavaScript object
-  return JSON.stringify(result); //JSON
+       function Logout() {
+            // remove user from local storage and clear http auth header
+            delete $localStorage.currentUser;
+            $http.defaults.headers.common.Authorization = '';
         }
-    };
-          
-       
-    }
 
 })();
 
-
-//var csv is the CSV file with headers
-// function csvJSON(csv){
-
-//   var lines=csv.split("\n");
-
-//   var result = [];
-
-//   var headers=lines[0].split(",");
-
-//   for(var i=1;i<lines.length;i++){
-
-//     var obj = {};
-//     var currentline=lines[i].split(",");
-
-//     for(var j=0;j<headers.length;j++){
-//       obj[headers[j]] = currentline[j];
-//     }
-
-//     result.push(obj);
-
-//   }
-  
-//   //return result; //JavaScript object
-//   return JSON.stringify(result); //JSON
-// }
-
-
-// processData: function(csv_data) {
-//             var record = csv_data.split(/\r\n|\n/);
-//             var headers = record[0].split(',');
-//             var lines = [];
-//             var json = {};
-
-//             for (var i = 0; i < record.length; i++) {
-//                 var data = record[i].split(',');
-//                 if (data.length == headers.length) {
-//                     var tarr = [];
-//                     for (var j = 0; j < headers.length; j++) {
-//                         tarr.push(data[j]);
-//                     }
-//                     lines.push(tarr);
-//                 }
-//             }
-            
-//             for (var k = 0; k < lines.length; ++k){
-//               json[k] = lines[k];
-//             }
-//             return json;
-//         }
 /**=========================================================
  * Module: sidebar-menu.js
  * Handle sidebar collapsible elements
@@ -19380,6 +17825,1547 @@ $scope.clickBtn = function() {
 
     }
 })();
+// (function() {
+//     'use strict';
+
+//     angular
+//         .module('app.bootstrapui')
+//         .controller('BulkImportController', BulkImportController);
+
+//     BulkImportController.$inject = ['$scope', '$http', '$interval', '$q'];
+//     function BulkImportController($scope, $http, $interval, $q) { 
+
+  //      $scope.data = [];
+  // $scope.gridOptions = {
+  //   enableGridMenu: true,
+  //   importerDataAddCallback: function( grid, newObjects ) {
+  //     $scope.data = $scope.data.concat( newObjects );
+  //   },
+  //   onRegisterApi: function(gridApi){ 
+  //     $scope.gridApi = gridApi;
+  //     gridApi.rowEdit.on.saveRow($scope, $scope.saveRow);
+  //   },
+  //   data: 'data'
+  // };
+
+  // $scope.saveRow = function( rowEntity ) {
+  //   // create a fake promise - normally you'd use the promise returned by $http or $resource
+  //   var promise = $q.defer();
+  //   $scope.gridApi.rowEdit.setSavePromise( rowEntity, promise.promise );
+   
+  //   // fake a delay of 3 seconds whilst the save occurs, return error if gender is "male"
+  //   $interval( function() {
+  //     if (rowEntity.Gender === 'male' ){
+  //       promise.reject();
+  //     } else {
+  //       promise.resolve();
+  //     }
+  //   }, 3000, 1);
+  // };
+  
+  // var handleFileSelect = function( event ){
+  //   var target = event.srcElement || event.target;
+    
+  //   if (target && target.files && target.files.length === 1) {
+  //     var fileObject = target.files[0];
+  //     $scope.gridApi.importer.importFile( fileObject );
+  //     target.form.reset();
+  //   }
+  // };
+
+  // var fileChooser = document.querySelectorAll('.file-chooser');
+  
+  // if ( fileChooser.length !== 1 ){
+  //   console.log('Found > 1 or < 1 file choosers within the menu item, error, cannot continue');
+  // } else {
+  //   fileChooser[0].addEventListener('change', handleFileSelect, false);  // TODO: why the false on the end?  Google  
+  // }
+
+//     }
+
+// })();
+
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.transactions')
+        .factory('EmployeeBatchPostingService', EmployeeBatchPostingService);
+
+    EmployeeBatchPostingService.$inject = ['$resource','jadaApiUrl'];
+    function EmployeeBatchPostingService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/payrollbatchposting', 
+    {
+  'save':   {
+    method:'POST',  isArray:true,  transformRequest: function(data){
+                        console.log('Data in transform request is');
+                        console.log(data);
+                        return angular.toJson(data); // this will go in the body request
+                    }
+},
+
+});
+     return data
+          
+       
+    }
+
+})();
+
+
+
+
+
+
+/**=========================================================
+ * Module: modals.js
+ * Provides a simple way to implement bootstrap modals from templates
+ =========================================================*/
+(function() {
+    'use strict';
+
+    angular
+        .module('app.transactions')
+        .controller('EmployeePostingController', EmployeePostingController);
+
+    EmployeePostingController.$inject = ['$scope','$http', '$rootScope','$uibModal','employeePostingService','GetemployeeService', '$state','$resource','jadaApiUrl'];
+    function EmployeePostingController($scope,$http, $rootScope, $uibModal, employeePostingService,GetemployeeService, $state,$resource,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+ var SuccessMsg;
+ var errorMsg;
+        
+     
+
+         $scope.searchEmployee=function(user) {
+
+          if(user.periodId!=null && user.periodId!=""){
+            $rootScope.employeePostedId = user.employeeId;
+            $rootScope.periodPostedId =user.periodId;
+                  var employeeId=user.employeeId;
+          var periodId=user.periodId;
+          
+          console.log("period - "+periodId+" employee - "+employeeId);
+          $http.get(jadaApiUrl+'api/payrollpostingReport/'+periodId+'/'+employeeId).success(function(data) {
+              $scope.oneUser = data;
+         $scope.transactions=data.payrollCodeReportList;
+              console.log($scope.transactions);
+             });
+
+           $http.get(jadaApiUrl+'api/payrolltransaction/'+periodId+'/'+employeeId).success(function(data) {
+         
+         $scope.alltransactions=data;
+         console.log($scope.alltransactions);
+             });
+
+          }
+        
+         };
+
+
+
+$http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
+          $scope.postingtrans={};
+          $scope.currentPeriod=data.data;
+    $scope.currentperiod=$scope.currentPeriod.period;
+      $scope.postingtrans.periodId=$scope.currentPeriod.id;
+      $scope.period_description=$scope.currentPeriod.month+ ' '+$scope.currentPeriod.year;
+     });
+
+
+
+          $scope.loadTransactions = function () {
+          var employeeId=$rootScope.employeePostedId;
+          var periodId=$rootScope.periodPostedId;
+          console.log("period - "+periodId+" employee - "+employeeId);
+          $http.get(jadaApiUrl+'api/payrollpostingReport/'+employeeId+'/'+periodId).success(function(data) {
+              $scope.oneUser = data;
+
+              $scope.transactions=data.payrollCodeReportList;
+              console.log(  $scope.transactions);
+
+
+            });
+        }
+
+ $rootScope.$on("CallLoadTransactions", function(){
+           $scope.loadTransactions ();
+        });
+
+
+    $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+$http.get(jadaApiUrl+'api/department').success(function(data) {
+              $scope.departments = data;
+
+            });
+
+$http.get(jadaApiUrl+'api/employee').success(function(data) {
+            // $scope.postingtrans={};
+              $scope.employees=data;
+              var empId=$scope.employees[0].id;
+              $scope.postingtrans.employeeId=empId;
+           console.log('hapa');
+             console.log($scope.employees[0].id);
+
+
+          
+            });
+
+
+   $http.get(jadaApiUrl+'api/payrollcode').success(function(data) {
+               $scope.pcodes = data;
+         
+
+            });
+
+         $scope.codeChange=function(id){
+              for(var r=0;r<$scope.pcodes.length;r++){
+                if(id==$scope.pcodes[r].id){
+                  $scope.description=$scope.pcodes[r].description;
+                }
+
+              }
+
+            }
+
+
+
+$scope.populateeTransactionData=function(id){
+    $scope.posting=[];
+for(var r=0;r< $scope.periods.length;r++){
+    if( $scope.periods[r].id==id){
+      $scope.periodId=$scope.periods[r].id;  
+    }
+  }
+
+  
+}
+
+
+        $scope.delete= function (transaction) {
+             var deletetransaction= new employeePostingService(transaction);
+                  deletetransaction.$delete().then(function () {
+                   $scope.loadTransactions();
+                   console.log('edited')
+            });
+            }
+          
+          $scope.open = function (employeeinfo) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'addTransactions.html',
+              controller: ModalOpenFormulaInstanceCtrl,
+          
+              resolve: {
+           employeeinfo: function () {
+             return employeeinfo;
+           }
+         }
+
+            });
+
+
+
+
+
+            var state = $('#modal-state');
+            modalInstance.result.then(function () {
+              state.text('Modal dismissed with OK status');
+            }, function () {
+              state.text('Modal dismissed with Cancel status');
+            });
+          };
+
+             $scope.openPayslip = function (employeeinfo) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'viewPayslip.html',
+              controller: ViewTransactionInstanceCtrl,
+              // size:'lg',
+              resolve: {
+           employeeinfo: function () {
+             return employeeinfo;
+           }
+         }
+
+            });
+
+
+
+
+
+            var state = $('#modal-state');
+            modalInstance.result.then(function () {
+              state.text('Modal dismissed with OK status');
+            }, function () {
+              state.text('Modal dismissed with Cancel status');
+            });
+          };
+
+
+
+
+
+
+$scope.show = function(trans) {
+      // $scope.x = x;
+      var modalInstance = $uibModal.open({
+        templateUrl: 'editTransaction.html',
+        controller: ModalInstanceCtrl,
+        resolve: {
+           trans: function () {
+             return trans;
+           }
+         }        
+        // scope : $scope
+      });
+    };
+    
+
+
+
+ 
+
+
+          // Please note that $uibModalInstance represents a modal window (instance) dependency.
+          // It is not the same as the $uibModal service used above.
+
+          ModalOpenFormulaInstanceCtrl.$inject = ['$scope', '$http','$rootScope','$uibModalInstance','employeePostingService','jadaApiUrl','employeeinfo'];
+          function ModalOpenFormulaInstanceCtrl($scope, $http,$rootScope,$uibModalInstance, employeePostingService,jadaApiUrl,employeeinfo) {
+
+         $scope.transactionposting=employeeinfo;
+      
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+
+            
+             $scope.submitTransaction=function(transactionposting) {
+      var usertransactionposting=new employeePostingService(transactionposting);
+
+          usertransactionposting.$save().then(function(data){
+             var response=angular.fromJson(data);
+          
+            if(response.Status=="1"){
+              $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+              
+                     $scope.transactionposting.payrollCodeId=' ';
+                     $scope.transactionposting.amount=' ';
+            }else{
+           
+               $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+           
+            }
+            $rootScope.$emit("CallLoadTransactions", {});
+
+          }, 
+          function() {
+             $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+     
+          };
+
+
+            $scope.saveCloseTransaction=function(transactionposting) {
+                 var usertransactionposting=new employeePostingService(transactionposting);
+         usertransactionposting.$save().then(function(){
+          $scope.transactionposting.payrollCodeId=' ';
+                     $scope.transactionposting.amount=' ';
+            $rootScope.$emit("CallLoadTransactions", {});
+            $scope.ok();
+
+          },
+           function() {
+             $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+     
+          };
+
+       
+         
+          }
+
+
+
+              // Please note that $uibModalInstance represents a modal window (instance) dependency.
+          // It is not the same as the $uibModal service used above.
+
+          ViewTransactionInstanceCtrl.$inject = ['$scope', '$http','$rootScope','$uibModalInstance','employeePostingService','jadaApiUrl','employeeinfo'];
+          function ViewTransactionInstanceCtrl($scope, $http,$rootScope,$uibModalInstance, employeePostingService,jadaApiUrl,employeeinfo) {
+
+    
+      
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+
+console.log(employeeinfo.periodId)
+console.log(employeeinfo.employeeId)
+
+          if(employeeinfo.periodId!=null && employeeinfo.periodId!=""){
+    
+           var employeeId=employeeinfo.employeeId;
+           var period=employeeinfo.periodId;
+     
+          $http.get(jadaApiUrl+'api/payslipreport//'+period+'/'+employeeId).success(function(data) {
+                $scope.persons= data;
+
+                 $scope.message="hellow period";
+      console.log('////hapa');
+              console.log($scope.persons);
+
+
+            });
+
+          }
+       
+         
+          }
+            
+
+             ModalInstanceCtrl.$inject = ['$scope', '$http', '$rootScope','$uibModalInstance','employeePostingService','trans','jadaApiUrl'];
+          function ModalInstanceCtrl($scope,$http, $rootScope,$uibModalInstance, employeePostingService,trans,jadaApiUrl) {
+          // $scope.transaction=trans;
+          var id=trans.id;
+          console.log(id);
+
+          
+                $scope.transaction=trans;
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+            
+       $scope.transaction= employeePostingService.get({id:id});
+           $scope.updateTransaction=function(transaction){
+      
+            transaction.$update().then(function(){
+                   $rootScope.$emit("CallLoadTransactions", {});
+            });
+          
+              };
+
+
+         
+          }
+        }
+    }
+
+})();
+
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.transactions')
+        .factory('employeePostingService', employeePostingService);
+
+    employeePostingService.$inject = ['$resource','jadaApiUrl'];
+    function employeePostingService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/payrollposting/:id', {id: '@id'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+
+
+
+
+/**=========================================================
+ * Module: modals.js
+ * Provides a simple way to implement bootstrap modals from templates
+ =========================================================*/
+(function() {
+    'use strict';
+
+    angular
+        .module('app.bootstrapui')
+        .controller('EmpBulkTransController', EmpBulkTransController);
+
+    EmpBulkTransController.$inject = ['$scope','$http', '$uibModal','PayrollBatchPostingService','$stateParams', '$state','readFileData','jadaApiUrl'];
+    function EmpBulkTransController($scope, $http,$uibModal, PayrollBatchPostingService,$stateParams, $state,readFileData,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+$scope.fileDataObj = [];
+
+            $scope.fileData ={ };
+    
+    $scope.uploadFile = function() {
+      if ($scope.fileContent) {
+        $scope.fileDataObj = readFileData.processData($scope.fileContent);
+      
+        // $scope.fileData = JSON.stringify($scope.fileDataObj);
+         $scope.fileData =  $.parseJSON($scope.fileDataObj);
+
+var jdata= JSON.stringify($scope.fileData);
+        console.log( $scope.fileData);
+      }
+    }
+
+
+
+            $scope.cancel = function () {
+           
+            $scope.fileData =' ';
+            };
+
+
+
+ $scope.save = function () {
+var list=$scope.fileData;
+for(var r=0;r<list.length;r++){
+  var vdata =list[r];
+  console.log(vdata);
+  // var postingdata = new PayrollBatchPostingService(vdata);
+    $http.post(jadaApiUrl+'api/payrollsingleposting/', {vdata}).success(
+      function(data){
+
+            var response=angular.fromJson(data);
+          
+            if(response.Status=="1"){
+              $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+                    console.log()
+            }else{
+           
+               $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+           
+            }
+        // $scope.fileData[r].success=true;
+        // $scope.response = data
+        // console.log(data);
+      })
+
+}
+
+  }
+
+        }
+    }
+
+})();
+
+
+
+      /**=========================================================
+       * Module: modals.js
+       * Provides a simple way to implement bootstrap modals from templates
+       =========================================================*/
+      (function() {
+          'use strict';
+
+          angular
+              .module('app.transactions')
+              .controller('LeaveApprovalController', LeaveApprovalController);
+
+          LeaveApprovalController.$inject = ['$scope','$http', '$rootScope','$uibModal', '$state','$resource','jadaApiUrl','LeaveApprovalService','PayrollApprovalService'];
+          function LeaveApprovalController($scope,$http, $rootScope, $uibModal, $state,$resource,jadaApiUrl,LeaveApprovalService,PayrollApprovalService) {
+              var vm = this;
+
+              activate();
+
+              ////////////////
+
+              function activate() {
+
+       var SuccessMsg;
+       var errorMsg;
+
+           
+      $scope.pendingleaves=LeaveApprovalService.query();
+      console.log($scope.pendingleaves);
+
+           
+
+      var currentperiod=0
+
+                 $http.get(jadaApiUrl+'api/approvedpayrolltransaction').success(function(data) {
+                    $scope.approvedgpayroll=data;
+                 
+                  });
+
+
+       $scope.approvedpayroll=function () {
+      var count = 0;
+
+      angular.forEach($scope.approvedgpayroll, function(value, key) {
+        if(key=="status" &&value=="1"){
+          count++
+       console.log(key + ': ' + value);
+        }
+       
+      }
+      );
+      return count;
+
+
+      }
+
+
+
+
+
+      $http.get(jadaApiUrl+'api/rejectedpayrolltransaction').success(function(data) {
+                    $scope.rejectedgpayroll =data;
+
+                console.log($scope.rejectedgpayroll);
+                  });
+
+
+
+       $scope.rejectedpayroll=function () {
+      var count = 0;
+
+      angular.forEach($scope.rejectedgpayroll, function(value, key) {
+        if(key=="status" &&value=="2"){
+          count++
+       console.log(key + ': ' + value);
+        }
+       
+      }
+      );
+      return count;
+
+
+      }
+
+
+                 $http.get(jadaApiUrl+'api/pendingpayrolltransaction').success(function(data) {
+                    $scope.pendingpayrolldata=data;
+                   console.log('pending');
+                    console.log($scope.pendingpayroll)
+                  });
+
+
+       $scope.pendingpayroll=function () {
+      var count = 0;
+
+      angular.forEach($scope.pendingpayrolldata, function(value, key) {
+        if(key=="status" &&value=="0"){
+          count++
+       console.log(key + ': ' + value);
+        }
+       
+      }
+      );
+      return count;
+
+
+      }
+
+
+
+
+       $scope.loadPendingpayroll=function () {
+    
+                 $http.get(jadaApiUrl+'api/pendingpayrolltransaction').success(function(data) {
+                    $scope.pendingpayrolldata=data;
+                   console.log('pending');
+                    console.log($scope.pendingpayroll)
+                  });
+       }
+
+
+       $scope.leavenotification = function () {
+      var count = 0;
+      angular.forEach($scope.pendingleaves, function (item) {
+      if (!item.isApproved) { count++ }
+      });
+      return count;
+
+
+      }
+
+      
+
+         $scope.loadPendingLeaves = function () {
+      $scope.pendingleaves=LeaveApprovalService.query();
+
+         }
+
+       $rootScope.$on("CallLoadPendingLeaves", function(){
+                 $scope.loadPendingLeaves();
+              });
+
+
+
+
+      $scope.totalNotification=function(){
+        var total=$scope.leavenotification()+ $scope.pendingpayroll()+$scope.rejectedpayroll()+$scope.approvedpayroll();
+        return total;
+        console.log(here);
+        console.log(total);
+
+      }
+
+
+      $scope.show = function(leave) {
+            // $scope.x = x;
+            var modalInstance = $uibModal.open({
+              templateUrl: 'leaveapproval.html',
+              controller: ModalInstanceCtrl,
+              resolve: {
+                 leave: function () {
+                   return leave;
+                 }
+               }        
+              // scope : $scope
+            });
+          };
+          
+
+
+
+       
+
+
+
+                   ModalInstanceCtrl.$inject = ['$scope', '$http', '$rootScope','$uibModalInstance','LeaveApprovalService','leave','jadaApiUrl'];
+                function ModalInstanceCtrl($scope,$http, $rootScope,$uibModalInstance, LeaveApprovalService,leave,jadaApiUrl) {
+                $scope.leave=leave;
+                  $scope.ok = function () {
+                    $uibModalInstance.close('closed');
+                  };
+
+                  $scope.cancel = function () {
+                    $uibModalInstance.dismiss('cancel');
+                  };
+                  
+
+                 $scope.approveLeave=function(leave){
+                   leave.$update().then(function(){
+                         $rootScope.$emit("CallLoadPendingLeaves", {});
+                  });
+                
+                    };
+
+
+               
+                }
+              }
+          }
+
+      })();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.transactions')
+        .factory('LeaveApprovalService', LeaveApprovalService);
+
+    LeaveApprovalService.$inject = ['$resource','jadaApiUrl'];
+    function LeaveApprovalService($resource,jadaApiUrl) {
+
+        // var data=$resource('https://jsonplaceholder.typicode.com/users/:user', {user: '@user'},
+     var data=$resource(jadaApiUrl+'api/pendingleaveprocessing/:id',{id: '@id'}, 
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.transactions')
+        .controller('LeaveProcessController', LeaveProcessController);
+
+   LeaveProcessController.$inject = ['$scope','$http','$rootScope', '$uibModal','LeaveProcessingService','$stateParams', '$state','$timeout','jadaApiUrl'];
+    function LeaveProcessController($scope,$http, $rootScope,$uibModal, LeaveProcessingService,$stateParams, $state,$timeout,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+ $scope.leavetypeprocess=LeaveProcessingService.query();
+ console.log( $scope.leavetypeprocess);
+
+
+$http.get(jadaApiUrl+'api/employee').success(function(data) {
+              $scope.employees = data;
+          
+            });
+
+$http.get(jadaApiUrl+'api/leavetype').success(function(data) {
+              $scope.leavetypes = data;
+              console.log($scope.leavetypes);
+          
+            });
+
+$http.get(jadaApiUrl+'api/leavePostingtype').success(function(data) {
+              $scope.leavetransaction = data;
+              console.log($scope.leavetypes);
+          
+            });
+
+
+    $http.get(jadaApiUrl+'api/period').success(function(data) {
+              $scope.periods = data;
+
+            });
+
+
+
+
+$http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
+            
+         $scope.leavepost={};
+          $scope.currentPeriod=data.data;
+      
+      $scope.leavepost.period=$scope.currentPeriod.id;
+      $scope.period_description=$scope.currentPeriod.month +' '+ $scope.currentPeriod.year; 
+      console.log($scope.currentPeriod);
+  
+            });
+
+$scope.employeeChange=function(id){
+              
+              for(var r=0;r<$scope.employees.length;r++){
+
+                if(id==$scope.employees[r].id){
+                  $scope.department=$scope.employees[r].department;
+                  $scope.employeeName=$scope.employees[r].firstName +' '+ $scope.employees[r].lastName;
+                }
+   console.log('fff'+$scope.department);
+              }
+
+            }
+
+$scope.dayDiff = function(firstDate, secondDate){
+    var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds    
+    var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
+    $scope.duration=diffDays;
+    console.log(diffDays);
+}
+
+
+
+       $scope.formatString = function(format) {
+    var day   = parseInt(format.substring(0,2));
+    var month  = parseInt(format.substring(3,5));
+    var year   = parseInt(format.substring(6,10));
+    var date = new Date(year, month-1, day);
+    return date;
+  }
+
+
+   $scope.leavepost=new LeaveProcessingService();
+             $scope.submitLeaveApplication=function(leavepostform) {
+ 
+          $scope.leavepost.$save().then(function(data){
+             var response=angular.fromJson(data);
+          
+            if(response.Status=="1"){
+              $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+            }else{
+           
+               $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+           
+            }
+          $scope.leavePostingReset(leavepostform);
+
+          }, 
+          function() {
+             $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+     
+          };
+
+
+  $scope.leavePostingReset=function(leavepostform){
+             $scope.leavepostform={};
+            $scope.leavepost="";
+            leavepostform.$setPristine();
+            };
+
+
+      
+        }
+    }
+
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.transactions')
+        .factory('LeaveProcessingService', LeaveProcessingService);
+
+    LeaveProcessingService.$inject = ['$resource','jadaApiUrl'];
+    function LeaveProcessingService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/leaveprocessing/:id', {id: '@id'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+
+      /**=========================================================
+       * Module: modals.js
+       * Provides a simple way to implement bootstrap modals from templates
+       =========================================================*/
+      (function() {
+          'use strict';
+
+          angular
+              .module('app.transactions')
+              .controller('jadaNotificationController', jadaNotificationController);
+
+          jadaNotificationController.$inject = ['$scope','$http', '$rootScope','$uibModal', '$state','$resource','jadaApiUrl','LeaveApprovalService','PayrollApprovalService'];
+          function jadaNotificationController($scope,$http, $rootScope, $uibModal, $state,$resource,jadaApiUrl,LeaveApprovalService,PayrollApprovalService) {
+              var vm = this;
+
+              activate();
+
+              ////////////////
+
+              function activate() {
+
+       var SuccessMsg;
+       var errorMsg;
+
+
+           
+$scope.approvedResource = $resource(jadaApiUrl+'api/approvedpayrolltransaction');
+$scope.approve=$scope.approvedResource.get({});
+
+$scope.rejectedResource = $resource(jadaApiUrl+'api/rejectedpayrolltransaction');
+ $scope.rejectedgpayroll=$scope.rejectedResource.get({});
+
+      $scope.pendingleaves=LeaveApprovalService.query();
+    
+
+           
+
+// $http.get(jadaApiUrl+'api/approvedpayrolltransaction').success(function(data) {
+//                     $scope.approvedgpayroll=data;
+                 
+//                   });
+
+
+
+
+       $scope.approvedpayroll=function () {
+      var count = 0;
+
+      angular.forEach($scope.approve, function(value, key) {
+        if(key=="status" &&value=="1"){
+          count++
+       console.log(key + ': ' + value);
+        }
+       
+      }
+      );
+      return count;
+
+
+      }
+
+
+
+
+
+
+
+
+      // $http.get(jadaApiUrl+'api/rejectedpayrolltransaction').success(function(data) {
+      //               $scope.rejectedgpayroll =data;
+
+      //           console.log($scope.rejectedgpayroll);
+      //             });
+
+
+
+
+       $scope.rejectedpayroll=function () {
+      var count = 0;
+
+      angular.forEach($scope.rejectedgpayroll, function(value, key) {
+        if(key=="status" &&value=="2"){
+          count++
+       console.log(key + ': ' + value);
+        }
+       
+      }
+      );
+      return count;
+
+
+      }
+
+
+
+
+
+
+                 $http.get(jadaApiUrl+'api/pendingpayrolltransaction').success(function(data) {
+                    $scope.pendingpayrolldata=data;
+                 
+                  });
+
+
+       $scope.pendingpayroll=function () {
+      var count = 0;
+
+      angular.forEach($scope.pendingpayrolldata, function(value, key) {
+        if(key=="status" &&value=="0"){
+          count++
+
+        }
+       
+      }
+      );
+      return count;
+
+
+      }
+
+
+
+       $scope.leavenotification = function () {
+      var count = 0;
+      angular.forEach($scope.pendingleaves, function (item) {
+      if (!item.isApproved) { count++ }
+      });
+      return count;
+
+
+      }
+
+    
+
+         $scope.loadPendingLeaves = function () {
+      $scope.pendingleaves=LeaveApprovalService.query();
+
+         }
+
+       $rootScope.$on("CallLoadPendingLeaves", function(){
+                 $scope.loadPendingLeaves();
+              });
+
+
+
+
+      $scope.totalNotification=function(){
+        var total=$scope.leavenotification()+ $scope.pendingpayroll()+$scope.rejectedpayroll()+$scope.approvedpayroll();
+        return total;
+      
+
+      }
+              }
+          }
+
+      })();
+
+
+
+/**=========================================================
+ * Module: modals.js
+ * Provides a simple way to implement bootstrap modals from templates
+ =========================================================*/
+(function() {
+    'use strict';
+
+    angular
+        .module('app.transactions')
+        .controller('PayrollApprovalController', PayrollApprovalController);
+
+   PayrollApprovalController.$inject = ['$scope','$http','$rootScope', '$uibModal','PayrollApprovalService','$stateParams', '$state','$timeout','jadaApiUrl','toaster'];
+    function PayrollApprovalController($scope,$http, $rootScope,$uibModal, PayrollApprovalService,$stateParams, $state,$timeout,jadaApiUrl,toaster) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+ 
+
+
+     
+
+ $http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
+            
+         $scope.currentp=data;
+        $scope.current=data.data.id;
+        console.log($scope.current);
+        console.log('data');
+       console.log($scope.currentp);
+  
+            });
+           
+
+
+
+
+ $scope.sendforApproval= function (current) {
+   var currentperiod=current;
+  var  paryroll={periodId:currentperiod, status:"0"};
+ 
+console.log(paryroll);
+    $scope.currentclass='whirl ringed';
+
+      var  payrollposting=new PayrollApprovalService(paryroll);
+  
+
+
+            payrollposting.$save().then(function(data){
+               $scope.currentclass='process';
+              var response=angular.fromJson(data);
+            console.log(response.Message);
+            // $scope.authMsg=response.Message;
+            if(response.Status=="1"){
+                    $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+            }else{
+            $scope.currentclass='process';
+                  $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+
+              // vm.auth=true;
+            } 
+           $state.reload()
+
+            }, function() {
+               $scope.currentclass='process';
+               $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+
+ }
+
+
+
+
+
+
+
+     $scope.buttonText="process";
+
+ $scope.payrollApproval= function (current) {
+   var currentperiod=current;
+  var  paryroll={periodId:currentperiod, status:"1"};
+ 
+console.log(paryroll);
+    $scope.currentclass='whirl ringed';
+
+      var  payrollposting=new PayrollApprovalService(paryroll);
+  
+
+
+            payrollposting.$update().then(function(data){
+               $scope.currentclass='process';
+              var response=angular.fromJson(data);
+            console.log(response.Message);
+            // $scope.authMsg=response.Message;
+            if(response.Status=="1"){
+                    $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+            }else{
+            $scope.currentclass='process';
+                  $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+
+              // vm.auth=true;
+            }
+           
+$state.reload()
+            }, function() {
+               $scope.currentclass='process';
+               $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+
+ }
+
+
+  $scope.payrollReject= function (current) {
+   var currentperiod=current;
+  var  paryroll={periodId:currentperiod, status:"2"};
+ 
+console.log(paryroll);
+    $scope.rejectclass='whirl ringed';
+
+      var  payrollposting=new PayrollApprovalService(paryroll);
+  
+
+
+            payrollposting.$update().then(function(data){
+               $scope.rejectclass='process';
+              var response=angular.fromJson(data);
+            console.log(response.Message);
+            // $scope.authMsg=response.Message;
+            if(response.Status=="1"){
+                    $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+            }else{
+            $scope.rejectclass='process';
+                  $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+
+              // vm.auth=true;
+            }
+           $state.reload()
+
+            }, function() {
+               $scope.rejectclass='process';
+               $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+
+ }
+ 
+
+
+
+          
+          
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+      
+        }
+    }
+
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.transactions')
+        .factory('PayrollApprovalService', PayrollApprovalService);
+
+    PayrollApprovalService.$inject = ['$resource','jadaApiUrl'];
+    function PayrollApprovalService($resource,jadaApiUrl) {
+
+        // var data=$resource('https://jsonplaceholder.typicode.com/users/:user', {user: '@user'},
+           // var data=$resource(jadaApiUrl+'api/payrolltransactionapproval/:periodId',{periodId: '@periodId'}, 
+     var data=$resource(jadaApiUrl+'api/payrolltransactionapproval/:periodId',{periodId: '@periodId'}, 
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.transactions')
+        .factory('GetemployeeService', GetemployeeService);
+
+    GetemployeeService.$inject = ['$resource','jadaApiUrl'];
+    function GetemployeeService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/payrollposting/:employeeId/:periodId',
+    { 'get':    {method:'GET',params:{ 
+        employeeId:'@employeeId', 
+        periodId: '@periodId'
+    },isArray:true}
+
+});
+     return data
+          
+       
+    }
+
+})();
+
+
+/**=========================================================
+ * Module: modals.js
+ * Provides a simple way to implement bootstrap modals from templates
+ =========================================================*/
+(function() {
+    'use strict';
+
+    angular
+        .module('app.transactions')
+        .controller('PayrollProcessController', PayrollProcessController);
+
+   PayrollProcessController.$inject = ['$scope','$http','$rootScope', '$uibModal','PayrollProcessingService','$stateParams', '$state','$timeout','jadaApiUrl'];
+    function PayrollProcessController($scope,$http, $rootScope,$uibModal, PayrollProcessingService,$stateParams, $state,$timeout,jadaApiUrl) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+
+$scope.groups=PayrollProcessingService.query();
+
+$scope.currentclass='danger';
+    $scope.buttonText="Process";
+
+ $scope.process= function () {
+    // $scope.buttonText="processing";
+    $scope.currentclass='whirl ringed';
+    $scope.buttonprocess=true;
+      $http.post(jadaApiUrl+'api/payrolltransaction').success(function(){
+    
+ $scope.buttonText="Processing";
+                  },function(err){
+            $scope.buttonText="failed";
+            }).finally(function(){
+              $scope.currentclass='process';
+            $scope.buttonText="Process";
+            });
+            };
+
+
+
+          
+          
+
+$scope.clickBtn = function() {
+  $scope.loading = true; // start loading
+  $timeout(function() {
+    $scope.loading = false; // stop loading
+  }, 2000);
+}
+
+
+      
+        }
+    }
+
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.transactions')
+        .factory('PayrollProcessingService', PayrollProcessingService);
+
+    PayrollProcessingService.$inject = ['$resource','jadaApiUrl'];
+    function PayrollProcessingService($resource,jadaApiUrl) {
+     var data=$resource(jadaApiUrl+'api/payrollposting/:id', {id: '@id'},
+    { 'get':    {method:'GET', isArray:false},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'update': { method:'PUT' },
+  'remove': {method:'DELETE'},
+  'delete': {method:'DELETE'} 
+});
+     return data
+          
+       
+    }
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.transactions')
+     .directive('fileReaderDirective', function() {
+ return {
+        restrict: "A",
+        scope: {
+            fileReaderDirective: "=",
+        },
+        link: function(scope, element) {
+            $(element).on('change', function(changeEvent) {
+                var files = changeEvent.target.files;
+                if (files.length) {
+                    var r = new FileReader();
+                    r.onload = function(e) {
+                        var contents = e.target.result;
+                        scope.$apply(function() {
+                            scope.fileReaderDirective = contents;
+                        });
+                    };
+                    r.readAsText(files[0]);
+                }
+            });
+        }
+    };
+});
+
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.transactions')
+        .factory('readFileData', readFileData);
+
+    // PayrollProcessingService.$inject = ['$resource','jadaApiUrl'];
+    function readFileData() {
+ return {
+        processData: function(csv) {
+            var lines=csv.split(/\r\n|\n/);
+
+  var result = [];
+
+  var headers=lines[0].split(",");
+
+  for(var i=1;i<lines.length;i++){
+
+    var obj = {};
+    var currentline=lines[i].split(",");
+
+    for(var j=0;j<headers.length;j++){
+      obj[headers[j]] = currentline[j];
+    }
+
+    result.push(obj);
+
+  }
+  
+  //return result; //JavaScript object
+  return JSON.stringify(result); //JSON
+        }
+    };
+          
+       
+    }
+
+})();
+
+
+//var csv is the CSV file with headers
+// function csvJSON(csv){
+
+//   var lines=csv.split("\n");
+
+//   var result = [];
+
+//   var headers=lines[0].split(",");
+
+//   for(var i=1;i<lines.length;i++){
+
+//     var obj = {};
+//     var currentline=lines[i].split(",");
+
+//     for(var j=0;j<headers.length;j++){
+//       obj[headers[j]] = currentline[j];
+//     }
+
+//     result.push(obj);
+
+//   }
+  
+//   //return result; //JavaScript object
+//   return JSON.stringify(result); //JSON
+// }
+
+
+// processData: function(csv_data) {
+//             var record = csv_data.split(/\r\n|\n/);
+//             var headers = record[0].split(',');
+//             var lines = [];
+//             var json = {};
+
+//             for (var i = 0; i < record.length; i++) {
+//                 var data = record[i].split(',');
+//                 if (data.length == headers.length) {
+//                     var tarr = [];
+//                     for (var j = 0; j < headers.length; j++) {
+//                         tarr.push(data[j]);
+//                     }
+//                     lines.push(tarr);
+//                 }
+//             }
+            
+//             for (var k = 0; k < lines.length; ++k){
+//               json[k] = lines[k];
+//             }
+//             return json;
+//         }
 (function() {
     'use strict';
 
