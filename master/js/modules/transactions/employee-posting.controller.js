@@ -50,6 +50,7 @@ $http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
           $scope.currentPeriod=data.data;
     $scope.currentperiod=$scope.currentPeriod.period;
       $scope.postingtrans.periodId=$scope.currentPeriod.id;
+      $scope.period_description=$scope.currentPeriod.month+ ' '+$scope.currentPeriod.year;
      });
 
 
@@ -133,11 +134,13 @@ for(var r=0;r< $scope.periods.length;r++){
             var modalInstance = $uibModal.open({
               templateUrl: 'addTransactions.html',
               controller: ModalOpenFormulaInstanceCtrl,
+          
               resolve: {
            employeeinfo: function () {
              return employeeinfo;
            }
          }
+
             });
 
 
@@ -151,6 +154,33 @@ for(var r=0;r< $scope.periods.length;r++){
               state.text('Modal dismissed with Cancel status');
             });
           };
+
+             $scope.openTransaction = function (employeeinfo) {
+
+            var modalInstance = $uibModal.open({
+              templateUrl: 'viewTransactions.html',
+              controller: ViewTransactionInstanceCtrl,
+              size:'lg',
+              resolve: {
+           employeeinfo: function () {
+             return employeeinfo;
+           }
+         }
+
+            });
+
+
+
+
+
+            var state = $('#modal-state');
+            modalInstance.result.then(function () {
+              state.text('Modal dismissed with OK status');
+            }, function () {
+              state.text('Modal dismissed with Cancel status');
+            });
+          };
+
 
 
 
@@ -181,6 +211,74 @@ $scope.show = function(trans) {
 
           ModalOpenFormulaInstanceCtrl.$inject = ['$scope', '$http','$rootScope','$uibModalInstance','employeePostingService','jadaApiUrl','employeeinfo'];
           function ModalOpenFormulaInstanceCtrl($scope, $http,$rootScope,$uibModalInstance, employeePostingService,jadaApiUrl,employeeinfo) {
+
+         $scope.transactionposting=employeeinfo;
+      
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+
+            
+             $scope.submitTransaction=function(transactionposting) {
+      var usertransactionposting=new employeePostingService(transactionposting);
+
+          usertransactionposting.$save().then(function(data){
+             var response=angular.fromJson(data);
+          
+            if(response.Status=="1"){
+              $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+              
+                     $scope.transactionposting.payrollCodeId=' ';
+                     $scope.transactionposting.amount=' ';
+            }else{
+           
+               $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+           
+            }
+            $rootScope.$emit("CallLoadTransactions", {});
+
+          }, 
+          function() {
+             $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+     
+          };
+
+
+            $scope.saveCloseTransaction=function(transactionposting) {
+                 var usertransactionposting=new employeePostingService(transactionposting);
+         usertransactionposting.$save().then(function(){
+          $scope.transactionposting.payrollCodeId=' ';
+                     $scope.transactionposting.amount=' ';
+            $rootScope.$emit("CallLoadTransactions", {});
+            $scope.ok();
+
+          },
+           function() {
+             $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
+     
+          };
+
+       
+         
+          }
+
+
+
+              // Please note that $uibModalInstance represents a modal window (instance) dependency.
+          // It is not the same as the $uibModal service used above.
+
+          ViewTransactionInstanceCtrl.$inject = ['$scope', '$http','$rootScope','$uibModalInstance','employeePostingService','jadaApiUrl','employeeinfo'];
+          function ViewTransactionInstanceCtrl($scope, $http,$rootScope,$uibModalInstance, employeePostingService,jadaApiUrl,employeeinfo) {
 
          $scope.transactionposting=employeeinfo;
       

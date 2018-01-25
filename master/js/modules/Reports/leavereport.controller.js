@@ -35,13 +35,12 @@
           
 $http.get(jadaApiUrl+'api/leavetype').success(function(data) {
               $scope.leavetypes = data;
-            
-              
-       
+              $scope.firstLeaveType=$scope.leavetypes[0].id;
+              // console.log($scope.firstLeaveType)
 
-                  
-          
+
             });
+ // console.log($scope.firstLeaveType)
   
             // for(var r=0;r<$scope.leaves.leaveTypeReportList.length;r++){
             //                     console.log($scope.leavetypes[0]);
@@ -57,9 +56,23 @@ $http.get(jadaApiUrl+'api/leavetype').success(function(data) {
           
             });
 
+$scope.getFirstLeave=function(){
+ var firstleave=0;
+  $http.get(jadaApiUrl+'api/leavetype').success(function(data) {
+              $scope.leavetypes = data;
+              firstleave=$scope.leavetypes[0].id;
+        
+
+
+            });
+    return firstleave;
+ 
+}
+var firstl=$scope.getFirstLeave();
+console.log(firstl);
 
               $scope.show=function(id){
-                console.log($scope.leaves.leaveTypeReportList.length);
+            
                 for(var r=0;r<$scope.leaves.leaveTypeReportList.length;r++){
                   if(id==$scope.leaves.leaveTypeReportList[r].leaveType.id){
 
