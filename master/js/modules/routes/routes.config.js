@@ -938,6 +938,7 @@
                 templateUrl: helper.basepath('bulk-input.html'),
                     resolve: helper.resolveFor('angularFileUpload', 'filestyle'),
                     resolve: helper.resolveFor('ui.grid'),
+                    resolve: helper.resolveFor('xeditable'),
 
                       resolve : {
                 ngAnimate : ['$$animateJs','$ocLazyLoad', function ($$animateJs, $ocLazyLoad) {

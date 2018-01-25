@@ -10,10 +10,8 @@
         .module('app.tables')
         .controller('TablexEditableController', TablexEditableController);
 
-    TablexEditableController.$inject = ['$filter', '$http', 'editableOptions', 'editableThemes','$q','userService'];
-    function TablexEditableController($filter, $http, editableOptions, editableThemes, $q,userService) {
-
-      
+    TablexEditableController.$inject = ['$filter', '$http', 'editableOptions', 'editableThemes','$q'];
+    function TablexEditableController($filter, $http, editableOptions, editableThemes, $q) {
         var vm = this;
 
         activate();
@@ -21,47 +19,26 @@
         ////////////////
 
         function activate() {
-           vm.users=UserService.query();
 
           // editable row
           // ----------------------------------- 
-          // vm.users  = [
-          //   {id: 1,  code: 1,  amount:50000,  name: 'awesome user1', status: 1, glaccount: '3000005', desc: 'DeptDesc Salaries', group: 4, groupName: 'admin'},
-          //   {id: 2, code: 2,  amount: 30000, name: 'awesome user2', status: undefined,glaccount: '2000005', desc: 'DeptDesc Salaries', group: 3, groupName: 'vip'},
-          //   {id: 3, code: 3, amount: 1000, name: 'awesome user3', status: 2, glaccount: '3000010', desc: 'DeptDesc Co. NSSF', group: null}
-          // ];
-
-
-           vm.codes = [
-            {code: '100'},
-            {code: '103'},
-            {code: '105'},
-            {code: '106'}
-          ];
-          vm.codes = [
-            {value: 1, text: '100'},
-            {value: 2, text: '102'},
-            {value: 3, text: '103'},
-            {value: 4, text: '104'}
+          vm.users = [
+            {id: 1, name: 'awesome user1', status: 2, group: 4, groupName: 'admin'},
+            {id: 2, name: 'awesome user2', status: undefined, group: 3, groupName: 'vip'},
+            {id: 3, name: 'awesome user3', status: 2, group: null}
           ];
 
           vm.statuses = [
-            {value: 1, text: 'Basic salary'},
-            {value: 2, text: 'House Allowance'},
-            {value: 3, text: 'leave pay'},
-            {value: 4, text: ' Telephone Benefit'}
+            {value: 1, text: 'status1'},
+            {value: 2, text: 'status2'},
+            {value: 3, text: 'status3'},
+            {value: 4, text: 'status4'}
           ];
 
           vm.groups = [];
           vm.loadGroups = function() {
             return vm.groups.length ? null : $http.get('server/xeditable-groups.json').success(function(data) {
               vm.groups = data;
-            });
-          };
-           vm.pcodes = [];
-          vm.loadpcodes = function() {
-            return vm.pcodes.length ? null : $http.get('server/codes.json').success(function(data) {
-              vm.pcodes = data;
             });
           };
 
@@ -73,12 +50,6 @@
               return user.groupName || 'Not set';
             }
           };
-          vm.showpcodes = function(user) {
-            if(user.code && vm.code.length) {
-              var selected = $filter('filter')(vm.groups, {id: user.code});
-              return selected.length ? selected[0].text : 'Not set';
-            } 
-          };
 
           vm.showStatus = function(user) {
             var selected = [];
@@ -87,15 +58,6 @@
             }
             return selected.length ? selected[0].text : 'Not set';
           };
-
-          vm.showcodes = function(user) {
-            var selected = [];
-            if(user.code) {
-              selected = $filter('filter')(vm.codes, {value: user.code});
-            }
-            return selected.length ? selected[0].text : 'Not set';
-          };
-
 
           vm.checkName = function(data, id) {
             if (id === 2 && data !== 'awesome') {
@@ -139,18 +101,6 @@
             });
             return $q.all(results);
           };
-
-
-             vm.savepayroll = function(column) {
-            var results = [];
-            angular.forEach(vm.payrollcodes, function(/*user*/) {
-              // results.push($http.post('/saveColumn', {column: column, value: user[column], id: user.id}));
-              console.log('Saving column: ' + column);
-            });
-            return $q.all(results);
-          };
-
-
 
           // editable table
           // ----------------------------------- 

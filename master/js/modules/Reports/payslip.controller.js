@@ -80,8 +80,8 @@ $scope.searchpayslipByperiod(12);
                 $scope.persons= data;
 
                  $scope.message="hellow period";
-      // console.log('////hapa');
-      //         console.log($scope.persons);
+      console.log('////hapa');
+              console.log($scope.persons);
 
 
             });
