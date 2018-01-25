@@ -13,14 +13,16 @@
       <form class="form-inline">
   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
     <div class="input-group-addon">Period</div>
+         <input class="form-control" type="hidden"  name="empNumber"  ng-model="postingtrans.periodId" placeholder="Period"/>
+          <input class="form-control" type="text"  name="empNumber"  ng-model="period_description" placeholder="Period" disabled="" />
   
-         <select name="period" class="slider slider-lg form-control" ng-model="postingtrans.periodId" ng-options="period.id as period.period for period in periods" disabled="">
+         <!-- <select name="period" class="slider slider-lg form-control" ng-model="postingtrans.periodId" ng-options="period.id as period.month+ ' '+ period.year for period in periods" disabled="">
         <option value="" disabled selected>Periods</option>
-  </select>
+  </select> -->
   </div>
   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
     <div class="input-group-addon">Employee Number</div>
-    <select name="employeeNumber" class="slider slider-lg form-control" ng-model="postingtrans.employeeId" ng-options="employee.id as employee.employeeNumber for employee in employees" >
+    <select name="employeeNumber" class="slider slider-lg form-control" ng-model="postingtrans.employeeId" ng-options="employee.id as employee.employeeNumber+'-'+employee.firstName+ ' '+employee.lastName for employee in employees" >
         <option value="" disabled selected>Employees</option>
   </select>
   </div>
@@ -95,7 +97,14 @@
    </div>
    </table>
    <br/>
-   <button class="btn btn-primary" ng-click="open(postingtrans)" >Add New </button>
+
+   <div class="clearfix">
+    
+           <button class="btn btn-primary" ng-click="open(postingtrans)" >Add New </button>
+         <button class="btn btn-primary" ng-click="openTransaction(postingtrans)" >View Transaction</button>
+           <button class="btn btn-primary" ng-click="open(postingtrans)" >View Payslip </button>
+      </div>
+ 
 
 <script type="text/ng-template" id="addTransactions.html">
             <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Transaction posting</h4></div>
@@ -171,6 +180,82 @@
 <div class="modal-footer"><button class="btn btn-primary" type="button"  ng-click="ok()">Close</button></div>
          </script>
 
+
+
+
+<script type="text/ng-template" id="viewTransactions.html">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button><h4 class="modal-title" id="myMapModalLabel">Transaction posting</h4></div>
+            <div class="modal-body" ng-controller="EmployeePostingController">
+
+  <form class="form-horizontal"  name="employeepostingform" novalidate>
+
+      <div class="form-group">
+                  <label class="col-lg-3 control-label"> Period
+
+                 </label>
+                  <div class="col-lg-9">
+
+                      <select name="period" class="slider slider-lg form-control" ng-model="transactionposting.periodId" ng-options="period.id as period.period for period in periods" disabled="">
+        <option value="" disabled selected>Periods</option>
+    }
+  </select>
+          
+                  </div>
+               </div>
+
+      <div class="form-group">
+                  <label class="col-lg-3 control-label"> Employee
+
+                 </label>
+                  <div class="col-lg-9">
+ <!--                     <input class="form-control" type="text" ng-model="transaction.employeeId" name="element_code
+" placeholder="Element code
+
+
+" /> -->
+
+  <select name="employee" class="slider slider-lg form-control" ng-model="transactionposting.employeeId" ng-options="employee.id as employee.employeeNumber for employee in employees" disabled="" >
+        <option value="" disabled selected>Employees</option>
+  </select>
+                  </div>
+               </div>
+           <div class="form-group">
+                  <label class="col-lg-3 control-label">Payroll Code
+
+                 </label>
+                  <div class="col-lg-9">
+                    <select class="form-control" name="payrollcode" ng-model="transactionposting.payrollCodeId"  ng-options="code.id as code.code+'-'+code.description  for code in pcodes" ng-required="true">
+    <option value="" disabled selected>All Codes</option>
+  </select>
+   <span class="text-danger" ng-show="employeepostingform.$submitted &amp;&amp; employeepostingform.payrollcode.$error.required">This field is required</span>
+                  </div>
+               </div>
+            
+               <div class="form-group">
+                  <label class="col-lg-3 control-label">Amount
+                   </label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text"  name="amount" ng-model="transactionposting.amount"  ng-required="true" placeholder="Group code
+                   " />
+                    <span class="text-danger" ng-show="employeepostingform.$submitted &amp;&amp; employeepostingform.amount.$error.required">This field is required</span>
+                  </div>
+               </div>
+     
+              <div class="form-group">
+                  <div class="col-lg-offset-3 col-lg-9">
+                  <button class="btn btn-sm btn-info" ng-click="employeepostingform.$valid && submitTransaction(transactionposting)" >Save and New</button>
+                   <button class="btn btn-sm btn-info" ng-click="saveCloseTransaction(transactionposting)" >Save and close</button>
+                    <button class="btn btn-sm btn-warning"  type="reset" >Reset</button>
+                   </div>
+               </div>
+                <div class="text-center text-success" margin-top="md" ng-show="SuccessMsg">{{SuccessMsg}}</div>
+             <div class="text-center text-danger"  margin-top="md" ng-show="errorMsg">{{errorMsg}}</div>
+               
+            </form>
+
+</div>
+<div class="modal-footer"><button class="btn btn-primary" type="button"  ng-click="ok()">Close</button></div>
+         </script>
 
 
          <script type="text/ng-template" id="editTransaction.html">

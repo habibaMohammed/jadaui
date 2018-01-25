@@ -50,9 +50,9 @@ $http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
          $scope.leavepost={};
           $scope.currentPeriod=data.data;
       
-          $scope.currentperiod=$scope.currentPeriod.period;
       $scope.leavepost.period=$scope.currentPeriod.id;
-      console.log($scope.leavepost.period);
+      $scope.period_description=$scope.currentPeriod.month +' '+ $scope.currentPeriod.year; 
+      console.log($scope.currentPeriod);
   
             });
 
