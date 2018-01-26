@@ -6,7 +6,7 @@ margin-right: auto;
 .bold{font-weight: bold;}
 .ml{margin-left: 10px;}
 .table-bordered-white > tbody > tr > td{
-  border-top: 1px solid #eee!important;
+  border-top: 0px solid #eee!important;
 background: #fff!important;
     vertical-align: top;}
 .panel-payslip{
@@ -445,3 +445,23 @@ ul.nav-wizard.nav-wizard-backnav .active ~ li a:focus {
 
 
 }*/
+.paginationclass{
+    
+margin: 19px 28px !important;    
+}
+.paginationclass span{
+    margin-left:15px !important;
+    display:inline-block !important;
+}
+.pagination-controle li{
+    display: inline-block !important;
+}
+.pagination-controle button{
+    font-size: 12px !important;
+    margin-top: -26px !important;
+    cursor:pointer !important;
+    
+}
+.pagination{
+    margin:5px 12px !important;
+}

@@ -1,17 +1,52 @@
  <h3>Company Totals</h3>
 <div  ng-controller="CompanyTotalsController">
  <div class="row">
-   <div class="col-lg-8">
+   <div class="col-lg-12">
+
       <form class="form-inline">
   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
     <div class="input-group-addon">Period</div>
   
-         <select name="period" class="slider slider-lg form-control" ng-model="period" ng-options="period.period as period.period for period in periods" ng-change="getByperiod(period)" >
+         <select name="period" class="slider slider-lg form-control" ng-model="ctotal.period" ng-options="period.period as period.period for period in periods" ng-change="getByperiod(ctotal)" >
         <option value="" disabled selected>Periods</option>
   </select>
   </div>
 
-  <button ng-click="getByperiod(period)" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+    <div class="input-group-addon">Department</div>
+  
+         <select name="period" class="slider slider-lg form-control" ng-model="ctotal.department" ng-options="department.ID as department.description for department in departments" ng-change="getByperiod(ctotal)" >
+        <option value="" disabled selected>Departments</option>
+  </select>
+  </div>
+
+  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+    <div class="input-group-addon">Employee Group</div>
+  
+         <select name="period" class="slider slider-lg form-control" ng-model="ctotal.group" ng-options="group.id as group.description for group in groups" ng-change="getByperiod(ctotal)" >
+        <option value="" disabled selected>Group</option>
+  </select>
+  </div>
+
+<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+    <div class="input-group-addon">Employee Category</div>
+  
+         <select name="period" class="slider slider-lg form-control" ng-model="ctotal.category" ng-options="category.id as category.description for category in categories" ng-change="getByperiod(ctotal)" >
+        <option value="" disabled selected>Category</option>
+  </select>
+  </div>
+
+
+  <br/>
+   <br/>
+    <div class="col-lg-8">
+
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+   
+   <button ng-click="getByperiod(ctotal)" class="btn btn-primary">Search</button>
+  </div>
+ 
+    </div>
 </form>
   
 
@@ -63,7 +98,7 @@
       <div class="table-responsive" id="tableToExport">
 
       <table class="table table-bordered-white" >
-          <p class="lead bb"><strong>Earnings</strong></p>
+          <p class="boldTotal">Earnings</p>
            <!--  <thead>
                <tr><th>Earnings</th>
                   <th>Amount</th>
