@@ -87,6 +87,12 @@
     'use strict';
 
     angular
+        .module('app.elements', []);
+})();
+(function() {
+    'use strict';
+
+    angular
         .module('app.core', [
             'ngRoute',
             'ngAnimate',
@@ -120,13 +126,7 @@
     'use strict';
 
     angular
-        .module('app.elements', []);
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.forms', []);
+        .module('app.extras', []);
 })();
 (function() {
     'use strict';
@@ -138,7 +138,7 @@
     'use strict';
 
     angular
-        .module('app.extras', []);
+        .module('app.forms', []);
 })();
 (function() {
     'use strict';
@@ -156,12 +156,6 @@
     'use strict';
 
     angular
-        .module('app.loadingbar', []);
-})();
-(function() {
-    'use strict';
-
-    angular
         .module('app.locale', []);
 })();
 (function() {
@@ -169,6 +163,12 @@
 
     angular
         .module('app.mailbox', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.loadingbar', []);
 })();
 (function() {
     'use strict';
@@ -186,12 +186,6 @@
     'use strict';
 
     angular
-        .module('app.notify', []);
-})();
-(function() {
-    'use strict';
-
-    angular
         .module('app.navsearch', []);
 })();
 (function() {
@@ -199,6 +193,12 @@
 
     angular
         .module('app.pages', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.notify', []);
 })();
 (function() {
     'use strict';
@@ -224,12 +224,6 @@
     'use strict';
 
     angular
-        .module('app.reports', []);
-})();
-(function() {
-    'use strict';
-
-    angular
         .module('app.routes', [
             'app.lazyload'
         ]);
@@ -244,13 +238,19 @@
     'use strict';
 
     angular
-        .module('app.tables', []);
+        .module('app.reports', []);
 })();
 (function() {
     'use strict';
 
     angular
         .module('app.sidebar', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.tables', []);
 })();
 (function() {
     'use strict';
@@ -5779,6 +5779,991 @@ $scope.show = function(period) {
 
 })();
 
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.elements')
+        .controller('AngularCarouselController', AngularCarouselController);
+
+    function AngularCarouselController() {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          vm.colors = ['#fc0003', '#f70008', '#f2000d', '#ed0012', '#e80017', '#e3001c', '#de0021', '#d90026', '#d4002b', '#cf0030', '#c90036', '#c4003b', '#bf0040', '#ba0045', '#b5004a', '#b0004f', '#ab0054', '#a60059', '#a1005e', '#9c0063', '#960069', '#91006e', '#8c0073', '#870078', '#82007d', '#7d0082', '#780087', '#73008c', '#6e0091', '#690096', '#63009c', '#5e00a1', '#5900a6', '#5400ab', '#4f00b0', '#4a00b5', '#4500ba', '#4000bf', '#3b00c4', '#3600c9', '#3000cf', '#2b00d4', '#2600d9', '#2100de', '#1c00e3', '#1700e8', '#1200ed', '#0d00f2', '#0800f7', '#0300fc'];
+
+          function getSlide(target, style) {
+              var i = target.length;
+              return {
+                  id: (i + 1),
+                  label: 'slide #' + (i + 1),
+                  img: 'http://lorempixel.com/1200/500/' + style + '/' + ((i + 1) % 10) ,
+                  color: vm.colors[ (i*10) % vm.colors.length],
+                  odd: (i % 2 === 0)
+              };
+          }
+
+          function addSlide(target, style) {
+              target.push(getSlide(target, style));
+          }
+
+          vm.carouselIndex = 3;
+          vm.carouselIndex2 = 0;
+          vm.carouselIndex2 = 1;
+          vm.carouselIndex3 = 5;
+          vm.carouselIndex4 = 5;
+
+          function addSlides(target, style, qty) {
+              for (var i=0; i < qty; i++) {
+                  addSlide(target, style);
+              }
+          }
+
+          // 1st ngRepeat demo
+          vm.slides = [];
+          addSlides(vm.slides, 'sports', 50);
+
+          // 2nd ngRepeat demo
+          vm.slides2 = [];
+          addSlides(vm.slides2, 'sports', 10);
+
+          // 3rd ngRepeat demo
+          vm.slides3 = [];
+          addSlides(vm.slides3, 'people', 50);
+
+          // 4th ngRepeat demo
+          vm.slides4 = [];
+          addSlides(vm.slides4, 'city', 50);
+
+
+          // 5th ngRepeat demo
+          vm.slides6 = [];
+          vm.carouselIndex6 = 0;
+          addSlides(vm.slides6, 'sports', 10);
+          vm.addSlide = function(at) {
+              if(at==='head') {
+                  vm.slides6.unshift(getSlide(vm.slides6, 'people'));
+              } else {
+                  vm.slides6.push(getSlide(vm.slides6, 'people'));
+              }
+          };
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: demo-dialog.js
+ * Demo for multiple ngDialog Usage
+ * - ngDialogProvider for default values not supported 
+ *   using lazy loader. Include plugin in base.js instead.
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.elements')
+        .controller('DialogIntroCtrl', DialogIntroCtrl)
+        .controller('DialogMainCtrl', DialogMainCtrl)
+        .controller('InsideCtrl', InsideCtrl)
+        .controller('SecondModalCtrl', SecondModalCtrl);
+
+    DialogIntroCtrl.$inject = ['$scope', 'ngDialog', 'tpl'];
+    // Called from the route state. 'tpl' is resolved before
+    function DialogIntroCtrl($scope, ngDialog, tpl) {
+        
+        activate();
+
+        ////////////////
+
+        function activate() {
+          // share with other controllers
+          $scope.tpl = tpl;
+          // open dialog window
+          ngDialog.open({
+            template: tpl.path,
+            // plain: true,
+            className: 'ngdialog-theme-default'
+          });
+        }
+    }
+
+    DialogMainCtrl.$inject = ['$scope', '$rootScope', 'ngDialog'];
+    // Loads from view
+    function DialogMainCtrl($scope, $rootScope, ngDialog) {
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          $rootScope.jsonData = '{"foo": "bar"}';
+          $rootScope.theme = 'ngdialog-theme-default';
+
+          $scope.directivePreCloseCallback = function (value) {
+            if(confirm('Close it? MainCtrl.Directive. (Value = ' + value + ')')) {
+              return true;
+            }
+            return false;
+          };
+
+          $scope.preCloseCallbackOnScope = function (value) {
+            if(confirm('Close it? MainCtrl.OnScope (Value = ' + value + ')')) {
+              return true;
+            }
+            return false;
+          };
+
+          $scope.open = function () {
+            ngDialog.open({ template: 'firstDialogId', controller: 'InsideCtrl', data: {foo: 'some data'} });
+          };
+
+          $scope.openDefault = function () {
+            ngDialog.open({
+              template: 'firstDialogId',
+              controller: 'InsideCtrl',
+              className: 'ngdialog-theme-default'
+            });
+          };
+
+          $scope.openDefaultWithPreCloseCallbackInlined = function () {
+            ngDialog.open({
+              template: 'firstDialogId',
+              controller: 'InsideCtrl',
+              className: 'ngdialog-theme-default',
+              preCloseCallback: function(value) {
+                if (confirm('Close it?  (Value = ' + value + ')')) {
+                  return true;
+                }
+                return false;
+              }
+            });
+          };
+
+
+
+          $scope.openConfirm = function () {
+            ngDialog.openConfirm({
+              template: 'modalDialogId',
+              className: 'ngdialog-theme-default'
+            }).then(function (value) {
+              console.log('Modal promise resolved. Value: ', value);
+            }, function (reason) {
+              console.log('Modal promise rejected. Reason: ', reason);
+            });
+          };
+
+          $scope.openConfirmWithPreCloseCallbackOnScope = function () {
+            ngDialog.openConfirm({
+              template: 'modalDialogId',
+              className: 'ngdialog-theme-default',
+              preCloseCallback: 'preCloseCallbackOnScope',
+              scope: $scope
+            }).then(function (value) {
+              console.log('Modal promise resolved. Value: ', value);
+            }, function (reason) {
+              console.log('Modal promise rejected. Reason: ', reason);
+            });
+          };
+
+          $scope.openConfirmWithPreCloseCallbackInlinedWithNestedConfirm = function () {
+            ngDialog.openConfirm({
+              template: 'dialogWithNestedConfirmDialogId',
+              className: 'ngdialog-theme-default',
+              preCloseCallback: function(/*value*/) {
+
+                var nestedConfirmDialog = ngDialog.openConfirm({
+                  template:
+                      '<p>Are you sure you want to close the parent dialog?</p>' +
+                      '<div>' +
+                        '<button type="button" class="btn btn-default" ng-click="closeThisDialog(0)">No' +
+                        '<button type="button" class="btn btn-primary" ng-click="confirm(1)">Yes' +
+                      '</button></div>',
+                  plain: true,
+                  className: 'ngdialog-theme-default'
+                });
+
+                return nestedConfirmDialog;
+              },
+              scope: $scope
+            })
+            .then(function(value){
+              console.log('resolved:' + value);
+              // Perform the save here
+            }, function(value){
+              console.log('rejected:' + value);
+
+            });
+          };
+
+          $scope.openInlineController = function () {
+            $rootScope.theme = 'ngdialog-theme-default';
+
+            ngDialog.open({
+              template: 'withInlineController',
+              controller: ['$scope', '$timeout', function ($scope, $timeout) {
+                var counter = 0;
+                var timeout;
+                function count() {
+                  $scope.exampleExternalData = 'Counter ' + (counter++);
+                  timeout = $timeout(count, 450);
+                }
+                count();
+                $scope.$on('$destroy', function () {
+                  $timeout.cancel(timeout);
+                });
+              }],
+              className: 'ngdialog-theme-default'
+            });
+          };
+
+          $scope.openTemplate = function () {
+            $scope.value = true;
+
+            ngDialog.open({
+              template: $scope.tpl.path,
+              className: 'ngdialog-theme-default',
+              scope: $scope
+            });
+          };
+
+          $scope.openTemplateNoCache = function () {
+            $scope.value = true;
+
+            ngDialog.open({
+              template: $scope.tpl.path,
+              className: 'ngdialog-theme-default',
+              scope: $scope,
+              cache: false
+            });
+          };
+
+          $scope.openTimed = function () {
+            var dialog = ngDialog.open({
+              template: '<p>Just passing through!</p>',
+              plain: true,
+              closeByDocument: false,
+              closeByEscape: false
+            });
+            setTimeout(function () {
+              dialog.close();
+            }, 2000);
+          };
+
+          $scope.openNotify = function () {
+            var dialog = ngDialog.open({
+              template:
+                '<p>You can do whatever you want when I close, however that happens.</p>' +
+                '<div><button type="button" class="btn btn-primary" ng-click="closeThisDialog(1)">Close Me</button></div>',
+              plain: true
+            });
+            dialog.closePromise.then(function (data) {
+              console.log('ngDialog closed' + (data.value === 1 ? ' using the button' : '') + ' and notified by promise: ' + data.id);
+            });
+          };
+
+          $scope.openWithoutOverlay = function () {
+            ngDialog.open({
+              template: '<h2>Notice that there is no overlay!</h2>',
+              className: 'ngdialog-theme-default',
+              plain: true,
+              overlay: false
+            });
+          };
+          $scope.clickToOpen = function () {
+        ngDialog.open({ template: 'popupTmpl.html' });
+};
+
+          $rootScope.$on('ngDialog.opened', function (e, $dialog) {
+            console.log('ngDialog opened: ' + $dialog.attr('id'));
+          });
+
+          $rootScope.$on('ngDialog.closed', function (e, $dialog) {
+            console.log('ngDialog closed: ' + $dialog.attr('id'));
+          });
+
+          $rootScope.$on('ngDialog.closing', function (e, $dialog) {
+            console.log('ngDialog closing: ' + $dialog.attr('id'));
+          });
+        }
+    
+    } // DialogMainCtrl
+
+
+    InsideCtrl.$inject = ['$scope', 'ngDialog'];
+    function InsideCtrl($scope, ngDialog) {
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          $scope.dialogModel = {
+            message : 'message from passed scope'
+          };
+          $scope.openSecond = function () {
+            ngDialog.open({
+              template: '<p class="lead m0"><a href="" ng-click="closeSecond()">Close all by click here!</a></h3>',
+              plain: true,
+              closeByEscape: false,
+              controller: 'SecondModalCtrl'
+            });
+          };
+        }
+    }
+
+    SecondModalCtrl.$inject = ['$scope', 'ngDialog'];
+    function SecondModalCtrl($scope, ngDialog) {
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          $scope.closeSecond = function () {
+            ngDialog.close();
+          };
+        }
+
+    }
+
+
+})();
+
+
+
+
+/**=========================================================
+ * Module: calendar-ui.js
+ * This script handle the calendar demo with draggable 
+ * events and events creations
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.elements')
+        .controller('InfiniteScrollController', InfiniteScrollController)
+        .factory('datasource', datasource);
+
+    function InfiniteScrollController() {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          vm.images = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+          vm.loadMore = function() {
+            var last = vm.images[vm.images.length - 1];
+            for(var i = 1; i <= 10; i++) {
+              vm.images.push(last + i);
+            }
+          };
+        }
+    }
+    
+    datasource.$inject = ['$log', '$timeout'];
+    function datasource(console, $timeout) {
+
+        var get = function(index, count, success) {
+            return $timeout(function() {
+                var i, result, _i, _ref;
+                result = [];
+                for (i = _i = index, _ref = index + count - 1; index <= _ref ? _i <= _ref : _i >= _ref; i = index <= _ref ? ++_i : --_i) {
+                    result.push('item #' + i);
+                }
+                return success(result);
+            }, 100);
+        };
+        return {
+            get: get
+        };
+    }
+
+})();
+
+/**=========================================================
+ * Module: masonry-deck.js
+ * Demo for Angular Deck
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.elements')
+        .controller('MasonryDeckController', MasonryDeckController)
+        .directive('imageloaded', imageloaded); // required by demo
+
+    MasonryDeckController.$inject = ['RouteHelpers'];
+    function MasonryDeckController(RouteHelpers) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          vm.basepath = RouteHelpers.basepath;
+
+          vm.photos = [
+              {id: 'photo-1', name: 'Awesome photo', src: 'http://lorempixel.com/400/300/abstract'},
+              {id: 'photo-2', name: 'Great photo', src: 'http://lorempixel.com/450/400/city'},
+              {id: 'photo-3', name: 'Strange photo', src: 'http://lorempixel.com/400/300/people'},
+              {id: 'photo-4', name: 'A photo?', src: 'http://lorempixel.com/400/300/transport'},
+              {id: 'photo-5', name: 'What a photo', src: 'http://lorempixel.com/450/300/fashion'},
+              {id: 'photo-6', name: 'Silly photo', src: 'http://lorempixel.com/400/300/technics'},
+              {id: 'photo-7', name: 'Weird photo', src: 'http://lorempixel.com/410/350/sports'},
+              {id: 'photo-8', name: 'Modern photo', src: 'http://lorempixel.com/400/300/nightlife'},
+              {id: 'photo-9', name: 'Classical photo', src: 'http://lorempixel.com/400/300/nature'},
+              {id: 'photo-10', name: 'Dynamic photo', src: 'http://lorempixel.com/420/300/abstract'},
+              {id: 'photo-11', name: 'Neat photo', src: 'http://lorempixel.com/400/300/sports'},
+              {id: 'photo-12', name: 'Bumpy photo', src: 'http://lorempixel.com/400/300/nightlife'},
+              {id: 'photo-13', name: 'Brilliant photo', src: 'http://lorempixel.com/400/380/nature'},
+              {id: 'photo-14', name: 'Excellent photo', src: 'http://lorempixel.com/480/300/technics'},
+              {id: 'photo-15', name: 'Gorgeous photo', src: 'http://lorempixel.com/400/300/sports'},
+              {id: 'photo-16', name: 'Lovely photo', src: 'http://lorempixel.com/400/300/nightlife'},
+              {id: 'photo-17', name: 'A "wow" photo', src: 'http://lorempixel.com/400/300/nature'},
+              {id: 'photo-18', name: 'Bodacious photo', src: 'http://lorempixel.com/400/300/abstract'}
+          ];
+        }
+    }
+
+    // Add class to img element when source is loaded
+    function imageloaded () {
+        // Copyright(c) 2013 André König <akoenig@posteo.de>
+        // MIT Licensed
+        var directive = {
+            link: link,
+            restrict: 'A'
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+          var cssClass = attrs.loadedclass;
+
+          element.bind('load', function () {
+              angular.element(element).addClass(cssClass);
+          });
+        }
+    }
+
+})();
+
+
+
+/**=========================================================
+ * Module: access-login.js
+ * Demo for login api
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.elements')
+        .controller('AbnTestController', AbnTestController);
+
+    AbnTestController.$inject = ['$timeout', '$resource'];
+    function AbnTestController($timeout, $resource) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        /*jshint -W106*/
+        function activate() {
+          vm.my_tree_handler = function(branch) {
+
+            vm.output = 'You selected: ' + branch.label;
+
+            if (branch.data && branch.data.description) {
+              vm.output += '(' + branch.data.description + ')';
+              return vm.output;
+            }
+          };
+
+          // onSelect event handlers
+          var apple_selected = function(branch) {
+            vm.output = 'APPLE! : ' + branch.label;
+            return vm.output;
+          };
+
+          var treedata_avm = [
+            {
+              label: 'Animal',
+              children: [
+                {
+                  label: 'Dog',
+                  data: {
+                    description: 'man\'s best friend'
+                  }
+                }, {
+                  label: 'Cat',
+                  data: {
+                    description: 'Felis catus'
+                  }
+                }, {
+                  label: 'Hippopotamus',
+                  data: {
+                    description: 'hungry, hungry'
+                  }
+                }, {
+                  label: 'Chicken',
+                  children: ['White Leghorn', 'Rhode Island Red', 'Jersey Giant']
+                }
+              ]
+            }, {
+              label: 'Vegetable',
+              data: {
+                definition: 'A plant or part of a plant used as food, typically as accompaniment to meat or fish, such as a cabbage, potato, carrot, or bean.',
+                data_can_contain_anything: true
+              },
+              onSelect: function(branch) {
+                vm.output = 'Vegetable: ' + branch.data.definition;
+                return vm.output;
+              },
+              children: [
+                {
+                  label: 'Oranges'
+                }, {
+                  label: 'Apples',
+                  children: [
+                    {
+                      label: 'Granny Smith',
+                      onSelect: apple_selected
+                    }, {
+                      label: 'Red Delicous',
+                      onSelect: apple_selected
+                    }, {
+                      label: 'Fuji',
+                      onSelect: apple_selected
+                    }
+                  ]
+                }
+              ]
+            }, {
+              label: 'Mineral',
+              children: [
+                {
+                  label: 'Rock',
+                  children: ['Igneous', 'Sedimentary', 'Metamorphic']
+                }, {
+                  label: 'Metal',
+                  children: ['Aluminum', 'Steel', 'Copper']
+                }, {
+                  label: 'Plastic',
+                  children: [
+                    {
+                      label: 'Thermoplastic',
+                      children: ['polyethylene', 'polypropylene', 'polystyrene', ' polyvinyl chloride']
+                    }, {
+                      label: 'Thermosetting Polymer',
+                      children: ['polyester', 'polyurethane', 'vulcanized rubber', 'bakelite', 'urea-formaldehyde']
+                    }
+                  ]
+                }
+              ]
+            }
+          ];
+          
+          var treedata_geography = [
+            {
+              label: 'North America',
+              children: [
+                {
+                  label: 'Canada',
+                  children: ['Toronto', 'Vancouver']
+                }, {
+                  label: 'USA',
+                  children: ['New York', 'Los Angeles']
+                }, {
+                  label: 'Mexico',
+                  children: ['Mexico City', 'Guadalajara']
+                }
+              ]
+            }, {
+              label: 'South America',
+              children: [
+                {
+                  label: 'Venezuela',
+                  children: ['Caracas', 'Maracaibo']
+                }, {
+                  label: 'Brazil',
+                  children: ['Sao Paulo', 'Rio de Janeiro']
+                }, {
+                  label: 'Argentina',
+                  children: ['Buenos Aires', 'Cordoba']
+                }
+              ]
+            }
+          ];
+
+          vm.my_data = treedata_avm;
+          vm.try_changing_the_tree_data = function() {
+            if (vm.my_data === treedata_avm) {
+              vm.my_data = treedata_geography;
+            } else {
+              vm.my_data = treedata_avm;
+            }
+            return vm.my_data;
+          };
+          
+          var tree;
+          // This is our API control variable
+          vm.my_tree = tree = {};
+          vm.try_async_load = function() {
+            
+            vm.my_data = [];
+            vm.doing_async = true;
+            
+            // Request tree data via $resource
+            var remoteTree = $resource('server/treedata.json');
+            
+            return remoteTree.get(function(res){
+              
+              vm.my_data = res.data;
+
+              vm.doing_async = false;
+            
+              return tree.expand_all();
+            
+            // we must return a promise so the plugin 
+            // can watch when it's resolved
+            }).$promise;
+          };
+          
+          // Adds a new branch to the tree
+          vm.try_adding_a_branch = function() {
+            var b;
+            b = tree.get_selected_branch();
+            return tree.add_branch(b, {
+              label: 'New Branch',
+              data: {
+                something: 42,
+                'else': 43
+              }
+            });
+          };
+
+        }
+    }
+})();
+
+
+/**=========================================================
+ * Module: nestable.js
+ * Nestable controller
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.elements')
+        .controller('NestableController', NestableController);
+
+    function NestableController() {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          vm.items =  [
+            {
+              item: {text: 'a'},
+              children: []
+            },
+            {
+              item: {text: 'b'},
+              children: [
+                {
+                  item: {text: 'c'},
+                  children: []
+                },
+                {
+                  item: {text: 'd'},
+                  children: []
+                }
+              ]
+            },
+            {
+              item: {text: 'e'},
+              children: []
+            },
+            {
+              item: {text: 'f'},
+              children: []
+            }
+          ];
+
+          vm.items2 =  [
+            {
+              item: {text: '1'},
+              children: []
+            },
+            {
+              item: {text: '2'},
+              children: [
+                {
+                  item: {text: '3'},
+                  children: []
+                },
+                {
+                  item: {text: '4'},
+                  children: []
+                }
+              ]
+            },
+            {
+              item: {text: '5'},
+              children: []
+            },
+            {
+              item: {text: '6'},
+              children: []
+            }
+          ];
+
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: scroll.js
+ * Make a content box scrollable
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.elements')
+        .directive('scrollable', scrollable);
+
+    function scrollable () {
+        var directive = {
+            link: link,
+            restrict: 'EA'
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+          var defaultHeight = 250;
+          element.slimScroll({
+              height: (attrs.height || defaultHeight)
+          });
+        }
+    }
+
+})();
+
+/**=========================================================
+ * Module: sortable.js
+ * Sortable controller
+ =========================================================*/
+(function() {
+    'use strict';
+
+    angular
+        .module('app.elements')
+        .controller('SortableController', SortableController);
+
+    SortableController.$inject = ['$scope'];
+
+    function SortableController($scope) {
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+            // Single List
+            $scope.data1 = [{
+                id: 1,
+                name: 'Donald Hoffman'
+            }, {
+                id: 2,
+                name: 'Wallace Barrett'
+            }, {
+                id: 3,
+                name: 'Marsha Hicks'
+            }, {
+                id: 4,
+                name: 'Roland Brown'
+            }];
+
+            $scope.add = function() {
+                $scope.data1.push({
+                    id: $scope.data1.length + 1,
+                    name: 'Earl Knight'
+                });
+            };
+
+            $scope.sortableOptions = {
+                placeholder: 'box-placeholder m0'
+            };
+        }
+    }
+
+})();
+
+/**=========================================================
+ * Module: sweetalert.js
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.elements')
+        .controller('SweetAlertController', SweetAlertController);
+
+    SweetAlertController.$inject = ['SweetAlert'];
+    function SweetAlertController(SweetAlert) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          vm.demo1 = function() {
+            SweetAlert.swal('Here\'s a message');
+          };
+
+          vm.demo2 = function() {
+            SweetAlert.swal('Here\'s a message!', 'It\'s pretty, isn\'t it?');
+          };
+
+          vm.demo3 = function() {
+            SweetAlert.swal('Good job!', 'You clicked the button!', 'success');
+          };
+
+          vm.demo4 = function() {
+            SweetAlert.swal({   
+              title: 'Are you sure?',   
+              text: 'Your will not be able to recover this imaginary file!',   
+              type: 'warning',   
+              showCancelButton: true,   
+              confirmButtonColor: '#DD6B55',   
+              confirmButtonText: 'Yes, delete it!',
+              closeOnConfirm: false
+            },  function(){  
+              SweetAlert.swal('Booyah!');
+            });
+          };
+
+          vm.demo5 = function() {
+            SweetAlert.swal({   
+              title: 'Are you sure?',   
+              text: 'Your will not be able to recover this imaginary file!',   
+              type: 'warning',   
+              showCancelButton: true,   
+              confirmButtonColor: '#DD6B55',   
+              confirmButtonText: 'Yes, delete it!',   
+              cancelButtonText: 'No, cancel plx!',   
+              closeOnConfirm: false,   
+              closeOnCancel: false 
+            }, function(isConfirm){  
+              if (isConfirm) {     
+                SweetAlert.swal('Deleted!', 'Your imaginary file has been deleted.', 'success');   
+              } else {     
+                SweetAlert.swal('Cancelled', 'Your imaginary file is safe :)', 'error');   
+              } 
+            });
+          };
+
+          vm.demo6 = function() {
+            SweetAlert.swal({   
+              title: 'Sweet!',   
+              text: 'Here\'s a custom image.',   
+              imageUrl: 'http://oitozero.com/img/avatar.jpg' 
+            });
+          };
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: demo-toaster.js
+ * Demos for toaster notifications
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.elements')
+        .controller('ToasterDemoCtrl', ToasterDemoCtrl);
+
+    ToasterDemoCtrl.$inject = ['toaster'];
+    function ToasterDemoCtrl(toaster) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          vm.toaster = {
+              type:  'success',
+              title: 'Title',
+              text:  'Message'
+          };
+
+          vm.pop = function() {
+            toaster.pop(vm.toaster.type, vm.toaster.title, vm.toaster.text);
+          };
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: tour.js
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.elements')
+        .controller('TourCtrl', TourCtrl);
+
+    TourCtrl.$inject = ['$scope'];
+    function TourCtrl($scope) {
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          // BootstrapTour is not compatible with z-index based layout
+          // so adding position:static for this case makes the browser
+          // to ignore the property
+          var section = angular.element('.wrapper > section');
+          section.css({'position': 'static'});
+          // finally restore on destroy and reuse the value declared in stylesheet
+          $scope.$on('$destroy', function(){
+            section.css({'position': ''});
+          });
+        }
+    }
+})();
+
 (function() {
     'use strict';
 
@@ -7167,15 +8152,17 @@ if ($localStorage.currentUser) {
 })();
 
 
-
+/**=========================================================
+ * Module: article.js
+ =========================================================*/
 (function() {
     'use strict';
 
     angular
-        .module('app.elements')
-        .controller('AngularCarouselController', AngularCarouselController);
+        .module('app.extras')
+        .controller('ArticleController', ArticleController);
 
-    function AngularCarouselController() {
+    function ArticleController() {
         var vm = this;
 
         activate();
@@ -7183,686 +8170,400 @@ if ($localStorage.currentUser) {
         ////////////////
 
         function activate() {
-          vm.colors = ['#fc0003', '#f70008', '#f2000d', '#ed0012', '#e80017', '#e3001c', '#de0021', '#d90026', '#d4002b', '#cf0030', '#c90036', '#c4003b', '#bf0040', '#ba0045', '#b5004a', '#b0004f', '#ab0054', '#a60059', '#a1005e', '#9c0063', '#960069', '#91006e', '#8c0073', '#870078', '#82007d', '#7d0082', '#780087', '#73008c', '#6e0091', '#690096', '#63009c', '#5e00a1', '#5900a6', '#5400ab', '#4f00b0', '#4a00b5', '#4500ba', '#4000bf', '#3b00c4', '#3600c9', '#3000cf', '#2b00d4', '#2600d9', '#2100de', '#1c00e3', '#1700e8', '#1200ed', '#0d00f2', '#0800f7', '#0300fc'];
-
-          function getSlide(target, style) {
-              var i = target.length;
-              return {
-                  id: (i + 1),
-                  label: 'slide #' + (i + 1),
-                  img: 'http://lorempixel.com/1200/500/' + style + '/' + ((i + 1) % 10) ,
-                  color: vm.colors[ (i*10) % vm.colors.length],
-                  odd: (i % 2 === 0)
-              };
-          }
-
-          function addSlide(target, style) {
-              target.push(getSlide(target, style));
-          }
-
-          vm.carouselIndex = 3;
-          vm.carouselIndex2 = 0;
-          vm.carouselIndex2 = 1;
-          vm.carouselIndex3 = 5;
-          vm.carouselIndex4 = 5;
-
-          function addSlides(target, style, qty) {
-              for (var i=0; i < qty; i++) {
-                  addSlide(target, style);
-              }
-          }
-
-          // 1st ngRepeat demo
-          vm.slides = [];
-          addSlides(vm.slides, 'sports', 50);
-
-          // 2nd ngRepeat demo
-          vm.slides2 = [];
-          addSlides(vm.slides2, 'sports', 10);
-
-          // 3rd ngRepeat demo
-          vm.slides3 = [];
-          addSlides(vm.slides3, 'people', 50);
-
-          // 4th ngRepeat demo
-          vm.slides4 = [];
-          addSlides(vm.slides4, 'city', 50);
-
-
-          // 5th ngRepeat demo
-          vm.slides6 = [];
-          vm.carouselIndex6 = 0;
-          addSlides(vm.slides6, 'sports', 10);
-          vm.addSlide = function(at) {
-              if(at==='head') {
-                  vm.slides6.unshift(getSlide(vm.slides6, 'people'));
-              } else {
-                  vm.slides6.push(getSlide(vm.slides6, 'people'));
-              }
-          };
-        }
-    }
-})();
-
-/**=========================================================
- * Module: demo-dialog.js
- * Demo for multiple ngDialog Usage
- * - ngDialogProvider for default values not supported 
- *   using lazy loader. Include plugin in base.js instead.
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.elements')
-        .controller('DialogIntroCtrl', DialogIntroCtrl)
-        .controller('DialogMainCtrl', DialogMainCtrl)
-        .controller('InsideCtrl', InsideCtrl)
-        .controller('SecondModalCtrl', SecondModalCtrl);
-
-    DialogIntroCtrl.$inject = ['$scope', 'ngDialog', 'tpl'];
-    // Called from the route state. 'tpl' is resolved before
-    function DialogIntroCtrl($scope, ngDialog, tpl) {
-        
-        activate();
-
-        ////////////////
-
-        function activate() {
-          // share with other controllers
-          $scope.tpl = tpl;
-          // open dialog window
-          ngDialog.open({
-            template: tpl.path,
-            // plain: true,
-            className: 'ngdialog-theme-default'
-          });
-        }
-    }
-
-    DialogMainCtrl.$inject = ['$scope', '$rootScope', 'ngDialog'];
-    // Loads from view
-    function DialogMainCtrl($scope, $rootScope, ngDialog) {
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          $rootScope.jsonData = '{"foo": "bar"}';
-          $rootScope.theme = 'ngdialog-theme-default';
-
-          $scope.directivePreCloseCallback = function (value) {
-            if(confirm('Close it? MainCtrl.Directive. (Value = ' + value + ')')) {
-              return true;
-            }
-            return false;
-          };
-
-          $scope.preCloseCallbackOnScope = function (value) {
-            if(confirm('Close it? MainCtrl.OnScope (Value = ' + value + ')')) {
-              return true;
-            }
-            return false;
-          };
-
-          $scope.open = function () {
-            ngDialog.open({ template: 'firstDialogId', controller: 'InsideCtrl', data: {foo: 'some data'} });
-          };
-
-          $scope.openDefault = function () {
-            ngDialog.open({
-              template: 'firstDialogId',
-              controller: 'InsideCtrl',
-              className: 'ngdialog-theme-default'
-            });
-          };
-
-          $scope.openDefaultWithPreCloseCallbackInlined = function () {
-            ngDialog.open({
-              template: 'firstDialogId',
-              controller: 'InsideCtrl',
-              className: 'ngdialog-theme-default',
-              preCloseCallback: function(value) {
-                if (confirm('Close it?  (Value = ' + value + ')')) {
-                  return true;
-                }
-                return false;
-              }
-            });
-          };
-
-
-
-          $scope.openConfirm = function () {
-            ngDialog.openConfirm({
-              template: 'modalDialogId',
-              className: 'ngdialog-theme-default'
-            }).then(function (value) {
-              console.log('Modal promise resolved. Value: ', value);
-            }, function (reason) {
-              console.log('Modal promise rejected. Reason: ', reason);
-            });
-          };
-
-          $scope.openConfirmWithPreCloseCallbackOnScope = function () {
-            ngDialog.openConfirm({
-              template: 'modalDialogId',
-              className: 'ngdialog-theme-default',
-              preCloseCallback: 'preCloseCallbackOnScope',
-              scope: $scope
-            }).then(function (value) {
-              console.log('Modal promise resolved. Value: ', value);
-            }, function (reason) {
-              console.log('Modal promise rejected. Reason: ', reason);
-            });
-          };
-
-          $scope.openConfirmWithPreCloseCallbackInlinedWithNestedConfirm = function () {
-            ngDialog.openConfirm({
-              template: 'dialogWithNestedConfirmDialogId',
-              className: 'ngdialog-theme-default',
-              preCloseCallback: function(/*value*/) {
-
-                var nestedConfirmDialog = ngDialog.openConfirm({
-                  template:
-                      '<p>Are you sure you want to close the parent dialog?</p>' +
-                      '<div>' +
-                        '<button type="button" class="btn btn-default" ng-click="closeThisDialog(0)">No' +
-                        '<button type="button" class="btn btn-primary" ng-click="confirm(1)">Yes' +
-                      '</button></div>',
-                  plain: true,
-                  className: 'ngdialog-theme-default'
-                });
-
-                return nestedConfirmDialog;
-              },
-              scope: $scope
-            })
-            .then(function(value){
-              console.log('resolved:' + value);
-              // Perform the save here
-            }, function(value){
-              console.log('rejected:' + value);
-
-            });
-          };
-
-          $scope.openInlineController = function () {
-            $rootScope.theme = 'ngdialog-theme-default';
-
-            ngDialog.open({
-              template: 'withInlineController',
-              controller: ['$scope', '$timeout', function ($scope, $timeout) {
-                var counter = 0;
-                var timeout;
-                function count() {
-                  $scope.exampleExternalData = 'Counter ' + (counter++);
-                  timeout = $timeout(count, 450);
-                }
-                count();
-                $scope.$on('$destroy', function () {
-                  $timeout.cancel(timeout);
-                });
-              }],
-              className: 'ngdialog-theme-default'
-            });
-          };
-
-          $scope.openTemplate = function () {
-            $scope.value = true;
-
-            ngDialog.open({
-              template: $scope.tpl.path,
-              className: 'ngdialog-theme-default',
-              scope: $scope
-            });
-          };
-
-          $scope.openTemplateNoCache = function () {
-            $scope.value = true;
-
-            ngDialog.open({
-              template: $scope.tpl.path,
-              className: 'ngdialog-theme-default',
-              scope: $scope,
-              cache: false
-            });
-          };
-
-          $scope.openTimed = function () {
-            var dialog = ngDialog.open({
-              template: '<p>Just passing through!</p>',
-              plain: true,
-              closeByDocument: false,
-              closeByEscape: false
-            });
-            setTimeout(function () {
-              dialog.close();
-            }, 2000);
-          };
-
-          $scope.openNotify = function () {
-            var dialog = ngDialog.open({
-              template:
-                '<p>You can do whatever you want when I close, however that happens.</p>' +
-                '<div><button type="button" class="btn btn-primary" ng-click="closeThisDialog(1)">Close Me</button></div>',
-              plain: true
-            });
-            dialog.closePromise.then(function (data) {
-              console.log('ngDialog closed' + (data.value === 1 ? ' using the button' : '') + ' and notified by promise: ' + data.id);
-            });
-          };
-
-          $scope.openWithoutOverlay = function () {
-            ngDialog.open({
-              template: '<h2>Notice that there is no overlay!</h2>',
-              className: 'ngdialog-theme-default',
-              plain: true,
-              overlay: false
-            });
-          };
-          $scope.clickToOpen = function () {
-        ngDialog.open({ template: 'popupTmpl.html' });
-};
-
-          $rootScope.$on('ngDialog.opened', function (e, $dialog) {
-            console.log('ngDialog opened: ' + $dialog.attr('id'));
-          });
-
-          $rootScope.$on('ngDialog.closed', function (e, $dialog) {
-            console.log('ngDialog closed: ' + $dialog.attr('id'));
-          });
-
-          $rootScope.$on('ngDialog.closing', function (e, $dialog) {
-            console.log('ngDialog closing: ' + $dialog.attr('id'));
-          });
-        }
-    
-    } // DialogMainCtrl
-
-
-    InsideCtrl.$inject = ['$scope', 'ngDialog'];
-    function InsideCtrl($scope, ngDialog) {
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          $scope.dialogModel = {
-            message : 'message from passed scope'
-          };
-          $scope.openSecond = function () {
-            ngDialog.open({
-              template: '<p class="lead m0"><a href="" ng-click="closeSecond()">Close all by click here!</a></h3>',
-              plain: true,
-              closeByEscape: false,
-              controller: 'SecondModalCtrl'
-            });
-          };
-        }
-    }
-
-    SecondModalCtrl.$inject = ['$scope', 'ngDialog'];
-    function SecondModalCtrl($scope, ngDialog) {
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          $scope.closeSecond = function () {
-            ngDialog.close();
-          };
-        }
-
-    }
-
-
-})();
-
-
-
-
-/**=========================================================
- * Module: calendar-ui.js
- * This script handle the calendar demo with draggable 
- * events and events creations
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.elements')
-        .controller('InfiniteScrollController', InfiniteScrollController)
-        .factory('datasource', datasource);
-
-    function InfiniteScrollController() {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          vm.images = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-          vm.loadMore = function() {
-            var last = vm.images[vm.images.length - 1];
-            for(var i = 1; i <= 10; i++) {
-              vm.images.push(last + i);
-            }
-          };
-        }
-    }
-    
-    datasource.$inject = ['$log', '$timeout'];
-    function datasource(console, $timeout) {
-
-        var get = function(index, count, success) {
-            return $timeout(function() {
-                var i, result, _i, _ref;
-                result = [];
-                for (i = _i = index, _ref = index + count - 1; index <= _ref ? _i <= _ref : _i >= _ref; i = index <= _ref ? ++_i : --_i) {
-                    result.push('item #' + i);
-                }
-                return success(result);
-            }, 100);
-        };
-        return {
-            get: get
-        };
-    }
-
-})();
-
-/**=========================================================
- * Module: masonry-deck.js
- * Demo for Angular Deck
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.elements')
-        .controller('MasonryDeckController', MasonryDeckController)
-        .directive('imageloaded', imageloaded); // required by demo
-
-    MasonryDeckController.$inject = ['RouteHelpers'];
-    function MasonryDeckController(RouteHelpers) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          vm.basepath = RouteHelpers.basepath;
-
-          vm.photos = [
-              {id: 'photo-1', name: 'Awesome photo', src: 'http://lorempixel.com/400/300/abstract'},
-              {id: 'photo-2', name: 'Great photo', src: 'http://lorempixel.com/450/400/city'},
-              {id: 'photo-3', name: 'Strange photo', src: 'http://lorempixel.com/400/300/people'},
-              {id: 'photo-4', name: 'A photo?', src: 'http://lorempixel.com/400/300/transport'},
-              {id: 'photo-5', name: 'What a photo', src: 'http://lorempixel.com/450/300/fashion'},
-              {id: 'photo-6', name: 'Silly photo', src: 'http://lorempixel.com/400/300/technics'},
-              {id: 'photo-7', name: 'Weird photo', src: 'http://lorempixel.com/410/350/sports'},
-              {id: 'photo-8', name: 'Modern photo', src: 'http://lorempixel.com/400/300/nightlife'},
-              {id: 'photo-9', name: 'Classical photo', src: 'http://lorempixel.com/400/300/nature'},
-              {id: 'photo-10', name: 'Dynamic photo', src: 'http://lorempixel.com/420/300/abstract'},
-              {id: 'photo-11', name: 'Neat photo', src: 'http://lorempixel.com/400/300/sports'},
-              {id: 'photo-12', name: 'Bumpy photo', src: 'http://lorempixel.com/400/300/nightlife'},
-              {id: 'photo-13', name: 'Brilliant photo', src: 'http://lorempixel.com/400/380/nature'},
-              {id: 'photo-14', name: 'Excellent photo', src: 'http://lorempixel.com/480/300/technics'},
-              {id: 'photo-15', name: 'Gorgeous photo', src: 'http://lorempixel.com/400/300/sports'},
-              {id: 'photo-16', name: 'Lovely photo', src: 'http://lorempixel.com/400/300/nightlife'},
-              {id: 'photo-17', name: 'A "wow" photo', src: 'http://lorempixel.com/400/300/nature'},
-              {id: 'photo-18', name: 'Bodacious photo', src: 'http://lorempixel.com/400/300/abstract'}
+          vm.htmlContent = 'Article content...';
+
+          vm.postDemo = {};
+          vm.postDemo.tags = ['coding', 'less'];
+          vm.availableTags = ['coding', 'less', 'sass', 'angularjs', 'node', 'expressJS'];
+          vm.postDemo.categories = ['JAVASCRIPT','WEB'];
+          vm.availableCategories = ['JAVASCRIPT','WEB', 'BOOTSTRAP', 'SERVER', 'HTML5', 'CSS'];
+
+          vm.reviewers = [
+            { name: 'Adam',      email: 'adam@email.com',      age: 10 },
+            { name: 'Amalie',    email: 'amalie@email.com',    age: 12 },
+            { name: 'Wladimir',  email: 'wladimir@email.com',  age: 30 },
+            { name: 'Samantha',  email: 'samantha@email.com',  age: 31 },
+            { name: 'Estefanía', email: 'estefanía@email.com', age: 16 },
+            { name: 'Natasha',   email: 'natasha@email.com',   age: 54 },
+            { name: 'Nicole',    email: 'nicole@email.com',    age: 43 },
+            { name: 'Adrian',    email: 'adrian@email.com',    age: 21 }
           ];
+
+
+          vm.alerts = [
+            { type: 'info', msg: 'There is an autosaved version of this article that is more recent than the version below. <a href="#" class="text-white">Restore</a>' }
+          ];
+
+          vm.closeAlert = function(index) {
+            vm.alerts.splice(index, 1);
+          };
         }
     }
+})();
 
-    // Add class to img element when source is loaded
-    function imageloaded () {
-        // Copyright(c) 2013 André König <akoenig@posteo.de>
-        // MIT Licensed
-        var directive = {
-            link: link,
-            restrict: 'A'
-        };
-        return directive;
+(function() {
+    'use strict';
 
-        function link(scope, element, attrs) {
-          var cssClass = attrs.loadedclass;
+    angular
+        .module('app.extras')
+        .controller('CalendarController', CalendarController);
 
-          element.bind('load', function () {
-              angular.element(element).addClass(cssClass);
-          });
+    CalendarController.$inject = ['$scope', '$compile', 'uiCalendarConfig'];
+    function CalendarController($scope, $compile, uiCalendarConfig) {
+        var vm = this;
+        vm.title = 'CalendarController';
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+            var date = new Date();
+            var d = date.getDate();
+            var m = date.getMonth();
+            var y = date.getFullYear();
+
+            $scope.changeTo = 'Hungarian';
+            /* event source that pulls from google.com */
+            $scope.eventSource = {
+                url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
+                className: 'gcal-event', // an option!
+                currentTimezone: 'America/Chicago' // an option!
+            };
+            /* event source that contains custom events on the scope */
+            $scope.events = [{
+                title: 'All Day Event',
+                start: new Date(y, m, 1),
+                backgroundColor: '#f56954', //red
+                borderColor: '#f56954' //red
+            }, {
+                title: 'Long Event',
+                start: new Date(y, m, d - 5),
+                end: new Date(y, m, d - 2),
+                backgroundColor: '#f39c12', //yellow
+                borderColor: '#f39c12' //yellow
+            }, {
+                id: 999,
+                title: 'Repeating Event',
+                start: new Date(y, m, d + 4, 16, 0),
+                allDay: false,
+                backgroundColor: '#00c0ef', //Info (aqua)
+                borderColor: '#00c0ef' //Info (aqua)
+            }, {
+                title: 'Birthday Party',
+                start: new Date(y, m, d + 1, 19, 0),
+                end: new Date(y, m, d + 1, 22, 30),
+                allDay: false,
+                backgroundColor: '#00a65a', //Success (green)
+                borderColor: '#00a65a' //Success (green)
+            }, {
+                title: 'Click for Google',
+                start: new Date(y, m, 28),
+                end: new Date(y, m, 29),
+                url: 'http://google.com/',
+                backgroundColor: '#2f80e7', //Primary (light-blue)
+                borderColor: '#2f80e7' //Primary (light-blue)
+            }];
+            /* event source that calls a function on every view switch */
+            $scope.eventsF = function(start, end, timezone, callback) {
+                var s = new Date(start).getTime() / 1000;
+                var e = new Date(end).getTime() / 1000;
+                var m = new Date(start).getMonth();
+                var events = [{
+                    title: 'Feed Me ' + m,
+                    start: s + (50000),
+                    end: s + (100000),
+                    allDay: false,
+                    className: ['customFeed']
+                }];
+                callback(events);
+            };
+
+            $scope.calEventsExt = {
+                color: '#f00',
+                textColor: 'white',
+                events: [{
+                    type: 'party',
+                    title: 'Lunch',
+                    start: new Date(y, m, d, 12, 0),
+                    end: new Date(y, m, d, 14, 0),
+                    allDay: false,
+                    backgroundColor: '#9289ca', //pink
+                    borderColor: '#9289ca' //pink
+                }, {
+                    type: 'party',
+                    title: 'Lunch 2',
+                    start: new Date(y, m, d, 12, 0),
+                    end: new Date(y, m, d, 14, 0),
+                    allDay: false,
+                    backgroundColor: '#9289ca', //pink
+                    borderColor: '#9289ca' //pink
+                }, {
+                    type: 'party',
+                    title: 'Click for Google',
+                    start: new Date(y, m, 28),
+                    end: new Date(y, m, 29),
+                    url: 'http://google.com/',
+                    backgroundColor: '#9289ca', //pink
+                    borderColor: '#9289ca' //pink
+
+                }]
+            };
+            /* alert on eventClick */
+            $scope.alertOnEventClick = function(date, jsEvent, view) {
+                $scope.alertMessage = (date.title + ' was clicked ');
+            };
+            /* alert on Drop */
+            $scope.alertOnDrop = function(event, delta, revertFunc, jsEvent, ui, view) {
+                $scope.alertMessage = ('Event Droped');// to make dayDelta ' + delta);
+            };
+            /* alert on Resize */
+            $scope.alertOnResize = function(event, delta, revertFunc, jsEvent, ui, view) {
+                $scope.alertMessage = ('Event Resized'); // to make dayDelta ' + delta);
+            };
+            /* add and removes an event source of choice */
+            $scope.addRemoveEventSource = function(sources, source) {
+                var canAdd = 0;
+                angular.forEach(sources, function(value, key) {
+                    if (sources[key] === source) {
+                        sources.splice(key, 1);
+                        canAdd = 1;
+                    }
+                });
+                if (canAdd === 0) {
+                    sources.push(source);
+                }
+            };
+            /* add custom event*/
+            $scope.addEvent = function() {
+                $scope.events.push({
+                    title: 'Open Sesame',
+                    start: new Date(y, m, 28),
+                    end: new Date(y, m, 29),
+                    className: ['openSesame']
+                });
+            };
+            /* remove event */
+            $scope.remove = function(index) {
+                $scope.events.splice(index, 1);
+            };
+            /* Change View */
+            $scope.changeView = function(view, calendar) {
+                uiCalendarConfig.calendars[calendar].fullCalendar('changeView', view);
+            };
+            /* Change View */
+            $scope.renderCalender = function(calendar) {
+                if (uiCalendarConfig.calendars[calendar]) {
+                    uiCalendarConfig.calendars[calendar].fullCalendar('render');
+                }
+            };
+            /* Render Tooltip */
+            $scope.eventRender = function(event, element, view) {
+                element.attr({
+                    'tooltip': event.title,
+                    'tooltip-append-to-body': true
+                });
+                $compile(element)($scope);
+            };
+            /* config object */
+            $scope.uiConfig = {
+                calendar: {
+                    height: 450,
+                    editable: true,
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,agendaWeek,agendaDay'
+                    },
+                    buttonIcons: { // note the space at the beginning
+                        prev: ' fa fa-caret-left',
+                        next: ' fa fa-caret-right'
+                    },
+                    buttonText: {
+                        today: 'today',
+                        month: 'month',
+                        week: 'week',
+                        day: 'day'
+                    },
+                    eventClick: $scope.alertOnEventClick,
+                    eventDrop: $scope.alertOnDrop,
+                    eventResize: $scope.alertOnResize,
+                    eventRender: $scope.eventRender
+                }
+            };
+
+            $scope.changeLang = function() {
+                if ($scope.changeTo === 'Hungarian') {
+                    $scope.uiConfig.calendar.dayNames = ["Vasárnap", "Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek", "Szombat"];
+                    $scope.uiConfig.calendar.dayNamesShort = ["Vas", "Hét", "Kedd", "Sze", "Csüt", "Pén", "Szo"];
+                    $scope.changeTo = 'English';
+                } else {
+                    $scope.uiConfig.calendar.dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                    $scope.uiConfig.calendar.dayNamesShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+                    $scope.changeTo = 'Hungarian';
+                }
+            };
+            /* event sources array*/
+            // $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
+            $scope.eventSources = [$scope.calEventsExt, $scope.eventsF, $scope.events];
         }
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.extras')
+        .service('LoadTreeService', LoadTreeService);
+
+    LoadTreeService.$inject = ['$resource'];
+    function LoadTreeService($resource) {
+        // Loads the list of files to populate the treeview
+        return $resource('server/editor/filetree.json');
     }
 
 })();
-
-
-
 /**=========================================================
- * Module: access-login.js
- * Demo for login api
+ * Module: code-editor.js
+ * Codemirror code editor controller
  =========================================================*/
 
 (function() {
     'use strict';
 
     angular
-        .module('app.elements')
-        .controller('AbnTestController', AbnTestController);
+        .module('app.extras')
+        .controller('CodeEditorController', CodeEditorController);
 
-    AbnTestController.$inject = ['$timeout', '$resource'];
-    function AbnTestController($timeout, $resource) {
+    CodeEditorController.$inject = ['$rootScope', '$scope', '$http', '$ocLazyLoad', 'filetree'];
+    function CodeEditorController($rootScope, $scope, $http, $ocLazyLoad, filetree) {
         var vm = this;
 
+        layout();
         activate();
 
         ////////////////
-
         /*jshint -W106*/
+        function layout() {
+          // Setup the layout mode 
+          $rootScope.app.useFullLayout = true;
+          $rootScope.app.hiddenFooter = true;
+          $rootScope.app.layout.isCollapsed = true;
+          
+          // Restore layout for demo
+          $scope.$on('$destroy', function(){
+              $rootScope.app.useFullLayout = false;
+              $rootScope.app.hiddenFooter = false;
+          });
+
+        }
+
         function activate() {
-          vm.my_tree_handler = function(branch) {
 
-            vm.output = 'You selected: ' + branch.label;
+          // Set the tree data into the scope
+          vm.filetree_data = filetree;
 
-            if (branch.data && branch.data.description) {
-              vm.output += '(' + branch.data.description + ')';
-              return vm.output;
+          // Available themes
+          vm.editorThemes = ['3024-day','3024-night','ambiance-mobile','ambiance','base16-dark','base16-light','blackboard','cobalt','eclipse','elegant','erlang-dark','lesser-dark','mbo','mdn-like','midnight','monokai','neat','neo','night','paraiso-dark','paraiso-light','pastel-on-dark','rubyblue','solarized','the-matrix','tomorrow-night-eighties','twilight','vibrant-ink','xq-dark','xq-light'];
+
+          vm.editorOpts = {
+            mode: 'javascript',
+            lineNumbers: true,
+            matchBrackets: true,
+            theme: 'mbo',
+            viewportMargin: Infinity
+          };
+
+          vm.refreshEditor = 0;
+
+          // Load dinamically the stylesheet for the selected theme
+          // You can use ozLazyLoad to load also the mode js based 
+          // on the file extension that is loaded (see handle_filetree)
+          vm.loadTheme = function() {
+            var BASE = 'vendor/codemirror/theme/';
+            $ocLazyLoad.load(BASE + vm.editorOpts.theme + '.css');
+            vm.refreshEditor = !vm.refreshEditor;
+          };
+          // load default theme
+          vm.loadTheme(vm.editorOpts.theme);
+          // Add some initial text
+          vm.code = '// Open a file from the left menu \n' +
+                        '// It will be requested to the server and loaded into the editor\n' +
+                        '// Also try adding a New File from the toolbar\n';
+
+
+          // Tree
+
+          var selectedBranch;
+          vm.handle_filetree = function(branch) {
+            
+            selectedBranch = branch;
+
+            var basePath = 'server/editor/';
+            var isFolder = !!branch.children.length;
+
+            console.log('You selected: ' + branch.label + ' - isFolder? ' + isFolder);
+
+            if ( ! isFolder ) {
+
+              $http
+                .get( basePath + branch.path )
+                .success(function(response){
+                  
+                  console.log('Loaded.. ' + branch.path);
+                  // set the new code into the editor
+                  vm.code = response;
+                  
+                  vm.editorOpts.mode = detectMode(branch.path);
+                  console.log( 'Mode is: ' + vm.editorOpts.mode);
+
+                });
             }
           };
 
-          // onSelect event handlers
-          var apple_selected = function(branch) {
-            vm.output = 'APPLE! : ' + branch.label;
-            return vm.output;
-          };
+          function detectMode(file) {
+            var ext = file.split('.');
+            ext = ext ? ext[ext.length - 1] : '';
+            switch (ext) {
+              case 'html':  return 'htmlmixed';
+              case 'css':   return 'css';
+              default:      return 'javascript';
+            }
+          }
 
-          var treedata_avm = [
-            {
-              label: 'Animal',
-              children: [
-                {
-                  label: 'Dog',
-                  data: {
-                    description: 'man\'s best friend'
-                  }
-                }, {
-                  label: 'Cat',
-                  data: {
-                    description: 'Felis catus'
-                  }
-                }, {
-                  label: 'Hippopotamus',
-                  data: {
-                    description: 'hungry, hungry'
-                  }
-                }, {
-                  label: 'Chicken',
-                  children: ['White Leghorn', 'Rhode Island Red', 'Jersey Giant']
-                }
-              ]
-            }, {
-              label: 'Vegetable',
-              data: {
-                definition: 'A plant or part of a plant used as food, typically as accompaniment to meat or fish, such as a cabbage, potato, carrot, or bean.',
-                data_can_contain_anything: true
-              },
-              onSelect: function(branch) {
-                vm.output = 'Vegetable: ' + branch.data.definition;
-                return vm.output;
-              },
-              children: [
-                {
-                  label: 'Oranges'
-                }, {
-                  label: 'Apples',
-                  children: [
-                    {
-                      label: 'Granny Smith',
-                      onSelect: apple_selected
-                    }, {
-                      label: 'Red Delicous',
-                      onSelect: apple_selected
-                    }, {
-                      label: 'Fuji',
-                      onSelect: apple_selected
-                    }
-                  ]
-                }
-              ]
-            }, {
-              label: 'Mineral',
-              children: [
-                {
-                  label: 'Rock',
-                  children: ['Igneous', 'Sedimentary', 'Metamorphic']
-                }, {
-                  label: 'Metal',
-                  children: ['Aluminum', 'Steel', 'Copper']
-                }, {
-                  label: 'Plastic',
-                  children: [
-                    {
-                      label: 'Thermoplastic',
-                      children: ['polyethylene', 'polypropylene', 'polystyrene', ' polyvinyl chloride']
-                    }, {
-                      label: 'Thermosetting Polymer',
-                      children: ['polyester', 'polyurethane', 'vulcanized rubber', 'bakelite', 'urea-formaldehyde']
-                    }
-                  ]
-                }
-              ]
-            }
-          ];
-          
-          var treedata_geography = [
-            {
-              label: 'North America',
-              children: [
-                {
-                  label: 'Canada',
-                  children: ['Toronto', 'Vancouver']
-                }, {
-                  label: 'USA',
-                  children: ['New York', 'Los Angeles']
-                }, {
-                  label: 'Mexico',
-                  children: ['Mexico City', 'Guadalajara']
-                }
-              ]
-            }, {
-              label: 'South America',
-              children: [
-                {
-                  label: 'Venezuela',
-                  children: ['Caracas', 'Maracaibo']
-                }, {
-                  label: 'Brazil',
-                  children: ['Sao Paulo', 'Rio de Janeiro']
-                }, {
-                  label: 'Argentina',
-                  children: ['Buenos Aires', 'Cordoba']
-                }
-              ]
-            }
-          ];
-
-          vm.my_data = treedata_avm;
-          vm.try_changing_the_tree_data = function() {
-            if (vm.my_data === treedata_avm) {
-              vm.my_data = treedata_geography;
-            } else {
-              vm.my_data = treedata_avm;
-            }
-            return vm.my_data;
-          };
-          
           var tree;
-          // This is our API control variable
-          vm.my_tree = tree = {};
-          vm.try_async_load = function() {
-            
-            vm.my_data = [];
-            vm.doing_async = true;
-            
-            // Request tree data via $resource
-            var remoteTree = $resource('server/treedata.json');
-            
-            return remoteTree.get(function(res){
-              
-              vm.my_data = res.data;
+          tree = vm.filetree = {};
 
-              vm.doing_async = false;
-            
-              return tree.expand_all();
-            
-            // we must return a promise so the plugin 
-            // can watch when it's resolved
-            }).$promise;
-          };
-          
           // Adds a new branch to the tree
-          vm.try_adding_a_branch = function() {
+          vm.new_filetree = function() {
             var b;
             b = tree.get_selected_branch();
+
+            // if we select a leaf -> select the parent folder
+            if ( b && b.children.length === 0 ) {
+              b = tree.get_parent_branch(b);
+            }
+            
             return tree.add_branch(b, {
-              label: 'New Branch',
-              data: {
-                something: 42,
-                'else': 43
-              }
+              'label': 'another.html',
+              'path': 'source/another.html'
             });
           };
-
         }
     }
 })();
 
 
-/**=========================================================
- * Module: nestable.js
- * Nestable controller
- =========================================================*/
-
 (function() {
     'use strict';
 
     angular
-        .module('app.elements')
-        .controller('NestableController', NestableController);
+        .module('app.extras')
+        .controller('TodoController', TodoController);
 
-    function NestableController() {
+    TodoController.$inject = ['$filter'];
+    function TodoController($filter) {
         var vm = this;
 
         activate();
@@ -7870,286 +8571,192 @@ if ($localStorage.currentUser) {
         ////////////////
 
         function activate() {
-          vm.items =  [
+           vm.items = [
             {
-              item: {text: 'a'},
-              children: []
+              todo: {title: 'Meeting with Mark at 7am.', description: 'Pellentesque convallis mauris eu elit imperdiet quis eleifend quam aliquet. '},
+              complete: true
             },
             {
-              item: {text: 'b'},
-              children: [
-                {
-                  item: {text: 'c'},
-                  children: []
-                },
-                {
-                  item: {text: 'd'},
-                  children: []
-                }
-              ]
+              todo: {title: 'Call Sonya. Talk about the new project.', description: ''},
+              complete: false
             },
             {
-              item: {text: 'e'},
-              children: []
-            },
-            {
-              item: {text: 'f'},
-              children: []
+              todo: {title: 'Find a new place for vacations', description: ''},
+              complete: false
             }
-          ];
+            ];
+          
+          vm.editingTodo = false;
+          vm.todo = {};
 
-          vm.items2 =  [
-            {
-              item: {text: '1'},
-              children: []
-            },
-            {
-              item: {text: '2'},
-              children: [
-                {
-                  item: {text: '3'},
-                  children: []
-                },
-                {
-                  item: {text: '4'},
-                  children: []
-                }
-              ]
-            },
-            {
-              item: {text: '5'},
-              children: []
-            },
-            {
-              item: {text: '6'},
-              children: []
+          vm.addTodo = function() {
+            
+            if( vm.todo.title === '' ) return;
+            if( !vm.todo.description ) vm.todo.description = '';
+            
+            if( vm.editingTodo ) {
+              vm.todo = {};
+              vm.editingTodo = false;
             }
-          ];
+            else {
+              vm.items.push({todo: angular.copy(vm.todo), complete: false});
+              vm.todo.title = '';
+              vm.todo.description = '';
+            }
+          };
+          
+          vm.editTodo = function(index, $event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            vm.todo = vm.items[index].todo;
+            vm.editingTodo = true;
+          };
+
+          vm.removeTodo = function(index/*, $event*/) {
+            vm.items.splice(index, 1);
+          };
+          
+          vm.clearAll = function() {
+            vm.items = [];
+          };
+
+          vm.totalCompleted = function() {
+            return $filter('filter')(vm.items, function(item){
+              return item.complete;
+            }).length;
+          };
+
+          vm.totalPending = function() {
+            return $filter('filter')(vm.items, function(item){
+              return !item.complete;
+            }).length;
+          };
 
         }
     }
 })();
 
 /**=========================================================
- * Module: scroll.js
- * Make a content box scrollable
+ * Module: word-cloud.js
+ * Controller for jqCloud
  =========================================================*/
 
 (function() {
     'use strict';
 
     angular
-        .module('app.elements')
-        .directive('scrollable', scrollable);
+        .module('app.extras')
+        .controller('WordCloudController', WordCloudController);
 
-    function scrollable () {
+    function WordCloudController() {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          vm.words = [
+              {
+                text: 'Lorem',
+                weight: 13
+                //link: 'http://themicon.co'
+              }, {
+                text: 'Ipsum',
+                weight: 10.5
+              }, {
+                text: 'Dolor',
+                weight: 9.4
+              }, {
+                text: 'Sit',
+                weight: 8
+              }, {
+                text: 'Amet',
+                weight: 6.2
+              }, {
+                text: 'Consectetur',
+                weight: 5
+              }, {
+                text: 'Adipiscing',
+                weight: 5
+              }, {
+                text: 'Sit',
+                weight: 8
+              }, {
+                text: 'Amet',
+                weight: 6.2
+              }, {
+                text: 'Consectetur',
+                weight: 5
+              }, {
+                text: 'Adipiscing',
+                weight: 5
+              }
+          ];
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: flatdoc.js
+ * Creates the flatdoc markup and initializes the plugin
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.flatdoc')
+        .directive('flatdoc', flatdoc);
+
+    function flatdoc() {
+
         var directive = {
+            template: '<div role="flatdoc"><div role="flatdoc-menu"></div><div role="flatdoc-content"></div></div>',
             link: link,
             restrict: 'EA'
         };
         return directive;
 
         function link(scope, element, attrs) {
-          var defaultHeight = 250;
-          element.slimScroll({
-              height: (attrs.height || defaultHeight)
-          });
-        }
-    }
 
-})();
+            Flatdoc.run({
+                fetcher: Flatdoc.file(attrs.src)
+            });
 
-/**=========================================================
- * Module: sortable.js
- * Sortable controller
- =========================================================*/
-(function() {
-    'use strict';
+            var $root = $('html, body');
+            var menuLinks;
 
-    angular
-        .module('app.elements')
-        .controller('SortableController', SortableController);
+            var $doc = $(document).on('flatdoc:ready', function() {
 
-    SortableController.$inject = ['$scope'];
+                var docMenu = $('[role="flatdoc-menu"]');
 
-    function SortableController($scope) {
+                menuLinks = docMenu.find('a').on('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
 
-        activate();
+                    var $this = $(this);
 
-        ////////////////
+                    docMenu.find('a.active').removeClass('active');
+                    $this.addClass('active');
 
-        function activate() {
-            // Single List
-            $scope.data1 = [{
-                id: 1,
-                name: 'Donald Hoffman'
-            }, {
-                id: 2,
-                name: 'Wallace Barrett'
-            }, {
-                id: 3,
-                name: 'Marsha Hicks'
-            }, {
-                id: 4,
-                name: 'Roland Brown'
-            }];
-
-            $scope.add = function() {
-                $scope.data1.push({
-                    id: $scope.data1.length + 1,
-                    name: 'Earl Knight'
+                    $root.animate({
+                        scrollTop: $(this.getAttribute('href')).offset().top - ($('.topnavbar').height() + 10)
+                    }, 800);
                 });
-            };
 
-            $scope.sortableOptions = {
-                placeholder: 'box-placeholder m0'
-            };
-        }
-    }
-
-})();
-
-/**=========================================================
- * Module: sweetalert.js
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.elements')
-        .controller('SweetAlertController', SweetAlertController);
-
-    SweetAlertController.$inject = ['SweetAlert'];
-    function SweetAlertController(SweetAlert) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          vm.demo1 = function() {
-            SweetAlert.swal('Here\'s a message');
-          };
-
-          vm.demo2 = function() {
-            SweetAlert.swal('Here\'s a message!', 'It\'s pretty, isn\'t it?');
-          };
-
-          vm.demo3 = function() {
-            SweetAlert.swal('Good job!', 'You clicked the button!', 'success');
-          };
-
-          vm.demo4 = function() {
-            SweetAlert.swal({   
-              title: 'Are you sure?',   
-              text: 'Your will not be able to recover this imaginary file!',   
-              type: 'warning',   
-              showCancelButton: true,   
-              confirmButtonColor: '#DD6B55',   
-              confirmButtonText: 'Yes, delete it!',
-              closeOnConfirm: false
-            },  function(){  
-              SweetAlert.swal('Booyah!');
             });
-          };
 
-          vm.demo5 = function() {
-            SweetAlert.swal({   
-              title: 'Are you sure?',   
-              text: 'Your will not be able to recover this imaginary file!',   
-              type: 'warning',   
-              showCancelButton: true,   
-              confirmButtonColor: '#DD6B55',   
-              confirmButtonText: 'Yes, delete it!',   
-              cancelButtonText: 'No, cancel plx!',   
-              closeOnConfirm: false,   
-              closeOnCancel: false 
-            }, function(isConfirm){  
-              if (isConfirm) {     
-                SweetAlert.swal('Deleted!', 'Your imaginary file has been deleted.', 'success');   
-              } else {     
-                SweetAlert.swal('Cancelled', 'Your imaginary file is safe :)', 'error');   
-              } 
+            // dettach all events
+            scope.$on('$destroy', function() {
+                menuLinks && menuLinks.off();
+                $doc.off('flatdoc:ready');
             });
-          };
 
-          vm.demo6 = function() {
-            SweetAlert.swal({   
-              title: 'Sweet!',   
-              text: 'Here\'s a custom image.',   
-              imageUrl: 'http://oitozero.com/img/avatar.jpg' 
-            });
-          };
         }
     }
-})();
 
-/**=========================================================
- * Module: demo-toaster.js
- * Demos for toaster notifications
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.elements')
-        .controller('ToasterDemoCtrl', ToasterDemoCtrl);
-
-    ToasterDemoCtrl.$inject = ['toaster'];
-    function ToasterDemoCtrl(toaster) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          vm.toaster = {
-              type:  'success',
-              title: 'Title',
-              text:  'Message'
-          };
-
-          vm.pop = function() {
-            toaster.pop(vm.toaster.type, vm.toaster.title, vm.toaster.text);
-          };
-        }
-    }
-})();
-
-/**=========================================================
- * Module: tour.js
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.elements')
-        .controller('TourCtrl', TourCtrl);
-
-    TourCtrl.$inject = ['$scope'];
-    function TourCtrl($scope) {
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          // BootstrapTour is not compatible with z-index based layout
-          // so adding position:static for this case makes the browser
-          // to ignore the property
-          var section = angular.element('.wrapper > section');
-          section.css({'position': 'static'});
-          // finally restore on destroy and reuse the value declared in stylesheet
-          $scope.$on('$destroy', function(){
-            section.css({'position': ''});
-          });
-        }
-    }
 })();
 
 (function() {
@@ -9152,613 +9759,6 @@ if ($localStorage.currentUser) {
 })();
 
 /**=========================================================
- * Module: flatdoc.js
- * Creates the flatdoc markup and initializes the plugin
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.flatdoc')
-        .directive('flatdoc', flatdoc);
-
-    function flatdoc() {
-
-        var directive = {
-            template: '<div role="flatdoc"><div role="flatdoc-menu"></div><div role="flatdoc-content"></div></div>',
-            link: link,
-            restrict: 'EA'
-        };
-        return directive;
-
-        function link(scope, element, attrs) {
-
-            Flatdoc.run({
-                fetcher: Flatdoc.file(attrs.src)
-            });
-
-            var $root = $('html, body');
-            var menuLinks;
-
-            var $doc = $(document).on('flatdoc:ready', function() {
-
-                var docMenu = $('[role="flatdoc-menu"]');
-
-                menuLinks = docMenu.find('a').on('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    var $this = $(this);
-
-                    docMenu.find('a.active').removeClass('active');
-                    $this.addClass('active');
-
-                    $root.animate({
-                        scrollTop: $(this.getAttribute('href')).offset().top - ($('.topnavbar').height() + 10)
-                    }, 800);
-                });
-
-            });
-
-            // dettach all events
-            scope.$on('$destroy', function() {
-                menuLinks && menuLinks.off();
-                $doc.off('flatdoc:ready');
-            });
-
-        }
-    }
-
-})();
-
-/**=========================================================
- * Module: article.js
- =========================================================*/
-(function() {
-    'use strict';
-
-    angular
-        .module('app.extras')
-        .controller('ArticleController', ArticleController);
-
-    function ArticleController() {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          vm.htmlContent = 'Article content...';
-
-          vm.postDemo = {};
-          vm.postDemo.tags = ['coding', 'less'];
-          vm.availableTags = ['coding', 'less', 'sass', 'angularjs', 'node', 'expressJS'];
-          vm.postDemo.categories = ['JAVASCRIPT','WEB'];
-          vm.availableCategories = ['JAVASCRIPT','WEB', 'BOOTSTRAP', 'SERVER', 'HTML5', 'CSS'];
-
-          vm.reviewers = [
-            { name: 'Adam',      email: 'adam@email.com',      age: 10 },
-            { name: 'Amalie',    email: 'amalie@email.com',    age: 12 },
-            { name: 'Wladimir',  email: 'wladimir@email.com',  age: 30 },
-            { name: 'Samantha',  email: 'samantha@email.com',  age: 31 },
-            { name: 'Estefanía', email: 'estefanía@email.com', age: 16 },
-            { name: 'Natasha',   email: 'natasha@email.com',   age: 54 },
-            { name: 'Nicole',    email: 'nicole@email.com',    age: 43 },
-            { name: 'Adrian',    email: 'adrian@email.com',    age: 21 }
-          ];
-
-
-          vm.alerts = [
-            { type: 'info', msg: 'There is an autosaved version of this article that is more recent than the version below. <a href="#" class="text-white">Restore</a>' }
-          ];
-
-          vm.closeAlert = function(index) {
-            vm.alerts.splice(index, 1);
-          };
-        }
-    }
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.extras')
-        .controller('CalendarController', CalendarController);
-
-    CalendarController.$inject = ['$scope', '$compile', 'uiCalendarConfig'];
-    function CalendarController($scope, $compile, uiCalendarConfig) {
-        var vm = this;
-        vm.title = 'CalendarController';
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-            var date = new Date();
-            var d = date.getDate();
-            var m = date.getMonth();
-            var y = date.getFullYear();
-
-            $scope.changeTo = 'Hungarian';
-            /* event source that pulls from google.com */
-            $scope.eventSource = {
-                url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
-                className: 'gcal-event', // an option!
-                currentTimezone: 'America/Chicago' // an option!
-            };
-            /* event source that contains custom events on the scope */
-            $scope.events = [{
-                title: 'All Day Event',
-                start: new Date(y, m, 1),
-                backgroundColor: '#f56954', //red
-                borderColor: '#f56954' //red
-            }, {
-                title: 'Long Event',
-                start: new Date(y, m, d - 5),
-                end: new Date(y, m, d - 2),
-                backgroundColor: '#f39c12', //yellow
-                borderColor: '#f39c12' //yellow
-            }, {
-                id: 999,
-                title: 'Repeating Event',
-                start: new Date(y, m, d + 4, 16, 0),
-                allDay: false,
-                backgroundColor: '#00c0ef', //Info (aqua)
-                borderColor: '#00c0ef' //Info (aqua)
-            }, {
-                title: 'Birthday Party',
-                start: new Date(y, m, d + 1, 19, 0),
-                end: new Date(y, m, d + 1, 22, 30),
-                allDay: false,
-                backgroundColor: '#00a65a', //Success (green)
-                borderColor: '#00a65a' //Success (green)
-            }, {
-                title: 'Click for Google',
-                start: new Date(y, m, 28),
-                end: new Date(y, m, 29),
-                url: 'http://google.com/',
-                backgroundColor: '#2f80e7', //Primary (light-blue)
-                borderColor: '#2f80e7' //Primary (light-blue)
-            }];
-            /* event source that calls a function on every view switch */
-            $scope.eventsF = function(start, end, timezone, callback) {
-                var s = new Date(start).getTime() / 1000;
-                var e = new Date(end).getTime() / 1000;
-                var m = new Date(start).getMonth();
-                var events = [{
-                    title: 'Feed Me ' + m,
-                    start: s + (50000),
-                    end: s + (100000),
-                    allDay: false,
-                    className: ['customFeed']
-                }];
-                callback(events);
-            };
-
-            $scope.calEventsExt = {
-                color: '#f00',
-                textColor: 'white',
-                events: [{
-                    type: 'party',
-                    title: 'Lunch',
-                    start: new Date(y, m, d, 12, 0),
-                    end: new Date(y, m, d, 14, 0),
-                    allDay: false,
-                    backgroundColor: '#9289ca', //pink
-                    borderColor: '#9289ca' //pink
-                }, {
-                    type: 'party',
-                    title: 'Lunch 2',
-                    start: new Date(y, m, d, 12, 0),
-                    end: new Date(y, m, d, 14, 0),
-                    allDay: false,
-                    backgroundColor: '#9289ca', //pink
-                    borderColor: '#9289ca' //pink
-                }, {
-                    type: 'party',
-                    title: 'Click for Google',
-                    start: new Date(y, m, 28),
-                    end: new Date(y, m, 29),
-                    url: 'http://google.com/',
-                    backgroundColor: '#9289ca', //pink
-                    borderColor: '#9289ca' //pink
-
-                }]
-            };
-            /* alert on eventClick */
-            $scope.alertOnEventClick = function(date, jsEvent, view) {
-                $scope.alertMessage = (date.title + ' was clicked ');
-            };
-            /* alert on Drop */
-            $scope.alertOnDrop = function(event, delta, revertFunc, jsEvent, ui, view) {
-                $scope.alertMessage = ('Event Droped');// to make dayDelta ' + delta);
-            };
-            /* alert on Resize */
-            $scope.alertOnResize = function(event, delta, revertFunc, jsEvent, ui, view) {
-                $scope.alertMessage = ('Event Resized'); // to make dayDelta ' + delta);
-            };
-            /* add and removes an event source of choice */
-            $scope.addRemoveEventSource = function(sources, source) {
-                var canAdd = 0;
-                angular.forEach(sources, function(value, key) {
-                    if (sources[key] === source) {
-                        sources.splice(key, 1);
-                        canAdd = 1;
-                    }
-                });
-                if (canAdd === 0) {
-                    sources.push(source);
-                }
-            };
-            /* add custom event*/
-            $scope.addEvent = function() {
-                $scope.events.push({
-                    title: 'Open Sesame',
-                    start: new Date(y, m, 28),
-                    end: new Date(y, m, 29),
-                    className: ['openSesame']
-                });
-            };
-            /* remove event */
-            $scope.remove = function(index) {
-                $scope.events.splice(index, 1);
-            };
-            /* Change View */
-            $scope.changeView = function(view, calendar) {
-                uiCalendarConfig.calendars[calendar].fullCalendar('changeView', view);
-            };
-            /* Change View */
-            $scope.renderCalender = function(calendar) {
-                if (uiCalendarConfig.calendars[calendar]) {
-                    uiCalendarConfig.calendars[calendar].fullCalendar('render');
-                }
-            };
-            /* Render Tooltip */
-            $scope.eventRender = function(event, element, view) {
-                element.attr({
-                    'tooltip': event.title,
-                    'tooltip-append-to-body': true
-                });
-                $compile(element)($scope);
-            };
-            /* config object */
-            $scope.uiConfig = {
-                calendar: {
-                    height: 450,
-                    editable: true,
-                    header: {
-                        left: 'prev,next today',
-                        center: 'title',
-                        right: 'month,agendaWeek,agendaDay'
-                    },
-                    buttonIcons: { // note the space at the beginning
-                        prev: ' fa fa-caret-left',
-                        next: ' fa fa-caret-right'
-                    },
-                    buttonText: {
-                        today: 'today',
-                        month: 'month',
-                        week: 'week',
-                        day: 'day'
-                    },
-                    eventClick: $scope.alertOnEventClick,
-                    eventDrop: $scope.alertOnDrop,
-                    eventResize: $scope.alertOnResize,
-                    eventRender: $scope.eventRender
-                }
-            };
-
-            $scope.changeLang = function() {
-                if ($scope.changeTo === 'Hungarian') {
-                    $scope.uiConfig.calendar.dayNames = ["Vasárnap", "Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek", "Szombat"];
-                    $scope.uiConfig.calendar.dayNamesShort = ["Vas", "Hét", "Kedd", "Sze", "Csüt", "Pén", "Szo"];
-                    $scope.changeTo = 'English';
-                } else {
-                    $scope.uiConfig.calendar.dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-                    $scope.uiConfig.calendar.dayNamesShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-                    $scope.changeTo = 'Hungarian';
-                }
-            };
-            /* event sources array*/
-            // $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
-            $scope.eventSources = [$scope.calEventsExt, $scope.eventsF, $scope.events];
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.extras')
-        .service('LoadTreeService', LoadTreeService);
-
-    LoadTreeService.$inject = ['$resource'];
-    function LoadTreeService($resource) {
-        // Loads the list of files to populate the treeview
-        return $resource('server/editor/filetree.json');
-    }
-
-})();
-/**=========================================================
- * Module: code-editor.js
- * Codemirror code editor controller
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.extras')
-        .controller('CodeEditorController', CodeEditorController);
-
-    CodeEditorController.$inject = ['$rootScope', '$scope', '$http', '$ocLazyLoad', 'filetree'];
-    function CodeEditorController($rootScope, $scope, $http, $ocLazyLoad, filetree) {
-        var vm = this;
-
-        layout();
-        activate();
-
-        ////////////////
-        /*jshint -W106*/
-        function layout() {
-          // Setup the layout mode 
-          $rootScope.app.useFullLayout = true;
-          $rootScope.app.hiddenFooter = true;
-          $rootScope.app.layout.isCollapsed = true;
-          
-          // Restore layout for demo
-          $scope.$on('$destroy', function(){
-              $rootScope.app.useFullLayout = false;
-              $rootScope.app.hiddenFooter = false;
-          });
-
-        }
-
-        function activate() {
-
-          // Set the tree data into the scope
-          vm.filetree_data = filetree;
-
-          // Available themes
-          vm.editorThemes = ['3024-day','3024-night','ambiance-mobile','ambiance','base16-dark','base16-light','blackboard','cobalt','eclipse','elegant','erlang-dark','lesser-dark','mbo','mdn-like','midnight','monokai','neat','neo','night','paraiso-dark','paraiso-light','pastel-on-dark','rubyblue','solarized','the-matrix','tomorrow-night-eighties','twilight','vibrant-ink','xq-dark','xq-light'];
-
-          vm.editorOpts = {
-            mode: 'javascript',
-            lineNumbers: true,
-            matchBrackets: true,
-            theme: 'mbo',
-            viewportMargin: Infinity
-          };
-
-          vm.refreshEditor = 0;
-
-          // Load dinamically the stylesheet for the selected theme
-          // You can use ozLazyLoad to load also the mode js based 
-          // on the file extension that is loaded (see handle_filetree)
-          vm.loadTheme = function() {
-            var BASE = 'vendor/codemirror/theme/';
-            $ocLazyLoad.load(BASE + vm.editorOpts.theme + '.css');
-            vm.refreshEditor = !vm.refreshEditor;
-          };
-          // load default theme
-          vm.loadTheme(vm.editorOpts.theme);
-          // Add some initial text
-          vm.code = '// Open a file from the left menu \n' +
-                        '// It will be requested to the server and loaded into the editor\n' +
-                        '// Also try adding a New File from the toolbar\n';
-
-
-          // Tree
-
-          var selectedBranch;
-          vm.handle_filetree = function(branch) {
-            
-            selectedBranch = branch;
-
-            var basePath = 'server/editor/';
-            var isFolder = !!branch.children.length;
-
-            console.log('You selected: ' + branch.label + ' - isFolder? ' + isFolder);
-
-            if ( ! isFolder ) {
-
-              $http
-                .get( basePath + branch.path )
-                .success(function(response){
-                  
-                  console.log('Loaded.. ' + branch.path);
-                  // set the new code into the editor
-                  vm.code = response;
-                  
-                  vm.editorOpts.mode = detectMode(branch.path);
-                  console.log( 'Mode is: ' + vm.editorOpts.mode);
-
-                });
-            }
-          };
-
-          function detectMode(file) {
-            var ext = file.split('.');
-            ext = ext ? ext[ext.length - 1] : '';
-            switch (ext) {
-              case 'html':  return 'htmlmixed';
-              case 'css':   return 'css';
-              default:      return 'javascript';
-            }
-          }
-
-          var tree;
-          tree = vm.filetree = {};
-
-          // Adds a new branch to the tree
-          vm.new_filetree = function() {
-            var b;
-            b = tree.get_selected_branch();
-
-            // if we select a leaf -> select the parent folder
-            if ( b && b.children.length === 0 ) {
-              b = tree.get_parent_branch(b);
-            }
-            
-            return tree.add_branch(b, {
-              'label': 'another.html',
-              'path': 'source/another.html'
-            });
-          };
-        }
-    }
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.extras')
-        .controller('TodoController', TodoController);
-
-    TodoController.$inject = ['$filter'];
-    function TodoController($filter) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-           vm.items = [
-            {
-              todo: {title: 'Meeting with Mark at 7am.', description: 'Pellentesque convallis mauris eu elit imperdiet quis eleifend quam aliquet. '},
-              complete: true
-            },
-            {
-              todo: {title: 'Call Sonya. Talk about the new project.', description: ''},
-              complete: false
-            },
-            {
-              todo: {title: 'Find a new place for vacations', description: ''},
-              complete: false
-            }
-            ];
-          
-          vm.editingTodo = false;
-          vm.todo = {};
-
-          vm.addTodo = function() {
-            
-            if( vm.todo.title === '' ) return;
-            if( !vm.todo.description ) vm.todo.description = '';
-            
-            if( vm.editingTodo ) {
-              vm.todo = {};
-              vm.editingTodo = false;
-            }
-            else {
-              vm.items.push({todo: angular.copy(vm.todo), complete: false});
-              vm.todo.title = '';
-              vm.todo.description = '';
-            }
-          };
-          
-          vm.editTodo = function(index, $event) {
-            $event.preventDefault();
-            $event.stopPropagation();
-            vm.todo = vm.items[index].todo;
-            vm.editingTodo = true;
-          };
-
-          vm.removeTodo = function(index/*, $event*/) {
-            vm.items.splice(index, 1);
-          };
-          
-          vm.clearAll = function() {
-            vm.items = [];
-          };
-
-          vm.totalCompleted = function() {
-            return $filter('filter')(vm.items, function(item){
-              return item.complete;
-            }).length;
-          };
-
-          vm.totalPending = function() {
-            return $filter('filter')(vm.items, function(item){
-              return !item.complete;
-            }).length;
-          };
-
-        }
-    }
-})();
-
-/**=========================================================
- * Module: word-cloud.js
- * Controller for jqCloud
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.extras')
-        .controller('WordCloudController', WordCloudController);
-
-    function WordCloudController() {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          vm.words = [
-              {
-                text: 'Lorem',
-                weight: 13
-                //link: 'http://themicon.co'
-              }, {
-                text: 'Ipsum',
-                weight: 10.5
-              }, {
-                text: 'Dolor',
-                weight: 9.4
-              }, {
-                text: 'Sit',
-                weight: 8
-              }, {
-                text: 'Amet',
-                weight: 6.2
-              }, {
-                text: 'Consectetur',
-                weight: 5
-              }, {
-                text: 'Adipiscing',
-                weight: 5
-              }, {
-                text: 'Sit',
-                weight: 8
-              }, {
-                text: 'Amet',
-                weight: 6.2
-              }, {
-                text: 'Consectetur',
-                weight: 5
-              }, {
-                text: 'Adipiscing',
-                weight: 5
-              }
-          ];
-        }
-    }
-})();
-
-/**=========================================================
  * Module: skycons.js
  * Include any animated weather icon from Skycons
  =========================================================*/
@@ -9965,50 +9965,6 @@ if ($localStorage.currentUser) {
     'use strict';
 
     angular
-        .module('app.loadingbar')
-        .config(loadingbarConfig)
-        ;
-    loadingbarConfig.$inject = ['cfpLoadingBarProvider'];
-    function loadingbarConfig(cfpLoadingBarProvider){
-      cfpLoadingBarProvider.includeBar = true;
-      cfpLoadingBarProvider.includeSpinner = false;
-      cfpLoadingBarProvider.latencyThreshold = 500;
-      cfpLoadingBarProvider.parentSelector = '.wrapper > section';
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.loadingbar')
-        .run(loadingbarRun)
-        ;
-    loadingbarRun.$inject = ['$rootScope', '$timeout', 'cfpLoadingBar'];
-    function loadingbarRun($rootScope, $timeout, cfpLoadingBar){
-
-      // Loading bar transition
-      // ----------------------------------- 
-      var thBar;
-      $rootScope.$on('$stateChangeStart', function() {
-          if($('.wrapper > section').length) // check if bar container exists
-            thBar = $timeout(function() {
-              cfpLoadingBar.start();
-            }, 0); // sets a latency Threshold
-      });
-      $rootScope.$on('$stateChangeSuccess', function(event) {
-          event.targetScope.$watch('$viewContentLoaded', function () {
-            $timeout.cancel(thBar);
-            cfpLoadingBar.complete();
-          });
-      });
-
-    }
-
-})();
-(function() {
-    'use strict';
-
-    angular
         .module('app.locale')
         .config(localeConfig)
         ;
@@ -10196,6 +10152,50 @@ if ($localStorage.currentUser) {
     }
 })();
 
+(function() {
+    'use strict';
+
+    angular
+        .module('app.loadingbar')
+        .config(loadingbarConfig)
+        ;
+    loadingbarConfig.$inject = ['cfpLoadingBarProvider'];
+    function loadingbarConfig(cfpLoadingBarProvider){
+      cfpLoadingBarProvider.includeBar = true;
+      cfpLoadingBarProvider.includeSpinner = false;
+      cfpLoadingBarProvider.latencyThreshold = 500;
+      cfpLoadingBarProvider.parentSelector = '.wrapper > section';
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.loadingbar')
+        .run(loadingbarRun)
+        ;
+    loadingbarRun.$inject = ['$rootScope', '$timeout', 'cfpLoadingBar'];
+    function loadingbarRun($rootScope, $timeout, cfpLoadingBar){
+
+      // Loading bar transition
+      // ----------------------------------- 
+      var thBar;
+      $rootScope.$on('$stateChangeStart', function() {
+          if($('.wrapper > section').length) // check if bar container exists
+            thBar = $timeout(function() {
+              cfpLoadingBar.start();
+            }, 0); // sets a latency Threshold
+      });
+      $rootScope.$on('$stateChangeSuccess', function(event) {
+          event.targetScope.$watch('$viewContentLoaded', function () {
+            $timeout.cancel(thBar);
+            cfpLoadingBar.complete();
+          });
+      });
+
+    }
+
+})();
 
   /**=========================================================
    * Module: modals.js
@@ -11137,238 +11137,6 @@ if ($localStorage.currentUser) {
 })();
 
 /**=========================================================
- * Module: demo-notify.js
- * Provides a simple demo for notify
- =========================================================*/
-(function() {
-    'use strict';
-
-    angular
-        .module('app.notify')
-        .controller('NotifyDemoCtrl', NotifyDemoCtrl);
-
-    NotifyDemoCtrl.$inject = ['Notify', '$timeout'];
-    function NotifyDemoCtrl(Notify, $timeout) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          vm.msgHtml = '<em class="fa fa-check"></em> Message with icon..';
-
-          vm.notifyMsg = 'Some messages here..';
-          vm.notifyOpts = {
-            status: 'danger',
-            pos: 'bottom-center'
-          };
-
-          // Service usage example
-          $timeout(function(){
-            
-            Notify.alert( 
-                'This is a custom message from notify..', 
-                {status: 'success'}
-            );
-          
-          }, 500);
-        }
-    }
-})();
-
-/**=========================================================
- * Module: notify.js
- * Directive for notify plugin
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.notify')
-        .directive('notify', notify);
-
-    notify.$inject = ['$window', 'Notify'];
-    function notify ($window, Notify) {
-
-        var directive = {
-            link: link,
-            restrict: 'A',
-            scope: {
-              options: '=',
-              message: '='
-            }
-        };
-        return directive;
-
-        function link(scope, element) {
-
-          element.on('click', function (e) {
-            e.preventDefault();
-            Notify.alert(scope.message, scope.options);
-          });
-        }
-
-    }
-
-})();
-
-
-/**=========================================================
- * Module: notify.js
- * Create a notifications that fade out automatically.
- * Based on Notify addon from UIKit (http://getuikit.com/docs/addons_notify.html)
- =========================================================*/
-
-(function() {
-    'use strict';
-    angular
-        .module('app.notify')
-        .service('Notify', Notify);
-
-    Notify.$inject = ['$timeout'];
-    function Notify($timeout) {
-
-        this.alert = notifyAlert;
-
-        ////////////////
-
-        function notifyAlert(msg, opts) {
-            if ( msg ) {
-                $timeout(function(){
-                    $.notify(msg, opts || {});
-                });
-            }
-        }
-    }
-
-})();
-
-/**
- * Notify Addon definition as jQuery plugin
- * Adapted version to work with Bootstrap classes
- * More information http://getuikit.com/docs/addons_notify.html
- */
-(function($){
-    'use strict';
-    var containers = {},
-        messages   = {},
-        notify     =  function(options){
-            if ($.type(options) === 'string') {
-                options = { message: options };
-            }
-            if (arguments[1]) {
-                options = $.extend(options, $.type(arguments[1]) === 'string' ? {status:arguments[1]} : arguments[1]);
-            }
-            return (new Message(options)).show();
-        },
-        closeAll  = function(group, instantly){
-            var id;
-            if(group) {
-                for(id in messages) { if(group===messages[id].group) messages[id].close(instantly); }
-            } else {
-                for(id in messages) { messages[id].close(instantly); }
-            }
-        };
-    var Message = function(options){
-        // var $this = this;
-        this.options = $.extend({}, Message.defaults, options);
-        this.uuid    = 'ID'+(new Date().getTime())+'RAND'+(Math.ceil(Math.random() * 100000));
-        this.element = $([
-            // @geedmo: alert-dismissable enables bs close icon
-            '<div class="uk-notify-message alert-dismissable">',
-                '<a class="close">&times;</a>',
-                '<div>'+this.options.message+'</div>',
-            '</div>'
-        ].join('')).data('notifyMessage', this);
-        // status
-        if (this.options.status) {
-            this.element.addClass('alert alert-'+this.options.status);
-            this.currentstatus = this.options.status;
-        }
-        this.group = this.options.group;
-        messages[this.uuid] = this;
-        if(!containers[this.options.pos]) {
-            containers[this.options.pos] = $('<div class="uk-notify uk-notify-'+this.options.pos+'"></div>').appendTo('body').on('click', '.uk-notify-message', function(){
-                $(this).data('notifyMessage').close();
-            });
-        }
-    };
-    $.extend(Message.prototype, {
-        uuid: false,
-        element: false,
-        timout: false,
-        currentstatus: '',
-        group: false,
-        show: function() {
-            if (this.element.is(':visible')) return;
-            var $this = this;
-            containers[this.options.pos].show().prepend(this.element);
-            var marginbottom = parseInt(this.element.css('margin-bottom'), 10);
-            this.element.css({'opacity':0, 'margin-top': -1*this.element.outerHeight(), 'margin-bottom':0}).animate({'opacity':1, 'margin-top': 0, 'margin-bottom':marginbottom}, function(){
-                if ($this.options.timeout) {
-                    var closefn = function(){ $this.close(); };
-                    $this.timeout = setTimeout(closefn, $this.options.timeout);
-                    $this.element.hover(
-                        function() { clearTimeout($this.timeout); },
-                        function() { $this.timeout = setTimeout(closefn, $this.options.timeout);  }
-                    );
-                }
-            });
-            return this;
-        },
-        close: function(instantly) {
-            var $this    = this,
-                finalize = function(){
-                    $this.element.remove();
-                    if(!containers[$this.options.pos].children().length) {
-                        containers[$this.options.pos].hide();
-                    }
-                    delete messages[$this.uuid];
-                };
-            if(this.timeout) clearTimeout(this.timeout);
-            if(instantly) {
-                finalize();
-            } else {
-                this.element.animate({'opacity':0, 'margin-top': -1* this.element.outerHeight(), 'margin-bottom':0}, function(){
-                    finalize();
-                });
-            }
-        },
-        content: function(html){
-            var container = this.element.find('>div');
-            if(!html) {
-                return container.html();
-            }
-            container.html(html);
-            return this;
-        },
-        status: function(status) {
-            if(!status) {
-                return this.currentstatus;
-            }
-            this.element.removeClass('alert alert-'+this.currentstatus).addClass('alert alert-'+status);
-            this.currentstatus = status;
-            return this;
-        }
-    });
-    Message.defaults = {
-        message: '',
-        status: 'normal',
-        timeout: 5000,
-        group: null,
-        pos: 'top-center'
-    };
-    
-    $.notify          = notify;
-    $.notify.message  = Message;
-    $.notify.closeAll = closeAll;
-    
-    return notify;
-}(jQuery));
-
-/**=========================================================
  * Module: navbar-search.js
  * Navbar search toggler * Auto dismiss on ESC key
  =========================================================*/
@@ -11968,6 +11736,238 @@ $scope.buttonText="Login";
     }
 
 })();
+/**=========================================================
+ * Module: demo-notify.js
+ * Provides a simple demo for notify
+ =========================================================*/
+(function() {
+    'use strict';
+
+    angular
+        .module('app.notify')
+        .controller('NotifyDemoCtrl', NotifyDemoCtrl);
+
+    NotifyDemoCtrl.$inject = ['Notify', '$timeout'];
+    function NotifyDemoCtrl(Notify, $timeout) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          vm.msgHtml = '<em class="fa fa-check"></em> Message with icon..';
+
+          vm.notifyMsg = 'Some messages here..';
+          vm.notifyOpts = {
+            status: 'danger',
+            pos: 'bottom-center'
+          };
+
+          // Service usage example
+          $timeout(function(){
+            
+            Notify.alert( 
+                'This is a custom message from notify..', 
+                {status: 'success'}
+            );
+          
+          }, 500);
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: notify.js
+ * Directive for notify plugin
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.notify')
+        .directive('notify', notify);
+
+    notify.$inject = ['$window', 'Notify'];
+    function notify ($window, Notify) {
+
+        var directive = {
+            link: link,
+            restrict: 'A',
+            scope: {
+              options: '=',
+              message: '='
+            }
+        };
+        return directive;
+
+        function link(scope, element) {
+
+          element.on('click', function (e) {
+            e.preventDefault();
+            Notify.alert(scope.message, scope.options);
+          });
+        }
+
+    }
+
+})();
+
+
+/**=========================================================
+ * Module: notify.js
+ * Create a notifications that fade out automatically.
+ * Based on Notify addon from UIKit (http://getuikit.com/docs/addons_notify.html)
+ =========================================================*/
+
+(function() {
+    'use strict';
+    angular
+        .module('app.notify')
+        .service('Notify', Notify);
+
+    Notify.$inject = ['$timeout'];
+    function Notify($timeout) {
+
+        this.alert = notifyAlert;
+
+        ////////////////
+
+        function notifyAlert(msg, opts) {
+            if ( msg ) {
+                $timeout(function(){
+                    $.notify(msg, opts || {});
+                });
+            }
+        }
+    }
+
+})();
+
+/**
+ * Notify Addon definition as jQuery plugin
+ * Adapted version to work with Bootstrap classes
+ * More information http://getuikit.com/docs/addons_notify.html
+ */
+(function($){
+    'use strict';
+    var containers = {},
+        messages   = {},
+        notify     =  function(options){
+            if ($.type(options) === 'string') {
+                options = { message: options };
+            }
+            if (arguments[1]) {
+                options = $.extend(options, $.type(arguments[1]) === 'string' ? {status:arguments[1]} : arguments[1]);
+            }
+            return (new Message(options)).show();
+        },
+        closeAll  = function(group, instantly){
+            var id;
+            if(group) {
+                for(id in messages) { if(group===messages[id].group) messages[id].close(instantly); }
+            } else {
+                for(id in messages) { messages[id].close(instantly); }
+            }
+        };
+    var Message = function(options){
+        // var $this = this;
+        this.options = $.extend({}, Message.defaults, options);
+        this.uuid    = 'ID'+(new Date().getTime())+'RAND'+(Math.ceil(Math.random() * 100000));
+        this.element = $([
+            // @geedmo: alert-dismissable enables bs close icon
+            '<div class="uk-notify-message alert-dismissable">',
+                '<a class="close">&times;</a>',
+                '<div>'+this.options.message+'</div>',
+            '</div>'
+        ].join('')).data('notifyMessage', this);
+        // status
+        if (this.options.status) {
+            this.element.addClass('alert alert-'+this.options.status);
+            this.currentstatus = this.options.status;
+        }
+        this.group = this.options.group;
+        messages[this.uuid] = this;
+        if(!containers[this.options.pos]) {
+            containers[this.options.pos] = $('<div class="uk-notify uk-notify-'+this.options.pos+'"></div>').appendTo('body').on('click', '.uk-notify-message', function(){
+                $(this).data('notifyMessage').close();
+            });
+        }
+    };
+    $.extend(Message.prototype, {
+        uuid: false,
+        element: false,
+        timout: false,
+        currentstatus: '',
+        group: false,
+        show: function() {
+            if (this.element.is(':visible')) return;
+            var $this = this;
+            containers[this.options.pos].show().prepend(this.element);
+            var marginbottom = parseInt(this.element.css('margin-bottom'), 10);
+            this.element.css({'opacity':0, 'margin-top': -1*this.element.outerHeight(), 'margin-bottom':0}).animate({'opacity':1, 'margin-top': 0, 'margin-bottom':marginbottom}, function(){
+                if ($this.options.timeout) {
+                    var closefn = function(){ $this.close(); };
+                    $this.timeout = setTimeout(closefn, $this.options.timeout);
+                    $this.element.hover(
+                        function() { clearTimeout($this.timeout); },
+                        function() { $this.timeout = setTimeout(closefn, $this.options.timeout);  }
+                    );
+                }
+            });
+            return this;
+        },
+        close: function(instantly) {
+            var $this    = this,
+                finalize = function(){
+                    $this.element.remove();
+                    if(!containers[$this.options.pos].children().length) {
+                        containers[$this.options.pos].hide();
+                    }
+                    delete messages[$this.uuid];
+                };
+            if(this.timeout) clearTimeout(this.timeout);
+            if(instantly) {
+                finalize();
+            } else {
+                this.element.animate({'opacity':0, 'margin-top': -1* this.element.outerHeight(), 'margin-bottom':0}, function(){
+                    finalize();
+                });
+            }
+        },
+        content: function(html){
+            var container = this.element.find('>div');
+            if(!html) {
+                return container.html();
+            }
+            container.html(html);
+            return this;
+        },
+        status: function(status) {
+            if(!status) {
+                return this.currentstatus;
+            }
+            this.element.removeClass('alert alert-'+this.currentstatus).addClass('alert alert-'+status);
+            this.currentstatus = status;
+            return this;
+        }
+    });
+    Message.defaults = {
+        message: '',
+        status: 'normal',
+        timeout: 5000,
+        group: null,
+        pos: 'top-center'
+    };
+    
+    $.notify          = notify;
+    $.notify.message  = Message;
+    $.notify.closeAll = closeAll;
+    
+    return notify;
+}(jQuery));
+
 /**=========================================================
  * Collapse panels * [panel-collapse]
  =========================================================*/
@@ -13201,6 +13201,1401 @@ group.$remove().then(function () {
     }
 
 })();
+/**=========================================================
+ * Module: helpers.js
+ * Provides helper functions for routes definition
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.routes')
+        .provider('RouteHelpers', RouteHelpersProvider)
+        ;
+
+    RouteHelpersProvider.$inject = ['APP_REQUIRES'];
+    function RouteHelpersProvider(APP_REQUIRES) {
+
+      /* jshint validthis:true */
+      return {
+        // provider access level
+        basepath: basepath,
+        resolveFor: resolveFor,
+        // controller access level
+        $get: function() {
+          return {
+            basepath: basepath,
+            resolveFor: resolveFor
+          };
+        }
+      };
+
+      // Set here the base of the relative path
+      // for all app views
+      function basepath(uri) {
+        return 'app/views/' + uri;
+      }
+
+      // Generates a resolve object by passing script names
+      // previously configured in constant.APP_REQUIRES
+      function resolveFor() {
+        var _args = arguments;
+        return {
+          deps: ['$ocLazyLoad','$q', function ($ocLL, $q) {
+            // Creates a promise chain for each argument
+            var promise = $q.when(1); // empty promise
+            for(var i=0, len=_args.length; i < len; i ++){
+              promise = andThen(_args[i]);
+            }
+            return promise;
+
+            // creates promise to chain dynamically
+            function andThen(_arg) {
+              // also support a function that returns a promise
+              if(typeof _arg === 'function')
+                  return promise.then(_arg);
+              else
+                  return promise.then(function() {
+                    // if is a module, pass the name. If not, pass the array
+                    var whatToLoad = getRequired(_arg);
+                    // simple error check
+                    if(!whatToLoad) return $.error('Route resolve: Bad resource name [' + _arg + ']');
+                    // finally, return a promise
+                    return $ocLL.load( whatToLoad );
+                  });
+            }
+            // check and returns required data
+            // analyze module items with the form [name: '', files: []]
+            // and also simple array of script files (for not angular js)
+            function getRequired(name) {
+              if (APP_REQUIRES.modules)
+                  for(var m in APP_REQUIRES.modules)
+                      if(APP_REQUIRES.modules[m].name && APP_REQUIRES.modules[m].name === name)
+                          return APP_REQUIRES.modules[m];
+              return APP_REQUIRES.scripts && APP_REQUIRES.scripts[name];
+            }
+
+          }]};
+      } // resolveFor
+
+    }
+
+
+})();
+
+
+/**=========================================================
+ * Module: config.js
+ * App routes and resources configuration
+ =========================================================*/
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.routes')
+   
+
+      
+        .config(routesConfig);
+
+
+    routesConfig.$inject = ['$stateProvider', '$locationProvider', '$urlRouterProvider', 'RouteHelpersProvider'];
+    function routesConfig($stateProvider, $locationProvider, $urlRouterProvider, helper){
+
+        // Set the following to true to enable the HTML5 Mode
+        // You may have to set <base> tag in index and a routing configuration in your server
+        $locationProvider.html5Mode(false);
+
+        // defaults to dashboard
+        $urlRouterProvider.otherwise('/app/dashboard');
+
+        //
+        // Application Routes
+        // -----------------------------------
+        $stateProvider
+          .state('app', {
+              url: '/app',
+              abstract: true,
+              templateUrl: helper.basepath('app.html'),
+              resolve: helper.resolveFor('fastclick', 'modernizr', 'icons', 'screenfull', 'animo', 'sparklines', 'slimscroll', 'classyloader', 'toaster', 'whirl')
+          })
+          .state('app.dashboard', {
+              url: '/dashboard',
+              title: 'Dashboard',
+              authenticate: true,
+              templateUrl: helper.basepath('dashboard.html'),
+              resolve: helper.resolveFor('flot-chart','flot-chart-plugins', 'weather-icons'),
+
+          })
+          .state('app.dashboard_v2', {
+              url: '/dashboard_v2',
+              title: 'Dashboard v2',
+              templateUrl: helper.basepath('dashboard_v2.html'),
+              controller: 'DashboardV2Controller',
+              controllerAs: 'dash2',
+              resolve: helper.resolveFor('flot-chart','flot-chart-plugins')
+          })
+          .state('app.dashboard_v3', {
+              url: '/dashboard_v3',
+              title: 'Dashboard v3',
+              controller: 'DashboardV3Controller',
+              controllerAs: 'dash3',
+              templateUrl: helper.basepath('dashboard_v3.html'),
+              resolve: helper.resolveFor('flot-chart','flot-chart-plugins', 'vector-map', 'vector-map-maps')
+          })
+          .state('app.widgets', {
+              url: '/widgets',
+              title: 'Widgets',
+              templateUrl: helper.basepath('widgets.html'),
+              resolve: helper.resolveFor('loadGoogleMapsJS', function() { return loadGoogleMaps(); }, 'ui.map')
+          })
+          .state('app.buttons', {
+              url: '/buttons',
+              title: 'Buttons',
+              templateUrl: helper.basepath('buttons.html')
+          })
+          .state('app.colors', {
+              url: '/colors',
+              title: 'Colors',
+              templateUrl: helper.basepath('colors.html')
+          })
+          .state('app.localization', {
+              url: '/localization',
+              title: 'Localization',
+              templateUrl: helper.basepath('localization.html')
+          })
+          .state('app.infinite-scroll', {
+              url: '/infinite-scroll',
+              title: 'Infinite Scroll',
+              templateUrl: helper.basepath('infinite-scroll.html'),
+              resolve: helper.resolveFor('infinite-scroll')
+          })
+          .state('app.navtree', {
+              url: '/navtree',
+              title: 'Nav Tree',
+              templateUrl: helper.basepath('nav-tree.html'),
+              resolve: helper.resolveFor('angularBootstrapNavTree')
+          })
+          .state('app.nestable', {
+              url: '/nestable',
+              title: 'Nestable',
+              templateUrl: helper.basepath('nestable.html'),
+              resolve: helper.resolveFor('ng-nestable')
+          })
+          .state('app.sortable', {
+              url: '/sortable',
+              title: 'Sortable',
+              templateUrl: helper.basepath('sortable.html'),
+              resolve: helper.resolveFor('ui.sortable')
+          })
+          .state('app.notifications', {
+              url: '/notifications',
+              title: 'Notifications',
+              templateUrl: helper.basepath('notifications.html')
+          })
+          .state('app.carousel', {
+              url: '/carousel',
+              title: 'Carousel',
+              templateUrl: helper.basepath('carousel.html'),
+              resolve: helper.resolveFor('angular-carousel')
+          })
+          .state('app.ngdialog', {
+              url: '/ngdialog',
+              title: 'ngDialog',
+              templateUrl: helper.basepath('ngdialog.html'),
+              resolve: angular.extend(helper.resolveFor('ngDialog'),{
+                tpl: function() { return { path: helper.basepath('ngdialog-template.html') }; }
+              }),
+              controller: 'DialogIntroCtrl'
+          })
+          .state('app.sweetalert', {
+            url: '/sweetalert',
+            title: 'SweetAlert',
+            templateUrl: helper.basepath('sweetalert.html'),
+            resolve: helper.resolveFor('oitozero.ngSweetAlert')
+          })
+          .state('app.tour', {
+            url: '/tour',
+            title: 'Tour',
+            templateUrl: helper.basepath('tour.html'),
+            resolve: helper.resolveFor('bm.bsTour')
+          })
+          .state('app.interaction', {
+              url: '/interaction',
+              title: 'Interaction',
+              templateUrl: helper.basepath('interaction.html')
+          })
+          .state('app.spinners', {
+              url: '/spinners',
+              title: 'Spinners',
+              templateUrl: helper.basepath('spinners.html'),
+              resolve: helper.resolveFor('loaders.css', 'spinkit')
+          })
+          .state('app.dropdown-animations', {
+              url: '/dropdown-animations',
+              title: 'Dropdown Animations',
+              templateUrl: helper.basepath('dropdown-animations.html')
+          })
+          .state('app.panels', {
+              url: '/panels',
+              title: 'Panels',
+              templateUrl: helper.basepath('panels.html')
+          })
+          .state('app.portlets', {
+              url: '/portlets',
+              title: 'Portlets',
+              templateUrl: helper.basepath('portlets.html'),
+              resolve: helper.resolveFor('ui.sortable')
+          })
+          .state('app.maps-google', {
+              url: '/maps-google',
+              title: 'Maps Google',
+              templateUrl: helper.basepath('maps-google.html'),
+              resolve: helper.resolveFor('loadGoogleMapsJS', function() { return loadGoogleMaps(); }, 'ui.map')
+          })
+          .state('app.maps-vector', {
+              url: '/maps-vector',
+              title: 'Maps Vector',
+              templateUrl: helper.basepath('maps-vector.html'),
+              controller: 'VectorMapController',
+              controllerAs: 'vmap',
+              resolve: helper.resolveFor('vector-map', 'vector-map-maps')
+          })
+          .state('app.grid', {
+              url: '/grid',
+              title: 'Grid',
+              templateUrl: helper.basepath('grid.html')
+          })
+          .state('app.grid-masonry', {
+              url: '/grid-masonry',
+              title: 'Grid Masonry',
+              templateUrl: helper.basepath('grid-masonry.html')
+          })
+          .state('app.grid-masonry-deck', {
+              url: '/grid-masonry-deck',
+              title: 'Grid Masonry',
+              templateUrl: helper.basepath('grid-masonry-deck.html'),
+              resolve: helper.resolveFor('spinkit', 'akoenig.deckgrid')
+          })
+          .state('app.typo', {
+              url: '/typo',
+              title: 'Typo',
+              templateUrl: helper.basepath('typo.html')
+          })
+          .state('app.icons-font', {
+              url: '/icons-font',
+              title: 'Icons Font',
+              templateUrl: helper.basepath('icons-font.html'),
+              resolve: helper.resolveFor('icons')
+          })
+          .state('app.icons-weather', {
+              url: '/icons-weather',
+              title: 'Icons Weather',
+              templateUrl: helper.basepath('icons-weather.html'),
+              resolve: helper.resolveFor('weather-icons', 'skycons')
+          })
+          .state('app.form-standard', {
+              url: '/form-standard',
+              title: 'Form Standard',
+              templateUrl: helper.basepath('form-standard.html')
+          })
+          .state('app.form-extended', {
+              url: '/form-extended',
+              title: 'Form Extended',
+              templateUrl: helper.basepath('form-extended.html'),
+              resolve: helper.resolveFor('colorpicker.module', 'codemirror', 'moment', 'taginput','inputmask','localytics.directives', 'ui.bootstrap-slider', 'ngWig', 'filestyle', 'summernote')
+          })
+          .state('app.form-validation', {
+              url: '/form-validation',
+              title: 'Form Validation',
+              templateUrl: helper.basepath('form-validation.html'),
+              resolve: helper.resolveFor('ui.select', 'taginput','inputmask','localytics.directives')
+          })
+          .state('app.form-wizard', {
+              url: '/form-wizard',
+              title: 'Form Wizard',
+              templateUrl: helper.basepath('form-wizard.html')
+          })
+          .state('app.form-upload', {
+              url: '/form-upload',
+              title: 'Form upload',
+              templateUrl: helper.basepath('form-upload.html'),
+              resolve: helper.resolveFor('angularFileUpload', 'filestyle')
+          })
+          .state('app.form-xeditable', {
+              url: '/form-xeditable',
+              templateUrl: helper.basepath('form-xeditable.html'),
+              resolve: helper.resolveFor('xeditable')
+          })
+          .state('app.form-imagecrop', {
+              url: '/form-imagecrop',
+              templateUrl: helper.basepath('form-imagecrop.html'),
+              resolve: helper.resolveFor('ngImgCrop', 'filestyle')
+          })
+          .state('app.form-uiselect', {
+              url: '/form-uiselect',
+              templateUrl: helper.basepath('form-uiselect.html'),
+              controller: 'uiSelectController',
+              controllerAs: 'uisel',
+              resolve: helper.resolveFor('ui.select')
+          })
+          .state('app.chart-flot', {
+              url: '/chart-flot',
+              title: 'Chart Flot',
+              templateUrl: helper.basepath('chart-flot.html'),
+              resolve: helper.resolveFor('flot-chart','flot-chart-plugins')
+          })
+          .state('app.chart-radial', {
+              url: '/chart-radial',
+              title: 'Chart Radial',
+              templateUrl: helper.basepath('chart-radial.html'),
+              resolve: helper.resolveFor('classyloader', 'ui.knob', 'easypiechart')
+          })
+          .state('app.chart-js', {
+              url: '/chart-js',
+              title: 'Chart JS',
+              templateUrl: helper.basepath('chart-js.html'),
+              resolve: helper.resolveFor('chartjs')
+          })
+          .state('app.chart-rickshaw', {
+              url: '/chart-rickshaw',
+              title: 'Chart Rickshaw',
+              templateUrl: helper.basepath('chart-rickshaw.html'),
+              resolve: helper.resolveFor('angular-rickshaw')
+          })
+          .state('app.chart-morris', {
+              url: '/chart-morris',
+              title: 'Chart Morris',
+              templateUrl: helper.basepath('chart-morris.html'),
+              resolve: helper.resolveFor('morris')
+          })
+          .state('app.chart-chartist', {
+              url: '/chart-chartist',
+              title: 'Chart Chartist',
+              templateUrl: helper.basepath('chart-chartist.html'),
+              resolve: helper.resolveFor('angular-chartist')
+          })
+          .state('app.table-standard', {
+              url: '/table-standard',
+              title: 'Table Standard',
+              templateUrl: helper.basepath('table-standard.html')
+          })
+          .state('app.table-extended', {
+              url: '/table-extended',
+              title: 'Table Extended',
+              templateUrl: helper.basepath('table-extended.html')
+          })
+          .state('app.table-datatable', {
+              url: '/table-datatable',
+              title: 'Table Datatable',
+              templateUrl: helper.basepath('table-datatable.html'),
+              resolve: helper.resolveFor('datatables')
+          })
+          .state('app.table-xeditable', {
+              url: '/table-xeditable',
+              templateUrl: helper.basepath('table-xeditable.html'),
+              resolve: helper.resolveFor('xeditable')
+          })
+          .state('app.table-ngtable', {
+              url: '/table-ngtable',
+              templateUrl: helper.basepath('table-ngtable.html'),
+              resolve: helper.resolveFor('ngTable', 'ngTableExport')
+          })
+          .state('app.table-uigrid', {
+              url: '/table-uigrid',
+              templateUrl: helper.basepath('table-uigrid.html'),
+              resolve: helper.resolveFor('ui.grid')
+          })
+          .state('app.table-angulargrid', {
+              url: '/table-angulargrid',
+              templateUrl: helper.basepath('table-angulargrid.html'),
+              resolve: helper.resolveFor('angularGrid')
+          })
+          .state('app.contacts', {
+              url: '/contacts',
+              title: 'Contacts',
+              templateUrl: helper.basepath('contacts.html')
+          })
+          .state('app.contact-details', {
+              url: '/contact-details',
+              title: 'Contact Details',
+              templateUrl: helper.basepath('contact-details.html')
+          })
+          .state('app.projects', {
+              url: '/projects',
+              title: 'Projects',
+              templateUrl: helper.basepath('projects.html')
+          })
+          .state('app.project-details', {
+              url: '/project-details',
+              title: 'Project Details',
+              templateUrl: helper.basepath('project-details.html')
+          })
+          .state('app.team-viewer', {
+              url: '/team-viewer',
+              title: 'Team Viewer',
+              templateUrl: helper.basepath('team-viewer.html')
+          })
+          .state('app.social-board', {
+              url: '/social-board',
+              title: 'Social Board',
+              templateUrl: helper.basepath('social-board.html')
+          })
+          .state('app.vote-links', {
+              url: '/vote-links',
+              title: 'Vote Links',
+              templateUrl: helper.basepath('vote-links.html')
+          })
+          .state('app.bug-tracker', {
+              url: '/bug-tracker',
+              title: 'Bug Tracker',
+              templateUrl: helper.basepath('bug-tracker.html'),
+              resolve: helper.resolveFor('datatables')
+          })
+          .state('app.faq', {
+              url: '/faq',
+              title: 'FAQ',
+              templateUrl: helper.basepath('faq.html'),
+              resolve: helper.resolveFor('datatables')
+          })
+          .state('app.help-center', {
+              url: '/help-center',
+              title: 'Help Center',
+              templateUrl: helper.basepath('help-center.html')
+          })
+          .state('app.followers', {
+              url: '/followers',
+              title: 'Followers',
+              templateUrl: helper.basepath('followers.html')
+          })
+          .state('app.settings', {
+              url: '/settings',
+              title: 'Settings',
+              templateUrl: helper.basepath('settings.html'),
+              resolve: helper.resolveFor('filestyle')
+          })
+          .state('app.plans', {
+              url: '/plans',
+              title: 'Plans',
+              templateUrl: helper.basepath('plans.html')
+          })
+          .state('app.file-manager', {
+              url: '/file-manager',
+              title: 'File Manager',
+              templateUrl: helper.basepath('file-manager.html'),
+              resolve: helper.resolveFor('filestyle')
+          })
+          .state('app.timeline', {
+              url: '/timeline',
+              title: 'Timeline',
+              templateUrl: helper.basepath('timeline.html')
+          })
+          .state('app.calendar', {
+              url: '/calendar',
+              title: 'Calendar',
+              templateUrl: helper.basepath('calendar.html'),
+              resolve: helper.resolveFor('moment', 'ui.calendar')
+          })
+          .state('app.invoice', {
+              url: '/invoice',
+              title: 'Invoice',
+              templateUrl: helper.basepath('invoice.html')
+          })
+          .state('app.search', {
+              url: '/search',
+              title: 'Search',
+              templateUrl: helper.basepath('search.html'),
+              resolve: helper.resolveFor('moment', 'localytics.directives', 'ui.bootstrap-slider')
+          })
+          .state('app.todo', {
+              url: '/todo',
+              title: 'Todo List',
+              templateUrl: helper.basepath('todo.html'),
+              controller: 'TodoController',
+              controllerAs: 'todo'
+          })
+          .state('app.profile', {
+              url: '/profile',
+              title: 'Profile',
+              templateUrl: helper.basepath('profile.html'),
+              resolve: helper.resolveFor('loadGoogleMapsJS', function() { return loadGoogleMaps(); }, 'ui.map')
+          })
+          .state('app.code-editor', {
+              url: '/code-editor',
+              templateUrl: helper.basepath('code-editor.html'),
+              controller: 'CodeEditorController',
+              controllerAs: 'coder',
+              resolve: {
+                  deps: helper.resolveFor('codemirror', 'ui.codemirror', 'codemirror-modes-web', 'angularBootstrapNavTree').deps,
+                  filetree: ['LoadTreeService', function (LoadTreeService) {
+                      return LoadTreeService.get().$promise.then(function (res) {
+                          return res.data;
+                      });
+                  }]
+              }
+          })
+          .state('app.template', {
+              url: '/template',
+              title: 'Blank Template',
+              templateUrl: helper.basepath('template.html')
+          })
+          .state('app.documentation', {
+              url: '/documentation',
+              title: 'Documentation',
+              templateUrl: helper.basepath('documentation.html'),
+              resolve: helper.resolveFor('flatdoc')
+          })
+          // Forum
+          // -----------------------------------
+          .state('app.forum', {
+              url: '/forum',
+              title: 'Forum',
+              templateUrl: helper.basepath('forum.html')
+          })
+          .state('app.forum-topics', {
+              url: '/forum/topics/:catid',
+              title: 'Forum Topics',
+              templateUrl: helper.basepath('forum-topics.html')
+          })
+          .state('app.forum-discussion', {
+              url: '/forum/discussion/:topid',
+              title: 'Forum Discussion',
+              templateUrl: helper.basepath('forum-discussion.html')
+          })
+          // Blog
+          // -----------------------------------
+          .state('app.blog', {
+              url: '/blog',
+              title: 'Blog',
+              templateUrl: helper.basepath('blog.html'),
+              resolve: helper.resolveFor('angular-jqcloud')
+          })
+          .state('app.blog-post', {
+              url: '/post',
+              title: 'Post',
+              templateUrl: helper.basepath('blog-post.html'),
+              resolve: helper.resolveFor('angular-jqcloud')
+          })
+          .state('app.articles', {
+              url: '/articles',
+              title: 'Articles',
+              templateUrl: helper.basepath('blog-articles.html'),
+              resolve: helper.resolveFor('datatables')
+          })
+          .state('app.article-view', {
+              url: '/article/:id',
+              title: 'Article View',
+              templateUrl: helper.basepath('blog-article-view.html'),
+              resolve: helper.resolveFor('ui.select', 'summernote')
+          })
+          // eCommerce
+          // -----------------------------------
+          .state('app.orders', {
+              url: '/orders',
+              title: 'Orders',
+              templateUrl: helper.basepath('ecommerce-orders.html'),
+              resolve: helper.resolveFor('datatables')
+          })
+          .state('app.order-view', {
+              url: '/order-view',
+              title: 'Order View',
+              templateUrl: helper.basepath('ecommerce-order-view.html')
+          })
+          .state('app.products', {
+              url: '/products',
+              title: 'Products',
+              templateUrl: helper.basepath('ecommerce-products.html'),
+              resolve: helper.resolveFor('datatables')
+          })
+          .state('app.product-view', {
+              url: '/product/:id',
+              title: 'Product View',
+              templateUrl: helper.basepath('ecommerce-product-view.html')
+          })
+          .state('app.checkout', {
+              url: '/checkout',
+              title: 'Checkout',
+              templateUrl: helper.basepath('ecommerce-checkout.html')
+          })
+          // Mailbox
+          // -----------------------------------
+          .state('app.mailbox', {
+              url: '/mailbox',
+              title: 'Mailbox',
+              abstract: true,
+              templateUrl: helper.basepath('mailbox.html')
+          })
+          .state('app.mailbox.folder', {
+              url: '/folder/:folder',
+              title: 'Mailbox',
+              templateUrl: helper.basepath('mailbox-inbox.html')
+          })
+          .state('app.mailbox.view', {
+              url : '/{mid:[0-9]{1,4}}',
+              title: 'View mail',
+              templateUrl: helper.basepath('mailbox-view.html'),
+              resolve: helper.resolveFor('ngWig')
+          })
+          .state('app.mailbox.compose', {
+              url: '/compose',
+              title: 'Mailbox',
+              templateUrl: helper.basepath('mailbox-compose.html'),
+              resolve: helper.resolveFor('ngWig')
+          })
+          //
+          // Multiple level example
+          // -----------------------------------
+          .state('app.multilevel', {
+              url: '/multilevel',
+              title: 'Multilevel',
+              template: '<h3>Multilevel Views</h3>' + '<div class="lead ba p">View @ Top Level ' + '<div ui-view=""></div> </div>'
+          })
+          .state('app.multilevel.level1', {
+              url: '/level1',
+              title: 'Multilevel - Level1',
+              template: '<div class="lead ba p">View @ Level 1' + '<div ui-view=""></div> </div>'
+          })
+          .state('app.multilevel.level1.item', {
+              url: '/item',
+              title: 'Multilevel - Level1',
+              template: '<div class="lead ba p"> Menu item @ Level 1</div>'
+          })
+          .state('app.multilevel.level1.level2', {
+              url: '/level2',
+              title: 'Multilevel - Level2',
+              template: '<div class="lead ba p">View @ Level 2'  + '<div ui-view=""></div> </div>'
+          })
+          .state('app.multilevel.level1.level2.level3', {
+              url: '/level3',
+              title: 'Multilevel - Level3',
+              template: '<div class="lead ba p">View @ Level 3' + '<div ui-view=""></div> </div>'
+          })
+          .state('app.multilevel.level1.level2.level3.item', {
+              url: '/item',
+              title: 'Multilevel - Level3 Item',
+              template: '<div class="lead ba p"> Menu item @ Level 3</div>'
+          })
+          //
+          // Single Page Routes
+          // -----------------------------------
+          .state('page', {
+              url: '/page',
+              templateUrl: 'app/pages/page.html',
+              resolve: helper.resolveFor('modernizr', 'icons'),
+              controller: ['$rootScope', function($rootScope) {
+                  $rootScope.app.layout.isBoxed = false;
+              }]
+          })
+          .state('page.login', {
+              url: '/login',
+              title: 'Login',
+              templateUrl: 'app/pages/login.html'
+          })
+          .state('page.register', {
+              url: '/register',
+              title: 'Register',
+              templateUrl: 'app/pages/register.html'
+          })
+
+           .state('page.registerwizard', {
+              url: '/registration',
+              title: 'Register',
+              templateUrl: 'app/pages/registerwizard.html'
+          })
+          .state('page.recover', {
+              url: '/recover',
+              title: 'Recover',
+              templateUrl: 'app/pages/recover.html'
+          })
+          .state('page.lock', {
+              url: '/lock',
+              title: 'Lock',
+              templateUrl: 'app/pages/lock.html'
+          })
+          .state('page.404', {
+              url: '/404',
+              title: 'Not Found',
+              templateUrl: 'app/pages/404.html'
+          })
+          .state('page.500', {
+              url: '/500',
+              title: 'Server error',
+              templateUrl: 'app/pages/500.html'
+          })
+          .state('page.maintenance', {
+              url: '/maintenance',
+              title: 'Maintenance',
+              templateUrl: 'app/pages/maintenance.html'
+          })
+
+          //
+          // Horizontal layout
+          // -----------------------------------
+          .state('app-h', {
+              url: '/app-h',
+              abstract: true,
+              templateUrl: helper.basepath( 'app-h.html' ),
+              resolve: helper.resolveFor('fastclick', 'modernizr', 'icons', 'screenfull', 'animo', 'sparklines', 'slimscroll', 'classyloader', 'toaster', 'whirl')
+          })
+          .state('app-h.dashboard_v2', {
+              url: '/dashboard_v2',
+              title: 'Dashboard v2',
+              templateUrl: helper.basepath('dashboard_v2.html'),
+              controller: 'DashboardV2Controller',
+              controllerAs: 'dash2',
+              resolve: helper.resolveFor('flot-chart','flot-chart-plugins')
+          })
+
+
+           .state('app.statutory-details', {
+              url: '/statutory-details',
+              title: 'payroll-details',
+              templateUrl: helper.basepath('company-statutory.html')
+          })
+
+             .state('app.leave-types', {
+              url: '/leave-types',
+              title: 'leave-types',
+              templateUrl: helper.basepath('leave-types.html')
+          })
+              .state('app.leave-approve', {
+              url: '/leave_approve',
+              title: 'Leave approval',
+              templateUrl: helper.basepath('leave-approve.html')
+          })
+
+              .state('app.Leave-transaction-types', {
+              url: '/Leave-transaction',
+              title: 'Leave-transaction',
+                templateUrl: helper.basepath('Leave-transaction.html'),
+                 resolve: helper.resolveFor('datatables')
+             
+          })
+            .state('app.gl-mapping', {
+              url: '/glMapping',
+              title: 'gl mapping',
+              templateUrl: helper.basepath('gl-mapping.html'),
+               resolve: helper.resolveFor('xeditable')
+          })
+
+              .state('app.company-maintenance', {
+              url: '/company-maintenance',
+              title: 'company-maintenance',
+              templateUrl: helper.basepath('company-maintenance.html')
+          })
+
+
+           .state('app.formula-setup', {
+              url: '/formula-setup',
+              title: 'formula-setup',
+              templateUrl: helper.basepath('formula-setup.html'),
+                resolve: helper.resolveFor('datatables')
+          })
+            .state('app.employee-setup', {
+              url: '/employee details',
+              title: 'employee details',
+              templateUrl: helper.basepath('employee-setup.html')
+          })
+
+
+           .state('app.payroll-codes', {
+              url: '/payroll-codes',
+              title: 'payroll-codes',
+              templateUrl: helper.basepath('payroll-codes.html'),
+               resolve: helper.resolveFor('datatables')
+          })
+
+           .state('app.payroll-groups', {
+              url: '/payrollgroups',
+              title: 'payroll-codes',
+              templateUrl: helper.basepath('payroll-groups.html'),
+              resolve: helper.resolveFor('datatables')
+          })
+
+
+            .state('app.exemptions', {
+              url: '/exemptions',
+              title: 'exemptions',
+              templateUrl: helper.basepath('exemptions.html'),
+                resolve: helper.resolveFor('datatables')
+          })
+
+
+
+           .state('app.bankcodes', {
+              url: '/bankcodes',
+              title: 'bank codes',
+              templateUrl: helper.basepath('bank-codes.html'),
+                resolve: helper.resolveFor('datatables')
+          })
+
+           .state('app.employee-posting', {
+              url: '/employee_posting',
+              title: 'payroll process',
+              templateUrl: helper.basepath('employeeposting.html'),
+               resolve: helper.resolveFor('xeditable')
+          })
+           .state('app.payslip-preview', {
+              url: '/processing',
+              title: 'payroll process',
+              templateUrl: helper.basepath('payslip-preview.html'),
+              resolve: helper.resolveFor('xeditable')
+          })
+
+           .state('app.payslip-approve', {
+              url: '/payslip-approve',
+              title: 'approving Payslip',
+              templateUrl: helper.basepath('payslip-approve.html'),
+              resolve: helper.resolveFor('xeditable')
+          })
+
+               .state('app.run', {
+              url: '/run-payroll',
+              title: 'payroll processing',
+              templateUrl: helper.basepath('run.html'),
+              resolve: helper.resolveFor('datatables')
+          })
+          .state('app.payroll-preview', {
+              url: '/payroll-preview',
+              title: 'preview payroll',
+              templateUrl: helper.basepath('payroll-preview.html')
+            
+          })
+          .state('app.payroll-approve', {
+              url: '/payroll-approval',
+              title: 'approve payroll',
+              templateUrl: helper.basepath('payroll-approve.html')
+            
+          })
+
+
+             .state('app.leaveposting', {
+              url: '/leaveposting',
+              title: 'Leave Posting',
+              templateUrl: helper.basepath('leaveposting.html')
+          })
+
+             .state('app.endmonth', {
+              url: '/endmonth',
+              title: 'Close Month',
+              templateUrl: helper.basepath('endmonth.html')
+          })
+
+
+          .state('app.employee-payroll', {
+              url: '/employee setup',
+              title: 'employee setup',
+              templateUrl: helper.basepath('employee-payroll.html')
+          })
+
+       
+            .state('app.company', {
+              url: '/company',
+              title: 'Company Details',
+                templateUrl: helper.basepath('company.html')
+             
+          })
+
+
+            .state('app.financialperiods', {
+              url: '/financialperiods',
+              title: 'Financial Periods',
+                templateUrl: helper.basepath('financialperiods.html')
+             
+          })
+
+
+            .state('app.companysummary', {
+              url: '/company summary',
+              title: 'companysummary',
+                templateUrl: helper.basepath('company-summary.html')
+             
+          })
+
+            .state('app.ctotals-review', {
+              url: '/company-totals-review',
+              title: 'Company totals',
+                templateUrl: helper.basepath('ctotals-review.html')
+             
+          })
+
+            .state('app.companytotals', {
+              url: '/company totals',
+              title: 'company totals',
+                templateUrl: helper.basepath('company-totals.html'),
+                resolve: helper.resolveFor('datatables')
+             
+          })
+
+             .state('app.csummary-review', {
+              url: '/company summary review',
+              title: 'company totals',
+                templateUrl: helper.basepath('csummary-review.html')
+                
+             
+          })
+
+             .state('app.company-total-approve', {
+              url: '/company-total-approve',
+              title: 'approving Payslip',
+              templateUrl: helper.basepath('company-total-approve.html')
+        
+          })
+
+             .state('app.company-summary-approve', {
+              url: '/company-summary-approve',
+              title: 'approving Payslip',
+              templateUrl: helper.basepath('company-summary-approve.html')
+        
+          })
+
+
+            .state('app.paye', {
+              url: '/paye',
+              title: 'PAYE  Report',
+                templateUrl: helper.basepath('paye.html')
+             
+          })
+
+
+            .state('app.payesummary', {
+              url: '/payesummary',
+              title: 'PAYE  Report',
+                templateUrl: helper.basepath('payesummary.html')
+             
+          })
+
+
+             .state('app.nhif', {
+              url: '/nhif  reports',
+              title: 'NHIF byproduct',
+                templateUrl: helper.basepath('nhif.html')
+             
+          })
+
+
+
+       
+
+         .state('app.nssf', {
+              url: '/nssf reports',
+              title: 'NSSF schedule',
+                templateUrl: helper.basepath('nssfschedule.html')
+             
+          })
+
+
+         .state('app.helb', {
+              url: '/helb  schedule',
+              title: 'HELB schedule',
+                templateUrl: helper.basepath('helb-schedule.html')
+             
+          })
+
+          .state('app.scheduler', {
+              url: '/schedules',
+              title: 'schedules',
+                templateUrl: helper.basepath('scheduler.html')
+               
+                
+             
+          })
+          .state('app.bankfiles', {
+              url: '/bankfiles',
+              title: 'schedules',
+                templateUrl: helper.basepath('bankfiles.html')
+
+             
+          })
+
+           .state('app.payroll-journals', {
+              url: '/payroll-journals',
+              title: 'payroll journals',
+                templateUrl: helper.basepath('payroll-journals.html')
+             
+          })
+
+
+         .state('app.bulktrans_input', {
+              url: '/bulktransactions',
+              title: 'Bulk transaction item input',
+                templateUrl: helper.basepath('bulk-input.html'),
+                    resolve: helper.resolveFor('angularFileUpload', 'filestyle'),
+                    resolve: helper.resolveFor('ui.grid'),
+                    resolve: helper.resolveFor('xeditable'),
+
+                      resolve : {
+                ngAnimate : ['$$animateJs','$ocLazyLoad', function ($$animateJs, $ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        'vendor/angular-ui-grid/ui-grid.min.css',
+                        'vendor/angular-ui-grid/ui-grid.min.js'
+                    ])
+                }]
+            }
+
+             
+          })
+
+           .state('app.payslip', {
+              url: '/payslip',
+              title: 'payslip',
+                templateUrl: helper.basepath('payslip.html'),
+                 resolve: helper.resolveFor('datatables')
+             
+          })
+
+         .state('app.listings', {
+              url: '/listings',
+              title: 'list',
+                templateUrl: helper.basepath('employeelist.html'),
+                 resolve: helper.resolveFor('datatables')
+             
+          })
+
+          .state('app.employee-groups', {
+              url: '/Employee-groups',
+              title: 'list',
+                templateUrl: helper.basepath('employee-groups.html'),
+                 resolve: helper.resolveFor('datatables')
+             
+          })
+        .state('app.employee-category', {
+              url: '/employee-category',
+              title: 'employee-category',
+                templateUrl: helper.basepath('employee-category.html'),
+                 resolve: helper.resolveFor('datatables')
+             
+          })
+
+
+          .state('app.batchemployees', {
+              url: '/batchemployees',
+              title: 'list',
+                templateUrl: helper.basepath('batch-employees.html')
+                 
+             
+          })
+         .state('app.Payfrequency', {
+              url: '/Payfrequency',
+              title: 'Payfrequency',
+                templateUrl: helper.basepath('payfrequency.html')
+           
+             
+          })
+       .state('app.departmentlistings', {
+              url: '/departmentlistings',
+              title: 'Departments',
+                templateUrl: helper.basepath('departmentlisting.html'),
+                resolve: helper.resolveFor('datatables')
+             
+          })
+
+
+         .state('app.costcenters', {
+              url: '/costcenters',
+              title: 'cost centers',
+                templateUrl: helper.basepath('costcenters.html'),
+                 resolve: helper.resolveFor('datatables')
+             
+          })
+
+         .state('app.paypointslistings', {
+              url: '/paypointslistings',
+              title: 'pay points',
+                templateUrl: helper.basepath('paypoints.html'),
+                resolve: helper.resolveFor('datatables')
+             
+          })
+
+
+           .state('app.paymode', {
+              url: '/paymode',
+              title: 'pay mode',
+                templateUrl: helper.basepath('paymode.html'),
+              
+             
+          })
+          .state('app.employeeinfo', {
+              url: '/employee/:Employee',
+              title: 'Employee details',
+                templateUrl: helper.basepath('employee-info.html')
+                 
+             
+          })
+
+            .state('app.employee-edit', {
+              url: '/employee/Update/:EmployeeId',
+              title: 'Update Employee',
+                templateUrl: helper.basepath('employee-update.html')
+
+                 
+             
+          })
+
+
+           .state('app.companyedit', {
+              url: '/company:id',
+              title: 'user details',
+                templateUrl: helper.basepath('companyedit.html')
+                 
+             
+          })
+          //Annual Reports
+ .state('app.p9a', {
+              url: '/p9a',
+              title: 'tax deduction card',
+                templateUrl: helper.basepath('p9a.html'),
+                 
+             
+          })
+
+ .state('app.p9b', {
+              url: '/p9b',
+              title: 'tax deduction card',
+                templateUrl: helper.basepath('p9b.html'),
+                 
+             
+          })
+
+
+ .state('app.p10', {
+              url: '/p10',
+              title: 'tax deduction card',
+                templateUrl: helper.basepath('p10.html'),
+                 
+             
+          })
+.state('app.p10a', {
+              url: '/p10a',
+              title: 'tax deduction card',
+                templateUrl: helper.basepath('p10a.html'),
+                 
+             
+          })
+  .state('app.p10b', {
+              url: '/p10b',
+              title: 'tax deduction card',
+                templateUrl: helper.basepath('p10b.html'),
+                 
+             
+          })
+
+ .state('app.p10c', {
+              url: '/p10c',
+              title: 'tax deduction card',
+                templateUrl: helper.basepath('p10c.html'),
+                 
+             
+          })
+ .state('app.p10d', {
+              url: '/p10d',
+              title: 'tax deduction card',
+                templateUrl: helper.basepath('p10d.html'),
+                 
+             
+          })
+
+//User Adminisration
+ .state('app.user_settings', {
+              url: '/adminsettings',
+              title: 'user settings',
+                templateUrl: helper.basepath('user-settings.html'),
+                    resolve: helper.resolveFor('datatables'),
+                 
+             
+          })
+
+
+  .state('app.accounts', {
+              url: '/accounts',
+              title: 'accounts',
+                templateUrl: helper.basepath('accounts.html'),
+                 resolve: helper.resolveFor('datatables'),
+                  
+                 
+             
+          })
+
+    .state('app.user-rights', {
+              url: '/rights',
+              title: 'accounts',
+                templateUrl: helper.basepath('user-rights.html'),
+                    resolve: helper.resolveFor('datatables'),
+                 
+             
+          })
+
+
+    .state('app.user-groups', {
+              url: '/user-groups',
+              title: 'accounts',
+                templateUrl: helper.basepath('user-groups.html'),
+                    resolve: helper.resolveFor('datatables'),
+                 
+             
+          })
+
+ .state('app.task', {
+              url: '/tasks',
+              title: 'tasks',
+                templateUrl: helper.basepath('task.html'),
+                 
+             
+          })
+.state('app.workflow', {
+              url: '/workflow/:Id',
+              title: 'workflow',
+                templateUrl: helper.basepath('workflow.html'),
+                 
+             
+          })
+
+.state('app.payrollworkflow', {
+              url: '/payrollworkflow',
+              title: 'workflow',
+                templateUrl: helper.basepath('payroll-workflow.html'),
+                 
+             
+          })
+
+ //Staff Portal 
+
+ .state('app.leave', {
+              url: '/leaves',
+              title: 'leaves',
+                templateUrl: helper.basepath('leavereport.html'),
+                 
+             
+          })
+ .state('app.timesheets', {
+              url: '/timesheets',
+              title: 'Timesheets',
+                templateUrl: helper.basepath('timesheets.html'),
+                 
+             
+          })
+  .state('app.claims', {
+              url: '/claims',
+              title: 'Claims',
+                templateUrl: helper.basepath('claims.html'),
+                 
+             
+          })
+  .state('app.mileage', {
+              url: '/mileage',
+              title: 'Mileage',
+                templateUrl: helper.basepath('mileage.html'),
+                 
+             
+          })
+
+
+
+
+          //
+          // CUSTOM RESOLVES
+          //   Add your own resolves properties
+          //   following this object extend
+          //   method
+          // -----------------------------------
+          // .state('app.someroute', {
+          //   url: '/some_url',
+          //   templateUrl: 'path_to_template.html',
+          //   controller: 'someController',
+          //   resolve: angular.extend(
+          //     helper.resolveFor(), {
+          //     // YOUR RESOLVES GO HERE
+          //     }
+          //   )
+          // })
+          ;
+
+    } // routesConfig
+
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.settings')
+        .run(settingsRun);
+
+    settingsRun.$inject = ['$rootScope', '$localStorage'];
+
+    function settingsRun($rootScope, $localStorage){
+
+
+      // User Settings
+      // -----------------------------------
+      $rootScope.user = {
+        name:     'John',
+        job:      'ng-developer',
+        picture:  'app/img/user/02.jpg'
+      };
+
+      // Hides/show user avatar on sidebar from any element
+      $rootScope.toggleUserBlock = function(){
+        $rootScope.$broadcast('toggleUserBlock');
+      };
+
+      // Global Settings
+      // -----------------------------------
+      $rootScope.app = {
+        name: 'Jada',
+        description: 'Jada Payroll',
+        year: ((new Date()).getFullYear()),
+        layout: {
+          isFixed: true,
+          isCollapsed: false,
+          isBoxed: false,
+          isRTL: false,
+          horizontal: false,
+          isFloat: false,
+          asideHover: false,
+          theme: null,
+          asideScrollbar: false,
+          isCollapsedText: false
+        },
+        useFullLayout: false,
+        hiddenFooter: false,
+        offsidebarOpen: false,
+        asideToggled: false,
+        viewAnimation: 'ng-fadeInUp'
+      };
+
+      // Setup the layout mode
+      $rootScope.app.layout.horizontal = ( $rootScope.$stateParams.layout === 'app-h') ;
+
+      // Restore layout settings
+      if( angular.isDefined($localStorage.layout) )
+        $rootScope.app.layout = $localStorage.layout;
+      else
+        $localStorage.layout = $rootScope.app.layout;
+
+      $rootScope.$watch('app.layout', function () {
+        $localStorage.layout = $rootScope.app.layout;
+      }, true);
+
+      // Close submenu when sidebar change from collapsed to normal
+      $rootScope.$watch('app.layout.isCollapsed', function(newValue) {
+        if( newValue === false )
+          $rootScope.$broadcast('closeSidebarMenu');
+      });
+
+    }
+       function Logout() {
+            // remove user from local storage and clear http auth header
+            delete $localStorage.currentUser;
+            $http.defaults.headers.common.Authorization = '';
+        }
+
+})();
+
 (function() {
     'use strict';
 
@@ -14781,8 +16176,8 @@ $scope.searchpayslipByperiod=function(id){
    $rootScope.pid=id;
    
 
- // $scope.curPage = 0;
- // $scope.pageSize = 1;
+ $scope.curPage = 0;
+ $scope.pageSize = 1;
 
     $http.get(jadaApiUrl+'api/payslipreport/'+id).success(function(data) {
             $scope.persons = data;
@@ -14790,19 +16185,19 @@ $scope.searchpayslipByperiod=function(id){
                  console.log('helllo period');
               console.log($scope.persons);
              
+     $scope.numberOfPages = function() {
+        return Math.ceil($scope.persons.length / $scope.pageSize);
+      };
 
             });
      
-     // $scope.numberOfPages = function() {
-     //    return Math.ceil($scope.persons.length / $scope.pageSize);
-     //  };
 
 
  }
   
 }
 
-$scope.searchpayslipByperiod(12);
+
 
 
 
@@ -14813,8 +16208,8 @@ $scope.searchpayslipByperiod(12);
            var employeeId=user.employeeNumber;
            var period=user.period;
 
- // $scope.curPage = 0;
- // $scope.pageSize = 1;
+ $scope.curPage = 0;
+ $scope.pageSize = 1;
      
           $http.get(jadaApiUrl+'api/payslipreport//'+period+'/'+employeeId).success(function(data) {
                 $scope.persons= data;
@@ -14823,12 +16218,12 @@ $scope.searchpayslipByperiod(12);
       console.log('////hapa');
               console.log($scope.persons);
 
-       
+         $scope.numberOfPages = function() {
+        return Math.ceil($scope.persons.length / $scope.pageSize);
+      };
+
 
             });
-      //      $scope.numberOfPages = function() {
-      //   return Math.ceil($scope.persons.length / $scope.pageSize);
-      // };
 
           }
           
@@ -14836,33 +16231,15 @@ $scope.searchpayslipByperiod(12);
          };
 
 
+$http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
+          $scope.user={};
+          $scope.currentPeriodData=data.data;
+    $scope.currentperiod=$scope.currentPeriodData.period;
+      $scope.user.period=$scope.currentperiod;
+     
 
-//  $scope.showData = function( ){
-
-//  $scope.curPage = 0;
-//  $scope.pageSize = 1;
-//      $scope.datalists = [
-//          { "name": "John","age":"16","designation":"Software Engineer1"},
-//     {"name": "John2","age":"21","designation":"Software Engineer2"},
-//     {"name": "John3","age":"19","designation":"Software Engineer3"},
-//     {"name": "John4","age":"17","designation":"Software Engineer4"},
-//     {"name": "John5","age":"21","designation":"Software Engineer5"},
-//     {"name": "John6","age":"31","designation":"Software Engineer6"},
-//     {"name": "John7","age":"41","designation":"Software Engineer7"},
-//     {"name": "John8","age":"16","designation":"Software Engineer8"},
-//     {"name": "John18","age":"16","designation":"Software Engineer9"},
-//     {"name": "John28","age":"16","designation":"Software Engineer10"},
-//     {"name": "John38","age":"16","designation":"Software Engineer11"},
-//     {"name": "John48","age":"16","designation":"Software Engineer12"},
-//     {"name": "John58","age":"16","designation":"Software Engineer13"},
-//     {"name": "John68","age":"16","designation":"Software Engineer14"},
-//     {"name": "John68","age":"16","designation":"Software Engineer15"}
-// ]
-//      $scope.numberOfPages = function() {
-//         return Math.ceil($scope.datalists.length / $scope.pageSize);
-//       };
-         
-// }
+      $scope.searchpayslipByperiod($scope.currentperiod);
+     });
 
 
 
@@ -15059,1318 +16436,307 @@ angular.module('app.reports').filter('unique', function () {
   };
 });
 /**=========================================================
- * Module: helpers.js
- * Provides helper functions for routes definition
+ * Module: sidebar-menu.js
+ * Handle sidebar collapsible elements
  =========================================================*/
 
 (function() {
     'use strict';
 
     angular
-        .module('app.routes')
-        .provider('RouteHelpers', RouteHelpersProvider)
-        ;
+        .module('app.sidebar')
+        .controller('SidebarController', SidebarController);
 
-    RouteHelpersProvider.$inject = ['APP_REQUIRES'];
-    function RouteHelpersProvider(APP_REQUIRES) {
+    SidebarController.$inject = ['$rootScope', '$scope', '$state', 'SidebarLoader', 'Utils'];
+    function SidebarController($rootScope, $scope, $state, SidebarLoader,  Utils) {
 
-      /* jshint validthis:true */
-      return {
-        // provider access level
-        basepath: basepath,
-        resolveFor: resolveFor,
-        // controller access level
-        $get: function() {
-          return {
-            basepath: basepath,
-            resolveFor: resolveFor
+        activate();
+
+        ////////////////
+
+        function activate() {
+          var collapseList = [];
+
+          // demo: when switch from collapse to hover, close all items
+          var watchOff1 = $rootScope.$watch('app.layout.asideHover', function(oldVal, newVal){
+            if ( newVal === false && oldVal === true) {
+              closeAllBut(-1);
+            }
+          });
+
+
+          // Load menu from json file
+          // -----------------------------------
+
+          SidebarLoader.getMenu(sidebarReady);
+
+          function sidebarReady(items) {
+            $scope.menuItems = items;
+          }
+
+          // Handle sidebar and collapse items
+          // ----------------------------------
+
+          $scope.getMenuItemPropClasses = function(item) {
+            return (item.heading ? 'nav-heading' : '') +
+                   (isActive(item) ? ' active' : '') ;
           };
-        }
-      };
 
-      // Set here the base of the relative path
-      // for all app views
-      function basepath(uri) {
-        return 'app/views/' + uri;
-      }
+          $scope.addCollapse = function($index, item) {
+            collapseList[$index] = $rootScope.app.layout.asideHover ? true : !isActive(item);
+          };
 
-      // Generates a resolve object by passing script names
-      // previously configured in constant.APP_REQUIRES
-      function resolveFor() {
-        var _args = arguments;
-        return {
-          deps: ['$ocLazyLoad','$q', function ($ocLL, $q) {
-            // Creates a promise chain for each argument
-            var promise = $q.when(1); // empty promise
-            for(var i=0, len=_args.length; i < len; i ++){
-              promise = andThen(_args[i]);
+          $scope.isCollapse = function($index) {
+            return (collapseList[$index]);
+          };
+
+          $scope.toggleCollapse = function($index, isParentItem) {
+
+            // collapsed sidebar doesn't toggle drodopwn
+            if( Utils.isSidebarCollapsed() || $rootScope.app.layout.asideHover ) return true;
+
+            // make sure the item index exists
+            if( angular.isDefined( collapseList[$index] ) ) {
+              if ( ! $scope.lastEventFromChild ) {
+                collapseList[$index] = !collapseList[$index];
+                closeAllBut($index);
+              }
             }
-            return promise;
+            else if ( isParentItem ) {
+              closeAllBut(-1);
+            }
 
-            // creates promise to chain dynamically
-            function andThen(_arg) {
-              // also support a function that returns a promise
-              if(typeof _arg === 'function')
-                  return promise.then(_arg);
+            $scope.lastEventFromChild = isChild($index);
+
+            return true;
+
+          };
+
+          // Controller helpers
+          // -----------------------------------
+
+            // Check item and children active state
+            function isActive(item) {
+
+              if(!item) return;
+
+              if( !item.sref || item.sref === '#') {
+                var foundActive = false;
+                angular.forEach(item.submenu, function(value) {
+                  if(isActive(value)) foundActive = true;
+                });
+                return foundActive;
+              }
               else
-                  return promise.then(function() {
-                    // if is a module, pass the name. If not, pass the array
-                    var whatToLoad = getRequired(_arg);
-                    // simple error check
-                    if(!whatToLoad) return $.error('Route resolve: Bad resource name [' + _arg + ']');
-                    // finally, return a promise
-                    return $ocLL.load( whatToLoad );
-                  });
-            }
-            // check and returns required data
-            // analyze module items with the form [name: '', files: []]
-            // and also simple array of script files (for not angular js)
-            function getRequired(name) {
-              if (APP_REQUIRES.modules)
-                  for(var m in APP_REQUIRES.modules)
-                      if(APP_REQUIRES.modules[m].name && APP_REQUIRES.modules[m].name === name)
-                          return APP_REQUIRES.modules[m];
-              return APP_REQUIRES.scripts && APP_REQUIRES.scripts[name];
+                return $state.is(item.sref) || $state.includes(item.sref);
             }
 
-          }]};
-      } // resolveFor
+            function closeAllBut(index) {
+              index += '';
+              for(var i in collapseList) {
+                if(index < 0 || index.indexOf(i) < 0)
+                  collapseList[i] = true;
+              }
+            }
 
+            function isChild($index) {
+              /*jshint -W018*/
+              return (typeof $index === 'string') && !($index.indexOf('-') < 0);
+            }
+
+            $scope.$on('$destroy', function() {
+                watchOff1();
+            });
+
+        } // activate
     }
 
-
 })();
-
 
 /**=========================================================
- * Module: config.js
- * App routes and resources configuration
+ * Module: sidebar.js
+ * Wraps the sidebar and handles collapsed state
  =========================================================*/
-
 
 (function() {
     'use strict';
 
     angular
-        .module('app.routes')
-   
+        .module('app.sidebar')
+        .directive('sidebar', sidebar);
 
-      
-        .config(routesConfig);
+    sidebar.$inject = ['$rootScope', '$timeout', '$window', 'Utils'];
+    function sidebar ($rootScope, $timeout, $window, Utils) {
+        var $win = angular.element($window);
+        var directive = {
+            // bindToController: true,
+            // controller: Controller,
+            // controllerAs: 'vm',
+            link: link,
+            restrict: 'EA',
+            template: '<nav class="sidebar" ng-transclude></nav>',
+            transclude: true,
+            replace: true
+            // scope: {}
+        };
+        return directive;
 
+        function link(scope, element, attrs) {
 
-    routesConfig.$inject = ['$stateProvider', '$locationProvider', '$urlRouterProvider', 'RouteHelpersProvider'];
-    function routesConfig($stateProvider, $locationProvider, $urlRouterProvider, helper){
+          var currentState = $rootScope.$state.current.name;
+          var $sidebar = element;
 
-        // Set the following to true to enable the HTML5 Mode
-        // You may have to set <base> tag in index and a routing configuration in your server
-        $locationProvider.html5Mode(false);
+          var eventName = Utils.isTouch() ? 'click' : 'mouseenter' ;
+          var subNav = $();
 
-        // defaults to dashboard
-        $urlRouterProvider.otherwise('/app/dashboard');
+          $sidebar.on( eventName, '.nav > li', function() {
 
-        //
-        // Application Routes
-        // -----------------------------------
-        $stateProvider
-          .state('app', {
-              url: '/app',
-              abstract: true,
-              templateUrl: helper.basepath('app.html'),
-              resolve: helper.resolveFor('fastclick', 'modernizr', 'icons', 'screenfull', 'animo', 'sparklines', 'slimscroll', 'classyloader', 'toaster', 'whirl')
-          })
-          .state('app.dashboard', {
-              url: '/dashboard',
-              title: 'Dashboard',
-              authenticate: true,
-              templateUrl: helper.basepath('dashboard.html'),
-              resolve: helper.resolveFor('flot-chart','flot-chart-plugins', 'weather-icons'),
+            if( Utils.isSidebarCollapsed() || $rootScope.app.layout.asideHover ) {
 
-          })
-          .state('app.dashboard_v2', {
-              url: '/dashboard_v2',
-              title: 'Dashboard v2',
-              templateUrl: helper.basepath('dashboard_v2.html'),
-              controller: 'DashboardV2Controller',
-              controllerAs: 'dash2',
-              resolve: helper.resolveFor('flot-chart','flot-chart-plugins')
-          })
-          .state('app.dashboard_v3', {
-              url: '/dashboard_v3',
-              title: 'Dashboard v3',
-              controller: 'DashboardV3Controller',
-              controllerAs: 'dash3',
-              templateUrl: helper.basepath('dashboard_v3.html'),
-              resolve: helper.resolveFor('flot-chart','flot-chart-plugins', 'vector-map', 'vector-map-maps')
-          })
-          .state('app.widgets', {
-              url: '/widgets',
-              title: 'Widgets',
-              templateUrl: helper.basepath('widgets.html'),
-              resolve: helper.resolveFor('loadGoogleMapsJS', function() { return loadGoogleMaps(); }, 'ui.map')
-          })
-          .state('app.buttons', {
-              url: '/buttons',
-              title: 'Buttons',
-              templateUrl: helper.basepath('buttons.html')
-          })
-          .state('app.colors', {
-              url: '/colors',
-              title: 'Colors',
-              templateUrl: helper.basepath('colors.html')
-          })
-          .state('app.localization', {
-              url: '/localization',
-              title: 'Localization',
-              templateUrl: helper.basepath('localization.html')
-          })
-          .state('app.infinite-scroll', {
-              url: '/infinite-scroll',
-              title: 'Infinite Scroll',
-              templateUrl: helper.basepath('infinite-scroll.html'),
-              resolve: helper.resolveFor('infinite-scroll')
-          })
-          .state('app.navtree', {
-              url: '/navtree',
-              title: 'Nav Tree',
-              templateUrl: helper.basepath('nav-tree.html'),
-              resolve: helper.resolveFor('angularBootstrapNavTree')
-          })
-          .state('app.nestable', {
-              url: '/nestable',
-              title: 'Nestable',
-              templateUrl: helper.basepath('nestable.html'),
-              resolve: helper.resolveFor('ng-nestable')
-          })
-          .state('app.sortable', {
-              url: '/sortable',
-              title: 'Sortable',
-              templateUrl: helper.basepath('sortable.html'),
-              resolve: helper.resolveFor('ui.sortable')
-          })
-          .state('app.notifications', {
-              url: '/notifications',
-              title: 'Notifications',
-              templateUrl: helper.basepath('notifications.html')
-          })
-          .state('app.carousel', {
-              url: '/carousel',
-              title: 'Carousel',
-              templateUrl: helper.basepath('carousel.html'),
-              resolve: helper.resolveFor('angular-carousel')
-          })
-          .state('app.ngdialog', {
-              url: '/ngdialog',
-              title: 'ngDialog',
-              templateUrl: helper.basepath('ngdialog.html'),
-              resolve: angular.extend(helper.resolveFor('ngDialog'),{
-                tpl: function() { return { path: helper.basepath('ngdialog-template.html') }; }
-              }),
-              controller: 'DialogIntroCtrl'
-          })
-          .state('app.sweetalert', {
-            url: '/sweetalert',
-            title: 'SweetAlert',
-            templateUrl: helper.basepath('sweetalert.html'),
-            resolve: helper.resolveFor('oitozero.ngSweetAlert')
-          })
-          .state('app.tour', {
-            url: '/tour',
-            title: 'Tour',
-            templateUrl: helper.basepath('tour.html'),
-            resolve: helper.resolveFor('bm.bsTour')
-          })
-          .state('app.interaction', {
-              url: '/interaction',
-              title: 'Interaction',
-              templateUrl: helper.basepath('interaction.html')
-          })
-          .state('app.spinners', {
-              url: '/spinners',
-              title: 'Spinners',
-              templateUrl: helper.basepath('spinners.html'),
-              resolve: helper.resolveFor('loaders.css', 'spinkit')
-          })
-          .state('app.dropdown-animations', {
-              url: '/dropdown-animations',
-              title: 'Dropdown Animations',
-              templateUrl: helper.basepath('dropdown-animations.html')
-          })
-          .state('app.panels', {
-              url: '/panels',
-              title: 'Panels',
-              templateUrl: helper.basepath('panels.html')
-          })
-          .state('app.portlets', {
-              url: '/portlets',
-              title: 'Portlets',
-              templateUrl: helper.basepath('portlets.html'),
-              resolve: helper.resolveFor('ui.sortable')
-          })
-          .state('app.maps-google', {
-              url: '/maps-google',
-              title: 'Maps Google',
-              templateUrl: helper.basepath('maps-google.html'),
-              resolve: helper.resolveFor('loadGoogleMapsJS', function() { return loadGoogleMaps(); }, 'ui.map')
-          })
-          .state('app.maps-vector', {
-              url: '/maps-vector',
-              title: 'Maps Vector',
-              templateUrl: helper.basepath('maps-vector.html'),
-              controller: 'VectorMapController',
-              controllerAs: 'vmap',
-              resolve: helper.resolveFor('vector-map', 'vector-map-maps')
-          })
-          .state('app.grid', {
-              url: '/grid',
-              title: 'Grid',
-              templateUrl: helper.basepath('grid.html')
-          })
-          .state('app.grid-masonry', {
-              url: '/grid-masonry',
-              title: 'Grid Masonry',
-              templateUrl: helper.basepath('grid-masonry.html')
-          })
-          .state('app.grid-masonry-deck', {
-              url: '/grid-masonry-deck',
-              title: 'Grid Masonry',
-              templateUrl: helper.basepath('grid-masonry-deck.html'),
-              resolve: helper.resolveFor('spinkit', 'akoenig.deckgrid')
-          })
-          .state('app.typo', {
-              url: '/typo',
-              title: 'Typo',
-              templateUrl: helper.basepath('typo.html')
-          })
-          .state('app.icons-font', {
-              url: '/icons-font',
-              title: 'Icons Font',
-              templateUrl: helper.basepath('icons-font.html'),
-              resolve: helper.resolveFor('icons')
-          })
-          .state('app.icons-weather', {
-              url: '/icons-weather',
-              title: 'Icons Weather',
-              templateUrl: helper.basepath('icons-weather.html'),
-              resolve: helper.resolveFor('weather-icons', 'skycons')
-          })
-          .state('app.form-standard', {
-              url: '/form-standard',
-              title: 'Form Standard',
-              templateUrl: helper.basepath('form-standard.html')
-          })
-          .state('app.form-extended', {
-              url: '/form-extended',
-              title: 'Form Extended',
-              templateUrl: helper.basepath('form-extended.html'),
-              resolve: helper.resolveFor('colorpicker.module', 'codemirror', 'moment', 'taginput','inputmask','localytics.directives', 'ui.bootstrap-slider', 'ngWig', 'filestyle', 'summernote')
-          })
-          .state('app.form-validation', {
-              url: '/form-validation',
-              title: 'Form Validation',
-              templateUrl: helper.basepath('form-validation.html'),
-              resolve: helper.resolveFor('ui.select', 'taginput','inputmask','localytics.directives')
-          })
-          .state('app.form-wizard', {
-              url: '/form-wizard',
-              title: 'Form Wizard',
-              templateUrl: helper.basepath('form-wizard.html')
-          })
-          .state('app.form-upload', {
-              url: '/form-upload',
-              title: 'Form upload',
-              templateUrl: helper.basepath('form-upload.html'),
-              resolve: helper.resolveFor('angularFileUpload', 'filestyle')
-          })
-          .state('app.form-xeditable', {
-              url: '/form-xeditable',
-              templateUrl: helper.basepath('form-xeditable.html'),
-              resolve: helper.resolveFor('xeditable')
-          })
-          .state('app.form-imagecrop', {
-              url: '/form-imagecrop',
-              templateUrl: helper.basepath('form-imagecrop.html'),
-              resolve: helper.resolveFor('ngImgCrop', 'filestyle')
-          })
-          .state('app.form-uiselect', {
-              url: '/form-uiselect',
-              templateUrl: helper.basepath('form-uiselect.html'),
-              controller: 'uiSelectController',
-              controllerAs: 'uisel',
-              resolve: helper.resolveFor('ui.select')
-          })
-          .state('app.chart-flot', {
-              url: '/chart-flot',
-              title: 'Chart Flot',
-              templateUrl: helper.basepath('chart-flot.html'),
-              resolve: helper.resolveFor('flot-chart','flot-chart-plugins')
-          })
-          .state('app.chart-radial', {
-              url: '/chart-radial',
-              title: 'Chart Radial',
-              templateUrl: helper.basepath('chart-radial.html'),
-              resolve: helper.resolveFor('classyloader', 'ui.knob', 'easypiechart')
-          })
-          .state('app.chart-js', {
-              url: '/chart-js',
-              title: 'Chart JS',
-              templateUrl: helper.basepath('chart-js.html'),
-              resolve: helper.resolveFor('chartjs')
-          })
-          .state('app.chart-rickshaw', {
-              url: '/chart-rickshaw',
-              title: 'Chart Rickshaw',
-              templateUrl: helper.basepath('chart-rickshaw.html'),
-              resolve: helper.resolveFor('angular-rickshaw')
-          })
-          .state('app.chart-morris', {
-              url: '/chart-morris',
-              title: 'Chart Morris',
-              templateUrl: helper.basepath('chart-morris.html'),
-              resolve: helper.resolveFor('morris')
-          })
-          .state('app.chart-chartist', {
-              url: '/chart-chartist',
-              title: 'Chart Chartist',
-              templateUrl: helper.basepath('chart-chartist.html'),
-              resolve: helper.resolveFor('angular-chartist')
-          })
-          .state('app.table-standard', {
-              url: '/table-standard',
-              title: 'Table Standard',
-              templateUrl: helper.basepath('table-standard.html')
-          })
-          .state('app.table-extended', {
-              url: '/table-extended',
-              title: 'Table Extended',
-              templateUrl: helper.basepath('table-extended.html')
-          })
-          .state('app.table-datatable', {
-              url: '/table-datatable',
-              title: 'Table Datatable',
-              templateUrl: helper.basepath('table-datatable.html'),
-              resolve: helper.resolveFor('datatables')
-          })
-          .state('app.table-xeditable', {
-              url: '/table-xeditable',
-              templateUrl: helper.basepath('table-xeditable.html'),
-              resolve: helper.resolveFor('xeditable')
-          })
-          .state('app.table-ngtable', {
-              url: '/table-ngtable',
-              templateUrl: helper.basepath('table-ngtable.html'),
-              resolve: helper.resolveFor('ngTable', 'ngTableExport')
-          })
-          .state('app.table-uigrid', {
-              url: '/table-uigrid',
-              templateUrl: helper.basepath('table-uigrid.html'),
-              resolve: helper.resolveFor('ui.grid')
-          })
-          .state('app.table-angulargrid', {
-              url: '/table-angulargrid',
-              templateUrl: helper.basepath('table-angulargrid.html'),
-              resolve: helper.resolveFor('angularGrid')
-          })
-          .state('app.contacts', {
-              url: '/contacts',
-              title: 'Contacts',
-              templateUrl: helper.basepath('contacts.html')
-          })
-          .state('app.contact-details', {
-              url: '/contact-details',
-              title: 'Contact Details',
-              templateUrl: helper.basepath('contact-details.html')
-          })
-          .state('app.projects', {
-              url: '/projects',
-              title: 'Projects',
-              templateUrl: helper.basepath('projects.html')
-          })
-          .state('app.project-details', {
-              url: '/project-details',
-              title: 'Project Details',
-              templateUrl: helper.basepath('project-details.html')
-          })
-          .state('app.team-viewer', {
-              url: '/team-viewer',
-              title: 'Team Viewer',
-              templateUrl: helper.basepath('team-viewer.html')
-          })
-          .state('app.social-board', {
-              url: '/social-board',
-              title: 'Social Board',
-              templateUrl: helper.basepath('social-board.html')
-          })
-          .state('app.vote-links', {
-              url: '/vote-links',
-              title: 'Vote Links',
-              templateUrl: helper.basepath('vote-links.html')
-          })
-          .state('app.bug-tracker', {
-              url: '/bug-tracker',
-              title: 'Bug Tracker',
-              templateUrl: helper.basepath('bug-tracker.html'),
-              resolve: helper.resolveFor('datatables')
-          })
-          .state('app.faq', {
-              url: '/faq',
-              title: 'FAQ',
-              templateUrl: helper.basepath('faq.html'),
-              resolve: helper.resolveFor('datatables')
-          })
-          .state('app.help-center', {
-              url: '/help-center',
-              title: 'Help Center',
-              templateUrl: helper.basepath('help-center.html')
-          })
-          .state('app.followers', {
-              url: '/followers',
-              title: 'Followers',
-              templateUrl: helper.basepath('followers.html')
-          })
-          .state('app.settings', {
-              url: '/settings',
-              title: 'Settings',
-              templateUrl: helper.basepath('settings.html'),
-              resolve: helper.resolveFor('filestyle')
-          })
-          .state('app.plans', {
-              url: '/plans',
-              title: 'Plans',
-              templateUrl: helper.basepath('plans.html')
-          })
-          .state('app.file-manager', {
-              url: '/file-manager',
-              title: 'File Manager',
-              templateUrl: helper.basepath('file-manager.html'),
-              resolve: helper.resolveFor('filestyle')
-          })
-          .state('app.timeline', {
-              url: '/timeline',
-              title: 'Timeline',
-              templateUrl: helper.basepath('timeline.html')
-          })
-          .state('app.calendar', {
-              url: '/calendar',
-              title: 'Calendar',
-              templateUrl: helper.basepath('calendar.html'),
-              resolve: helper.resolveFor('moment', 'ui.calendar')
-          })
-          .state('app.invoice', {
-              url: '/invoice',
-              title: 'Invoice',
-              templateUrl: helper.basepath('invoice.html')
-          })
-          .state('app.search', {
-              url: '/search',
-              title: 'Search',
-              templateUrl: helper.basepath('search.html'),
-              resolve: helper.resolveFor('moment', 'localytics.directives', 'ui.bootstrap-slider')
-          })
-          .state('app.todo', {
-              url: '/todo',
-              title: 'Todo List',
-              templateUrl: helper.basepath('todo.html'),
-              controller: 'TodoController',
-              controllerAs: 'todo'
-          })
-          .state('app.profile', {
-              url: '/profile',
-              title: 'Profile',
-              templateUrl: helper.basepath('profile.html'),
-              resolve: helper.resolveFor('loadGoogleMapsJS', function() { return loadGoogleMaps(); }, 'ui.map')
-          })
-          .state('app.code-editor', {
-              url: '/code-editor',
-              templateUrl: helper.basepath('code-editor.html'),
-              controller: 'CodeEditorController',
-              controllerAs: 'coder',
-              resolve: {
-                  deps: helper.resolveFor('codemirror', 'ui.codemirror', 'codemirror-modes-web', 'angularBootstrapNavTree').deps,
-                  filetree: ['LoadTreeService', function (LoadTreeService) {
-                      return LoadTreeService.get().$promise.then(function (res) {
-                          return res.data;
-                      });
-                  }]
-              }
-          })
-          .state('app.template', {
-              url: '/template',
-              title: 'Blank Template',
-              templateUrl: helper.basepath('template.html')
-          })
-          .state('app.documentation', {
-              url: '/documentation',
-              title: 'Documentation',
-              templateUrl: helper.basepath('documentation.html'),
-              resolve: helper.resolveFor('flatdoc')
-          })
-          // Forum
-          // -----------------------------------
-          .state('app.forum', {
-              url: '/forum',
-              title: 'Forum',
-              templateUrl: helper.basepath('forum.html')
-          })
-          .state('app.forum-topics', {
-              url: '/forum/topics/:catid',
-              title: 'Forum Topics',
-              templateUrl: helper.basepath('forum-topics.html')
-          })
-          .state('app.forum-discussion', {
-              url: '/forum/discussion/:topid',
-              title: 'Forum Discussion',
-              templateUrl: helper.basepath('forum-discussion.html')
-          })
-          // Blog
-          // -----------------------------------
-          .state('app.blog', {
-              url: '/blog',
-              title: 'Blog',
-              templateUrl: helper.basepath('blog.html'),
-              resolve: helper.resolveFor('angular-jqcloud')
-          })
-          .state('app.blog-post', {
-              url: '/post',
-              title: 'Post',
-              templateUrl: helper.basepath('blog-post.html'),
-              resolve: helper.resolveFor('angular-jqcloud')
-          })
-          .state('app.articles', {
-              url: '/articles',
-              title: 'Articles',
-              templateUrl: helper.basepath('blog-articles.html'),
-              resolve: helper.resolveFor('datatables')
-          })
-          .state('app.article-view', {
-              url: '/article/:id',
-              title: 'Article View',
-              templateUrl: helper.basepath('blog-article-view.html'),
-              resolve: helper.resolveFor('ui.select', 'summernote')
-          })
-          // eCommerce
-          // -----------------------------------
-          .state('app.orders', {
-              url: '/orders',
-              title: 'Orders',
-              templateUrl: helper.basepath('ecommerce-orders.html'),
-              resolve: helper.resolveFor('datatables')
-          })
-          .state('app.order-view', {
-              url: '/order-view',
-              title: 'Order View',
-              templateUrl: helper.basepath('ecommerce-order-view.html')
-          })
-          .state('app.products', {
-              url: '/products',
-              title: 'Products',
-              templateUrl: helper.basepath('ecommerce-products.html'),
-              resolve: helper.resolveFor('datatables')
-          })
-          .state('app.product-view', {
-              url: '/product/:id',
-              title: 'Product View',
-              templateUrl: helper.basepath('ecommerce-product-view.html')
-          })
-          .state('app.checkout', {
-              url: '/checkout',
-              title: 'Checkout',
-              templateUrl: helper.basepath('ecommerce-checkout.html')
-          })
-          // Mailbox
-          // -----------------------------------
-          .state('app.mailbox', {
-              url: '/mailbox',
-              title: 'Mailbox',
-              abstract: true,
-              templateUrl: helper.basepath('mailbox.html')
-          })
-          .state('app.mailbox.folder', {
-              url: '/folder/:folder',
-              title: 'Mailbox',
-              templateUrl: helper.basepath('mailbox-inbox.html')
-          })
-          .state('app.mailbox.view', {
-              url : '/{mid:[0-9]{1,4}}',
-              title: 'View mail',
-              templateUrl: helper.basepath('mailbox-view.html'),
-              resolve: helper.resolveFor('ngWig')
-          })
-          .state('app.mailbox.compose', {
-              url: '/compose',
-              title: 'Mailbox',
-              templateUrl: helper.basepath('mailbox-compose.html'),
-              resolve: helper.resolveFor('ngWig')
-          })
-          //
-          // Multiple level example
-          // -----------------------------------
-          .state('app.multilevel', {
-              url: '/multilevel',
-              title: 'Multilevel',
-              template: '<h3>Multilevel Views</h3>' + '<div class="lead ba p">View @ Top Level ' + '<div ui-view=""></div> </div>'
-          })
-          .state('app.multilevel.level1', {
-              url: '/level1',
-              title: 'Multilevel - Level1',
-              template: '<div class="lead ba p">View @ Level 1' + '<div ui-view=""></div> </div>'
-          })
-          .state('app.multilevel.level1.item', {
-              url: '/item',
-              title: 'Multilevel - Level1',
-              template: '<div class="lead ba p"> Menu item @ Level 1</div>'
-          })
-          .state('app.multilevel.level1.level2', {
-              url: '/level2',
-              title: 'Multilevel - Level2',
-              template: '<div class="lead ba p">View @ Level 2'  + '<div ui-view=""></div> </div>'
-          })
-          .state('app.multilevel.level1.level2.level3', {
-              url: '/level3',
-              title: 'Multilevel - Level3',
-              template: '<div class="lead ba p">View @ Level 3' + '<div ui-view=""></div> </div>'
-          })
-          .state('app.multilevel.level1.level2.level3.item', {
-              url: '/item',
-              title: 'Multilevel - Level3 Item',
-              template: '<div class="lead ba p"> Menu item @ Level 3</div>'
-          })
-          //
-          // Single Page Routes
-          // -----------------------------------
-          .state('page', {
-              url: '/page',
-              templateUrl: 'app/pages/page.html',
-              resolve: helper.resolveFor('modernizr', 'icons'),
-              controller: ['$rootScope', function($rootScope) {
-                  $rootScope.app.layout.isBoxed = false;
-              }]
-          })
-          .state('page.login', {
-              url: '/login',
-              title: 'Login',
-              templateUrl: 'app/pages/login.html'
-          })
-          .state('page.register', {
-              url: '/register',
-              title: 'Register',
-              templateUrl: 'app/pages/register.html'
-          })
+              subNav.trigger('mouseleave');
+              subNav = toggleMenuItem( $(this), $sidebar);
 
-           .state('page.registerwizard', {
-              url: '/registration',
-              title: 'Register',
-              templateUrl: 'app/pages/registerwizard.html'
-          })
-          .state('page.recover', {
-              url: '/recover',
-              title: 'Recover',
-              templateUrl: 'app/pages/recover.html'
-          })
-          .state('page.lock', {
-              url: '/lock',
-              title: 'Lock',
-              templateUrl: 'app/pages/lock.html'
-          })
-          .state('page.404', {
-              url: '/404',
-              title: 'Not Found',
-              templateUrl: 'app/pages/404.html'
-          })
-          .state('page.500', {
-              url: '/500',
-              title: 'Server error',
-              templateUrl: 'app/pages/500.html'
-          })
-          .state('page.maintenance', {
-              url: '/maintenance',
-              title: 'Maintenance',
-              templateUrl: 'app/pages/maintenance.html'
-          })
+              // Used to detect click and touch events outside the sidebar
+              sidebarAddBackdrop();
 
-          //
-          // Horizontal layout
-          // -----------------------------------
-          .state('app-h', {
-              url: '/app-h',
-              abstract: true,
-              templateUrl: helper.basepath( 'app-h.html' ),
-              resolve: helper.resolveFor('fastclick', 'modernizr', 'icons', 'screenfull', 'animo', 'sparklines', 'slimscroll', 'classyloader', 'toaster', 'whirl')
-          })
-          .state('app-h.dashboard_v2', {
-              url: '/dashboard_v2',
-              title: 'Dashboard v2',
-              templateUrl: helper.basepath('dashboard_v2.html'),
-              controller: 'DashboardV2Controller',
-              controllerAs: 'dash2',
-              resolve: helper.resolveFor('flot-chart','flot-chart-plugins')
-          })
-
-
-           .state('app.statutory-details', {
-              url: '/statutory-details',
-              title: 'payroll-details',
-              templateUrl: helper.basepath('company-statutory.html')
-          })
-
-             .state('app.leave-types', {
-              url: '/leave-types',
-              title: 'leave-types',
-              templateUrl: helper.basepath('leave-types.html')
-          })
-              .state('app.leave-approve', {
-              url: '/leave_approve',
-              title: 'Leave approval',
-              templateUrl: helper.basepath('leave-approve.html')
-          })
-
-              .state('app.Leave-transaction-types', {
-              url: '/Leave-transaction',
-              title: 'Leave-transaction',
-                templateUrl: helper.basepath('Leave-transaction.html'),
-                 resolve: helper.resolveFor('datatables')
-             
-          })
-            .state('app.gl-mapping', {
-              url: '/glMapping',
-              title: 'gl mapping',
-              templateUrl: helper.basepath('gl-mapping.html'),
-               resolve: helper.resolveFor('xeditable')
-          })
-
-              .state('app.company-maintenance', {
-              url: '/company-maintenance',
-              title: 'company-maintenance',
-              templateUrl: helper.basepath('company-maintenance.html')
-          })
-
-
-           .state('app.formula-setup', {
-              url: '/formula-setup',
-              title: 'formula-setup',
-              templateUrl: helper.basepath('formula-setup.html'),
-                resolve: helper.resolveFor('datatables')
-          })
-            .state('app.employee-setup', {
-              url: '/employee details',
-              title: 'employee details',
-              templateUrl: helper.basepath('employee-setup.html')
-          })
-
-
-           .state('app.payroll-codes', {
-              url: '/payroll-codes',
-              title: 'payroll-codes',
-              templateUrl: helper.basepath('payroll-codes.html'),
-               resolve: helper.resolveFor('datatables')
-          })
-
-           .state('app.payroll-groups', {
-              url: '/payrollgroups',
-              title: 'payroll-codes',
-              templateUrl: helper.basepath('payroll-groups.html'),
-              resolve: helper.resolveFor('datatables')
-          })
-
-
-            .state('app.exemptions', {
-              url: '/exemptions',
-              title: 'exemptions',
-              templateUrl: helper.basepath('exemptions.html'),
-                resolve: helper.resolveFor('datatables')
-          })
-
-
-
-           .state('app.bankcodes', {
-              url: '/bankcodes',
-              title: 'bank codes',
-              templateUrl: helper.basepath('bank-codes.html'),
-                resolve: helper.resolveFor('datatables')
-          })
-
-           .state('app.employee-posting', {
-              url: '/employee_posting',
-              title: 'payroll process',
-              templateUrl: helper.basepath('employeeposting.html'),
-               resolve: helper.resolveFor('xeditable')
-          })
-           .state('app.payslip-preview', {
-              url: '/processing',
-              title: 'payroll process',
-              templateUrl: helper.basepath('payslip-preview.html'),
-              resolve: helper.resolveFor('xeditable')
-          })
-
-           .state('app.payslip-approve', {
-              url: '/payslip-approve',
-              title: 'approving Payslip',
-              templateUrl: helper.basepath('payslip-approve.html'),
-              resolve: helper.resolveFor('xeditable')
-          })
-
-               .state('app.run', {
-              url: '/run-payroll',
-              title: 'payroll processing',
-              templateUrl: helper.basepath('run.html'),
-              resolve: helper.resolveFor('datatables')
-          })
-          .state('app.payroll-preview', {
-              url: '/payroll-preview',
-              title: 'preview payroll',
-              templateUrl: helper.basepath('payroll-preview.html')
-            
-          })
-          .state('app.payroll-approve', {
-              url: '/payroll-approval',
-              title: 'approve payroll',
-              templateUrl: helper.basepath('payroll-approve.html')
-            
-          })
-
-
-             .state('app.leaveposting', {
-              url: '/leaveposting',
-              title: 'Leave Posting',
-              templateUrl: helper.basepath('leaveposting.html')
-          })
-
-             .state('app.endmonth', {
-              url: '/endmonth',
-              title: 'Close Month',
-              templateUrl: helper.basepath('endmonth.html')
-          })
-
-
-          .state('app.employee-payroll', {
-              url: '/employee setup',
-              title: 'employee setup',
-              templateUrl: helper.basepath('employee-payroll.html')
-          })
-
-       
-            .state('app.company', {
-              url: '/company',
-              title: 'Company Details',
-                templateUrl: helper.basepath('company.html')
-             
-          })
-
-
-            .state('app.financialperiods', {
-              url: '/financialperiods',
-              title: 'Financial Periods',
-                templateUrl: helper.basepath('financialperiods.html')
-             
-          })
-
-
-            .state('app.companysummary', {
-              url: '/company summary',
-              title: 'companysummary',
-                templateUrl: helper.basepath('company-summary.html')
-             
-          })
-
-            .state('app.ctotals-review', {
-              url: '/company-totals-review',
-              title: 'Company totals',
-                templateUrl: helper.basepath('ctotals-review.html')
-             
-          })
-
-            .state('app.companytotals', {
-              url: '/company totals',
-              title: 'company totals',
-                templateUrl: helper.basepath('company-totals.html'),
-                resolve: helper.resolveFor('datatables')
-             
-          })
-
-             .state('app.csummary-review', {
-              url: '/company summary review',
-              title: 'company totals',
-                templateUrl: helper.basepath('csummary-review.html')
-                
-             
-          })
-
-             .state('app.company-total-approve', {
-              url: '/company-total-approve',
-              title: 'approving Payslip',
-              templateUrl: helper.basepath('company-total-approve.html')
-        
-          })
-
-             .state('app.company-summary-approve', {
-              url: '/company-summary-approve',
-              title: 'approving Payslip',
-              templateUrl: helper.basepath('company-summary-approve.html')
-        
-          })
-
-
-            .state('app.paye', {
-              url: '/paye',
-              title: 'PAYE  Report',
-                templateUrl: helper.basepath('paye.html')
-             
-          })
-
-
-            .state('app.payesummary', {
-              url: '/payesummary',
-              title: 'PAYE  Report',
-                templateUrl: helper.basepath('payesummary.html')
-             
-          })
-
-
-             .state('app.nhif', {
-              url: '/nhif  reports',
-              title: 'NHIF byproduct',
-                templateUrl: helper.basepath('nhif.html')
-             
-          })
-
-
-
-       
-
-         .state('app.nssf', {
-              url: '/nssf reports',
-              title: 'NSSF schedule',
-                templateUrl: helper.basepath('nssfschedule.html')
-             
-          })
-
-
-         .state('app.helb', {
-              url: '/helb  schedule',
-              title: 'HELB schedule',
-                templateUrl: helper.basepath('helb-schedule.html')
-             
-          })
-
-          .state('app.scheduler', {
-              url: '/schedules',
-              title: 'schedules',
-                templateUrl: helper.basepath('scheduler.html')
-               
-                
-             
-          })
-          .state('app.bankfiles', {
-              url: '/bankfiles',
-              title: 'schedules',
-                templateUrl: helper.basepath('bankfiles.html')
-
-             
-          })
-
-           .state('app.payroll-journals', {
-              url: '/payroll-journals',
-              title: 'payroll journals',
-                templateUrl: helper.basepath('payroll-journals.html')
-             
-          })
-
-
-         .state('app.bulktrans_input', {
-              url: '/bulktransactions',
-              title: 'Bulk transaction item input',
-                templateUrl: helper.basepath('bulk-input.html'),
-                    resolve: helper.resolveFor('angularFileUpload', 'filestyle'),
-                    resolve: helper.resolveFor('ui.grid'),
-                    resolve: helper.resolveFor('xeditable'),
-
-                      resolve : {
-                ngAnimate : ['$$animateJs','$ocLazyLoad', function ($$animateJs, $ocLazyLoad) {
-                    return $ocLazyLoad.load([
-                        'vendor/angular-ui-grid/ui-grid.min.css',
-                        'vendor/angular-ui-grid/ui-grid.min.js'
-                    ])
-                }]
             }
 
-             
-          })
+          });
 
-           .state('app.payslip', {
-              url: '/payslip',
-              title: 'payslip',
-                templateUrl: helper.basepath('payslip.html'),
-                 resolve: helper.resolveFor('datatables')
-             
-          })
+          var eventOff1 = scope.$on('closeSidebarMenu', function() {
+            removeFloatingNav();
+          });
 
-         .state('app.listings', {
-              url: '/listings',
-              title: 'list',
-                templateUrl: helper.basepath('employeelist.html'),
-                 resolve: helper.resolveFor('datatables')
-             
-          })
+          // Normalize state when resize to mobile
+          $win.on('resize.sidebar', function() {
+            if( ! Utils.isMobile() )
+          	asideToggleOff();
+          });
 
-          .state('app.employee-groups', {
-              url: '/Employee-groups',
-              title: 'list',
-                templateUrl: helper.basepath('employee-groups.html'),
-                 resolve: helper.resolveFor('datatables')
-             
-          })
-        .state('app.employee-category', {
-              url: '/employee-category',
-              title: 'employee-category',
-                templateUrl: helper.basepath('employee-category.html'),
-                 resolve: helper.resolveFor('datatables')
-             
-          })
+          // Adjustment on route changes
+          var eventOff2 = $rootScope.$on('$stateChangeStart', function(event, toState) {
+            currentState = toState.name;
+            // Hide sidebar automatically on mobile
+            asideToggleOff();
 
+            $rootScope.$broadcast('closeSidebarMenu');
+          });
 
-          .state('app.batchemployees', {
-              url: '/batchemployees',
-              title: 'list',
-                templateUrl: helper.basepath('batch-employees.html')
-                 
-             
-          })
-         .state('app.Payfrequency', {
-              url: '/Payfrequency',
-              title: 'Payfrequency',
-                templateUrl: helper.basepath('payfrequency.html')
-           
-             
-          })
-       .state('app.departmentlistings', {
-              url: '/departmentlistings',
-              title: 'Departments',
-                templateUrl: helper.basepath('departmentlisting.html'),
-                resolve: helper.resolveFor('datatables')
-             
-          })
+      	  // Autoclose when click outside the sidebar
+          if ( angular.isDefined(attrs.sidebarAnyclickClose) ) {
 
+            var wrapper = $('.wrapper');
+            var sbclickEvent = 'click.sidebar';
 
-         .state('app.costcenters', {
-              url: '/costcenters',
-              title: 'cost centers',
-                templateUrl: helper.basepath('costcenters.html'),
-                 resolve: helper.resolveFor('datatables')
-             
-          })
+            var watchOff1 = $rootScope.$watch('app.asideToggled', watchExternalClicks);
 
-         .state('app.paypointslistings', {
-              url: '/paypointslistings',
-              title: 'pay points',
-                templateUrl: helper.basepath('paypoints.html'),
-                resolve: helper.resolveFor('datatables')
-             
-          })
+          }
 
+          //////
 
-           .state('app.paymode', {
-              url: '/paymode',
-              title: 'pay mode',
-                templateUrl: helper.basepath('paymode.html'),
-              
-             
-          })
-          .state('app.employeeinfo', {
-              url: '/employee/:Employee',
-              title: 'Employee details',
-                templateUrl: helper.basepath('employee-info.html')
-                 
-             
-          })
+          function watchExternalClicks(newVal) {
+            // if sidebar becomes visible
+            if ( newVal === true ) {
+              $timeout(function(){ // render after current digest cycle
+                wrapper.on(sbclickEvent, function(e){
+                  // if not child of sidebar
+                  if( ! $(e.target).parents('.aside').length ) {
+                    asideToggleOff();
+                  }
+                });
+              });
+            }
+            else {
+              // dettach event
+              wrapper.off(sbclickEvent);
+            }
+          }
 
-            .state('app.employee-edit', {
-              url: '/employee/Update/:EmployeeId',
-              title: 'Update Employee',
-                templateUrl: helper.basepath('employee-update.html')
+          function asideToggleOff() {
+            $rootScope.app.asideToggled = false;
+            if(!scope.$$phase) scope.$apply(); // anti-pattern but sometimes necessary
+      	  }
 
-                 
-             
-          })
+          scope.$on('$destroy', function() {
+            // detach scope events
+            eventOff1();
+            eventOff2();
+            watchOff1();
+            // detach dom events
+            $sidebar.off(eventName);
+            $win.off('resize.sidebar');
+            wrapper.off(sbclickEvent);
+          });
 
+        }
 
-           .state('app.companyedit', {
-              url: '/company:id',
-              title: 'user details',
-                templateUrl: helper.basepath('companyedit.html')
-                 
-             
-          })
-          //Annual Reports
- .state('app.p9a', {
-              url: '/p9a',
-              title: 'tax deduction card',
-                templateUrl: helper.basepath('p9a.html'),
-                 
-             
-          })
+        ///////
 
- .state('app.p9b', {
-              url: '/p9b',
-              title: 'tax deduction card',
-                templateUrl: helper.basepath('p9b.html'),
-                 
-             
-          })
+        function sidebarAddBackdrop() {
+          var $backdrop = $('<div/>', { 'class': 'dropdown-backdrop'} );
+          $backdrop.insertAfter('.aside-inner').on('click mouseenter', function () {
+            removeFloatingNav();
+          });
+        }
 
+        // Open the collapse sidebar submenu items when on touch devices
+        // - desktop only opens on hover
+        function toggleTouchItem($element){
+          $element
+            .siblings('li')
+            .removeClass('open')
+            .end()
+            .toggleClass('open');
+        }
 
- .state('app.p10', {
-              url: '/p10',
-              title: 'tax deduction card',
-                templateUrl: helper.basepath('p10.html'),
-                 
-             
-          })
-.state('app.p10a', {
-              url: '/p10a',
-              title: 'tax deduction card',
-                templateUrl: helper.basepath('p10a.html'),
-                 
-             
-          })
-  .state('app.p10b', {
-              url: '/p10b',
-              title: 'tax deduction card',
-                templateUrl: helper.basepath('p10b.html'),
-                 
-             
-          })
+        // Handles hover to open items under collapsed menu
+        // -----------------------------------
+        function toggleMenuItem($listItem, $sidebar) {
 
- .state('app.p10c', {
-              url: '/p10c',
-              title: 'tax deduction card',
-                templateUrl: helper.basepath('p10c.html'),
-                 
-             
-          })
- .state('app.p10d', {
-              url: '/p10d',
-              title: 'tax deduction card',
-                templateUrl: helper.basepath('p10d.html'),
-                 
-             
-          })
+          removeFloatingNav();
 
-//User Adminisration
- .state('app.user_settings', {
-              url: '/adminsettings',
-              title: 'user settings',
-                templateUrl: helper.basepath('user-settings.html'),
-                    resolve: helper.resolveFor('datatables'),
-                 
-             
-          })
+          var ul = $listItem.children('ul');
 
+          if( !ul.length ) return $();
+          if( $listItem.hasClass('open') ) {
+            toggleTouchItem($listItem);
+            return $();
+          }
 
-  .state('app.accounts', {
-              url: '/accounts',
-              title: 'accounts',
-                templateUrl: helper.basepath('accounts.html'),
-                 resolve: helper.resolveFor('datatables'),
-                  
-                 
-             
-          })
+          var $aside = $('.aside');
+          var $asideInner = $('.aside-inner'); // for top offset calculation
+          // float aside uses extra padding on aside
+          var mar = parseInt( $asideInner.css('padding-top'), 0) + parseInt( $aside.css('padding-top'), 0);
+          var subNav = ul.clone().appendTo( $aside );
 
-    .state('app.user-rights', {
-              url: '/rights',
-              title: 'accounts',
-                templateUrl: helper.basepath('user-rights.html'),
-                    resolve: helper.resolveFor('datatables'),
-                 
-             
-          })
+          toggleTouchItem($listItem);
 
+          var itemTop = ($listItem.position().top + mar) - $sidebar.scrollTop();
+          var vwHeight = $win.height();
 
-    .state('app.user-groups', {
-              url: '/user-groups',
-              title: 'accounts',
-                templateUrl: helper.basepath('user-groups.html'),
-                    resolve: helper.resolveFor('datatables'),
-                 
-             
-          })
+          subNav
+            .addClass('nav-floating')
+            .css({
+              position: $rootScope.app.layout.isFixed ? 'fixed' : 'absolute',
+              top:      itemTop,
+              bottom:   (subNav.outerHeight(true) + itemTop > vwHeight) ? 0 : 'auto'
+            });
 
- .state('app.task', {
-              url: '/tasks',
-              title: 'tasks',
-                templateUrl: helper.basepath('task.html'),
-                 
-             
-          })
-.state('app.workflow', {
-              url: '/workflow/:Id',
-              title: 'workflow',
-                templateUrl: helper.basepath('workflow.html'),
-                 
-             
-          })
+          subNav.on('mouseleave', function() {
+            toggleTouchItem($listItem);
+            subNav.remove();
+          });
 
-.state('app.payrollworkflow', {
-              url: '/payrollworkflow',
-              title: 'workflow',
-                templateUrl: helper.basepath('payroll-workflow.html'),
-                 
-             
-          })
+          return subNav;
+        }
 
- //Staff Portal 
+        function removeFloatingNav() {
+          $('.dropdown-backdrop').remove();
+          $('.sidebar-subnav.nav-floating').remove();
+          $('.sidebar li.open').removeClass('open');
+        }
+    }
 
- .state('app.leave', {
-              url: '/leaves',
-              title: 'leaves',
-                templateUrl: helper.basepath('leavereport.html'),
-                 
-             
-          })
- .state('app.timesheets', {
-              url: '/timesheets',
-              title: 'Timesheets',
-                templateUrl: helper.basepath('timesheets.html'),
-                 
-             
-          })
-  .state('app.claims', {
-              url: '/claims',
-              title: 'Claims',
-                templateUrl: helper.basepath('claims.html'),
-                 
-             
-          })
-  .state('app.mileage', {
-              url: '/mileage',
-              title: 'Mileage',
-                templateUrl: helper.basepath('mileage.html'),
-                 
-             
-          })
-
-
-
-
-          //
-          // CUSTOM RESOLVES
-          //   Add your own resolves properties
-          //   following this object extend
-          //   method
-          // -----------------------------------
-          // .state('app.someroute', {
-          //   url: '/some_url',
-          //   templateUrl: 'path_to_template.html',
-          //   controller: 'someController',
-          //   resolve: angular.extend(
-          //     helper.resolveFor(), {
-          //     // YOUR RESOLVES GO HERE
-          //     }
-          //   )
-          // })
-          ;
-
-    } // routesConfig
 
 })();
 
@@ -16379,78 +16745,55 @@ angular.module('app.reports').filter('unique', function () {
     'use strict';
 
     angular
-        .module('app.settings')
-        .run(settingsRun);
+        .module('app.sidebar')
+        .service('SidebarLoader', SidebarLoader);
 
-    settingsRun.$inject = ['$rootScope', '$localStorage'];
+    SidebarLoader.$inject = ['$http'];
+    function SidebarLoader($http) {
+        this.getMenu = getMenu;
 
-    function settingsRun($rootScope, $localStorage){
+        ////////////////
 
+        function getMenu(onReady, onError) {
+          var menuJson = 'server/sidebar-menu.json',
+              menuURL  = menuJson + '?v=' + (new Date().getTime()); // jumps cache
+            
+          onError = onError || function() { alert('Failure loading menu'); };
 
-      // User Settings
-      // -----------------------------------
-      $rootScope.user = {
-        name:     'John',
-        job:      'ng-developer',
-        picture:  'app/img/user/02.jpg'
-      };
-
-      // Hides/show user avatar on sidebar from any element
-      $rootScope.toggleUserBlock = function(){
-        $rootScope.$broadcast('toggleUserBlock');
-      };
-
-      // Global Settings
-      // -----------------------------------
-      $rootScope.app = {
-        name: 'Jada',
-        description: 'Jada Payroll',
-        year: ((new Date()).getFullYear()),
-        layout: {
-          isFixed: true,
-          isCollapsed: false,
-          isBoxed: false,
-          isRTL: false,
-          horizontal: false,
-          isFloat: false,
-          asideHover: false,
-          theme: null,
-          asideScrollbar: false,
-          isCollapsedText: false
-        },
-        useFullLayout: false,
-        hiddenFooter: false,
-        offsidebarOpen: false,
-        asideToggled: false,
-        viewAnimation: 'ng-fadeInUp'
-      };
-
-      // Setup the layout mode
-      $rootScope.app.layout.horizontal = ( $rootScope.$stateParams.layout === 'app-h') ;
-
-      // Restore layout settings
-      if( angular.isDefined($localStorage.layout) )
-        $rootScope.app.layout = $localStorage.layout;
-      else
-        $localStorage.layout = $rootScope.app.layout;
-
-      $rootScope.$watch('app.layout', function () {
-        $localStorage.layout = $rootScope.app.layout;
-      }, true);
-
-      // Close submenu when sidebar change from collapsed to normal
-      $rootScope.$watch('app.layout.isCollapsed', function(newValue) {
-        if( newValue === false )
-          $rootScope.$broadcast('closeSidebarMenu');
-      });
-
-    }
-       function Logout() {
-            // remove user from local storage and clear http auth header
-            delete $localStorage.currentUser;
-            $http.defaults.headers.common.Authorization = '';
+          $http
+            .get(menuURL)
+            .success(onReady)
+            .error(onError);
         }
+    }
+})();
+(function() {
+    'use strict';
 
+    angular
+        .module('app.sidebar')
+        .controller('UserBlockController', UserBlockController);
+
+    UserBlockController.$inject = ['$scope'];
+    function UserBlockController($scope) {
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          $scope.userBlockVisible = true;
+
+          var detach = $scope.$on('toggleUserBlock', function(/*event, args*/) {
+
+            $scope.userBlockVisible = ! $scope.userBlockVisible;
+
+          });
+
+          $scope.$on('$destroy', detach);
+        }
+    }
 })();
 
 /**=========================================================
@@ -17427,367 +17770,6 @@ angular.module('app.reports').filter('unique', function () {
         }
     }
 })();
-/**=========================================================
- * Module: sidebar-menu.js
- * Handle sidebar collapsible elements
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.sidebar')
-        .controller('SidebarController', SidebarController);
-
-    SidebarController.$inject = ['$rootScope', '$scope', '$state', 'SidebarLoader', 'Utils'];
-    function SidebarController($rootScope, $scope, $state, SidebarLoader,  Utils) {
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          var collapseList = [];
-
-          // demo: when switch from collapse to hover, close all items
-          var watchOff1 = $rootScope.$watch('app.layout.asideHover', function(oldVal, newVal){
-            if ( newVal === false && oldVal === true) {
-              closeAllBut(-1);
-            }
-          });
-
-
-          // Load menu from json file
-          // -----------------------------------
-
-          SidebarLoader.getMenu(sidebarReady);
-
-          function sidebarReady(items) {
-            $scope.menuItems = items;
-          }
-
-          // Handle sidebar and collapse items
-          // ----------------------------------
-
-          $scope.getMenuItemPropClasses = function(item) {
-            return (item.heading ? 'nav-heading' : '') +
-                   (isActive(item) ? ' active' : '') ;
-          };
-
-          $scope.addCollapse = function($index, item) {
-            collapseList[$index] = $rootScope.app.layout.asideHover ? true : !isActive(item);
-          };
-
-          $scope.isCollapse = function($index) {
-            return (collapseList[$index]);
-          };
-
-          $scope.toggleCollapse = function($index, isParentItem) {
-
-            // collapsed sidebar doesn't toggle drodopwn
-            if( Utils.isSidebarCollapsed() || $rootScope.app.layout.asideHover ) return true;
-
-            // make sure the item index exists
-            if( angular.isDefined( collapseList[$index] ) ) {
-              if ( ! $scope.lastEventFromChild ) {
-                collapseList[$index] = !collapseList[$index];
-                closeAllBut($index);
-              }
-            }
-            else if ( isParentItem ) {
-              closeAllBut(-1);
-            }
-
-            $scope.lastEventFromChild = isChild($index);
-
-            return true;
-
-          };
-
-          // Controller helpers
-          // -----------------------------------
-
-            // Check item and children active state
-            function isActive(item) {
-
-              if(!item) return;
-
-              if( !item.sref || item.sref === '#') {
-                var foundActive = false;
-                angular.forEach(item.submenu, function(value) {
-                  if(isActive(value)) foundActive = true;
-                });
-                return foundActive;
-              }
-              else
-                return $state.is(item.sref) || $state.includes(item.sref);
-            }
-
-            function closeAllBut(index) {
-              index += '';
-              for(var i in collapseList) {
-                if(index < 0 || index.indexOf(i) < 0)
-                  collapseList[i] = true;
-              }
-            }
-
-            function isChild($index) {
-              /*jshint -W018*/
-              return (typeof $index === 'string') && !($index.indexOf('-') < 0);
-            }
-
-            $scope.$on('$destroy', function() {
-                watchOff1();
-            });
-
-        } // activate
-    }
-
-})();
-
-/**=========================================================
- * Module: sidebar.js
- * Wraps the sidebar and handles collapsed state
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.sidebar')
-        .directive('sidebar', sidebar);
-
-    sidebar.$inject = ['$rootScope', '$timeout', '$window', 'Utils'];
-    function sidebar ($rootScope, $timeout, $window, Utils) {
-        var $win = angular.element($window);
-        var directive = {
-            // bindToController: true,
-            // controller: Controller,
-            // controllerAs: 'vm',
-            link: link,
-            restrict: 'EA',
-            template: '<nav class="sidebar" ng-transclude></nav>',
-            transclude: true,
-            replace: true
-            // scope: {}
-        };
-        return directive;
-
-        function link(scope, element, attrs) {
-
-          var currentState = $rootScope.$state.current.name;
-          var $sidebar = element;
-
-          var eventName = Utils.isTouch() ? 'click' : 'mouseenter' ;
-          var subNav = $();
-
-          $sidebar.on( eventName, '.nav > li', function() {
-
-            if( Utils.isSidebarCollapsed() || $rootScope.app.layout.asideHover ) {
-
-              subNav.trigger('mouseleave');
-              subNav = toggleMenuItem( $(this), $sidebar);
-
-              // Used to detect click and touch events outside the sidebar
-              sidebarAddBackdrop();
-
-            }
-
-          });
-
-          var eventOff1 = scope.$on('closeSidebarMenu', function() {
-            removeFloatingNav();
-          });
-
-          // Normalize state when resize to mobile
-          $win.on('resize.sidebar', function() {
-            if( ! Utils.isMobile() )
-          	asideToggleOff();
-          });
-
-          // Adjustment on route changes
-          var eventOff2 = $rootScope.$on('$stateChangeStart', function(event, toState) {
-            currentState = toState.name;
-            // Hide sidebar automatically on mobile
-            asideToggleOff();
-
-            $rootScope.$broadcast('closeSidebarMenu');
-          });
-
-      	  // Autoclose when click outside the sidebar
-          if ( angular.isDefined(attrs.sidebarAnyclickClose) ) {
-
-            var wrapper = $('.wrapper');
-            var sbclickEvent = 'click.sidebar';
-
-            var watchOff1 = $rootScope.$watch('app.asideToggled', watchExternalClicks);
-
-          }
-
-          //////
-
-          function watchExternalClicks(newVal) {
-            // if sidebar becomes visible
-            if ( newVal === true ) {
-              $timeout(function(){ // render after current digest cycle
-                wrapper.on(sbclickEvent, function(e){
-                  // if not child of sidebar
-                  if( ! $(e.target).parents('.aside').length ) {
-                    asideToggleOff();
-                  }
-                });
-              });
-            }
-            else {
-              // dettach event
-              wrapper.off(sbclickEvent);
-            }
-          }
-
-          function asideToggleOff() {
-            $rootScope.app.asideToggled = false;
-            if(!scope.$$phase) scope.$apply(); // anti-pattern but sometimes necessary
-      	  }
-
-          scope.$on('$destroy', function() {
-            // detach scope events
-            eventOff1();
-            eventOff2();
-            watchOff1();
-            // detach dom events
-            $sidebar.off(eventName);
-            $win.off('resize.sidebar');
-            wrapper.off(sbclickEvent);
-          });
-
-        }
-
-        ///////
-
-        function sidebarAddBackdrop() {
-          var $backdrop = $('<div/>', { 'class': 'dropdown-backdrop'} );
-          $backdrop.insertAfter('.aside-inner').on('click mouseenter', function () {
-            removeFloatingNav();
-          });
-        }
-
-        // Open the collapse sidebar submenu items when on touch devices
-        // - desktop only opens on hover
-        function toggleTouchItem($element){
-          $element
-            .siblings('li')
-            .removeClass('open')
-            .end()
-            .toggleClass('open');
-        }
-
-        // Handles hover to open items under collapsed menu
-        // -----------------------------------
-        function toggleMenuItem($listItem, $sidebar) {
-
-          removeFloatingNav();
-
-          var ul = $listItem.children('ul');
-
-          if( !ul.length ) return $();
-          if( $listItem.hasClass('open') ) {
-            toggleTouchItem($listItem);
-            return $();
-          }
-
-          var $aside = $('.aside');
-          var $asideInner = $('.aside-inner'); // for top offset calculation
-          // float aside uses extra padding on aside
-          var mar = parseInt( $asideInner.css('padding-top'), 0) + parseInt( $aside.css('padding-top'), 0);
-          var subNav = ul.clone().appendTo( $aside );
-
-          toggleTouchItem($listItem);
-
-          var itemTop = ($listItem.position().top + mar) - $sidebar.scrollTop();
-          var vwHeight = $win.height();
-
-          subNav
-            .addClass('nav-floating')
-            .css({
-              position: $rootScope.app.layout.isFixed ? 'fixed' : 'absolute',
-              top:      itemTop,
-              bottom:   (subNav.outerHeight(true) + itemTop > vwHeight) ? 0 : 'auto'
-            });
-
-          subNav.on('mouseleave', function() {
-            toggleTouchItem($listItem);
-            subNav.remove();
-          });
-
-          return subNav;
-        }
-
-        function removeFloatingNav() {
-          $('.dropdown-backdrop').remove();
-          $('.sidebar-subnav.nav-floating').remove();
-          $('.sidebar li.open').removeClass('open');
-        }
-    }
-
-
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.sidebar')
-        .service('SidebarLoader', SidebarLoader);
-
-    SidebarLoader.$inject = ['$http'];
-    function SidebarLoader($http) {
-        this.getMenu = getMenu;
-
-        ////////////////
-
-        function getMenu(onReady, onError) {
-          var menuJson = 'server/sidebar-menu.json',
-              menuURL  = menuJson + '?v=' + (new Date().getTime()); // jumps cache
-            
-          onError = onError || function() { alert('Failure loading menu'); };
-
-          $http
-            .get(menuURL)
-            .success(onReady)
-            .error(onError);
-        }
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.sidebar')
-        .controller('UserBlockController', UserBlockController);
-
-    UserBlockController.$inject = ['$scope'];
-    function UserBlockController($scope) {
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          $scope.userBlockVisible = true;
-
-          var detach = $scope.$on('toggleUserBlock', function(/*event, args*/) {
-
-            $scope.userBlockVisible = ! $scope.userBlockVisible;
-
-          });
-
-          $scope.$on('$destroy', detach);
-        }
-    }
-})();
-
 // (function() {
 //     'use strict';
 
