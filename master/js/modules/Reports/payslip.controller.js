@@ -53,8 +53,8 @@ $scope.searchpayslipByperiod=function(id){
    $rootScope.pid=id;
    
 
- $scope.curPage = 0;
- $scope.pageSize = 1;
+ // $scope.curPage = 0;
+ // $scope.pageSize = 1;
 
     $http.get(jadaApiUrl+'api/payslipreport/'+id).success(function(data) {
             $scope.persons = data;
@@ -65,9 +65,9 @@ $scope.searchpayslipByperiod=function(id){
 
             });
      
-     $scope.numberOfPages = function() {
-        return Math.ceil($scope.persons.length / $scope.pageSize);
-      };
+     // $scope.numberOfPages = function() {
+     //    return Math.ceil($scope.persons.length / $scope.pageSize);
+     //  };
 
 
  }
@@ -85,8 +85,8 @@ $scope.searchpayslipByperiod(12);
            var employeeId=user.employeeNumber;
            var period=user.period;
 
- $scope.curPage = 0;
- $scope.pageSize = 1;
+ // $scope.curPage = 0;
+ // $scope.pageSize = 1;
      
           $http.get(jadaApiUrl+'api/payslipreport//'+period+'/'+employeeId).success(function(data) {
                 $scope.persons= data;
@@ -98,9 +98,9 @@ $scope.searchpayslipByperiod(12);
        
 
             });
-           $scope.numberOfPages = function() {
-        return Math.ceil($scope.persons.length / $scope.pageSize);
-      };
+      //      $scope.numberOfPages = function() {
+      //   return Math.ceil($scope.persons.length / $scope.pageSize);
+      // };
 
           }
           
