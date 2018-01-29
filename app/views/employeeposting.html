@@ -27,8 +27,19 @@
   </select>
   </div>
   <button  ng-click="searchEmployee(postingtrans)"   class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+<div class="col-lg-2 text-right" style="float: right;" >
+               
+  <button type="button" class="btn btn-primary"> Previous</button>
 
+                   
+          
+ <button type="button" class="btn btn-primary"
+>Next</button>
+
+            
+               </div>
  <button class="btn btn-primary pull-right" ng-click="openPayslip(postingtrans)" >View Payslip </button>
+  
 </form>
 
 
@@ -41,7 +52,9 @@
           <!-- START panel-->
 
       <div class="panel panel-default">
-         
+          <div class="panel-heading">Employee Postings
+              
+            </div>
             <div class="panel-body">
       <!--       <h3>Search
    <small>Search and filter results</small>
@@ -555,20 +568,7 @@
             <div class="panel-wrapper" uib-collapse="panelDemo1">
                <div class="panel-body">
                   <div class="table-responsive">
-                    <div class="col-lg-4 col-xs-12 pv">
-            <div class="clearfix">
-               <p class="pull-left">Employee NO.</p>
-               <p class="pull-right mr">{{oneUser.employeeInfo.employeeNumber}}</p>
-            </div>
-            <div class="clearfix">
-               <p class="pull-left">Employee Name</p>
-               <p  class="pull-right mr">{{oneUser.employeeInfo.employeeName}}</p>
-            </div>
-          <!--   <div class="clearfix">
-               <p class="pull-left">Pay Period</p>
-               <p class="pull-right mr">{{oneUser.employeeInfo.period}}</p>
-            </div> -->
-         </div>
+                
          <br/>
 <!--  <h4 class="page-header">Current details</h4> -->
    <table class="table table-bordered table-hover bg-white">
@@ -599,4 +599,5 @@
          </div>
 
 </div>
+       
        

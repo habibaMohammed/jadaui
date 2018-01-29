@@ -17,7 +17,7 @@
   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
     <div class="input-group-addon">Employee Number</div>
     <select name="employeeNumber" class="slider slider-lg form-control" ng-model="user.employeeNumber" ng-options="employee.id as employee.employeeNumber for employee in employees" >
-        <option value="" disabled selected>Employees</option>
+        <option value="" disabled selected>All Employees</option>
   </select>
   </div>
   <button type="submit" ng-click="searchPayslip(user)" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
@@ -292,6 +292,12 @@
                      <!--    <td >{{payslipcode.code}}</td> -->
                         <td >{{benefit.description}}</td>
                         <td  class="text-right">{{benefit.amount}}</td>
+                     </tr>
+
+                       <tr ng-repeat="benefit in payslip.benefits.payslipCodeList">
+                     <!--    <td >{{payslipcode.code}}</td> -->
+                        <td class="boldTotal">Total Benefits</td>
+                        <td  class="boldTotal text-right">{{payslip.totalBenefits}}</td>
                      </tr>
                   </tbody>
                </table>
