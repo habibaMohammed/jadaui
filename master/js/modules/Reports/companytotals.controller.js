@@ -16,11 +16,27 @@
         function activate() {
 
        var period=1;
-        $scope.companytotals=CompanyTotalsService.get({periodId:1});
+        // $scope.companytotals=CompanyTotalsService.get({periodId:1});
 
-          $scope.getByperiod=function(period){
+          // $scope.getByperiod=function(period){
         
-            $scope.companytotals=CompanyTotalsService.get({periodId:period});
+          //   $scope.companytotals=CompanyTotalsService.get({periodId:period});
+
+          // }
+
+           $scope.getByperiod=function(ctotal){
+               
+             var periodId=ctotal.period;
+             var departmentId=ctotal.department;
+          
+             var employeeCategoryId=ctotal.category;
+             var employeeGroupId=ctotal.group;
+               $http.get(jadaApiUrl+'api/CompanyTotalsReport/'+periodId+'/'+departmentId+'/'+employeeGroupId+'/'+employeeCategoryId).success(function(data){
+             $scope.companytotals=data;
+             
+console.log($scope.companytotals);
+            });
+
 
           }
 
@@ -29,7 +45,7 @@
       return item[prop] > val;
     }
 }
-console.log($scope.companytotals);
+
 
 
     
