@@ -936,19 +936,20 @@
               url: '/bulktransactions',
               title: 'Bulk transaction item input',
                 templateUrl: helper.basepath('bulk-input.html'),
-                    resolve: helper.resolveFor('angularFileUpload', 'filestyle'),
-                    resolve: helper.resolveFor('ui.grid'),
-                    resolve: helper.resolveFor('xeditable'),
+                 resolve: helper.resolveFor('xeditable')
+                   
+              
+                   
 
-                      resolve : {
-                ngAnimate : ['$$animateJs','$ocLazyLoad', function ($$animateJs, $ocLazyLoad) {
-                    return $ocLazyLoad.load([
-                        'vendor/angular-ui-grid/ui-grid.min.css',
-                        'vendor/angular-ui-grid/ui-grid.min.js'
-                    ])
-                }]
-            }
+            //           resolve : {
 
+            //     ngAnimate : ['$$animateJs','$ocLazyLoad', function ($$animateJs, $ocLazyLoad) {
+            //         return $ocLazyLoad.load([
+            //             'vendor/angular-ui-grid/ui-grid.min.css',
+            //             'vendor/angular-ui-grid/ui-grid.min.js'
+            //         ])
+            //     }]
+            // }
              
           })
 
