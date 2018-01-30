@@ -62,7 +62,7 @@ $http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
 
 
 
-          $scope.loadTransactions = function () {
+          $scope.loadTransactions=function () {
           var employeeId=$rootScope.employeePostedId;
           var periodId=$rootScope.periodPostedId;
           console.log("period - "+periodId+" employee - "+employeeId);

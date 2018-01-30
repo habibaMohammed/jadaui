@@ -933,9 +933,9 @@
 
 
          .state('app.bulktrans_input', {
-              url: '/bulktransactions',
+              url: '/batch_posting',
               title: 'Bulk transaction item input',
-                templateUrl: helper.basepath('bulk-input.html'),
+                templateUrl: helper.basepath('batch_posting.html'),
                  resolve: helper.resolveFor('xeditable')
                    
               
@@ -952,6 +952,52 @@
             // }
              
           })
+
+
+             .state('app.common_data_postingt', {
+              url: '/common_data_postingt',
+              title: 'Bulk transaction',
+                templateUrl: helper.basepath('commonDataPosting.html'),
+                 resolve: helper.resolveFor('xeditable')
+                   
+              
+                   
+
+            //           resolve : {
+
+            //     ngAnimate : ['$$animateJs','$ocLazyLoad', function ($$animateJs, $ocLazyLoad) {
+            //         return $ocLazyLoad.load([
+            //             'vendor/angular-ui-grid/ui-grid.min.css',
+            //             'vendor/angular-ui-grid/ui-grid.min.js'
+            //         ])
+            //     }]
+            // }
+             
+          })
+
+         .state('app.payrollposting_import', {
+              url: '/bulktransactions',
+              title: 'Bulk transaction item input',
+                templateUrl: helper.basepath('bulk-input.html'),
+                 resolve: helper.resolveFor('filestyle')
+                   
+              
+                   
+
+            //           resolve : {
+
+            //     ngAnimate : ['$$animateJs','$ocLazyLoad', function ($$animateJs, $ocLazyLoad) {
+            //         return $ocLazyLoad.load([
+            //             'vendor/angular-ui-grid/ui-grid.min.css',
+            //             'vendor/angular-ui-grid/ui-grid.min.js'
+            //         ])
+            //     }]
+            // }
+             
+          })
+
+
+
 
            .state('app.payslip', {
               url: '/payslip',
@@ -988,7 +1034,7 @@
           .state('app.batchemployees', {
               url: '/batchemployees',
               title: 'list',
-                templateUrl: helper.basepath('batch-employees.html')
+                templateUrl: helper.basepath('batch-employeesMaster.html')
                  
              
           })
