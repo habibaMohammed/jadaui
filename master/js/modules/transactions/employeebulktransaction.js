@@ -49,7 +49,7 @@ var jdata= JSON.stringify($scope.fileData);
 var list=$scope.fileData;
 for(var r=0;r<list.length;r++){
   var vdata =list[r];
-  console.log(vdata);
+
   // var postingdata = new PayrollBatchPostingService(vdata);
     $http.post(jadaApiUrl+'api/payrollsingleposting/', {vdata}).success(
       function(data){

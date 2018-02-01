@@ -16,7 +16,7 @@
         function activate() {
 
        var currentPeriod=1;
-        $scope.bankfiles=BankfileService.get({periodId:currentPeriod});
+        $scope.bankfiles=BankfileService.get({});
 
           
                      $scope.getByperiod=function(period){

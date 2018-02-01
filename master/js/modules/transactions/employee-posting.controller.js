@@ -22,35 +22,68 @@
 
  var SuccessMsg;
  var errorMsg;
-        
+  
+
+         //  $http.get(jadaApiUrl+'api/payrollpostingReport/').success(function(data) {
+         //      $scope.payrollpostingTransaction=data;
+         // // $scope.transactions=data.payrollCodeReportList;
+         // // $scope.alltransactions=data.payrollTransactionList;
+         //      console.log($scope.payrollpostingTransaction);
+         //     });
      
 
-         $scope.searchEmployee=function(user) {
 
-          if(user.periodId!=null && user.periodId!=""){
-            $rootScope.employeePostedId = user.employeeId;
-            $rootScope.periodPostedId =user.periodId;
-                  var employeeId=user.employeeId;
-          var periodId=user.periodId;
+$scope.postingData=function(){
+
+        $scope.curPage = 0;
+        $scope.pageSize = 1;      
+
+
+          $http.get(jadaApiUrl+'api/payrollpostingReport/').success(function(data) {
+              $scope.payrollpostingTransaction=data;
+         // $scope.transactions=data.payrollCodeReportList;
+         // $scope.alltransactions=data.payrollTransactionList;
+              console.log($scope.payrollpostingTransaction);
+     $scope.numberOfPages = function() {
+        return Math.ceil($scope.payrollpostingTransaction.length / $scope.pageSize);
+      };
+
+
+             });
+
+  
+}
+$scope.postingData();
+
+
+         $scope.searchEmployee=function(postingtrans) {
+              $scope.curPage = 0;
+             $scope.pageSize = 1;    
+
+          if(postingtrans.periodId!=null && postingtrans.periodId!=""){
+            $rootScope.employeePostedId = postingtrans.employeeId;
+            $rootScope.periodPostedId =postingtrans.periodId;
+                  var employeeId=postingtrans.employeeId;
+          var periodId=postingtrans.periodId;
           
           console.log("period - "+periodId+" employee - "+employeeId);
           $http.get(jadaApiUrl+'api/payrollpostingReport/'+periodId+'/'+employeeId).success(function(data) {
-              $scope.oneUser = data;
-         $scope.transactions=data.payrollCodeReportList;
-              console.log($scope.transactions);
+            $scope.payrollpostingTransaction=data;
+     
+          console.log($scope.payrollpostingTransaction);
+               $scope.numberOfPages = function() {
+        return Math.ceil($scope.payrollpostingTransaction.length / $scope.pageSize);
+      };
+
              });
 
-           $http.get(jadaApiUrl+'api/payrolltransaction/'+periodId+'/'+employeeId).success(function(data) {
-         
-         $scope.alltransactions=data;
-         console.log($scope.alltransactions);
-             });
 
           }
         
          };
 
 
+     
 
 $http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
           $scope.postingtrans={};
@@ -62,6 +95,24 @@ $http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
 
 
 
+
+
+   $scope.reloadtrans=function(postingtrans) {
+         
+      var employeeId=postingtrans.employeeinfo.id;
+          var periodId=postingtrans.employeeinfo.period;
+          
+
+          $http.get(jadaApiUrl+'api/payrollpostingReport/'+periodId+'/'+employeeId).success(function(data) {
+            $scope.payrollpostingTransaction=data;
+     
+          console.log($scope.payrollpostingTransaction);
+      
+             });
+
+     
+        
+         };
           $scope.loadTransactions=function () {
           var employeeId=$rootScope.employeePostedId;
           var periodId=$rootScope.periodPostedId;
@@ -92,7 +143,7 @@ $http.get(jadaApiUrl+'api/department').success(function(data) {
             });
 
 $http.get(jadaApiUrl+'api/employee').success(function(data) {
-            // $scope.postingtrans={};
+            $scope.postingtrans={};
               $scope.employees=data;
               var empId=$scope.employees[0].id;
               $scope.postingtrans.employeeId=empId;
@@ -137,8 +188,7 @@ for(var r=0;r< $scope.periods.length;r++){
         $scope.delete= function (transaction) {
              var deletetransaction= new employeePostingService(transaction);
                   deletetransaction.$delete().then(function () {
-                   $scope.loadTransactions();
-                   console.log('edited')
+                   $state.reload();
             });
             }
           
@@ -226,7 +276,8 @@ $scope.show = function(trans) {
           function ModalOpenFormulaInstanceCtrl($scope, $http,$rootScope,$uibModalInstance, employeePostingService,jadaApiUrl,employeeinfo) {
 
          $scope.transactionposting=employeeinfo;
-      
+          $scope.transactionposting.periodId=employeeinfo.period;
+       $scope.transactionposting.employeeId=employeeinfo.id;
             $scope.ok = function () {
               $uibModalInstance.close('closed');
             };
