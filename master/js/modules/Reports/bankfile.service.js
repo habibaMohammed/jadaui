@@ -7,7 +7,7 @@
 
     BankfileService.$inject = ['$resource','jadaApiUrl'];
     function BankfileService($resource,jadaApiUrl) {
-     var data=$resource(jadaApiUrl+'api/bankfilereport/:periodId', {periodId: '@periodId'},
+     var data=$resource(jadaApiUrl+'api/bankfilereport',
     { 'get':    {method:'GET', isArray:false},
   'save':   {method:'POST'},
   'query':  {method:'GET', isArray:true},

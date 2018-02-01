@@ -23,7 +23,7 @@
        var SuccessMsg;
        var errorMsg;
 
-
+ 
            
 $scope.approvedResource = $resource(jadaApiUrl+'api/approvedpayrolltransaction');
 $scope.approve=$scope.approvedResource.get({});

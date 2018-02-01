@@ -1,11 +1,11 @@
 
 <h3>Payslip</h3>
 
-<div class="row" ng-controller="PayslipController" >
+<div  ng-controller="PayslipController" >
    
-    <div class="col-lg-12">         
+       
 
-   <div class="col-lg-8" style="float:left;">
+   <div class="col-lg-12" style="float:left;">
       <form class="form-inline">
   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
     <div class="input-group-addon">Period</div>
@@ -21,47 +21,27 @@
   </select>
   </div>
   <button type="submit" ng-click="searchPayslip(user)" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+<div class="col-lg-2 text-right" style="float: right;" ng-show="persons.length" >
+               
+  <button type="button" class="btn btn-primary" ng-disabled="curPage == 0"
+ ng-click="curPage=curPage-1"> Previous</button>
 
+                   
+<button type="button" class="btn btn-primary"
+ ng-disabled="curPage >= persons.length/pageSize - 1"
+ ng-click="curPage = curPage+1">Next</button>
+
+            
+               </div>
 
 </form>
   
    </div>
- <div class="col-lg-2 text-right" style="float: right;"  ng-show="persons.length">
-                  <ul class="pagination pagination-sm">
-                  <li>
-  <button type="button" class="btn btn-primary" ng-disabled="curPage == 0"
- ng-click="curPage=curPage-1"> Previous</button>
- </li>
-                   
-                <li>
- <button type="button" class="btn btn-primary"
- ng-disabled="curPage >= persons.length/pageSize - 1"
- ng-click="curPage = curPage+1">Next</button>
- </li>
-                  </ul>
-               </div>
-<!--    <div class="col-lg-3" style="float:right;">
-  <div class=" pull-right" ng-show="persons.length">
-<ul  class="pagination pagination-sm">
- <li>
-  <button type="button" class="btn btn-primary" ng-disabled="curPage == 0"
- ng-click="curPage=curPage-1"> Previous</button>
- </li>
+ 
 
- <li>
- <button type="button" class="btn btn-default"
-> <span>Page {{curPage + 1}} of {{ numberOfPages() }}</span></button>
- </li>
 
- <li>
- <button type="button" class="btn btn-primary"
- ng-disabled="curPage >= persons.length/pageSize - 1"
- ng-click="curPage = curPage+1">Next</button>
- </li>
-</ul>
-</div>
-</div> -->
-</div>
+<br/>
+<br/>
 <div class="row">
     
 
@@ -70,7 +50,7 @@
    <div class="col-lg-12" >
 
       <!-- START widget-->
-      <div class="panel panel-default" ng-repeat="payslip in persons| pagination: curPage * pageSize | limitTo: pageSize"">
+      <div class="panel panel-default" ng-repeat="payslip in persons| pagination: curPage * pageSize | limitTo: pageSize">
          <div  class="panel-body" >
           <div  id="printable">
            <div class="row">

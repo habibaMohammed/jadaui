@@ -23,9 +23,7 @@
           // editable row
           // ----------------------------------- 
           vm.posting = [
-            {periodId:12, employeeId: 1, payrollCodeId: 2, amount: 4},
-            {periodId:12, employeeId: 2, payrollCodeId: 6, amount: 3},
-            {periodId: 12, employeeId: 2, payrollCodeId: 2, amount: null}
+         
           ];
 
           vm.statuses = [
