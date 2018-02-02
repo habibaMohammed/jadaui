@@ -4,10 +4,10 @@
 
       angular
           .module('app.maintenance')
-          .factory('formulasService', formulasService);
+          .factory('GlMappingService', GlMappingService);
 
-      formulasService.$inject = ['$resource','jadaApiUrl'];
-      function formulasService($resource,jadaApiUrl) {
+      GlMappingService.$inject = ['$resource','jadaApiUrl'];
+      function GlMappingService($resource,jadaApiUrl) {
        var data=$resource(jadaApiUrl+'api/formula/:id', {id: '@id'},
       { 'get':    {method:'GET', isArray:false},
     'save':   {method:'POST'},
