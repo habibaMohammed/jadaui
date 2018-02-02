@@ -24,13 +24,14 @@
 
           // }
 
+
            $scope.getByperiod=function(ctotal){
                
-             var periodId=ctotal.period;
-             var departmentId=ctotal.department;
+             var periodId=ctotal.period==null?"0":ctotal.period;
+             var departmentId=ctotal.department==null?"0":ctotal.department;
           
-             var employeeCategoryId=ctotal.category;
-             var employeeGroupId=ctotal.group;
+             var employeeCategoryId=ctotal.category==null?"0":ctotal.category;
+             var employeeGroupId=ctotal.group==null?"0":ctotal.group;
                $http.get(jadaApiUrl+'api/CompanyTotalsReport/'+periodId+'/'+departmentId+'/'+employeeGroupId+'/'+employeeCategoryId).success(function(data){
              $scope.companytotals=data;
              
@@ -53,6 +54,17 @@ console.log($scope.companytotals);
               $scope.periods = data;
 
             });
+
+
+$http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
+        var period=0;
+        $scope.ctotal={};
+          $scope.currentPeriod=data.data;
+          period=$scope.currentPeriod.period;
+          $scope.ctotal.period=period;
+  
+    $scope.getByperiod($scope.currentPeriod);
+     });
 
 
 

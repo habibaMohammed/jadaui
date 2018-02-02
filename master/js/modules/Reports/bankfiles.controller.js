@@ -18,13 +18,7 @@
        var currentPeriod=1;
         $scope.bankfiles=BankfileService.get({});
 
-          
-                     $scope.getByperiod=function(period){
-        
-         $scope.bankfiles=BankfileService.get({periodId:period});
-
-          }
-
+          console.log($scope.bankfiles);
 
 
               $http.get(jadaApiUrl+'api/period').success(function(data) {
