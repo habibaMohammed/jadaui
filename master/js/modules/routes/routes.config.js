@@ -919,7 +919,8 @@
           .state('app.bankfiles', {
               url: '/bankfiles',
               title: 'schedules',
-                templateUrl: helper.basepath('bankfiles.html')
+                templateUrl: helper.basepath('bankfiles.html'),
+                 resolve: helper.resolveFor('angular-file-saver')
 
              
           })

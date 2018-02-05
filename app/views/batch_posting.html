@@ -32,7 +32,7 @@ Import</a>
 
         <td>
             <!-- editable group (select-remote)-->
-            <span editable-select="user.employeeId" e-name="employeeId" onshow="table.loadEmployees()" e-form="rowform" e-ng-options="g.id as g.employeeNumber+'_'+g.firstName+' '+g.lastName for g in table.employees ">{{ user.employeeId }}</span>
+            <span editable-select="user.employeeId" e-name="employeeId" onshow="table.loadEmployees()" e-form="rowform" e-ng-options="g.id as g.employeeNumber+'_'+g.firstName+' '+g.lastName for g in table.employees ">{{ table.showEmployees(user) }}</span>
          </td>
 
               <td>
