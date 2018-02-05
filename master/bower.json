@@ -125,6 +125,7 @@
     "fullcalendar": "3.0.0",
     "jquery": "2.2.4",
     "d3": "3.5.5",
-    "bootstrap": "3.3.7"
+    "bootstrap": "3.3.7",
+    "angular-file-saver":"1.1.3"
   }
 }

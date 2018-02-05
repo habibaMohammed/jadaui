@@ -69,12 +69,6 @@
     'use strict';
 
     angular
-        .module('app.charts', []);
-})();
-(function() {
-    'use strict';
-
-    angular
         .module('app.colors', []);
 })();
 (function() {
@@ -82,6 +76,12 @@
 
     angular
         .module('app.companydetails', []);
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.charts', []);
 })();
 (function() {
     'use strict';
@@ -126,13 +126,19 @@
     'use strict';
 
     angular
+        .module('app.flatdoc', []);
+})();
+(function() {
+    'use strict';
+
+    angular
         .module('app.extras', []);
 })();
 (function() {
     'use strict';
 
     angular
-        .module('app.flatdoc', []);
+        .module('app.icons', []);
 })();
 (function() {
     'use strict';
@@ -150,7 +156,7 @@
     'use strict';
 
     angular
-        .module('app.icons', []);
+        .module('app.locale', []);
 })();
 (function() {
     'use strict';
@@ -162,25 +168,19 @@
     'use strict';
 
     angular
-        .module('app.locale', []);
-})();
-(function() {
-    'use strict';
-
-    angular
         .module('app.mailbox', []);
 })();
 (function() {
     'use strict';
 
     angular
-        .module('app.maintenance', ['ui.bootstrap']);
+        .module('app.maps', []);
 })();
 (function() {
     'use strict';
 
     angular
-        .module('app.maps', []);
+        .module('app.maintenance', ['ui.bootstrap']);
 })();
 (function() {
     'use strict';
@@ -198,13 +198,13 @@
     'use strict';
 
     angular
-        .module('app.panels', []);
+        .module('app.pages', []);
 })();
 (function() {
     'use strict';
 
     angular
-        .module('app.pages', []);
+        .module('app.panels', []);
 })();
 (function() {
     'use strict';
@@ -256,13 +256,13 @@
     'use strict';
 
     angular
-        .module('app.translate', []);
+        .module('app.transactions', []);
 })();
 (function() {
     'use strict';
 
     angular
-        .module('app.transactions', []);
+        .module('app.translate', []);
 })();
 (function() {
     'use strict';
@@ -1735,1668 +1735,6 @@ $scope.show = function(period) {
           }
         }
     }
-
-})();
-
-/**=========================================================
- * Module: chartist.js
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.charts')
-        .controller('ChartistController', ChartistController);
-
-    function ChartistController() {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          // Line chart
-          // ----------------------------------- 
-
-          vm.lineData = {
-            labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-            series: [
-              [12, 9, 7, 8, 5],
-              [2, 1, 3.5, 7, 3],
-              [1, 3, 4, 5, 6]
-            ]
-          };
-
-          vm.lineOptions = {
-            fullWidth: true,
-            height: 220,
-            chartPadding: {
-              right: 40
-            }
-          };
-
-          // Bar bipolar
-          // ----------------------------------- 
-
-          vm.barBipolarOptions = {
-            high: 10,
-            low: -10,
-            height: 220,
-            axisX: {
-              labelInterpolationFnc: function(value, index) {
-                return index % 2 === 0 ? value : null;
-              }
-            }
-          };
-
-          vm.barBipolarData = {
-            labels: ['W1', 'W2', 'W3', 'W4', 'W5', 'W6', 'W7', 'W8', 'W9', 'W10'],
-            series: [
-              [1, 2, 4, 8, 6, -2, -1, -4, -6, -2]
-            ]
-          };
-
-
-          // Bar horizontal
-          // ----------------------------------- 
-
-          vm.barHorizontalData = {
-            labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-            series: [
-              [5, 4, 3, 7, 5, 10, 3],
-              [3, 2, 9, 5, 4, 6, 4]
-            ]
-          };
-
-          vm.barHorizontalOptions = {
-            seriesBarDistance: 10,
-            reverseData: true,
-            horizontalBars: true,
-            height: 220,
-            axisY: {
-              offset: 70
-            }
-          };
-
-          // Smil Animations
-          // ----------------------------------- 
-
-          // Let's put a sequence number aside so we can use it in the event callbacks
-          var seq = 0,
-            delays = 80,
-            durations = 500;
-
-          vm.smilData = {
-            labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
-            series: [
-              [12, 9, 7, 8, 5, 4, 6, 2, 3, 3, 4, 6],
-              [4,  5, 3, 7, 3, 5, 5, 3, 4, 4, 5, 5],
-              [5,  3, 4, 5, 6, 3, 3, 4, 5, 6, 3, 4],
-              [3,  4, 5, 6, 7, 6, 4, 5, 6, 7, 6, 3]
-            ]
-          };
-
-          vm.smilOptions = {
-            low: 0,
-            height: 260
-          };
-
-          vm.smilEvents = {
-            created: function() {
-              seq = 0;
-            },
-            draw: function(data) {
-              seq++;
-
-              if(data.type === 'line') {
-                // If the drawn element is a line we do a simple opacity fade in. This could also be achieved using CSS3 animations.
-                data.element.animate({
-                  opacity: {
-                    // The delay when we like to start the animation
-                    begin: seq * delays + 1000,
-                    // Duration of the animation
-                    dur: durations,
-                    // The value where the animation should start
-                    from: 0,
-                    // The value where it should end
-                    to: 1
-                  }
-                });
-              } else if(data.type === 'label' && data.axis === 'x') {
-                data.element.animate({
-                  y: {
-                    begin: seq * delays,
-                    dur: durations,
-                    from: data.y + 100,
-                    to: data.y,
-                    // We can specify an easing function from Chartist.Svg.Easing
-                    easing: 'easeOutQuart'
-                  }
-                });
-              } else if(data.type === 'label' && data.axis === 'y') {
-                data.element.animate({
-                  x: {
-                    begin: seq * delays,
-                    dur: durations,
-                    from: data.x - 100,
-                    to: data.x,
-                    easing: 'easeOutQuart'
-                  }
-                });
-              } else if(data.type === 'point') {
-                data.element.animate({
-                  x1: {
-                    begin: seq * delays,
-                    dur: durations,
-                    from: data.x - 10,
-                    to: data.x,
-                    easing: 'easeOutQuart'
-                  },
-                  x2: {
-                    begin: seq * delays,
-                    dur: durations,
-                    from: data.x - 10,
-                    to: data.x,
-                    easing: 'easeOutQuart'
-                  },
-                  opacity: {
-                    begin: seq * delays,
-                    dur: durations,
-                    from: 0,
-                    to: 1,
-                    easing: 'easeOutQuart'
-                  }
-                });
-              } 
-            }
-          };
-
-
-          // SVG PATH animation
-          // ----------------------------------- 
-
-          vm.pathData = {
-            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-            series: [
-              [1, 5, 2, 5, 4, 3],
-              [2, 3, 4, 8, 1, 2],
-              [5, 4, 3, 2, 1, 0.5]
-            ]
-          };
-
-          vm.pathOptions = {
-            low: 0,
-            showArea: true,
-            showPoint: false,
-            fullWidth: true,
-            height: 260
-          };
-
-          vm.pathEvents = {
-            draw: function(data) {
-              if(data.type === 'line' || data.type === 'area') {
-                data.element.animate({
-                  d: {
-                    begin: 2000 * data.index,
-                    dur: 2000,
-                    from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
-                    to: data.path.clone().stringify(),
-                    easing: Chartist.Svg.Easing.easeOutQuint
-                  }
-                });
-              }
-            }
-          };
-
-        }
-    }
-})();
-
-
-/**=========================================================
- * Module: chart.controller.js
- * Controller for ChartJs
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.charts')
-        .controller('ChartJSController', ChartJSController);
-
-    ChartJSController.$inject = ['Colors'];
-    function ChartJSController(Colors) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          // random values for demo
-          var rFactor = function(){ return Math.round(Math.random()*100); };
-
-          // Line chart
-          // ----------------------------------- 
-
-          vm.lineData = {
-              labels : ['January','February','March','April','May','June','July'],
-              datasets : [
-                {
-                  label: 'My First dataset',
-                  fillColor : 'rgba(114,102,186,0.2)',
-                  strokeColor : 'rgba(114,102,186,1)',
-                  pointColor : 'rgba(114,102,186,1)',
-                  pointStrokeColor : '#fff',
-                  pointHighlightFill : '#fff',
-                  pointHighlightStroke : 'rgba(114,102,186,1)',
-                  data : [rFactor(),rFactor(),rFactor(),rFactor(),rFactor(),rFactor(),rFactor()]
-                },
-                {
-                  label: 'My Second dataset',
-                  fillColor : 'rgba(35,183,229,0.2)',
-                  strokeColor : 'rgba(35,183,229,1)',
-                  pointColor : 'rgba(35,183,229,1)',
-                  pointStrokeColor : '#fff',
-                  pointHighlightFill : '#fff',
-                  pointHighlightStroke : 'rgba(35,183,229,1)',
-                  data : [rFactor(),rFactor(),rFactor(),rFactor(),rFactor(),rFactor(),rFactor()]
-                }
-              ]
-            };
-
-
-          vm.lineOptions = {
-            scaleShowGridLines : true,
-            scaleGridLineColor : 'rgba(0,0,0,.05)',
-            scaleGridLineWidth : 1,
-            bezierCurve : true,
-            bezierCurveTension : 0.4,
-            pointDot : true,
-            pointDotRadius : 4,
-            pointDotStrokeWidth : 1,
-            pointHitDetectionRadius : 20,
-            datasetStroke : true,
-            datasetStrokeWidth : 2,
-            datasetFill : true,
-          };
-
-
-          // Bar chart
-          // ----------------------------------- 
-
-          vm.barData = {
-              labels : ['January','February','March','April','May','June','July'],
-              datasets : [
-                {
-                  fillColor : Colors.byName('info'),
-                  strokeColor : Colors.byName('info'),
-                  highlightFill: Colors.byName('info'),
-                  highlightStroke: Colors.byName('info'),
-                  data : [rFactor(),rFactor(),rFactor(),rFactor(),rFactor(),rFactor(),rFactor()]
-                },
-                {
-                  fillColor : Colors.byName('primary'),
-                  strokeColor : Colors.byName('primary'),
-                  highlightFill : Colors.byName('primary'),
-                  highlightStroke : Colors.byName('primary'),
-                  data : [rFactor(),rFactor(),rFactor(),rFactor(),rFactor(),rFactor(),rFactor()]
-                }
-              ]
-          };
-          
-          vm.barOptions = {
-            scaleBeginAtZero : true,
-            scaleShowGridLines : true,
-            scaleGridLineColor : 'rgba(0,0,0,.05)',
-            scaleGridLineWidth : 1,
-            barShowStroke : true,
-            barStrokeWidth : 2,
-            barValueSpacing : 5,
-            barDatasetSpacing : 1,
-          };
-
-
-          //  Doughnut chart
-          // ----------------------------------- 
-          
-          vm.doughnutData = [
-                {
-                  value: 300,
-                  color: Colors.byName('purple'),
-                  highlight: Colors.byName('purple'),
-                  label: 'Purple'
-                },
-                {
-                  value: 50,
-                  color: Colors.byName('info'),
-                  highlight: Colors.byName('info'),
-                  label: 'Info'
-                },
-                {
-                  value: 100,
-                  color: Colors.byName('yellow'),
-                  highlight: Colors.byName('yellow'),
-                  label: 'Yellow'
-                }
-              ];
-
-          vm.doughnutOptions = {
-            segmentShowStroke : true,
-            segmentStrokeColor : '#fff',
-            segmentStrokeWidth : 2,
-            percentageInnerCutout : 85,
-            animationSteps : 100,
-            animationEasing : 'easeOutBounce',
-            animateRotate : true,
-            animateScale : false
-          };
-
-          // Pie chart
-          // ----------------------------------- 
-
-          vm.pieData =[
-                {
-                  value: 300,
-                  color: Colors.byName('purple'),
-                  highlight: Colors.byName('purple'),
-                  label: 'Purple'
-                },
-                {
-                  value: 40,
-                  color: Colors.byName('yellow'),
-                  highlight: Colors.byName('yellow'),
-                  label: 'Yellow'
-                },
-                {
-                  value: 120,
-                  color: Colors.byName('info'),
-                  highlight: Colors.byName('info'),
-                  label: 'Info'
-                }
-              ];
-
-          vm.pieOptions = {
-            segmentShowStroke : true,
-            segmentStrokeColor : '#fff',
-            segmentStrokeWidth : 2,
-            percentageInnerCutout : 0, // Setting this to zero convert a doughnut into a Pie
-            animationSteps : 100,
-            animationEasing : 'easeOutBounce',
-            animateRotate : true,
-            animateScale : false
-          };
-
-          // Polar chart
-          // ----------------------------------- 
-          
-          vm.polarData = [
-                {
-                  value: 300,
-                  color: Colors.byName('pink'),
-                  highlight: Colors.byName('pink'),
-                  label: 'Red'
-                },
-                {
-                  value: 50,
-                  color: Colors.byName('purple'),
-                  highlight: Colors.byName('purple'),
-                  label: 'Green'
-                },
-                {
-                  value: 100,
-                  color: Colors.byName('pink'),
-                  highlight: Colors.byName('pink'),
-                  label: 'Yellow'
-                },
-                {
-                  value: 140,
-                  color: Colors.byName('purple'),
-                  highlight: Colors.byName('purple'),
-                  label: 'Grey'
-                },
-              ];
-
-          vm.polarOptions = {
-            scaleShowLabelBackdrop : true,
-            scaleBackdropColor : 'rgba(255,255,255,0.75)',
-            scaleBeginAtZero : true,
-            scaleBackdropPaddingY : 1,
-            scaleBackdropPaddingX : 1,
-            scaleShowLine : true,
-            segmentShowStroke : true,
-            segmentStrokeColor : '#fff',
-            segmentStrokeWidth : 2,
-            animationSteps : 100,
-            animationEasing : 'easeOutBounce',
-            animateRotate : true,
-            animateScale : false
-          };
-
-
-          // Radar chart
-          // ----------------------------------- 
-
-          vm.radarData = {
-            labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
-            datasets: [
-              {
-                label: 'My First dataset',
-                fillColor: 'rgba(114,102,186,0.2)',
-                strokeColor: 'rgba(114,102,186,1)',
-                pointColor: 'rgba(114,102,186,1)',
-                pointStrokeColor: '#fff',
-                pointHighlightFill: '#fff',
-                pointHighlightStroke: 'rgba(114,102,186,1)',
-                data: [65,59,90,81,56,55,40]
-              },
-              {
-                label: 'My Second dataset',
-                fillColor: 'rgba(151,187,205,0.2)',
-                strokeColor: 'rgba(151,187,205,1)',
-                pointColor: 'rgba(151,187,205,1)',
-                pointStrokeColor: '#fff',
-                pointHighlightFill: '#fff',
-                pointHighlightStroke: 'rgba(151,187,205,1)',
-                data: [28,48,40,19,96,27,100]
-              }
-            ]
-          };
-
-          vm.radarOptions = {
-            scaleShowLine : true,
-            angleShowLineOut : true,
-            scaleShowLabels : false,
-            scaleBeginAtZero : true,
-            angleLineColor : 'rgba(0,0,0,.1)',
-            angleLineWidth : 1,
-            /*jshint -W109*/
-            pointLabelFontFamily : "'Arial'",
-            pointLabelFontStyle : 'bold',
-            pointLabelFontSize : 10,
-            pointLabelFontColor : '#565656',
-            pointDot : true,
-            pointDotRadius : 3,
-            pointDotStrokeWidth : 1,
-            pointHitDetectionRadius : 20,
-            datasetStroke : true,
-            datasetStrokeWidth : 2,
-            datasetFill : true
-          };
-        }
-    }
-})();
-
-/**=========================================================
- * Module: chart.js
- * Wrapper directive for chartJS. 
- * Based on https://gist.github.com/AndreasHeiberg/9837868
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.charts')
-        /* Aliases for various chart types */
-        .directive('linechart',     chartJS('Line')      )
-        .directive('barchart',      chartJS('Bar')       )
-        .directive('radarchart',    chartJS('Radar')     )
-        .directive('polarchart',    chartJS('PolarArea') )
-        .directive('piechart',      chartJS('Pie')       )
-        .directive('doughnutchart', chartJS('Doughnut')  )
-        .directive('donutchart',    chartJS('Doughnut')  )
-        ;
-
-    function chartJS(type) {
-        return function() {
-            return {
-                restrict: 'A',
-                scope: {
-                    data: '=',
-                    options: '=',
-                    id: '@',
-                    width: '=',
-                    height: '=',
-                    resize: '=',
-                    chart: '@',
-                    segments: '@',
-                    responsive: '=',
-                    tooltip: '=',
-                    legend: '='
-                },
-                link: function ($scope, $elem) {
-                    var ctx = $elem[0].getContext('2d');
-                    var autosize = false;
-
-                    $scope.size = function () {
-                        if ($scope.width <= 0) {
-                            $elem.width($elem.parent().width());
-                            ctx.canvas.width = $elem.width();
-                        } else {
-                            ctx.canvas.width = $scope.width || ctx.canvas.width;
-                            autosize = true;
-                        }
-
-                        if($scope.height <= 0){
-                            $elem.height($elem.parent().height());
-                            ctx.canvas.height = ctx.canvas.width / 2;
-                        } else {
-                            ctx.canvas.height = $scope.height || ctx.canvas.height;
-                            autosize = true;
-                        }
-                    };
-
-                    $scope.$watch('data', function (newVal) {
-                        if(chartCreated)
-                            chartCreated.destroy();
-
-                        // if data not defined, exit
-                        if (!newVal) {
-                            return;
-                        }
-                        if ($scope.chart) { type = $scope.chart; }
-
-                        if(autosize){
-                            $scope.size();
-                            chart = new Chart(ctx);
-                        }
-
-                        if($scope.responsive || $scope.resize)
-                            $scope.options.responsive = true;
-
-                        if($scope.responsive !== undefined)
-                            $scope.options.responsive = $scope.responsive;
-
-                        chartCreated = chart[type]($scope.data, $scope.options);
-                        chartCreated.update();
-                        if($scope.legend)
-                            angular.element($elem[0]).parent().after( chartCreated.generateLegend() );
-                    }, true);
-
-                    $scope.$watch('tooltip', function (newVal) {
-                        if (chartCreated)
-                            chartCreated.draw();
-                        if(newVal===undefined || !chartCreated.segments)
-                            return;
-                        if(!isFinite(newVal) || newVal >= chartCreated.segments.length || newVal < 0)
-                            return;
-                        var activeSegment = chartCreated.segments[newVal];
-                        activeSegment.save();
-                        activeSegment.fillColor = activeSegment.highlightColor;
-                        chartCreated.showTooltip([activeSegment]);
-                        activeSegment.restore();
-                    }, true);
-
-                    $scope.size();
-                    var chart = new Chart(ctx);
-                    var chartCreated;
-
-                    $scope.$on('$destroy', function() {
-                        if(chartCreated)
-                            chartCreated.destroy();
-                    });
-                }
-            };
-        };
-    }
-})();
-
-
-
-
-
-/**=========================================================
- * Module: classy-loader.js
- * Enable use of classyloader directly from data attributes
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.charts')
-        .directive('classyloader', classyloader);
-
-    classyloader.$inject = ['$timeout', 'Utils', '$window'];
-    function classyloader ($timeout, Utils, $window) {
-        var directive = {
-            link: link,
-            restrict: 'A'
-        };
-        return directive;
-
-        function link(scope, element) {
-          var $scroller       = $($window),
-              inViewFlagClass = 'js-is-in-view'; // a classname to detect when a chart has been triggered after scroll
-
-          // run after interpolation  
-          $timeout(function(){
-      
-            var $element = $(element),
-                options  = $element.data();
-            
-            // At lease we need a data-percentage attribute
-            if(options) {
-              if( options.triggerInView ) {
-
-                $scroller.scroll(function() {
-                  checkLoaderInVIew($element, options);
-                });
-                // if the element starts already in view
-                checkLoaderInVIew($element, options);
-              }
-              else
-                startLoader($element, options);
-            }
-
-          }, 0);
-
-          function checkLoaderInVIew(element, options) {
-            var offset = -20;
-            if( ! element.hasClass(inViewFlagClass) &&
-                Utils.isInView(element, {topoffset: offset}) ) {
-              startLoader(element, options);
-            }
-          }
-          function startLoader(element, options) {
-            element.ClassyLoader(options).addClass(inViewFlagClass);
-          }
-        }
-    }
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.charts')
-        .service('ChartData', ChartData);
-
-    ChartData.$inject = ['$resource'];
-    function ChartData($resource) {
-        this.load = load;
-
-        ////////////////
-      
-        var opts = {
-            get: { method: 'GET', isArray: true }
-          };
-        function load(source) {
-          return $resource(source, {}, opts).get();
-        }
-    }
-})();
-
-/**=========================================================
- * Module: flot-chart.js
- * Setup options and data for flot chart directive
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.charts')
-        .controller('FlotChartController', FlotChartController);
-
-    FlotChartController.$inject = ['$scope', 'ChartData', '$timeout'];
-    function FlotChartController($scope, ChartData, $timeout) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          // BAR
-          // -----------------------------------
-          vm.barData = ChartData.load('server/chart/bar.json');
-          vm.barOptions = {
-              series: {
-                  bars: {
-                      align: 'center',
-                      lineWidth: 0,
-                      show: true,
-                      barWidth: 0.6,
-                      fill: 0.9
-                  }
-              },
-              grid: {
-                  borderColor: '#eee',
-                  borderWidth: 1,
-                  hoverable: true,
-                  backgroundColor: '#fcfcfc'
-              },
-              tooltip: true,
-              tooltipOpts: {
-                  content: function (label, x, y) { return x + ' : ' + y; }
-              },
-              xaxis: {
-                  tickColor: '#fcfcfc',
-                  mode: 'categories'
-              },
-              yaxis: {
-                  position: ($scope.app.layout.isRTL ? 'right' : 'left'),
-                  tickColor: '#eee'
-              },
-              shadowSize: 0
-          };
-
-          // BAR STACKED
-          // -----------------------------------
-          vm.barStackeData = ChartData.load('server/chart/barstacked.json');
-          vm.barStackedOptions = {
-              series: {
-                  stack: true,
-                  bars: {
-                      align: 'center',
-                      lineWidth: 0,
-                      show: true,
-                      barWidth: 0.6,
-                      fill: 0.9
-                  }
-              },
-              grid: {
-                  borderColor: '#eee',
-                  borderWidth: 1,
-                  hoverable: true,
-                  backgroundColor: '#fcfcfc'
-              },
-              tooltip: true,
-              tooltipOpts: {
-                  content: function (label, x, y) { return x + ' : ' + y; }
-              },
-              xaxis: {
-                  tickColor: '#fcfcfc',
-                  mode: 'categories'
-              },
-              yaxis: {
-                  min: 0,
-                  max: 200, // optional: use it for a clear represetation
-                  position: ($scope.app.layout.isRTL ? 'right' : 'left'),
-                  tickColor: '#eee'
-              },
-              shadowSize: 0
-          };
-
-          // SPLINE
-          // -----------------------------------
-          vm.splineData = ChartData.load('server/chart/spline.json');
-          vm.splineOptions = {
-              series: {
-                  lines: {
-                      show: false
-                  },
-                  points: {
-                      show: true,
-                      radius: 4
-                  },
-                  splines: {
-                      show: true,
-                      tension: 0.4,
-                      lineWidth: 1,
-                      fill: 0.5
-                  }
-              },
-              grid: {
-                  borderColor: '#eee',
-                  borderWidth: 1,
-                  hoverable: true,
-                  backgroundColor: '#fcfcfc'
-              },
-              tooltip: true,
-              tooltipOpts: {
-                  content: function (label, x, y) { return x + ' : ' + y; }
-              },
-              xaxis: {
-                  tickColor: '#fcfcfc',
-                  mode: 'categories'
-              },
-              yaxis: {
-                  min: 0,
-                  max: 150, // optional: use it for a clear represetation
-                  tickColor: '#eee',
-                  position: ($scope.app.layout.isRTL ? 'right' : 'left'),
-                  tickFormatter: function (v) {
-                      return v/* + ' visitors'*/;
-                  }
-              },
-              shadowSize: 0
-          };
-
-          // AREA
-          // -----------------------------------
-          vm.areaData = ChartData.load('server/chart/area.json');
-          vm.areaOptions = {
-              series: {
-                  lines: {
-                      show: true,
-                      fill: 0.8
-                  },
-                  points: {
-                      show: true,
-                      radius: 4
-                  }
-              },
-              grid: {
-                  borderColor: '#eee',
-                  borderWidth: 1,
-                  hoverable: true,
-                  backgroundColor: '#fcfcfc'
-              },
-              tooltip: true,
-              tooltipOpts: {
-                  content: function (label, x, y) { return x + ' : ' + y; }
-              },
-              xaxis: {
-                  tickColor: '#fcfcfc',
-                  mode: 'categories'
-              },
-              yaxis: {
-                  min: 0,
-                  tickColor: '#eee',
-                  position: ($scope.app.layout.isRTL ? 'right' : 'left'),
-                  tickFormatter: function (v) {
-                      return v + ' visitors';
-                  }
-              },
-              shadowSize: 0
-          };
-
-          // LINE
-          // -----------------------------------
-          vm.lineData = ChartData.load('server/chart/line.json');
-          vm.lineOptions = {
-              series: {
-                  lines: {
-                      show: true,
-                      fill: 0.01
-                  },
-                  points: {
-                      show: true,
-                      radius: 4
-                  }
-              },
-              grid: {
-                  borderColor: '#eee',
-                  borderWidth: 1,
-                  hoverable: true,
-                  backgroundColor: '#fcfcfc'
-              },
-              tooltip: true,
-              tooltipOpts: {
-                  content: function (label, x, y) { return x + ' : ' + y; }
-              },
-              xaxis: {
-                  tickColor: '#eee',
-                  mode: 'categories'
-              },
-              yaxis: {
-                  position: ($scope.app.layout.isRTL ? 'right' : 'left'),
-                  tickColor: '#eee'
-              },
-              shadowSize: 0
-          };
-
-          // PIE
-          // -----------------------------------
-          vm.pieData = [{
-              "label": "jQuery",
-              "color": "#4acab4",
-              "data": 30
-            }, {
-              "label": "CSS",
-              "color": "#ffea88",
-              "data": 40
-            }, {
-              "label": "LESS",
-              "color": "#ff8153",
-              "data": 90
-            }, {
-              "label": "SASS",
-              "color": "#878bb6",
-              "data": 75
-            }, {
-              "label": "Jade",
-              "color": "#b2d767",
-              "data": 120
-            }];
-          // Direct data temporarily added until fix: https://github.com/flot/flot/pull/1462
-          // ChartData.load('server/chart/pie.json');
-
-          vm.pieOptions = {
-              series: {
-                  pie: {
-                      show: true,
-                      innerRadius: 0,
-                      label: {
-                          show: true,
-                          radius: 0.8,
-                          formatter: function (label, series) {
-                              return '<div class="flot-pie-label">' +
-                              //label + ' : ' +
-                              Math.round(series.percent) +
-                              '%</div>';
-                          },
-                          background: {
-                              opacity: 0.8,
-                              color: '#222'
-                          }
-                      }
-                  }
-              }
-          };
-
-          // DONUT
-          // -----------------------------------
-          vm.donutData = [ { "color" : "#39C558",
-                "data" : 60,
-                "label" : "Coffee"
-              },
-              { "color" : "#00b4ff",
-                "data" : 90,
-                "label" : "CSS"
-              },
-              { "color" : "#FFBE41",
-                "data" : 50,
-                "label" : "LESS"
-              },
-              { "color" : "#ff3e43",
-                "data" : 80,
-                "label" : "Jade"
-              },
-              { "color" : "#937fc7",
-                "data" : 116,
-                "label" : "AngularJS"
-              }
-            ];
-          // Direct data temporarily added until fix: https://github.com/flot/flot/pull/1462
-          // ChartData.load('server/chart/donut.json');
-
-          vm.donutOptions = {
-              series: {
-                  pie: {
-                      show: true,
-                      innerRadius: 0.5 // This makes the donut shape
-                  }
-              }
-          };
-
-          // REALTIME
-          // -----------------------------------
-          vm.realTimeOptions = {
-              series: {
-                lines: { show: true, fill: true, fillColor:  { colors: ['#a0e0f3', '#23b7e5'] } },
-                shadowSize: 0 // Drawing is faster without shadows
-              },
-              grid: {
-                  show:false,
-                  borderWidth: 0,
-                  minBorderMargin: 20,
-                  labelMargin: 10
-              },
-              xaxis: {
-                tickFormatter: function() {
-                    return '';
-                }
-              },
-              yaxis: {
-                  min: 0,
-                  max: 110
-              },
-              legend: {
-                  show: true
-              },
-              colors: ['#23b7e5']
-          };
-
-          // Generate random data for realtime demo
-          var data = [], totalPoints = 300;
-
-          update();
-
-          function getRandomData() {
-            if (data.length > 0)
-              data = data.slice(1);
-            // Do a random walk
-            while (data.length < totalPoints) {
-              var prev = data.length > 0 ? data[data.length - 1] : 50,
-                y = prev + Math.random() * 10 - 5;
-              if (y < 0) {
-                y = 0;
-              } else if (y > 100) {
-                y = 100;
-              }
-              data.push(y);
-            }
-            // Zip the generated y values with the x values
-            var res = [];
-            for (var i = 0; i < data.length; ++i) {
-              res.push([i, data[i]]);
-            }
-            return [res];
-          }
-          function update() {
-            vm.realTimeData = getRandomData();
-            $timeout(update, 30);
-          }
-          // end random data generation
-
-
-          // PANEL REFRESH EVENTS
-          // -----------------------------------
-
-          $scope.$on('panel-refresh', function(event, id) {
-
-            console.log('Simulating chart refresh during 3s on #'+id);
-
-            // Instead of timeout you can request a chart data
-            $timeout(function(){
-
-              // directive listen for to remove the spinner
-              // after we end up to perform own operations
-              $scope.$broadcast('removeSpinner', id);
-
-              console.log('Refreshed #' + id);
-
-            }, 3000);
-
-          });
-
-
-          // PANEL DISMISS EVENTS
-          // -----------------------------------
-
-          // Before remove panel
-          $scope.$on('panel-remove', function(event, id, deferred){
-
-            console.log('Panel #' + id + ' removing');
-
-            // Here is obligatory to call the resolve() if we pretend to remove the panel finally
-            // Not calling resolve() will NOT remove the panel
-            // It's up to your app to decide if panel should be removed or not
-            deferred.resolve();
-
-          });
-
-          // Panel removed ( only if above was resolved() )
-          $scope.$on('panel-removed', function(event, id){
-
-            console.log('Panel #' + id + ' removed');
-
-          });
-
-        }
-    }
-})();
-
-/**=========================================================
- * Module: flot.js
- * Initializes the Flot chart plugin and handles data refresh
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.charts')
-        .directive('flot', flot);
-
-    flot.$inject = ['$http', '$timeout'];
-
-    function flot($http, $timeout) {
-
-        var directive = {
-            restrict: 'EA',
-            template: '<div></div>',
-            scope: {
-                dataset: '=?',
-                options: '=',
-                series: '=',
-                callback: '=',
-                src: '='
-            },
-            link: link
-        };
-        return directive;
-
-        function link(scope, element, attrs) {
-            var height, plot, plotArea, width;
-            var heightDefault = 220;
-
-            plot = null;
-
-            width = attrs.width || '100%';
-            height = attrs.height || heightDefault;
-
-            plotArea = $(element.children()[0]);
-            plotArea.css({
-                width: width,
-                height: height
-            });
-
-            function init() {
-                var plotObj;
-                if (!scope.dataset || !scope.options) return;
-                plotObj = $.plot(plotArea, scope.dataset, scope.options);
-                scope.$emit('plotReady', plotObj);
-                if (scope.callback) {
-                    scope.callback(plotObj, scope);
-                }
-
-                return plotObj;
-            }
-
-            function onDatasetChanged(dataset) {
-                if (plot) {
-                    plot.setData(dataset);
-                    plot.setupGrid();
-                    return plot.draw();
-                } else {
-                    plot = init();
-                    onSerieToggled(scope.series);
-                    return plot;
-                }
-            }
-            var $watchOff1 = scope.$watchCollection('dataset', onDatasetChanged, true);
-
-            function onSerieToggled(series) {
-                if (!plot || !series) return;
-                var someData = plot.getData();
-                for (var sName in series) {
-                    angular.forEach(series[sName], toggleFor(sName));
-                }
-
-                plot.setData(someData);
-                plot.draw();
-
-                function toggleFor(sName) {
-                    return function(s, i) {
-                        if (someData[i] && someData[i][sName])
-                            someData[i][sName].show = s;
-                    };
-                }
-            }
-            var $watchOff2 = scope.$watch('series', onSerieToggled, true);
-
-            function onSrcChanged(src) {
-
-                if (src) {
-
-                    $http.get(src)
-                        .success(function(data) {
-
-                            $timeout(function() {
-                                scope.dataset = data;
-                            });
-
-                        }).error(function() {
-                            $.error('Flot chart: Bad request.');
-                        });
-
-                }
-            }
-            var $watchOff3 = scope.$watch('src', onSrcChanged);
-
-            scope.$on('$destroy', function(){
-                // detach watches and scope events
-                $watchOff1();
-                $watchOff2();
-                $watchOff3();
-                // destroy chart
-                plot.destroy();
-            });
-
-        }
-    }
-
-
-})();
-/**=========================================================
- * Module: morris.js
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.charts')
-        .controller('ChartMorrisController', ChartMorrisController);
-
-    ChartMorrisController.$inject = ['$timeout', 'Colors'];
-    function ChartMorrisController($timeout, Colors) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-         vm.chartdata = [
-              { y: '2006', a: 100, b: 90 },
-              { y: '2007', a: 75,  b: 65 },
-              { y: '2008', a: 50,  b: 40 },
-              { y: '2009', a: 75,  b: 65 },
-              { y: '2010', a: 50,  b: 40 },
-              { y: '2011', a: 75,  b: 65 },
-              { y: '2012', a: 100, b: 90 }
-          ];
-
-          /* test data update
-          $timeout(function(){
-            vm.chartdata[0].a = 50;
-            vm.chartdata[0].b = 50;
-          }, 3000); */
-
-          vm.donutdata = [
-            {label: 'Download Sales', value: 12},
-            {label: 'In-Store Sales',value: 30},
-            {label: 'Mail-Order Sales', value: 20}
-          ];
-
-          vm.donutOptions = {
-            Colors: [ Colors.byName('danger'), Colors.byName('yellow'), Colors.byName('warning') ],
-            resize: true
-          };
-
-          vm.barOptions = {
-            xkey: 'y',
-            ykeys: ['a', 'b'],
-            labels: ['Series A', 'Series B'],
-            xLabelMargin: 2,
-            barColors: [ Colors.byName('info'), Colors.byName('danger') ],
-            resize: true
-          };
-
-          vm.lineOptions = {
-            xkey: 'y',
-            ykeys: ['a', 'b'],
-            labels: ['Serie A', 'Serie B'],
-            lineColors: ['#31C0BE', '#7a92a3'],
-            resize: true
-          };
-
-          vm.areaOptions = {
-            xkey: 'y',
-            ykeys: ['a', 'b'],
-            labels: ['Serie A', 'Serie B'],
-            lineColors: [ Colors.byName('purple'), Colors.byName('info') ],
-            resize: true
-          };
-
-        }
-    }
-})();
-
-/**=========================================================
- * Module: morris.js
- * AngularJS Directives for Morris Charts
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.charts')
-        .directive('morrisBar',   morrisChart('Bar')   )
-        .directive('morrisDonut', morrisChart('Donut') )
-        .directive('morrisLine',  morrisChart('Line')  )
-        .directive('morrisArea',  morrisChart('Area')  );
-
-    function morrisChart(type) {
-      return function () {
-        return {
-          restrict: 'EA',
-          scope: {
-            morrisData: '=',
-            morrisOptions: '='
-          },
-          link: function($scope, element) {
-            // start ready to watch for changes in data
-            $scope.$watch('morrisData', function(newVal) {
-              if (newVal) {
-                $scope.morrisInstance.setData(newVal);
-                $scope.morrisInstance.redraw();
-              }
-            }, true);
-            // the element that contains the chart
-            $scope.morrisOptions.element = element;
-            // If data defined copy to options
-            if($scope.morrisData)
-              $scope.morrisOptions.data = $scope.morrisData;
-            // Init chart
-            $scope.morrisInstance = new Morris[type]($scope.morrisOptions);
-
-          }
-        };
-      };
-    }
-
-})();
-
-/**=========================================================
- * Module: PieChartsController.js
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.charts')
-        .controller('PieChartsController', PieChartsController);
-
-    /*jshint -W069*/
-    PieChartsController.$inject = ['Colors'];
-
-    function PieChartsController(Colors) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          // KNOB Charts
-
-          vm.knobLoaderData1 = 80;
-          vm.knobLoaderOptions1 = {
-              width: '50%', // responsive
-              displayInput: true,
-              fgColor: Colors.byName('info')
-            };
-
-          vm.knobLoaderData2 = 45;
-          vm.knobLoaderOptions2 = {
-              width: '50%', // responsive
-              displayInput: true,
-              fgColor: Colors.byName('purple'),
-              readOnly : true
-            };
-
-          vm.knobLoaderData3 = 30;
-          vm.knobLoaderOptions3 = {
-              width: '50%', // responsive
-              displayInput: true,
-              fgColor: Colors.byName('pink'),
-              displayPrevious : true,
-              thickness : 0.1,
-              lineCap : 'round'
-            };
-
-          vm.knobLoaderData4 = 20;
-          vm.knobLoaderOptions4 = {
-              width: '50%', // responsive
-              displayInput: true,
-              fgColor: Colors.byName('info'),
-              bgColor: Colors.byName('gray'),
-              angleOffset: -125,
-              angleArc: 250
-            };
-
-          // Easy Pie Charts
-
-          vm.piePercent1 = 85;
-          vm.piePercent2 = 45;
-          vm.piePercent3 = 25;
-          vm.piePercent4 = 60;
-
-          vm.pieOptions1 = {
-              animate:{
-                  duration: 800,
-                  enabled: true
-              },
-              barColor: Colors.byName('success'),
-              trackColor: false,
-              scaleColor: false,
-              lineWidth: 10,
-              lineCap: 'circle'
-          };
-
-          vm.pieOptions2= {
-              animate:{
-                  duration: 800,
-                  enabled: true
-              },
-              barColor: Colors.byName('warning'),
-              trackColor: false,
-              scaleColor: false,
-              lineWidth: 4,
-              lineCap: 'circle'
-          };
-
-          vm.pieOptions3 = {
-              animate:{
-                  duration: 800,
-                  enabled: true
-              },
-              barColor: Colors.byName('danger'),
-              trackColor: false,
-              scaleColor: Colors.byName('gray'),
-              lineWidth: 15,
-              lineCap: 'circle'
-          };
-
-          vm.pieOptions4 = {
-              animate:{
-                  duration: 800,
-                  enabled: true
-              },
-              barColor: Colors.byName('danger'),
-              trackColor: Colors.byName('yellow'),
-              scaleColor: Colors.byName('gray-dark'),
-              lineWidth: 15,
-              lineCap: 'circle'
-          };
-
-          vm.randomize = function(type) {
-            if ( type === 'easy') {
-              vm.piePercent1 = random();
-              vm.piePercent2 = random();
-              vm.piePercent3 = random();
-              vm.piePercent4 = random();
-            }
-            if ( type === 'knob') {
-              vm.knobLoaderData1 = random();
-              vm.knobLoaderData2 = random();
-              vm.knobLoaderData3 = random();
-              vm.knobLoaderData4 = random();
-            }
-          }
-
-          function random() { return Math.floor((Math.random() * 100) + 1); }
-
-        }
-    }
-})();
-
-/**=========================================================
- * Module: rickshaw.js
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.charts')
-        .controller('ChartRickshawController', ChartRickshawController);
-
-    function ChartRickshawController() {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          vm.renderers = [{
-                  id: 'area',
-                  name: 'Area'
-              }, {
-                  id: 'line',
-                  name: 'Line'
-              }, {
-                  id: 'bar',
-                  name: 'Bar'
-              }, {
-                  id: 'scatterplot',
-                  name: 'Scatterplot'
-              }];
-
-          vm.palettes = [
-              'spectrum14',
-              'spectrum2000',
-              'spectrum2001',
-              'colorwheel',
-              'cool',
-              'classic9',
-              'munin'
-          ];
-
-          vm.rendererChanged = function(id) {
-              vm['options' + id] = {
-                  renderer: vm['renderer' + id].id
-              };
-          };
-
-          vm.paletteChanged = function(id) {
-              vm['features' + id] = {
-                  palette: vm['palette' + id]
-              };
-          };
-
-          vm.changeSeriesData = function(id) {
-              var seriesList = [];
-              for (var i = 0; i < 3; i++) {
-                  var series = {
-                      name: 'Series ' + (i + 1),
-                      data: []
-                  };
-                  for (var j = 0; j < 10; j++) {
-                      series.data.push({x: j, y: Math.random() * 20});
-                  }
-                  seriesList.push(series);
-                  vm['series' + id][i] = series;
-              }
-              //vm['series' + id] = seriesList;
-          };
-
-          vm.series0 = [];
-
-          vm.options0 = {
-            renderer: 'area'
-          };
-
-          vm.renderer0 = vm.renderers[0];
-          vm.palette0 = vm.palettes[0];
-
-          vm.rendererChanged(0);
-          vm.paletteChanged(0);
-          vm.changeSeriesData(0);  
-
-          // Graph 2
-
-          var seriesData = [ [], [], [] ];
-          var random = new Rickshaw.Fixtures.RandomData(150);
-
-          for (var i = 0; i < 150; i++) {
-            random.addData(seriesData);
-          }
-
-          vm.series2 = [
-            {
-              color: '#c05020',
-              data: seriesData[0],
-              name: 'New York'
-            }, {
-              color: '#30c020',
-              data: seriesData[1],
-              name: 'London'
-            }, {
-              color: '#6060c0',
-              data: seriesData[2],
-              name: 'Tokyo'
-            }
-          ];
-
-          vm.options2 = {
-            renderer: 'area'
-          };
-
-        }
-    }
-})();
-
-/**=========================================================
- * Module: sparkline.js
- * SparkLines Mini Charts
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.charts')
-        .directive('sparkline', sparkline);
-
-    function sparkline () {
-        var directive = {
-            restrict: 'EA',
-            scope: {
-              'sparkline': '='
-            },
-            controller: Controller
-        };
-        return directive;
-
-    }
-    Controller.$inject = ['$scope', '$element', '$timeout', '$window'];
-    function Controller($scope, $element, $timeout, $window) {
-      var runSL = function(){
-        initSparLine();
-      };
-      // generate a unique resize event so we can detach later
-      var resizeEventId = 'resize.sparkline' + $scope.$id;
-
-      $timeout(runSL);
-
-      function initSparLine() {
-        var options = $scope.sparkline,
-            data = $element.data();
-
-        if(!options) // if no scope options, try with data attributes
-          options = data;
-        else
-          if(data) // data attributes overrides scope options
-            options = angular.extend({}, options, data);
-
-        options.type = options.type || 'bar'; // default chart is bar
-        options.disableHiddenCheck = true;
-
-        $element.sparkline('html', options);
-
-        if(options.resize) {
-          $($window).on(resizeEventId, function(){
-            $element.sparkline('html', options);
-          });
-        }
-      }
-
-      $scope.$on('$destroy', function(){
-        $($window).off(resizeEventId);
-      });
-
-    }
-
 
 })();
 
@@ -5779,6 +4117,1668 @@ for(var r=0;r<accountRights.length;r++){
 
 })();
 
+/**=========================================================
+ * Module: chartist.js
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.charts')
+        .controller('ChartistController', ChartistController);
+
+    function ChartistController() {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          // Line chart
+          // ----------------------------------- 
+
+          vm.lineData = {
+            labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+            series: [
+              [12, 9, 7, 8, 5],
+              [2, 1, 3.5, 7, 3],
+              [1, 3, 4, 5, 6]
+            ]
+          };
+
+          vm.lineOptions = {
+            fullWidth: true,
+            height: 220,
+            chartPadding: {
+              right: 40
+            }
+          };
+
+          // Bar bipolar
+          // ----------------------------------- 
+
+          vm.barBipolarOptions = {
+            high: 10,
+            low: -10,
+            height: 220,
+            axisX: {
+              labelInterpolationFnc: function(value, index) {
+                return index % 2 === 0 ? value : null;
+              }
+            }
+          };
+
+          vm.barBipolarData = {
+            labels: ['W1', 'W2', 'W3', 'W4', 'W5', 'W6', 'W7', 'W8', 'W9', 'W10'],
+            series: [
+              [1, 2, 4, 8, 6, -2, -1, -4, -6, -2]
+            ]
+          };
+
+
+          // Bar horizontal
+          // ----------------------------------- 
+
+          vm.barHorizontalData = {
+            labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+            series: [
+              [5, 4, 3, 7, 5, 10, 3],
+              [3, 2, 9, 5, 4, 6, 4]
+            ]
+          };
+
+          vm.barHorizontalOptions = {
+            seriesBarDistance: 10,
+            reverseData: true,
+            horizontalBars: true,
+            height: 220,
+            axisY: {
+              offset: 70
+            }
+          };
+
+          // Smil Animations
+          // ----------------------------------- 
+
+          // Let's put a sequence number aside so we can use it in the event callbacks
+          var seq = 0,
+            delays = 80,
+            durations = 500;
+
+          vm.smilData = {
+            labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+            series: [
+              [12, 9, 7, 8, 5, 4, 6, 2, 3, 3, 4, 6],
+              [4,  5, 3, 7, 3, 5, 5, 3, 4, 4, 5, 5],
+              [5,  3, 4, 5, 6, 3, 3, 4, 5, 6, 3, 4],
+              [3,  4, 5, 6, 7, 6, 4, 5, 6, 7, 6, 3]
+            ]
+          };
+
+          vm.smilOptions = {
+            low: 0,
+            height: 260
+          };
+
+          vm.smilEvents = {
+            created: function() {
+              seq = 0;
+            },
+            draw: function(data) {
+              seq++;
+
+              if(data.type === 'line') {
+                // If the drawn element is a line we do a simple opacity fade in. This could also be achieved using CSS3 animations.
+                data.element.animate({
+                  opacity: {
+                    // The delay when we like to start the animation
+                    begin: seq * delays + 1000,
+                    // Duration of the animation
+                    dur: durations,
+                    // The value where the animation should start
+                    from: 0,
+                    // The value where it should end
+                    to: 1
+                  }
+                });
+              } else if(data.type === 'label' && data.axis === 'x') {
+                data.element.animate({
+                  y: {
+                    begin: seq * delays,
+                    dur: durations,
+                    from: data.y + 100,
+                    to: data.y,
+                    // We can specify an easing function from Chartist.Svg.Easing
+                    easing: 'easeOutQuart'
+                  }
+                });
+              } else if(data.type === 'label' && data.axis === 'y') {
+                data.element.animate({
+                  x: {
+                    begin: seq * delays,
+                    dur: durations,
+                    from: data.x - 100,
+                    to: data.x,
+                    easing: 'easeOutQuart'
+                  }
+                });
+              } else if(data.type === 'point') {
+                data.element.animate({
+                  x1: {
+                    begin: seq * delays,
+                    dur: durations,
+                    from: data.x - 10,
+                    to: data.x,
+                    easing: 'easeOutQuart'
+                  },
+                  x2: {
+                    begin: seq * delays,
+                    dur: durations,
+                    from: data.x - 10,
+                    to: data.x,
+                    easing: 'easeOutQuart'
+                  },
+                  opacity: {
+                    begin: seq * delays,
+                    dur: durations,
+                    from: 0,
+                    to: 1,
+                    easing: 'easeOutQuart'
+                  }
+                });
+              } 
+            }
+          };
+
+
+          // SVG PATH animation
+          // ----------------------------------- 
+
+          vm.pathData = {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+            series: [
+              [1, 5, 2, 5, 4, 3],
+              [2, 3, 4, 8, 1, 2],
+              [5, 4, 3, 2, 1, 0.5]
+            ]
+          };
+
+          vm.pathOptions = {
+            low: 0,
+            showArea: true,
+            showPoint: false,
+            fullWidth: true,
+            height: 260
+          };
+
+          vm.pathEvents = {
+            draw: function(data) {
+              if(data.type === 'line' || data.type === 'area') {
+                data.element.animate({
+                  d: {
+                    begin: 2000 * data.index,
+                    dur: 2000,
+                    from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
+                    to: data.path.clone().stringify(),
+                    easing: Chartist.Svg.Easing.easeOutQuint
+                  }
+                });
+              }
+            }
+          };
+
+        }
+    }
+})();
+
+
+/**=========================================================
+ * Module: chart.controller.js
+ * Controller for ChartJs
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.charts')
+        .controller('ChartJSController', ChartJSController);
+
+    ChartJSController.$inject = ['Colors'];
+    function ChartJSController(Colors) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          // random values for demo
+          var rFactor = function(){ return Math.round(Math.random()*100); };
+
+          // Line chart
+          // ----------------------------------- 
+
+          vm.lineData = {
+              labels : ['January','February','March','April','May','June','July'],
+              datasets : [
+                {
+                  label: 'My First dataset',
+                  fillColor : 'rgba(114,102,186,0.2)',
+                  strokeColor : 'rgba(114,102,186,1)',
+                  pointColor : 'rgba(114,102,186,1)',
+                  pointStrokeColor : '#fff',
+                  pointHighlightFill : '#fff',
+                  pointHighlightStroke : 'rgba(114,102,186,1)',
+                  data : [rFactor(),rFactor(),rFactor(),rFactor(),rFactor(),rFactor(),rFactor()]
+                },
+                {
+                  label: 'My Second dataset',
+                  fillColor : 'rgba(35,183,229,0.2)',
+                  strokeColor : 'rgba(35,183,229,1)',
+                  pointColor : 'rgba(35,183,229,1)',
+                  pointStrokeColor : '#fff',
+                  pointHighlightFill : '#fff',
+                  pointHighlightStroke : 'rgba(35,183,229,1)',
+                  data : [rFactor(),rFactor(),rFactor(),rFactor(),rFactor(),rFactor(),rFactor()]
+                }
+              ]
+            };
+
+
+          vm.lineOptions = {
+            scaleShowGridLines : true,
+            scaleGridLineColor : 'rgba(0,0,0,.05)',
+            scaleGridLineWidth : 1,
+            bezierCurve : true,
+            bezierCurveTension : 0.4,
+            pointDot : true,
+            pointDotRadius : 4,
+            pointDotStrokeWidth : 1,
+            pointHitDetectionRadius : 20,
+            datasetStroke : true,
+            datasetStrokeWidth : 2,
+            datasetFill : true,
+          };
+
+
+          // Bar chart
+          // ----------------------------------- 
+
+          vm.barData = {
+              labels : ['January','February','March','April','May','June','July'],
+              datasets : [
+                {
+                  fillColor : Colors.byName('info'),
+                  strokeColor : Colors.byName('info'),
+                  highlightFill: Colors.byName('info'),
+                  highlightStroke: Colors.byName('info'),
+                  data : [rFactor(),rFactor(),rFactor(),rFactor(),rFactor(),rFactor(),rFactor()]
+                },
+                {
+                  fillColor : Colors.byName('primary'),
+                  strokeColor : Colors.byName('primary'),
+                  highlightFill : Colors.byName('primary'),
+                  highlightStroke : Colors.byName('primary'),
+                  data : [rFactor(),rFactor(),rFactor(),rFactor(),rFactor(),rFactor(),rFactor()]
+                }
+              ]
+          };
+          
+          vm.barOptions = {
+            scaleBeginAtZero : true,
+            scaleShowGridLines : true,
+            scaleGridLineColor : 'rgba(0,0,0,.05)',
+            scaleGridLineWidth : 1,
+            barShowStroke : true,
+            barStrokeWidth : 2,
+            barValueSpacing : 5,
+            barDatasetSpacing : 1,
+          };
+
+
+          //  Doughnut chart
+          // ----------------------------------- 
+          
+          vm.doughnutData = [
+                {
+                  value: 300,
+                  color: Colors.byName('purple'),
+                  highlight: Colors.byName('purple'),
+                  label: 'Purple'
+                },
+                {
+                  value: 50,
+                  color: Colors.byName('info'),
+                  highlight: Colors.byName('info'),
+                  label: 'Info'
+                },
+                {
+                  value: 100,
+                  color: Colors.byName('yellow'),
+                  highlight: Colors.byName('yellow'),
+                  label: 'Yellow'
+                }
+              ];
+
+          vm.doughnutOptions = {
+            segmentShowStroke : true,
+            segmentStrokeColor : '#fff',
+            segmentStrokeWidth : 2,
+            percentageInnerCutout : 85,
+            animationSteps : 100,
+            animationEasing : 'easeOutBounce',
+            animateRotate : true,
+            animateScale : false
+          };
+
+          // Pie chart
+          // ----------------------------------- 
+
+          vm.pieData =[
+                {
+                  value: 300,
+                  color: Colors.byName('purple'),
+                  highlight: Colors.byName('purple'),
+                  label: 'Purple'
+                },
+                {
+                  value: 40,
+                  color: Colors.byName('yellow'),
+                  highlight: Colors.byName('yellow'),
+                  label: 'Yellow'
+                },
+                {
+                  value: 120,
+                  color: Colors.byName('info'),
+                  highlight: Colors.byName('info'),
+                  label: 'Info'
+                }
+              ];
+
+          vm.pieOptions = {
+            segmentShowStroke : true,
+            segmentStrokeColor : '#fff',
+            segmentStrokeWidth : 2,
+            percentageInnerCutout : 0, // Setting this to zero convert a doughnut into a Pie
+            animationSteps : 100,
+            animationEasing : 'easeOutBounce',
+            animateRotate : true,
+            animateScale : false
+          };
+
+          // Polar chart
+          // ----------------------------------- 
+          
+          vm.polarData = [
+                {
+                  value: 300,
+                  color: Colors.byName('pink'),
+                  highlight: Colors.byName('pink'),
+                  label: 'Red'
+                },
+                {
+                  value: 50,
+                  color: Colors.byName('purple'),
+                  highlight: Colors.byName('purple'),
+                  label: 'Green'
+                },
+                {
+                  value: 100,
+                  color: Colors.byName('pink'),
+                  highlight: Colors.byName('pink'),
+                  label: 'Yellow'
+                },
+                {
+                  value: 140,
+                  color: Colors.byName('purple'),
+                  highlight: Colors.byName('purple'),
+                  label: 'Grey'
+                },
+              ];
+
+          vm.polarOptions = {
+            scaleShowLabelBackdrop : true,
+            scaleBackdropColor : 'rgba(255,255,255,0.75)',
+            scaleBeginAtZero : true,
+            scaleBackdropPaddingY : 1,
+            scaleBackdropPaddingX : 1,
+            scaleShowLine : true,
+            segmentShowStroke : true,
+            segmentStrokeColor : '#fff',
+            segmentStrokeWidth : 2,
+            animationSteps : 100,
+            animationEasing : 'easeOutBounce',
+            animateRotate : true,
+            animateScale : false
+          };
+
+
+          // Radar chart
+          // ----------------------------------- 
+
+          vm.radarData = {
+            labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
+            datasets: [
+              {
+                label: 'My First dataset',
+                fillColor: 'rgba(114,102,186,0.2)',
+                strokeColor: 'rgba(114,102,186,1)',
+                pointColor: 'rgba(114,102,186,1)',
+                pointStrokeColor: '#fff',
+                pointHighlightFill: '#fff',
+                pointHighlightStroke: 'rgba(114,102,186,1)',
+                data: [65,59,90,81,56,55,40]
+              },
+              {
+                label: 'My Second dataset',
+                fillColor: 'rgba(151,187,205,0.2)',
+                strokeColor: 'rgba(151,187,205,1)',
+                pointColor: 'rgba(151,187,205,1)',
+                pointStrokeColor: '#fff',
+                pointHighlightFill: '#fff',
+                pointHighlightStroke: 'rgba(151,187,205,1)',
+                data: [28,48,40,19,96,27,100]
+              }
+            ]
+          };
+
+          vm.radarOptions = {
+            scaleShowLine : true,
+            angleShowLineOut : true,
+            scaleShowLabels : false,
+            scaleBeginAtZero : true,
+            angleLineColor : 'rgba(0,0,0,.1)',
+            angleLineWidth : 1,
+            /*jshint -W109*/
+            pointLabelFontFamily : "'Arial'",
+            pointLabelFontStyle : 'bold',
+            pointLabelFontSize : 10,
+            pointLabelFontColor : '#565656',
+            pointDot : true,
+            pointDotRadius : 3,
+            pointDotStrokeWidth : 1,
+            pointHitDetectionRadius : 20,
+            datasetStroke : true,
+            datasetStrokeWidth : 2,
+            datasetFill : true
+          };
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: chart.js
+ * Wrapper directive for chartJS. 
+ * Based on https://gist.github.com/AndreasHeiberg/9837868
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.charts')
+        /* Aliases for various chart types */
+        .directive('linechart',     chartJS('Line')      )
+        .directive('barchart',      chartJS('Bar')       )
+        .directive('radarchart',    chartJS('Radar')     )
+        .directive('polarchart',    chartJS('PolarArea') )
+        .directive('piechart',      chartJS('Pie')       )
+        .directive('doughnutchart', chartJS('Doughnut')  )
+        .directive('donutchart',    chartJS('Doughnut')  )
+        ;
+
+    function chartJS(type) {
+        return function() {
+            return {
+                restrict: 'A',
+                scope: {
+                    data: '=',
+                    options: '=',
+                    id: '@',
+                    width: '=',
+                    height: '=',
+                    resize: '=',
+                    chart: '@',
+                    segments: '@',
+                    responsive: '=',
+                    tooltip: '=',
+                    legend: '='
+                },
+                link: function ($scope, $elem) {
+                    var ctx = $elem[0].getContext('2d');
+                    var autosize = false;
+
+                    $scope.size = function () {
+                        if ($scope.width <= 0) {
+                            $elem.width($elem.parent().width());
+                            ctx.canvas.width = $elem.width();
+                        } else {
+                            ctx.canvas.width = $scope.width || ctx.canvas.width;
+                            autosize = true;
+                        }
+
+                        if($scope.height <= 0){
+                            $elem.height($elem.parent().height());
+                            ctx.canvas.height = ctx.canvas.width / 2;
+                        } else {
+                            ctx.canvas.height = $scope.height || ctx.canvas.height;
+                            autosize = true;
+                        }
+                    };
+
+                    $scope.$watch('data', function (newVal) {
+                        if(chartCreated)
+                            chartCreated.destroy();
+
+                        // if data not defined, exit
+                        if (!newVal) {
+                            return;
+                        }
+                        if ($scope.chart) { type = $scope.chart; }
+
+                        if(autosize){
+                            $scope.size();
+                            chart = new Chart(ctx);
+                        }
+
+                        if($scope.responsive || $scope.resize)
+                            $scope.options.responsive = true;
+
+                        if($scope.responsive !== undefined)
+                            $scope.options.responsive = $scope.responsive;
+
+                        chartCreated = chart[type]($scope.data, $scope.options);
+                        chartCreated.update();
+                        if($scope.legend)
+                            angular.element($elem[0]).parent().after( chartCreated.generateLegend() );
+                    }, true);
+
+                    $scope.$watch('tooltip', function (newVal) {
+                        if (chartCreated)
+                            chartCreated.draw();
+                        if(newVal===undefined || !chartCreated.segments)
+                            return;
+                        if(!isFinite(newVal) || newVal >= chartCreated.segments.length || newVal < 0)
+                            return;
+                        var activeSegment = chartCreated.segments[newVal];
+                        activeSegment.save();
+                        activeSegment.fillColor = activeSegment.highlightColor;
+                        chartCreated.showTooltip([activeSegment]);
+                        activeSegment.restore();
+                    }, true);
+
+                    $scope.size();
+                    var chart = new Chart(ctx);
+                    var chartCreated;
+
+                    $scope.$on('$destroy', function() {
+                        if(chartCreated)
+                            chartCreated.destroy();
+                    });
+                }
+            };
+        };
+    }
+})();
+
+
+
+
+
+/**=========================================================
+ * Module: classy-loader.js
+ * Enable use of classyloader directly from data attributes
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.charts')
+        .directive('classyloader', classyloader);
+
+    classyloader.$inject = ['$timeout', 'Utils', '$window'];
+    function classyloader ($timeout, Utils, $window) {
+        var directive = {
+            link: link,
+            restrict: 'A'
+        };
+        return directive;
+
+        function link(scope, element) {
+          var $scroller       = $($window),
+              inViewFlagClass = 'js-is-in-view'; // a classname to detect when a chart has been triggered after scroll
+
+          // run after interpolation  
+          $timeout(function(){
+      
+            var $element = $(element),
+                options  = $element.data();
+            
+            // At lease we need a data-percentage attribute
+            if(options) {
+              if( options.triggerInView ) {
+
+                $scroller.scroll(function() {
+                  checkLoaderInVIew($element, options);
+                });
+                // if the element starts already in view
+                checkLoaderInVIew($element, options);
+              }
+              else
+                startLoader($element, options);
+            }
+
+          }, 0);
+
+          function checkLoaderInVIew(element, options) {
+            var offset = -20;
+            if( ! element.hasClass(inViewFlagClass) &&
+                Utils.isInView(element, {topoffset: offset}) ) {
+              startLoader(element, options);
+            }
+          }
+          function startLoader(element, options) {
+            element.ClassyLoader(options).addClass(inViewFlagClass);
+          }
+        }
+    }
+
+})();
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.charts')
+        .service('ChartData', ChartData);
+
+    ChartData.$inject = ['$resource'];
+    function ChartData($resource) {
+        this.load = load;
+
+        ////////////////
+      
+        var opts = {
+            get: { method: 'GET', isArray: true }
+          };
+        function load(source) {
+          return $resource(source, {}, opts).get();
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: flot-chart.js
+ * Setup options and data for flot chart directive
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.charts')
+        .controller('FlotChartController', FlotChartController);
+
+    FlotChartController.$inject = ['$scope', 'ChartData', '$timeout'];
+    function FlotChartController($scope, ChartData, $timeout) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          // BAR
+          // -----------------------------------
+          vm.barData = ChartData.load('server/chart/bar.json');
+          vm.barOptions = {
+              series: {
+                  bars: {
+                      align: 'center',
+                      lineWidth: 0,
+                      show: true,
+                      barWidth: 0.6,
+                      fill: 0.9
+                  }
+              },
+              grid: {
+                  borderColor: '#eee',
+                  borderWidth: 1,
+                  hoverable: true,
+                  backgroundColor: '#fcfcfc'
+              },
+              tooltip: true,
+              tooltipOpts: {
+                  content: function (label, x, y) { return x + ' : ' + y; }
+              },
+              xaxis: {
+                  tickColor: '#fcfcfc',
+                  mode: 'categories'
+              },
+              yaxis: {
+                  position: ($scope.app.layout.isRTL ? 'right' : 'left'),
+                  tickColor: '#eee'
+              },
+              shadowSize: 0
+          };
+
+          // BAR STACKED
+          // -----------------------------------
+          vm.barStackeData = ChartData.load('server/chart/barstacked.json');
+          vm.barStackedOptions = {
+              series: {
+                  stack: true,
+                  bars: {
+                      align: 'center',
+                      lineWidth: 0,
+                      show: true,
+                      barWidth: 0.6,
+                      fill: 0.9
+                  }
+              },
+              grid: {
+                  borderColor: '#eee',
+                  borderWidth: 1,
+                  hoverable: true,
+                  backgroundColor: '#fcfcfc'
+              },
+              tooltip: true,
+              tooltipOpts: {
+                  content: function (label, x, y) { return x + ' : ' + y; }
+              },
+              xaxis: {
+                  tickColor: '#fcfcfc',
+                  mode: 'categories'
+              },
+              yaxis: {
+                  min: 0,
+                  max: 200, // optional: use it for a clear represetation
+                  position: ($scope.app.layout.isRTL ? 'right' : 'left'),
+                  tickColor: '#eee'
+              },
+              shadowSize: 0
+          };
+
+          // SPLINE
+          // -----------------------------------
+          vm.splineData = ChartData.load('server/chart/spline.json');
+          vm.splineOptions = {
+              series: {
+                  lines: {
+                      show: false
+                  },
+                  points: {
+                      show: true,
+                      radius: 4
+                  },
+                  splines: {
+                      show: true,
+                      tension: 0.4,
+                      lineWidth: 1,
+                      fill: 0.5
+                  }
+              },
+              grid: {
+                  borderColor: '#eee',
+                  borderWidth: 1,
+                  hoverable: true,
+                  backgroundColor: '#fcfcfc'
+              },
+              tooltip: true,
+              tooltipOpts: {
+                  content: function (label, x, y) { return x + ' : ' + y; }
+              },
+              xaxis: {
+                  tickColor: '#fcfcfc',
+                  mode: 'categories'
+              },
+              yaxis: {
+                  min: 0,
+                  max: 150, // optional: use it for a clear represetation
+                  tickColor: '#eee',
+                  position: ($scope.app.layout.isRTL ? 'right' : 'left'),
+                  tickFormatter: function (v) {
+                      return v/* + ' visitors'*/;
+                  }
+              },
+              shadowSize: 0
+          };
+
+          // AREA
+          // -----------------------------------
+          vm.areaData = ChartData.load('server/chart/area.json');
+          vm.areaOptions = {
+              series: {
+                  lines: {
+                      show: true,
+                      fill: 0.8
+                  },
+                  points: {
+                      show: true,
+                      radius: 4
+                  }
+              },
+              grid: {
+                  borderColor: '#eee',
+                  borderWidth: 1,
+                  hoverable: true,
+                  backgroundColor: '#fcfcfc'
+              },
+              tooltip: true,
+              tooltipOpts: {
+                  content: function (label, x, y) { return x + ' : ' + y; }
+              },
+              xaxis: {
+                  tickColor: '#fcfcfc',
+                  mode: 'categories'
+              },
+              yaxis: {
+                  min: 0,
+                  tickColor: '#eee',
+                  position: ($scope.app.layout.isRTL ? 'right' : 'left'),
+                  tickFormatter: function (v) {
+                      return v + ' visitors';
+                  }
+              },
+              shadowSize: 0
+          };
+
+          // LINE
+          // -----------------------------------
+          vm.lineData = ChartData.load('server/chart/line.json');
+          vm.lineOptions = {
+              series: {
+                  lines: {
+                      show: true,
+                      fill: 0.01
+                  },
+                  points: {
+                      show: true,
+                      radius: 4
+                  }
+              },
+              grid: {
+                  borderColor: '#eee',
+                  borderWidth: 1,
+                  hoverable: true,
+                  backgroundColor: '#fcfcfc'
+              },
+              tooltip: true,
+              tooltipOpts: {
+                  content: function (label, x, y) { return x + ' : ' + y; }
+              },
+              xaxis: {
+                  tickColor: '#eee',
+                  mode: 'categories'
+              },
+              yaxis: {
+                  position: ($scope.app.layout.isRTL ? 'right' : 'left'),
+                  tickColor: '#eee'
+              },
+              shadowSize: 0
+          };
+
+          // PIE
+          // -----------------------------------
+          vm.pieData = [{
+              "label": "jQuery",
+              "color": "#4acab4",
+              "data": 30
+            }, {
+              "label": "CSS",
+              "color": "#ffea88",
+              "data": 40
+            }, {
+              "label": "LESS",
+              "color": "#ff8153",
+              "data": 90
+            }, {
+              "label": "SASS",
+              "color": "#878bb6",
+              "data": 75
+            }, {
+              "label": "Jade",
+              "color": "#b2d767",
+              "data": 120
+            }];
+          // Direct data temporarily added until fix: https://github.com/flot/flot/pull/1462
+          // ChartData.load('server/chart/pie.json');
+
+          vm.pieOptions = {
+              series: {
+                  pie: {
+                      show: true,
+                      innerRadius: 0,
+                      label: {
+                          show: true,
+                          radius: 0.8,
+                          formatter: function (label, series) {
+                              return '<div class="flot-pie-label">' +
+                              //label + ' : ' +
+                              Math.round(series.percent) +
+                              '%</div>';
+                          },
+                          background: {
+                              opacity: 0.8,
+                              color: '#222'
+                          }
+                      }
+                  }
+              }
+          };
+
+          // DONUT
+          // -----------------------------------
+          vm.donutData = [ { "color" : "#39C558",
+                "data" : 60,
+                "label" : "Coffee"
+              },
+              { "color" : "#00b4ff",
+                "data" : 90,
+                "label" : "CSS"
+              },
+              { "color" : "#FFBE41",
+                "data" : 50,
+                "label" : "LESS"
+              },
+              { "color" : "#ff3e43",
+                "data" : 80,
+                "label" : "Jade"
+              },
+              { "color" : "#937fc7",
+                "data" : 116,
+                "label" : "AngularJS"
+              }
+            ];
+          // Direct data temporarily added until fix: https://github.com/flot/flot/pull/1462
+          // ChartData.load('server/chart/donut.json');
+
+          vm.donutOptions = {
+              series: {
+                  pie: {
+                      show: true,
+                      innerRadius: 0.5 // This makes the donut shape
+                  }
+              }
+          };
+
+          // REALTIME
+          // -----------------------------------
+          vm.realTimeOptions = {
+              series: {
+                lines: { show: true, fill: true, fillColor:  { colors: ['#a0e0f3', '#23b7e5'] } },
+                shadowSize: 0 // Drawing is faster without shadows
+              },
+              grid: {
+                  show:false,
+                  borderWidth: 0,
+                  minBorderMargin: 20,
+                  labelMargin: 10
+              },
+              xaxis: {
+                tickFormatter: function() {
+                    return '';
+                }
+              },
+              yaxis: {
+                  min: 0,
+                  max: 110
+              },
+              legend: {
+                  show: true
+              },
+              colors: ['#23b7e5']
+          };
+
+          // Generate random data for realtime demo
+          var data = [], totalPoints = 300;
+
+          update();
+
+          function getRandomData() {
+            if (data.length > 0)
+              data = data.slice(1);
+            // Do a random walk
+            while (data.length < totalPoints) {
+              var prev = data.length > 0 ? data[data.length - 1] : 50,
+                y = prev + Math.random() * 10 - 5;
+              if (y < 0) {
+                y = 0;
+              } else if (y > 100) {
+                y = 100;
+              }
+              data.push(y);
+            }
+            // Zip the generated y values with the x values
+            var res = [];
+            for (var i = 0; i < data.length; ++i) {
+              res.push([i, data[i]]);
+            }
+            return [res];
+          }
+          function update() {
+            vm.realTimeData = getRandomData();
+            $timeout(update, 30);
+          }
+          // end random data generation
+
+
+          // PANEL REFRESH EVENTS
+          // -----------------------------------
+
+          $scope.$on('panel-refresh', function(event, id) {
+
+            console.log('Simulating chart refresh during 3s on #'+id);
+
+            // Instead of timeout you can request a chart data
+            $timeout(function(){
+
+              // directive listen for to remove the spinner
+              // after we end up to perform own operations
+              $scope.$broadcast('removeSpinner', id);
+
+              console.log('Refreshed #' + id);
+
+            }, 3000);
+
+          });
+
+
+          // PANEL DISMISS EVENTS
+          // -----------------------------------
+
+          // Before remove panel
+          $scope.$on('panel-remove', function(event, id, deferred){
+
+            console.log('Panel #' + id + ' removing');
+
+            // Here is obligatory to call the resolve() if we pretend to remove the panel finally
+            // Not calling resolve() will NOT remove the panel
+            // It's up to your app to decide if panel should be removed or not
+            deferred.resolve();
+
+          });
+
+          // Panel removed ( only if above was resolved() )
+          $scope.$on('panel-removed', function(event, id){
+
+            console.log('Panel #' + id + ' removed');
+
+          });
+
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: flot.js
+ * Initializes the Flot chart plugin and handles data refresh
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.charts')
+        .directive('flot', flot);
+
+    flot.$inject = ['$http', '$timeout'];
+
+    function flot($http, $timeout) {
+
+        var directive = {
+            restrict: 'EA',
+            template: '<div></div>',
+            scope: {
+                dataset: '=?',
+                options: '=',
+                series: '=',
+                callback: '=',
+                src: '='
+            },
+            link: link
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+            var height, plot, plotArea, width;
+            var heightDefault = 220;
+
+            plot = null;
+
+            width = attrs.width || '100%';
+            height = attrs.height || heightDefault;
+
+            plotArea = $(element.children()[0]);
+            plotArea.css({
+                width: width,
+                height: height
+            });
+
+            function init() {
+                var plotObj;
+                if (!scope.dataset || !scope.options) return;
+                plotObj = $.plot(plotArea, scope.dataset, scope.options);
+                scope.$emit('plotReady', plotObj);
+                if (scope.callback) {
+                    scope.callback(plotObj, scope);
+                }
+
+                return plotObj;
+            }
+
+            function onDatasetChanged(dataset) {
+                if (plot) {
+                    plot.setData(dataset);
+                    plot.setupGrid();
+                    return plot.draw();
+                } else {
+                    plot = init();
+                    onSerieToggled(scope.series);
+                    return plot;
+                }
+            }
+            var $watchOff1 = scope.$watchCollection('dataset', onDatasetChanged, true);
+
+            function onSerieToggled(series) {
+                if (!plot || !series) return;
+                var someData = plot.getData();
+                for (var sName in series) {
+                    angular.forEach(series[sName], toggleFor(sName));
+                }
+
+                plot.setData(someData);
+                plot.draw();
+
+                function toggleFor(sName) {
+                    return function(s, i) {
+                        if (someData[i] && someData[i][sName])
+                            someData[i][sName].show = s;
+                    };
+                }
+            }
+            var $watchOff2 = scope.$watch('series', onSerieToggled, true);
+
+            function onSrcChanged(src) {
+
+                if (src) {
+
+                    $http.get(src)
+                        .success(function(data) {
+
+                            $timeout(function() {
+                                scope.dataset = data;
+                            });
+
+                        }).error(function() {
+                            $.error('Flot chart: Bad request.');
+                        });
+
+                }
+            }
+            var $watchOff3 = scope.$watch('src', onSrcChanged);
+
+            scope.$on('$destroy', function(){
+                // detach watches and scope events
+                $watchOff1();
+                $watchOff2();
+                $watchOff3();
+                // destroy chart
+                plot.destroy();
+            });
+
+        }
+    }
+
+
+})();
+/**=========================================================
+ * Module: morris.js
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.charts')
+        .controller('ChartMorrisController', ChartMorrisController);
+
+    ChartMorrisController.$inject = ['$timeout', 'Colors'];
+    function ChartMorrisController($timeout, Colors) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+         vm.chartdata = [
+              { y: '2006', a: 100, b: 90 },
+              { y: '2007', a: 75,  b: 65 },
+              { y: '2008', a: 50,  b: 40 },
+              { y: '2009', a: 75,  b: 65 },
+              { y: '2010', a: 50,  b: 40 },
+              { y: '2011', a: 75,  b: 65 },
+              { y: '2012', a: 100, b: 90 }
+          ];
+
+          /* test data update
+          $timeout(function(){
+            vm.chartdata[0].a = 50;
+            vm.chartdata[0].b = 50;
+          }, 3000); */
+
+          vm.donutdata = [
+            {label: 'Download Sales', value: 12},
+            {label: 'In-Store Sales',value: 30},
+            {label: 'Mail-Order Sales', value: 20}
+          ];
+
+          vm.donutOptions = {
+            Colors: [ Colors.byName('danger'), Colors.byName('yellow'), Colors.byName('warning') ],
+            resize: true
+          };
+
+          vm.barOptions = {
+            xkey: 'y',
+            ykeys: ['a', 'b'],
+            labels: ['Series A', 'Series B'],
+            xLabelMargin: 2,
+            barColors: [ Colors.byName('info'), Colors.byName('danger') ],
+            resize: true
+          };
+
+          vm.lineOptions = {
+            xkey: 'y',
+            ykeys: ['a', 'b'],
+            labels: ['Serie A', 'Serie B'],
+            lineColors: ['#31C0BE', '#7a92a3'],
+            resize: true
+          };
+
+          vm.areaOptions = {
+            xkey: 'y',
+            ykeys: ['a', 'b'],
+            labels: ['Serie A', 'Serie B'],
+            lineColors: [ Colors.byName('purple'), Colors.byName('info') ],
+            resize: true
+          };
+
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: morris.js
+ * AngularJS Directives for Morris Charts
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.charts')
+        .directive('morrisBar',   morrisChart('Bar')   )
+        .directive('morrisDonut', morrisChart('Donut') )
+        .directive('morrisLine',  morrisChart('Line')  )
+        .directive('morrisArea',  morrisChart('Area')  );
+
+    function morrisChart(type) {
+      return function () {
+        return {
+          restrict: 'EA',
+          scope: {
+            morrisData: '=',
+            morrisOptions: '='
+          },
+          link: function($scope, element) {
+            // start ready to watch for changes in data
+            $scope.$watch('morrisData', function(newVal) {
+              if (newVal) {
+                $scope.morrisInstance.setData(newVal);
+                $scope.morrisInstance.redraw();
+              }
+            }, true);
+            // the element that contains the chart
+            $scope.morrisOptions.element = element;
+            // If data defined copy to options
+            if($scope.morrisData)
+              $scope.morrisOptions.data = $scope.morrisData;
+            // Init chart
+            $scope.morrisInstance = new Morris[type]($scope.morrisOptions);
+
+          }
+        };
+      };
+    }
+
+})();
+
+/**=========================================================
+ * Module: PieChartsController.js
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.charts')
+        .controller('PieChartsController', PieChartsController);
+
+    /*jshint -W069*/
+    PieChartsController.$inject = ['Colors'];
+
+    function PieChartsController(Colors) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          // KNOB Charts
+
+          vm.knobLoaderData1 = 80;
+          vm.knobLoaderOptions1 = {
+              width: '50%', // responsive
+              displayInput: true,
+              fgColor: Colors.byName('info')
+            };
+
+          vm.knobLoaderData2 = 45;
+          vm.knobLoaderOptions2 = {
+              width: '50%', // responsive
+              displayInput: true,
+              fgColor: Colors.byName('purple'),
+              readOnly : true
+            };
+
+          vm.knobLoaderData3 = 30;
+          vm.knobLoaderOptions3 = {
+              width: '50%', // responsive
+              displayInput: true,
+              fgColor: Colors.byName('pink'),
+              displayPrevious : true,
+              thickness : 0.1,
+              lineCap : 'round'
+            };
+
+          vm.knobLoaderData4 = 20;
+          vm.knobLoaderOptions4 = {
+              width: '50%', // responsive
+              displayInput: true,
+              fgColor: Colors.byName('info'),
+              bgColor: Colors.byName('gray'),
+              angleOffset: -125,
+              angleArc: 250
+            };
+
+          // Easy Pie Charts
+
+          vm.piePercent1 = 85;
+          vm.piePercent2 = 45;
+          vm.piePercent3 = 25;
+          vm.piePercent4 = 60;
+
+          vm.pieOptions1 = {
+              animate:{
+                  duration: 800,
+                  enabled: true
+              },
+              barColor: Colors.byName('success'),
+              trackColor: false,
+              scaleColor: false,
+              lineWidth: 10,
+              lineCap: 'circle'
+          };
+
+          vm.pieOptions2= {
+              animate:{
+                  duration: 800,
+                  enabled: true
+              },
+              barColor: Colors.byName('warning'),
+              trackColor: false,
+              scaleColor: false,
+              lineWidth: 4,
+              lineCap: 'circle'
+          };
+
+          vm.pieOptions3 = {
+              animate:{
+                  duration: 800,
+                  enabled: true
+              },
+              barColor: Colors.byName('danger'),
+              trackColor: false,
+              scaleColor: Colors.byName('gray'),
+              lineWidth: 15,
+              lineCap: 'circle'
+          };
+
+          vm.pieOptions4 = {
+              animate:{
+                  duration: 800,
+                  enabled: true
+              },
+              barColor: Colors.byName('danger'),
+              trackColor: Colors.byName('yellow'),
+              scaleColor: Colors.byName('gray-dark'),
+              lineWidth: 15,
+              lineCap: 'circle'
+          };
+
+          vm.randomize = function(type) {
+            if ( type === 'easy') {
+              vm.piePercent1 = random();
+              vm.piePercent2 = random();
+              vm.piePercent3 = random();
+              vm.piePercent4 = random();
+            }
+            if ( type === 'knob') {
+              vm.knobLoaderData1 = random();
+              vm.knobLoaderData2 = random();
+              vm.knobLoaderData3 = random();
+              vm.knobLoaderData4 = random();
+            }
+          }
+
+          function random() { return Math.floor((Math.random() * 100) + 1); }
+
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: rickshaw.js
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.charts')
+        .controller('ChartRickshawController', ChartRickshawController);
+
+    function ChartRickshawController() {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          vm.renderers = [{
+                  id: 'area',
+                  name: 'Area'
+              }, {
+                  id: 'line',
+                  name: 'Line'
+              }, {
+                  id: 'bar',
+                  name: 'Bar'
+              }, {
+                  id: 'scatterplot',
+                  name: 'Scatterplot'
+              }];
+
+          vm.palettes = [
+              'spectrum14',
+              'spectrum2000',
+              'spectrum2001',
+              'colorwheel',
+              'cool',
+              'classic9',
+              'munin'
+          ];
+
+          vm.rendererChanged = function(id) {
+              vm['options' + id] = {
+                  renderer: vm['renderer' + id].id
+              };
+          };
+
+          vm.paletteChanged = function(id) {
+              vm['features' + id] = {
+                  palette: vm['palette' + id]
+              };
+          };
+
+          vm.changeSeriesData = function(id) {
+              var seriesList = [];
+              for (var i = 0; i < 3; i++) {
+                  var series = {
+                      name: 'Series ' + (i + 1),
+                      data: []
+                  };
+                  for (var j = 0; j < 10; j++) {
+                      series.data.push({x: j, y: Math.random() * 20});
+                  }
+                  seriesList.push(series);
+                  vm['series' + id][i] = series;
+              }
+              //vm['series' + id] = seriesList;
+          };
+
+          vm.series0 = [];
+
+          vm.options0 = {
+            renderer: 'area'
+          };
+
+          vm.renderer0 = vm.renderers[0];
+          vm.palette0 = vm.palettes[0];
+
+          vm.rendererChanged(0);
+          vm.paletteChanged(0);
+          vm.changeSeriesData(0);  
+
+          // Graph 2
+
+          var seriesData = [ [], [], [] ];
+          var random = new Rickshaw.Fixtures.RandomData(150);
+
+          for (var i = 0; i < 150; i++) {
+            random.addData(seriesData);
+          }
+
+          vm.series2 = [
+            {
+              color: '#c05020',
+              data: seriesData[0],
+              name: 'New York'
+            }, {
+              color: '#30c020',
+              data: seriesData[1],
+              name: 'London'
+            }, {
+              color: '#6060c0',
+              data: seriesData[2],
+              name: 'Tokyo'
+            }
+          ];
+
+          vm.options2 = {
+            renderer: 'area'
+          };
+
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: sparkline.js
+ * SparkLines Mini Charts
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.charts')
+        .directive('sparkline', sparkline);
+
+    function sparkline () {
+        var directive = {
+            restrict: 'EA',
+            scope: {
+              'sparkline': '='
+            },
+            controller: Controller
+        };
+        return directive;
+
+    }
+    Controller.$inject = ['$scope', '$element', '$timeout', '$window'];
+    function Controller($scope, $element, $timeout, $window) {
+      var runSL = function(){
+        initSparLine();
+      };
+      // generate a unique resize event so we can detach later
+      var resizeEventId = 'resize.sparkline' + $scope.$id;
+
+      $timeout(runSL);
+
+      function initSparLine() {
+        var options = $scope.sparkline,
+            data = $element.data();
+
+        if(!options) // if no scope options, try with data attributes
+          options = data;
+        else
+          if(data) // data attributes overrides scope options
+            options = angular.extend({}, options, data);
+
+        options.type = options.type || 'bar'; // default chart is bar
+        options.disableHiddenCheck = true;
+
+        $element.sparkline('html', options);
+
+        if(options.resize) {
+          $($window).on(resizeEventId, function(){
+            $element.sparkline('html', options);
+          });
+        }
+      }
+
+      $scope.$on('$destroy', function(){
+        $($window).off(resizeEventId);
+      });
+
+    }
+
+
+})();
+
 (function() {
     'use strict';
 
@@ -8153,6 +8153,67 @@ if ($localStorage.currentUser) {
 
 
 /**=========================================================
+ * Module: flatdoc.js
+ * Creates the flatdoc markup and initializes the plugin
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.flatdoc')
+        .directive('flatdoc', flatdoc);
+
+    function flatdoc() {
+
+        var directive = {
+            template: '<div role="flatdoc"><div role="flatdoc-menu"></div><div role="flatdoc-content"></div></div>',
+            link: link,
+            restrict: 'EA'
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+
+            Flatdoc.run({
+                fetcher: Flatdoc.file(attrs.src)
+            });
+
+            var $root = $('html, body');
+            var menuLinks;
+
+            var $doc = $(document).on('flatdoc:ready', function() {
+
+                var docMenu = $('[role="flatdoc-menu"]');
+
+                menuLinks = docMenu.find('a').on('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    var $this = $(this);
+
+                    docMenu.find('a.active').removeClass('active');
+                    $this.addClass('active');
+
+                    $root.animate({
+                        scrollTop: $(this.getAttribute('href')).offset().top - ($('.topnavbar').height() + 10)
+                    }, 800);
+                });
+
+            });
+
+            // dettach all events
+            scope.$on('$destroy', function() {
+                menuLinks && menuLinks.off();
+                $doc.off('flatdoc:ready');
+            });
+
+        }
+    }
+
+})();
+
+/**=========================================================
  * Module: article.js
  =========================================================*/
 (function() {
@@ -8699,61 +8760,33 @@ if ($localStorage.currentUser) {
 })();
 
 /**=========================================================
- * Module: flatdoc.js
- * Creates the flatdoc markup and initializes the plugin
+ * Module: skycons.js
+ * Include any animated weather icon from Skycons
  =========================================================*/
 
 (function() {
     'use strict';
 
     angular
-        .module('app.flatdoc')
-        .directive('flatdoc', flatdoc);
+        .module('app.icons')
+        .directive('skycon', skycon);
 
-    function flatdoc() {
+    function skycon () {
 
         var directive = {
-            template: '<div role="flatdoc"><div role="flatdoc-menu"></div><div role="flatdoc-content"></div></div>',
             link: link,
-            restrict: 'EA'
+            restrict: 'A'
         };
         return directive;
 
         function link(scope, element, attrs) {
+          var skycons = new Skycons({'color': (attrs.color || 'white')});
 
-            Flatdoc.run({
-                fetcher: Flatdoc.file(attrs.src)
-            });
+          element.html('<canvas width="' + attrs.width + '" height="' + attrs.height + '"></canvas>');
 
-            var $root = $('html, body');
-            var menuLinks;
+          skycons.add(element.children()[0], attrs.skycon);
 
-            var $doc = $(document).on('flatdoc:ready', function() {
-
-                var docMenu = $('[role="flatdoc-menu"]');
-
-                menuLinks = docMenu.find('a').on('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    var $this = $(this);
-
-                    docMenu.find('a.active').removeClass('active');
-                    $this.addClass('active');
-
-                    $root.animate({
-                        scrollTop: $(this.getAttribute('href')).offset().top - ($('.topnavbar').height() + 10)
-                    }, 800);
-                });
-
-            });
-
-            // dettach all events
-            scope.$on('$destroy', function() {
-                menuLinks && menuLinks.off();
-                $doc.off('flatdoc:ready');
-            });
-
+          skycons.play();
         }
     }
 
@@ -9921,90 +9954,15 @@ if ($localStorage.currentUser) {
                                                         'vendor/fullcalendar/dist/fullcalendar.min.js',
                                                         'vendor/fullcalendar/dist/gcal.js',
                                                         'vendor/fullcalendar/dist/fullcalendar.css',
-                                                        'vendor/angular-ui-calendar/src/calendar.js'], serie: true}
+                                                        'vendor/angular-ui-calendar/src/calendar.js'], serie: true},
+         {name: 'angular-file-saver',          files: ['vendor/angular-file-saver/dist/angular-file-saver.bundle.js']},
+
           ]
         })
         ;
 
 })();
 
-/**=========================================================
- * Module: skycons.js
- * Include any animated weather icon from Skycons
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.icons')
-        .directive('skycon', skycon);
-
-    function skycon () {
-
-        var directive = {
-            link: link,
-            restrict: 'A'
-        };
-        return directive;
-
-        function link(scope, element, attrs) {
-          var skycons = new Skycons({'color': (attrs.color || 'white')});
-
-          element.html('<canvas width="' + attrs.width + '" height="' + attrs.height + '"></canvas>');
-
-          skycons.add(element.children()[0], attrs.skycon);
-
-          skycons.play();
-        }
-    }
-
-})();
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.loadingbar')
-        .config(loadingbarConfig)
-        ;
-    loadingbarConfig.$inject = ['cfpLoadingBarProvider'];
-    function loadingbarConfig(cfpLoadingBarProvider){
-      cfpLoadingBarProvider.includeBar = true;
-      cfpLoadingBarProvider.includeSpinner = false;
-      cfpLoadingBarProvider.latencyThreshold = 500;
-      cfpLoadingBarProvider.parentSelector = '.wrapper > section';
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.loadingbar')
-        .run(loadingbarRun)
-        ;
-    loadingbarRun.$inject = ['$rootScope', '$timeout', 'cfpLoadingBar'];
-    function loadingbarRun($rootScope, $timeout, cfpLoadingBar){
-
-      // Loading bar transition
-      // ----------------------------------- 
-      var thBar;
-      $rootScope.$on('$stateChangeStart', function() {
-          if($('.wrapper > section').length) // check if bar container exists
-            thBar = $timeout(function() {
-              cfpLoadingBar.start();
-            }, 0); // sets a latency Threshold
-      });
-      $rootScope.$on('$stateChangeSuccess', function(event) {
-          event.targetScope.$watch('$viewContentLoaded', function () {
-            $timeout.cancel(thBar);
-            cfpLoadingBar.complete();
-          });
-      });
-
-    }
-
-})();
 (function() {
     'use strict';
 
@@ -10058,6 +10016,50 @@ if ($localStorage.currentUser) {
     }
 })();
 
+(function() {
+    'use strict';
+
+    angular
+        .module('app.loadingbar')
+        .config(loadingbarConfig)
+        ;
+    loadingbarConfig.$inject = ['cfpLoadingBarProvider'];
+    function loadingbarConfig(cfpLoadingBarProvider){
+      cfpLoadingBarProvider.includeBar = true;
+      cfpLoadingBarProvider.includeSpinner = false;
+      cfpLoadingBarProvider.latencyThreshold = 500;
+      cfpLoadingBarProvider.parentSelector = '.wrapper > section';
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.loadingbar')
+        .run(loadingbarRun)
+        ;
+    loadingbarRun.$inject = ['$rootScope', '$timeout', 'cfpLoadingBar'];
+    function loadingbarRun($rootScope, $timeout, cfpLoadingBar){
+
+      // Loading bar transition
+      // ----------------------------------- 
+      var thBar;
+      $rootScope.$on('$stateChangeStart', function() {
+          if($('.wrapper > section').length) // check if bar container exists
+            thBar = $timeout(function() {
+              cfpLoadingBar.start();
+            }, 0); // sets a latency Threshold
+      });
+      $rootScope.$on('$stateChangeSuccess', function(event) {
+          event.targetScope.$watch('$viewContentLoaded', function () {
+            $timeout.cancel(thBar);
+            cfpLoadingBar.complete();
+          });
+      });
+
+    }
+
+})();
 /**=========================================================
  * Module: demo-pagination.js
  * Provides a simple demo for pagination
@@ -10192,6 +10194,346 @@ if ($localStorage.currentUser) {
           mails.get($stateParams.mid).then(function(mail){
             vm.mail = mail;
           });
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: modals.js
+ * Provides a simple way to implement bootstrap modals from templates
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.maps')
+        .controller('ModalGmapController', ModalGmapController);
+
+    ModalGmapController.$inject = ['$uibModal'];
+    function ModalGmapController($uibModal) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          vm.open = function (size) {
+
+            //var modalInstance =
+            $uibModal.open({
+              templateUrl: '/myModalContent.html',
+              controller: ModalInstanceCtrl,
+              size: size
+            });
+
+            
+          };
+
+
+
+          // Please note that $uibModalInstance represents a modal window (instance) dependency.
+          // It is not the same as the $uibModal service used above.
+
+          ModalInstanceCtrl.$inject = ['$scope', '$uibModalInstance', '$timeout'];
+          function ModalInstanceCtrl($scope, $uibModalInstance, $timeout) {
+
+            $uibModalInstance.opened.then(function () {
+              var position = new google.maps.LatLng(33.790807, -117.835734);
+
+              $scope.mapOptionsModal = {
+                zoom: 14,
+                center: position,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+              };
+
+              // we use timeout to wait maps to be ready before add a markers
+              $timeout(function(){
+                // 1. Add a marker at the position it was initialized
+                new google.maps.Marker({
+                  map: $scope.myMapModal,
+                  position: position
+                });
+                // 2. Trigger a resize so the map is redrawed
+                google.maps.event.trigger($scope.myMapModal, 'resize');
+                // 3. Move to the center if it is misaligned
+                $scope.myMapModal.panTo(position);
+              });
+
+            });
+
+            $scope.ok = function () {
+              $uibModalInstance.close('closed');
+            };
+
+            $scope.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+
+          }
+
+        }
+    }
+
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.maps')
+        .controller('GMapController', GMapController);
+
+    GMapController.$inject = ['$timeout'];
+    function GMapController($timeout) {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          var position = [
+              new google.maps.LatLng(33.790807, -117.835734),
+              new google.maps.LatLng(33.790807, -117.835734),
+              new google.maps.LatLng(33.790807, -117.835734),
+              new google.maps.LatLng(33.790807, -117.835734),
+              new google.maps.LatLng(33.787453, -117.835858)
+            ];
+          
+          vm.addMarker = addMarker;
+          // we use timeout to wait maps to be ready before add a markers
+          $timeout(function(){
+            addMarker(vm.myMap1, position[0]);
+            addMarker(vm.myMap2, position[1]);
+            addMarker(vm.myMap3, position[2]);
+            addMarker(vm.myMap5, position[3]);
+          });
+
+          vm.mapOptions1 = {
+            zoom: 14,
+            center: position[0],
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            scrollwheel: false
+          };
+
+          vm.mapOptions2 = {
+            zoom: 19,
+            center: position[1],
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+
+          vm.mapOptions3 = {
+            zoom: 14,
+            center: position[2],
+            mapTypeId: google.maps.MapTypeId.SATELLITE
+          };
+
+          vm.mapOptions4 = {
+            zoom: 14,
+            center: position[3],
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+
+          // for multiple markers
+          $timeout(function(){
+            addMarker(vm.myMap4, position[3]);
+            addMarker(vm.myMap4, position[4]);
+          });
+
+          // custom map style
+          var MapStyles = [{'featureType':'water','stylers':[{'visibility':'on'},{'color':'#bdd1f9'}]},{'featureType':'all','elementType':'labels.text.fill','stylers':[{'color':'#334165'}]},{featureType:'landscape',stylers:[{color:'#e9ebf1'}]},{featureType:'road.highway',elementType:'geometry',stylers:[{color:'#c5c6c6'}]},{featureType:'road.arterial',elementType:'geometry',stylers:[{color:'#fff'}]},{featureType:'road.local',elementType:'geometry',stylers:[{color:'#fff'}]},{featureType:'transit',elementType:'geometry',stylers:[{color:'#d8dbe0'}]},{featureType:'poi',elementType:'geometry',stylers:[{color:'#cfd5e0'}]},{featureType:'administrative',stylers:[{visibility:'on'},{lightness:33}]},{featureType:'poi.park',elementType:'labels',stylers:[{visibility:'on'},{lightness:20}]},{featureType:'road',stylers:[{color:'#d8dbe0',lightness:20}]}];
+          vm.mapOptions5 = {
+            zoom: 14,
+            center: position[3],
+            styles: MapStyles,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            scrollwheel: false
+          };
+
+          ///////////////
+          
+          function addMarker(map, position) {
+            return new google.maps.Marker({
+              map: map,
+              position: position
+            });
+          }
+
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: vector-map.js.js
+ * Init jQuery Vector Map plugin
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.maps')
+        .directive('vectorMap', vectorMap);
+
+    vectorMap.$inject = ['VectorMap'];
+    function vectorMap (VectorMap) {
+        var directive = {
+            link: link,
+            restrict: 'EA',
+            scope: {
+              seriesData: '=',
+              markersData: '='
+            }
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+          
+          var defaultColors = {
+              markerColor:  '#23b7e5',      // the marker points
+              bgColor:      'transparent',      // the background
+              scaleColors:  ['#878c9a'],    // the color of the region in the serie
+              regionFill:   '#bbbec6'       // the base region color
+          };
+
+          var mapHeight   = attrs.height || '300',
+              options     = {
+                markerColor:  attrs.markerColor  || defaultColors.markerColor,
+                bgColor:      attrs.bgColor      || defaultColors.bgColor,
+                scale:        attrs.scale        || 1,
+                scaleColors:  attrs.scaleColors  || defaultColors.scaleColors,
+                regionFill:   attrs.regionFill   || defaultColors.regionFill,
+                mapName:      attrs.mapName      || 'world_mill_en'
+              };
+          
+          element.css('height', mapHeight);
+          
+          VectorMap.init( element , options, scope.seriesData, scope.markersData);
+        }
+    }
+
+})();
+
+/**=========================================================
+ * Module: vector-map.js
+ * Services to initialize vector map plugin
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.maps')
+        .service('VectorMap', VectorMap);
+
+    function VectorMap() {
+        this.init = init;
+
+        ////////////////
+
+        function init($element, opts, series, markers) {
+          $element.vectorMap({
+            map:             opts.mapName,
+            backgroundColor: opts.bgColor,
+            zoomMin:         1,
+            zoomMax:         8,
+            zoomOnScroll:    false,
+            regionStyle: {
+              initial: {
+                'fill':           opts.regionFill,
+                'fill-opacity':   1,
+                'stroke':         'none',
+                'stroke-width':   1.5,
+                'stroke-opacity': 1
+              },
+              hover: {
+                'fill-opacity': 0.8
+              },
+              selected: {
+                fill: 'blue'
+              },
+              selectedHover: {
+              }
+            },
+            focusOn:{ x:0.4, y:0.6, scale: opts.scale},
+            markerStyle: {
+              initial: {
+                fill: opts.markerColor,
+                stroke: opts.markerColor
+              }
+            },
+            onRegionLabelShow: function(e, el, code) {
+              if ( series && series[code] )
+                el.html(el.html() + ': ' + series[code] + ' visitors');
+            },
+            markers: markers,
+            series: {
+                regions: [{
+                    values: series,
+                    scale: opts.scaleColors,
+                    normalizeFunction: 'polynomial'
+                }]
+            },
+          });
+        }
+    }
+})();
+
+/**=========================================================
+ * Module: vmaps,js
+ * jVector Maps support
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.maps')
+        .controller('VectorMapController', VectorMapController);
+
+    function VectorMapController() {
+        var vm = this;
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+          vm.seriesData = {
+            'CA': 11100,   // Canada
+            'DE': 2510,    // Germany
+            'FR': 3710,    // France
+            'AU': 5710,    // Australia
+            'GB': 8310,    // Great Britain
+            'RU': 9310,    // Russia
+            'BR': 6610,    // Brazil
+            'IN': 7810,    // India
+            'CN': 4310,    // China
+            'US': 839,     // USA
+            'SA': 410      // Saudi Arabia
+          };
+          
+          vm.markersData = [
+            { latLng:[41.90, 12.45],  name:'Vatican City'          },
+            { latLng:[43.73, 7.41],   name:'Monaco'                },
+            { latLng:[-0.52, 166.93], name:'Nauru'                 },
+            { latLng:[-8.51, 179.21], name:'Tuvalu'                },
+            { latLng:[7.11,171.06],   name:'Marshall Islands'      },
+            { latLng:[17.3,-62.73],   name:'Saint Kitts and Nevis' },
+            { latLng:[3.2,73.22],     name:'Maldives'              },
+            { latLng:[35.88,14.5],    name:'Malta'                 },
+            { latLng:[41.0,-71.06],   name:'New England'           },
+            { latLng:[12.05,-61.75],  name:'Grenada'               },
+            { latLng:[13.16,-59.55],  name:'Barbados'              },
+            { latLng:[17.11,-61.85],  name:'Antigua and Barbuda'   },
+            { latLng:[-4.61,55.45],   name:'Seychelles'            },
+            { latLng:[7.35,134.46],   name:'Palau'                 },
+            { latLng:[42.5,1.51],     name:'Andorra'               }
+          ];
         }
     }
 })();
@@ -10984,346 +11326,6 @@ if ($localStorage.currentUser) {
 
   })();
 /**=========================================================
- * Module: modals.js
- * Provides a simple way to implement bootstrap modals from templates
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.maps')
-        .controller('ModalGmapController', ModalGmapController);
-
-    ModalGmapController.$inject = ['$uibModal'];
-    function ModalGmapController($uibModal) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          vm.open = function (size) {
-
-            //var modalInstance =
-            $uibModal.open({
-              templateUrl: '/myModalContent.html',
-              controller: ModalInstanceCtrl,
-              size: size
-            });
-
-            
-          };
-
-
-
-          // Please note that $uibModalInstance represents a modal window (instance) dependency.
-          // It is not the same as the $uibModal service used above.
-
-          ModalInstanceCtrl.$inject = ['$scope', '$uibModalInstance', '$timeout'];
-          function ModalInstanceCtrl($scope, $uibModalInstance, $timeout) {
-
-            $uibModalInstance.opened.then(function () {
-              var position = new google.maps.LatLng(33.790807, -117.835734);
-
-              $scope.mapOptionsModal = {
-                zoom: 14,
-                center: position,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-              };
-
-              // we use timeout to wait maps to be ready before add a markers
-              $timeout(function(){
-                // 1. Add a marker at the position it was initialized
-                new google.maps.Marker({
-                  map: $scope.myMapModal,
-                  position: position
-                });
-                // 2. Trigger a resize so the map is redrawed
-                google.maps.event.trigger($scope.myMapModal, 'resize');
-                // 3. Move to the center if it is misaligned
-                $scope.myMapModal.panTo(position);
-              });
-
-            });
-
-            $scope.ok = function () {
-              $uibModalInstance.close('closed');
-            };
-
-            $scope.cancel = function () {
-              $uibModalInstance.dismiss('cancel');
-            };
-
-          }
-
-        }
-    }
-
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.maps')
-        .controller('GMapController', GMapController);
-
-    GMapController.$inject = ['$timeout'];
-    function GMapController($timeout) {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          var position = [
-              new google.maps.LatLng(33.790807, -117.835734),
-              new google.maps.LatLng(33.790807, -117.835734),
-              new google.maps.LatLng(33.790807, -117.835734),
-              new google.maps.LatLng(33.790807, -117.835734),
-              new google.maps.LatLng(33.787453, -117.835858)
-            ];
-          
-          vm.addMarker = addMarker;
-          // we use timeout to wait maps to be ready before add a markers
-          $timeout(function(){
-            addMarker(vm.myMap1, position[0]);
-            addMarker(vm.myMap2, position[1]);
-            addMarker(vm.myMap3, position[2]);
-            addMarker(vm.myMap5, position[3]);
-          });
-
-          vm.mapOptions1 = {
-            zoom: 14,
-            center: position[0],
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            scrollwheel: false
-          };
-
-          vm.mapOptions2 = {
-            zoom: 19,
-            center: position[1],
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          };
-
-          vm.mapOptions3 = {
-            zoom: 14,
-            center: position[2],
-            mapTypeId: google.maps.MapTypeId.SATELLITE
-          };
-
-          vm.mapOptions4 = {
-            zoom: 14,
-            center: position[3],
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          };
-
-          // for multiple markers
-          $timeout(function(){
-            addMarker(vm.myMap4, position[3]);
-            addMarker(vm.myMap4, position[4]);
-          });
-
-          // custom map style
-          var MapStyles = [{'featureType':'water','stylers':[{'visibility':'on'},{'color':'#bdd1f9'}]},{'featureType':'all','elementType':'labels.text.fill','stylers':[{'color':'#334165'}]},{featureType:'landscape',stylers:[{color:'#e9ebf1'}]},{featureType:'road.highway',elementType:'geometry',stylers:[{color:'#c5c6c6'}]},{featureType:'road.arterial',elementType:'geometry',stylers:[{color:'#fff'}]},{featureType:'road.local',elementType:'geometry',stylers:[{color:'#fff'}]},{featureType:'transit',elementType:'geometry',stylers:[{color:'#d8dbe0'}]},{featureType:'poi',elementType:'geometry',stylers:[{color:'#cfd5e0'}]},{featureType:'administrative',stylers:[{visibility:'on'},{lightness:33}]},{featureType:'poi.park',elementType:'labels',stylers:[{visibility:'on'},{lightness:20}]},{featureType:'road',stylers:[{color:'#d8dbe0',lightness:20}]}];
-          vm.mapOptions5 = {
-            zoom: 14,
-            center: position[3],
-            styles: MapStyles,
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            scrollwheel: false
-          };
-
-          ///////////////
-          
-          function addMarker(map, position) {
-            return new google.maps.Marker({
-              map: map,
-              position: position
-            });
-          }
-
-        }
-    }
-})();
-
-/**=========================================================
- * Module: vector-map.js.js
- * Init jQuery Vector Map plugin
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.maps')
-        .directive('vectorMap', vectorMap);
-
-    vectorMap.$inject = ['VectorMap'];
-    function vectorMap (VectorMap) {
-        var directive = {
-            link: link,
-            restrict: 'EA',
-            scope: {
-              seriesData: '=',
-              markersData: '='
-            }
-        };
-        return directive;
-
-        function link(scope, element, attrs) {
-          
-          var defaultColors = {
-              markerColor:  '#23b7e5',      // the marker points
-              bgColor:      'transparent',      // the background
-              scaleColors:  ['#878c9a'],    // the color of the region in the serie
-              regionFill:   '#bbbec6'       // the base region color
-          };
-
-          var mapHeight   = attrs.height || '300',
-              options     = {
-                markerColor:  attrs.markerColor  || defaultColors.markerColor,
-                bgColor:      attrs.bgColor      || defaultColors.bgColor,
-                scale:        attrs.scale        || 1,
-                scaleColors:  attrs.scaleColors  || defaultColors.scaleColors,
-                regionFill:   attrs.regionFill   || defaultColors.regionFill,
-                mapName:      attrs.mapName      || 'world_mill_en'
-              };
-          
-          element.css('height', mapHeight);
-          
-          VectorMap.init( element , options, scope.seriesData, scope.markersData);
-        }
-    }
-
-})();
-
-/**=========================================================
- * Module: vector-map.js
- * Services to initialize vector map plugin
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.maps')
-        .service('VectorMap', VectorMap);
-
-    function VectorMap() {
-        this.init = init;
-
-        ////////////////
-
-        function init($element, opts, series, markers) {
-          $element.vectorMap({
-            map:             opts.mapName,
-            backgroundColor: opts.bgColor,
-            zoomMin:         1,
-            zoomMax:         8,
-            zoomOnScroll:    false,
-            regionStyle: {
-              initial: {
-                'fill':           opts.regionFill,
-                'fill-opacity':   1,
-                'stroke':         'none',
-                'stroke-width':   1.5,
-                'stroke-opacity': 1
-              },
-              hover: {
-                'fill-opacity': 0.8
-              },
-              selected: {
-                fill: 'blue'
-              },
-              selectedHover: {
-              }
-            },
-            focusOn:{ x:0.4, y:0.6, scale: opts.scale},
-            markerStyle: {
-              initial: {
-                fill: opts.markerColor,
-                stroke: opts.markerColor
-              }
-            },
-            onRegionLabelShow: function(e, el, code) {
-              if ( series && series[code] )
-                el.html(el.html() + ': ' + series[code] + ' visitors');
-            },
-            markers: markers,
-            series: {
-                regions: [{
-                    values: series,
-                    scale: opts.scaleColors,
-                    normalizeFunction: 'polynomial'
-                }]
-            },
-          });
-        }
-    }
-})();
-
-/**=========================================================
- * Module: vmaps,js
- * jVector Maps support
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.maps')
-        .controller('VectorMapController', VectorMapController);
-
-    function VectorMapController() {
-        var vm = this;
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-          vm.seriesData = {
-            'CA': 11100,   // Canada
-            'DE': 2510,    // Germany
-            'FR': 3710,    // France
-            'AU': 5710,    // Australia
-            'GB': 8310,    // Great Britain
-            'RU': 9310,    // Russia
-            'BR': 6610,    // Brazil
-            'IN': 7810,    // India
-            'CN': 4310,    // China
-            'US': 839,     // USA
-            'SA': 410      // Saudi Arabia
-          };
-          
-          vm.markersData = [
-            { latLng:[41.90, 12.45],  name:'Vatican City'          },
-            { latLng:[43.73, 7.41],   name:'Monaco'                },
-            { latLng:[-0.52, 166.93], name:'Nauru'                 },
-            { latLng:[-8.51, 179.21], name:'Tuvalu'                },
-            { latLng:[7.11,171.06],   name:'Marshall Islands'      },
-            { latLng:[17.3,-62.73],   name:'Saint Kitts and Nevis' },
-            { latLng:[3.2,73.22],     name:'Maldives'              },
-            { latLng:[35.88,14.5],    name:'Malta'                 },
-            { latLng:[41.0,-71.06],   name:'New England'           },
-            { latLng:[12.05,-61.75],  name:'Grenada'               },
-            { latLng:[13.16,-59.55],  name:'Barbados'              },
-            { latLng:[17.11,-61.85],  name:'Antigua and Barbuda'   },
-            { latLng:[-4.61,55.45],   name:'Seychelles'            },
-            { latLng:[7.35,134.46],   name:'Palau'                 },
-            { latLng:[42.5,1.51],     name:'Andorra'               }
-          ];
-        }
-    }
-})();
-
-/**=========================================================
  * Module: navbar-search.js
  * Navbar search toggler * Auto dismiss on ESC key
  =========================================================*/
@@ -11664,488 +11666,6 @@ if ($localStorage.currentUser) {
     return notify;
 }(jQuery));
 
-/**=========================================================
- * Collapse panels * [panel-collapse]
- =========================================================*/
-(function() {
-    'use strict';
-
-    angular
-        .module('app.panels')
-        .directive('panelCollapse', panelCollapse);
-
-    function panelCollapse () {
-        var directive = {
-            controller: Controller,
-            restrict: 'A',
-            scope: false
-        };
-        return directive;
-    }
-
-    Controller.$inject = ['$scope', '$element', '$timeout', '$localStorage'];
-    function Controller ($scope, $element, $timeout, $localStorage) {
-      var storageKeyName = 'panelState';
-
-      // Prepare the panel to be collapsible
-      var $elem   = $($element),
-          parent  = $elem.closest('.panel'), // find the first parent panel
-          panelId = parent.attr('id');
-
-      // Load the saved state if exists
-      var currentState = loadPanelState( panelId );
-      if ( typeof currentState !== 'undefined') {
-        $timeout(function(){
-            $scope[panelId] = currentState; },
-          10);
-      }
-
-      // bind events to switch icons
-      $element.bind('click', function(e) {
-        e.preventDefault();
-        savePanelState( panelId, !$scope[panelId] );
-
-      });
-  
-      // Controller helpers
-      function savePanelState(id, state) {
-        if(!id) return false;
-        var data = angular.fromJson($localStorage[storageKeyName]);
-        if(!data) { data = {}; }
-        data[id] = state;
-        $localStorage[storageKeyName] = angular.toJson(data);
-      }
-      function loadPanelState(id) {
-        if(!id) return false;
-        var data = angular.fromJson($localStorage[storageKeyName]);
-        if(data) {
-          return data[id];
-        }
-      }
-    }
-
-})();
-
-/**=========================================================
- * Dismiss panels * [panel-dismiss]
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.panels')
-        .directive('panelDismiss', panelDismiss);
-
-    function panelDismiss () {
-
-        var directive = {
-            controller: Controller,
-            restrict: 'A'
-        };
-        return directive;
-
-    }
-
-    Controller.$inject = ['$scope', '$element', '$q', 'Utils'];
-    function Controller ($scope, $element, $q, Utils) {
-      var removeEvent   = 'panel-remove',
-          removedEvent  = 'panel-removed';
-
-      $element.on('click', function (e) {
-        e.preventDefault();
-
-        // find the first parent panel
-        var parent = $(this).closest('.panel');
-
-        removeElement();
-
-        function removeElement() {
-          var deferred = $q.defer();
-          var promise = deferred.promise;
-          
-          // Communicate event destroying panel
-          $scope.$emit(removeEvent, parent.attr('id'), deferred);
-          promise.then(destroyMiddleware);
-        }
-
-        // Run the animation before destroy the panel
-        function destroyMiddleware() {
-          if(Utils.support.animation) {
-            parent.animo({animation: 'bounceOut'}, destroyPanel);
-          }
-          else destroyPanel();
-        }
-
-        function destroyPanel() {
-
-          var col = parent.parent();
-          parent.remove();
-          // remove the parent if it is a row and is empty and not a sortable (portlet)
-          col
-            .filter(function() {
-            var el = $(this);
-            return (el.is('[class*="col-"]:not(.sortable)') && el.children('*').length === 0);
-          }).remove();
-
-          // Communicate event destroyed panel
-          $scope.$emit(removedEvent, parent.attr('id'));
-
-        }
-
-      });
-    }
-})();
-
-
-
-/**=========================================================
- * Refresh panels
- * [panel-refresh] * [data-spinner="standard"]
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.panels')
-        .directive('panelRefresh', panelRefresh);
-
-    function panelRefresh () {
-        var directive = {
-            controller: Controller,
-            restrict: 'A',
-            scope: false
-        };
-        return directive;
-
-    }
-
-    Controller.$inject = ['$scope', '$element'];
-    function Controller ($scope, $element) {
-      var refreshEvent   = 'panel-refresh',
-          whirlClass     = 'whirl',
-          defaultSpinner = 'standard';
-
-      // catch clicks to toggle panel refresh
-      $element.on('click', function (e) {
-        e.preventDefault();
-
-        var $this   = $(this),
-            panel   = $this.parents('.panel').eq(0),
-            spinner = $this.data('spinner') || defaultSpinner
-            ;
-
-        // start showing the spinner
-        panel.addClass(whirlClass + ' ' + spinner);
-
-        // Emit event when refresh clicked
-        $scope.$emit(refreshEvent, panel.attr('id'));
-
-      });
-
-      // listen to remove spinner
-      $scope.$on('removeSpinner', removeSpinner);
-
-      // method to clear the spinner when done
-      function removeSpinner (ev, id) {
-        if (!id) return;
-        var newid = id.charAt(0) === '#' ? id : ('#'+id);
-        angular
-          .element(newid)
-          .removeClass(whirlClass);
-      }
-    }
-})();
-
-
-
-/**=========================================================
- * Module panel-tools.js
- * Directive tools to control panels.
- * Allows collapse, refresh and dismiss (remove)
- * Saves panel state in browser storage
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.panels')
-        .directive('paneltool', paneltool);
-
-    paneltool.$inject = ['$compile', '$timeout'];
-    function paneltool ($compile, $timeout) {
-        var directive = {
-            link: link,
-            restrict: 'E',
-            scope: false
-        };
-        return directive;
-
-        function link(scope, element, attrs) {
-
-          var templates = {
-            /* jshint multistr: true */
-            collapse:'<a href="#" panel-collapse="" uib-tooltip="Collapse Panel" ng-click="{{panelId}} = !{{panelId}}"> \
-                        <em ng-show="{{panelId}}" class="fa fa-plus ng-no-animation"></em> \
-                        <em ng-show="!{{panelId}}" class="fa fa-minus ng-no-animation"></em> \
-                      </a>',
-            dismiss: '<a href="#" panel-dismiss="" uib-tooltip="Close Panel">\
-                       <em class="fa fa-times"></em>\
-                     </a>',
-            refresh: '<a href="#" panel-refresh="" data-spinner="{{spinner}}" uib-tooltip="Refresh Panel">\
-                       <em class="fa fa-refresh"></em>\
-                     </a>'
-          };
-
-          var tools = scope.panelTools || attrs;
-
-          $timeout(function() {
-            element.html(getTemplate(element, tools )).show();
-            $compile(element.contents())(scope);
-
-            element.addClass('pull-right');
-          });
-
-          function getTemplate( elem, attrs ){
-            var temp = '';
-            attrs = attrs || {};
-            if(attrs.toolCollapse)
-              temp += templates.collapse.replace(/{{panelId}}/g, (elem.parent().parent().attr('id')) );
-            if(attrs.toolDismiss)
-              temp += templates.dismiss;
-            if(attrs.toolRefresh)
-              temp += templates.refresh.replace(/{{spinner}}/g, attrs.toolRefresh);
-            return temp;
-          }
-        }// link
-    }
-
-})();
-
-/**=========================================================
- * Module: demo-panels.js
- * Provides a simple demo for panel actions
- =========================================================*/
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.panels')
-        .controller('PanelsCtrl', PanelsCtrl);
-
-    PanelsCtrl.$inject = ['$scope', '$timeout'];
-    function PanelsCtrl($scope, $timeout) {
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-          // PANEL COLLAPSE EVENTS
-          // ----------------------------------- 
-
-          // We can use panel id name for the boolean flag to [un]collapse the panel
-          $scope.$watch('panelDemo1',function(newVal){
-              
-              console.log('panelDemo1 collapsed: ' + newVal);
-
-          });
-
-
-          // PANEL DISMISS EVENTS
-          // ----------------------------------- 
-
-          // Before remove panel
-          $scope.$on('panel-remove', function(event, id, deferred){
-            
-            console.log('Panel #' + id + ' removing');
-            
-            // Here is obligatory to call the resolve() if we pretend to remove the panel finally
-            // Not calling resolve() will NOT remove the panel
-            // It's up to your app to decide if panel should be removed or not
-            deferred.resolve();
-          
-          });
-
-          // Panel removed ( only if above was resolved() )
-          $scope.$on('panel-removed', function(event, id){
-
-            console.log('Panel #' + id + ' removed');
-
-          });
-
-
-          // PANEL REFRESH EVENTS
-          // ----------------------------------- 
-
-          $scope.$on('panel-refresh', function(event, id) {
-            var secs = 3;
-            
-            console.log('Refreshing during ' + secs +'s #'+id);
-
-            $timeout(function(){
-              // directive listen for to remove the spinner 
-              // after we end up to perform own operations
-              $scope.$broadcast('removeSpinner', id);
-              
-              console.log('Refreshed #' + id);
-
-            }, 3000);
-
-          });
-
-          // PANELS VIA NG-REPEAT
-          // ----------------------------------- 
-
-          $scope.panels = [
-            {
-              id: 'panelRepeat1',
-              title: 'Panel Title 1',
-              body: 'Nulla eget lorem leo, sit amet elementum lorem. '
-            },
-            {
-              id: 'panelRepeat2',
-              title: 'Panel Title 2',
-              body: 'Nulla eget lorem leo, sit amet elementum lorem. '
-            },
-            {
-              id: 'panelRepeat3',
-              title: 'Panel Title 3',
-              body: 'Nulla eget lorem leo, sit amet elementum lorem. '
-            }
-          ];
-        }
-
-    } //PanelsCtrl
-
-})();
-
-
-(function() {
-    'use strict';
-
-    angular
-        .module('app.panels')
-        .controller('DraggablePanelController', DraggablePanelController);
-
-    DraggablePanelController.$inject = ['$timeout', '$localStorage'];
-
-    function DraggablePanelController($timeout, $localStorage) {
-        var vm = this;
-        var storageKeyName = 'portletState';
-
-        activate();
-
-        ////////////////
-
-        function activate() {
-
-            vm.panels = [
-                [{
-                    id: 'panelPortlet1',
-                    type: 'default',
-                    heading: 'Panel heading',
-                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
-                    footer: 'Panale footer'
-                }, {
-                    id: 'panelPortlet2',
-                    type: 'primary',
-                    heading: 'Panel heading',
-                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
-                    footer: 'Panale footer'
-                }, {
-                    id: 'panelPortlet3',
-                    type: 'success',
-                    heading: 'Panel heading',
-                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
-                    footer: 'Panale footer'
-                }],
-                [{
-                    id: 'panelPortlet4',
-                    type: 'info',
-                    heading: 'Panel heading',
-                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
-                    footer: 'Panale footer'
-                }, {
-                    id: 'panelPortlet5',
-                    type: 'warning',
-                    heading: 'Panel heading',
-                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
-                    footer: 'Panale footer'
-                }, {
-                    id: 'panelPortlet6',
-                    type: 'danger',
-                    heading: 'Panel heading',
-                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
-                    footer: 'Panale footer'
-                }],
-                [{
-                    id: 'panelPortlet7',
-                    type: 'inverse',
-                    heading: 'Panel heading',
-                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
-                    footer: 'Panale footer'
-                }, {
-                    id: 'panelPortlet8',
-                    type: 'purple',
-                    heading: 'Panel heading',
-                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
-                    footer: 'Panale footer'
-                }, {
-                    id: 'panelPortlet9',
-                    type: 'green',
-                    heading: 'Panel heading',
-                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
-                    footer: 'Panale footer'
-                }]
-            ];
-
-            vm.panelList1 = vm.panels[0];
-            vm.panelList2 = vm.panels[1];
-            vm.panelList3 = vm.panels[2];
-
-            // https://github.com/angular-ui/ui-sortable
-            vm.sortablePortletOptions = {
-                connectWith: '.portlet-connect',
-                handle: '.panel-heading',
-                opacity: 0.7,
-                placeholder: 'portlet box-placeholder',
-                cancel: '.portlet-cancel',
-                forcePlaceholderSize: true,
-                iframeFix: false,
-                tolerance: 'pointer',
-                helper: 'original',
-                revert: 200,
-                forceHelperSize: true,
-                update: savePortletOrder,
-                create: loadPortletOrder
-            };
-
-            function savePortletOrder(event) {
-                $timeout(function() {
-                    $localStorage[storageKeyName] = angular.toJson(vm.panels);
-                });
-            }
-
-            function loadPortletOrder(event) {
-                var data = angular.fromJson($localStorage[storageKeyName]);
-                if (data) {
-                    $timeout(function() {
-                        vm.panels = data;
-                        vm.panelList1 = vm.panels[0];
-                        vm.panelList2 = vm.panels[1];
-                        vm.panelList3 = vm.panels[2];
-                    });
-                }
-            }
-
-        }
-    }
-})();
 // /**=========================================================
 //  * Module: access-login.js
 //  * Demo for login api
@@ -12636,6 +12156,488 @@ $scope.buttonText="Login";
        
     }
 
+})();
+/**=========================================================
+ * Collapse panels * [panel-collapse]
+ =========================================================*/
+(function() {
+    'use strict';
+
+    angular
+        .module('app.panels')
+        .directive('panelCollapse', panelCollapse);
+
+    function panelCollapse () {
+        var directive = {
+            controller: Controller,
+            restrict: 'A',
+            scope: false
+        };
+        return directive;
+    }
+
+    Controller.$inject = ['$scope', '$element', '$timeout', '$localStorage'];
+    function Controller ($scope, $element, $timeout, $localStorage) {
+      var storageKeyName = 'panelState';
+
+      // Prepare the panel to be collapsible
+      var $elem   = $($element),
+          parent  = $elem.closest('.panel'), // find the first parent panel
+          panelId = parent.attr('id');
+
+      // Load the saved state if exists
+      var currentState = loadPanelState( panelId );
+      if ( typeof currentState !== 'undefined') {
+        $timeout(function(){
+            $scope[panelId] = currentState; },
+          10);
+      }
+
+      // bind events to switch icons
+      $element.bind('click', function(e) {
+        e.preventDefault();
+        savePanelState( panelId, !$scope[panelId] );
+
+      });
+  
+      // Controller helpers
+      function savePanelState(id, state) {
+        if(!id) return false;
+        var data = angular.fromJson($localStorage[storageKeyName]);
+        if(!data) { data = {}; }
+        data[id] = state;
+        $localStorage[storageKeyName] = angular.toJson(data);
+      }
+      function loadPanelState(id) {
+        if(!id) return false;
+        var data = angular.fromJson($localStorage[storageKeyName]);
+        if(data) {
+          return data[id];
+        }
+      }
+    }
+
+})();
+
+/**=========================================================
+ * Dismiss panels * [panel-dismiss]
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.panels')
+        .directive('panelDismiss', panelDismiss);
+
+    function panelDismiss () {
+
+        var directive = {
+            controller: Controller,
+            restrict: 'A'
+        };
+        return directive;
+
+    }
+
+    Controller.$inject = ['$scope', '$element', '$q', 'Utils'];
+    function Controller ($scope, $element, $q, Utils) {
+      var removeEvent   = 'panel-remove',
+          removedEvent  = 'panel-removed';
+
+      $element.on('click', function (e) {
+        e.preventDefault();
+
+        // find the first parent panel
+        var parent = $(this).closest('.panel');
+
+        removeElement();
+
+        function removeElement() {
+          var deferred = $q.defer();
+          var promise = deferred.promise;
+          
+          // Communicate event destroying panel
+          $scope.$emit(removeEvent, parent.attr('id'), deferred);
+          promise.then(destroyMiddleware);
+        }
+
+        // Run the animation before destroy the panel
+        function destroyMiddleware() {
+          if(Utils.support.animation) {
+            parent.animo({animation: 'bounceOut'}, destroyPanel);
+          }
+          else destroyPanel();
+        }
+
+        function destroyPanel() {
+
+          var col = parent.parent();
+          parent.remove();
+          // remove the parent if it is a row and is empty and not a sortable (portlet)
+          col
+            .filter(function() {
+            var el = $(this);
+            return (el.is('[class*="col-"]:not(.sortable)') && el.children('*').length === 0);
+          }).remove();
+
+          // Communicate event destroyed panel
+          $scope.$emit(removedEvent, parent.attr('id'));
+
+        }
+
+      });
+    }
+})();
+
+
+
+/**=========================================================
+ * Refresh panels
+ * [panel-refresh] * [data-spinner="standard"]
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.panels')
+        .directive('panelRefresh', panelRefresh);
+
+    function panelRefresh () {
+        var directive = {
+            controller: Controller,
+            restrict: 'A',
+            scope: false
+        };
+        return directive;
+
+    }
+
+    Controller.$inject = ['$scope', '$element'];
+    function Controller ($scope, $element) {
+      var refreshEvent   = 'panel-refresh',
+          whirlClass     = 'whirl',
+          defaultSpinner = 'standard';
+
+      // catch clicks to toggle panel refresh
+      $element.on('click', function (e) {
+        e.preventDefault();
+
+        var $this   = $(this),
+            panel   = $this.parents('.panel').eq(0),
+            spinner = $this.data('spinner') || defaultSpinner
+            ;
+
+        // start showing the spinner
+        panel.addClass(whirlClass + ' ' + spinner);
+
+        // Emit event when refresh clicked
+        $scope.$emit(refreshEvent, panel.attr('id'));
+
+      });
+
+      // listen to remove spinner
+      $scope.$on('removeSpinner', removeSpinner);
+
+      // method to clear the spinner when done
+      function removeSpinner (ev, id) {
+        if (!id) return;
+        var newid = id.charAt(0) === '#' ? id : ('#'+id);
+        angular
+          .element(newid)
+          .removeClass(whirlClass);
+      }
+    }
+})();
+
+
+
+/**=========================================================
+ * Module panel-tools.js
+ * Directive tools to control panels.
+ * Allows collapse, refresh and dismiss (remove)
+ * Saves panel state in browser storage
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.panels')
+        .directive('paneltool', paneltool);
+
+    paneltool.$inject = ['$compile', '$timeout'];
+    function paneltool ($compile, $timeout) {
+        var directive = {
+            link: link,
+            restrict: 'E',
+            scope: false
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+
+          var templates = {
+            /* jshint multistr: true */
+            collapse:'<a href="#" panel-collapse="" uib-tooltip="Collapse Panel" ng-click="{{panelId}} = !{{panelId}}"> \
+                        <em ng-show="{{panelId}}" class="fa fa-plus ng-no-animation"></em> \
+                        <em ng-show="!{{panelId}}" class="fa fa-minus ng-no-animation"></em> \
+                      </a>',
+            dismiss: '<a href="#" panel-dismiss="" uib-tooltip="Close Panel">\
+                       <em class="fa fa-times"></em>\
+                     </a>',
+            refresh: '<a href="#" panel-refresh="" data-spinner="{{spinner}}" uib-tooltip="Refresh Panel">\
+                       <em class="fa fa-refresh"></em>\
+                     </a>'
+          };
+
+          var tools = scope.panelTools || attrs;
+
+          $timeout(function() {
+            element.html(getTemplate(element, tools )).show();
+            $compile(element.contents())(scope);
+
+            element.addClass('pull-right');
+          });
+
+          function getTemplate( elem, attrs ){
+            var temp = '';
+            attrs = attrs || {};
+            if(attrs.toolCollapse)
+              temp += templates.collapse.replace(/{{panelId}}/g, (elem.parent().parent().attr('id')) );
+            if(attrs.toolDismiss)
+              temp += templates.dismiss;
+            if(attrs.toolRefresh)
+              temp += templates.refresh.replace(/{{spinner}}/g, attrs.toolRefresh);
+            return temp;
+          }
+        }// link
+    }
+
+})();
+
+/**=========================================================
+ * Module: demo-panels.js
+ * Provides a simple demo for panel actions
+ =========================================================*/
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.panels')
+        .controller('PanelsCtrl', PanelsCtrl);
+
+    PanelsCtrl.$inject = ['$scope', '$timeout'];
+    function PanelsCtrl($scope, $timeout) {
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+          // PANEL COLLAPSE EVENTS
+          // ----------------------------------- 
+
+          // We can use panel id name for the boolean flag to [un]collapse the panel
+          $scope.$watch('panelDemo1',function(newVal){
+              
+              console.log('panelDemo1 collapsed: ' + newVal);
+
+          });
+
+
+          // PANEL DISMISS EVENTS
+          // ----------------------------------- 
+
+          // Before remove panel
+          $scope.$on('panel-remove', function(event, id, deferred){
+            
+            console.log('Panel #' + id + ' removing');
+            
+            // Here is obligatory to call the resolve() if we pretend to remove the panel finally
+            // Not calling resolve() will NOT remove the panel
+            // It's up to your app to decide if panel should be removed or not
+            deferred.resolve();
+          
+          });
+
+          // Panel removed ( only if above was resolved() )
+          $scope.$on('panel-removed', function(event, id){
+
+            console.log('Panel #' + id + ' removed');
+
+          });
+
+
+          // PANEL REFRESH EVENTS
+          // ----------------------------------- 
+
+          $scope.$on('panel-refresh', function(event, id) {
+            var secs = 3;
+            
+            console.log('Refreshing during ' + secs +'s #'+id);
+
+            $timeout(function(){
+              // directive listen for to remove the spinner 
+              // after we end up to perform own operations
+              $scope.$broadcast('removeSpinner', id);
+              
+              console.log('Refreshed #' + id);
+
+            }, 3000);
+
+          });
+
+          // PANELS VIA NG-REPEAT
+          // ----------------------------------- 
+
+          $scope.panels = [
+            {
+              id: 'panelRepeat1',
+              title: 'Panel Title 1',
+              body: 'Nulla eget lorem leo, sit amet elementum lorem. '
+            },
+            {
+              id: 'panelRepeat2',
+              title: 'Panel Title 2',
+              body: 'Nulla eget lorem leo, sit amet elementum lorem. '
+            },
+            {
+              id: 'panelRepeat3',
+              title: 'Panel Title 3',
+              body: 'Nulla eget lorem leo, sit amet elementum lorem. '
+            }
+          ];
+        }
+
+    } //PanelsCtrl
+
+})();
+
+
+(function() {
+    'use strict';
+
+    angular
+        .module('app.panels')
+        .controller('DraggablePanelController', DraggablePanelController);
+
+    DraggablePanelController.$inject = ['$timeout', '$localStorage'];
+
+    function DraggablePanelController($timeout, $localStorage) {
+        var vm = this;
+        var storageKeyName = 'portletState';
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+
+            vm.panels = [
+                [{
+                    id: 'panelPortlet1',
+                    type: 'default',
+                    heading: 'Panel heading',
+                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
+                    footer: 'Panale footer'
+                }, {
+                    id: 'panelPortlet2',
+                    type: 'primary',
+                    heading: 'Panel heading',
+                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
+                    footer: 'Panale footer'
+                }, {
+                    id: 'panelPortlet3',
+                    type: 'success',
+                    heading: 'Panel heading',
+                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
+                    footer: 'Panale footer'
+                }],
+                [{
+                    id: 'panelPortlet4',
+                    type: 'info',
+                    heading: 'Panel heading',
+                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
+                    footer: 'Panale footer'
+                }, {
+                    id: 'panelPortlet5',
+                    type: 'warning',
+                    heading: 'Panel heading',
+                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
+                    footer: 'Panale footer'
+                }, {
+                    id: 'panelPortlet6',
+                    type: 'danger',
+                    heading: 'Panel heading',
+                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
+                    footer: 'Panale footer'
+                }],
+                [{
+                    id: 'panelPortlet7',
+                    type: 'inverse',
+                    heading: 'Panel heading',
+                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
+                    footer: 'Panale footer'
+                }, {
+                    id: 'panelPortlet8',
+                    type: 'purple',
+                    heading: 'Panel heading',
+                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
+                    footer: 'Panale footer'
+                }, {
+                    id: 'panelPortlet9',
+                    type: 'green',
+                    heading: 'Panel heading',
+                    content: 'Aenean pellentesque augue non eros commodo tempus. Etiam odio ante, placerat eu accumsan ut, consectetur vel mi. Praesent ac lorem justo.',
+                    footer: 'Panale footer'
+                }]
+            ];
+
+            vm.panelList1 = vm.panels[0];
+            vm.panelList2 = vm.panels[1];
+            vm.panelList3 = vm.panels[2];
+
+            // https://github.com/angular-ui/ui-sortable
+            vm.sortablePortletOptions = {
+                connectWith: '.portlet-connect',
+                handle: '.panel-heading',
+                opacity: 0.7,
+                placeholder: 'portlet box-placeholder',
+                cancel: '.portlet-cancel',
+                forcePlaceholderSize: true,
+                iframeFix: false,
+                tolerance: 'pointer',
+                helper: 'original',
+                revert: 200,
+                forceHelperSize: true,
+                update: savePortletOrder,
+                create: loadPortletOrder
+            };
+
+            function savePortletOrder(event) {
+                $timeout(function() {
+                    $localStorage[storageKeyName] = angular.toJson(vm.panels);
+                });
+            }
+
+            function loadPortletOrder(event) {
+                var data = angular.fromJson($localStorage[storageKeyName]);
+                if (data) {
+                    $timeout(function() {
+                        vm.panels = data;
+                        vm.panelList1 = vm.panels[0];
+                        vm.panelList2 = vm.panels[1];
+                        vm.panelList3 = vm.panels[2];
+                    });
+                }
+            }
+
+        }
+    }
 })();
   /**=========================================================
    * Module: modals.js
@@ -14393,7 +14395,8 @@ group.$remove().then(function () {
           .state('app.bankfiles', {
               url: '/bankfiles',
               title: 'schedules',
-                templateUrl: helper.basepath('bankfiles.html')
+                templateUrl: helper.basepath('bankfiles.html'),
+                 resolve: helper.resolveFor('angular-file-saver')
 
              
           })
@@ -14782,8 +14785,8 @@ group.$remove().then(function () {
         .module('app.reports')
         .controller('BankFilesController', BankFilesController);
 
-    BankFilesController.$inject = ['$scope','$http','$resource', 'BankfileService','jadaApiUrl'];
-    function BankFilesController($scope,$http,$resource,BankfileService,jadaApiUrl) {
+    BankFilesController.$inject = ['$scope','$http','$resource', 'BankfileService','jadaApiUrl','FileSaver','Blob'];
+    function BankFilesController($scope,$http,$resource,BankfileService,jadaApiUrl,FileSaver,Blob) {
         var vm = this;
 
         activate();
@@ -14791,6 +14794,23 @@ group.$remove().then(function () {
         ////////////////
 
         function activate() {
+vm.val = {
+    text: 'Hey ho lets go!'
+  };
+
+  $scope.download = function(table) {
+    // var data = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    // FileSaver.saveAs(data, 'text.txt');
+
+
+  var ele = document.getElementById(table);
+var blob = new Blob([ele.innerText], {
+        type: "text/plain;charset=utf-8"
+    });
+    FileSaver.saveAs(blob, "bank-file.txt");
+};
+
+
 
        var currentPeriod=1;
         $scope.bankfiles=BankfileService.get({});
@@ -18047,70 +18067,6 @@ angular.module('app.reports').filter('unique', function () {
     }
 })();
 
-(function() {
-    'use strict';
-
-    angular
-        .module('app.translate')
-        .config(translateConfig)
-        ;
-    translateConfig.$inject = ['$translateProvider'];
-    function translateConfig($translateProvider){
-
-      $translateProvider.useStaticFilesLoader({
-          prefix : 'app/i18n/',
-          suffix : '.json'
-      });
-
-      $translateProvider.preferredLanguage('en');
-      $translateProvider.useLocalStorage();
-      $translateProvider.usePostCompiling(true);
-      $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
-
-    }
-})();
-(function() {
-    'use strict';
-
-    angular
-        .module('app.translate')
-        .run(translateRun)
-        ;
-    translateRun.$inject = ['$rootScope', '$translate'];
-    
-    function translateRun($rootScope, $translate){
-
-      // Internationalization
-      // ----------------------
-
-      $rootScope.language = {
-        // Handles language dropdown
-        listIsOpen: false,
-        // list of available languages
-        available: {
-          'en':       'English',
-          'es_AR':    'Español'
-        },
-        // display always the current ui language
-        init: function () {
-          var proposedLanguage = $translate.proposedLanguage() || $translate.use();
-          var preferredLanguage = $translate.preferredLanguage(); // we know we have set a preferred one in app.config
-          $rootScope.language.selected = $rootScope.language.available[ (proposedLanguage || preferredLanguage) ];
-        },
-        set: function (localeId) {
-          // Set the new idiom
-          $translate.use(localeId);
-          // save a reference for the current language
-          $rootScope.language.selected = $rootScope.language.available[localeId];
-          // finally toggle dropdown
-          $rootScope.language.listIsOpen = ! $rootScope.language.listIsOpen;
-        }
-      };
-
-      $rootScope.language.init();
-
-    }
-})();
 /**=========================================================
  * Module: demo-buttons.js
  * Provides a simple demo for buttons actions
@@ -18163,11 +18119,10 @@ angular.module('app.reports').filter('unique', function () {
 
             });
           };
-
-          vm.showEmployees = function(posting) {
+ vm.showEmployees = function(posting) {
             if(posting.employeeID && vm.employees.length) {
-              var selected = $filter('filter')(vm.employees, {employeeId: posting.employeeId});
-              return selected.length ? selected[0].employeeId : 'Not set';
+              var selected = $filter('filter')(vm.employees, {id: posting.employeeId});
+              return selected.length ? selected[0].id : 'Not set';
             } else {
               return posting.employeeId || 'Not set';
             }
@@ -18406,7 +18361,7 @@ angular.module('app.reports').filter('unique', function () {
 
           vm.showEmployees = function(posting) {
             if(posting.employeeID && vm.employees.length) {
-              var selected = $filter('filter')(vm.employees, {employeeId: posting.employeeId});
+              var selected = $filter('filter')(vm.employees, {id: posting.employeeId});
               return selected.length ? selected[0].employeeId : 'Not set';
             } else {
               return posting.employeeId || 'Not set';
@@ -18453,7 +18408,7 @@ angular.module('app.reports').filter('unique', function () {
           // add user
           vm.addUser = function() {
             vm.inserted = {
-               periodId: 12,
+          
               employeeId: null,
               payrollCodeId: null,
               amount: null,
@@ -20063,6 +20018,70 @@ $scope.clickBtn = function() {
 //             }
 //             return json;
 //         }
+(function() {
+    'use strict';
+
+    angular
+        .module('app.translate')
+        .config(translateConfig)
+        ;
+    translateConfig.$inject = ['$translateProvider'];
+    function translateConfig($translateProvider){
+
+      $translateProvider.useStaticFilesLoader({
+          prefix : 'app/i18n/',
+          suffix : '.json'
+      });
+
+      $translateProvider.preferredLanguage('en');
+      $translateProvider.useLocalStorage();
+      $translateProvider.usePostCompiling(true);
+      $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
+
+    }
+})();
+(function() {
+    'use strict';
+
+    angular
+        .module('app.translate')
+        .run(translateRun)
+        ;
+    translateRun.$inject = ['$rootScope', '$translate'];
+    
+    function translateRun($rootScope, $translate){
+
+      // Internationalization
+      // ----------------------
+
+      $rootScope.language = {
+        // Handles language dropdown
+        listIsOpen: false,
+        // list of available languages
+        available: {
+          'en':       'English',
+          'es_AR':    'Español'
+        },
+        // display always the current ui language
+        init: function () {
+          var proposedLanguage = $translate.proposedLanguage() || $translate.use();
+          var preferredLanguage = $translate.preferredLanguage(); // we know we have set a preferred one in app.config
+          $rootScope.language.selected = $rootScope.language.available[ (proposedLanguage || preferredLanguage) ];
+        },
+        set: function (localeId) {
+          // Set the new idiom
+          $translate.use(localeId);
+          // save a reference for the current language
+          $rootScope.language.selected = $rootScope.language.available[localeId];
+          // finally toggle dropdown
+          $rootScope.language.listIsOpen = ! $rootScope.language.listIsOpen;
+        }
+      };
+
+      $rootScope.language.init();
+
+    }
+})();
 (function() {
     'use strict';
 

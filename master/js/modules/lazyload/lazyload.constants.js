@@ -142,7 +142,9 @@
                                                         'vendor/fullcalendar/dist/fullcalendar.min.js',
                                                         'vendor/fullcalendar/dist/gcal.js',
                                                         'vendor/fullcalendar/dist/fullcalendar.css',
-                                                        'vendor/angular-ui-calendar/src/calendar.js'], serie: true}
+                                                        'vendor/angular-ui-calendar/src/calendar.js'], serie: true},
+         {name: 'angular-file-saver',          files: ['vendor/angular-file-saver/dist/angular-file-saver.bundle.js']},
+
           ]
         })
         ;

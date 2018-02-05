@@ -51,7 +51,7 @@
 
           vm.showEmployees = function(posting) {
             if(posting.employeeID && vm.employees.length) {
-              var selected = $filter('filter')(vm.employees, {employeeId: posting.employeeId});
+              var selected = $filter('filter')(vm.employees, {id: posting.employeeId});
               return selected.length ? selected[0].employeeId : 'Not set';
             } else {
               return posting.employeeId || 'Not set';
@@ -98,7 +98,7 @@
           // add user
           vm.addUser = function() {
             vm.inserted = {
-               periodId: 12,
+          
               employeeId: null,
               payrollCodeId: null,
               amount: null,

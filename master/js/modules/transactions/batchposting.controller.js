@@ -50,11 +50,10 @@
 
             });
           };
-
-          vm.showEmployees = function(posting) {
+ vm.showEmployees = function(posting) {
             if(posting.employeeID && vm.employees.length) {
-              var selected = $filter('filter')(vm.employees, {employeeId: posting.employeeId});
-              return selected.length ? selected[0].employeeId : 'Not set';
+              var selected = $filter('filter')(vm.employees, {id: posting.employeeId});
+              return selected.length ? selected[0].id : 'Not set';
             } else {
               return posting.employeeId || 'Not set';
             }
