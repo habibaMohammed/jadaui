@@ -39,6 +39,7 @@
           vm.loadEmployees = function() {
             return vm.employees.length ? null : $http.get(jadaApiUrl+'api/employee').success(function(data) {
               vm.employees = data;
+              console.log(vm.employees);
             });
           };
 
@@ -53,7 +54,7 @@
  vm.showEmployees = function(posting) {
             if(posting.employeeID && vm.employees.length) {
               var selected = $filter('filter')(vm.employees, {id: posting.employeeId});
-              return selected.length ? selected[0].id : 'Not set';
+              return selected.length ? selected[0].employeeNumber : 'Not set';
             } else {
               return posting.employeeId || 'Not set';
             }

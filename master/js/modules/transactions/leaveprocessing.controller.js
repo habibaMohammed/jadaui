@@ -87,10 +87,10 @@ $scope.dayDiff = function(firstDate, secondDate){
   }
 
 
-   $scope.leavepost=new LeaveProcessingService();
-             $scope.submitLeaveApplication=function(leavepostform) {
- 
-          $scope.leavepost.$save().then(function(data){
+     
+             $scope.submitLeaveApplication=function(leavepost,leavepostform) {
+ var leaveposting=new LeaveProcessingService(leavepost);
+          leaveposting.$save().then(function(data){
              var response=angular.fromJson(data);
           
             if(response.Status=="1"){
