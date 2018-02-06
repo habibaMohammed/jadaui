@@ -51,23 +51,29 @@
 
             });
           };
- vm.showEmployees = function(posting) {
-            if(posting.employeeID && vm.employees.length) {
-              var selected = $filter('filter')(vm.employees, {id: posting.employeeId});
-              return selected.length ? selected[0].employeeNumber : 'Not set';
-            } else {
-              return posting.employeeId || 'Not set';
-            }
-          };
+ // vm.showEmployees = function(posting) {
+ //            if(posting.employeeID && vm.employees.length) {
+ //              var selected = $filter('filter')(vm.employees, {id: posting.employeeId});
+ //              return selected.length ? selected[0].employeeNumber : 'Not set';
+ //            } 
+ //          };
 
+
+          vm.showEmployees=function(posting) {
+            var selected = [];
+            if(posting.employeeId) {
+              selected = $filter('filter')(vm.employees, {id: posting.employeeId});
+            }
+            return selected.length ? selected[0].employeeNumber : 'Not set';
+          };
   
 
           vm.showCode = function(posting) {
             var selected = [];
             if(posting.payrollCodeId) {
-              selected = $filter('filter')(vm.codes, {payrollCodeId: posting.payrollCodeId});
+              selected = $filter('filter')(vm.codes, {id: posting.payrollCodeId});
             }
-            return selected.length ? selected[0].payrollCodeId : 'Not set';
+            return selected.length ? selected[0].code : 'Not set';
           };
 
           vm.showStatus = function(user) {

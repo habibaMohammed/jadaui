@@ -16,11 +16,19 @@
         function activate() {
 
 
-        $scope.companysumaries=CompanySummaryService.get({periodId:12});
-        console.log( $scope.companysumaries);
+ 
 
 
 
+$http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
+    
+          $scope.currentPeriodData=data.data;
+    $scope.currentperiod=$scope.currentPeriodData.period;
+
+     
+       $scope.companysumaries=CompanySummaryService.get({periodId:$scope.currentperiod});
+ 
+     });
 
 $scope.searchCsummaryByperiod=function(id){
              
