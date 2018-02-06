@@ -691,7 +691,16 @@
               url: '/glMapping',
               title: 'gl mapping',
               templateUrl: helper.basepath('gl-mapping.html'),
-               resolve: helper.resolveFor('xeditable')
+            
+                 resolve: helper.resolveFor('ui.select', 'taginput','inputmask','localytics.directives','xeditable')
+          })
+
+
+             .state('app.payroll-ledger', {
+              url: '/payroll-ledger',
+              title: 'payroll-ledger',
+              templateUrl: helper.basepath('payroll-ledger.html'),
+             
           })
 
               .state('app.company-maintenance', {
@@ -937,7 +946,7 @@
               url: '/batch_posting',
               title: 'Bulk transaction item input',
                 templateUrl: helper.basepath('batch_posting.html'),
-                 resolve: helper.resolveFor('xeditable')
+                  resolve: helper.resolveFor('ui.select', 'taginput','inputmask','localytics.directives','xeditable')
                    
               
                    

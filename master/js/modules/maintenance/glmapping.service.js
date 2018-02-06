@@ -8,7 +8,7 @@
 
       GlMappingService.$inject = ['$resource','jadaApiUrl'];
       function GlMappingService($resource,jadaApiUrl) {
-       var data=$resource(jadaApiUrl+'api/formula/:id', {id: '@id'},
+       var data=$resource(jadaApiUrl+'api/payrollledgermapping/:id', {id: '@id'},
       { 'get':    {method:'GET', isArray:false},
     'save':   {method:'POST'},
     'query':  {method:'GET', isArray:true},

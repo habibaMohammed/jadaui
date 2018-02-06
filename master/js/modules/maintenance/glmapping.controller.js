@@ -10,8 +10,8 @@
           .module('app.bootstrapui')
           .controller('GlmappingController', GlmappingController);
 
-      GlmappingController.$inject = ['$scope', '$rootScope','$uibModal','GlMappingService','$stateParams', '$state'];
-      function GlmappingController($scope,$rootScope, $uibModal, GlMappingService,$stateParams, $state) {
+      GlmappingController.$inject = ['$scope','$http', '$rootScope','$uibModal','GlMappingService','$stateParams', '$state','jadaApiUrl'];
+      function GlmappingController($scope,$http,$rootScope, $uibModal, GlMappingService,$stateParams, $state,jadaApiUrl) {
           var vm = this;
 
           activate();
@@ -20,21 +20,37 @@
 
           function activate() {
 
-
+ var SuccessMsg;
+ var errorMsg;
 
   $scope.glmappings=GlMappingService.query();
+  console.log($scope.glmappings);
     $scope.loadglMapping = function () {
           $scope.glmappings=GlMappingService.query();
      }
 
    $rootScope.$on("CallLoadglMapping", function(){
-             $scope.loadBanks();
+             $scope.loadglMapping ();
           });
 
 
 
 
+  $http.get(jadaApiUrl+'api/costcenter').success(function(data) {
+                $scope.centers = data;
 
+              });
+
+  $http.get(jadaApiUrl+'api/payrollcode').success(function(data) {
+               $scope.pcodes = data;
+         
+
+            });
+    $http.get(jadaApiUrl+'api/payrollLedger').success(function(data) {
+               $scope.legercodes = data;
+         
+
+            });
 
 
     $scope.delete= function (gl) {
@@ -67,14 +83,14 @@
 
 
 
-    $scope.show = function(gl) {
+    $scope.show = function(glmapping) {
         // $scope.x = x;
         var modalInstance = $uibModal.open({
           templateUrl: 'editgGLMapping.html',
           controller: ModalInstanceCtrl,
           resolve: {
-             gl: function () {
-               return gl;
+             glmapping: function () {
+               return glmapping;
              }
            }        
           // scope : $scope
@@ -103,19 +119,36 @@
               };
               $scope.gl=new GlMappingService();
                $scope.submitGl=function() {
-            $scope.gl.$save().then(function(){
+            $scope.gl.$save().then(function(data){
+              var response=angular.fromJson(data);
+       
+            if(response.Status=="1"){
+                     $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+                    // $scope.pl=PayrollLedgerService.get({id:id});
+            }else{
+           
+                  $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+          
+            }
+         
+              
                  $rootScope.$emit("CallLoadglMapping", {});
-                 $scope.ok();
-            });
+                 
+            },   function() {
+                $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
     
             };
            
             }
 
 
-             ModalInstanceCtrl.$inject = ['$scope', '$uibModalInstance','GlMappingService','gl'];
-            function ModalInstanceCtrl($scope, $uibModalInstance, GlMappingService,bank) {
-            $scope.gl=gl;
+             ModalInstanceCtrl.$inject = ['$scope', '$uibModalInstance','GlMappingService','glmapping'];
+            function ModalInstanceCtrl($scope, $uibModalInstance, GlMappingService,glmapping) {
+            $scope.gl=glmapping;
               $scope.ok = function () {
                 $uibModalInstance.close('closed');
               };
@@ -125,12 +158,30 @@
               };
 
 
-              $scope.updateGl=function(gl){
+              $scope.glUpdate=function(gl){
     
               
               gl.$update().then(function(){
-                     $rootScope.$emit("CallLoadglMapping", {});
-              });
+                  var response=angular.fromJson(data);
+       
+            if(response.Status=="1"){
+                     $scope.errorMsg=false;
+                    $scope.SuccessMsg =response.Message;
+                    // $scope.pl=PayrollLedgerService.get({id:id});
+            }else{
+           
+                  $scope.SuccessMsg=false;
+                   $scope.errorMsg=response.Message;
+          
+            }
+         
+              
+                 $rootScope.$emit("CallLoadglMapping", {});
+          
+              },function() {
+                $scope.SuccessMsg=false;
+                 $scope.errorMsg = 'Server Request Error';
+                });
             
 
               };

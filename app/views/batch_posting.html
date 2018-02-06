@@ -35,9 +35,9 @@ Import</a>
             <span editable-select="user.employeeId" e-name="employeeId" onshow="table.loadEmployees()" e-form="rowform" e-ng-options="g.id as g.employeeNumber+'_'+g.firstName+' '+g.lastName for g in table.employees ">{{ table.showEmployees(user) }}</span>
          </td>
 
-              <td>
+              <td> 
             <!-- editable status (select-local)-->
-            <span editable-select="user.payrollCodeId" e-name="payrollCodeId" onshow="table.loadCodes()" e-form="rowform" e-ng-options="code.id as code.code+'_' +code.description for code in table.codes">{{ user.payrollCodeId }}</span>
+            <span editable-select="user.payrollCodeId"  e-name="payrollCodeId" onshow="table.loadCodes()" e-form="rowform" e-ng-options="code.id as code.code+'_' +code.description for code in table.codes">{{ table.showCode(user) }}</span>
          </td>
          <td>
             <!-- editable username (text with validation)-->

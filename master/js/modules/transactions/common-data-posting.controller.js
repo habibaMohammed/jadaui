@@ -63,9 +63,9 @@
           vm.showCode = function(posting) {
             var selected = [];
             if(posting.payrollCodeId) {
-              selected = $filter('filter')(vm.codes, {payrollCodeId: posting.payrollCodeId});
+              selected = $filter('filter')(vm.codes, {id: posting.payrollCodeId});
             }
-            return selected.length ? selected[0].payrollCodeId : 'Not set';
+            return selected.length ? selected[0].code : 'Not set';
           };
 
           vm.showStatus = function(user) {
@@ -82,7 +82,7 @@
             }
           };
 
-          vm.saveUser = function(data) {
+          vm.saveData = function(data) {
             //vm.user not updated yet
             angular.extend(data);
             console.log(data.employeeID);
@@ -91,12 +91,12 @@
           };
 
           // remove user
-          vm.removeUser = function(index) {
+          vm.removeData = function(index) {
             vm.posting.splice(index, 1);
           };
 
           // add user
-          vm.addUser = function() {
+          vm.addData = function() {
             vm.inserted = {
           
               employeeId: null,
@@ -111,14 +111,7 @@
           // ----------------------------------- 
 
 
-          vm.saveColumn = function(column) {
-            var results = [];
-            angular.forEach(vm.users, function(/*user*/) {
-              // results.push($http.post('/saveColumn', {column: column, value: user[column], id: user.id}));
-              console.log('Saving column: ' + column);
-            });
-            return $q.all(results);
-          };
+       
 
           // editable table
           // ----------------------------------- 
@@ -151,27 +144,6 @@
             }
           };
 
-          // save edits
-          vm.saveTable = function() {
-            var results = [];
-            for (var i = vm.users.length; i--;) {
-              var user = vm.users[i];
-              // actually delete user
-              if (user.isDeleted) {
-                vm.users.splice(i, 1);
-              }
-              // mark as not new 
-              if (user.isNew) {
-                user.isNew = false;
-              }
-
-              // send on server
-              // results.push($http.post('/saveUser', user));
-              console.log('Saving Table...');
-            }
-
-            return $q.all(results);
-          };
 
         }
     }

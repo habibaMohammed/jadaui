@@ -33,26 +33,26 @@
          </tr>
        </thead>
        <tbody>
-        <tr >
+        <tr ng-repeat="glmapping in glmappings" >
         
     
-            <td>M001</td>
-              <td>Payroll Cost - Deployment</td>
-                <td>2000000</td> 
+            <td>{{glmapping.code}}</td>
+              <td>{{glmapping.description}}</td>
+                <td>{{glmapping.payrollLedger}}</td> 
 
-                  <td>T003,C001,C002,C003,C005</td>
+                  <td>{{glmapping.payrollCode}}</td>
 
-                    <td>DR</td>
+                    <td>{{glmapping.entryType}}</td>
 
-                  <td>C001</td>
+                  <td>{{glmapping.costCentre}}</td>
 
         
 
           <td>
             <div class="buttons" >
               
-                   <button class="btn btn-sm btn-info  mr" type="button" ng-click="show(task)"><em class="fa fa-pencil"></em></button>
-                  <button class="btn btn-sm btn-danger mr"  ng-click="delete(task)" title="Delete">
+                   <button class="btn btn-sm btn-info  mr" type="button" ng-click="show(glmapping)"><em class="fa fa-pencil"></em></button>
+                  <button class="btn btn-sm btn-danger mr"  ng-click="delete(glmapping)" title="Delete">
                     <em class="fa fa-trash"></em>
 
          
@@ -89,7 +89,7 @@
                   <label class="col-lg-3"> Mapping Code
 </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="mappingCode" ng-model="gl.mappingCode" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true" placeholder=" Mapping Code"/>
+                     <input class="form-control" type="text"  name="mappingCode" ng-model="gl.code" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true" placeholder=" Mapping Code"/>
                        <span class="text-danger" ng-show="glform.mappingCode.$dirty &amp;&amp; glform.mappingCode.$error.required">This field is required</span>
                <span class="text-danger" ng-show="glform.mappingCode.$dirty &amp;&amp; glform.mappingCode.$error.pattern"> No special characters allowed </span>
                   </div>
@@ -105,44 +105,71 @@
                   </div>
                </div>
 
-                   <div class="form-group">
-                  <label class="col-lg-3">  General Ledger Code
-</label>
-                  <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="glCode" ng-model="gl.glCode" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true" placeholder="General Ledger Code"/>
-                       <span class="text-danger" ng-show="glform.mappingCode.$dirty &amp;&amp; glform.glCode.$error.required">This field is required</span>
-               <span class="text-danger" ng-show="glform.glCode.$dirty &amp;&amp; glform.glCode.$error.pattern"> No special characters allowed </span>
-                  </div>
-               </div>
+     
 
-                   <div class="form-group">
-                  <label class="col-lg-3">Payroll Code
-</label>
-                  <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="payrollCode" ng-model="gl.payrollCode" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true" placeholder="Payroll Code"/>
-                       <span class="text-danger" ng-show="glform.payrollCode.$dirty &amp;&amp; glform.payrollCode.$error.required">This field is required</span>
-               <span class="text-danger" ng-show="glform.payrollCode.$dirty &amp;&amp; glform.payrollCode.$error.pattern"> No special characters allowed </span>
+                 
+                      <div class="form-group">
+                        <label class="col-lg-3">General Ledger Code</label>
+                        <div class="col-lg-9">
+                 
+                            <select  class="form-control" name="payrollLedger"  ng-model="gl.payrollLedger" ng-options="code.id as code.code for code in legercodes">
+                     <option value="" disabled selected>Select General Ledger Code</option>
+                     </select>
+                     
+                        <!-- <div class="col-sm-4">
+                           <small class="text-muted">type='number'</small>
+                        </div> -->
                   </div>
-               </div>
+                           
+                     </div>
 
-                   <div class="form-group">
-                  <label class="col-lg-3">  DR/CR
-</label>
-                  <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="ledgerType" ng-model="gl.ledgerType" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true" placeholder=" DR/CR"/>
-                       <span class="text-danger" ng-show="glform.ledgerType.$dirty &amp;&amp; glform.ledgerType.$error.required">This field is required</span>
-               <span class="text-danger" ng-show="glform.ledgerType.$dirty &amp;&amp; glform.ledgerType.$error.pattern"> No special characters allowed </span>
+                  
+                      <div class="form-group">
+                        <label class="col-lg-3">Payroll Code</label>
+                        <div class="col-lg-9">
+                 
+                            <select  class="form-control" chosen=""  multiple="multiple"  name="payrollCode"  ng-model="gl.payrollCode" ng-options="code.id as code.code for code in pcodes">
+                
+                     </select>
+                     
+                        <!-- <div class="col-sm-4">
+                           <small class="text-muted">type='number'</small>
+                        </div> -->
                   </div>
-               </div>
-                   <div class="form-group">
-                  <label class="col-lg-3"> Cost Centre
+                           
+                     </div>
+                
+
+               <div class="form-group">
+               <label class="col-lg-3"> DR/CR
 </label>
-                  <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="costCentre" ng-model="gl.costCentre" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/" placeholder=" Cost Centre"/>
-                      
-               <span class="text-danger" ng-show="glform.costCentre.$dirty &amp;&amp; glform.costCentre.$error.pattern"> No special characters allowed </span>
-                  </div>
+               <div class="col-lg-9">
+                  <select class="form-control" ng-model="gl.entryType">
+                     <option value="">Select Financial Category</option>
+                       <option value="1">DR</option>
+                     <option value="0">CR</option>
+                  
+                  </select>
+                 
                </div>
+            </div>
+              
+
+                      <div class="form-group">
+                        <label class="col-lg-3"> Cost Center</label>
+                        <div class="col-lg-9">
+                 
+                            <select  class="form-control" name="costCentre"  ng-model="gl.costCenter" ng-options="center.id as center.description for center in centers">
+                     <option value="" disabled selected>Select Cost Center</option>
+                     </select>
+                     
+                        <!-- <div class="col-sm-4">
+                           <small class="text-muted">type='number'</small>
+                        </div> -->
+                  </div>
+                           
+                     </div>
+                
     
 
            
@@ -152,7 +179,7 @@
               
                <div class="form-group">
                   <div class="col-lg-offset-3 col-lg-9">
-                     <button class="btn btn-info btn-sm mr" ng-disabled="glform.$invalid" ng-click="submitGl(gl)">Save and New</button>
+                     <button class="btn btn-info btn-sm mr" ng-disabled="glform.$invalid" ng-click="submitGl()">Save and New</button>
                          <button class="btn btn-info btn-sm mr" ng-disabled="glform.$invalid" ng-click="submitCloseGl()">Save and Close</button>
                       <button class="btn btn-warning btn-sm" type="reset">Reset</button>
                   </div>
@@ -161,6 +188,7 @@
                       <div class="text-center text-success" margin-top="md" ng-show="SuccessMsg">{{SuccessMsg}}</div>
              <div class="text-center text-danger"  margin-top="md" ng-show="errorMsg">{{errorMsg}}</div>
             </form>
+          
 <!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
          </script>
 
@@ -173,7 +201,7 @@
                   <label class="col-lg-3"> Mapping Code
 </label>
                   <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="mappingCode" ng-model="gl.mappingCode" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true" placeholder=" Mapping Code"/>
+                     <input class="form-control" type="text"  name="mappingCode" ng-model="gl.code" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true" placeholder=" Mapping Code"/>
                        <span class="text-danger" ng-show="glform.mappingCode.$dirty &amp;&amp; glform.mappingCode.$error.required">This field is required</span>
                <span class="text-danger" ng-show="glform.mappingCode.$dirty &amp;&amp; glform.mappingCode.$error.pattern"> No special characters allowed </span>
                   </div>
@@ -189,44 +217,71 @@
                   </div>
                </div>
 
-                   <div class="form-group">
-                  <label class="col-lg-3">  General Ledger Code
-</label>
-                  <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="glCode" ng-model="gl.glCode" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true" placeholder="General Ledger Code"/>
-                       <span class="text-danger" ng-show="glform.mappingCode.$dirty &amp;&amp; glform.glCode.$error.required">This field is required</span>
-               <span class="text-danger" ng-show="glform.glCode.$dirty &amp;&amp; glform.glCode.$error.pattern"> No special characters allowed </span>
-                  </div>
-               </div>
+     
 
-                   <div class="form-group">
-                  <label class="col-lg-3">Payroll Code
-</label>
-                  <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="payrollCode" ng-model="gl.payrollCode" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true" placeholder="Payroll Code"/>
-                       <span class="text-danger" ng-show="glform.payrollCode.$dirty &amp;&amp; glform.payrollCode.$error.required">This field is required</span>
-               <span class="text-danger" ng-show="glform.payrollCode.$dirty &amp;&amp; glform.payrollCode.$error.pattern"> No special characters allowed </span>
+                 
+                      <div class="form-group">
+                        <label class="col-lg-3">General Ledger Code</label>
+                        <div class="col-lg-9">
+                 
+                            <select  class="form-control" name="payrollLedger"  ng-model="gl.payrollLedger" ng-options="code.id as code.code for code in legercodes">
+                     <option value="" disabled selected>Select General Ledger Code</option>
+                     </select>
+                     
+                        <!-- <div class="col-sm-4">
+                           <small class="text-muted">type='number'</small>
+                        </div> -->
                   </div>
-               </div>
+                           
+                     </div>
 
-                   <div class="form-group">
-                  <label class="col-lg-3">  DR/CR
-</label>
-                  <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="ledgerType" ng-model="gl.ledgerType" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/"  ng-required="true" placeholder=" DR/CR"/>
-                       <span class="text-danger" ng-show="glform.ledgerType.$dirty &amp;&amp; glform.ledgerType.$error.required">This field is required</span>
-               <span class="text-danger" ng-show="glform.ledgerType.$dirty &amp;&amp; glform.ledgerType.$error.pattern"> No special characters allowed </span>
+                  
+                      <div class="form-group">
+                        <label class="col-lg-3">Payroll Code</label>
+                        <div class="col-lg-9">
+                 
+                            <select  class="form-control" chosen=""  multiple="multiple"  name="payrollCode"  ng-model="gl.payrollCode" ng-options="code.id as code.code for code in pcodes">
+                
+                     </select>
+                     
+                        <!-- <div class="col-sm-4">
+                           <small class="text-muted">type='number'</small>
+                        </div> -->
                   </div>
-               </div>
-                   <div class="form-group">
-                  <label class="col-lg-3"> Cost Centre
+                           
+                     </div>
+                
+
+               <div class="form-group">
+               <label class="col-lg-3"> DR/CR
 </label>
-                  <div class="col-lg-9">
-                     <input class="form-control" type="text"  name="costCentre" ng-model="gl.costCentre" ng-pattern="/^[a-zA-Z0-9\s.\-_']+$/" placeholder=" Cost Centre"/>
-                      
-               <span class="text-danger" ng-show="glform.costCentre.$dirty &amp;&amp; glform.costCentre.$error.pattern"> No special characters allowed </span>
-                  </div>
+               <div class="col-lg-9">
+                  <select class="form-control" ng-model="gl.entryType">
+                     <option value="">Select Financial Category</option>
+                       <option value="1">DR</option>
+                     <option value="0">CR</option>
+                  
+                  </select>
+                 
                </div>
+            </div>
+              
+
+                      <div class="form-group">
+                        <label class="col-lg-3"> Cost Center</label>
+                        <div class="col-lg-9">
+                 
+                            <select  class="form-control" name="costCentre"  ng-model="gl.costCenter" ng-options="center.id as center.description for center in centers">
+                     <option value="" disabled selected>Select Cost Center</option>
+                     </select>
+                     
+                        <!-- <div class="col-sm-4">
+                           <small class="text-muted">type='number'</small>
+                        </div> -->
+                  </div>
+                           
+                     </div>
+                
     
 
            
@@ -236,15 +291,16 @@
               
                <div class="form-group">
                   <div class="col-lg-offset-3 col-lg-9">
-                     <button class="btn btn-info btn-sm mr" ng-disabled="glform.$invalid" ng-click="updateGl(gl)">Save and New</button>
-                     
-                
+                     <button class="btn btn-info btn-sm mr" ng-disabled="glform.$invalid" ng-click="glUpdate(gl)">Update</button>
+                   
+                      <button class="btn btn-warning btn-sm" type="reset">Reset</button>
                   </div>
                </div>
                
                       <div class="text-center text-success" margin-top="md" ng-show="SuccessMsg">{{SuccessMsg}}</div>
              <div class="text-center text-danger"  margin-top="md" ng-show="errorMsg">{{errorMsg}}</div>
             </form>
+            {{gl|json}}
 <!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
          </script>
       </div>

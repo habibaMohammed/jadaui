@@ -19,7 +19,7 @@
 
               <td>
             <!-- editable status (select-local)-->
-            <span editable-select="user.payrollCodeId" e-name="payrollCodeId" onshow="table.loadCodes()" e-form="rowform" e-ng-options="code.id as code.code+'_' +code.description for code in table.codes">{{ user.payrollCodeId }}</span>
+            <span editable-select="user.payrollCodeId" e-name="payrollCodeId" onshow="table.loadCodes()" e-form="rowform" e-ng-options="code.id as code.code+'_' +code.description for code in table.codes">{{table.showCode(user)}}</span>
          </td>
          <td>
             <!-- editable username (text with validation)-->
@@ -31,7 +31,7 @@
       
          <td style="white-space: nowrap">
             <!-- form-->
-            <form class="form-buttons form-inline" editable-form="" name="rowform" onbeforesave="table.saveUser($data)" ng-show="rowform.$visible" shown="table.inserted == user">
+            <form class="form-buttons form-inline" editable-form="" name="rowform" onbeforesave="table.saveData($data)" ng-show="rowform.$visible" shown="table.inserted == user">
                <button class="btn btn-sm btn-info" type="submit" ng-disabled="rowform.$waiting" title="Save">
                   <em class="fa fa-save"></em>
                </button>
@@ -43,12 +43,12 @@
                <button class="btn btn-sm btn-info" ng-click="rowform.$show()" title="Edit">
                   <em class="fa fa-pencil"></em>
                </button>
-               <button class="btn btn-sm btn-danger" ng-click="table.removeUser($index)" title="Delete">
+               <button class="btn btn-sm btn-danger" ng-click="table.removeData($index)" title="Delete">
                   <em class="fa fa-trash"></em>
                </button>
             </div>
          </td>
       </tr>
    </table>
-  <button class="btn btn-info" ng-click="table.addUser()">Add row</button>
+  <button class="btn btn-info" ng-click="table.addData()">Add row</button>
          </div>

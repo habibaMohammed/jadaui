@@ -245,13 +245,15 @@
     "text": " Exports",
     "sref": "#",
     "child": "fa fa-chevron-down",
-   
+
     "submenu": [
       {"text": " Bank Files", "sref": "app.bankfiles"},
-       {"text": "Gl Journals", "sref": "app.payroll-journals"},
+     
       
-       {"text": "Gl Mapping", "sref": "app.gl-mapping"}
-        
+       {"text": "Gl Mapping", "sref": "app.gl-mapping"}, 
+         {"text": "Payroll Ledger", "sref": "app.payroll-ledger"},   
+         {"text": "Gl Journals", "sref": "app.payroll-journals"}
+           
          
        
     ]
