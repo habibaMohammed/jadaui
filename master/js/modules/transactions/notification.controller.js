@@ -50,7 +50,7 @@ $scope.rejectedResource = $resource(jadaApiUrl+'api/rejectedpayrolltransaction')
       angular.forEach($scope.approve, function(value, key) {
         if(key=="status" &&value=="1"){
           count++
-       console.log(key + ': ' + value);
+  
         }
        
       }
@@ -82,7 +82,7 @@ $scope.rejectedResource = $resource(jadaApiUrl+'api/rejectedpayrolltransaction')
       angular.forEach($scope.rejectedgpayroll, function(value, key) {
         if(key=="status" &&value=="2"){
           count++
-       console.log(key + ': ' + value);
+
         }
        
       }

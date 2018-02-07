@@ -17,7 +17,7 @@
 
         function activate() {
 
-var currentperiod=0;
+             var currentperiod=0;
           // $scope.psummaries=PayeSummaryService.get({periodId:currentperiod});
 
        
@@ -96,6 +96,16 @@ console.log($scope.details);
  // console.log($scope.companyDetails);
 
 }
+
+$scope.header={ headers: [] };
+
+  $scope.addHeader=function(period) {
+       console.log('hellow');
+   $scope.header.headers.push(period);
+   console.log('hellow');
+  }
+
+
         }
     }
 })();
