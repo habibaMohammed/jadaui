@@ -240,7 +240,7 @@
                         <label class="col-lg-3">Payroll Code</label>
                         <div class="col-lg-9">
                  
-                            <select  class="form-control" chosen=""  multiple="multiple"  name="payrollCode"  ng-model="gl.payrollCode" ng-options="code.id as code.code for code in pcodes">
+                            <select  class="form-control"  name="payrollCode"  ng-model="gl.payrollCode" ng-options="code.id as code.code for code in pcodes">
                 
                      </select>
                      
@@ -300,7 +300,7 @@
                       <div class="text-center text-success" margin-top="md" ng-show="SuccessMsg">{{SuccessMsg}}</div>
              <div class="text-center text-danger"  margin-top="md" ng-show="errorMsg">{{errorMsg}}</div>
             </form>
-            {{gl|json}}
+           <!--  {{gl|json}} -->
 <!-- END panel--></div><div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Close</button></div>
          </script>
       </div>

@@ -937,7 +937,8 @@
            .state('app.payroll-journals', {
               url: '/payroll-journals',
               title: 'payroll journals',
-                templateUrl: helper.basepath('payroll-journals.html')
+                templateUrl: helper.basepath('payroll-journals.html'),
+                 resolve: helper.resolveFor('angular-file-saver')
              
           })
 
