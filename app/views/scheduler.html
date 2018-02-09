@@ -1,5 +1,7 @@
 <h3>Schedules</h3>
 
+
+
 <div ng-controller="SchedulerController">
 
     <div class="panel panel-default" id="panelDemo15">
@@ -16,68 +18,46 @@
   <div class="panel panel-widget" id="panelDemo14">
        
          <div class="panel-body">
-         	 <div class="panel-heading bg-gray-lighter  text-bold"> Headers</div>
-            <uib-tabset  active="activePill"  type="pills">
-        <uib-tab heading="Company Details">    <div class="panel-body">
+          <form>
+         <!-- 	 <div class="panel-heading bg-gray-lighter  text-bold"> Headers</div> -->
 
-<!-- <tr ng-repeat="item in details.company">
-<td>{{item.action}}</td>
-<td>{{item.done}}</td>
-</tr>
-        -->        
+       <!--      <uib-tabset  active="activePill"  type="pills">
+              
+        <uib-tab heading="Company Details">    <div class="panel-body">
+      
            <div class="form-group" ng-repeat="item in details.company">
                <label class="col-sm-3 control-label">{{item.name}}</label>
                <div class="col-sm-9">
                   <div class="checkbox c-checkbox needsclick">
                      <label class="needsclick">
-                        <input class="needsclick" type="checkbox" ng-model="id" ng-true-value="{{item.id}} " ng-change="selectedCompanyattribute(id)"  />
+                        <input class="needsclick" type="checkbox" ng-model="scheduler.id" ng-true-value="{{item.id}} " ng-change="selectedCompanyattribute(id)"  />
                         <span class="fa fa-check"></span></label>
                   </div>
                </div>
             </div>
 
-           <!--   <div class="form-group">
-               <label class="col-sm-3 control-label">Company PIN</label>
-               <div class="col-sm-9">
-                  <div class="checkbox c-checkbox needsclick">
-                     <label class="needsclick">
-                        <input class="needsclick" type="checkbox" value="" />
-                        <span class="fa fa-check"></span></label>
-                  </div>
-               </div>
-            </div> -->
-             <!-- <div class="form-group">
-               <label class="col-sm-3 control-label">NSSF Number</label>
-               <div class="col-sm-9">
-                  <div class="checkbox c-checkbox needsclick">
-                     <label class="needsclick">
-                        <input class="needsclick" type="checkbox" value="" />
-                        <span class="fa fa-check"></span></label>
-                  </div>
-               </div>
-            </div> -->
-             <!-- <div class="form-group">
-               <label class="col-sm-3 control-label">Pension Number</label>
-               <div class="col-sm-9">
-                  <div class="checkbox c-checkbox needsclick">
-                     <label class="needsclick">
-                        <input class="needsclick" type="checkbox" value="" />
-                        <span class="fa fa-check"></span></label>
-                  </div>
-               </div>
-            </div> -->
+          
 
              
                </div></uib-tab>
                <uib-tab heading="Periods" >
                	     <div class="panel-body" >
                         <div class="periodList" style="max-height: 300">
+                            <div class="form-group">
+                  <label class="col-lg-2 ">First Name
+                   </label>
+                  <div class="col-lg-10">
+                     <input class="form-control" type="text" name=" surname" ng-model="employee.firstName" placeholder="First Name
+                   " />
+                 
+                  </div>
+               </div>
                   <div class="form-group" ng-repeat="period in periods">
                <label class="col-sm-3 control-label">{{period.month}} {{period.year}}</label>
                <div class="col-sm-9">
                   <div class="checkbox c-checkbox needsclick">
                      <label class="needsclick">
-                        <input class="needsclick" type="checkbox" ng-model="header.period" ng-true-value=" {{period.id}} "  ng-change="addHeader(header.period)"/>
+                        <input class="needsclick" type="checkbox" ng-model="scheduler.period" ng-change="addHeader(header.period)"/>
                         <span class="fa fa-check"></span></label>
 
                   </div>
@@ -97,35 +77,99 @@
                </div>
 
                </uib-tab>
+               scheduler
+{{scheduler}}
 
-                 <!--   <uib-tab heading="Periods">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-                  aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat , sunt in culpa qui officia deserunt mollit anim id est laborum.</uib-tab> -->
-            
+      
+   
             </uib-tabset>
+ -->
 
-
-
+         </form>
 <div class="panel b">
-   <div class="panel-heading bg-gray-lighter text-bold">Columns
+   <!-- <div class="panel-heading bg-gray-lighter text-bold">Columns
   
-   </div>
+   </div> -->
    <div class="panel-body">
      <div class="container-md">
    <div class="row">
       <div class="col-md-3">
          <div class="panel b">
+          <div class="panel-heading bg-gray-lighter text-bold">headers</div>
+            <div class="list-group" ng-init="settingActive = 1"><a class="list-group-item" href="" ng-click="settingActive=1" ng-class="{'active': (settingActive == 1)}">Campany</a><a class="list-group-item" href="" ng-click="settingActive=2" ng-class="{'active': (settingActive == 2)}">Period</a>
+
+            </div>
+            <br/>
             <div class="panel-heading bg-gray-lighter text-bold">Columns</div>
-            <div class="list-group" ng-init="settingActive = 1"><a class="list-group-item" href="" ng-click="settingActive=1" ng-class="{'active': (settingActive == 1)}">Employee</a><a class="list-group-item" href="" ng-click="settingActive=2" ng-class="{'active': (settingActive == 2)}">Category</a><a class="list-group-item"
-               href="" ng-click="settingActive=3" ng-class="{'active': (settingActive == 3)}">Departments</a><a class="list-group-item" href="" ng-click="settingActive=4" ng-class="{'active': (settingActive == 4)}">Cost Centers</a><a class="list-group-item"
-               href="" ng-click="settingActive=5" ng-class="{'active': (settingActive == 5)}">Payroll Codes</a>
+            <div class="list-group">
+              <a class="list-group-item" href="" ng-click="settingActive=3" ng-class="{'active': (settingActive == 3)}">Employee</a><a class="list-group-item" href="" ng-click="settingActive=4" ng-class="{'active': (settingActive == 4)}">Category</a><a class="list-group-item"
+               href="" ng-click="settingActive=5" ng-class="{'active': (settingActive == 5)}">Departments</a><a class="list-group-item" href="" ng-click="settingActive=6" ng-class="{'active': (settingActive == 6)}">Cost Centers</a><a class="list-group-item"
+               href="" ng-click="settingActive=7" ng-class="{'active': (settingActive == 7)}">Payroll Codes</a>
 
                <a class="list-group-item"
-               href="" ng-click="settingActive=6" ng-class="{'active': (settingActive == 6)}">Totals</a>
+               href="" ng-click="settingActive=8" ng-class="{'active': (settingActive == 8)}">Totals</a>
             </div>
          </div>
       </div>
       <div class="col-md-9">
-         <div ng-show="settingActive == 1">
+<form>
+               <div ng-show="settingActive == 1">
+            <div class="panel b">
+               <div class="panel-heading bg-gray-lighter text-bold">Company Details</div>
+               <div class="panel-body">
+
+<!--               <div class="form-group">
+                  <label class="col-lg-3 "> Phone Number
+                   </label>
+                  <div class="col-lg-9">
+                     <input class="form-control" type="text"  name="phone_number" ng-model="scheduler.phoneNumber" placeholder="Phone Number
+                   " />
+                  </div>
+               </div> -->
+                   
+           <div class="form-group" ng-repeat="item in details.company">
+               <label class="col-sm-3 control-label">{{item.name}}</label>
+               <div class="col-sm-9">
+                  <div class="checkbox c-checkbox needsclick">
+                     <label class="needsclick">
+                        <input class="needsclick" type="checkbox" ng-model="scheduler.id"  g-true-value="{{item.id}} " />
+                        <span class="fa fa-check"></span></label>
+                  </div>
+               </div>
+            </div>
+              ss{{scheduler}}
+
+               </div>
+            </div>
+
+            
+               </div>
+      
+            
+   
+                <div ng-show="settingActive == 2">
+            <div class="panel b">
+               <div class="panel-heading bg-gray-lighter text-bold">Period</div>
+               <div class="panel-body">
+                    
+   <div class="form-group" ng-repeat="role in roles">
+               <label class="col-sm-3 control-label">{{period.month}} {{role.text}}</label>
+               <div class="col-sm-9">
+                  <div class="checkbox c-checkbox needsclick">
+                     <label class="needsclick">
+                        <input type="checkbox" data-checklist-model="user.roles" data-checklist-value="role"/>
+                        <span class="fa fa-check"></span></label>
+
+                  </div>
+                
+               </div>
+             </div>
+ ss{{user.roles}}
+               </div>
+            </div>
+            
+         </div>
+         <div ng-show="settingActive == 3">
             <div class="panel b">
                <div class="panel-heading bg-gray-lighter text-bold">Employee Details</div>
                <div class="panel-body">
@@ -230,7 +274,7 @@
                </div>
             </div>
          </div>
-         <div ng-show="settingActive == 2">
+         <div ng-show="settingActive == 4">
             <div class="panel b">
                <div class="panel-heading bg-gray-lighter text-bold">Category</div>
                <div class="panel-body">
@@ -259,7 +303,7 @@
             </div>
             
          </div>
-         <div ng-show="settingActive == 3">
+         <div ng-show="settingActive == 5">
             <div class="panel b">
                <div class="panel-heading bg-gray-lighter text-bold" >Departments</div>
                <div class="panel-body">
@@ -288,7 +332,7 @@
               
             </div>
          </div>
-         <div ng-show="settingActive == 4">
+         <div ng-show="settingActive == 6">
   <div class="panel b">
                <div class="panel-heading bg-gray-lighter text-bold">Cost Centers</div>
                <div class="panel-body">
@@ -317,7 +361,7 @@
               
             </div>
          </div>
-         <div ng-show="settingActive == 5">
+         <div ng-show="settingActive == 7">
             <div class="panel b">
                <div class="panel-heading bg-gray-lighter text-bold">Payroll Codes</div>
                <div class="panel-body">
@@ -356,7 +400,7 @@
 
 
 
-         <div ng-show="settingActive == 6">
+         <div ng-show="settingActive == 8">
   <div class="panel b">
                <div class="panel-heading bg-gray-lighter text-bold">Totals</div>
                <div class="panel-body">
@@ -386,6 +430,8 @@
               
             </div>
          </div>
+         ss{{scheduler}}
+       </form>
       </div>
    </div>
 </div>
@@ -801,7 +847,8 @@
          </div>
          <div class="panel-body">
            
-
+scheduler
+{{scheduler}}
  <div class="col-sm-4">
             <table class="table table-striped table-bordered table-hover">
                   

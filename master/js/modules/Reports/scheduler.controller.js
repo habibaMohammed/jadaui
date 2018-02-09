@@ -20,9 +20,21 @@
              var currentperiod=0;
           // $scope.psummaries=PayeSummaryService.get({periodId:currentperiod});
 
-       
+       $scope.scheduler={};
      
             
+
+              $scope.roles = [
+    {id: 1, text: 'guest'},
+    {id: 2, text: 'user'},
+    {id: 3, text: 'customer'},
+    {id: 4, text: 'admin'}
+  ];
+
+
+    $scope.user = {
+    roles: [$scope.roles[1]]
+  };
               $http.get(jadaApiUrl+'api/period').success(function(data) {
               $scope.periods = data;
 

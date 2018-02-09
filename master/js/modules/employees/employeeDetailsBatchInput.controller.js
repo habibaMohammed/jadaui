@@ -26,7 +26,6 @@
 
             $scope.fileDataObj = [];
 
-                $scope.fileData ={ };
         
         $scope.uploadFile = function() {
           if ($scope.fileContent) {
