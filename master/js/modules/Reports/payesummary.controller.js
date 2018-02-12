@@ -15,14 +15,14 @@
 
         function activate() {
 
-var currentperiod=0;
-          // $scope.psummaries=PayeSummaryService.get({periodId:currentperiod});
+// var currentperiod=0;
+//           // $scope.psummaries=PayeSummaryService.get({periodId:currentperiod});
 
-           $http.get(jadaApiUrl+'api/payesummary/'+currentperiod).success(function(data) {
-               $scope.psummaries = data;
-                   console.log(  $scope.psummaries);
+//            $http.get(jadaApiUrl+'api/payesummary/'+currentperiod).success(function(data) {
+//                $scope.psummaries = data;
+//                    console.log(  $scope.psummaries);
 
-            });
+//             });
 
       
 
@@ -33,6 +33,16 @@ var currentperiod=0;
 
             });
 
+
+
+$http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
+    
+          $scope.currentPeriodData=data.data;
+    $scope.currentperiod=$scope.currentPeriodData.period;
+
+        $scope.getByperiod( $scope.currentperiod);
+ 
+     });
           }
               $http.get(jadaApiUrl+'api/period').success(function(data) {
               $scope.periods = data;
@@ -49,7 +59,7 @@ var currentperiod=0;
             
          
           $scope.currentPeriod=data.data;
-          console.log($scope.currentPeriod.month);
+   
           $scope.currentMonth=$scope.currentPeriod.month+ ' '+$scope.currentPeriod.year;
       
   

@@ -433,15 +433,19 @@ ul.nav-wizard.nav-wizard-backnav .active ~ li a:focus {
                  overflow: visible;  
                 }
                
-  .periodList{
-    max-height: 300px !important;
-    overflow: scroll;
-  }
+               }
+  .schedulerHeight {
+  max-height: 300px;
+  overflow: scroll;
+}
 
   .justify_right{
        text-align: justify!important;
        direction:rtl!important;
   }
+
+
+
 
 /*
   .topnavbar .navbar-header .brand-logo {

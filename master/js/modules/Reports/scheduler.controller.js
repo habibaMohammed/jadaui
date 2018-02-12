@@ -7,8 +7,8 @@
         .module('app.reports')
         .controller('SchedulerController', SchedulerController);
 
-    SchedulerController.$inject = ['$scope','$http','$resource','jadaApiUrl'];
-    function SchedulerController($scope,$http,$resource,jadaApiUrl) {
+    SchedulerController.$inject = ['$scope','$http','$resource','SchedulerService','jadaApiUrl'];
+    function SchedulerController($scope,$http,$resource,SchedulerService,jadaApiUrl) {
         var vm = this;
 
         activate();
@@ -17,105 +17,172 @@
 
         function activate() {
 
-             var currentperiod=0;
-          // $scope.psummaries=PayeSummaryService.get({periodId:currentperiod});
+        
 
        $scope.scheduler={};
      
             
 
-              $scope.roles = [
-    {id: 1, text: 'guest'},
-    {id: 2, text: 'user'},
-    {id: 3, text: 'customer'},
-    {id: 4, text: 'admin'}
-  ];
-
-
-    $scope.user = {
-    roles: [$scope.roles[1]]
-  };
               $http.get(jadaApiUrl+'api/period').success(function(data) {
-              $scope.periods = data;
+              $scope.periods=data;
 
             });
 
 
               $http.get(jadaApiUrl+'api/employee').success(function(data) {
-              $scope.employees = data;
+              $scope.employees=data;
           
             });
 
      var id=1;
               $http.get(jadaApiUrl+'api/company/'+id).success(function(data) {
-              $scope.employer= data;
-              console.log($scope.employer)
+              $scope.companyDetails= data;
+              console.log($scope.companyDetails)
           
             });
 
-               $scope.selectedPeriod=function(id){
+               $http.get(jadaApiUrl+'api/payrollcode').success(function(data) {
+                 $scope.pcodes = data;
+           console.log($scope.pcodes);
+
+              });
+
+  //              $scope.selectedPeriod=function(id){
 
 
-                 for(var r=0;r<$scope.periods.length;r++){
-    if($scope.periods[r].id==id){
-      $scope.periodid=$scope.periods[r].id;
-   $scope.periodname=$scope.periods[r].month+' '+$scope.periods[r].year;
-    }
+  //                for(var r=0;r<$scope.periods.length;r++){
+  //   if($scope.periods[r].id==id){
+  //     $scope.periodid=$scope.periods[r].id;
+  //  $scope.periodname=$scope.periods[r].month+' '+$scope.periods[r].year;
+  //   }
 
-    console.log("///////////////////////////////////");
 
-    console.log($scope.bankBranchName);
-  }
+  //   console.log($scope.bankBranchName);
+  // }
 
-                $scope.selectP=name;
-                console.log($scope.selectP);
+  //               $scope.selectP=name;
+  //               console.log($scope.selectP);
 
-              }
+  //             }
 
 
 
             var model = {
-columns: [{ id:1, name: "First Name"},
-         { id:2, name: "Pin Number"},
-          { id:3, name: "Pension Number",}],
+employee: [{ name: "firstName", description: "First Name"},
+          {name: "middleName", description: "Middle Name"},
+          {name: "lastName", description: "Surname"}, 
+          {name: "employeeNumber", description: "Employee Number"},
+          {name: "idNumber", description: "National ID Number"},
+          {name: "passportNumber", description: "Passport Number"},
+          {name: "countryOfIssuance", description: "Country of issue"},
+          {name: "expiryDate", description: "Expiry date"},
+          {name: "dateOfBirth", description: "Date of Birth"},
+          {name: "maritalStatus", description: "Marital Status"},
+          {name: "gender", description: "Gender"},
+          {name: "dependencies", description: "Dependency"},
+          {name: "nextOfKin", description: "Next of Kin"},
+          {name: "nextOfKinRelationship", description: "Relationship with Next of Kin"},
+          {name: "nextOfKinPhoneNumber", description: "Phone Number for Next of Kin"},
+          {name: "disability", description: "Disability"},
+          {name: "natureOfDisability", description: "Nature of Disability"},
+          {name: "phoneNumber", description: "Phone Number"},
+          {name: "emailAddress", description: "Email address"},
+          {name: "physicalAddress", description: "Physical Address"},
+          {name: "postalAddress", description: "Postal address"},
+          {name: "pinNumber", description: "PIN Number"},
+          {name: "nhifNumber", description: "NHIF number"},
+          {name: "nssfNumber", description: "NSSF Number"},
+          {name: "helbNumber", description: "HELB Number"},
+          {name: "universityRegNo", description: "University Registration Number"},
+          {name: "employmentDate", description: "Employment Date"},
+          {name: "payPoint", description: "Pay Point"},
+          {name: "payMode", description: "Pay Mode"},
+          {name: "bankCode", description: "Bank Code"},
+          {name: "bankName", description: "Bank Name"},
+          {name: "bankBranch", description: "Bank Branch Name"},
+          {name: "accountNumber", description: "Bank Account Number"},
+          {name: "accountName", description: "Bank Account Name"},
+          {name: "department", description: "Department"},
+          {name: "costCenter", description: "Cost Center"},
+          {name: "employeeCategory", description: "Employee category"},
+          {name: "employeeGroup", description: "Employee Group"},
+          
+          {name: "position", description: "Position"}],
 
-company: [{ id:1, name: "Company Name", value: "Timecon" },
-         { id:2, name: "Pin Number", value: 123456 },
-          { id:3, name: "Pension Number", value: 1234567}]
+company: [{ name:"companyName", description: "Company Name" },
+         { name:"companyPin", description: "Pin Number" },
+          { name:"nssfNumber", description: "NSSF Number"},
+          { name:"nhifNumber", description: "NHIF Number"},
+          { name:"helbNumber", description: "HELB Number"},
+          { name:"country", description: "Country"},
+
+          { name:"emailAddress", description: "Email Address"},
+          { name:"physicalAddress", description: "Physical Address"},
+          { name:"postalAddress", description: "Postal Address"},
+          { name:"postalCode", description: "Postal Code"},
+           { name:"telephoneNumber", description: "Telephone Number"},
+          { name:"website", description: "Website"},
+          { name:"workDays", description: "Work Days"}]
 };
 $scope.details=model;
-console.log($scope.details);
 
 
-$scope.selectedColumns=[{ id:1, name: "First Name"},
-         { id:2, name: "Pin Number"},
-          { id:3, name: "Pension Number",}]
 
-$scope.selectedCompanyattribute=function(id){
-  $scope.companyDetails=[];
-console.log($scope.details);
-    for(var r=0;r<$scope.details.company.length;r++){
-    if($scope.details.company[r].id==id){
-      $scope.companyDetails.push($scope.details.company[r]);
-       console.log($scope.companyDetails);
-    }
+// $scope.selectedColumns=[{ id:1, name: "First Name"},
+//          { id:2, name: "Pin Number"},
+//           { id:3, name: "Pension Number",}]
+
+// $scope.selectedCompanyattribute=function(id){
+//   $scope.companyDetails=[];
+// console.log($scope.details);
+//     for(var r=0;r<$scope.details.company.length;r++){
+//     if($scope.details.company[r].id==id){
+//       $scope.companyDetails.push($scope.details.company[r]);
+//        console.log($scope.companyDetails);
+//     }
 
    
 
  
-  }
- // $scope.companyDetails.push({ name: "Company Name", value:"Timecon" });
- // console.log($scope.companyDetails);
+//   }
+//  // $scope.companyDetails.push({ name: "Company Name", value:"Timecon" });
+//  // console.log($scope.companyDetails);
 
-}
+// }
 
-$scope.header={ headers: [] };
 
-  $scope.addHeader=function(period) {
-       console.log('hellow');
-   $scope.header.headers.push(period);
-   console.log('hellow');
-  }
+   $scope.submitScheduler=function(scheduler) {
+    var saveScheduler=new SchedulerService(scheduler);
+            saveScheduler.$save().then(function(data){
+              var response=angular.fromJson(data);
+            
+              if(response.Status=="1"){
+                $scope.errorMsg=false;
+                      $scope.SuccessMsg =response.Message;
+              }else{
+             
+                 $scope.SuccessMsg=false;
+                     $scope.errorMsg=response.Message;
+             
+              }
+             
+                
+
+            },
+             function() {
+               $scope.SuccessMsg=false;
+                   $scope.errorMsg = 'Server Request Error';
+                  });
+          
+            };
+
+
+
+  // $scope.addHeader=function(period) {
+  //      console.log('hellow');
+  //  $scope.header.headers.push(period);
+  //  console.log('hellow');
+  // }
 
 
         }
