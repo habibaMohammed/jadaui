@@ -24,7 +24,7 @@
             <uib-tabset  active="activePill"  type="pills">
               
         <uib-tab heading="Company Details">    <div class="panel-body">
-      
+       <div class="schedulerHeight">
                <div class="form-group" ng-repeat="company in details.company">
                <label class="col-sm-3 control-label">{{company.description}}</label>
                <div class="col-sm-9">
@@ -36,7 +36,7 @@
                </div>
             </div>
           
-
+</div>
              
                </div></uib-tab>
                <uib-tab heading="Periods" >
@@ -97,56 +97,7 @@
             </div>
          </div>
       </div>
-      <div class="col-md-9">
-
-            <!--    <div ng-show="settingActive == 1">
-            <div class="panel b">
-               <div class="panel-heading bg-gray-lighter text-bold">Company Details</div>
-               <div class="panel-body">
-
-                   
-           <div class="form-group" ng-repeat="item in details.company">
-               <label class="col-sm-3 control-label">{{item.name}}</label>
-               <div class="col-sm-9">
-                  <div class="checkbox c-checkbox needsclick">
-                     <label class="needsclick">
-                        <input class="needsclick" type="checkbox" data-checklist-model="scheduler.company" data-checklist-value="item.id"/>
-                        <span class="fa fa-check"></span></label>
-                  </div>
-               </div>
-            </div>
-              ss{{scheduler}}
-
-               </div>
-            </div>
-
-            
-               </div> -->
-      
-            
-   <!-- 
-                <div ng-show="settingActive == 2">
-            <div class="panel b">
-               <div class="panel-heading bg-gray-lighter text-bold">Period</div>
-               <div class="panel-body">
-                    
-   <div class="form-group" ng-repeat="period in periods">
-               <label class="col-sm-3 control-label">{{period.month}} </label>
-               <div class="col-sm-9">
-                  <div class="checkbox c-checkbox needsclick">
-                     <label class="needsclick">
-                        <input type="checkbox" data-checklist-model="scheduler.id" data-checklist-value="period.id"/>
-                        <span class="fa fa-check"></span></label>
-
-                  </div>
-                
-               </div>
-             </div>
- ss{{scheduler}}
-               </div>
-            </div>
-            
-         </div> -->
+     <div class="col-md-9">
          <div ng-show="settingActive == 1">
             <div class="panel b">
                <div class="panel-heading bg-gray-lighter text-bold">Employee Details</div>
@@ -371,27 +322,28 @@
               
             </div>
          </div>
-     <div class="clearfix">
+  
+       </div>
+       </div>
+
+      </div>
+   </div>
+   
+</div>
+   <div class="clearfix">
         
-         <button class="btn btn-primary pull-right "  ng-click="submitScheduler(scheduler)" type="button">Save</button>
+         <button class="btn btn-primary pull-left "  ng-click="submitScheduler(scheduler)" type="button">Generate Scheduler</button>
 
-          <!-- <uib-progressbar class="progress-striped" value="22" type="warning">22%</uib-progressbar> -->
-
-  <!--    <div class="whirl traditional" ng-show="process">{{process}}</div> -->
-       <!--   <button ladda="loading" ng-click="clickBtn()">
-  Button
-</button> -->
+    
          </div>
        </form>
-      </div>
-   </div>
-</div>
+   
    </div>
 </div>
 
 
-         </div>
-      </div>
+      
+    
 
 
                  </uib-tab>
@@ -408,48 +360,20 @@
          	 <div class="panel-heading bg-gray-lighter  text-bold"> Headers</div>
             <uib-tabset>
                <uib-tab heading="Company Details">     <div class="panel-body">
-                  <div class="form-group">
-               <label class="col-sm-3 control-label">Company Name</label>
+                 <div class="schedulerHeight">
+                <div class="form-group" ng-repeat="company in details.company">
+               <label class="col-sm-3 control-label">{{company.description}}</label>
                <div class="col-sm-9">
                   <div class="checkbox c-checkbox needsclick">
                      <label class="needsclick">
-                        <input class="needsclick" type="checkbox" value="" />
+                        <input class="needsclick" type="checkbox" data-checklist-model="scheduler.companyScheduler" data-checklist-value="company.name"/>
                         <span class="fa fa-check"></span></label>
                   </div>
                </div>
             </div>
 
-             <div class="form-group">
-               <label class="col-sm-3 control-label">Company PIN</label>
-               <div class="col-sm-9">
-                  <div class="checkbox c-checkbox needsclick">
-                     <label class="needsclick">
-                        <input class="needsclick" type="checkbox" value="" />
-                        <span class="fa fa-check"></span></label>
-                  </div>
-               </div>
-            </div>
-             <div class="form-group">
-               <label class="col-sm-3 control-label">NSSF Number</label>
-               <div class="col-sm-9">
-                  <div class="checkbox c-checkbox needsclick">
-                     <label class="needsclick">
-                        <input class="needsclick" type="checkbox" value="" />
-                        <span class="fa fa-check"></span></label>
-                  </div>
-               </div>
-            </div>
-             <div class="form-group">
-               <label class="col-sm-3 control-label">Pension Number</label>
-               <div class="col-sm-9">
-                  <div class="checkbox c-checkbox needsclick">
-                     <label class="needsclick">
-                        <input class="needsclick" type="checkbox" value="" />
-                        <span class="fa fa-check"></span></label>
-                  </div>
-               </div>
-            </div>
-
+        
+</div>
              
                </div></uib-tab>
                <uib-tab heading="Employee">
@@ -470,58 +394,42 @@
             <div class="panel b">
                <div class="panel-heading bg-gray-lighter text-bold">Employee Details</div>
                <div class="panel-body">
-                  <div class="form-group">
-               <label class="col-sm-3 control-label">Payroll Number</label>
-               <div class="col-sm-9">
-                  <div class="checkbox c-checkbox needsclick">
-                     <label class="needsclick">
-                        <input class="needsclick" type="checkbox" value="" />
-                        <span class="fa fa-check"></span></label>
-                  </div>
-               </div>
-            </div>
+                   <div class="schedulerHeight">
+                    <table class="table table-bordered-white " >
+            <thead>
+               <tr><th>Employee Atributes</th>
+                    <th>Add to colums</th>
+                 
+                 
+                 
+               </tr>
+            </thead>
+            <tbody >
+             
+               <tr ng-repeat="employee in details.employee">
 
-             <div class="form-group">
-               <label class="col-sm-3 control-label">First Name</label>
-               <div class="col-sm-9">
-                  <div class="checkbox c-checkbox needsclick">
-                     <label class="needsclick">
-                        <input class="needsclick" type="checkbox" value="" />
-                        <span class="fa fa-check"></span></label>
-                  </div>
-               </div>
-            </div>
-             <div class="form-group">
-               <label class="col-sm-3 control-label">Last Name</label>
-               <div class="col-sm-9">
-                  <div class="checkbox c-checkbox needsclick">
-                     <label class="needsclick">
-                        <input class="needsclick" type="checkbox" value="" />
-                        <span class="fa fa-check"></span></label>
-                  </div>
-               </div>
-            </div>
-             <div class="form-group">
-               <label class="col-sm-3 control-label">ID Number</label>
-               <div class="col-sm-9">
-                  <div class="checkbox c-checkbox needsclick">
-                     <label class="needsclick">
-                        <input class="needsclick" type="checkbox" value="" />
-                        <span class="fa fa-check"></span></label>
-                  </div>
-               </div>
-            </div>
 
-            <div class="form-group">
-               <label class="col-sm-3 control-label">Pension Number</label>
+                  <td >{{employee.description}}</td>
+            
+                  <td><div class="form-group">
+               <label class="col-sm-3 control-label"> </label>
                <div class="col-sm-9">
                   <div class="checkbox c-checkbox needsclick">
                      <label class="needsclick">
-                        <input class="needsclick" type="checkbox" value="" />
+                        <input type="checkbox" data-checklist-model="scheduler.employee" data-checklist-value="employee.name"/>
                         <span class="fa fa-check"></span></label>
+
                   </div>
+                
                </div>
-            </div>
+             </div> </td>    
+               </tr>
+                    
+            
+            </tbody>
+         </table>
+         </div>
+
              
                </div>
             </div>
@@ -701,22 +609,31 @@
             <div class="panel b">
                <div class="panel-heading bg-gray-lighter text-bold">Payroll Codes</div>
                <div class="panel-body">
-                  <table class="table table-bordered-white " >
+                  <div class="schedulerHeight">
+                    <table class="table table-bordered-white " >
             <thead>
                <tr><th>Payroll Code</th>
                     <th>Description</th>
+                      <th>Add to colums</th>
+                    <th>Totals on Numeric Fields</th>
                
                  
                  
                </tr>
             </thead>
             <tbody >
-               <tr>
-                  <td >E001</td>
-                  <td >Basic Pay</td>
+              
+               <tr ng-repeat="code in pcodes">
+                  <td >{{code.code}}</td>
+                  <td >{{code.description}}</td>
                   <td ><div class="checkbox c-checkbox needsclick">
                      <label class="needsclick">
-                        <input class="needsclick" type="checkbox" value="" />
+                       <input class="needsclick" type="checkbox" data-checklist-model="scheduler.PayrollCodes" data-checklist-value="code.id" />
+                        <span class="fa fa-check"></span></label>
+                  </div></td>
+                    <td ><div class="checkbox c-checkbox needsclick">
+                     <label class="needsclick">
+                       <input class="needsclick" type="checkbox" data-checklist-model="scheduler.total" data-checklist-value="code.id" />
                         <span class="fa fa-check"></span></label>
                   </div></td>
                  
@@ -725,11 +642,12 @@
                 
                </tr>
                
-              
-             
+       
             
             </tbody>
          </table>
+
+             </div>
                </div>
             </div>
             
@@ -738,25 +656,25 @@
             <div class="panel b">
                <div class="panel-heading bg-gray-lighter text-bold" >Periods</div>
                <div class="panel-body">
-                  <div class="form-group">
-               <label class="col-sm-3 control-label">February 2017 </label>
+                
+               <div class="schedulerHeight">
+                                     
+   <div class="form-group" ng-repeat="period in periods">
+               <label class="col-sm-3 control-label">{{period.month}} {{period.year}} </label>
                <div class="col-sm-9">
                   <div class="checkbox c-checkbox needsclick">
                      <label class="needsclick">
-                        <input class="needsclick" type="checkbox"   value="" />
+                        <input type="checkbox" data-checklist-model="scheduler.periodScheduler" data-checklist-value="period.id"/>
                         <span class="fa fa-check"></span></label>
+
                   </div>
+                
                </div>
-            </div>
-             <div class="form-group">
-               <label class="col-sm-3 control-label">February 2017 </label>
-               <div class="col-sm-9">
-                  <div class="checkbox c-checkbox needsclick">
-                     <label class="needsclick">
-                        <input class="needsclick" type="checkbox" value="" />
-                        <span class="fa fa-check"></span></label>
-                  </div>
-               </div>
+             </div>
+
+            
+                  
+            
             </div>
             
                </div>
