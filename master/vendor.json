@@ -134,5 +134,6 @@
   "bower_components/bootstrap/js/*",
   "bower_components/summernote/dist/**/*",
   "bower_components/angular-summernote/dist/angular-summernote.js",
-  "bower_components/angular-file-saver/dist/angular-file-saver.bundle.js"
+  "bower_components/angular-file-saver/dist/angular-file-saver.bundle.js",
+   "bower_components/checklist-model/checklist-model.js"
 ]

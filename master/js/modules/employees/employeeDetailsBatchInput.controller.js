@@ -26,13 +26,12 @@
 
             $scope.fileDataObj = [];
 
-                $scope.fileData ={ };
         
         $scope.uploadFile = function() {
           if ($scope.fileContent) {
             $scope.fileDataObj = readFileEmployeeData.processData($scope.fileContent);
           
-             $scope.fileData =  $.parseJSON($scope.fileDataObj);
+             $scope.fileData = $.parseJSON($scope.fileDataObj);
 
     var jdata= JSON.stringify($scope.fileData);
             

@@ -46,6 +46,10 @@ $scope.searchCsummaryByperiod=function(id){
 
             });
 
+
+
+
+
                         
 $scope.printDiv = function (div) {
     console.log('hellow print');

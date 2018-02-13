@@ -920,7 +920,8 @@
           .state('app.scheduler', {
               url: '/schedules',
               title: 'schedules',
-                templateUrl: helper.basepath('scheduler.html')
+                templateUrl: helper.basepath('scheduler.html'),
+                 resolve: helper.resolveFor('checklist-model')
                
                 
              

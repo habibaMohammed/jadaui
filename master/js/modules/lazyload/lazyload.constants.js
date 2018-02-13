@@ -144,6 +144,7 @@
                                                         'vendor/fullcalendar/dist/fullcalendar.css',
                                                         'vendor/angular-ui-calendar/src/calendar.js'], serie: true},
          {name: 'angular-file-saver',          files: ['vendor/angular-file-saver/dist/angular-file-saver.bundle.js']},
+          {name: 'checklist-model',          files: ['vendor/checklist-model/checklist-model.js']},
 
           ]
         })
