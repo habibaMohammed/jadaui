@@ -3,4 +3,4 @@
 
 
 angular.module('angle').constant('jadaApiUrl',
-'http://jadabackend.azurewebsites.net/');
+'https://jadabackend.azurewebsites.net/');
