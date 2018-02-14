@@ -277,13 +277,30 @@
    <!-- START widget-->
       <div class="panel panel-default" ng-repeat="payslip in persons">
         <div  class="panel-body" >
-          <div  id="printable">
+             <div  id="printable">
            <div class="row">
 
+<!--    <div class="col-lg-4 col-xs-6 br pv">
+            <div class="col-md-12">
+               <p class="pull-left"><strong>Employee NO.</strong></p>
+               <p class="pull-right mr">{{payslip.payslipInfo.employeeNumber}}</p>
+            </div>
+         </div>
+          <div class="col-lg-4 col-xs-6 br pv">
+            <div class="col-md-12">
+               <p class="pull-left"><strong>Employee Name.</strong></p>
+               <p class="pull-right mr">{{payslip.payslipInfo.employeeName}}</p>
+            </div>
+         </div>
+          <div class="col-lg-4 col-xs-6 br pv">
+            <div class="col-md-10">
+               <p class="pull-left"><strong>Pay Period</strong></p>
+               <p class="pull-right mr">{{payslip.payslipInfo.period}}</p>
+            </div>
+         </div> -->
 
 
-
-         <div class="col-md-6">
+         <div class="col-md-8">
         <table class="table table-bordered-white" >
             
                   <thead>
@@ -323,7 +340,7 @@
              </div> 
              <br>
              <div class="row">
-         <div class="col-md-6">
+         <div class="col-md-8">
         
            
                <table class="table table-bordered-white" >
@@ -368,7 +385,7 @@
          </div>
       <br/>
          <div class="row">
-         <div class="col-md-6">
+         <div class="col-md-8">
          
            <div class="table-responsive">
             
@@ -403,7 +420,7 @@
       </div>
  <br/>
       <div class="row">
-         <div class="col-md-6">
+         <div class="col-md-8">
        
              <div class="table-responsive">
         
@@ -456,7 +473,7 @@
   <br/>
 
       <div class="row">
-         <div class="col-md-6">
+         <div class="col-md-8">
          
              <div class="table-responsive">
         
@@ -496,27 +513,41 @@
 
       <br/>
 
-     <!--   <div class="row">
-         <div class="col-md-12">
-            <p class="lead bb">Company Information
-</p>
+      <div class="row">
+         <div class="col-md-8">
+         
              <div class="table-responsive">
         
                <table class="table table-bordered-white">
                    
-            
-                  <tbody>
-                    <tr ng-repeat="benefit in payslip.benefits.payslipCodeList">
-            
-                        <td style="width:50%">{{benefit.description1}}</td>
-                        <td style="width:50%">{{benefit.amount1}}</td>
+                 <!--  <thead>
+                     <tr>
+                        <th>#</th>
+                        <th>Code</th>
+                        <th>Descriptions
+                        </th>
+                        <th>Amount</th>
                      </tr>
+                  </thead> -->
+                  <tbody>
+                    <tr style="width:100%">
+                      <td class="boldTotal"> Company Contribution</td>
+                    
+                    </tr>
+                    <tr ng-repeat="benefit in company.companyContributions
+.payslipCodeList">
+                     <!--    <td >{{payslipcode.code}}</td> -->
+                        <td >{{company.description}}</td>
+                        <td  class="text-right">{{company.amount}}</td>
+                     </tr>
+
                   </tbody>
                </table>
             </div>
          </div>
       
-      </div> -->
+      </div>
+
       <br/>
 
    <!--    <div class="row">
