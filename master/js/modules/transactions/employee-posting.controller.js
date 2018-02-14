@@ -24,14 +24,6 @@
  var errorMsg;
   
 
-         //  $http.get(jadaApiUrl+'api/payrollpostingReport/').success(function(data) {
-         //      $scope.payrollpostingTransaction=data;
-         // // $scope.transactions=data.payrollCodeReportList;
-         // // $scope.alltransactions=data.payrollTransactionList;
-         //      console.log($scope.payrollpostingTransaction);
-         //     });
-     
-
      
 $http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
           $scope.postingtrans={};
@@ -106,14 +98,14 @@ $scope.postingData();
 
    $scope.reloadtrans=function(postingtrans) {
          
-      var employeeId=postingtrans.employeeinfo.id;
-          var periodId=postingtrans.employeeinfo.period;
+      var employeeId=postingtrans.employeeId;
+          var periodId=postingtrans.periodId;
           
 
-          $http.get(jadaApiUrl+'api/payrollpostingReport/'+periodId+'/'+employeeId).success(function(data) {
+           $http.get(jadaApiUrl+'api/payrollpostingReport/'+periodId+'/'+employeeId).success(function(data) {
             $scope.payrollpostingTransaction=data;
      
-          console.log($scope.payrollpostingTransaction);
+          console.log(postingtrans);
       
              });
 
@@ -195,7 +187,7 @@ for(var r=0;r< $scope.periods.length;r++){
         $scope.delete= function (transaction) {
              var deletetransaction= new employeePostingService(transaction);
                   deletetransaction.$delete().then(function () {
-                   $state.reload();
+                 $state.reload();
             });
             }
           
@@ -312,7 +304,7 @@ $scope.show = function(trans) {
                    $scope.errorMsg=response.Message;
            
             }
-            $rootScope.$emit("CallLoadTransactions", {});
+           $state.reload();
 
           }, 
           function() {
@@ -328,7 +320,7 @@ $scope.show = function(trans) {
          usertransactionposting.$save().then(function(){
           $scope.transactionposting.payrollCodeId=' ';
                      $scope.transactionposting.amount=' ';
-            $rootScope.$emit("CallLoadTransactions", {});
+            $state.reload();
             $scope.ok();
 
           },
@@ -405,7 +397,7 @@ console.log(employeeinfo.employeeId)
            $scope.updateTransaction=function(transaction){
       
             transaction.$update().then(function(){
-                   $rootScope.$emit("CallLoadTransactions", {});
+                 $state.reload();
             });
           
               };
