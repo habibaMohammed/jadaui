@@ -38,7 +38,9 @@ var currentperiod=0;
           $scope.currentPeriod=data.data;
           console.log($scope.currentPeriod.month);
           $scope.currentMonth=$scope.currentPeriod.month+ ' '+$scope.currentPeriod.year;
-      
+          var periodId= $scope.currentPeriod.id;
+          console.log(periodId);
+          $scope.getByperiod(periodId);
   
             });
 

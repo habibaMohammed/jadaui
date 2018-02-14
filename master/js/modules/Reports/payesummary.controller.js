@@ -34,15 +34,6 @@
             });
 
 
-
-$http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
-    
-          $scope.currentPeriodData=data.data;
-    $scope.currentperiod=$scope.currentPeriodData.period;
-
-        $scope.getByperiod( $scope.currentperiod);
- 
-     });
           }
               $http.get(jadaApiUrl+'api/period').success(function(data) {
               $scope.periods = data;
@@ -61,6 +52,9 @@ $http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
           $scope.currentPeriod=data.data;
    
           $scope.currentMonth=$scope.currentPeriod.month+ ' '+$scope.currentPeriod.year;
+          var periodId= $scope.currentPeriod.id;
+          console.log(periodId);
+          $scope.getByperiod(periodId);
       
   
             });
