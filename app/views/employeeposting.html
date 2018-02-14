@@ -13,16 +13,16 @@
       <form class="form-inline">
   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
     <div class="input-group-addon">Period</div>
-         <input class="form-control" type="hidden"  name="empNumber"  ng-model="postingtrans.periodId" placeholder="Period"/>
-          <input class="form-control" type="text"  name="empNumber"  ng-model="period_description" placeholder="Period" disabled="" />
+         <!-- <input class="form-control" type="text"  name="empNumber"  ng-model="postingtrans.periodId" placeholder="Period"/>
+          <input class="form-control" type="text"  name="empNumber"  ng-model="period_description" placeholder="Period" disabled="" /> -->
   
-         <!-- <select name="period" class="slider slider-lg form-control" ng-model="postingtrans.periodId" ng-options="period.id as period.month+ ' '+ period.year for period in periods" disabled="">
+         <select name="period" class="slider slider-lg form-control" ng-model="postingtrans.periodId" ng-options="period.id as period.month+ ' '+ period.year for period in periods" disabled="">
         <option value="" disabled selected>Periods</option>
-  </select> -->
+  </select>
   </div>
   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
     <div class="input-group-addon">Employee Number</div>
-    <select name="employeeNumber" class="slider slider-lg form-control" ng-model="postingtrans.employeeId" ng-options="employee.id as employee.employeeNumber+'-'+employee.firstName+ ' '+employee.lastName for employee in employees" >
+    <select name="employeeNumber" class="slider slider-lg form-control" ng-model="postingtrans.employeeId" ng-options="employee.id as employee.employeeNumber+'-'+employee.firstName+ ' '+employee.lastName for employee in employees"  ng-change="searchEmployee(postingtrans)">
         <option value="" disabled selected>Employees</option>
   </select>
   </div>

@@ -87,7 +87,7 @@
             angular.extend(data);
             console.log(data.employeeID);
             console.log(data);
-            // return $http.post('/saveUser', data);
+            return $http.post(jadaApiUrl+'api/payrollmassposting', data);
           };
 
           // remove user
@@ -99,7 +99,6 @@
           vm.addData = function() {
             vm.inserted = {
           
-              employeeId: null,
               payrollCodeId: null,
               amount: null,
               isNew: true
