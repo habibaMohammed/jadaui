@@ -32,33 +32,22 @@
          //     });
      
 
+     
+$http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
+          $scope.postingtrans={};
+          $scope.currentPeriod=data.data;
+    $scope.currentperiodId=$scope.currentPeriod.id;
+    console.log('currentperiod')
+    console.log($scope.currentperiodId)
 
-$scope.postingData=function(){
+      $scope.postingtrans.periodId=$scope.currentperiodId;
+      $scope.period_description=$scope.currentPeriod.month+ ' '+$scope.currentPeriod.year;
+     });
 
-        $scope.curPage = 0;
-        $scope.pageSize = 1;      
-
-
-          $http.get(jadaApiUrl+'api/payrollpostingReport/').success(function(data) {
-              $scope.payrollpostingTransaction=data;
-         // $scope.transactions=data.payrollCodeReportList;
-         // $scope.alltransactions=data.payrollTransactionList;
-              console.log($scope.payrollpostingTransaction);
-     $scope.numberOfPages = function() {
-        return Math.ceil($scope.payrollpostingTransaction.length / $scope.pageSize);
-      };
-
-
-             });
-
-  
-}
-$scope.postingData();
-
-
-         $scope.searchEmployee=function(postingtrans) {
+       $scope.searchEmployee=function(postingtrans) {
               $scope.curPage = 0;
-             $scope.pageSize = 1;    
+             $scope.pageSize = 1;   
+             console.log(postingtrans);
 
           if(postingtrans.periodId!=null && postingtrans.periodId!=""){
             $rootScope.employeePostedId = postingtrans.employeeId;
@@ -83,15 +72,33 @@ $scope.postingData();
          };
 
 
-     
+$scope.postingData=function(){
 
-$http.get(jadaApiUrl+'api/currentperiod').then(function(data) {
-          $scope.postingtrans={};
-          $scope.currentPeriod=data.data;
-    $scope.currentperiod=$scope.currentPeriod.period;
-      $scope.postingtrans.periodId=$scope.currentPeriod.id;
-      $scope.period_description=$scope.currentPeriod.month+ ' '+$scope.currentPeriod.year;
-     });
+        $scope.curPage = 0;
+        $scope.pageSize = 1;      
+
+
+          $http.get(jadaApiUrl+'api/payrollpostingReport/').success(function(data) {
+              $scope.payrollpostingTransaction=data;
+         // $scope.transactions=data.payrollCodeReportList;
+         // $scope.alltransactions=data.payrollTransactionList;
+              console.log($scope.payrollpostingTransaction);
+     $scope.numberOfPages = function() {
+        return Math.ceil($scope.payrollpostingTransaction.length / $scope.pageSize);
+      };
+
+
+             });
+
+  
+}
+$scope.postingData();
+
+
+       
+
+
+     
 
 
 
@@ -143,7 +150,7 @@ $http.get(jadaApiUrl+'api/department').success(function(data) {
             });
 
 $http.get(jadaApiUrl+'api/employee').success(function(data) {
-            $scope.postingtrans={};
+            // $scope.postingtrans={};
               $scope.employees=data;
               var empId=$scope.employees[0].id;
               $scope.postingtrans.employeeId=empId;
